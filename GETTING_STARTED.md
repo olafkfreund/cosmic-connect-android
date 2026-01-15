@@ -371,11 +371,11 @@ claude-code --agent protocol-compatibility "Debug TLS handshake failure between 
 - [ ] Create docs/rust-extraction-plan.md
 
 **Day 3: Cargo Project**
-- [ ] Complete Issue #44 (Create cosmic-connect-core)
-- [ ] Initialize Cargo library project
-- [ ] Set up module structure (protocol/, network/, crypto/, plugins/, ffi/)
-- [ ] Configure uniffi-rs in Cargo.toml
-- [ ] Create initial README and ARCHITECTURE.md
+- [x] Complete Issue #44 (Create cosmic-connect-core) ✅
+- [x] Initialize Cargo library project ✅
+- [x] Set up module structure (protocol/, network/, crypto/, plugins/, ffi/) ✅
+- [x] Configure uniffi-rs in Cargo.toml ✅
+- [x] Create initial README and ARCHITECTURE.md ✅
 
 **Day 4-5: NetworkPacket Extraction**
 - [ ] Start Issue #45 (Extract NetworkPacket)

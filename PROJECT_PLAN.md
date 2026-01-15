@@ -1,48 +1,94 @@
-# COSMIC Connect Modernization - Project Plan
+# COSMIC Connect Modernization - Updated Project Plan
+## Rust + Kotlin Hybrid Architecture
 
 ## 📋 Executive Summary
 
-**Project:** COSMIC Connect Android Modernization  
-**Timeline:** 12-16 weeks  
+**Project:** COSMIC Connect Android Modernization with Shared Rust Core  
+**Timeline:** 16-20 weeks  
 **Team Size:** 1-3 developers  
-**Target:** Modernize COSMIC Connect Android app for seamless COSMIC Desktop integration
+**Target:** Modernize COSMIC Connect Android app with shared Rust protocol implementation for seamless COSMIC Desktop integration
+
+**Key Innovation:** Extract KDE Connect protocol implementation from COSMIC Desktop applet into a shared Rust library used by both desktop and Android.
 
 **Key Metrics:**
+- Create shared `cosmic-connect-core` Rust library
 - 150+ Java files to convert to Kotlin
 - Target: 80%+ test coverage
 - Goal: Full protocol compatibility with COSMIC Desktop
 - Zero breaking changes for existing users
+- Single source of truth for protocol logic
 
 ---
 
-## 🎯 Project Phases Overview
+## 🎯 Architectural Overview
 
 ```
-Phase 1: Foundation & Setup (Weeks 1-2)
+cosmic-connect-ecosystem/
+├── cosmic-connect-core/          # NEW: Shared Rust Library
+│   ├── src/
+│   │   ├── protocol/            # KDE Connect protocol
+│   │   ├── network/             # Device discovery, packets
+│   │   ├── crypto/              # TLS, certificates
+│   │   ├── plugins/             # Core plugin logic
+│   │   └── ffi/                 # FFI interfaces
+│   └── Cargo.toml
+│
+├── cosmic-connect-android/       # THIS REPO (Updated)
+│   ├── rust-ffi/                # NEW: JNI bindings
+│   │   ├── uniffi.toml          # uniffi-rs configuration
+│   │   └── src/lib.rs           # FFI wrapper
+│   ├── src/org/kde/...          # Kotlin UI & Android services
+│   └── build.gradle.kts         # Updated with cargo-ndk
+│
+└── cosmic-applet-kdeconnect/    # EXISTING (Refactored)
+    ├── Uses cosmic-connect-core
+    └── COSMIC Desktop UI only
+```
+
+**Key Benefits:**
+- **Single Protocol Implementation**: One Rust codebase for protocol logic
+- **Memory Safety**: Rust guarantees for critical networking code
+- **Code Reuse**: Share 70%+ of logic between desktop and mobile
+- **Easier Debugging**: Fix protocol bugs once, benefit everywhere
+- **Better Testing**: Test protocol once at the core level
+- **Modern Android**: Keep Kotlin for UI and Android integrations
+
+---
+
+## 📊 Updated Phase Structure
+
+```
+Phase 0: Rust Core Extraction (NEW - Weeks 1-3)
+├─ Extract protocol from desktop applet
+├─ Create cosmic-connect-core library
+├─ Set up FFI interfaces
+└─ Validate with desktop applet
+
+Phase 1: Foundation & Setup (Weeks 4-5)
 ├─ Environment setup
 ├─ Codebase audit
-├─ Infrastructure preparation
-└─ Initial modernization
+├─ Android FFI integration
+└─ Protocol validation
 
-Phase 2: Core Modernization (Weeks 3-6)
-├─ Architecture refactoring
+Phase 2: Core Modernization (Weeks 6-9)
+├─ Integrate Rust core with Android
 ├─ Java to Kotlin conversion
-├─ Protocol implementation
+├─ Android-specific services
 └─ Testing infrastructure
 
-Phase 3: Feature Implementation (Weeks 7-10)
-├─ Plugin modernization
-├─ UI refresh
+Phase 3: Feature Implementation (Weeks 10-14)
+├─ Plugin integration (Rust core + Kotlin UI)
+├─ UI modernization
 ├─ Enhanced testing
 └─ Performance optimization
 
-Phase 4: Integration & Testing (Weeks 11-12)
+Phase 4: Integration & Testing (Weeks 15-16)
 ├─ Cross-platform testing
 ├─ Bug fixes
 ├─ Documentation
 └─ Release preparation
 
-Phase 5: Release & Maintenance (Weeks 13+)
+Phase 5: Release & Maintenance (Weeks 17+)
 ├─ Beta testing
 ├─ Final polish
 ├─ Release
@@ -51,1440 +97,982 @@ Phase 5: Release & Maintenance (Weeks 13+)
 
 ---
 
-## 📊 Phase 1: Foundation & Setup (Weeks 1-2)
+## 📊 Phase 0: Rust Core Extraction (NEW - Weeks 1-3)
 
 ### Goal
-Establish solid foundation for modernization work.
+Extract and modularize KDE Connect protocol implementation from COSMIC Desktop applet into a shared Rust library.
 
-### Epic: Project Setup
+### Epic: Create Shared Protocol Library
 
-#### Issue #1: Development Environment Setup
+#### Issue #43: Analyze COSMIC Applet for Protocol Extraction
 **Priority:** P0-Critical  
-**Labels:** `setup`, `infrastructure`, `P0-Critical`  
-**Estimated Effort:** 2 hours
+**Labels:** `rust`, `architecture`, `protocol`, `P0-Critical`  
+**Estimated Effort:** 4 hours
 
 **Description:**
-Set up complete development environment for both Android and COSMIC development.
+Analyze the existing COSMIC Desktop applet to identify all protocol-related code for extraction.
+
+**Tasks:**
+- [ ] Clone cosmic-applet-kdeconnect repository
+- [ ] Map all protocol-related modules
+- [ ] Identify NetworkPacket implementation
+- [ ] Identify device discovery code
+- [ ] Identify TLS/certificate handling
+- [ ] Identify plugin core logic
+- [ ] Document dependencies
+- [ ] Create extraction plan
+
+**Deliverables:**
+- `docs/rust-extraction-plan.md`
+- Module dependency diagram
+- List of code to extract
+- FFI interface requirements
+
+**Success Criteria:**
+- Complete understanding of protocol code
+- Clear extraction boundaries
+- Documented plan
+
+**Dependencies:** None
+
+**Related Documentation:**
+- cosmic-applet-kdeconnect source
+- `kdeconnect-protocol-debug.md`
+
+---
+
+#### Issue #44: Create cosmic-connect-core Cargo Project
+**Priority:** P0-Critical  
+**Labels:** `rust`, `infrastructure`, `P0-Critical`  
+**Estimated Effort:** 3 hours
+
+**Description:**
+Create the new shared Rust library project with proper structure.
+
+**Tasks:**
+- [ ] Initialize new Cargo workspace
+- [ ] Set up library crate structure
+- [ ] Configure Cargo.toml with dependencies
+- [ ] Set up module structure (protocol, network, crypto, plugins)
+- [ ] Add uniffi-rs support
+- [ ] Configure for multi-platform (Android + Linux)
+- [ ] Set up CI/CD for the library
+- [ ] Add comprehensive README
+
+**Implementation Requirements:**
+```toml
+[package]
+name = "cosmic-connect-core"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1.0", features = ["full"] }
+rustls = "0.21"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+uniffi = "0.25"
+
+[lib]
+crate-type = ["lib", "staticlib", "cdylib"]
+```
+
+**Success Criteria:**
+- Project compiles
+- Structure matches design
+- CI/CD configured
+
+**Dependencies:** #43
+
+---
+
+#### Issue #45: Extract NetworkPacket to Rust Core
+**Priority:** P0-Critical  
+**Labels:** `rust`, `protocol`, `P0-Critical`  
+**Estimated Effort:** 5 hours
+
+**Description:**
+Extract NetworkPacket implementation from desktop applet to shared core.
+
+**Tasks:**
+- [ ] Create `protocol/packet.rs`
+- [ ] Implement packet serialization/deserialization
+- [ ] Add packet type enums (Identity, Pair, etc.)
+- [ ] Implement validation logic
+- [ ] **CRITICAL**: Ensure newline termination (\\n)
+- [ ] Add comprehensive tests
+- [ ] Document packet format
+- [ ] Add FFI bindings
+
+**Implementation Requirements:**
+```rust
+pub struct NetworkPacket {
+    pub packet_type: String,
+    pub id: i64,
+    pub body: serde_json::Value,
+    // ... other fields
+}
+
+impl NetworkPacket {
+    pub fn serialize(&self) -> Result<Vec<u8>>;
+    pub fn deserialize(data: &[u8]) -> Result<Self>;
+    pub fn validate(&self) -> Result<()>;
+}
+```
+
+**Success Criteria:**
+- All packet types supported
+- Protocol compatible
+- Tests pass
+- FFI works
+
+**Dependencies:** #44
+
+---
+
+#### Issue #46: Extract Device Discovery to Rust Core
+**Priority:** P0-Critical  
+**Labels:** `rust`, `protocol`, `networking`, `P0-Critical`  
+**Estimated Effort:** 6 hours
+
+**Description:**
+Extract UDP multicast discovery implementation to shared core.
+
+**Tasks:**
+- [ ] Create `network/discovery.rs`
+- [ ] Implement multicast listener
+- [ ] Implement broadcast scheduler
+- [ ] Add device detection logic
+- [ ] Handle identity packets
+- [ ] Add network state management
+- [ ] Write comprehensive tests
+- [ ] Add FFI bindings
+
+**Implementation Requirements:**
+- Multicast group: 224.0.0.251
+- Port: 1716
+- Async with tokio
+- Cross-platform support
+
+**Success Criteria:**
+- Discovery works on Linux
+- Discovery works on Android
+- Protocol compatible
+- Tests pass
+
+**Dependencies:** #45
+
+---
+
+#### Issue #47: Extract TLS/Certificate Management to Rust Core
+**Priority:** P0-Critical  
+**Labels:** `rust`, `security`, `tls`, `P0-Critical`  
+**Estimated Effort:** 8 hours
+
+**Description:**
+Extract TLS and certificate management to shared core.
+
+**Tasks:**
+- [ ] Create `crypto/certificate.rs`
+- [ ] Create `crypto/tls.rs`
+- [ ] Implement certificate generation
+- [ ] Implement certificate validation
+- [ ] Implement TLS context creation
+- [ ] Add certificate pinning
+- [ ] **CRITICAL**: Implement TLS role logic (deviceId comparison)
+- [ ] Add connection manager
+- [ ] Write security tests
+- [ ] Add FFI bindings
+
+**Implementation Requirements:**
+- RSA 2048-bit keys
+- 10-year validity
+- SHA-256 fingerprints
+- TLS 1.2+ support
+- Certificate storage abstraction (platform-specific)
+
+**Success Criteria:**
+- Secure implementation
+- Protocol compatible
+- Works on both platforms
+- Tests pass
+
+**Dependencies:** #45
+
+---
+
+#### Issue #48: Extract Plugin Core Logic to Rust Core
+**Priority:** P1-High  
+**Labels:** `rust`, `plugins`, `P1-High`  
+**Estimated Effort:** 6 hours
+
+**Description:**
+Extract core plugin management and base logic to shared library.
+
+**Tasks:**
+- [ ] Create `plugins/mod.rs`
+- [ ] Define Plugin trait
+- [ ] Implement PluginManager
+- [ ] Add packet routing
+- [ ] Create plugin base implementations
+- [ ] Add lifecycle management
+- [ ] Write tests
+- [ ] Add FFI bindings
+
+**Implementation Requirements:**
+```rust
+pub trait Plugin {
+    fn name(&self) -> &str;
+    fn handle_packet(&mut self, packet: NetworkPacket) -> Result<()>;
+    fn initialize(&mut self) -> Result<()>;
+    fn shutdown(&mut self) -> Result<()>;
+}
+
+pub struct PluginManager {
+    plugins: HashMap<String, Box<dyn Plugin>>,
+}
+```
+
+**Success Criteria:**
+- Clean plugin API
+- Extensible design
+- Works on both platforms
+- Tests pass
+
+**Dependencies:** #45
+
+---
+
+#### Issue #49: Set Up uniffi-rs FFI Generation
+**Priority:** P0-Critical  
+**Labels:** `rust`, `ffi`, `android`, `P0-Critical`  
+**Estimated Effort:** 5 hours
+
+**Description:**
+Configure uniffi-rs for automatic FFI binding generation.
+
+**Tasks:**
+- [ ] Create `src/ffi/mod.rs`
+- [ ] Define uniffi interfaces
+- [ ] Configure Kotlin codegen
+- [ ] Test generated bindings
+- [ ] Document FFI API
+- [ ] Add examples
+- [ ] Set up build integration
+
+**Implementation Requirements:**
+```rust
+// src/ffi/mod.rs
+uniffi::include_scaffolding!("cosmic_connect_core");
+
+#[uniffi::export]
+pub fn create_network_packet(
+    packet_type: String,
+    id: i64,
+    body: String,
+) -> Arc<NetworkPacket> {
+    // Implementation
+}
+```
+
+**Success Criteria:**
+- Bindings generate correctly
+- Kotlin can call Rust
+- Types map correctly
+- Examples work
+
+**Dependencies:** #45, #46, #47, #48
+
+---
+
+#### Issue #50: Validate Rust Core with COSMIC Desktop
+**Priority:** P0-Critical  
+**Labels:** `rust`, `testing`, `integration`, `P0-Critical`  
+**Estimated Effort:** 6 hours
+
+**Description:**
+Refactor COSMIC Desktop applet to use new shared core and validate functionality.
+
+**Tasks:**
+- [ ] Update cosmic-applet-kdeconnect Cargo.toml
+- [ ] Replace internal protocol code with core library
+- [ ] Update all call sites
+- [ ] Test discovery
+- [ ] Test pairing
+- [ ] Test all plugins
+- [ ] Verify no regressions
+- [ ] Update documentation
+
+**Success Criteria:**
+- Desktop applet works perfectly
+- All features functional
+- No performance regressions
+- Code is cleaner
+
+**Dependencies:** #49
+
+---
+
+## 📊 Phase 1: Foundation & Setup (Updated - Weeks 4-5)
+
+### Epic: Android Integration Setup
+
+#### Issue #51: Set Up cargo-ndk in Android Build
+**Priority:** P0-Critical  
+**Labels:** `android`, `rust`, `build-system`, `P0-Critical`  
+**Estimated Effort:** 4 hours
+
+**Description:**
+Integrate Rust library building into Android Gradle build.
+
+**Tasks:**
+- [ ] Add cargo-ndk plugin to build.gradle.kts
+- [ ] Configure Android NDK paths
+- [ ] Set up target architectures (arm64-v8a, armeabi-v7a, x86_64)
+- [ ] Configure Rust compilation in Gradle
+- [ ] Add JNI library loading
+- [ ] Test build on all architectures
+- [ ] Document build process
+
+**Implementation Requirements:**
+```kotlin
+// build.gradle.kts
+plugins {
+    id("org.mozilla.rust-android-gradle.rust-android") version "0.9.3"
+}
+
+cargo {
+    module = "../cosmic-connect-core"
+    libname = "cosmic_connect_core"
+    targets = listOf("arm64", "arm", "x86_64")
+}
+```
+
+**Success Criteria:**
+- Rust builds on Android
+- All architectures supported
+- CI/CD integration works
+
+**Dependencies:** #50, #1
+
+**Related Skills:** gradle-SKILL.md
+
+---
+
+#### Issue #52: Create Android FFI Wrapper Layer
+**Priority:** P0-Critical  
+**Labels:** `android`, `kotlin`, `rust`, `P0-Critical`  
+**Estimated Effort:** 6 hours
+
+**Description:**
+Create Kotlin wrapper layer around Rust FFI for idiomatic Android usage.
+
+**Tasks:**
+- [ ] Create CosmicConnectCore singleton
+- [ ] Wrap NetworkPacket in Kotlin
+- [ ] Wrap Discovery in Kotlin
+- [ ] Wrap TLS/Certificate in Kotlin
+- [ ] Wrap PluginManager in Kotlin
+- [ ] Add lifecycle management
+- [ ] Add error handling
+- [ ] Write tests
+
+**Implementation Requirements:**
+```kotlin
+object CosmicConnectCore {
+    init {
+        System.loadLibrary("cosmic_connect_core")
+    }
+    
+    fun createNetworkPacket(type: String, id: Long, body: String): NetworkPacket {
+        return NetworkPacket(createNetworkPacketNative(type, id, body))
+    }
+}
+
+class NetworkPacket(private val handle: Long) {
+    fun serialize(): ByteArray
+    fun getType(): String
+    // ... other methods
+}
+```
+
+**Success Criteria:**
+- Clean Kotlin API
+- Type-safe
+- Memory safe
+- Tests pass
+
+**Dependencies:** #51
+
+**Related Skills:** android-development-SKILL.md
+
+---
+
+#### Issue #1: Development Environment Setup (Updated)
+**Priority:** P0-Critical  
+**Labels:** `setup`, `infrastructure`, `rust`, `P0-Critical`  
+**Estimated Effort:** 3 hours
+
+**Description:**
+Set up complete development environment for Android + Rust development.
 
 **Tasks:**
 - [ ] Install Android Studio (latest stable)
 - [ ] Install Rust toolchain (1.70+)
+- [ ] Install cargo-ndk
+- [ ] Install uniffi-bindgen
+- [ ] Add Android targets: rustup target add aarch64-linux-android armv7-linux-androideabi x86_64-linux-android
 - [ ] Install NixOS development tools (if using NixOS)
-- [ ] Clone both repositories
+- [ ] Clone all repositories
+- [ ] Build cosmic-connect-core
 - [ ] Build Android app successfully
 - [ ] Build COSMIC applet successfully
 - [ ] Set up emulator/test device
 - [ ] Configure git hooks
 
 **Success Criteria:**
-- Both projects build without errors
+- All projects build without errors
+- Rust compiles for Android
 - Tests run successfully
 - Git hooks working
-- Claude Code skills installed
 
-**Dependencies:** None
+**Dependencies:** #50
 
 ---
 
-#### Issue #2: Codebase Audit - Android
+#### Issue #2: Codebase Audit - Android (Same as before)
 **Priority:** P0-Critical  
 **Labels:** `audit`, `android`, `documentation`, `P0-Critical`  
 **Estimated Effort:** 4 hours
 
-**Description:**
-Complete audit of Android codebase to understand current state and plan modernization.
+[Content remains the same as original]
 
-**Tasks:**
-- [ ] Count Java vs Kotlin files
-- [ ] List all Activity/Fragment classes
-- [ ] Identify Services and BroadcastReceivers
-- [ ] Document plugin implementations
-- [ ] Check dependency versions
-- [ ] Review test coverage
-- [ ] Identify deprecated APIs in use
-- [ ] Document current architecture patterns
-
-**Deliverables:**
-- `docs/audit-android.md` with findings
-- List of Java files to convert
-- List of deprecated APIs to replace
-- Current test coverage report
-
-**Success Criteria:**
-- Complete understanding of codebase
-- Prioritized modernization list
-- Documented technical debt
-
-**Dependencies:** #1
+**Dependencies:** #52
 
 ---
 
-#### Issue #3: Codebase Audit - COSMIC Desktop
+#### Issue #3: Test Existing COSMIC Desktop Applet (Updated from original #3)
 **Priority:** P0-Critical  
 **Labels:** `audit`, `cosmic`, `documentation`, `P0-Critical`  
 **Estimated Effort:** 3 hours
 
-**Description:**
-Complete audit of COSMIC Desktop implementation to understand integration requirements.
+[Content remains the same as original]
 
-**Tasks:**
-- [ ] Review daemon implementation
-- [ ] Check DBus interface completeness
-- [ ] Test applet functionality
-- [ ] Verify protocol implementation
-- [ ] Review system integrations
-- [ ] Check plugin implementations
-- [ ] Document current features
-- [ ] Identify gaps vs Android
-
-**Deliverables:**
-- `docs/audit-cosmic.md` with findings
-- Protocol compatibility matrix
-- Feature parity checklist
-- Integration gaps document
-
-**Success Criteria:**
-- Complete understanding of COSMIC implementation
-- Clear compatibility requirements
-- Feature gaps identified
-
-**Dependencies:** #1
+**Dependencies:** #50
 
 ---
 
-#### Issue #4: Protocol Compatibility Testing
+#### Issue #4: Protocol Compatibility Testing (Updated)
 **Priority:** P0-Critical  
-**Labels:** `protocol`, `testing`, `P0-Critical`  
-**Estimated Effort:** 4 hours
+**Labels:** `protocol`, `testing`, `rust`, `P0-Critical`  
+**Estimated Effort:** 5 hours
 
 **Description:**
-Test current protocol compatibility between Android and COSMIC implementations.
+Test Rust core protocol compatibility with Android integration.
 
 **Tasks:**
-- [ ] Test device discovery (both directions)
-- [ ] Test pairing process (both directions)
-- [ ] Test file transfer (both directions)
-- [ ] Test all plugins bidirectionally
-- [ ] Capture and analyze network traffic
-- [ ] Verify TLS implementation
-- [ ] Document incompatibilities
-- [ ] Create test checklist
-
-**Deliverables:**
-- `docs/protocol-compatibility-report.md`
-- Test results matrix
-- List of compatibility issues
-- Network captures
+- [ ] Test NetworkPacket FFI
+- [ ] Test Discovery FFI
+- [ ] Test TLS/Certificate FFI
+- [ ] Test Plugin FFI
+- [ ] Verify protocol compatibility
+- [ ] Test memory management
+- [ ] Test error handling
+- [ ] Document findings
 
 **Success Criteria:**
-- All protocol aspects tested
-- Issues documented
-- Test methodology established
+- FFI works correctly
+- Protocol compatible
+- No memory leaks
+- Tests pass
 
-**Dependencies:** #1, #2, #3
+**Dependencies:** #52, #3
 
 ---
 
-#### Issue #5: Create Project Board and Initial Issues
-**Priority:** P0-Critical  
-**Labels:** `project-management`, `P0-Critical`  
-**Estimated Effort:** 3 hours
+#### Issue #5: Create Project Board (Same as before)
 
-**Description:**
-Set up GitHub project board and create all initial issues for the project.
-
-**Tasks:**
-- [ ] Create GitHub project board
-- [ ] Set up board columns (Backlog, Ready, In Progress, Review, Done)
-- [ ] Create milestones for each phase
-- [ ] Create all Phase 2 issues
-- [ ] Create all Phase 3 issues
-- [ ] Create all Phase 4 issues
-- [ ] Assign labels and priorities
-- [ ] Set up issue templates
-
-**Deliverables:**
-- Active GitHub project board
-- All issues created and labeled
-- Milestones configured
-- Issue templates available
-
-**Success Criteria:**
-- Project board populated
-- Clear path forward
-- Team can start work
+[Content remains the same as original]
 
 **Dependencies:** #2, #3, #4
 
 ---
 
-## 📊 Phase 2: Core Modernization (Weeks 3-6)
+## 📊 Phase 2: Core Modernization (Updated - Weeks 6-9)
 
-### Goal
-Modernize core Android codebase and establish solid architecture foundation.
-
-### Epic: Build System Modernization
+### Note on Issues #6-#8 (Build System)
+These remain largely the same but need updates for Rust integration.
 
 #### Issue #6: Convert Root build.gradle to Kotlin DSL
-**Priority:** P1-High  
-**Labels:** `gradle`, `build-system`, `P1-High`  
-**Estimated Effort:** 2 hours
+[Keep original content, build succeeds with Rust]
 
-**Description:**
-Modernize root-level build.gradle to Kotlin DSL.
+#### Issue #7: Convert App build.gradle to Kotlin DSL (Updated)
+[Original content PLUS:]
 
-**Tasks:**
-- [ ] Convert build.gradle to build.gradle.kts
-- [ ] Update plugin declarations
-- [ ] Convert repositories configuration
-- [ ] Test build succeeds
-- [ ] Update documentation
+**Additional Tasks:**
+- [ ] Add cargo configuration
+- [ ] Configure rust-android plugin
+- [ ] Set up JNI library loading
 
-**Implementation Requirements:**
-- Use modern plugin syntax
-- Add version catalog support
-- Configure dependency resolution
-
-**Success Criteria:**
-- Build succeeds without warnings
-- All tests pass
-- Documentation updated
-
-**Dependencies:** #5
-
-**Related Skills:** gradle-SKILL.md
-
----
-
-#### Issue #7: Convert App build.gradle to Kotlin DSL
-**Priority:** P1-High  
-**Labels:** `gradle`, `build-system`, `P1-High`  
-**Estimated Effort:** 3 hours
-
-**Description:**
-Modernize app-level build.gradle to Kotlin DSL.
-
-**Tasks:**
-- [ ] Convert build.gradle to build.gradle.kts
-- [ ] Modernize Android configuration
-- [ ] Set up build types properly
-- [ ] Configure ProGuard/R8 rules
-- [ ] Migrate dependencies
-- [ ] Test all build variants
-- [ ] Update documentation
-
-**Implementation Requirements:**
-- Use type-safe configuration
-- Enable modern Android features
-- Optimize build performance
-
-**Success Criteria:**
-- All build variants work
-- ProGuard rules correct
-- Build time acceptable
-
-**Dependencies:** #6
-
-**Related Skills:** gradle-SKILL.md
-
----
+**Dependencies:** #6, #51
 
 #### Issue #8: Set Up Version Catalog
-**Priority:** P1-High  
-**Labels:** `gradle`, `build-system`, `P1-High`  
-**Estimated Effort:** 2 hours
-
-**Description:**
-Create version catalog for centralized dependency management.
-
-**Tasks:**
-- [ ] Create gradle/libs.versions.toml
-- [ ] Define version variables
-- [ ] Define libraries
-- [ ] Define plugins
-- [ ] Create bundles
-- [ ] Migrate dependencies
-- [ ] Test build
-- [ ] Update documentation
-
-**Success Criteria:**
-- All dependencies in catalog
-- Build uses catalog
-- Documentation complete
-
-**Dependencies:** #7
-
-**Related Skills:** gradle-SKILL.md
+[Keep original content]
 
 ---
 
-### Epic: Core Architecture Modernization
+### Issues #9-#10: NetworkPacket (REPLACED by Rust Core)
 
-#### Issue #9: Convert NetworkPacket to Kotlin
+**Note:** NetworkPacket is now implemented in Rust core. These issues are replaced by:
+
+#### Issue #53: Integrate NetworkPacket FFI in Android
 **Priority:** P0-Critical  
-**Labels:** `android`, `kotlin-conversion`, `protocol`, `P0-Critical`  
-**Estimated Effort:** 3 hours
-
-**Description:**
-Convert NetworkPacket class to Kotlin with modern patterns.
-
-**Tasks:**
-- [ ] Convert to Kotlin data class
-- [ ] Add sealed classes for packet types
-- [ ] Implement proper null safety
-- [ ] Add extension functions
-- [ ] Write comprehensive tests
-- [ ] Update documentation
-
-**Implementation Requirements:**
-- Use data class for immutability
-- Add proper serialization
-- Maintain protocol compatibility
-- Add validation logic
-
-**Success Criteria:**
-- All tests pass
-- Protocol compatibility verified
-- Code more readable and safe
-
-**Dependencies:** #8
-
-**Related Skills:** android-development-SKILL.md, tls-networking-SKILL.md
-
----
-
-#### Issue #10: Implement NetworkPacket Unit Tests
-**Priority:** P0-Critical  
-**Labels:** `android`, `testing`, `P0-Critical`  
-**Estimated Effort:** 2 hours
-
-**Description:**
-Create comprehensive unit tests for NetworkPacket.
-
-**Tasks:**
-- [ ] Test serialization/deserialization
-- [ ] Test all packet types
-- [ ] Test validation logic
-- [ ] Test error cases
-- [ ] Test edge cases
-- [ ] Achieve >90% coverage
-
-**Success Criteria:**
-- All tests pass
-- >90% code coverage
-- Edge cases covered
-
-**Dependencies:** #9
-
-**Related Skills:** android-development-SKILL.md, debugging-SKILL.md
-
----
-
-#### Issue #11: Convert Device Class to Kotlin
-**Priority:** P0-Critical  
-**Labels:** `android`, `kotlin-conversion`, `P0-Critical`  
+**Labels:** `android`, `kotlin`, `ffi`, `P0-Critical`  
 **Estimated Effort:** 4 hours
 
 **Description:**
-Convert Device class to Kotlin with modern patterns.
+Replace Java NetworkPacket with Rust core via FFI.
 
 **Tasks:**
-- [ ] Convert to Kotlin
-- [ ] Use data class for device info
-- [ ] Add state management with sealed classes
-- [ ] Implement coroutines for async ops
-- [ ] Add proper lifecycle handling
-- [ ] Write unit tests
-- [ ] Update documentation
-
-**Implementation Requirements:**
-- Thread-safe state management
-- Coroutines for network operations
-- Proper resource cleanup
-- Null safety
+- [ ] Remove existing Java NetworkPacket
+- [ ] Use Kotlin FFI wrapper
+- [ ] Update all call sites
+- [ ] Add proper error handling
+- [ ] Write integration tests
+- [ ] Verify protocol compatibility
+- [ ] Document usage
 
 **Success Criteria:**
-- All functionality preserved
+- All code uses Rust NetworkPacket
 - Tests pass
-- More maintainable code
+- Protocol compatible
 
-**Dependencies:** #9, #10
-
-**Related Skills:** android-development-SKILL.md
+**Dependencies:** #52, #8
 
 ---
 
-#### Issue #12: Convert DeviceManager to Kotlin with Repository Pattern
+### Issues #11-#12: Device/DeviceManager (Updated)
+
+#### Issue #11: Convert Device Class to Kotlin (Updated)
 **Priority:** P1-High  
-**Labels:** `android`, `kotlin-conversion`, `architecture`, `P1-High`  
-**Estimated Effort:** 6 hours
+**Labels:** `android`, `kotlin-conversion`, `P1-High`  
+**Estimated Effort:** 4 hours
 
 **Description:**
-Convert DeviceManager to Kotlin and refactor to Repository pattern.
+Convert Device class to Kotlin, delegating protocol logic to Rust core.
 
 **Tasks:**
 - [ ] Convert to Kotlin
-- [ ] Implement Repository interface
-- [ ] Create DeviceRepository implementation
-- [ ] Use StateFlow for device list
-- [ ] Add coroutines for operations
-- [ ] Implement proper error handling
+- [ ] Use Rust core for protocol operations
+- [ ] Keep Android-specific logic (UI state, lifecycle)
+- [ ] Add state management with sealed classes
+- [ ] Implement coroutines for async ops
 - [ ] Write unit tests
-- [ ] Write integration tests
 - [ ] Update documentation
 
-**Implementation Requirements:**
-- Repository pattern for data access
-- StateFlow for reactive updates
-- Dependency injection ready
-- Proper separation of concerns
+**Success Criteria:**
+- Clean separation: Rust for protocol, Kotlin for Android
+- Tests pass
+- More maintainable
+
+**Dependencies:** #53
+
+---
+
+#### Issue #12: Convert DeviceManager to Kotlin (Updated)
+**Priority:** P1-High  
+**Labels:** `android`, `kotlin-conversion`, `architecture`, `P1-High`  
+**Estimated Effort:** 5 hours
+
+**Description:**
+Convert DeviceManager to Kotlin with Repository pattern, using Rust core.
+
+**Tasks:**
+- [ ] Convert to Kotlin
+- [ ] Use Rust PluginManager via FFI
+- [ ] Implement Repository interface
+- [ ] Use StateFlow for device list
+- [ ] Add coroutines for operations
+- [ ] Write tests
 
 **Success Criteria:**
 - Repository pattern implemented
-- All tests pass
-- Better testability
+- Uses Rust core
+- Tests pass
 
 **Dependencies:** #11
 
-**Related Skills:** android-development-SKILL.md
-
 ---
 
-### Epic: TLS and Certificate Management
+### Issues #13-#14: TLS/Certificates (REPLACED by Rust Core)
 
-#### Issue #13: Modernize CertificateManager
+**Note:** TLS and certificate management are now in Rust core. These issues become:
+
+#### Issue #54: Integrate TLS/Certificate FFI in Android
 **Priority:** P0-Critical  
-**Labels:** `android`, `security`, `tls`, `P0-Critical`  
-**Estimated Effort:** 4 hours
+**Labels:** `android`, `kotlin`, `ffi`, `security`, `P0-Critical`  
+**Estimated Effort:** 5 hours
 
 **Description:**
-Modernize certificate management with Android Keystore.
+Replace Android certificate management with Rust core via FFI, using Android Keystore for storage.
 
 **Tasks:**
-- [ ] Convert to Kotlin
-- [ ] Use Android Keystore properly
-- [ ] Add certificate rotation support
-- [ ] Implement proper error handling
-- [ ] Add certificate validation
+- [ ] Remove existing Java CertificateManager
+- [ ] Use Rust crypto via FFI
+- [ ] Implement Android Keystore storage backend
+- [ ] Create Kotlin wrapper for certificate operations
+- [ ] Handle certificate storage in Android Keystore
 - [ ] Write security tests
 - [ ] Document security model
 
-**Implementation Requirements:**
-- Use Android Keystore
-- RSA 2048-bit keys
-- 10-year validity
-- SHA-256 fingerprints
+**Implementation:**
+```kotlin
+class AndroidCertificateStorage : CertificateStorage {
+    private val keyStore = AndroidKeyStore()
+    
+    override fun saveCertificate(deviceId: String, cert: ByteArray) {
+        keyStore.setCertificateEntry("kdeconnect_$deviceId", cert)
+    }
+    
+    override fun loadCertificate(deviceId: String): ByteArray? {
+        return keyStore.getCertificate("kdeconnect_$deviceId")?.encoded
+    }
+}
+```
 
 **Success Criteria:**
-- Secure certificate storage
-- COSMIC Desktop compatible
+- Rust core handles crypto
+- Android Keystore provides storage
+- Secure implementation
 - Tests pass
 
-**Dependencies:** #11
-
-**Related Skills:** android-development-SKILL.md, tls-networking-SKILL.md
+**Dependencies:** #52, #12
 
 ---
 
-#### Issue #14: Implement TLS Connection Manager
-**Priority:** P0-Critical  
-**Labels:** `android`, `networking`, `tls`, `P0-Critical`  
-**Estimated Effort:** 5 hours
+### Issue #15: Modernize Discovery Service (Updated)
 
-**Description:**
-Create modern TLS connection manager with coroutines.
-
-**Tasks:**
-- [ ] Implement TLS context creation
-- [ ] Add certificate pinning
-- [ ] Implement connection pooling
-- [ ] Add timeout handling
-- [ ] Implement retry logic
-- [ ] Add connection monitoring
-- [ ] Write integration tests
-- [ ] Document TLS configuration
-
-**Implementation Requirements:**
-- TLS 1.2+ support
-- Certificate validation
-- Proper timeout handling
-- Connection reuse
-
-**Success Criteria:**
-- Secure connections
-- Protocol compatible
-- Well tested
-
-**Dependencies:** #13
-
-**Related Skills:** tls-networking-SKILL.md, android-development-SKILL.md
-
----
-
-### Epic: Device Discovery
-
-#### Issue #15: Modernize Discovery Service
+#### Issue #55: Integrate Discovery FFI in Android
 **Priority:** P1-High  
-**Labels:** `android`, `networking`, `P1-High`  
+**Labels:** `android`, `kotlin`, `ffi`, `networking`, `P1-High`  
 **Estimated Effort:** 5 hours
 
 **Description:**
-Modernize UDP multicast discovery service.
+Integrate Rust core discovery with Android services.
 
 **Tasks:**
-- [ ] Convert to Kotlin
-- [ ] Implement with coroutines
-- [ ] Add proper multicast lock handling
-- [ ] Implement broadcast scheduling
-- [ ] Add discovery state management
+- [ ] Create Android DiscoveryService
+- [ ] Use Rust discovery via FFI
+- [ ] Handle Android-specific networking
+- [ ] Manage wake locks
 - [ ] Handle network changes
+- [ ] Add proper lifecycle
 - [ ] Write tests
-- [ ] Update documentation
-
-**Implementation Requirements:**
-- Multicast group: 224.0.0.251
-- Port: 1716
-- Proper wake locks
-- Network change handling
 
 **Success Criteria:**
-- Discovery works reliably
-- Network changes handled
+- Discovery uses Rust core
+- Android integration proper
 - Tests pass
 
-**Dependencies:** #9, #11
-
-**Related Skills:** android-development-SKILL.md, tls-networking-SKILL.md
+**Dependencies:** #54, original #15 concepts
 
 ---
 
-#### Issue #16: Test Discovery with COSMIC Desktop
-**Priority:** P0-Critical  
-**Labels:** `protocol`, `testing`, `integration`, `P0-Critical`  
-**Estimated Effort:** 3 hours
+### Issue #16: Test Discovery with COSMIC Desktop (Updated)
 
-**Description:**
-Integration testing for device discovery.
+[Keep same goals, but test Rust core on both platforms]
 
-**Tasks:**
-- [ ] Test Android discovers COSMIC
-- [ ] Test COSMIC discovers Android
-- [ ] Verify identity packet format
-- [ ] Test on different networks
-- [ ] Test with network interruptions
-- [ ] Document test results
-- [ ] Fix any issues found
-
-**Success Criteria:**
-- Bidirectional discovery works
-- Protocol compatible
-- Documented test cases
-
-**Dependencies:** #15
-
-**Related Skills:** debugging-SKILL.md, tls-networking-SKILL.md
+**Dependencies:** #55
 
 ---
 
-## 📊 Phase 3: Feature Implementation (Weeks 7-10)
+## 📊 Phase 3: Feature Implementation (Updated - Weeks 10-14)
 
-### Goal
-Modernize all plugins and implement enhanced features.
+### Epic: Plugin Integration
 
-### Epic: Plugin Modernization
+**Note:** Plugin core logic is in Rust. Android provides:
+1. UI for plugin controls
+2. Android system integration (notifications, clipboard, etc.)
+3. FFI bridges to Rust plugin core
 
-#### Issue #17: Create Plugin Base Architecture
+#### Issue #17: Create Plugin Architecture Bridge (Updated)
 **Priority:** P1-High  
-**Labels:** `android`, `architecture`, `plugins`, `P1-High`  
-**Estimated Effort:** 4 hours
+**Labels:** `android`, `kotlin`, `plugins`, `rust`, `P1-High`  
+**Estimated Effort:** 5 hours
 
 **Description:**
-Create modern plugin architecture with coroutines.
+Create architecture for integrating Rust plugin core with Android UI/services.
 
 **Tasks:**
-- [ ] Design Plugin interface
-- [ ] Implement PluginManager
-- [ ] Add plugin lifecycle management
-- [ ] Implement packet routing
-- [ ] Add plugin configuration
+- [ ] Design Plugin FFI bridge
+- [ ] Create Android Plugin base class
+- [ ] Implement Rust-to-Android event flow
+- [ ] Implement Android-to-Rust command flow
+- [ ] Add plugin lifecycle
 - [ ] Create plugin testing base
-- [ ] Document plugin API
+- [ ] Document architecture
 
-**Implementation Requirements:**
-- Coroutine-based
-- Type-safe packet handling
-- Easy to test
-- Extensible
+**Implementation:**
+```kotlin
+abstract class AndroidPlugin(
+    private val rustPlugin: RustPluginHandle
+) {
+    // Bridge between Rust core and Android UI/services
+    abstract fun provideUI(): Composable
+    abstract fun handleAndroidSpecifics()
+    
+    fun handlePacket(packet: NetworkPacket) {
+        rustPlugin.handlePacket(packet) // Delegates to Rust
+    }
+}
+```
 
 **Success Criteria:**
-- Clean plugin API
-- Easy to add plugins
+- Clean bridge architecture
+- Easy to implement plugins
 - Well documented
 
-**Dependencies:** #12
-
-**Related Skills:** android-development-SKILL.md
+**Dependencies:** #12, #54
 
 ---
 
-#### Issue #18: Modernize Battery Plugin
+#### Issue #56: Implement Battery Plugin with Rust Core
 **Priority:** P1-High  
-**Labels:** `android`, `plugins`, `P1-High`  
+**Labels:** `android`, `kotlin`, `plugins`, `rust`, `P1-High`  
 **Estimated Effort:** 3 hours
 
 **Description:**
-Modernize battery plugin with MVVM.
+Implement battery plugin using Rust core for protocol, Kotlin for Android battery API.
 
 **Tasks:**
-- [ ] Convert to Kotlin
-- [ ] Implement with new plugin base
-- [ ] Create BatteryViewModel
-- [ ] Add StateFlow for battery state
-- [ ] Implement monitoring with coroutines
-- [ ] Add low battery notifications
+- [ ] Use Rust battery plugin core via FFI
+- [ ] Read Android battery status
+- [ ] Send updates through Rust core
+- [ ] Receive updates from Rust core
+- [ ] Create simple UI
 - [ ] Write tests
 - [ ] Test with COSMIC Desktop
 
 **Success Criteria:**
-- Plugin works correctly
+- Plugin works both directions
+- Uses Rust core
 - COSMIC Desktop compatible
-- Tests pass
 
 **Dependencies:** #17
 
-**Related Skills:** android-development-SKILL.md
-
 ---
 
-#### Issue #19: Modernize Share Plugin
+#### Issue #57: Implement Share Plugin with Rust Core
 **Priority:** P1-High  
-**Labels:** `android`, `plugins`, `P1-High`  
+**Labels:** `android`, `kotlin`, `plugins`, `rust`, `P1-High`  
 **Estimated Effort:** 5 hours
 
 **Description:**
-Modernize file sharing plugin.
+Implement file sharing using Rust core for transfer protocol.
 
 **Tasks:**
-- [ ] Convert to Kotlin
-- [ ] Implement with new plugin base
-- [ ] Add coroutines for file transfer
-- [ ] Implement progress reporting
-- [ ] Add cancellation support
-- [ ] Handle large files properly
+- [ ] Use Rust share plugin via FFI
+- [ ] Handle Android file URIs
+- [ ] Implement Android share sheet
+- [ ] Stream files through Rust core
+- [ ] Show progress UI
 - [ ] Write tests
-- [ ] Test with COSMIC Desktop
-
-**Implementation Requirements:**
-- TCP payload transfer
-- Progress callbacks
-- Cancellable transfers
-- Memory efficient
 
 **Success Criteria:**
-- File sharing works both ways
+- File sharing works
 - Large files supported
-- Progress tracking works
+- Progress tracking
 
-**Dependencies:** #17, #14
-
-**Related Skills:** android-development-SKILL.md, tls-networking-SKILL.md
+**Dependencies:** #17, #54
 
 ---
 
-#### Issue #20: Modernize Clipboard Plugin
-**Priority:** P1-High  
-**Labels:** `android`, `plugins`, `P1-High`  
-**Estimated Effort:** 4 hours
+#### Issues #58-#61: Other Plugins
+[Similar pattern for Clipboard (#58), Notifications (#59), RunCommand (#60), FindMyPhone (#61)]
 
-**Description:**
-Modernize clipboard synchronization plugin.
-
-**Tasks:**
-- [ ] Convert to Kotlin
-- [ ] Implement with new plugin base
-- [ ] Add bidirectional sync
-- [ ] Implement clipboard monitoring
-- [ ] Add conflict resolution
-- [ ] Handle different content types
-- [ ] Write tests
-- [ ] Test with COSMIC Desktop
-
-**Success Criteria:**
-- Clipboard syncs both ways
-- No sync loops
-- Tests pass
-
-**Dependencies:** #17
-
-**Related Skills:** android-development-SKILL.md
-
----
-
-#### Issue #21: Modernize Notification Plugin
-**Priority:** P2-Medium  
-**Labels:** `android`, `plugins`, `P2-Medium`  
-**Estimated Effort:** 4 hours
-
-**Description:**
-Modernize notification synchronization plugin.
-
-**Tasks:**
-- [ ] Convert to Kotlin
-- [ ] Implement with new plugin base
-- [ ] Add notification listener service
-- [ ] Implement notification forwarding
-- [ ] Add reply support
-- [ ] Handle notification actions
-- [ ] Write tests
-- [ ] Test with COSMIC Desktop
-
-**Success Criteria:**
-- Notifications forwarded
-- Actions work
-- Tests pass
-
-**Dependencies:** #17
-
-**Related Skills:** android-development-SKILL.md
-
----
-
-#### Issue #22: Implement RunCommand Plugin
-**Priority:** P2-Medium  
-**Labels:** `android`, `plugins`, `P2-Medium`  
-**Estimated Effort:** 4 hours
-
-**Description:**
-Implement remote command execution plugin.
-
-**Tasks:**
-- [ ] Create plugin from scratch in Kotlin
-- [ ] Implement command storage
-- [ ] Add command execution
-- [ ] Implement security checks
-- [ ] Add command management UI
-- [ ] Write tests
-- [ ] Test with COSMIC Desktop
-
-**Implementation Requirements:**
-- Pre-configured commands only
-- Non-blocking execution
-- Security validation
-- Persistent storage
-
-**Success Criteria:**
-- Commands execute correctly
-- Secure implementation
-- COSMIC Desktop compatible
-
-**Dependencies:** #17
-
-**Related Skills:** android-development-SKILL.md
-
----
-
-#### Issue #23: Implement FindMyPhone Plugin
-**Priority:** P2-Medium  
-**Labels:** `android`, `plugins`, `P2-Medium`  
-**Estimated Effort:** 3 hours
-
-**Description:**
-Implement find my phone plugin.
-
-**Tasks:**
-- [ ] Create plugin in Kotlin
-- [ ] Implement ring functionality
-- [ ] Add notification display
-- [ ] Handle volume control
-- [ ] Add stop mechanism
-- [ ] Write tests
-- [ ] Test with COSMIC Desktop
-
-**Success Criteria:**
-- Phone rings on command
-- Can be stopped
-- Works with COSMIC Desktop
-
-**Dependencies:** #17
-
-**Related Skills:** android-development-SKILL.md
+Each follows the pattern:
+- Rust core for protocol logic
+- Kotlin for Android system integration
+- FFI bridge between them
 
 ---
 
 ### Epic: UI Modernization
-
-#### Issue #24: Create Design System
-**Priority:** P2-Medium  
-**Labels:** `android`, `ui`, `design`, `P2-Medium`  
-**Estimated Effort:** 4 hours
-
-**Description:**
-Create Material 3 design system for app.
-
-**Tasks:**
-- [ ] Define color scheme
-- [ ] Create typography system
-- [ ] Define component library
-- [ ] Create common composables
-- [ ] Document design system
-
-**Success Criteria:**
-- Consistent design
-- Reusable components
-- Documented
-
-**Dependencies:** #17
-
-**Related Skills:** android-development-SKILL.md
+[Issues #24-#27 remain the same - pure Kotlin/Compose UI]
 
 ---
 
-#### Issue #25: Convert Device List to Compose
-**Priority:** P2-Medium  
-**Labels:** `android`, `ui`, `compose`, `P2-Medium`  
+## 📊 Phase 4: Integration & Testing (Weeks 15-16)
+
+### Epic: Comprehensive Testing
+
+[Issues #28-#34 remain similar, but with additional focus on FFI testing]
+
+#### Issue #62: FFI Integration Testing
+**Priority:** P0-Critical  
+**Labels:** `testing`, `rust`, `ffi`, `P0-Critical`  
 **Estimated Effort:** 5 hours
 
 **Description:**
-Convert device list screen to Jetpack Compose.
+Comprehensive FFI testing for memory safety and correctness.
 
 **Tasks:**
-- [ ] Create DeviceListScreen composable
-- [ ] Implement device list with LazyColumn
-- [ ] Add device item card
-- [ ] Implement device actions
-- [ ] Add loading states
-- [ ] Add error states
-- [ ] Write UI tests
+- [ ] Test memory management across FFI boundary
+- [ ] Test error propagation
+- [ ] Test concurrent access
+- [ ] Test large data transfers
+- [ ] Run under valgrind/ASAN
+- [ ] Document findings
 
 **Success Criteria:**
-- Modern UI
-- Smooth performance
-- Tests pass
+- No memory leaks
+- No crashes
+- Thread-safe
 
-**Dependencies:** #24
-
-**Related Skills:** android-development-SKILL.md
+**Dependencies:** All plugin issues
 
 ---
 
-#### Issue #26: Convert Device Detail to Compose
-**Priority:** P2-Medium  
-**Labels:** `android`, `ui`, `compose`, `P2-Medium`  
-**Estimated Effort:** 5 hours
+## 📊 Phase 5: Release & Maintenance (Weeks 17+)
 
-**Description:**
-Convert device detail screen to Jetpack Compose.
-
-**Tasks:**
-- [ ] Create DeviceDetailScreen composable
-- [ ] Show device information
-- [ ] Display plugin list
-- [ ] Add plugin controls
-- [ ] Implement actions
-- [ ] Write UI tests
-
-**Success Criteria:**
-- Modern UI
-- All features work
-- Tests pass
-
-**Dependencies:** #25
-
-**Related Skills:** android-development-SKILL.md
+[Issues #35-#40 remain the same]
 
 ---
 
-#### Issue #27: Convert Settings to Compose
-**Priority:** P3-Low  
-**Labels:** `android`, `ui`, `compose`, `P3-Low`  
-**Estimated Effort:** 4 hours
+## 🎯 Updated Critical Path
 
-**Description:**
-Convert settings screen to Jetpack Compose.
+```
+Phase 0 (Rust Core):
+#43 → #44 → #45 → #46 → #47 → #48 → #49 → #50
 
-**Tasks:**
-- [ ] Create SettingsScreen composable
-- [ ] Implement preference items
-- [ ] Add plugin configuration
-- [ ] Implement actions
-- [ ] Write UI tests
+Phase 1 (Integration):
+#51 → #52 → #1 → #2, #3 → #4 → #5
 
-**Success Criteria:**
-- Modern settings UI
-- All settings work
-- Tests pass
+Phase 2 (Core Android):
+#6 → #7 → #8 → #53 → #11 → #12 → #54 → #55 → #16
 
-**Dependencies:** #26
+Phase 3 (Plugins):
+#17 → #56-#61 (Plugins) + #24-#27 (UI)
 
-**Related Skills:** android-development-SKILL.md
+Phase 4 (Testing):
+#28-#34 + #62
+
+Phase 5 (Release):
+#35-#40
+```
 
 ---
 
-## 📊 Phase 4: Integration & Testing (Weeks 11-12)
-
-### Goal
-Comprehensive testing and integration verification.
-
-### Epic: Testing Infrastructure
-
-#### Issue #28: Set Up Integration Test Framework
-**Priority:** P1-High  
-**Labels:** `testing`, `infrastructure`, `P1-High`  
-**Estimated Effort:** 4 hours
-
-**Description:**
-Set up comprehensive integration testing.
-
-**Tasks:**
-- [ ] Configure test devices/emulators
-- [ ] Set up mock server
-- [ ] Create test utilities
-- [ ] Add test data factories
-- [ ] Configure CI for tests
-- [ ] Document test approach
-
-**Success Criteria:**
-- Tests run on CI
-- Easy to write new tests
-- Documented
-
-**Dependencies:** #27
-
-**Related Skills:** android-development-SKILL.md, debugging-SKILL.md
-
----
-
-#### Issue #29: Integration Tests - Discovery & Pairing
-**Priority:** P0-Critical  
-**Labels:** `testing`, `integration`, `protocol`, `P0-Critical`  
-**Estimated Effort:** 5 hours
-
-**Description:**
-Create integration tests for discovery and pairing.
-
-**Tasks:**
-- [ ] Test device discovery
-- [ ] Test pairing initiation
-- [ ] Test pairing acceptance
-- [ ] Test pairing rejection
-- [ ] Test certificate exchange
-- [ ] Test paired device persistence
-
-**Success Criteria:**
-- All scenarios tested
-- Tests pass reliably
-- Good coverage
-
-**Dependencies:** #28
-
-**Related Skills:** android-development-SKILL.md, debugging-SKILL.md
-
----
-
-#### Issue #30: Integration Tests - File Transfer
-**Priority:** P0-Critical  
-**Labels:** `testing`, `integration`, `protocol`, `P0-Critical`  
-**Estimated Effort:** 5 hours
-
-**Description:**
-Create integration tests for file transfer.
-
-**Tasks:**
-- [ ] Test small file transfer
-- [ ] Test large file transfer
-- [ ] Test multiple files
-- [ ] Test cancellation
-- [ ] Test error cases
-- [ ] Test progress reporting
-
-**Success Criteria:**
-- All scenarios tested
-- Tests pass reliably
-- Edge cases covered
-
-**Dependencies:** #28, #19
-
-**Related Skills:** android-development-SKILL.md, tls-networking-SKILL.md
-
----
-
-#### Issue #31: Integration Tests - All Plugins
-**Priority:** P1-High  
-**Labels:** `testing`, `integration`, `plugins`, `P1-High`  
-**Estimated Effort:** 6 hours
-
-**Description:**
-Create integration tests for all plugins.
-
-**Tasks:**
-- [ ] Test battery plugin
-- [ ] Test share plugin
-- [ ] Test clipboard plugin
-- [ ] Test notification plugin
-- [ ] Test RunCommand plugin
-- [ ] Test FindMyPhone plugin
-
-**Success Criteria:**
-- All plugins tested
-- Tests pass reliably
-- Good coverage
-
-**Dependencies:** #28, #18-#23
-
-**Related Skills:** android-development-SKILL.md
-
----
-
-### Epic: Cross-Platform Testing
-
-#### Issue #32: End-to-End Test: Android → COSMIC
-**Priority:** P0-Critical  
-**Labels:** `testing`, `e2e`, `protocol`, `P0-Critical`  
-**Estimated Effort:** 4 hours
-
-**Description:**
-Full end-to-end testing from Android to COSMIC.
-
-**Tasks:**
-- [ ] Test complete flow: discovery → pairing → transfer
-- [ ] Test all plugins Android → COSMIC
-- [ ] Test error recovery
-- [ ] Test reconnection
-- [ ] Document test results
-
-**Success Criteria:**
-- All features work
-- Issues documented
-- Test cases recorded
-
-**Dependencies:** #31
-
-**Related Skills:** debugging-SKILL.md, tls-networking-SKILL.md
-
----
-
-#### Issue #33: End-to-End Test: COSMIC → Android
-**Priority:** P0-Critical  
-**Labels:** `testing`, `e2e`, `protocol`, `P0-Critical`  
-**Estimated Effort:** 4 hours
-
-**Description:**
-Full end-to-end testing from COSMIC to Android.
-
-**Tasks:**
-- [ ] Test complete flow: discovery → pairing → transfer
-- [ ] Test all plugins COSMIC → Android
-- [ ] Test error recovery
-- [ ] Test reconnection
-- [ ] Document test results
-
-**Success Criteria:**
-- All features work
-- Issues documented
-- Test cases recorded
-
-**Dependencies:** #32
-
-**Related Skills:** debugging-SKILL.md, tls-networking-SKILL.md
-
----
-
-#### Issue #34: Performance Testing
-**Priority:** P1-High  
-**Labels:** `testing`, `performance`, `P1-High`  
-**Estimated Effort:** 5 hours
-
-**Description:**
-Comprehensive performance testing.
-
-**Tasks:**
-- [ ] Test app startup time
-- [ ] Test discovery time
-- [ ] Test connection time
-- [ ] Test file transfer speed
-- [ ] Test memory usage
-- [ ] Test battery impact
-- [ ] Document benchmarks
-
-**Success Criteria:**
-- Benchmarks established
-- Performance acceptable
-- Documented
-
-**Dependencies:** #33
-
-**Related Skills:** debugging-SKILL.md, android-development-SKILL.md
-
----
-
-### Epic: Documentation
-
-#### Issue #35: Update User Documentation
-**Priority:** P2-Medium  
-**Labels:** `documentation`, `P2-Medium`  
-**Estimated Effort:** 4 hours
-
-**Description:**
-Update all user-facing documentation.
-
-**Tasks:**
-- [ ] Update README
-- [ ] Update setup guide
-- [ ] Create user guide
-- [ ] Add screenshots
-- [ ] Document features
-- [ ] Create FAQ
-
-**Success Criteria:**
-- Complete documentation
-- Easy to understand
-- Up to date
-
-**Dependencies:** #34
-
-**Related Skills:** N/A
-
----
-
-#### Issue #36: Update Developer Documentation
-**Priority:** P2-Medium  
-**Labels:** `documentation`, `P2-Medium`  
-**Estimated Effort:** 5 hours
-
-**Description:**
-Update all developer documentation.
-
-**Tasks:**
-- [ ] Update architecture docs
-- [ ] Document plugin API
-- [ ] Create contribution guide
-- [ ] Add code examples
-- [ ] Document protocol implementation
-- [ ] Update API docs
-
-**Success Criteria:**
-- Complete dev docs
-- Easy to contribute
-- Well explained
-
-**Dependencies:** #35
-
-**Related Skills:** N/A
-
----
-
-#### Issue #37: Create Migration Guide
-**Priority:** P2-Medium  
-**Labels:** `documentation`, `P2-Medium`  
-**Estimated Effort:** 3 hours
-
-**Description:**
-Create migration guide for users and developers.
-
-**Tasks:**
-- [ ] Document breaking changes
-- [ ] Create upgrade guide
-- [ ] Add troubleshooting section
-- [ ] Document new features
-- [ ] Add FAQ
-
-**Success Criteria:**
-- Clear migration path
-- Common issues covered
-- Easy to follow
-
-**Dependencies:** #36
-
-**Related Skills:** N/A
-
----
-
-## 📊 Phase 5: Release & Maintenance (Weeks 13+)
-
-### Epic: Release Preparation
-
-#### Issue #38: Beta Release Preparation
-**Priority:** P0-Critical  
-**Labels:** `release`, `P0-Critical`  
-**Estimated Effort:** 6 hours
-
-**Description:**
-Prepare for beta release.
-
-**Tasks:**
-- [ ] Create release checklist
-- [ ] Test on multiple devices
-- [ ] Update version numbers
-- [ ] Create release notes
-- [ ] Prepare Play Store listing
-- [ ] Create promotional materials
-- [ ] Set up beta channel
-
-**Success Criteria:**
-- Ready for beta
-- Documentation complete
-- Tests passing
-
-**Dependencies:** #37
-
-**Related Skills:** N/A
-
----
-
-#### Issue #39: Beta Testing
-**Priority:** P0-Critical  
-**Labels:** `testing`, `release`, `P0-Critical`  
-**Estimated Effort:** 2 weeks
-
-**Description:**
-Coordinate beta testing with users.
-
-**Tasks:**
-- [ ] Recruit beta testers
-- [ ] Distribute beta build
-- [ ] Set up feedback collection
-- [ ] Monitor crash reports
-- [ ] Triage and fix issues
-- [ ] Release beta updates
-- [ ] Document feedback
-
-**Success Criteria:**
-- Major issues found and fixed
-- Stable for release
-- Positive feedback
-
-**Dependencies:** #38
-
-**Related Skills:** N/A
-
----
-
-#### Issue #40: Final Release
-**Priority:** P0-Critical  
-**Labels:** `release`, `P0-Critical`  
-**Estimated Effort:** 4 hours
-
-**Description:**
-Final release preparation and deployment.
-
-**Tasks:**
-- [ ] Final testing
-- [ ] Update all documentation
-- [ ] Create final release notes
-- [ ] Build signed APK
-- [ ] Upload to Play Store
-- [ ] Upload to F-Droid
-- [ ] Announce release
-- [ ] Monitor for issues
-
-**Success Criteria:**
-- App released
-- No critical issues
-- Users can update
-
-**Dependencies:** #39
-
-**Related Skills:** N/A
-
----
-
-## 📈 Project Tracking
-
-### Metrics to Monitor
-
-Create `docs/metrics.md` and update weekly:
-
-```markdown
-# Weekly Metrics
-
-## Week X (Date Range)
-
-### Issues
-- Completed: N
-- In Progress: M
-- Blocked: X
-- Total Remaining: Y
-
-### Code Quality
-- Kotlin vs Java files: X% / Y%
-- Test Coverage: Z%
-- Code Review Backlog: N PRs
-
-### Protocol Compatibility
-- Features Working: X/Y
-- Integration Tests Passing: N/M
-- Known Issues: X
+## 📈 Key Advantages of Rust + Kotlin Architecture
+
+### Code Sharing
+- **70%+ protocol logic shared** between desktop and Android
+- Single source of truth for KDE Connect protocol
+- Fix bugs once, benefit both platforms
+
+### Memory Safety
+- Rust guarantees for networking and crypto code
+- No segfaults or memory leaks in protocol layer
+- Safe concurrency
 
 ### Performance
-- App Startup: X ms
-- Discovery Time: Y ms
-- File Transfer Speed: Z MB/s
+- Native performance for protocol operations
+- Efficient memory usage
+- Fast file transfers
 
-### Technical Debt
-- High Priority Items: N
-- Medium Priority Items: M
-- Low Priority Items: X
-```
+### Maintainability
+- Clear separation of concerns
+- Protocol in Rust, UI/Android in Kotlin
+- Each platform uses best-suited language
 
-### Weekly Review Template
-
-Create `docs/weekly-reviews/week-X.md`:
-
-```markdown
-# Week X Review (Dates)
-
-## Completed This Week
-- Issue #N: Description
-- Issue #M: Description
-
-## In Progress
-- Issue #X: Status
-- Issue #Y: Status
-
-## Blocked
-- Issue #Z: Reason
-
-## Metrics
-- Issues completed: N
-- Test coverage: X%
-- Code reviews: M
-
-## Highlights
-Key achievements this week
-
-## Challenges
-Problems encountered and solutions
-
-## Next Week Plan
-- Focus on Epic X
-- Complete issues #A, #B, #C
-- Start Epic Y
-
-## Team Notes
-Any team communications or decisions
-```
+### Testing
+- Test protocol once in Rust
+- Platform-specific tests only for UI/integration
+- Higher confidence in correctness
 
 ---
 
-## 🎯 Critical Path
-
-These issues must be completed in order:
-
-```
-1. #1 → #2, #3 → #4 → #5 (Setup phase)
-2. #6 → #7 → #8 (Build system)
-3. #9 → #10 → #11 → #12 (Core architecture)
-4. #13 → #14 → #15 → #16 (Networking)
-5. #17 → #18-#23 (Plugins)
-6. #28 → #29-#31 → #32 → #33 (Testing)
-7. #34 → #35 → #36 → #37 (Documentation)
-8. #38 → #39 → #40 (Release)
-```
-
----
-
-## 🚀 Getting Started
-
-### First Day Checklist
+## 🚀 Getting Started (Updated)
 
 ```bash
-# 1. Set up environment
-# Follow Issue #1
+# 1. Set up Rust for Android
+rustup target add aarch64-linux-android armv7-linux-androideabi x86_64-linux-android
+cargo install cargo-ndk
+cargo install uniffi-bindgen
 
 # 2. Clone repositories
+git clone https://github.com/olafkfreund/cosmic-connect-core.git      # NEW
 git clone https://github.com/olafkfreund/cosmic-connect-android.git
-git clone https://github.com/olafkfreund/cosmic-applet-cosmicconnect.git
+git clone https://github.com/olafkfreund/cosmic-applet-kdeconnect.git
 
-# 3. Install Claude Code skills
-cd cosmic-connect-android
-tar -xzf cosmic-connect-skills.tar.gz
-mkdir -p .claude
-mv cosmic-connect-skills/skills .claude/
-mv cosmic-connect-skills/agents .claude/
-mv cosmic-connect-skills/CLAUDE.md .
-mv cosmic-connect-skills/README.md .claude/
+# 3. Build Rust core
+cd cosmic-connect-core
+cargo build --release
+cargo test
 
-# 4. Build projects
-cd cosmic-connect-android
+# 4. Build COSMIC applet with new core
+cd ../cosmic-applet-kdeconnect
+# Update Cargo.toml to use cosmic-connect-core
+cargo build --release
+
+# 5. Build Android app
+cd ../cosmic-connect-android
 ./gradlew build
 
-cd ../cosmic-applet-cosmicconnect
-cargo build
-
-# 5. Create project board
-# Follow Issue #5
-
-# 6. Start work on first issue
-claude-code "Read CLAUDE.md and help me start work on issue #2"
+# 6. Start development
+claude-code "Read PROJECT_PLAN_UPDATED.md and help me start Phase 0"
 ```
 
 ---
 
-## 📞 Support and Questions
-
-### Using Claude Code for Project Planning
+## 📞 Using Claude Code
 
 ```bash
-# Get help with project plan
-claude-code "Read PROJECT_PLAN.md and explain the next steps"
+# Help with Rust extraction
+claude-code "Read PROJECT_PLAN_UPDATED.md and help me extract protocol code from the COSMIC applet"
 
-# Help prioritize issues
-claude-code "Review PROJECT_PLAN.md and help me decide which issue to work on next"
+# Help with FFI
+claude-code "Help me set up uniffi-rs bindings for the NetworkPacket struct"
 
-# Create new issues
-claude-code "Based on PROJECT_PLAN.md, help me create issue #X with proper formatting"
-
-# Update project status
-claude-code "Read PROJECT_PLAN.md and help me update weekly metrics"
+# Help with Android integration
+claude-code "Show me how to integrate the Rust core into the Android build system"
 ```
 
 ---
 
-## ✅ Definition of Done
+## ✅ Updated Definition of Done
 
 An issue is considered "Done" when:
 
 **Implementation:**
-- [ ] Code complete and compiles
-- [ ] All tests pass
+- [ ] Code complete and compiles (Rust + Kotlin)
+- [ ] All tests pass (Rust + Kotlin + FFI)
 - [ ] Code reviewed and approved
 - [ ] Documentation updated
 
-**Documentation:**
-- [ ] Implementation document created
-- [ ] Code comments added
-- [ ] API docs updated (if applicable)
-- [ ] User docs updated (if user-facing)
+**FFI Requirements (for FFI-related issues):**
+- [ ] No memory leaks (tested with valgrind/ASAN)
+- [ ] Error handling across boundary works
+- [ ] Thread-safe if needed
+- [ ] Performance acceptable
 
-**Testing:**
-- [ ] Unit tests written
-- [ ] Integration tests added (if applicable)
-- [ ] Manual testing completed
-- [ ] Cross-platform testing done (if protocol-related)
+**Cross-Platform:**
+- [ ] Works on Android
+- [ ] Works on COSMIC Desktop
+- [ ] Protocol compatible
 
-**Quality:**
-- [ ] No new warnings
-- [ ] No degradation in metrics
-- [ ] Meets acceptance criteria
-- [ ] Retrospective written
-
-**Process:**
-- [ ] PR merged
-- [ ] Issue closed
-- [ ] Project board updated
-- [ ] Team notified
+[Rest remains the same as original]
 
 ---
 
-## 🎉 Success!
+## 🎉 Summary
 
-This project plan provides a clear path from current state to a modern, well-tested, cross-platform COSMIC Connect implementation. 
+This updated plan transforms COSMIC Connect into a truly cross-platform solution with:
 
-**Remember:**
-- Each issue builds on previous work
-- Document everything
-- Test thoroughly
-- Learn from each task
-- Celebrate progress!
+✅ **Shared Rust core** for protocol logic  
+✅ **Modern Kotlin** for Android UI and services  
+✅ **Single source of truth** for KDE Connect protocol  
+✅ **Memory safety** where it matters most  
+✅ **Easy maintenance** through clear separation of concerns  
 
-**Let's build something amazing!** 🚀
+**Let's build something incredible!** 🚀

@@ -1,15 +1,19 @@
 # Development Environments
 
-This repository provides **two specialized development environments** via Nix flakes:
+This repository provides **three specialized development environments** via Nix flakes:
 
-1. **Android Development** (default) - For working on the COSMIC Connect Android app
-2. **NixOS Development** - For working on NixOS configuration and Nix code
+1. **Android Development** (default) - For working on the COSMIC Connect Android app with Rust FFI
+2. **Rust Core Development** - For working on cosmic-connect-core library
+3. **NixOS Development** - For working on NixOS configuration and Nix code
 
 ## Quick Start
 
 ```bash
-# For Android development (default)
+# For Android development (default) - includes Rust for FFI
 nix develop --impure
+
+# For Rust core development (cosmic-connect-core)
+nix develop .#rust-dev
 
 # For NixOS development
 nix develop .#nixos-dev
@@ -19,16 +23,26 @@ nix develop .#nixos-dev
 
 ## 🤖 Android Development Environment (Default)
 
-**Use this for**: Building and testing the COSMIC Connect Android app
+**Use this for**: Building the Android app with Rust FFI integration
 
 ### What's Included
 
+#### Android Tools
 - **Android SDK**: Command-line tools, platform-tools (adb, fastboot)
 - **Build Tools**: Gradle, JDK 17
-- **Kotlin**: Kotlin compiler, language server, ktlint
-- **Rust**: For testing the COSMIC applet (rustc, cargo, rust-analyzer)
+- **Kotlin**: Kotlin compiler, language server (kotlin-language-server), ktlint
+
+#### Rust FFI Tools
+- **Rust Toolchain**: rustc, cargo, rust-analyzer
+- **cargo-ndk**: Compile Rust for Android (aarch64, armv7, x86_64, i686)
+- **uniffi-bindgen**: Generate Kotlin bindings from Rust
+- **Android Targets**: Pre-installed Rust Android compilation targets
+- **Rust Dev Tools**: clippy (linter), rustfmt (formatter), cargo-watch
+
+#### Development Tools
 - **Network Tools**: wireshark, tcpdump, netcat (for protocol debugging)
 - **Version Control**: git, gh (GitHub CLI)
+- **Build Monitoring**: cargo-watch (auto-rebuild Rust on changes)
 
 ### Enter the Environment
 
@@ -42,8 +56,9 @@ nix develop --impure
 
 ### Common Tasks
 
+#### Android App Development
 ```bash
-# Build the Android app
+# Build the Android app (includes Rust compilation via cargo-ndk)
 ./gradlew assembleDebug
 
 # Install to Waydroid
@@ -53,19 +68,182 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 # Watch logs
 adb logcat | grep -i cosmicconnect
 
-# Run tests
+# Run Kotlin tests
 ./gradlew test
 
-# Lint code
+# Lint Kotlin code
 ./gradlew lint
+```
+
+#### Rust FFI Development
+```bash
+# Build Rust library for Android targets
+cd ../cosmic-connect-core
+cargo ndk -o ../cosmic-connect-android/app/src/main/jniLibs build
+
+# Generate Kotlin bindings from Rust
+uniffi-bindgen generate src/core.udl --language kotlin --out-dir ./bindings
+
+# Run Rust tests
+cargo test
+
+# Lint Rust code
+cargo clippy -- -D warnings
+
+# Format Rust code
+cargo fmt
+
+# Watch for changes and auto-rebuild
+cargo watch -x test
+```
+
+#### Integrated Development
+```bash
+# Build both Rust and Android (Gradle handles cargo-ndk automatically)
+./gradlew assembleDebug
+
+# Clean everything (Rust + Android)
+./gradlew clean
+cd ../cosmic-connect-core && cargo clean
+
+# Run all tests (Rust + Kotlin)
+cd ../cosmic-connect-core && cargo test && cd ../cosmic-connect-android && ./gradlew test
 ```
 
 ### Environment Variables Set
 
 - `ANDROID_HOME` - Android SDK location
 - `ANDROID_SDK_ROOT` - Same as ANDROID_HOME
+- `ANDROID_NDK_HOME` - Android NDK for Rust compilation
 - `GRADLE_OPTS` - Gradle optimization flags
-- `PATH` - Includes Android SDK tools
+- `CARGO_TARGET_DIR` - Rust build output directory
+- `PATH` - Includes Android SDK tools, cargo, cargo-ndk, uniffi-bindgen
+
+---
+
+## 🦀 Rust Core Development Environment
+
+**Use this for**: Working on the cosmic-connect-core Rust library (protocol implementation)
+
+### What's Included
+
+#### Rust Development Tools
+- **Rust Toolchain**: rustc 1.70+, cargo, rust-analyzer (LSP)
+- **Build Tools**: cargo-watch, cargo-edit, cargo-expand
+- **Linting**: clippy (strict mode), rustfmt (code formatter)
+- **Testing**: cargo-nextest (faster test runner), cargo-tarpaulin (coverage)
+- **Debugging**: rust-gdb, rust-lldb
+- **Profiling**: cargo-flamegraph, perf
+
+#### FFI Development Tools
+- **uniffi-rs**: uniffi-bindgen (generate Kotlin/Swift bindings)
+- **cbindgen**: Generate C headers (if needed)
+- **Cross-compilation**: Support for Linux, Android, iOS targets
+
+#### Protocol Development Tools
+- **Network Tools**: wireshark, tcpdump, netcat (protocol debugging)
+- **TLS Tools**: openssl, rustls utilities
+- **JSON Tools**: jq (JSON processing)
+
+#### Documentation Tools
+- **cargo-doc**: Generate Rust documentation
+- **mdbook**: Create documentation books
+- **cargo-readme**: Generate README from doc comments
+
+### Enter the Environment
+
+```bash
+nix develop .#rust-dev
+```
+
+### Common Tasks
+
+#### Core Development
+```bash
+cd cosmic-connect-core
+
+# Build the library
+cargo build
+
+# Build with all features
+cargo build --all-features
+
+# Run tests
+cargo test
+
+# Run tests with coverage
+cargo tarpaulin --out Html
+
+# Watch for changes and auto-test
+cargo watch -x test
+
+# Lint code (strict)
+cargo clippy -- -D warnings
+
+# Format code
+cargo fmt
+
+# Check without building
+cargo check
+```
+
+#### FFI Binding Generation
+```bash
+# Generate Kotlin bindings
+uniffi-bindgen generate src/core.udl --language kotlin --out-dir ./bindings/kotlin
+
+# Generate Swift bindings (for future iOS support)
+uniffi-bindgen generate src/core.udl --language swift --out-dir ./bindings/swift
+
+# Test FFI bindings
+cargo test --features ffi
+```
+
+#### Protocol Testing
+```bash
+# Run discovery tests
+cargo test discovery
+
+# Run TLS tests
+cargo test tls
+
+# Run packet serialization tests
+cargo test packet
+
+# Run all integration tests
+cargo test --test '*'
+```
+
+#### Documentation
+```bash
+# Generate and open docs
+cargo doc --open
+
+# Check documentation
+cargo doc --no-deps
+
+# Generate README from lib.rs
+cargo readme > README.md
+```
+
+#### Benchmarking & Profiling
+```bash
+# Run benchmarks
+cargo bench
+
+# Profile with flamegraph
+cargo flamegraph --bin cosmic-connect-core
+
+# Check for performance issues
+cargo clippy -- -W clippy::perf
+```
+
+### Environment Variables Set
+
+- `RUST_BACKTRACE=1` - Full backtraces on panic
+- `RUSTFLAGS` - Optimization and warning flags
+- `CARGO_INCREMENTAL=1` - Faster incremental compilation
+- `PATH` - Includes cargo, rustc, and Rust tools
 
 ---
 
@@ -169,20 +347,39 @@ nom       # nix-output-monitor (prettier nix builds)
 You can easily switch between environments:
 
 ```bash
-# Start in Android dev environment
+# Start in Android dev environment (includes Rust FFI tools)
 nix develop --impure
+
+# Exit and enter Rust core dev environment
+exit
+nix develop .#rust-dev
 
 # Exit and enter NixOS dev environment
 exit
 nix develop .#nixos-dev
 
 # Or open multiple terminals with different environments
-# Terminal 1: Android dev
+# Terminal 1: Android dev (Kotlin + Rust FFI)
 nix develop --impure
 
-# Terminal 2: NixOS dev
+# Terminal 2: Rust core dev (cosmic-connect-core)
+nix develop .#rust-dev
+
+# Terminal 3: NixOS dev (system configuration)
 nix develop .#nixos-dev
 ```
+
+### Recommended Workflow
+
+**Phase 0 (Weeks 1-3): Rust Core Extraction**
+- Use **Rust Core Development** environment
+- Work in `cosmic-connect-core` repository
+- Extract protocol from COSMIC applet
+
+**Phase 1+ (Weeks 4-20): Android Integration**
+- Use **Android Development** environment (includes Rust FFI tools)
+- Work in `cosmic-connect-android` repository
+- Integrate Rust core via FFI
 
 ---
 
@@ -195,12 +392,36 @@ Install these extensions:
 - Kotlin Language
 - Android iOS Emulator
 - Gradle for Java
+- rust-analyzer (for Rust FFI code)
 
 Configure settings:
 ```json
 {
   "kotlin.languageServer.enabled": true,
-  "java.home": "/nix/store/.../jdk-17"
+  "java.home": "/nix/store/.../jdk-17",
+  "rust-analyzer.cargo.features": "all",
+  "rust-analyzer.checkOnSave.command": "clippy"
+}
+```
+
+#### For Rust Core Development:
+Install these extensions:
+- rust-analyzer (Rust LSP)
+- CodeLLDB (debugging)
+- Better TOML
+- crates (dependency management)
+
+Configure settings:
+```json
+{
+  "rust-analyzer.cargo.features": "all",
+  "rust-analyzer.checkOnSave.command": "clippy",
+  "rust-analyzer.checkOnSave.allTargets": true,
+  "rust-analyzer.inlayHints.enable": true,
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer",
+    "editor.formatOnSave": true
+  }
 }
 ```
 
@@ -225,8 +446,45 @@ Configure settings:
 -- Add Kotlin LSP
 require('lspconfig').kotlin_language_server.setup{}
 
+-- Add Rust LSP (for FFI code)
+require('lspconfig').rust_analyzer.setup{
+  settings = {
+    ['rust-analyzer'] = {
+      checkOnSave = {
+        command = "clippy"
+      }
+    }
+  }
+}
+
 -- Android-specific settings
 vim.g.android_sdk_path = vim.env.ANDROID_HOME
+```
+
+#### For Rust Core Development:
+```lua
+-- Add Rust LSP
+require('lspconfig').rust_analyzer.setup{
+  settings = {
+    ['rust-analyzer'] = {
+      cargo = {
+        features = "all"
+      },
+      checkOnSave = {
+        command = "clippy",
+        allTargets = true
+      }
+    }
+  }
+}
+
+-- Format on save
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.rs",
+  callback = function()
+    vim.lsp.buf.format()
+  end,
+})
 ```
 
 #### For NixOS Development:
@@ -253,6 +511,16 @@ Add to `~/.config/helix/languages.toml`:
 name = "kotlin"
 language-server = { command = "kotlin-language-server" }
 formatter = { command = "ktlint", args = ["--format"] }
+
+# Rust support
+[[language]]
+name = "rust"
+language-server = { command = "rust-analyzer" }
+formatter = { command = "rustfmt" }
+
+[language.config.rust-analyzer]
+cargo = { features = "all" }
+checkOnSave = { command = "clippy" }
 
 # Nix support
 [[language]]
@@ -339,14 +607,27 @@ nix flake check --impure --show-trace
 
 | Task | Environment |
 |------|-------------|
-| Building Android app | Android (default) |
+| **Phase 0: Rust Core Extraction** | |
+| Extracting protocol from COSMIC applet | Rust core dev |
+| Implementing NetworkPacket in Rust | Rust core dev |
+| Implementing TLS/Discovery in Rust | Rust core dev |
+| Setting up uniffi-rs FFI | Rust core dev |
+| Writing Rust tests | Rust core dev |
+| Generating FFI bindings | Rust core dev |
+| **Phase 1+: Android Integration** | |
+| Building Android app (with Rust) | Android (default) |
 | Debugging Android issues | Android (default) |
 | Testing with Waydroid | Android (default) |
 | Working on build.gradle | Android (default) |
+| Integrating cargo-ndk | Android (default) |
+| Creating FFI wrapper layer | Android (default) |
+| Writing Kotlin tests | Android (default) |
+| **System Configuration** | |
 | Modifying flake.nix | NixOS dev |
 | Updating NixOS config | NixOS dev |
 | Formatting Nix code | NixOS dev |
 | Creating Nix modules | NixOS dev |
+| Adding dev shell tools | NixOS dev |
 
 ---
 

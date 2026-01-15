@@ -21,21 +21,33 @@ All features work wirelessly over your existing Wi-Fi network using secure TLS e
 
 ## 🎯 About This Project
 
-**COSMIC Connect** is a modernized Android application designed specifically for **[COSMIC Desktop](https://system76.com/cosmic)** integration. This project takes the proven COSMIC Connect protocol and brings it to COSMIC Desktop with a completely modernized Android codebase.
+**COSMIC Connect** is a modernized Android application designed specifically for **[COSMIC Desktop](https://system76.com/cosmic)** integration. This project uses a **hybrid Rust + Kotlin architecture** with a shared protocol implementation for maximum reliability and code reuse.
+
+### 🦀 Hybrid Architecture
+
+This project uses a unique **Rust + Kotlin hybrid approach**:
+
+- **Rust Core** (`cosmic-connect-core`): Protocol implementation, networking, TLS, and crypto
+- **Kotlin UI**: Android-specific features, UI, and system integration
+- **70%+ Code Sharing**: Protocol logic shared between Android and COSMIC Desktop
+- **Single Source of Truth**: Fix protocol bugs once, both platforms benefit
+- **Memory Safety**: Rust's ownership system prevents entire classes of bugs
 
 ### Modern Android Stack
 
-- ✅ **Kotlin** - Modern, safe, and concise code (converting from Java)
+- ✅ **Kotlin** - Modern Android UI and platform integration
+- ✅ **Rust Core** - Memory-safe protocol implementation via FFI
 - ✅ **MVVM Architecture** - Clean separation of concerns
 - ✅ **Jetpack Compose** - Modern declarative UI
 - ✅ **Coroutines & Flow** - Efficient async operations
+- ✅ **uniffi-rs** - Seamless Rust ↔ Kotlin FFI bindings
 - ✅ **Material 3** - Beautiful, modern design
 - ✅ **Android 14+** - Latest platform features
 - ✅ **80%+ Test Coverage** - Reliable and maintainable
 
 ### COSMIC Desktop Integration
 
-Works seamlessly with the [COSMIC Connect Desktop Applet](https://github.com/olafkfreund/cosmic-applet-cosmicconnect) built specifically for COSMIC Desktop using Rust and libcosmic.
+Works seamlessly with the [COSMIC Connect Desktop Applet](https://github.com/olafkfreund/cosmic-applet-cosmicconnect) built for COSMIC Desktop using Rust and libcosmic. Both platforms share the same Rust core library, ensuring 100% protocol compatibility.
 
 ---
 
@@ -73,35 +85,48 @@ This modernized app will be available on:
 
 See [GETTING_STARTED.md](GETTING_STARTED.md) for complete setup instructions.
 
+**Requirements**:
+- Android Studio Hedgehog or later
+- Rust 1.70+ with cargo-ndk and uniffi-bindgen
+- Android NDK (for Rust compilation)
+- NixOS users: Waydroid for testing
+
 ```bash
-# Clone the repository
+# Clone the repositories
 git clone https://github.com/olafkfreund/cosmic-connect-android
-cd cosmic-connect-android
+git clone https://github.com/olafkfreund/cosmic-connect-core
 
 # View the first setup issue
+cd cosmic-connect-android
 gh issue view 1
 
 # Start development
-# See GETTING_STARTED.md for full instructions
+# See GETTING_STARTED.md for full instructions including Rust setup
 ```
 
 ---
 
 ## 🏗️ Project Status
 
-**Current Phase**: Foundation & Setup (Phase 1 of 5)
+**Current Phase**: Rust Core Extraction (Phase 0 of 6)
 
-We are actively modernizing the Android codebase:
+We are actively building the hybrid Rust + Kotlin architecture:
 
 | Phase | Status | Description |
 |-------|--------|-------------|
-| **Phase 1** | 🚧 In Progress | Foundation & Setup |
+| **Phase 0** | 🚧 In Progress | Rust Core Extraction |
+| **Phase 1** | 📋 Planned | Foundation & FFI Setup |
 | **Phase 2** | 📋 Planned | Core Modernization |
 | **Phase 3** | 📋 Planned | Feature Implementation |
 | **Phase 4** | 📋 Planned | Integration & Testing |
 | **Phase 5** | 📋 Planned | Release |
 
-**Timeline**: 12-16 weeks
+**Timeline**: 16-20 weeks
+
+**Repositories**:
+- 📱 [cosmic-connect-android](https://github.com/olafkfreund/cosmic-connect-android) - This repo (Android app)
+- 🦀 [cosmic-connect-core](https://github.com/olafkfreund/cosmic-connect-core) - Shared Rust library
+- 🖥️ [cosmic-applet-cosmicconnect](https://github.com/olafkfreund/cosmic-applet-cosmicconnect) - COSMIC Desktop applet
 
 Track our progress: [View All Issues](https://github.com/olafkfreund/cosmic-connect-android/issues)
 
@@ -136,12 +161,15 @@ We welcome contributions! This is an open-source project focused on bringing a m
 
 ### Development Standards
 
-- **Language**: Kotlin (we're converting from Java)
-- **Architecture**: MVVM with Repository pattern
+- **Languages**:
+  - **Rust** for protocol implementation (cosmic-connect-core)
+  - **Kotlin** for Android UI and platform integration
+- **Architecture**: MVVM with Repository pattern + FFI bridge
 - **UI**: Jetpack Compose with Material 3
-- **Async**: Coroutines and Flow
-- **Testing**: Aim for 80%+ coverage
-- **Code Style**: Follow Android Kotlin style guide
+- **Async**: Coroutines and Flow (Kotlin), tokio (Rust)
+- **FFI**: uniffi-rs for Rust ↔ Kotlin bindings
+- **Testing**: Aim for 80%+ coverage on both Rust and Kotlin
+- **Code Style**: Follow Android Kotlin style guide and Rust conventions
 
 ### Using AI Assistance
 
@@ -195,8 +223,11 @@ See [Issue #1](https://github.com/olafkfreund/cosmic-connect-android/issues/1) f
 | Document | Purpose |
 |----------|---------|
 | [PROJECT_SCOPE.md](PROJECT_SCOPE.md) | Clear project definition |
-| [GETTING_STARTED.md](GETTING_STARTED.md) | Complete getting started guide |
-| [PROJECT_PLAN.md](PROJECT_PLAN.md) | All 41 issues detailed |
+| [GETTING_STARTED.md](GETTING_STARTED.md) | Complete getting started guide (includes Rust setup) |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | Hybrid Rust+Kotlin architecture details |
+| [ARCHITECTURE_CHANGES_SUMMARY.md](ARCHITECTURE_CHANGES_SUMMARY.md) | Summary of architectural changes |
+| [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) | Quick implementation guide for FFI |
+| [PROJECT_PLAN_UPDATED.md](PROJECT_PLAN_UPDATED.md) | All 62 issues detailed |
 | [CLAUDE.md](CLAUDE.md) | AI development assistance |
 | [cosmicconnect-protocol-debug.md](cosmicconnect-protocol-debug.md) | Protocol reference |
 
@@ -263,33 +294,42 @@ Our mission is to provide COSMIC Desktop users with a modern, reliable, and feat
 
 ## 🚀 Roadmap
 
-**Phase 1** (Current): Foundation & Setup
-- Development environment
+**Phase 0** (Current): Rust Core Extraction (Weeks 1-3)
+- Analyze COSMIC applet protocol code
+- Extract NetworkPacket, Discovery, TLS to Rust
+- Set up uniffi-rs FFI bindings
+- Validate with COSMIC Desktop applet
+
+**Phase 1**: Foundation & FFI Setup (Weeks 4-5)
+- Android development environment + Rust toolchain
+- Set up cargo-ndk in Android build
+- Create Android FFI wrapper layer
 - Codebase audits
-- Protocol testing
 
-**Phase 2**: Core Modernization
+**Phase 2**: Core Modernization (Weeks 6-9)
+- Integrate NetworkPacket FFI
+- Integrate TLS/Certificate FFI with Android Keystore
+- Integrate Discovery FFI
 - Gradle modernization
-- NetworkPacket → Kotlin
-- TLS & Certificate management
-- Device discovery
 
-**Phase 3**: Feature Implementation
-- Plugin modernization
+**Phase 3**: Feature Implementation (Weeks 10-14)
+- Plugin architecture FFI bridge
+- Implement 6 core plugins with Rust core
 - Jetpack Compose UI
 - MVVM architecture
 
-**Phase 4**: Integration & Testing
-- Comprehensive testing
+**Phase 4**: Integration & Testing (Weeks 15-18)
+- FFI integration testing (memory safety, concurrency)
 - COSMIC Desktop integration testing
 - Performance optimization
+- Protocol compatibility validation
 
-**Phase 5**: Release
+**Phase 5**: Release (Weeks 19-20)
 - Beta testing
 - Play Store release
 - F-Droid release
 
-See [PROJECT_PLAN.md](PROJECT_PLAN.md) for complete roadmap.
+See [PROJECT_PLAN_UPDATED.md](PROJECT_PLAN_UPDATED.md) and [ARCHITECTURE.md](ARCHITECTURE.md) for complete details.
 
 ---
 

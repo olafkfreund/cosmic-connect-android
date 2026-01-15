@@ -12,9 +12,9 @@ Migrating all plugins from mutable `NetworkPacket` to immutable `Core.NetworkPac
 
 ## Progress Overview
 
-**Completed**: 10 plugins ✅
-**Remaining**: ~15 plugins
-**Total LOC Migrated**: ~1,999 lines
+**Completed**: 11 plugins ✅
+**Remaining**: ~14 plugins
+**Total LOC Migrated**: ~2,315 lines
 
 ---
 
@@ -393,6 +393,59 @@ private fun sendMprisPacket(body: Map<String, Any>) {
 
 ---
 
+### ✅ MprisReceiverPlugin (316 lines)
+**Date**: 2025-01-15
+**Pattern**: Payload Handling + Extensive Metadata (Java)
+**File**: `src/org/cosmic/cosmicconnect/Plugins/MprisReceiverPlugin/MprisReceiverPlugin.java`
+
+**Changes**:
+- Updated imports to use `Core.NetworkPacket`
+- Added Map import
+- Changed `onPacketReceived()` signature to use legacy NetworkPacket
+- Migrated 3 packet-sending methods:
+  - `sendPlayerList()` → sends player list with album art support
+  - `sendAlbumArt()` → sends album art as payload (special handling)
+  - `sendMetadata()` → sends extensive player metadata (17 fields)
+- Created `convertToLegacyPacket()` helper
+
+**Pattern Demonstrated (Payload Handling)**:
+```java
+// Create immutable packet with fields
+Map<String, Object> body = new HashMap<>();
+body.put("player", playerName);
+body.put("transferringAlbumArt", true);
+body.put("albumArtUrl", artUrl);
+NetworkPacket packet = NetworkPacket.create(PACKET_TYPE_MPRIS, body);
+
+// Convert to legacy and set payload
+org.cosmic.cosmicconnect.NetworkPacket np = convertToLegacyPacket(packet);
+np.setPayload(new org.cosmic.cosmicconnect.NetworkPacket.Payload(p));
+
+// Send
+getDevice().sendPacket(np);
+```
+
+**Pattern Demonstrated (Extensive Metadata)**:
+```java
+// Prepare all data first
+String nowPlaying = Stream.of(player.getArtist(), player.getTitle())
+    .filter(StringUtils::isNotEmpty).collect(Collectors.joining(" - "));
+
+// Create immutable packet with all metadata
+Map<String, Object> body = new HashMap<>();
+body.put("player", player.getName());
+body.put("title", player.getTitle());
+body.put("artist", player.getArtist());
+// ... 14 more fields
+NetworkPacket packet = NetworkPacket.create(PACKET_TYPE_MPRIS, body);
+
+getDevice().sendPacket(convertToLegacyPacket(packet));
+```
+
+**Key Learning**: Packets with payloads require special handling - create immutable packet, convert to legacy, then set payload before sending. For extensive metadata, prepare all data first, then create packet in one go.
+
+---
+
 ## Remaining Plugins to Migrate
 
 ### Simple Plugins (Similar to FindRemoteDevice)
@@ -405,7 +458,7 @@ private fun sendMprisPacket(body: Map<String, Any>) {
 - [x] MousePadPlugin ✅
 - [x] MouseReceiverPlugin ✅
 - [x] MprisPlugin ✅
-- [ ] MprisReceiverPlugin
+- [x] MprisReceiverPlugin ✅
 - [ ] SftpPlugin
 - [ ] ReceiveNotificationsPlugin
 

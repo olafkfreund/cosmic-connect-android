@@ -22,7 +22,7 @@ import androidx.fragment.app.DialogFragment;
 import org.apache.commons.lang3.StringUtils;
 import org.cosmic.cosmicconnect.Helpers.AppsHelper;
 import org.cosmic.cosmicconnect.Helpers.ThreadHelper;
-import org.cosmic.cosmicconnect.NetworkPacket;
+import org.cosmic.cosmicconnect.Core.NetworkPacket;
 import org.cosmic.cosmicconnect.Plugins.NotificationsPlugin.NotificationReceiver;
 import org.cosmic.cosmicconnect.Plugins.Plugin;
 import org.cosmic.cosmicconnect.Plugins.PluginFactory;
@@ -33,6 +33,7 @@ import org.cosmic.cosmicconnect.R;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -106,7 +107,7 @@ public class MprisReceiverPlugin extends Plugin {
     }
 
     @Override
-    public boolean onPacketReceived(@NonNull NetworkPacket np) {
+    public boolean onPacketReceived(@NonNull org.cosmic.cosmicconnect.NetworkPacket np) {
         if (np.getBoolean("requestPlayerList")) {
             sendPlayerList();
             return true;
@@ -222,10 +223,14 @@ public class MprisReceiverPlugin extends Plugin {
     }
 
     private void sendPlayerList() {
-        NetworkPacket np = new NetworkPacket(PACKET_TYPE_MPRIS);
-        np.set("playerList", players.keySet());
-        np.set("supportAlbumArtPayload", true);
-        getDevice().sendPacket(np);
+        // Create immutable packet
+        Map<String, Object> body = new HashMap<>();
+        body.put("playerList", new ArrayList<>(players.keySet()));
+        body.put("supportAlbumArtPayload", true);
+        NetworkPacket packet = NetworkPacket.create(PACKET_TYPE_MPRIS, body);
+
+        // Convert and send
+        getDevice().sendPacket(convertToLegacyPacket(packet));
     }
 
     void sendAlbumArt(String playerName, @NonNull MprisReceiverCallback cb, @Nullable String requestedUrl) {
@@ -251,32 +256,26 @@ public class MprisReceiverPlugin extends Plugin {
             Log.w(TAG, "sendAlbumArt: Failed to get art stream");
             return;
         }
-        NetworkPacket np = new NetworkPacket(PACKET_TYPE_MPRIS);
-        np.setPayload(new NetworkPacket.Payload(p));
-        np.set("player", playerName);
-        np.set("transferringAlbumArt", true);
-        np.set("albumArtUrl", artUrl);
+
+        // Create immutable packet
+        Map<String, Object> body = new HashMap<>();
+        body.put("player", playerName);
+        body.put("transferringAlbumArt", true);
+        body.put("albumArtUrl", artUrl);
+        NetworkPacket packet = NetworkPacket.create(PACKET_TYPE_MPRIS, body);
+
+        // Convert to legacy and set payload
+        org.cosmic.cosmicconnect.NetworkPacket np = convertToLegacyPacket(packet);
+        np.setPayload(new org.cosmic.cosmicconnect.NetworkPacket.Payload(p));
+
+        // Send
         getDevice().sendPacket(np);
     }
 
     void sendMetadata(MprisReceiverPlayer player) {
-        NetworkPacket np = new NetworkPacket(MprisReceiverPlugin.PACKET_TYPE_MPRIS);
-        np.set("player", player.getName());
-        np.set("title", player.getTitle());
-        np.set("artist", player.getArtist());
+        // Prepare all data
         String nowPlaying = Stream.of(player.getArtist(), player.getTitle())
             .filter(StringUtils::isNotEmpty).collect(Collectors.joining(" - "));
-        np.set("nowPlaying", nowPlaying); // GSConnect 50 (so, Ubuntu 22.04) needs this
-        np.set("album", player.getAlbum());
-        np.set("isPlaying", player.isPlaying());
-        np.set("pos", player.getPosition());
-        np.set("length", player.getLength());
-        np.set("canPlay", player.canPlay());
-        np.set("canPause", player.canPause());
-        np.set("canGoPrevious", player.canGoPrevious());
-        np.set("canGoNext", player.canGoNext());
-        np.set("canSeek", player.canSeek());
-        np.set("volume", player.getVolume());
         String artUrl = "";
         MprisReceiverCallback cb = playerCbs.get(player.getName());
         if (cb != null) {
@@ -285,8 +284,28 @@ public class MprisReceiverPlugin extends Plugin {
                 artUrl = url;
             }
         }
-        np.set("albumArtUrl", artUrl);
-        getDevice().sendPacket(np);
+
+        // Create immutable packet
+        Map<String, Object> body = new HashMap<>();
+        body.put("player", player.getName());
+        body.put("title", player.getTitle());
+        body.put("artist", player.getArtist());
+        body.put("nowPlaying", nowPlaying); // GSConnect 50 (so, Ubuntu 22.04) needs this
+        body.put("album", player.getAlbum());
+        body.put("isPlaying", player.isPlaying());
+        body.put("pos", player.getPosition());
+        body.put("length", player.getLength());
+        body.put("canPlay", player.canPlay());
+        body.put("canPause", player.canPause());
+        body.put("canGoPrevious", player.canGoPrevious());
+        body.put("canGoNext", player.canGoNext());
+        body.put("canSeek", player.canSeek());
+        body.put("volume", player.getVolume());
+        body.put("albumArtUrl", artUrl);
+        NetworkPacket packet = NetworkPacket.create(MprisReceiverPlugin.PACKET_TYPE_MPRIS, body);
+
+        // Convert and send
+        getDevice().sendPacket(convertToLegacyPacket(packet));
     }
 
     @Override
@@ -311,6 +330,22 @@ public class MprisReceiverPlugin extends Plugin {
     private boolean hasPermission() {
         String notificationListenerList = Settings.Secure.getString(context.getContentResolver(), "enabled_notification_listeners");
         return notificationListenerList != null && notificationListenerList.contains(context.getPackageName());
+    }
+
+    /**
+     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
+     */
+    private org.cosmic.cosmicconnect.NetworkPacket convertToLegacyPacket(NetworkPacket ffi) {
+        org.cosmic.cosmicconnect.NetworkPacket legacy =
+            new org.cosmic.cosmicconnect.NetworkPacket(ffi.getType());
+
+        // Copy all body fields
+        Map<String, Object> body = ffi.getBody();
+        for (Map.Entry<String, Object> entry : body.entrySet()) {
+            legacy.set(entry.getKey(), entry.getValue());
+        }
+
+        return legacy;
     }
 
 }

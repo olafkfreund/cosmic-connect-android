@@ -1068,6 +1068,55 @@ An issue is considered "Done" when:
 
 ---
 
+## 🔮 Future Optimizations
+
+### Issue #63: Optimal Discovery and Pairing Architecture
+**Priority:** P2-Medium
+**Labels:** `enhancement`, `rust`, `android`, `performance`, `architecture`
+**Timeline:** Q2 2026 (8 weeks after Issue #50)
+
+**Related:** [cosmic-applet-kdeconnect#53](https://github.com/olafkfreund/cosmic-applet-kdeconnect/issues/53) - Full architectural proposal
+
+**Overview:**
+Major optimization of device discovery and pairing using modern cryptography and smart discovery strategies.
+
+**Problems Addressed:**
+- ❌ Battery drain (5-10% hourly)
+- ❌ Slow discovery (5-10 seconds)
+- ❌ Pairing race conditions
+- ❌ RSA-2048 performance (500ms key generation)
+- ❌ Poor network change handling
+
+**Key Features:**
+- **3-Layer Discovery:** Known IPs → mDNS/DNS-SD → UDP broadcast
+- **7-State Pairing Machine:** Prevents race conditions
+- **Modern Cryptography:** Ed25519 (5000x faster), X25519, ChaCha20-Poly1305
+
+**Performance Targets:**
+
+| Metric | Current | Target | Improvement |
+|--------|---------|--------|-------------|
+| Discovery | 5-10s | <3s | 2x faster |
+| Key generation | 500ms | <10ms | 50x faster |
+| Pairing time | 10-30s | <5s | 3-6x faster |
+| Battery drain | 5-10%/hr | <2%/hr | 3-5x better |
+
+**Implementation:**
+- Weeks 1-2: Core infrastructure (DiscoveryManager, state machine)
+- Weeks 3-4: Discovery methods (3 layers)
+- Weeks 5-6: Pairing system (modern crypto)
+- Weeks 7-8: Android integration & testing
+
+**Dependencies:**
+- [x] Issue #44: cosmic-connect-core ✅
+- [ ] Issues #45-50: Core protocol implementation
+
+**Status:** Planned (requires cosmic-connect-core foundation)
+
+**Documentation:** See `docs/optimization-roadmap.md` for complete details
+
+---
+
 ## 🎉 Summary
 
 This updated plan transforms COSMIC Connect into a truly cross-platform solution with:

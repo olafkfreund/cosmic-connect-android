@@ -387,9 +387,15 @@ claude-code --agent protocol-compatibility "Debug TLS handshake failure between 
 ### Week 2: Core Extraction
 
 **Day 1-2: Discovery & TLS**
-- [ ] Complete Issue #46 (Extract Discovery)
+- [x] Complete Issue #46 (Extract Discovery) ✅
+  - [x] Extract DeviceInfo, DeviceType structs ✅
+  - [x] Extract Discovery (sync) and DiscoveryService (async) ✅
+  - [x] Extract DiscoveryEvent system ✅
+  - [x] UDP broadcasting on port 1716 ✅
+  - [x] Port fallback (1714-1764) ✅
+  - [x] Device timeout tracking ✅
+  - [x] All tests passing (25 unit + 8 doc) ✅
 - [ ] Complete Issue #47 (Extract TLS/Certificates)
-- [ ] Implement UDP multicast discovery (224.0.0.251:1716)
 - [ ] Implement certificate generation (RSA 2048-bit)
 - [ ] **CRITICAL**: Implement TLS role logic (deviceId comparison)
 - [ ] Write security tests

@@ -41,7 +41,8 @@ import org.cosmic.cosmicconnect.Helpers.SMSHelper.getNewestMessageTimestamp
 import org.cosmic.cosmicconnect.Helpers.SMSHelper.jsonArrayToAddressList
 import org.cosmic.cosmicconnect.Helpers.SMSHelper.jsonArrayToAttachmentsList
 import org.cosmic.cosmicconnect.Helpers.ThreadHelper.execute
-import org.cosmic.cosmicconnect.NetworkPacket
+import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory.LoadablePlugin
 import org.cosmic.cosmicconnect.Plugins.SMSPlugin.SmsMmsUtils.partIdToMessageAttachmentPacket
@@ -185,11 +186,12 @@ class SMSPlugin : Plugin() {
             }
         }
 
-        val np = NetworkPacket(TelephonyPlugin.PACKET_TYPE_TELEPHONY)
+        // Build packet body
+        val body = mutableMapOf<String, Any>()
 
-        np["event"] = "sms"
+        body["event"] = "sms"
 
-        np["messageBody"] = buildString {
+        body["messageBody"] = buildString {
             for (message in messages) {
                 append(message.messageBody)
             }
@@ -206,19 +208,23 @@ class SMSPlugin : Plugin() {
 
             val name = contactInfo["name"]
             if (name != null) {
-                np["contactName"] = name
+                body["contactName"] = name
             }
 
             val photoID = contactInfo["photoID"]
             if (photoID != null) {
-                np["phoneThumbnail"] = ContactsHelper.photoId64Encoded(context, photoID)
+                body["phoneThumbnail"] = ContactsHelper.photoId64Encoded(context, photoID)
             }
         }
         if (phoneNumber != null) {
-            np["phoneNumber"] = phoneNumber
+            body["phoneNumber"] = phoneNumber
         }
 
-        device.sendPacket(np)
+        // Create immutable packet
+        val packet = NetworkPacket.create(TelephonyPlugin.PACKET_TYPE_TELEPHONY, body.toMap())
+
+        // Convert and send
+        device.sendPacket(convertToLegacyPacket(packet))
     }
 
     override val permissionExplanation: Int = R.string.telepathy_permission_explanation
@@ -255,7 +261,7 @@ class SMSPlugin : Plugin() {
     override val description: String
         get() = context.resources.getString(R.string.pref_plugin_telepathy_desc)
 
-    override fun onPacketReceived(np: NetworkPacket): Boolean = when (np.type) {
+    override fun onPacketReceived(np: LegacyNetworkPacket): Boolean = when (np.type) {
         PACKET_TYPE_SMS_REQUEST_CONVERSATIONS -> {
             execute {
                 this.handleRequestAllConversations(np)
@@ -506,25 +512,50 @@ class SMSPlugin : Plugin() {
          * @param messages Messages to include in the packet
          * @return NetworkPacket of type [PACKET_TYPE_SMS_MESSAGE]
          */
-        private fun constructBulkMessagePacket(messages: Iterable<SMSHelper.Message>): NetworkPacket {
-            val reply = NetworkPacket(PACKET_TYPE_SMS_MESSAGE)
-
-            val body = JSONArray()
+        private fun constructBulkMessagePacket(messages: Iterable<SMSHelper.Message>): LegacyNetworkPacket {
+            val messagesArray = JSONArray()
 
             for (message: SMSHelper.Message in messages) {
                 try {
                     val json: JSONObject = message.toJSONObject()
 
-                    body.put(json)
+                    messagesArray.put(json)
                 } catch (e: JSONException) {
                     Log.e("Conversations", "Error serializing message", e)
                 }
             }
 
-            reply["messages"] = body
-            reply["version"] = SMS_MESSAGE_PACKET_VERSION
+            // Create immutable packet
+            val packet = NetworkPacket.create(PACKET_TYPE_SMS_MESSAGE, mapOf(
+                "messages" to messagesArray,
+                "version" to SMS_MESSAGE_PACKET_VERSION
+            ))
 
-            return reply
+            // Convert and return
+            return convertToLegacyPacket(packet)
+        }
+
+        /**
+         * Convert immutable NetworkPacket to legacy NetworkPacket for sending
+         */
+        private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
+            val legacy = LegacyNetworkPacket(ffi.type)
+
+            // Copy all body fields
+            ffi.body.forEach { (key, value) ->
+                when (value) {
+                    is String -> legacy.set(key, value)
+                    is Int -> legacy.set(key, value)
+                    is Long -> legacy.set(key, value)
+                    is Boolean -> legacy.set(key, value)
+                    is Double -> legacy.set(key, value)
+                    is JSONArray -> legacy.set(key, value)
+                    is JSONObject -> legacy.set(key, value)
+                    else -> legacy.set(key, value.toString())
+                }
+            }
+
+            return legacy
         }
     }
 }

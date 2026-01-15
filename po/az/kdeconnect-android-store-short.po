@@ -15,5 +15,5 @@ msgstr ""
 "X-Generator: Lokalize 23.04.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "KDE Connect integrates your smartphone and computer"
-msgstr "KDE Connect kompyuteriniz ilə smartfonunuzu inteqrasiya edir"
+msgid "COSMIC Connect integrates your smartphone and computer"
+msgstr "COSMIC Connect kompyuteriniz ilə smartfonunuzu inteqrasiya edir"

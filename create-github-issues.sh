@@ -124,7 +124,7 @@ Complete audit of COSMIC Desktop implementation to understand integration requir
 
 ## Related Documentation
 - See `.claude/skills/cosmic-desktop-SKILL.md`
-- See `kdeconnect-protocol-debug.md`
+- See `cosmicconnect-protocol-debug.md`
 EOF
 )" \
   --label "P0-Critical,audit,cosmic,documentation" \
@@ -166,7 +166,7 @@ Test current protocol compatibility between Android and COSMIC implementations.
 - #3
 
 ## Related Documentation
-- See `kdeconnect-protocol-debug.md`
+- See `cosmicconnect-protocol-debug.md`
 - See `.claude/skills/tls-networking-SKILL.md`
 EOF
 )" \
@@ -363,7 +363,7 @@ Convert NetworkPacket class to Kotlin with modern patterns.
 ## Related Documentation
 - See `.claude/skills/android-development-SKILL.md`
 - See `.claude/skills/tls-networking-SKILL.md`
-- See `kdeconnect-protocol-debug.md`
+- See `cosmicconnect-protocol-debug.md`
 EOF
 )" \
   --label "P0-Critical,android,kotlin-conversion,protocol" \

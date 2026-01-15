@@ -1,12 +1,12 @@
-# translation of kdeconnect-android-store-short.pot to esperanto
+# translation of cosmicconnect-android-store-short.pot to esperanto
 # Copyright (C) 2023 Free Software Foundation, Inc.
-# This file is distributed under the same license as the kdeconnect-android package.
+# This file is distributed under the same license as the cosmicconnect-android package.
 # Oliver Kellogg <okellogg@users.sourceforge.net, 2023.
 #
 #. extracted from ./metadata/android/en-US/short_description.txt
 msgid ""
 msgstr ""
-"Project-Id-Version: kdeconnect-android\n"
+"Project-Id-Version: cosmicconnect-android\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-17 09:00+0000\n"
 "PO-Revision-Date: 2023-07-05 07:30+0100\n"
@@ -18,5 +18,5 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-msgid "KDE Connect integrates your smartphone and computer"
-msgstr "KDE Connect integras vian poŝtelefonon kaj komputilon"
+msgid "COSMIC Connect integrates your smartphone and computer"
+msgstr "COSMIC Connect integras vian poŝtelefonon kaj komputilon"

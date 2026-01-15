@@ -1,9 +1,9 @@
-# translation of kdeconnect-android-store-short.po Slovak
+# translation of cosmicconnect-android-store-short.po Slovak
 # SPDX-FileCopyrightText: 2023 Roman Paholik <wizzardsk@gmail.com>
 #. extracted from ./metadata/android/en-US/short_description.txt
 msgid ""
 msgstr ""
-"Project-Id-Version: kdeconnect-android-store-short\n"
+"Project-Id-Version: cosmicconnect-android-store-short\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-17 09:00+0000\n"
 "PO-Revision-Date: 2023-12-08 19:55+0100\n"
@@ -16,5 +16,5 @@ msgstr ""
 "X-Generator: Lokalize 23.08.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-msgid "KDE Connect integrates your smartphone and computer"
-msgstr "KDE Connect integruje váš smartfón a počítač"
+msgid "COSMIC Connect integrates your smartphone and computer"
+msgstr "COSMIC Connect integruje váš smartfón a počítač"

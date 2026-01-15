@@ -1,8 +1,8 @@
-# KDE Connect Rust Implementation Guide
+# COSMIC Connect Rust Implementation Guide
 ## Complete Step-by-Step Process for COSMIC Desktop
 
-> **Target**: Implement KDE Connect protocol in Rust for COSMIC Desktop
-> **Based on**: Protocol v7, compatible with KDE Connect Android app
+> **Target**: Implement COSMIC Connect protocol in Rust for COSMIC Desktop
+> **Based on**: Protocol v7, compatible with COSMIC Connect Android app
 > **Last Updated**: 2025-01-15
 
 ---
@@ -27,7 +27,7 @@
 
 ```toml
 [package]
-name = "kdeconnect-cosmic"
+name = "cosmicconnect-cosmic"
 version = "0.1.0"
 edition = "2021"
 
@@ -61,7 +61,7 @@ tracing-subscriber = "0.3"
 ### 1.2 Project Structure
 
 ```
-kdeconnect-cosmic/
+cosmicconnect-cosmic/
 ├── Cargo.toml
 ├── src/
 │   ├── main.rs                 # Application entry point
@@ -100,55 +100,55 @@ kdeconnect-cosmic/
 ### 2.1 Protocol Constants (`src/protocol/constants.rs`)
 
 ```rust
-/// KDE Connect protocol constants
+/// COSMIC Connect protocol constants
 pub const UDP_PORT: u16 = 1716;
 pub const MIN_TCP_PORT: u16 = 1714;
 pub const MAX_TCP_PORT: u16 = 1764;
 pub const PROTOCOL_VERSION: u8 = 7;
 
 /// Packet types
-pub const PACKET_TYPE_IDENTITY: &str = "kdeconnect.identity";
-pub const PACKET_TYPE_PAIR: &str = "kdeconnect.pair";
+pub const PACKET_TYPE_IDENTITY: &str = "cosmicconnect.identity";
+pub const PACKET_TYPE_PAIR: &str = "cosmicconnect.pair";
 
 /// Default capabilities
 pub const DEFAULT_INCOMING_CAPABILITIES: &[&str] = &[
-    "kdeconnect.battery.request",
-    "kdeconnect.clipboard",
-    "kdeconnect.clipboard.connect",
-    "kdeconnect.connectivity_report.request",
-    "kdeconnect.findmyphone.request",
-    "kdeconnect.mousepad.keyboardstate",
-    "kdeconnect.mousepad.request",
-    "kdeconnect.mpris",
-    "kdeconnect.mpris.request",
-    "kdeconnect.notification",
-    "kdeconnect.notification.action",
-    "kdeconnect.notification.reply",
-    "kdeconnect.notification.request",
-    "kdeconnect.ping",
-    "kdeconnect.runcommand",
-    "kdeconnect.runcommand.request",
-    "kdeconnect.sftp.request",
-    "kdeconnect.share.request",
+    "cosmicconnect.battery.request",
+    "cosmicconnect.clipboard",
+    "cosmicconnect.clipboard.connect",
+    "cosmicconnect.connectivity_report.request",
+    "cosmicconnect.findmyphone.request",
+    "cosmicconnect.mousepad.keyboardstate",
+    "cosmicconnect.mousepad.request",
+    "cosmicconnect.mpris",
+    "cosmicconnect.mpris.request",
+    "cosmicconnect.notification",
+    "cosmicconnect.notification.action",
+    "cosmicconnect.notification.reply",
+    "cosmicconnect.notification.request",
+    "cosmicconnect.ping",
+    "cosmicconnect.runcommand",
+    "cosmicconnect.runcommand.request",
+    "cosmicconnect.sftp.request",
+    "cosmicconnect.share.request",
 ];
 
 pub const DEFAULT_OUTGOING_CAPABILITIES: &[&str] = &[
-    "kdeconnect.battery",
-    "kdeconnect.clipboard",
-    "kdeconnect.clipboard.connect",
-    "kdeconnect.connectivity_report",
-    "kdeconnect.findmyphone.request",
-    "kdeconnect.mousepad.echo",
-    "kdeconnect.mousepad.keyboardstate",
-    "kdeconnect.mousepad.request",
-    "kdeconnect.mpris",
-    "kdeconnect.mpris.request",
-    "kdeconnect.notification",
-    "kdeconnect.notification.request",
-    "kdeconnect.ping",
-    "kdeconnect.runcommand",
-    "kdeconnect.sftp",
-    "kdeconnect.share.request",
+    "cosmicconnect.battery",
+    "cosmicconnect.clipboard",
+    "cosmicconnect.clipboard.connect",
+    "cosmicconnect.connectivity_report",
+    "cosmicconnect.findmyphone.request",
+    "cosmicconnect.mousepad.echo",
+    "cosmicconnect.mousepad.keyboardstate",
+    "cosmicconnect.mousepad.request",
+    "cosmicconnect.mpris",
+    "cosmicconnect.mpris.request",
+    "cosmicconnect.notification",
+    "cosmicconnect.notification.request",
+    "cosmicconnect.ping",
+    "cosmicconnect.runcommand",
+    "cosmicconnect.sftp",
+    "cosmicconnect.share.request",
 ];
 ```
 
@@ -164,7 +164,7 @@ pub struct NetworkPacket {
     /// Unique packet ID (timestamp in milliseconds)
     pub id: i64,
     
-    /// Packet type (e.g., "kdeconnect.identity", "kdeconnect.pair")
+    /// Packet type (e.g., "cosmicconnect.identity", "cosmicconnect.pair")
     #[serde(rename = "type")]
     pub packet_type: String,
     
@@ -192,7 +192,7 @@ impl NetworkPacket {
     ) -> Self {
         Self {
             id: Self::generate_id(),
-            packet_type: "kdeconnect.identity".to_string(),
+            packet_type: "cosmicconnect.identity".to_string(),
             body: serde_json::json!({
                 "deviceId": device_id,
                 "deviceName": device_name,
@@ -211,7 +211,7 @@ impl NetworkPacket {
     pub fn new_pair(pair: bool) -> Self {
         Self {
             id: Self::generate_id(),
-            packet_type: "kdeconnect.pair".to_string(),
+            packet_type: "cosmicconnect.pair".to_string(),
             body: serde_json::json!({ "pair": pair }),
             payload_size: None,
             payload_transfer_info: None,
@@ -259,12 +259,12 @@ impl NetworkPacket {
     
     /// Check if this is an identity packet
     pub fn is_identity(&self) -> bool {
-        self.packet_type == "kdeconnect.identity"
+        self.packet_type == "cosmicconnect.identity"
     }
     
     /// Check if this is a pair packet
     pub fn is_pair(&self) -> bool {
-        self.packet_type == "kdeconnect.pair"
+        self.packet_type == "cosmicconnect.pair"
     }
 }
 
@@ -371,7 +371,7 @@ pub struct RemoteDevice {
 use thiserror::Error;
 
 #[derive(Error, Debug)]
-pub enum KdeConnectError {
+pub enum CosmicConnectError {
     #[error("IO error: {0}")]
     Io(#[from] std::io::Error),
     
@@ -397,7 +397,7 @@ pub enum KdeConnectError {
     Pairing(String),
 }
 
-pub type Result<T> = std::result::Result<T, KdeConnectError>;
+pub type Result<T> = std::result::Result<T, CosmicConnectError>;
 ```
 
 ---
@@ -413,7 +413,7 @@ use std::path::{Path, PathBuf};
 use std::fs;
 use anyhow::{Result, Context};
 
-/// Certificate manager for KDE Connect
+/// Certificate manager for COSMIC Connect
 pub struct CertificateManager {
     cert_path: PathBuf,
     key_path: PathBuf,
@@ -436,7 +436,7 @@ impl CertificateManager {
         }
     }
     
-    /// Generate a new self-signed certificate for KDE Connect
+    /// Generate a new self-signed certificate for COSMIC Connect
     /// CRITICAL: Must be RSA 2048-bit with specific attributes
     fn generate_certificate(&self, device_id: &str) -> Result<(Vec<CertificateDer<'static>>, PrivateKeyDer<'static>)> {
         // Generate RSA 2048-bit key pair
@@ -448,10 +448,10 @@ impl CertificateManager {
         // Set distinguished name components
         // CN = deviceId (with underscores)
         // O = KDE
-        // OU = KDE Connect
+        // OU = COSMIC Connect
         params.distinguished_name.push(DnType::CommonName, device_id);
         params.distinguished_name.push(DnType::OrganizationName, "KDE");
-        params.distinguished_name.push(DnType::OrganizationalUnitName, "KDE Connect");
+        params.distinguished_name.push(DnType::OrganizationalUnitName, "COSMIC Connect");
         
         // Set validity period (1 year ago to 10 years from now)
         params.not_before = time::OffsetDateTime::now_utc() - time::Duration::days(365);
@@ -511,7 +511,7 @@ use rustls::{DigitallySignedStruct, Error, SignatureScheme};
 use std::fmt::Debug;
 
 /// Custom certificate verifier that accepts any certificate
-/// This is required for KDE Connect's self-signed certificate model
+/// This is required for COSMIC Connect's self-signed certificate model
 #[derive(Debug)]
 pub struct AcceptAnyCertVerifier;
 
@@ -524,7 +524,7 @@ impl ServerCertVerifier for AcceptAnyCertVerifier {
         _ocsp_response: &[u8],
         _now: UnixTime,
     ) -> Result<ServerCertVerified, Error> {
-        // Accept any certificate (KDE Connect uses self-signed certs)
+        // Accept any certificate (COSMIC Connect uses self-signed certs)
         Ok(ServerCertVerified::assertion())
     }
     
@@ -750,7 +750,7 @@ sudo tcpdump -i any udp port 1716 -vvv -X
 2. **Test UDP Broadcast**:
 ```bash
 # Send test broadcast manually
-echo '{"id":1234567890,"type":"kdeconnect.identity","body":{"deviceId":"test","deviceName":"Test","deviceType":"desktop","protocolVersion":7,"tcpPort":1716}}
+echo '{"id":1234567890,"type":"cosmicconnect.identity","body":{"deviceId":"test","deviceName":"Test","deviceType":"desktop","protocolVersion":7,"tcpPort":1716}}
 ' | nc -u -b 255.255.255.255 1716
 ```
 
@@ -876,7 +876,7 @@ impl TcpConnectionManager {
             
             // Prevent infinite reads
             if buffer.len() > 65536 {
-                return Err(crate::error::KdeConnectError::Protocol(
+                return Err(crate::error::CosmicConnectError::Protocol(
                     "Identity packet too large".to_string()
                 ));
             }
@@ -885,7 +885,7 @@ impl TcpConnectionManager {
         // Parse identity packet
         let remote_identity = NetworkPacket::deserialize(&buffer)?;
         if !remote_identity.is_identity() {
-            return Err(crate::error::KdeConnectError::Protocol(
+            return Err(crate::error::CosmicConnectError::Protocol(
                 "Expected identity packet".to_string()
             ));
         }
@@ -951,7 +951,7 @@ impl TcpConnectionManager {
             }
             
             if buffer.len() > 65536 {
-                return Err(crate::error::KdeConnectError::Protocol(
+                return Err(crate::error::CosmicConnectError::Protocol(
                     "Identity packet too large".to_string()
                 ));
             }
@@ -959,7 +959,7 @@ impl TcpConnectionManager {
         
         let remote_identity = NetworkPacket::deserialize(&buffer)?;
         if !remote_identity.is_identity() {
-            return Err(crate::error::KdeConnectError::Protocol(
+            return Err(crate::error::CosmicConnectError::Protocol(
                 "Expected identity packet".to_string()
             ));
         }
@@ -1060,7 +1060,7 @@ impl TlsHandler {
             .with_single_cert(certs.clone(), key.clone_key())?;
         
         // Set compatible cipher suites
-        server_config.alpn_protocols = vec![b"kdeconnect".to_vec()];
+        server_config.alpn_protocols = vec![b"cosmicconnect".to_vec()];
         
         // Configure TLS client (for when we're the client)
         let mut client_config = ClientConfig::builder()
@@ -1068,7 +1068,7 @@ impl TlsHandler {
             .with_custom_certificate_verifier(Arc::new(AcceptAnyCertVerifier))
             .with_client_auth_cert(certs, key)?;
         
-        client_config.alpn_protocols = vec![b"kdeconnect".to_vec()];
+        client_config.alpn_protocols = vec![b"cosmicconnect".to_vec()];
         
         Ok(Self {
             server_config: Arc::new(server_config),
@@ -1260,7 +1260,7 @@ impl PairingManager {
             }
             
             if buffer.len() > 65536 {
-                return Err(crate::error::KdeConnectError::Protocol(
+                return Err(crate::error::CosmicConnectError::Protocol(
                     "Packet too large".to_string()
                 ));
             }
@@ -1363,7 +1363,7 @@ async fn main() -> anyhow::Result<()> {
     // Initialize tracing
     tracing_subscriber::fmt::init();
     
-    info!("Starting KDE Connect for COSMIC Desktop");
+    info!("Starting COSMIC Connect for COSMIC Desktop");
     
     // 1. Load device information
     let device_info = DeviceInfo::new_desktop(
@@ -1378,7 +1378,7 @@ async fn main() -> anyhow::Result<()> {
     // 2. Load or generate certificate
     let config_dir = dirs::config_dir()
         .unwrap_or_else(|| PathBuf::from("."))
-        .join("kdeconnect-cosmic");
+        .join("cosmicconnect-cosmic");
     
     let cert_manager = CertificateManager::new(&config_dir);
     let (certs, key) = cert_manager.load_or_generate(&device_info.device_id)?;
@@ -1410,7 +1410,7 @@ async fn main() -> anyhow::Result<()> {
     // 7. Create TLS handler
     let tls_handler = Arc::new(TlsHandler::new(certs, key)?);
     
-    info!("KDE Connect service running");
+    info!("COSMIC Connect service running");
     
     // Main event loop
     loop {
@@ -1631,7 +1631,7 @@ async fn test_tls_role_determination() {
 
 ### Phase 1: UDP Discovery
 - [ ] Start the application
-- [ ] Open KDE Connect on Android
+- [ ] Open COSMIC Connect on Android
 - [ ] Verify UDP broadcast is sent (check logs)
 - [ ] Verify Android device is discovered (check logs)
 - [ ] Run tcpdump to confirm UDP traffic
@@ -1653,7 +1653,7 @@ async fn test_tls_role_determination() {
 - [ ] Check for any TLS errors in logs
 - [ ] Verify certificate is RSA 2048-bit
   ```bash
-  openssl x509 -in ~/.config/kdeconnect-cosmic/certificate.pem -text -noout
+  openssl x509 -in ~/.config/cosmicconnect-cosmic/certificate.pem -text -noout
   ```
 
 ### Phase 4: Pairing
@@ -1678,9 +1678,9 @@ async fn test_tls_role_determination() {
 
 ```bash
 #!/bin/bash
-# kdeconnect-debug.sh
+# cosmicconnect-debug.sh
 
-echo "=== KDE Connect Network Debugging ==="
+echo "=== COSMIC Connect Network Debugging ==="
 
 echo -e "\n1. Checking UDP Port 1716..."
 ss -ulnp | grep 1716 || echo "Not listening on UDP 1716"
@@ -1705,15 +1705,15 @@ netstat -tuln | grep -E "171[4-9]|17[2-5][0-9]|176[0-4]"
 
 ```bash
 #!/bin/bash
-# capture-kdeconnect.sh
+# capture-cosmicconnect.sh
 
 DURATION=${1:-60}
 
-echo "Capturing KDE Connect traffic for ${DURATION} seconds..."
+echo "Capturing COSMIC Connect traffic for ${DURATION} seconds..."
 
 sudo tcpdump -i any \
     '(udp port 1716) or (tcp portrange 1714-1764)' \
-    -w kdeconnect_capture.pcap \
+    -w cosmicconnect_capture.pcap \
     -v &
 
 PID=$!
@@ -1723,7 +1723,7 @@ sleep $DURATION
 sudo kill $PID
 
 echo "Capture complete. Analyzing..."
-tcpdump -r kdeconnect_capture.pcap -A | head -100
+tcpdump -r cosmicconnect_capture.pcap -A | head -100
 ```
 
 ### 10.3 Certificate Validation
@@ -1732,7 +1732,7 @@ tcpdump -r kdeconnect_capture.pcap -A | head -100
 #!/bin/bash
 # verify-certificate.sh
 
-CERT_PATH="$HOME/.config/kdeconnect-cosmic/certificate.pem"
+CERT_PATH="$HOME/.config/cosmicconnect-cosmic/certificate.pem"
 
 if [ ! -f "$CERT_PATH" ]; then
     echo "Certificate not found at $CERT_PATH"
@@ -1807,7 +1807,7 @@ async fn main() -> anyhow::Result<()> {
 1. **Packet Termination**: Every packet MUST end with `\n` (0x0A), NOT `\r\n`
 2. **TLS Role**: Determined by lexicographic comparison of deviceIds
 3. **Identity Before TLS**: Identity packets exchanged BEFORE TLS handshake
-4. **Certificate Format**: RSA 2048-bit, self-signed, CN=deviceId, O=KDE, OU=KDE Connect
+4. **Certificate Format**: RSA 2048-bit, self-signed, CN=deviceId, O=KDE, OU=COSMIC Connect
 5. **Port Range**: UDP 1716, TCP 1714-1764
 6. **Protocol Version**: Must be 7
 
@@ -1827,7 +1827,7 @@ async fn main() -> anyhow::Result<()> {
 2. **Integration Tests**: Test full discovery-to-pairing flow
 3. **Network Tests**: Use tcpdump/wireshark to verify packets
 4. **Certificate Tests**: Verify certificate format with OpenSSL
-5. **Real Device Tests**: Test with actual KDE Connect Android app
+5. **Real Device Tests**: Test with actual COSMIC Connect Android app
 
 ### 📊 Success Metrics
 
@@ -1841,4 +1841,4 @@ async fn main() -> anyhow::Result<()> {
 
 ---
 
-*This implementation guide provides a complete, step-by-step approach to building a KDE Connect compatible application in Rust for COSMIC Desktop. Follow the verification steps at each phase to ensure correctness.*
+*This implementation guide provides a complete, step-by-step approach to building a COSMIC Connect compatible application in Rust for COSMIC Desktop. Follow the verification steps at each phase to ensure correctness.*

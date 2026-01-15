@@ -1,7 +1,7 @@
-# KDE Connect Protocol Debug Document
+# COSMIC Connect Protocol Debug Document
 
 ## Purpose
-This document provides a comprehensive reference for debugging discovery and pairing issues in a Rust implementation of the KDE Connect protocol for COSMIC Desktop, specifically when communicating with the KDE Connect Android app.
+This document provides a comprehensive reference for debugging discovery and pairing issues in a Rust implementation of the COSMIC Connect protocol for COSMIC Desktop, specifically when communicating with the COSMIC Connect Android app.
 
 ---
 
@@ -13,8 +13,8 @@ const UDP_PORT: u16 = 1716;
 const MIN_TCP_PORT: u16 = 1714;
 const MAX_TCP_PORT: u16 = 1764;
 const PROTOCOL_VERSION: u8 = 7;
-const PACKET_TYPE_IDENTITY: &str = "kdeconnect.identity";
-const PACKET_TYPE_PAIR: &str = "kdeconnect.pair";
+const PACKET_TYPE_IDENTITY: &str = "cosmicconnect.identity";
+const PACKET_TYPE_PAIR: &str = "cosmicconnect.pair";
 ```
 
 ### Communication Flow Summary
@@ -63,7 +63,7 @@ const PACKET_TYPE_PAIR: &str = "kdeconnect.pair";
 ```json
 {
     "id": 1642176543000,
-    "type": "kdeconnect.identity",
+    "type": "cosmicconnect.identity",
     "body": {
         "deviceId": "740bd4b9_b418_4ee4_97d6_caf1da8151be",
         "deviceName": "My COSMIC Desktop",
@@ -71,54 +71,54 @@ const PACKET_TYPE_PAIR: &str = "kdeconnect.pair";
         "protocolVersion": 7,
         "tcpPort": 1716,
         "incomingCapabilities": [
-            "kdeconnect.battery.request",
-            "kdeconnect.clipboard",
-            "kdeconnect.clipboard.connect",
-            "kdeconnect.connectivity_report.request",
-            "kdeconnect.contacts.request_all_uids_timestamps",
-            "kdeconnect.contacts.request_vcards_by_uid",
-            "kdeconnect.findmyphone.request",
-            "kdeconnect.mousepad.keyboardstate",
-            "kdeconnect.mousepad.request",
-            "kdeconnect.mpris",
-            "kdeconnect.mpris.request",
-            "kdeconnect.notification",
-            "kdeconnect.notification.action",
-            "kdeconnect.notification.reply",
-            "kdeconnect.notification.request",
-            "kdeconnect.ping",
-            "kdeconnect.runcommand",
-            "kdeconnect.runcommand.request",
-            "kdeconnect.sftp.request",
-            "kdeconnect.share.request",
-            "kdeconnect.sms.request",
-            "kdeconnect.sms.request_conversation",
-            "kdeconnect.sms.request_conversations",
-            "kdeconnect.systemvolume.request",
-            "kdeconnect.telephony.request_mute"
+            "cosmicconnect.battery.request",
+            "cosmicconnect.clipboard",
+            "cosmicconnect.clipboard.connect",
+            "cosmicconnect.connectivity_report.request",
+            "cosmicconnect.contacts.request_all_uids_timestamps",
+            "cosmicconnect.contacts.request_vcards_by_uid",
+            "cosmicconnect.findmyphone.request",
+            "cosmicconnect.mousepad.keyboardstate",
+            "cosmicconnect.mousepad.request",
+            "cosmicconnect.mpris",
+            "cosmicconnect.mpris.request",
+            "cosmicconnect.notification",
+            "cosmicconnect.notification.action",
+            "cosmicconnect.notification.reply",
+            "cosmicconnect.notification.request",
+            "cosmicconnect.ping",
+            "cosmicconnect.runcommand",
+            "cosmicconnect.runcommand.request",
+            "cosmicconnect.sftp.request",
+            "cosmicconnect.share.request",
+            "cosmicconnect.sms.request",
+            "cosmicconnect.sms.request_conversation",
+            "cosmicconnect.sms.request_conversations",
+            "cosmicconnect.systemvolume.request",
+            "cosmicconnect.telephony.request_mute"
         ],
         "outgoingCapabilities": [
-            "kdeconnect.battery",
-            "kdeconnect.clipboard",
-            "kdeconnect.clipboard.connect",
-            "kdeconnect.connectivity_report",
-            "kdeconnect.contacts.response_uids_timestamps",
-            "kdeconnect.contacts.response_vcards",
-            "kdeconnect.findmyphone.request",
-            "kdeconnect.mousepad.echo",
-            "kdeconnect.mousepad.keyboardstate",
-            "kdeconnect.mousepad.request",
-            "kdeconnect.mpris",
-            "kdeconnect.mpris.request",
-            "kdeconnect.notification",
-            "kdeconnect.notification.request",
-            "kdeconnect.ping",
-            "kdeconnect.runcommand",
-            "kdeconnect.sftp",
-            "kdeconnect.share.request",
-            "kdeconnect.sms.messages",
-            "kdeconnect.systemvolume",
-            "kdeconnect.telephony"
+            "cosmicconnect.battery",
+            "cosmicconnect.clipboard",
+            "cosmicconnect.clipboard.connect",
+            "cosmicconnect.connectivity_report",
+            "cosmicconnect.contacts.response_uids_timestamps",
+            "cosmicconnect.contacts.response_vcards",
+            "cosmicconnect.findmyphone.request",
+            "cosmicconnect.mousepad.echo",
+            "cosmicconnect.mousepad.keyboardstate",
+            "cosmicconnect.mousepad.request",
+            "cosmicconnect.mpris",
+            "cosmicconnect.mpris.request",
+            "cosmicconnect.notification",
+            "cosmicconnect.notification.request",
+            "cosmicconnect.ping",
+            "cosmicconnect.runcommand",
+            "cosmicconnect.sftp",
+            "cosmicconnect.share.request",
+            "cosmicconnect.sms.messages",
+            "cosmicconnect.systemvolume",
+            "cosmicconnect.telephony"
         ]
     }
 }
@@ -183,7 +183,7 @@ nc -zv <phone_ip> 1716
 ## 4. TLS Handshake (CRITICAL SECTION)
 
 ### Certificate Generation
-KDE Connect uses **self-signed RSA 2048-bit certificates**. The certificate MUST be generated with specific attributes:
+COSMIC Connect uses **self-signed RSA 2048-bit certificates**. The certificate MUST be generated with specific attributes:
 
 ```rust
 // Certificate requirements:
@@ -191,7 +191,7 @@ KDE Connect uses **self-signed RSA 2048-bit certificates**. The certificate MUST
 // - Self-signed X.509 certificate
 // - Common Name (CN) = deviceId (UUID with underscores instead of hyphens)
 // - Organization (O) = "KDE"
-// - Organizational Unit (OU) = "KDE Connect"
+// - Organizational Unit (OU) = "COSMIC Connect"
 // - Valid from: 1 year ago
 // - Valid until: 10 years from now
 ```
@@ -202,7 +202,7 @@ openssl req -new -x509 -sha256 -newkey rsa:2048 \
     -nodes -days 3650 \
     -keyout privateKey.pem \
     -out certificate.pem \
-    -subj "/CN=740bd4b9_b418_4ee4_97d6_caf1da8151be/O=KDE/OU=KDE Connect"
+    -subj "/CN=740bd4b9_b418_4ee4_97d6_caf1da8151be/O=KDE/OU=COSMIC Connect"
 ```
 
 ### TLS Role Determination (CRITICAL!)
@@ -255,7 +255,7 @@ fn determine_tls_role(my_device_id: &str, their_device_id: &str) -> TlsRole {
 ```
 
 ### Cipher Suites
-The Android app (and KDE Connect) expects these cipher suites:
+The Android app (and COSMIC Connect) expects these cipher suites:
 ```rust
 const SUPPORTED_CIPHER_SUITES: &[&str] = &[
     "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
@@ -270,7 +270,7 @@ const SUPPORTED_CIPHER_SUITES: &[&str] = &[
 ### TLS Configuration in Rust
 ```rust
 use rustls::{ClientConfig, ServerConfig, Certificate, PrivateKey};
-use rustls::version::TLS12;  // KDE Connect uses TLS 1.2
+use rustls::version::TLS12;  // COSMIC Connect uses TLS 1.2
 
 // Important settings:
 // - TLS 1.2 (minimum, but TLS 1.3 may also work with newer Android apps)
@@ -324,7 +324,7 @@ openssl s_client -connect <phone_ip>:1716 -cert your_cert.pem -key your_key.pem
 // Request pairing
 {
     "id": 1642176600000,
-    "type": "kdeconnect.pair",
+    "type": "cosmicconnect.pair",
     "body": {
         "pair": true
     }
@@ -333,7 +333,7 @@ openssl s_client -connect <phone_ip>:1716 -cert your_cert.pem -key your_key.pem
 // Accept pairing
 {
     "id": 1642176601000,
-    "type": "kdeconnect.pair", 
+    "type": "cosmicconnect.pair", 
     "body": {
         "pair": true
     }
@@ -342,7 +342,7 @@ openssl s_client -connect <phone_ip>:1716 -cert your_cert.pem -key your_key.pem
 // Reject pairing OR unpair
 {
     "id": 1642176602000,
-    "type": "kdeconnect.pair",
+    "type": "cosmicconnect.pair",
     "body": {
         "pair": false
     }
@@ -376,7 +376,7 @@ openssl s_client -connect <phone_ip>:1716 -cert your_cert.pem -key your_key.pem
 ### Certificate Storage After Pairing
 Once paired, store the remote device's certificate:
 ```rust
-// Store in: ~/.config/kdeconnect/<deviceId>/certificate.pem
+// Store in: ~/.config/cosmicconnect/<deviceId>/certificate.pem
 // or equivalent for COSMIC
 
 struct TrustedDevice {
@@ -393,9 +393,9 @@ struct TrustedDevice {
 # Monitor encrypted traffic (won't see content, but can see packet flow)
 sudo tcpdump -i any tcp port 1716 -vvv
 
-# Check KDE Connect's stored devices (for comparison)
-ls -la ~/.config/kdeconnect/
-cat ~/.config/kdeconnect/*/certificate.pem
+# Check COSMIC Connect's stored devices (for comparison)
+ls -la ~/.config/cosmicconnect/
+cat ~/.config/cosmicconnect/*/certificate.pem
 ```
 
 ---
@@ -510,8 +510,8 @@ openssl x509 -in <saved_cert> -fingerprint -noout
 
 ### Network Debugging
 ```bash
-# Monitor all KDE Connect traffic
-sudo tcpdump -i any "udp port 1716 or tcp portrange 1714-1764" -vvv -w kdeconnect.pcap
+# Monitor all COSMIC Connect traffic
+sudo tcpdump -i any "udp port 1716 or tcp portrange 1714-1764" -vvv -w cosmicconnect.pcap
 
 # Real-time packet inspection
 sudo tshark -i any -f "port 1716" -Y "json" -T fields -e json.value.string
@@ -538,10 +538,10 @@ networking.firewall = {
 ### Android Debugging
 ```bash
 # Get Android logs (connect phone via USB with debugging enabled)
-adb logcat | grep -i kdeconnect
+adb logcat | grep -i cosmicconnect
 
 # More specific
-adb logcat --pid=$(adb shell pidof -s org.kde.kdeconnect_tp)
+adb logcat --pid=$(adb shell pidof -s org.cosmic.cosmicconnect)
 
 # Filter for connection issues
 adb logcat | grep -E "(LanLinkProvider|Handshake|identity|pair)"
@@ -583,7 +583,7 @@ adb logcat | grep -E "(LanLinkProvider|Handshake|identity|pair)"
 - [ ] All packets terminated with `\n`
 - [ ] JSON serialization matches expected format
 - [ ] `id` field is integer timestamp (milliseconds)
-- [ ] `type` field follows `kdeconnect.*` pattern
+- [ ] `type` field follows `cosmicconnect.*` pattern
 - [ ] `body` field is object (even if empty `{}`)
 
 ---
@@ -614,7 +614,7 @@ impl NetworkPacket {
                 .duration_since(UNIX_EPOCH)
                 .unwrap()
                 .as_millis() as i64,
-            packet_type: "kdeconnect.identity".to_string(),
+            packet_type: "cosmicconnect.identity".to_string(),
             body: serde_json::json!({
                 "deviceId": device_info.device_id,
                 "deviceName": device_info.device_name,
@@ -635,7 +635,7 @@ impl NetworkPacket {
                 .duration_since(UNIX_EPOCH)
                 .unwrap()
                 .as_millis() as i64,
-            packet_type: "kdeconnect.pair".to_string(),
+            packet_type: "cosmicconnect.pair".to_string(),
             body: serde_json::json!({ "pair": pair }),
             payload_size: None,
             payload_transfer_info: None,
@@ -664,7 +664,7 @@ impl NetworkPacket {
 use uuid::Uuid;
 
 pub fn generate_device_id() -> String {
-    // KDE Connect uses UUIDs with underscores instead of hyphens
+    // COSMIC Connect uses UUIDs with underscores instead of hyphens
     Uuid::new_v4()
         .to_string()
         .replace('-', "_")
@@ -697,7 +697,7 @@ pub fn determine_tls_role(my_device_id: &str, their_device_id: &str) -> TlsRole 
 ### Test 1: UDP Broadcast Reception
 ```bash
 # On desktop, start your app
-# On phone, open KDE Connect app and pull down to refresh
+# On phone, open COSMIC Connect app and pull down to refresh
 # Expected: Your app logs receiving identity packet from phone
 ```
 
@@ -731,10 +731,10 @@ pub fn determine_tls_role(my_device_id: &str, their_device_id: &str) -> TlsRole 
 
 ## 11. Useful Resources
 
-- **Official Protocol Spec**: https://invent.kde.org/network/kdeconnect-meta/blob/master/protocol.md
+- **Official Protocol Spec**: https://invent.kde.org/network/cosmicconnect-meta/blob/master/protocol.md
 - **Valent Protocol Reference**: https://valent.andyholmes.ca/documentation/protocol.html
-- **KDE Connect KDE Source**: https://invent.kde.org/network/kdeconnect-kde
-- **KDE Connect Android Source**: https://invent.kde.org/network/kdeconnect-android
+- **COSMIC Connect KDE Source**: https://invent.kde.org/network/cosmicconnect-kde
+- **COSMIC Connect Android Source**: https://invent.kde.org/network/cosmicconnect-android
 - **mconnect (Vala Implementation)**: https://github.com/bboozzoo/mconnect
 - **GSConnect (JavaScript/GNOME)**: https://github.com/GSConnect/gnome-shell-extension-gsconnect
 
@@ -782,4 +782,4 @@ START: Device not connecting
 
 *Document Version: 1.0*
 *Last Updated: 2025-01-15*
-*For: COSMIC Desktop KDE Connect Rust Implementation*
+*For: COSMIC Desktop COSMIC Connect Rust Implementation*

@@ -94,7 +94,7 @@ claude-code "Read GETTING_STARTED.md and explain the project"
 | **GETTING_STARTED.md** | Complete walkthrough (READ THIS!) |
 | **SUMMARY.md** | Executive summary |
 | **PROJECT_PLAN.md** | All 41 issues in detail |
-| **kdeconnect-protocol-debug.md** | Protocol reference |
+| **cosmicconnect-protocol-debug.md** | Protocol reference |
 | **CLAUDE.md** | Claude Code skills/agents |
 
 ## 🎯 Key Technical Points
@@ -114,7 +114,7 @@ claude-code "Read GETTING_STARTED.md and explain the project"
 - RSA 2048-bit keys
 - CN = deviceId
 - O = "KDE"
-- OU = "KDE Connect"
+- OU = "COSMIC Connect"
 - 10-year validity
 
 ## ✅ Quick Checks
@@ -143,7 +143,7 @@ claude-code "I'm stuck on issue #N, can you help?"
 less GETTING_STARTED.md
 
 # Check the protocol debug guide
-less kdeconnect-protocol-debug.md
+less cosmicconnect-protocol-debug.md
 
 # Use debugging skill
 claude-code "Using debugging skill, help me troubleshoot..."

@@ -4,7 +4,7 @@
 
 **This project ONLY modernizes the Android app!**
 
-- ✅ **COSMIC Desktop applet is ALREADY BUILT**: https://github.com/olafkfreund/cosmic-applet-kdeconnect
+- ✅ **COSMIC Desktop applet is ALREADY BUILT**: https://github.com/olafkfreund/cosmic-applet-cosmicconnect
 - 🎯 **We are ONLY modernizing the Android app**
 - 🔗 **Goal**: Modernize Android to work perfectly with existing COSMIC applet
 
@@ -30,7 +30,7 @@ We will **test** the existing COSMIC applet, NOT build it from scratch!
 - ✅ `cosmic` - COSMIC Desktop integration
 - ✅ `documentation` - Documentation improvements
 - ✅ `testing` - Testing and quality assurance
-- ✅ `protocol` - KDE Connect protocol implementation
+- ✅ `protocol` - COSMIC Connect protocol implementation
 - ✅ `gradle` - Gradle build system
 - ✅ `build-system` - Build configuration and tooling
 - ✅ `kotlin-conversion` - Java to Kotlin conversion
@@ -226,8 +226,8 @@ All documentation is in your repository:
 1. **GETTING_STARTED.md** - Comprehensive getting started guide
 2. **SUMMARY.md** - Quick executive summary
 3. **PROJECT_PLAN.md** - Detailed plan with all 40 issues
-4. **kdeconnect-protocol-debug.md** - Protocol debugging reference
-5. **kdeconnect-rust-implementation-guide.md** - COSMIC implementation guide
+4. **cosmicconnect-protocol-debug.md** - Protocol debugging reference
+5. **cosmicconnect-rust-implementation-guide.md** - COSMIC implementation guide
 6. **CLAUDE.md** - Claude Code usage instructions
 
 ---
@@ -309,7 +309,7 @@ gh issue list --label "testing"
 ### Certificate Requirements
 - ✅ RSA 2048-bit keys
 - ✅ Self-signed X.509 certificates
-- ✅ CN = deviceId, O = "KDE", OU = "KDE Connect"
+- ✅ CN = deviceId, O = "KDE", OU = "COSMIC Connect"
 - ✅ 10-year validity
 
 ### Network Configuration
@@ -360,7 +360,7 @@ claude-code "I have a question about the project structure"
 claude-code "Help me understand issue #9"
 
 # Technical help
-claude-code "How does TLS role determination work in KDE Connect?"
+claude-code "How does TLS role determination work in COSMIC Connect?"
 
 # Debug help
 claude-code --agent protocol-compatibility "Debug UDP discovery issues"

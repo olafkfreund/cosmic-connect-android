@@ -1,6 +1,6 @@
 # Using Claude Code with Cosmic Connect Android
 
-This repository is configured to work with [Claude Code](https://docs.claude.ai/en/docs/claude-code-overview), an AI-powered development assistant that helps modernize and maintain this KDE Connect Android implementation for COSMIC Desktop integration.
+This repository is configured to work with [Claude Code](https://docs.claude.ai/en/docs/claude-code-overview), an AI-powered development assistant that helps modernize and maintain this COSMIC Connect Android implementation for COSMIC Desktop integration.
 
 ## 📋 Table of Contents
 
@@ -23,7 +23,7 @@ This repository is configured to work with [Claude Code](https://docs.claude.ai/
 
 ```bash
 # Convert a Java file to Kotlin
-claude-code "Convert src/org/kde/kdeconnect/Device.java to modern Kotlin"
+claude-code "Convert src/org/cosmic/cosmicconnect/Device.java to modern Kotlin"
 
 # Or use an agent for complex tasks
 claude-code --agent android-modernization "Refactor the entire device discovery module"
@@ -34,14 +34,14 @@ claude-code --agent android-modernization "Refactor the entire device discovery 
 This repository includes specialized Claude Code skills located in `.claude/skills/`:
 
 ### 1. **android-development-SKILL.md**
-Modern Android development patterns for KDE Connect protocol implementation.
+Modern Android development patterns for COSMIC Connect protocol implementation.
 
 **What it covers:**
 - Java to Kotlin migration strategies
 - MVVM architecture with Jetpack components
 - Coroutines for async operations
 - Android 14+ compatibility
-- KDE Connect protocol implementation
+- COSMIC Connect protocol implementation
 - Background services and foreground services
 - Runtime permissions handling
 
@@ -86,20 +86,20 @@ Modern Gradle build system configuration and optimization.
 - Configuring release builds
 
 ### 4. **tls-networking-SKILL.md**
-Secure communication and KDE Connect protocol implementation.
+Secure communication and COSMIC Connect protocol implementation.
 
 **What it covers:**
 - TLS/SSL certificate management
 - UDP device discovery
 - TCP payload transfers
-- KDE Connect protocol packets
+- COSMIC Connect protocol packets
 - Network error handling
 - Certificate pinning
 
 **Use when:**
 - Implementing secure communication
 - Debugging connection issues
-- Adding new KDE Connect plugins
+- Adding new COSMIC Connect plugins
 - Testing cross-platform compatibility
 
 ### 5. **debugging-SKILL.md**
@@ -261,7 +261,7 @@ claude-code "Create unit tests for NetworkPacket serialization"
 claude-code "Create integration test for device discovery flow"
 
 # Protocol tests
-claude-code "Create test suite for all KDE Connect packet types"
+claude-code "Create test suite for all COSMIC Connect packet types"
 ```
 
 ## 🎓 Best Practices
@@ -401,7 +401,7 @@ claude-code --agent protocol-compatibility "Debug pairing failure between Androi
 claude-code "Using tls-networking and debugging skills, analyze Wireshark capture of failed handshake"
 
 # Verify packet format
-claude-code "Verify NetworkPacket serialization format matches KDE Connect spec"
+claude-code "Verify NetworkPacket serialization format matches COSMIC Connect spec"
 ```
 
 ## 📚 Additional Resources
@@ -409,7 +409,7 @@ claude-code "Verify NetworkPacket serialization format matches KDE Connect spec"
 - **Skills Documentation**: `.claude/skills/` - Detailed skill documentation
 - **Agent Configuration**: `.claude/agents/` - Agent definitions and capabilities
 - **Claude Code Docs**: https://docs.claude.com/en/docs/claude-code-overview
-- **KDE Connect Protocol**: https://invent.kde.org/network/kdeconnect-kde
+- **COSMIC Connect Protocol**: https://invent.kde.org/network/cosmicconnect-kde
 - **COSMIC Desktop**: https://github.com/pop-os/cosmic-epoch
 - **Android Developers**: https://developer.android.com/
 

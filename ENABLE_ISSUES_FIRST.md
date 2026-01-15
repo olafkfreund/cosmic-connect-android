@@ -16,7 +16,7 @@ gh repo edit --enable-issues
 
 1. Go to your repository on GitHub.com:
    ```
-   https://github.com/olafkfreund/Cosmic-kdeconnect-android
+   https://github.com/olafkfreund/Cosmic-cosmicconnect-android
    ```
 
 2. Click **Settings** (top right)

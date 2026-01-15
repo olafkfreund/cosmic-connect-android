@@ -19,7 +19,7 @@ use cosmic::{
 };
 
 // Basic COSMIC application structure
-struct CosmicKdeConnect {
+struct CosmicCosmicConnect {
     core: Core,
     devices: Vec<DeviceInfo>,
     selected_device: Option<String>,
@@ -33,12 +33,12 @@ enum Message {
     Tick,
 }
 
-impl Application for CosmicKdeConnect {
+impl Application for CosmicCosmicConnect {
     type Executor = cosmic::executor::Default;
     type Flags = ();
     type Message = Message;
     
-    const APP_ID: &'static str = "com.system76.CosmicKdeConnect";
+    const APP_ID: &'static str = "com.system76.CosmicCosmicConnect";
     
     fn core(&self) -> &Core {
         &self.core
@@ -116,7 +116,7 @@ use cosmic::{
     widget, Application, Element,
 };
 
-pub struct CosmicKdeConnectApplet {
+pub struct CosmicCosmicConnectApplet {
     core: cosmic::app::Core,
     popup: Option<SurfaceId>,
     devices: Vec<DeviceInfo>,
@@ -135,12 +135,12 @@ pub enum Message {
     DbusEvent(DbusMessage),
 }
 
-impl Application for CosmicKdeConnectApplet {
+impl Application for CosmicCosmicConnectApplet {
     type Executor = cosmic::executor::Default;
     type Flags = ();
     type Message = Message;
     
-    const APP_ID: &'static str = "com.system76.CosmicAppletKdeConnect";
+    const APP_ID: &'static str = "com.system76.CosmicAppletCosmicConnect";
     
     fn core(&self) -> &cosmic::app::Core {
         &self.core
@@ -242,7 +242,7 @@ impl Application for CosmicKdeConnectApplet {
     }
 }
 
-impl CosmicKdeConnectApplet {
+impl CosmicCosmicConnectApplet {
     fn popup_view(&self) -> Element<Message> {
         let device_list = widget::column(
             self.devices
@@ -254,7 +254,7 @@ impl CosmicKdeConnectApplet {
         
         widget::container(
             widget::column![
-                widget::text("KDE Connect Devices").size(18),
+                widget::text("COSMIC Connect Devices").size(18),
                 widget::divider::horizontal::default(),
                 device_list,
             ]
@@ -347,7 +347,7 @@ impl LayerShellWindow {
             qh,
             surface,
             Layer::Overlay,
-            Some("kdeconnect-widget"),
+            Some("cosmicconnect-widget"),
             None,
         );
         
@@ -427,13 +427,13 @@ use zbus::{dbus_interface, Connection};
 use std::sync::Arc;
 use tokio::sync::RwLock;
 
-pub struct KdeConnectService {
+pub struct CosmicConnectService {
     devices: Arc<RwLock<HashMap<String, DeviceInfo>>>,
     daemon_connection: Arc<Connection>,
 }
 
-#[dbus_interface(name = "com.system76.CosmicKdeConnect")]
-impl KdeConnectService {
+#[dbus_interface(name = "com.system76.CosmicCosmicConnect")]
+impl CosmicConnectService {
     async fn get_devices(&self) -> Vec<DeviceInfo> {
         self.devices.read().await.values().cloned().collect()
     }
@@ -483,11 +483,11 @@ impl KdeConnectService {
 
 // DBus proxy for daemon
 #[dbus_proxy(
-    interface = "com.system76.CosmicKdeConnect",
-    default_service = "com.system76.CosmicKdeConnect",
-    default_path = "/com/system76/CosmicKdeConnect"
+    interface = "com.system76.CosmicCosmicConnect",
+    default_service = "com.system76.CosmicCosmicConnect",
+    default_path = "/com/system76/CosmicCosmicConnect"
 )]
-trait KdeConnectDaemon {
+trait CosmicConnectDaemon {
     async fn get_devices(&self) -> zbus::Result<Vec<DeviceInfo>>;
     async fn send_ping(&self, device_id: &str, message: &str) -> zbus::Result<()>;
     async fn share_file(&self, device_id: &str, path: &str) -> zbus::Result<()>;
@@ -499,7 +499,7 @@ trait KdeConnectDaemon {
 
 ### DBus Subscription in Application
 ```rust
-impl CosmicKdeConnectApplet {
+impl CosmicCosmicConnectApplet {
     fn dbus_subscription(&self) -> Subscription<Message> {
         struct DbusWorker;
         
@@ -508,7 +508,7 @@ impl CosmicKdeConnectApplet {
             100,
             |mut output| async move {
                 let conn = Connection::session().await.unwrap();
-                let proxy = KdeConnectDaemonProxyBuilder::new(&conn)
+                let proxy = CosmicConnectDaemonProxyBuilder::new(&conn)
                     .await
                     .unwrap();
                 
@@ -577,7 +577,7 @@ impl NotificationService {
         
         proxy
             .notify(
-                "cosmic-kdeconnect",
+                "cosmic-cosmicconnect",
                 0,
                 icon.unwrap_or(""),
                 title,
@@ -795,7 +795,7 @@ impl MprisController {
 use thiserror::Error;
 
 #[derive(Error, Debug)]
-pub enum CosmicKdeConnectError {
+pub enum CosmicCosmicConnectError {
     #[error("DBus error: {0}")]
     Dbus(#[from] zbus::Error),
     
@@ -815,7 +815,7 @@ pub enum CosmicKdeConnectError {
     Notification(String),
 }
 
-pub type Result<T> = std::result::Result<T, CosmicKdeConnectError>;
+pub type Result<T> = std::result::Result<T, CosmicCosmicConnectError>;
 ```
 
 ## Testing COSMIC Applications
@@ -829,7 +829,7 @@ mod tests {
     #[tokio::test]
     async fn test_dbus_connection() {
         let conn = Connection::session().await.unwrap();
-        let proxy = KdeConnectDaemonProxyBuilder::new(&conn)
+        let proxy = CosmicConnectDaemonProxyBuilder::new(&conn)
             .await
             .unwrap();
         
@@ -861,7 +861,7 @@ mod tests {
 ### Cargo.toml for COSMIC Applet
 ```toml
 [package]
-name = "cosmic-applet-kdeconnect"
+name = "cosmic-applet-cosmicconnect"
 version = "0.1.0"
 edition = "2021"
 
@@ -890,10 +890,10 @@ version = "0.31"
 ### Development Build
 ```bash
 # Build the applet
-cargo build --bin cosmic-applet-kdeconnect
+cargo build --bin cosmic-applet-cosmicconnect
 
 # Run with logging
-RUST_LOG=debug cargo run --bin cosmic-applet-kdeconnect
+RUST_LOG=debug cargo run --bin cosmic-applet-cosmicconnect
 
 # Run tests
 cargo test
@@ -902,15 +902,15 @@ cargo test
 ### Installation
 ```bash
 # Build release
-cargo build --release --bin cosmic-applet-kdeconnect
+cargo build --release --bin cosmic-applet-cosmicconnect
 
 # Install system-wide
-sudo install -Dm755 target/release/cosmic-applet-kdeconnect \
-    /usr/bin/cosmic-applet-kdeconnect
+sudo install -Dm755 target/release/cosmic-applet-cosmicconnect \
+    /usr/bin/cosmic-applet-cosmicconnect
 
 # Install desktop file
-sudo install -Dm644 data/cosmic-applet-kdeconnect.desktop \
-    /usr/share/applications/cosmic-applet-kdeconnect.desktop
+sudo install -Dm644 data/cosmic-applet-cosmicconnect.desktop \
+    /usr/share/applications/cosmic-applet-cosmicconnect.desktop
 ```
 
 ## Best Practices

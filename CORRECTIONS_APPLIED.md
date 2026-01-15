@@ -11,7 +11,7 @@
 
 **AFTER** (Correct Understanding):
 - ✅ **ONLY modernizing the Android app**
-- ✅ **COSMIC Desktop applet already exists**: https://github.com/olafkfreund/cosmic-applet-kdeconnect
+- ✅ **COSMIC Desktop applet already exists**: https://github.com/olafkfreund/cosmic-applet-cosmicconnect
 - ✅ **We only TEST the COSMIC applet**, not build it
 
 ---
@@ -23,7 +23,7 @@
 - Added NixOS development environment setup
 - Added Waydroid configuration for Android testing
 - Included NixOS flake setup
-- Added network firewall configuration for KDE Connect ports
+- Added network firewall configuration for COSMIC Connect ports
 - Clarified: COSMIC applet is for testing only
 - Added Waydroid initialization steps
 - Added troubleshooting section
@@ -115,12 +115,12 @@ Waydroid is now part of Issue #1 for NixOS developers:
 #### Why Waydroid?
 - ✅ Better performance than emulators
 - ✅ Native integration with NixOS
-- ✅ Easier to test KDE Connect protocol
+- ✅ Easier to test COSMIC Connect protocol
 - ✅ Can test Android ↔ COSMIC communication locally
 
 #### Setup Steps (in Issue #1)
 1. Enable Waydroid in NixOS configuration
-2. Configure firewall for KDE Connect ports
+2. Configure firewall for COSMIC Connect ports
 3. Initialize Waydroid container
 4. Run Android app in Waydroid
 5. Test with COSMIC applet
@@ -140,7 +140,7 @@ cosmic-connect-android/              ← THIS REPO (You modify this)
 ├── PROJECT_SCOPE.md                 ← READ THIS FIRST!
 └── GETTING_STARTED.md               ← Complete guide
 
-cosmic-applet-kdeconnect/            ← SEPARATE REPO (Only test this)
+cosmic-applet-cosmicconnect/            ← SEPARATE REPO (Only test this)
 ├── src/                             ← Rust source (DO NOT MODIFY)
 └── ...                              ← Already built, just run it
 
@@ -159,11 +159,11 @@ git clone https://github.com/olafkfreund/cosmic-connect-android
 cd cosmic-connect-android
 
 # 2. Clone COSMIC applet (TESTING ONLY)
-git clone https://github.com/olafkfreund/cosmic-applet-kdeconnect
+git clone https://github.com/olafkfreund/cosmic-applet-cosmicconnect
 
 # 3. Set up NixOS dev environment (from Issue #1)
 # Add Waydroid to your NixOS configuration
-# Enable KDE Connect firewall ports
+# Enable COSMIC Connect firewall ports
 
 # 4. Start with Issue #1
 gh issue view 1

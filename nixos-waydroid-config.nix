@@ -21,18 +21,18 @@
   # ============================================================================
 
   networking = {
-    # KDE Connect / COSMIC Connect ports
+    # COSMIC Connect / COSMIC Connect ports
     firewall = {
       # TCP ports for data transfer
       allowedTCPPorts = [
-        1714  # KDE Connect protocol (primary)
-        1715  # KDE Connect protocol (secondary)
-        1716  # KDE Connect protocol (tertiary)
+        1714  # COSMIC Connect protocol (primary)
+        1715  # COSMIC Connect protocol (secondary)
+        1716  # COSMIC Connect protocol (tertiary)
       ];
 
       # UDP port for device discovery
       allowedUDPPorts = [
-        1716  # KDE Connect discovery broadcasts
+        1716  # COSMIC Connect discovery broadcasts
       ];
     };
   };

@@ -1,7 +1,7 @@
-# Android Development Skill for KDE Connect
+# Android Development Skill for COSMIC Connect
 
 ## Overview
-This skill provides comprehensive guidance for modern Android development with a focus on KDE Connect protocol implementation, network programming, and integration with desktop applications.
+This skill provides comprehensive guidance for modern Android development with a focus on COSMIC Connect protocol implementation, network programming, and integration with desktop applications.
 
 ## Core Android Development Principles
 
@@ -53,7 +53,7 @@ inline fun <T> Socket.use(block: (Socket) -> T): T {
 #### Services
 ```kotlin
 // Foreground service for persistent connections
-class KdeConnectService : Service() {
+class CosmicConnectService : Service() {
     private lateinit var notificationManager: NotificationManager
     private val serviceJob = SupervisorJob()
     private val serviceScope = CoroutineScope(Dispatchers.Default + serviceJob)
@@ -68,7 +68,7 @@ class KdeConnectService : Service() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 CHANNEL_ID,
-                "KDE Connect Service",
+                "COSMIC Connect Service",
                 NotificationManager.IMPORTANCE_LOW
             ).apply {
                 description = "Maintains device connections"
@@ -97,7 +97,7 @@ class NetworkStateReceiver : BroadcastReceiver() {
                 val isConnected = activeNetwork?.isConnected == true
                 
                 // Notify service about network changes
-                Intent(context, KdeConnectService::class.java).apply {
+                Intent(context, CosmicConnectService::class.java).apply {
                     action = "NETWORK_STATE_CHANGED"
                     putExtra("isConnected", isConnected)
                     context.startService(this)
@@ -108,7 +108,7 @@ class NetworkStateReceiver : BroadcastReceiver() {
 }
 ```
 
-## KDE Connect Protocol Implementation
+## COSMIC Connect Protocol Implementation
 
 ### Device Discovery
 ```kotlin
@@ -155,7 +155,7 @@ class DeviceDiscoveryManager(private val context: Context) {
     private fun createIdentityPacket(): JSONObject {
         return JSONObject().apply {
             put("id", System.currentTimeMillis())
-            put("type", "kdeconnect.identity")
+            put("type", "cosmicconnect.identity")
             put("body", JSONObject().apply {
                 put("deviceId", getDeviceId())
                 put("deviceName", Build.MODEL)
@@ -308,8 +308,8 @@ class BatteryPlugin(
     deviceId: String
 ) : Plugin(context, deviceId) {
     override val supportedPacketTypes = setOf(
-        "kdeconnect.battery",
-        "kdeconnect.battery.request"
+        "cosmicconnect.battery",
+        "cosmicconnect.battery.request"
     )
     override val displayName = "Battery"
     
@@ -319,11 +319,11 @@ class BatteryPlugin(
     
     override suspend fun handlePacket(packet: NetworkPacket): Boolean {
         return when (packet.type) {
-            "kdeconnect.battery.request" -> {
+            "cosmicconnect.battery.request" -> {
                 sendBatteryStatus()
                 true
             }
-            "kdeconnect.battery" -> {
+            "cosmicconnect.battery" -> {
                 handleBatteryStatus(packet)
                 true
             }
@@ -354,7 +354,7 @@ class BatteryPlugin(
         
         val packet = NetworkPacket(
             id = System.currentTimeMillis(),
-            type = "kdeconnect.battery",
+            type = "cosmicconnect.battery",
             body = JSONObject().apply {
                 put("currentCharge", batteryPct)
                 put("isCharging", isCharging)
@@ -563,7 +563,7 @@ class NetworkPacketTest {
     fun `packet serialization and deserialization`() {
         val originalPacket = NetworkPacket(
             id = 12345,
-            type = "kdeconnect.ping",
+            type = "cosmicconnect.ping",
             body = JSONObject().apply {
                 put("message", "test")
             }
@@ -614,23 +614,23 @@ class DeviceConnectionTest {
 
 ### Protocol Compatibility
 - Ensure protocol version 7/8 compatibility
-- Use same packet formats as kdeconnect-protocol crate
+- Use same packet formats as cosmicconnect-protocol crate
 - Support all packet types defined in the Rust implementation
 - Maintain TLS certificate format compatibility
 
 ### Testing Against COSMIC Applet
 ```bash
 # Test device discovery
-adb shell am broadcast -a org.kde.kdeconnect.ACTION_DISCOVERY
+adb shell am broadcast -a org.cosmic.cosmicconnect.ACTION_DISCOVERY
 
 # Test file transfer
 adb shell am start -a android.intent.action.SEND \
     -t "text/plain" \
     --es android.intent.extra.TEXT "Test message" \
-    org.kde.kdeconnect_tp/.MainActivity
+    org.cosmic.cosmicconnect/.MainActivity
 
 # Monitor logs
-adb logcat -s KdeConnect:D
+adb logcat -s CosmicConnect:D
 ```
 
 ## Common Pitfalls to Avoid
@@ -705,6 +705,6 @@ class DeviceManager {
 
 - [Android Developers Guide](https://developer.android.com/guide)
 - [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
-- [KDE Connect Protocol Spec](https://invent.kde.org/network/kdeconnect-kde)
+- [COSMIC Connect Protocol Spec](https://invent.kde.org/network/cosmicconnect-kde)
 - [Android Architecture Components](https://developer.android.com/topic/libraries/architecture)
 - [Jetpack Compose](https://developer.android.com/jetpack/compose)

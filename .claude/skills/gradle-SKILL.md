@@ -1,7 +1,7 @@
 # Gradle Build System Skill for Android
 
 ## Overview
-This skill provides comprehensive guidance for Gradle build configuration, optimization, and troubleshooting in Android projects, particularly for KDE Connect Android app modernization.
+This skill provides comprehensive guidance for Gradle build configuration, optimization, and troubleshooting in Android projects, particularly for COSMIC Connect Android app modernization.
 
 ## Modern Gradle Project Structure
 
@@ -45,11 +45,11 @@ plugins {
 }
 
 android {
-    namespace = "org.kde.kdeconnect_tp"
+    namespace = "org.cosmic.cosmicconnect"
     compileSdk = 34
     
     defaultConfig {
-        applicationId = "org.kde.kdeconnect_tp"
+        applicationId = "org.cosmic.cosmicconnect"
         minSdk = 24
         targetSdk = 34
         versionCode = 15070
@@ -76,7 +76,7 @@ android {
             // Configure signing for release builds
             storeFile = file("keystore/release.keystore")
             storePassword = System.getenv("KEYSTORE_PASSWORD")
-            keyAlias = "kdeconnect"
+            keyAlias = "cosmicconnect"
             keyPassword = System.getenv("KEY_PASSWORD")
         }
     }
@@ -284,7 +284,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "KDE Connect"
+rootProject.name = "COSMIC Connect"
 include(":app")
 
 // Enable Gradle configuration cache
@@ -392,22 +392,22 @@ android.nonFinalResIds=true
 -keep class okhttp3.** { *; }
 -keep interface okhttp3.** { *; }
 
-# KDE Connect specific
--keep class org.kde.kdeconnect.** { *; }
--keep interface org.kde.kdeconnect.** { *; }
--keepclassmembers class org.kde.kdeconnect.** {
+# COSMIC Connect specific
+-keep class org.cosmic.cosmicconnect.** { *; }
+-keep interface org.cosmic.cosmicconnect.** { *; }
+-keepclassmembers class org.cosmic.cosmicconnect.** {
     public <methods>;
     public <fields>;
 }
 
 # Keep plugin classes
--keep class * extends org.kde.kdeconnect.Plugins.Plugin {
+-keep class * extends org.cosmic.cosmicconnect.Plugins.Plugin {
     public <init>(...);
 }
 
 # Keep packet classes
--keep class org.kde.kdeconnect.NetworkPacket { *; }
--keep class org.kde.kdeconnect.NetworkPacket$* { *; }
+-keep class org.cosmic.cosmicconnect.NetworkPacket { *; }
+-keep class org.cosmic.cosmicconnect.NetworkPacket$* { *; }
 
 # Hilt
 -dontwarn com.google.errorprone.annotations.*
@@ -486,7 +486,7 @@ tasks.register("generateBuildInfo") {
         
         val buildInfoFile = file("$outputDir/BuildInfo.kt")
         buildInfoFile.writeText("""
-            package org.kde.kdeconnect
+            package org.cosmic.cosmicconnect
             
             object BuildInfo {
                 const val VERSION_CODE = ${android.defaultConfig.versionCode}

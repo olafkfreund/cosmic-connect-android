@@ -1,6 +1,6 @@
 # COSMIC Connect Skills & Agents Package
 
-This package contains comprehensive Claude Code skills and agent configurations for modernizing the KDE Connect Android app to work seamlessly with the COSMIC Desktop applet.
+This package contains comprehensive Claude Code skills and agent configurations for modernizing the COSMIC Connect Android app to work seamlessly with the COSMIC Desktop applet.
 
 ## 📦 Package Contents
 
@@ -10,7 +10,7 @@ cosmic-connect-skills/
 │   ├── android-development-SKILL.md   # Modern Android development
 │   ├── cosmic-desktop-SKILL.md        # COSMIC Desktop & Rust
 │   ├── gradle-SKILL.md                # Gradle build system
-│   ├── tls-networking-SKILL.md        # TLS & KDE Connect protocol
+│   ├── tls-networking-SKILL.md        # TLS & COSMIC Connect protocol
 │   └── debugging-SKILL.md             # Debugging for both platforms
 ├── agents/                          # Agent Configurations
 │   ├── android-modernization-agent.md # Android app modernization
@@ -22,7 +22,7 @@ cosmic-connect-skills/
 ## 🎯 Purpose
 
 This package helps you:
-- Modernize the KDE Connect Android app (Java → Kotlin, modern architecture)
+- Modernize the COSMIC Connect Android app (Java → Kotlin, modern architecture)
 - Ensure protocol compatibility with COSMIC Desktop applet
 - Implement secure TLS communication
 - Build and debug both Android and Rust codebases
@@ -85,7 +85,7 @@ claude-code --agent protocol-compatibility "Verify identity packet format compat
 **What it covers:**
 - Modern Android architecture (MVVM, Repository pattern)
 - Kotlin best practices and coroutines
-- KDE Connect protocol implementation in Android
+- COSMIC Connect protocol implementation in Android
 - Services, BroadcastReceivers, and Android components
 - Jetpack Compose UI development
 - Dependency injection with Hilt
@@ -142,7 +142,7 @@ claude-code --agent protocol-compatibility "Verify identity packet format compat
 **File:** `skills/tls-networking-SKILL.md`
 
 **What it covers:**
-- KDE Connect protocol (v7/8)
+- COSMIC Connect protocol (v7/8)
 - TLS certificate management (Android & Rust)
 - Self-signed certificate generation
 - UDP multicast device discovery
@@ -268,7 +268,7 @@ agents:
 3. **Start modernizing:**
 ```bash
 # Convert a file to Kotlin
-claude-code "Modernize src/org/kde/kdeconnect/Device.java"
+claude-code "Modernize src/org/cosmic/cosmicconnect/Device.java"
 
 # Implement modern architecture
 claude-code "Refactor DeviceManager to use Repository pattern and coroutines"
@@ -277,11 +277,11 @@ claude-code "Refactor DeviceManager to use Repository pattern and coroutines"
 claude-code "Convert build.gradle to build.gradle.kts with Kotlin DSL"
 ```
 
-### For cosmic-applet-kdeconnect Repository
+### For cosmic-applet-cosmicconnect Repository
 
 1. **Place skills in repository:**
 ```bash
-cd cosmic-applet-kdeconnect
+cd cosmic-applet-cosmicconnect
 mkdir -p .claude/skills .claude/agents
 cp /path/to/cosmic-connect-skills/skills/* .claude/skills/
 cp /path/to/cosmic-connect-skills/agents/* .claude/agents/
@@ -325,7 +325,7 @@ claude-code "Add COSMIC notification for low battery alerts"
 ### Example 1: Modernizing Android Code
 ```bash
 # Step 1: Convert Java to Kotlin
-claude-code "Convert src/org/kde/kdeconnect/NetworkPacket.java to Kotlin"
+claude-code "Convert src/org/cosmic/cosmicconnect/NetworkPacket.java to Kotlin"
 
 # Step 2: Add modern patterns
 claude-code "Refactor NetworkPacket to use Kotlin data class and sealed classes for state"
@@ -459,9 +459,9 @@ These skills are provided to assist with the COSMIC Connect project, which is li
 ## 🙏 Acknowledgments
 
 Based on:
-- [KDE Connect Android](https://invent.kde.org/network/kdeconnect-android)
-- [cosmic-applet-kdeconnect](https://github.com/olafkfreund/cosmic-applet-kdeconnect)
-- KDE Connect Protocol Specification
+- [COSMIC Connect Android](https://invent.kde.org/network/cosmicconnect-android)
+- [cosmic-applet-cosmicconnect](https://github.com/olafkfreund/cosmic-applet-cosmicconnect)
+- COSMIC Connect Protocol Specification
 - COSMIC Desktop Development Guide
 
 ## 📞 Support
@@ -476,4 +476,4 @@ For issues or questions:
 
 **Happy Coding! 🚀**
 
-Use these skills and agents to create a seamless, modern KDE Connect experience across Android and COSMIC Desktop!
+Use these skills and agents to create a seamless, modern COSMIC Connect experience across Android and COSMIC Desktop!

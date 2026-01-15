@@ -1,7 +1,7 @@
 # Debugging Skill for Android and Rust Development
 
 ## Overview
-This skill provides comprehensive debugging techniques, tools, and best practices for both Android (Kotlin/Java) and Rust/COSMIC Desktop development, with focus on network programming and KDE Connect protocol debugging.
+This skill provides comprehensive debugging techniques, tools, and best practices for both Android (Kotlin/Java) and Rust/COSMIC Desktop development, with focus on network programming and COSMIC Connect protocol debugging.
 
 ## Android Debugging
 
@@ -10,7 +10,7 @@ This skill provides comprehensive debugging techniques, tools, and best practice
 #### Custom Logging Tags
 ```kotlin
 object Log {
-    private const val APP_TAG = "KdeConnect"
+    private const val APP_TAG = "CosmicConnect"
     
     fun d(tag: String, message: String) {
         android.util.Log.d("$APP_TAG:$tag", message)
@@ -41,16 +41,16 @@ Log.e("TLS", "Handshake failed", exception)
 #### Filtering Logcat
 ```bash
 # Filter by tag
-adb logcat -s KdeConnect:D
+adb logcat -s CosmicConnect:D
 
 # Filter multiple tags
-adb logcat -s KdeConnect:D NetworkPacket:D TLS:V
+adb logcat -s CosmicConnect:D NetworkPacket:D TLS:V
 
 # Filter by process ID
-adb logcat --pid=$(adb shell pidof -s org.kde.kdeconnect_tp)
+adb logcat --pid=$(adb shell pidof -s org.cosmic.cosmicconnect)
 
 # Filter with grep
-adb logcat | grep "KdeConnect"
+adb logcat | grep "CosmicConnect"
 
 # Save to file
 adb logcat -d > logcat.txt
@@ -122,11 +122,11 @@ adb shell chmod 755 /system/xbin/tcpdump
 adb shell tcpdump -i any -s 0 -w /sdcard/capture.pcap
 
 # Filter by port
-adb shell tcpdump -i any port 1714 -w /sdcard/kdeconnect.pcap
+adb shell tcpdump -i any port 1714 -w /sdcard/cosmicconnect.pcap
 
 # Pull and analyze
-adb pull /sdcard/kdeconnect.pcap
-wireshark kdeconnect.pcap
+adb pull /sdcard/cosmicconnect.pcap
+wireshark cosmicconnect.pcap
 ```
 
 ### Memory Profiling
@@ -153,7 +153,7 @@ class MemoryMonitor {
 #### Heap Dump Analysis
 ```bash
 # Capture heap dump
-adb shell am dumpheap org.kde.kdeconnect_tp /data/local/tmp/heap.hprof
+adb shell am dumpheap org.cosmic.cosmicconnect /data/local/tmp/heap.hprof
 adb pull /data/local/tmp/heap.hprof
 
 # Convert to standard format
@@ -233,12 +233,12 @@ Thread.setDefaultUncaughtExceptionHandler(CustomExceptionHandler())
 #### Method Tracing
 ```kotlin
 // Manual tracing
-Debug.startMethodTracing("kdeconnect")
+Debug.startMethodTracing("cosmicconnect")
 // ... code to profile
 Debug.stopMethodTracing()
 
 // Pull trace file
-adb pull /sdcard/Android/data/org.kde.kdeconnect_tp/files/kdeconnect.trace
+adb pull /sdcard/Android/data/org.cosmic.cosmicconnect/files/cosmicconnect.trace
 
 // Analyze in Android Studio
 // File > Open... > Select trace file
@@ -323,10 +323,10 @@ async fn handle_connection(device_id: String, socket: TlsStream<TcpStream>) {
 #### Basic GDB Commands
 ```bash
 # Compile with debug symbols
-cargo build --bin cosmic-kdeconnect
+cargo build --bin cosmic-cosmicconnect
 
 # Start GDB
-gdb target/debug/cosmic-kdeconnect
+gdb target/debug/cosmic-cosmicconnect
 
 # Common commands
 (gdb) break main                  # Set breakpoint
@@ -363,7 +363,7 @@ gdb target/debug/cosmic-kdeconnect
 #### Basic LLDB Commands
 ```bash
 # Start LLDB
-lldb target/debug/cosmic-kdeconnect
+lldb target/debug/cosmic-cosmicconnect
 
 # Common commands
 (lldb) breakpoint set --name main
@@ -381,7 +381,7 @@ lldb target/debug/cosmic-kdeconnect
 #### Rust-specific LLDB
 ```bash
 # Use rust-lldb wrapper
-rust-lldb target/debug/cosmic-kdeconnect
+rust-lldb target/debug/cosmic-cosmicconnect
 
 # Pretty-print Rust types automatically enabled
 
@@ -404,15 +404,15 @@ rust-lldb target/debug/cosmic-kdeconnect
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug cosmic-kdeconnect",
+            "name": "Debug cosmic-cosmicconnect",
             "cargo": {
                 "args": [
                     "build",
-                    "--bin=cosmic-kdeconnect",
-                    "--package=cosmic-kdeconnect"
+                    "--bin=cosmic-cosmicconnect",
+                    "--package=cosmic-cosmicconnect"
                 ],
                 "filter": {
-                    "name": "cosmic-kdeconnect",
+                    "name": "cosmic-cosmicconnect",
                     "kind": "bin"
                 }
             },
@@ -432,10 +432,10 @@ rust-lldb target/debug/cosmic-kdeconnect
                     "test",
                     "--no-run",
                     "--lib",
-                    "--package=kdeconnect-protocol"
+                    "--package=cosmicconnect-protocol"
                 ],
                 "filter": {
-                    "name": "kdeconnect-protocol",
+                    "name": "cosmicconnect-protocol",
                     "kind": "lib"
                 }
             },
@@ -455,10 +455,10 @@ sudo apt install valgrind
 
 # Check for memory leaks
 valgrind --leak-check=full --show-leak-kinds=all \
-    target/debug/cosmic-kdeconnect
+    target/debug/cosmic-cosmicconnect
 
 # Track origins of uninitialized values
-valgrind --track-origins=yes target/debug/cosmic-kdeconnect
+valgrind --track-origins=yes target/debug/cosmic-cosmicconnect
 ```
 
 #### AddressSanitizer
@@ -467,7 +467,7 @@ valgrind --track-origins=yes target/debug/cosmic-kdeconnect
 RUSTFLAGS="-Z sanitizer=address" cargo +nightly build --target x86_64-unknown-linux-gnu
 
 # Run
-ASAN_OPTIONS=detect_leaks=1 target/x86_64-unknown-linux-gnu/debug/cosmic-kdeconnect
+ASAN_OPTIONS=detect_leaks=1 target/x86_64-unknown-linux-gnu/debug/cosmic-cosmicconnect
 ```
 
 ### Performance Profiling
@@ -478,7 +478,7 @@ ASAN_OPTIONS=detect_leaks=1 target/x86_64-unknown-linux-gnu/debug/cosmic-kdeconn
 cargo install flamegraph
 
 # Profile
-cargo flamegraph --bin cosmic-kdeconnect
+cargo flamegraph --bin cosmic-cosmicconnect
 
 # Open flamegraph.svg in browser
 ```
@@ -486,7 +486,7 @@ cargo flamegraph --bin cosmic-kdeconnect
 #### perf
 ```bash
 # Record
-perf record --call-graph dwarf target/debug/cosmic-kdeconnect
+perf record --call-graph dwarf target/debug/cosmic-cosmicconnect
 
 # Analyze
 perf report
@@ -501,7 +501,7 @@ perf script | stackcollapse-perf.pl | flamegraph.pl > perf.svg
 
 #### Capture Filters
 ```
-# KDE Connect specific
+# COSMIC Connect specific
 tcp port 1714 or tcp portrange 1714-1764 or udp port 1716
 
 # TLS traffic
@@ -513,7 +513,7 @@ ip.addr == 192.168.1.100
 
 #### Display Filters
 ```
-# Show only KDE Connect packets
+# Show only COSMIC Connect packets
 tcp.port >= 1714 and tcp.port <= 1764
 
 # Show TLS handshake
@@ -571,7 +571,7 @@ class NetworkPacketTest {
     fun `packet serialization works correctly`() {
         val packet = NetworkPacket(
             id = 123,
-            type = "kdeconnect.ping",
+            type = "cosmicconnect.ping",
             body = JSONObject().apply {
                 put("message", "test")
             }
@@ -628,7 +628,7 @@ mod tests {
     fn test_packet_serialization() {
         let packet = NetworkPacket {
             id: 123,
-            packet_type: "kdeconnect.ping".to_string(),
+            packet_type: "cosmicconnect.ping".to_string(),
             body: serde_json::json!({
                 "message": "test"
             }),
@@ -658,7 +658,7 @@ mod tests {
 #### Integration Tests
 ```rust
 // tests/integration_test.rs
-use kdeconnect_protocol::*;
+use cosmicconnect_protocol::*;
 
 #[tokio::test]
 async fn test_full_connection_flow() {
@@ -677,7 +677,7 @@ async fn test_full_connection_flow() {
     
     // Verify received
     let received = server.receive_packet().await.unwrap();
-    assert_eq!(received.packet_type, "kdeconnect.ping");
+    assert_eq!(received.packet_type, "cosmicconnect.ping");
 }
 ```
 
@@ -693,7 +693,7 @@ proptest! {
     ) {
         let packet = NetworkPacket {
             id,
-            packet_type: "kdeconnect.ping".to_string(),
+            packet_type: "cosmicconnect.ping".to_string(),
             body: serde_json::json!({ "message": msg }),
             payload_size: None,
             payload_transfer_info: None,

@@ -2,7 +2,7 @@
 #. extracted from ./metadata/android/en-US/short_description.txt
 msgid ""
 msgstr ""
-"Project-Id-Version: kdeconnect-android-store-short\n"
+"Project-Id-Version: cosmicconnect-android-store-short\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-17 09:00+0000\n"
 "PO-Revision-Date: 2023-08-12 01:48+0900\n"
@@ -17,5 +17,5 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Generator: Lokalize 23.04.3\n"
 
-msgid "KDE Connect integrates your smartphone and computer"
-msgstr "KDE Connect は携帯電話と PC を連携させます"
+msgid "COSMIC Connect integrates your smartphone and computer"
+msgstr "COSMIC Connect は携帯電話と PC を連携させます"

@@ -117,7 +117,7 @@ Complete audit of COSMIC Desktop implementation to understand integration requir
 
 ## Related Documentation
 - \`.claude/skills/cosmic-desktop-SKILL.md\`
-- \`kdeconnect-protocol-debug.md\`" \
+- \`cosmicconnect-protocol-debug.md\`" \
   --label "P0-Critical,audit,cosmic,documentation"
 
 # Issue #4
@@ -156,7 +156,7 @@ Test current protocol compatibility between Android and COSMIC implementations.
 - Issue #3
 
 ## Related Documentation
-- \`kdeconnect-protocol-debug.md\`
+- \`cosmicconnect-protocol-debug.md\`
 - \`.claude/skills/tls-networking-SKILL.md\`" \
   --label "P0-Critical,protocol,testing"
 
@@ -324,7 +324,7 @@ Convert NetworkPacket class to Kotlin with modern patterns. **CRITICAL**: Founda
 
 ## Success Criteria
 - All tests pass
-- Protocol compatibility verified with KDE Connect Android
+- Protocol compatibility verified with COSMIC Connect Android
 - Code more readable and safe
 - Newline termination preserved
 
@@ -337,7 +337,7 @@ Convert NetworkPacket class to Kotlin with modern patterns. **CRITICAL**: Founda
 ## Related Documentation
 - \`.claude/skills/android-development-SKILL.md\`
 - \`.claude/skills/tls-networking-SKILL.md\`
-- \`kdeconnect-protocol-debug.md\`" \
+- \`cosmicconnect-protocol-debug.md\`" \
   --label "P0-Critical,android,kotlin-conversion,protocol"
 
 # Issue #10
@@ -467,7 +467,7 @@ Modernize certificate management with Android Keystore. **CRITICAL**: Security f
 - RSA 2048-bit keys
 - 10-year validity
 - SHA-256 fingerprints
-- CN=deviceId, O=KDE, OU=KDE Connect
+- CN=deviceId, O=KDE, OU=COSMIC Connect
 
 ## Success Criteria
 - Secure certificate storage
@@ -483,7 +483,7 @@ Modernize certificate management with Android Keystore. **CRITICAL**: Security f
 ## Related Documentation
 - \`.claude/skills/android-development-SKILL.md\`
 - \`.claude/skills/tls-networking-SKILL.md\`
-- \`kdeconnect-protocol-debug.md\`" \
+- \`cosmicconnect-protocol-debug.md\`" \
   --label "P0-Critical,android,security,tls"
 
 # Issue #14
@@ -523,7 +523,7 @@ Create modern TLS connection manager with coroutines. **CRITICAL**: Required for
 ## Related Documentation
 - \`.claude/skills/tls-networking-SKILL.md\`
 - \`.claude/skills/android-development-SKILL.md\`
-- \`kdeconnect-protocol-debug.md\`" \
+- \`cosmicconnect-protocol-debug.md\`" \
   --label "P0-Critical,android,networking,tls"
 
 # Issue #15

@@ -1,9 +1,9 @@
-# TLS and Networking Skill for KDE Connect
+# TLS and Networking Skill for COSMIC Connect
 
 ## Overview
-This skill provides comprehensive guidance for implementing secure TLS connections, certificate management, and network programming for the KDE Connect protocol on both Android and Rust/COSMIC platforms.
+This skill provides comprehensive guidance for implementing secure TLS connections, certificate management, and network programming for the COSMIC Connect protocol on both Android and Rust/COSMIC platforms.
 
-## KDE Connect Protocol Overview
+## COSMIC Connect Protocol Overview
 
 ### Protocol Specifications
 - **Protocol Version**: 7/8
@@ -50,7 +50,7 @@ class CertificateManager(private val context: Context) {
     }
     
     companion object {
-        private const val KEY_ALIAS = "kdeconnect_certificate"
+        private const val KEY_ALIAS = "cosmicconnect_certificate"
         private const val KEY_SIZE = 2048
         private const val VALIDITY_YEARS = 10
     }
@@ -110,7 +110,7 @@ class CertificateManager(private val context: Context) {
     }
     
     private fun getDeviceId(): String {
-        val prefs = context.getSharedPreferences("kdeconnect", Context.MODE_PRIVATE)
+        val prefs = context.getSharedPreferences("cosmicconnect", Context.MODE_PRIVATE)
         return prefs.getString("device_id", null) ?: run {
             val newId = UUID.randomUUID().toString()
             prefs.edit().putString("device_id", newId).apply()
@@ -405,7 +405,7 @@ impl TLSManager {
                 self.private_key.clone(),
             )?;
         
-        config.alpn_protocols = vec![b"kdeconnect".to_vec()];
+        config.alpn_protocols = vec![b"cosmicconnect".to_vec()];
         
         let connector = TlsConnector::from(Arc::new(config));
         let domain = rustls::ServerName::try_from(host)?;
@@ -514,7 +514,7 @@ class DeviceDiscovery(
         
         // Acquire multicast lock
         val wifiManager = context.getSystemService(Context.WIFI_SERVICE) as WifiManager
-        val multicastLock = wifiManager.createMulticastLock("kdeconnect_discovery")
+        val multicastLock = wifiManager.createMulticastLock("cosmicconnect_discovery")
         multicastLock.acquire()
         
         try {
@@ -569,21 +569,21 @@ class DeviceDiscovery(
     private fun createIdentityPacket(): String {
         return JSONObject().apply {
             put("id", System.currentTimeMillis())
-            put("type", "kdeconnect.identity")
+            put("type", "cosmicconnect.identity")
             put("body", JSONObject().apply {
                 put("deviceId", getDeviceId())
                 put("deviceName", Build.MODEL)
                 put("deviceType", "phone")
                 put("protocolVersion", 7)
                 put("incomingCapabilities", JSONArray(listOf(
-                    "kdeconnect.battery",
-                    "kdeconnect.ping",
-                    "kdeconnect.share.request"
+                    "cosmicconnect.battery",
+                    "cosmicconnect.ping",
+                    "cosmicconnect.share.request"
                 )))
                 put("outgoingCapabilities", JSONArray(listOf(
-                    "kdeconnect.battery",
-                    "kdeconnect.ping",
-                    "kdeconnect.share.request"
+                    "cosmicconnect.battery",
+                    "cosmicconnect.ping",
+                    "cosmicconnect.share.request"
                 )))
                 put("tcpPort", getTcpPort())
             })
@@ -593,7 +593,7 @@ class DeviceDiscovery(
     private fun parseIdentityPacket(data: String): DeviceInfo? {
         return try {
             val json = JSONObject(data)
-            if (json.getString("type") == "kdeconnect.identity") {
+            if (json.getString("type") == "cosmicconnect.identity") {
                 val body = json.getJSONObject("body")
                 DeviceInfo(
                     id = body.getString("deviceId"),
@@ -690,21 +690,21 @@ impl Discovery {
     pub async fn broadcast_identity(&self) -> Result<(), Box<dyn std::error::Error>> {
         let packet = IdentityPacket {
             id: chrono::Utc::now().timestamp_millis(),
-            packet_type: "kdeconnect.identity".to_string(),
+            packet_type: "cosmicconnect.identity".to_string(),
             body: IdentityBody {
                 device_id: self.device_id.clone(),
                 device_name: hostname::get()?.to_string_lossy().to_string(),
                 device_type: "desktop".to_string(),
                 protocol_version: 7,
                 incoming_capabilities: vec![
-                    "kdeconnect.battery".to_string(),
-                    "kdeconnect.ping".to_string(),
-                    "kdeconnect.share.request".to_string(),
+                    "cosmicconnect.battery".to_string(),
+                    "cosmicconnect.ping".to_string(),
+                    "cosmicconnect.share.request".to_string(),
                 ],
                 outgoing_capabilities: vec![
-                    "kdeconnect.battery".to_string(),
-                    "kdeconnect.ping".to_string(),
-                    "kdeconnect.share.request".to_string(),
+                    "cosmicconnect.battery".to_string(),
+                    "cosmicconnect.ping".to_string(),
+                    "cosmicconnect.share.request".to_string(),
                 ],
                 tcp_port: self.tcp_port,
             },
@@ -781,7 +781,7 @@ class PayloadTransfer {
             // Send packet with payload info
             val packet = NetworkPacket(
                 id = System.currentTimeMillis(),
-                type = "kdeconnect.share.request",
+                type = "cosmicconnect.share.request",
                 body = JSONObject().apply {
                     put("filename", file.name)
                     put("filesize", file.length())
@@ -879,7 +879,7 @@ impl PayloadTransfer {
         // Send packet with payload info
         let packet = NetworkPacket {
             id: chrono::Utc::now().timestamp_millis(),
-            packet_type: "kdeconnect.share.request".to_string(),
+            packet_type: "cosmicconnect.share.request".to_string(),
             body: serde_json::json!({
                 "filename": file_path.file_name().unwrap().to_string_lossy(),
                 "filesize": file_size,
@@ -1013,7 +1013,7 @@ adb shell netstat -an | grep 1714
 adb shell ping -c 4 <device-ip>
 
 # View logs
-adb logcat -s KdeConnect:D NetworkPacket:D TLS:D
+adb logcat -s CosmicConnect:D NetworkPacket:D TLS:D
 ```
 
 ### Rust Debugging
@@ -1031,7 +1031,7 @@ openssl s_client -connect localhost:1714 -showcerts
 ## Resources
 
 - [TLS 1.3 RFC](https://datatracker.ietf.org/doc/html/rfc8446)
-- [KDE Connect Protocol](https://invent.kde.org/network/kdeconnect-kde)
+- [COSMIC Connect Protocol](https://invent.kde.org/network/cosmicconnect-kde)
 - [Android Network Security](https://developer.android.com/training/articles/security-ssl)
 - [Rust TLS Library (rustls)](https://docs.rs/rustls/)
 - [Certificate Transparency](https://certificate.transparency.dev/)

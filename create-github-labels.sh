@@ -20,7 +20,7 @@ gh label create "android" --description "Android app development" --color "3ddc8
 gh label create "cosmic" --description "COSMIC Desktop integration" --color "ed8936" --force
 gh label create "documentation" --description "Documentation improvements" --color "0075ca" --force
 gh label create "testing" --description "Testing and quality assurance" --color "fbca04" --force
-gh label create "protocol" --description "KDE Connect protocol implementation" --color "c5def5" --force
+gh label create "protocol" --description "COSMIC Connect protocol implementation" --color "c5def5" --force
 gh label create "gradle" --description "Gradle build system" --color "02303a" --force
 gh label create "build-system" --description "Build configuration and tooling" --color "006b75" --force
 gh label create "kotlin-conversion" --description "Java to Kotlin conversion" --color "7f52ff" --force

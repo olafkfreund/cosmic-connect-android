@@ -3,9 +3,9 @@
 ## ✅ What Was Changed
 
 ### 1. **Project Name & Branding**
-- **OLD**: "KDE Connect - Android app"
+- **OLD**: "COSMIC Connect - Android app"
 - **NEW**: "COSMIC Connect - Android App"
-- Changed all references from "KDE Connect" to "COSMIC Connect"
+- Changed all references from "COSMIC Connect" to "COSMIC Connect"
 - Added COSMIC Desktop branding throughout
 
 ### 2. **Project Description**
@@ -17,7 +17,7 @@
 Added prominent "🙏 Credit to KDE" section that:
 - ✅ Thanks KDE for creating the original app and protocol
 - ✅ Lists their accomplishments
-- ✅ Links to original KDE Connect repositories
+- ✅ Links to original COSMIC Connect repositories
 - ✅ Makes it clear we build upon their work
 - ✅ Shows deep appreciation and proper attribution
 
@@ -30,7 +30,7 @@ Added prominent "🙏 Credit to KDE" section that:
 - Removed old Play Store/F-Droid links (coming soon)
 - Added link to COSMIC Connect Desktop Applet
 - Updated developer setup instructions
-- Removed references to KDE Connect desktop app
+- Removed references to COSMIC Connect desktop app
 
 ### 6. **Project Status** (NEW!)
 - Added current phase indicator
@@ -55,12 +55,12 @@ Added prominent "🙏 Credit to KDE" section that:
 - GETTING_STARTED.md
 - PROJECT_PLAN.md
 - CLAUDE.md
-- kdeconnect-protocol-debug.md
+- cosmicconnect-protocol-debug.md
 
 ### 10. **Links Section**
 - **This Project**: Links to this GitHub repo
 - **COSMIC Desktop**: Links to COSMIC resources
-- **Original KDE Connect**: Links to KDE repos (with credit)
+- **Original COSMIC Connect**: Links to KDE repos (with credit)
 
 ### 11. **Community & Support**
 - Changed from KDE mailing lists to GitHub Issues/Discussions
@@ -78,7 +78,7 @@ Added prominent "🙏 Credit to KDE" section that:
 - Links to PROJECT_PLAN.md for details
 
 ### 14. **Acknowledgments** (NEW!)
-- Credits KDE Connect Team
+- Credits COSMIC Connect Team
 - Credits COSMIC Desktop Team
 - Credits System76
 - Credits all contributors
@@ -112,8 +112,8 @@ Added prominent "🙏 Credit to KDE" section that:
 
 ### Kept ✅
 - All feature descriptions (updated context)
-- GPL v2/v3 license (same as KDE Connect)
-- Links to original KDE Connect repos (in credit section)
+- GPL v2/v3 license (same as COSMIC Connect)
+- Links to original COSMIC Connect repos (in credit section)
 - Security & privacy information
 
 ---
@@ -126,10 +126,10 @@ The new README prominently credits KDE with:
 ## 🙏 Credit to KDE
 
 This project is built upon the **excellent foundation** laid by the
-[KDE Connect](https://community.kde.org/KDEConnect) project and team.
+[COSMIC Connect](https://community.kde.org/COSMICConnect) project and team.
 We are deeply grateful to KDE for:
 
-- Creating the original KDE Connect application and protocol
+- Creating the original COSMIC Connect application and protocol
 - Years of development and refinement
 - Building a robust, secure communication protocol
 - Establishing the open-source foundation we build upon
@@ -152,7 +152,7 @@ Plus links to original repositories and a footer disclaimer.
 
 ## ✅ Review Checklist
 
-- ✅ Changed all "KDE Connect" to "COSMIC Connect"
+- ✅ Changed all "COSMIC Connect" to "COSMIC Connect"
 - ✅ Removed KDE branding as primary identity
 - ✅ Added prominent credit to KDE with links
 - ✅ Updated installation instructions

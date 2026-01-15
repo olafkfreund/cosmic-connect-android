@@ -5,7 +5,7 @@
 **Project:** COSMIC Connect Android Modernization  
 **Timeline:** 12-16 weeks  
 **Team Size:** 1-3 developers  
-**Target:** Modernize KDE Connect Android app for seamless COSMIC Desktop integration
+**Target:** Modernize COSMIC Connect Android app for seamless COSMIC Desktop integration
 
 **Key Metrics:**
 - 150+ Java files to convert to Kotlin
@@ -1393,7 +1393,7 @@ These issues must be completed in order:
 
 # 2. Clone repositories
 git clone https://github.com/olafkfreund/cosmic-connect-android.git
-git clone https://github.com/olafkfreund/cosmic-applet-kdeconnect.git
+git clone https://github.com/olafkfreund/cosmic-applet-cosmicconnect.git
 
 # 3. Install Claude Code skills
 cd cosmic-connect-android
@@ -1408,7 +1408,7 @@ mv cosmic-connect-skills/README.md .claude/
 cd cosmic-connect-android
 ./gradlew build
 
-cd ../cosmic-applet-kdeconnect
+cd ../cosmic-applet-cosmicconnect
 cargo build
 
 # 5. Create project board
@@ -1478,7 +1478,7 @@ An issue is considered "Done" when:
 
 ## 🎉 Success!
 
-This project plan provides a clear path from current state to a modern, well-tested, cross-platform KDE Connect implementation. 
+This project plan provides a clear path from current state to a modern, well-tested, cross-platform COSMIC Connect implementation. 
 
 **Remember:**
 - Each issue builds on previous work

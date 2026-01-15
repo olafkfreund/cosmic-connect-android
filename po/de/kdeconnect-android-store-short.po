@@ -2,7 +2,7 @@
 #. extracted from ./metadata/android/en-US/short_description.txt
 msgid ""
 msgstr ""
-"Project-Id-Version: kdeconnect-android-store-short\n"
+"Project-Id-Version: cosmicconnect-android-store-short\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-17 09:00+0000\n"
 "PO-Revision-Date: 2023-06-07 19:50+0200\n"
@@ -15,5 +15,5 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 23.07.70\n"
 
-msgid "KDE Connect integrates your smartphone and computer"
-msgstr "KDE Connect verbindet Ihr Smartphone mit Ihrem Computer"
+msgid "COSMIC Connect integrates your smartphone and computer"
+msgstr "COSMIC Connect verbindet Ihr Smartphone mit Ihrem Computer"

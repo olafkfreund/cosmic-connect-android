@@ -21,7 +21,7 @@ All features work wirelessly over your existing Wi-Fi network using secure TLS e
 
 ## 🎯 About This Project
 
-**COSMIC Connect** is a modernized Android application designed specifically for **[COSMIC Desktop](https://system76.com/cosmic)** integration. This project takes the proven KDE Connect protocol and brings it to COSMIC Desktop with a completely modernized Android codebase.
+**COSMIC Connect** is a modernized Android application designed specifically for **[COSMIC Desktop](https://system76.com/cosmic)** integration. This project takes the proven COSMIC Connect protocol and brings it to COSMIC Desktop with a completely modernized Android codebase.
 
 ### Modern Android Stack
 
@@ -35,24 +35,24 @@ All features work wirelessly over your existing Wi-Fi network using secure TLS e
 
 ### COSMIC Desktop Integration
 
-Works seamlessly with the [COSMIC Connect Desktop Applet](https://github.com/olafkfreund/cosmic-applet-kdeconnect) built specifically for COSMIC Desktop using Rust and libcosmic.
+Works seamlessly with the [COSMIC Connect Desktop Applet](https://github.com/olafkfreund/cosmic-applet-cosmicconnect) built specifically for COSMIC Desktop using Rust and libcosmic.
 
 ---
 
 ## 🙏 Credit to KDE
 
-This project is built upon the **excellent foundation** laid by the [KDE Connect](https://community.kde.org/KDEConnect) project and team. We are deeply grateful to KDE for:
+This project is built upon the **excellent foundation** laid by the [COSMIC Connect](https://community.kde.org/COSMICConnect) project and team. We are deeply grateful to KDE for:
 
-- Creating the original KDE Connect application and protocol
+- Creating the original COSMIC Connect application and protocol
 - Years of development and refinement
 - Building a robust, secure communication protocol
 - Establishing the open-source foundation we build upon
 
-**Original KDE Connect repositories:**
-- Desktop: https://invent.kde.org/network/kdeconnect-kde
-- Android: https://invent.kde.org/network/kdeconnect-android
+**Original COSMIC Connect repositories:**
+- Desktop: https://invent.kde.org/network/cosmicconnect-kde
+- Android: https://invent.kde.org/network/cosmicconnect-android
 
-The KDE Connect team deserves immense credit for creating such an amazing cross-platform communication solution. This COSMIC Connect project modernizes the Android app and adapts it specifically for COSMIC Desktop while maintaining full protocol compatibility.
+The COSMIC Connect team deserves immense credit for creating such an amazing cross-platform communication solution. This COSMIC Connect project modernizes the Android app and adapts it specifically for COSMIC Desktop while maintaining full protocol compatibility.
 
 ---
 
@@ -67,7 +67,7 @@ This modernized app will be available on:
 - F-Droid
 - Direct APK downloads from GitHub Releases
 
-**Desktop Requirement**: You'll need the [COSMIC Connect Desktop Applet](https://github.com/olafkfreund/cosmic-applet-kdeconnect) installed on your COSMIC Desktop system.
+**Desktop Requirement**: You'll need the [COSMIC Connect Desktop Applet](https://github.com/olafkfreund/cosmic-applet-cosmicconnect) installed on your COSMIC Desktop system.
 
 ### For Developers
 
@@ -109,7 +109,7 @@ Track our progress: [View All Issues](https://github.com/olafkfreund/cosmic-conn
 
 ## 🤝 Contributing
 
-We welcome contributions! This is an open-source project focused on bringing a modern KDE Connect experience to COSMIC Desktop.
+We welcome contributions! This is an open-source project focused on bringing a modern COSMIC Connect experience to COSMIC Desktop.
 
 ### How to Contribute
 
@@ -163,11 +163,11 @@ See [CLAUDE.md](CLAUDE.md) for details on using AI assistance.
 
 ### Testing with COSMIC Desktop
 
-You'll need the [COSMIC Connect Desktop Applet](https://github.com/olafkfreund/cosmic-applet-kdeconnect) running to test functionality:
+You'll need the [COSMIC Connect Desktop Applet](https://github.com/olafkfreund/cosmic-applet-cosmicconnect) running to test functionality:
 
 ```bash
 # Clone the desktop applet
-git clone https://github.com/olafkfreund/cosmic-applet-kdeconnect
+git clone https://github.com/olafkfreund/cosmic-applet-cosmicconnect
 
 # Run it (see applet repo for instructions)
 ```
@@ -198,7 +198,7 @@ See [Issue #1](https://github.com/olafkfreund/cosmic-connect-android/issues/1) f
 | [GETTING_STARTED.md](GETTING_STARTED.md) | Complete getting started guide |
 | [PROJECT_PLAN.md](PROJECT_PLAN.md) | All 41 issues detailed |
 | [CLAUDE.md](CLAUDE.md) | AI development assistance |
-| [kdeconnect-protocol-debug.md](kdeconnect-protocol-debug.md) | Protocol reference |
+| [cosmicconnect-protocol-debug.md](cosmicconnect-protocol-debug.md) | Protocol reference |
 
 ---
 
@@ -215,7 +215,7 @@ See [Issue #1](https://github.com/olafkfreund/cosmic-connect-android/issues/1) f
 
 **GNU GPL v2** and **GNU GPL v3**
 
-This project maintains the same licensing as the original KDE Connect:
+This project maintains the same licensing as the original COSMIC Connect:
 - [GNU GPL v2](https://www.gnu.org/licenses/gpl-2.0.html)
 - [GNU GPL v3](https://www.gnu.org/licenses/gpl-3.0.html)
 
@@ -225,7 +225,7 @@ This project maintains the same licensing as the original KDE Connect:
 
 ### This Project
 - **Android App**: https://github.com/olafkfreund/cosmic-connect-android
-- **COSMIC Desktop Applet**: https://github.com/olafkfreund/cosmic-applet-kdeconnect
+- **COSMIC Desktop Applet**: https://github.com/olafkfreund/cosmic-applet-cosmicconnect
 - **Issues**: https://github.com/olafkfreund/cosmic-connect-android/issues
 - **Discussions**: https://github.com/olafkfreund/cosmic-connect-android/discussions
 
@@ -233,10 +233,10 @@ This project maintains the same licensing as the original KDE Connect:
 - **COSMIC Desktop**: https://system76.com/cosmic
 - **COSMIC Epoch**: https://github.com/pop-os/cosmic-epoch
 
-### Original KDE Connect (Credit)
-- **KDE Connect Desktop**: https://invent.kde.org/network/kdeconnect-kde
-- **KDE Connect Android**: https://invent.kde.org/network/kdeconnect-android
-- **KDE Community**: https://community.kde.org/KDEConnect
+### Original COSMIC Connect (Credit)
+- **COSMIC Connect Desktop**: https://invent.kde.org/network/cosmicconnect-kde
+- **COSMIC Connect Android**: https://invent.kde.org/network/cosmicconnect-android
+- **KDE Community**: https://community.kde.org/COSMICConnect
 
 ---
 
@@ -254,7 +254,7 @@ Our mission is to provide COSMIC Desktop users with a modern, reliable, and feat
 
 - ✅ Works seamlessly with COSMIC Desktop
 - ✅ Uses modern Android development practices
-- ✅ Maintains protocol compatibility with KDE Connect
+- ✅ Maintains protocol compatibility with COSMIC Connect
 - ✅ Provides excellent user experience
 - ✅ Is well-tested and maintainable
 - ✅ Respects user privacy and security
@@ -301,7 +301,7 @@ _Coming soon!_
 
 ## ❤️ Acknowledgments
 
-- **KDE Connect Team**: For creating the original application and protocol
+- **COSMIC Connect Team**: For creating the original application and protocol
 - **COSMIC Desktop Team**: For building an amazing desktop environment
 - **System76**: For supporting open source development
 - **All Contributors**: Everyone helping modernize this codebase

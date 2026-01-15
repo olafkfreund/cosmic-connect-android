@@ -1,7 +1,7 @@
 # Protocol Compatibility Agent
 
 ## Purpose
-This agent ensures full compatibility between the Android app and COSMIC Desktop implementation of the KDE Connect protocol, managing protocol version compatibility, packet formats, and feature parity.
+This agent ensures full compatibility between the Android app and COSMIC Desktop implementation of the COSMIC Connect protocol, managing protocol version compatibility, packet formats, and feature parity.
 
 ## Skills
 - android-development-SKILL.md
@@ -41,7 +41,7 @@ This agent ensures full compatibility between the Android app and COSMIC Desktop
 ```json
 {
   "id": 1234567890,
-  "type": "kdeconnect.ping",
+  "type": "cosmicconnect.ping",
   "body": {
     "message": "test"
   },

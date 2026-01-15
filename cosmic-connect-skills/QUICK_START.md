@@ -2,7 +2,7 @@
 
 ## 📦 What You Got
 
-A comprehensive package of Claude Code skills and agents for modernizing your KDE Connect Android app to work with COSMIC Desktop.
+A comprehensive package of Claude Code skills and agents for modernizing your COSMIC Connect Android app to work with COSMIC Desktop.
 
 **Package Size:** 39KB  
 **Files Included:** 5 skills + 3 agents + documentation
@@ -31,11 +31,11 @@ rm -rf cosmic-connect-skills
 ls -la .claude/
 ```
 
-### Option 2: For cosmic-applet-kdeconnect repository
+### Option 2: For cosmic-applet-cosmicconnect repository
 
 ```bash
 # Navigate to your COSMIC repo
-cd ~/path/to/cosmic-applet-kdeconnect
+cd ~/path/to/cosmic-applet-cosmicconnect
 
 # Extract the archive
 tar -xzf cosmic-connect-skills.tar.gz
@@ -67,7 +67,7 @@ tar -xzf ~/Downloads/cosmic-connect-skills.tar.gz
 cd ~/cosmic-connect-android
 ln -s ~/.claude/cosmic-connect/cosmic-connect-skills .claude
 
-cd ~/cosmic-applet-kdeconnect
+cd ~/cosmic-applet-cosmicconnect
 ln -s ~/.claude/cosmic-connect/cosmic-connect-skills .claude
 ```
 
@@ -77,7 +77,7 @@ ln -s ~/.claude/cosmic-connect/cosmic-connect-skills .claude
 
 ```bash
 # Convert Java file to Kotlin
-claude-code "Using android-development skill, convert src/org/kde/kdeconnect/Device.java to modern Kotlin with coroutines"
+claude-code "Using android-development skill, convert src/org/cosmic/cosmicconnect/Device.java to modern Kotlin with coroutines"
 
 # Modernize build system
 claude-code "Using gradle skill, convert build.gradle to build.gradle.kts with Kotlin DSL and version catalog"
@@ -106,7 +106,7 @@ claude-code "Using cosmic-desktop skill, integrate file picker with XDG Desktop 
 claude-code "Using debugging and tls-networking skills, debug TLS handshake failure between Android and COSMIC"
 
 # Analyze traffic
-claude-code "Using debugging skill, help me analyze the Wireshark capture for KDE Connect packets"
+claude-code "Using debugging skill, help me analyze the Wireshark capture for COSMIC Connect packets"
 
 # Test compatibility
 claude-code --agent protocol-compatibility "Test file sharing from Android to COSMIC Desktop"
@@ -118,7 +118,7 @@ claude-code --agent protocol-compatibility "Test file sharing from Android to CO
 
 ```bash
 # Step-by-step approach
-claude-code "Using android-development skill, analyze src/org/kde/kdeconnect/NetworkPacket.java and suggest modernization strategy"
+claude-code "Using android-development skill, analyze src/org/cosmic/cosmicconnect/NetworkPacket.java and suggest modernization strategy"
 
 claude-code "Convert the file to Kotlin with data class and sealed classes"
 
@@ -161,7 +161,7 @@ claude-code --agent protocol-compatibility "Verify discovery works bidirectional
 | android-development | Android code modernization | Kotlin, Coroutines, MVVM, Jetpack Compose |
 | cosmic-desktop | COSMIC applet development | libcosmic, Rust, DBus, Wayland |
 | gradle | Build system | Build scripts, Dependencies, Optimization |
-| tls-networking | Protocol & network | TLS, Certificates, UDP/TCP, KDE Connect |
+| tls-networking | Protocol & network | TLS, Certificates, UDP/TCP, COSMIC Connect |
 | debugging | Troubleshooting | Logcat, GDB, Wireshark, Profiling |
 
 ## 🤖 Agent Quick Reference

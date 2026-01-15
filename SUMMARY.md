@@ -2,10 +2,10 @@
 
 ## 🎯 What This Project Is
 
-A 12-16 week modernization project to **upgrade the Android KDE Connect app** to work seamlessly with the existing COSMIC Desktop applet.
+A 12-16 week modernization project to **upgrade the Android COSMIC Connect app** to work seamlessly with the existing COSMIC Desktop applet.
 
 **IMPORTANT**:
-- ✅ COSMIC Desktop applet is **ALREADY BUILT**: https://github.com/olafkfreund/cosmic-applet-kdeconnect
+- ✅ COSMIC Desktop applet is **ALREADY BUILT**: https://github.com/olafkfreund/cosmic-applet-cosmicconnect
 - 🎯 We are **ONLY modernizing the Android app**
 - 🔗 Goal: Ensure Android app works perfectly with existing COSMIC applet
 
@@ -53,7 +53,7 @@ A 12-16 week modernization project to **upgrade the Android KDE Connect app** to
 2. **Read Documentation** (1 hour)
    - Read `GETTING_STARTED.md` (this gives you the full picture)
    - Skim `PROJECT_PLAN.md` (detailed issue list)
-   - Bookmark `kdeconnect-protocol-debug.md` (protocol reference)
+   - Bookmark `cosmicconnect-protocol-debug.md` (protocol reference)
 
 3. **Start Issue #1: Development Environment Setup** (2 hours)
    - Install Android Studio
@@ -126,7 +126,7 @@ Week 13+: Phase 5
 
 ## 💡 Key Technical Concepts
 
-### 1. KDE Connect Protocol
+### 1. COSMIC Connect Protocol
 - **UDP Discovery**: Port 1716, broadcast to find devices
 - **TCP Connection**: Ports 1714-1764
 - **TLS Encryption**: Self-signed certificates
@@ -176,7 +176,7 @@ Week 13+: Phase 5
 - **Test Coverage Goal**: 80%+
 - **Plugins to Modernize**: 8 plugins
 - **UI Screens**: 5+ screens to Compose
-- **Protocol Version**: 7 (KDE Connect standard)
+- **Protocol Version**: 7 (COSMIC Connect standard)
 
 ### Timeline
 - **Phase 1**: 2 weeks (setup and audits)
@@ -241,8 +241,8 @@ Week 13+: Phase 5
 |------|---------|--------------|
 | `GETTING_STARTED.md` | Complete guide | READ FIRST |
 | `PROJECT_PLAN.md` | All 40 issues detailed | Reference |
-| `kdeconnect-protocol-debug.md` | Protocol debugging | When working on networking |
-| `kdeconnect-rust-implementation-guide.md` | COSMIC implementation | When working on desktop side |
+| `cosmicconnect-protocol-debug.md` | Protocol debugging | When working on networking |
+| `cosmicconnect-rust-implementation-guide.md` | COSMIC implementation | When working on desktop side |
 | `CLAUDE.md` | Claude Code usage | When using AI assistance |
 | `.claude/skills/*.md` | Specific skills | When working on that area |
 
@@ -252,7 +252,7 @@ Week 13+: Phase 5
 
 ### Week 1: Foundation
 - Learn project structure
-- Understand KDE Connect protocol
+- Understand COSMIC Connect protocol
 - Set up development environment
 
 ### Week 2-3: Android Basics

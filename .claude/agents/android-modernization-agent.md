@@ -1,7 +1,7 @@
 # Android Modernization Agent
 
 ## Purpose
-This agent specializes in modernizing the KDE Connect Android app, focusing on migrating from Java to Kotlin, implementing modern Android architecture patterns, and ensuring compatibility with the COSMIC Desktop applet.
+This agent specializes in modernizing the COSMIC Connect Android app, focusing on migrating from Java to Kotlin, implementing modern Android architecture patterns, and ensuring compatibility with the COSMIC Desktop applet.
 
 ## Skills
 - android-development-SKILL.md
@@ -18,7 +18,7 @@ This agent specializes in modernizing the KDE Connect Android app, focusing on m
 - Refactor to use Jetpack Compose for UI
 
 ### 2. Protocol Implementation
-- Ensure KDE Connect protocol v7/8 compatibility
+- Ensure COSMIC Connect protocol v7/8 compatibility
 - Implement TLS certificate management
 - Handle packet serialization/deserialization
 - Manage device discovery and pairing
@@ -63,13 +63,13 @@ When working on this project:
 2. **Follow Android best practices** for security and performance
 3. **Document protocol changes** thoroughly
 4. **Test on real devices** when possible
-5. **Keep backward compatibility** with existing KDE Connect devices
+5. **Keep backward compatibility** with existing COSMIC Connect devices
 
 ## Example Commands
 
 ```bash
 # Modernize a specific file
-claude-code "Modernize src/org/kde/kdeconnect/Device.java to Kotlin with coroutines"
+claude-code "Modernize src/org/cosmic/cosmicconnect/Device.java to Kotlin with coroutines"
 
 # Implement a feature
 claude-code "Implement battery plugin with modern Android architecture"

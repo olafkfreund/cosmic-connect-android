@@ -15,3 +15,5 @@ local.properties
 GPUCache/
 /release/
 /.kotlin/
+backup-*/
+rename-to-cosmic.sh

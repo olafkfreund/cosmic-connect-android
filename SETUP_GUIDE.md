@@ -113,24 +113,24 @@ adb connect 192.168.250.2:5555
 adb install -r app/build/outputs/apk/debug/app-debug.apk
 
 # Check it's installed
-adb shell pm list packages | grep kdeconnect
+adb shell pm list packages | grep cosmicconnect
 ```
 
 Expected output:
 ```
-package:org.kde.kdeconnect_tp
+package:org.cosmic.cosmicconnect
 ```
 
 ## Step 8: Launch the App
 
 In Waydroid UI:
-1. Look for "KDE Connect" app icon
+1. Look for "COSMIC Connect" app icon
 2. Tap to launch
 3. Grant required permissions
 
 OR via command line:
 ```bash
-adb shell monkey -p org.kde.kdeconnect_tp -c android.intent.category.LAUNCHER 1
+adb shell monkey -p org.cosmic.cosmicconnect -c android.intent.category.LAUNCHER 1
 ```
 
 ## Step 9: Clone COSMIC Applet
@@ -138,8 +138,8 @@ adb shell monkey -p org.kde.kdeconnect_tp -c android.intent.category.LAUNCHER 1
 ```bash
 # Clone in a separate directory
 cd ~/Source/GitHub
-git clone https://github.com/olafkfreund/cosmic-applet-kdeconnect
-cd cosmic-applet-kdeconnect
+git clone https://github.com/olafkfreund/cosmic-applet-cosmicconnect
+cd cosmic-applet-cosmicconnect
 
 # Build and run the COSMIC applet
 cargo build --release
@@ -168,7 +168,7 @@ ss -tulnp | grep -E "171[4-6]"
 sudo nft list ruleset | grep -E "171[4-6]"
 
 # Watch Android logs
-adb logcat | grep -i kdeconnect
+adb logcat | grep -i cosmicconnect
 
 # Send test UDP broadcast
 echo -n "test" | nc -u -b 255.255.255.255 1716
@@ -223,10 +223,10 @@ rm -rf ~/.gradle/caches
 adb logcat | grep -i "androidruntime\|exception"
 
 # Clear app data
-adb shell pm clear org.kde.kdeconnect_tp
+adb shell pm clear org.cosmic.cosmicconnect
 
 # Reinstall
-adb uninstall org.kde.kdeconnect_tp
+adb uninstall org.cosmic.cosmicconnect
 adb install -r app/build/outputs/apk/debug/app-debug.apk
 ```
 
@@ -257,7 +257,7 @@ vim src/...
 adb install -r app/build/outputs/apk/debug/app-debug.apk
 
 # 4. Watch logs
-adb logcat | grep -i kdeconnect
+adb logcat | grep -i cosmicconnect
 
 # 5. Test with COSMIC applet
 # Launch applet and verify communication
@@ -279,7 +279,7 @@ adb logcat | grep -i kdeconnect
 ```bash
 adb devices                        # List connected devices
 adb install -r app.apk             # Install/reinstall APK
-adb uninstall org.kde.kdeconnect_tp # Uninstall app
+adb uninstall org.cosmic.cosmicconnect # Uninstall app
 adb logcat                         # View logs
 adb shell                          # Open shell in Android
 adb shell pm list packages         # List installed packages

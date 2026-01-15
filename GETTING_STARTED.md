@@ -4,13 +4,13 @@
 
 **This project ONLY modernizes the Android app!**
 
-- ✅ **COSMIC Desktop applet is ALREADY BUILT**: https://github.com/olafkfreund/cosmic-applet-kdeconnect
+- ✅ **COSMIC Desktop applet is ALREADY BUILT**: https://github.com/olafkfreund/cosmic-applet-cosmicconnect
 - 🎯 **We are ONLY working on the Android app**
 - 🔗 **Goal**: Modernize Android to work perfectly with existing COSMIC applet
 
 ## 📋 Project Overview
 
-This project modernizes the KDE Connect Android app for seamless integration with the **existing** COSMIC Desktop applet. It involves:
+This project modernizes the COSMIC Connect Android app for seamless integration with the **existing** COSMIC Desktop applet. It involves:
 
 1. **Android App** (MAIN FOCUS): Converting 150+ Java files to modern Kotlin with MVVM architecture
 2. **COSMIC Desktop** (TESTING ONLY): Test with existing applet to ensure compatibility
@@ -225,20 +225,20 @@ gh project create --title "COSMIC Connect Modernization" --body "12-week moderni
 
 ### Critical Technical Concepts
 
-#### 1. **KDE Connect Protocol**
+#### 1. **COSMIC Connect Protocol**
 - **Version**: 7 (must match)
 - **Discovery**: UDP broadcast on port 1716
 - **Connection**: TCP ports 1714-1764
 - **Encryption**: TLS with self-signed certificates
 - **Pairing**: Certificate exchange and trust
 
-📖 **Read**: `kdeconnect-protocol-debug.md` - This is your bible
+📖 **Read**: `cosmicconnect-protocol-debug.md` - This is your bible
 
 #### 2. **Packet Format** (CRITICAL!)
 ```json
 {
   "id": 1234567890,
-  "type": "kdeconnect.identity",
+  "type": "cosmicconnect.identity",
   "body": { ... }
 }\n  ← MUST END WITH NEWLINE!
 ```
@@ -380,7 +380,7 @@ claude-code --agent protocol-compatibility "Debug TLS handshake failure between 
 
 ### 2. Breaking Protocol Compatibility
 **Don't**: Change packet formats
-**Do**: Maintain exact KDE Connect protocol v7 compatibility
+**Do**: Maintain exact COSMIC Connect protocol v7 compatibility
 
 ### 3. Ignoring Tests
 **Don't**: Code without tests
@@ -400,8 +400,8 @@ claude-code --agent protocol-compatibility "Debug TLS handshake failure between 
 
 1. **This file** (you're here!)
 2. `PROJECT_PLAN.md` - Complete project details
-3. `kdeconnect-protocol-debug.md` - Protocol reference
-4. `kdeconnect-rust-implementation-guide.md` - COSMIC implementation
+3. `cosmicconnect-protocol-debug.md` - Protocol reference
+4. `cosmicconnect-rust-implementation-guide.md` - COSMIC implementation
 5. `CLAUDE.md` - Claude Code usage
 6. `.claude/skills/` - Specific skill documentation
 
@@ -427,7 +427,7 @@ claude-code "Review my NetworkPacket implementation for protocol compatibility"
 
 ### Community Resources
 
-- KDE Connect Protocol: https://invent.kde.org/network/kdeconnect-meta
+- COSMIC Connect Protocol: https://invent.kde.org/network/cosmicconnect-meta
 - COSMIC Desktop: https://github.com/pop-os/cosmic-epoch
 - Android Kotlin Guide: https://developer.android.com/kotlin
 

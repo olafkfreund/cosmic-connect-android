@@ -2,7 +2,7 @@
 
 ## What This Project IS
 
-**This project ONLY modernizes the Android KDE Connect app!**
+**This project ONLY modernizes the Android COSMIC Connect app!**
 
 ### What We're Doing ✅
 - Modernizing the **Android app** codebase
@@ -25,11 +25,11 @@
 
 ### ✅ Already Built and Available
 
-**Repository**: https://github.com/olafkfreund/cosmic-applet-kdeconnect
+**Repository**: https://github.com/olafkfreund/cosmic-applet-cosmicconnect
 
 The COSMIC Desktop applet is:
 - ✅ **Fully implemented** in Rust
-- ✅ **Working** with KDE Connect protocol
+- ✅ **Working** with COSMIC Connect protocol
 - ✅ **Available** for testing
 - ✅ **Complete** - no further development needed from our side
 
@@ -83,7 +83,7 @@ We will NOT:
    - End-to-end tests with COSMIC applet
 
 6. **Protocol Compatibility**
-   - Ensure KDE Connect protocol v7 compatibility
+   - Ensure COSMIC Connect protocol v7 compatibility
    - Test all plugins with COSMIC applet
    - Verify TLS handshake works
    - Test device discovery and pairing
@@ -194,7 +194,7 @@ cosmic-connect-android/           ← THIS REPO (Android app)
 ├── GETTING_STARTED.md            ← Getting started guide
 └── ...
 
-cosmic-applet-kdeconnect/         ← SEPARATE REPO (Desktop applet)
+cosmic-applet-cosmicconnect/         ← SEPARATE REPO (Desktop applet)
 ├── src/                          ← Rust source code
 └── ...                           ← We only TEST this, not modify
 ```
@@ -210,7 +210,7 @@ cosmic-applet-kdeconnect/         ← SEPARATE REPO (Desktop applet)
 - ✅ Documentation
 
 ### What You'll Only Test
-- 🔍 `cosmic-applet-kdeconnect` repository
+- 🔍 `cosmic-applet-cosmicconnect` repository
 - 🔍 COSMIC Desktop applet
 - 🔍 Protocol compatibility
 
@@ -245,7 +245,7 @@ git clone https://github.com/olafkfreund/cosmic-connect-android
 cd cosmic-connect-android
 
 # 2. Clone COSMIC applet repo (for testing only)
-git clone https://github.com/olafkfreund/cosmic-applet-kdeconnect
+git clone https://github.com/olafkfreund/cosmic-applet-cosmicconnect
 
 # 3. Start with Issue #1
 gh issue view 1

@@ -1,7 +1,7 @@
 # COSMIC Desktop Integration Agent
 
 ## Purpose
-This agent specializes in developing and enhancing the COSMIC Desktop applet and daemon for KDE Connect, focusing on Rust implementation, libcosmic integration, and seamless desktop experience.
+This agent specializes in developing and enhancing the COSMIC Desktop applet and daemon for COSMIC Connect, focusing on Rust implementation, libcosmic integration, and seamless desktop experience.
 
 ## Skills
 - cosmic-desktop-SKILL.md
@@ -23,7 +23,7 @@ This agent specializes in developing and enhancing the COSMIC Desktop applet and
 - Manage configuration and persistence
 
 ### 3. Protocol Implementation
-- Rust implementation of KDE Connect protocol
+- Rust implementation of COSMIC Connect protocol
 - TLS certificate management with rustls
 - UDP discovery with tokio
 - TCP payload transfers
@@ -65,7 +65,7 @@ This agent specializes in developing and enhancing the COSMIC Desktop applet and
 When working on this project:
 
 1. **Follow Rust best practices** for safety and performance
-2. **Maintain compatibility** with Android KDE Connect app
+2. **Maintain compatibility** with Android COSMIC Connect app
 3. **Use structured logging** with tracing crate
 4. **Write comprehensive tests** for async code
 5. **Document public APIs** with rustdoc

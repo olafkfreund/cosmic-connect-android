@@ -51,7 +51,7 @@ adb devices
 adb install -r app/build/outputs/apk/debug/app-debug.apk
 
 # Watch logs
-adb logcat | grep -i kdeconnect
+adb logcat | grep -i cosmicconnect
 
 # Run tests
 ./gradlew test

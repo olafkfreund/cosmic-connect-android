@@ -12,7 +12,7 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="org.kde.kdeconnect.Plugins.MousePadPlugin.MousePadActivity">
+    tools:context="org.cosmic.cosmicconnect.Plugins.MousePadPlugin.MousePadActivity">
 
     <include layout="@layout/toolbar" android:id="@+id/toolbar_layout" />
 
@@ -34,7 +34,7 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
             android:importantForAccessibility="no"
             android:text="@string/mousepad_info" />
 
-        <org.kde.kdeconnect.Plugins.MousePadPlugin.KeyListenerView
+        <org.cosmic.cosmicconnect.Plugins.MousePadPlugin.KeyListenerView
             android:id="@+id/keyListener"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,7 +57,7 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
                     android:contentDescription="@string/left_click"
                     android:layout_weight="3"
                     app:icon="@drawable/left_click_48dp"
-                    style="@style/KdeConnectButton.IconButton" />
+                    style="@style/CosmicConnectButton.IconButton" />
 
             <com.google.android.material.button.MaterialButton
                     android:id="@+id/mouse_click_middle"
@@ -65,7 +65,7 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
                     android:contentDescription="@string/middle_click"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    style="@style/KdeConnectButton.IconButton.Secondary" />
+                    style="@style/CosmicConnectButton.IconButton.Secondary" />
 
             <com.google.android.material.button.MaterialButton
                     android:id="@+id/mouse_click_right"
@@ -74,7 +74,7 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
                     android:layout_height="match_parent"
                     android:layout_weight="3"
                     app:icon="@drawable/right_click_48dp"
-                    style="@style/KdeConnectButton.IconButton" />
+                    style="@style/CosmicConnectButton.IconButton" />
 
         </LinearLayout>
     </RelativeLayout>

@@ -41,10 +41,10 @@ kotlin {
 }
 
 android {
-    namespace = "org.kde.kdeconnect_tp"
+    namespace = "org.cosmic.cosmicconnect"
     compileSdk = 36
     defaultConfig {
-        applicationId = "org.kde.kdeconnect_tp"
+        applicationId = "org.cosmic.cosmicconnect"
         minSdk = 23
         targetSdk = 35
         versionCode = 13404
@@ -222,7 +222,7 @@ abstract class FixCollectionsClassVisitorFactory :
                         descriptor: String?,
                         isInterface: Boolean
                     ) {
-                        val backportClass = "org/kde/kdeconnect/Helpers/CollectionsBackport"
+                        val backportClass = "org/cosmic/cosmicconnect/Helpers/CollectionsBackport"
 
                         if (opcode == INVOKESTATIC && type == "java/util/Collections") {
                             val replaceRules = mapOf(
@@ -252,7 +252,7 @@ abstract class FixCollectionsClassVisitorFactory :
 }
 
 ksp {
-    arg("com.albertvaka.classindexksp.annotations", "org.kde.kdeconnect.Plugins.PluginFactory.LoadablePlugin")
+    arg("com.albertvaka.classindexksp.annotations", "org.cosmic.cosmicconnect.Plugins.PluginFactory.LoadablePlugin")
 }
 
 androidComponents {

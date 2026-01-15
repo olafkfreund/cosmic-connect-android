@@ -1,4 +1,4 @@
-# Translation of kdeconnect-android-store-short.po to Catalan (Valencian)
+# Translation of cosmicconnect-android-store-short.po to Catalan (Valencian)
 # Copyright (C) 2023 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
@@ -7,7 +7,7 @@
 #. extracted from ./metadata/android/en-US/short_description.txt
 msgid ""
 msgstr ""
-"Project-Id-Version: kdeconnect-android\n"
+"Project-Id-Version: cosmicconnect-android\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-17 09:00+0000\n"
 "PO-Revision-Date: 2023-06-07 10:46+0200\n"
@@ -20,5 +20,5 @@ msgstr ""
 "X-Generator: Lokalize 23.04.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-msgid "KDE Connect integrates your smartphone and computer"
-msgstr "KDE Connect integra el vostre telèfon intel·ligent i l'ordinador"
+msgid "COSMIC Connect integrates your smartphone and computer"
+msgstr "COSMIC Connect integra el vostre telèfon intel·ligent i l'ordinador"

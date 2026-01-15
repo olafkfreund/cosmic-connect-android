@@ -1,4 +1,4 @@
-# Translation of kdeconnect-android-store-short to Norwegian Nynorsk
+# Translation of cosmicconnect-android-store-short to Norwegian Nynorsk
 #
 # Karl Ove Hufthammer <karl@huftis.org>, 2023.
 #. extracted from ./metadata/android/en-US/short_description.txt
@@ -20,5 +20,5 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-msgid "KDE Connect integrates your smartphone and computer"
-msgstr "KDE Connect koplar telefonen din saman med datamaskina"
+msgid "COSMIC Connect integrates your smartphone and computer"
+msgstr "COSMIC Connect koplar telefonen din saman med datamaskina"

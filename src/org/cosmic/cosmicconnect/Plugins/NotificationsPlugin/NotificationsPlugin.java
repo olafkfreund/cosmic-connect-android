@@ -43,7 +43,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.cosmic.cosmicconnect.Helpers.AppsHelper;
-import org.cosmic.cosmicconnect.NetworkPacket;
+import org.cosmic.cosmicconnect.Core.NetworkPacket;
 import org.cosmic.cosmicconnect.Plugins.Plugin;
 import org.cosmic.cosmicconnect.Plugins.PluginFactory;
 import org.cosmic.cosmicconnect.UserInterface.MainActivity;
@@ -165,10 +165,14 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
             return;
         }
 
-        NetworkPacket np = new NetworkPacket(PACKET_TYPE_NOTIFICATION);
-        np.set("id", id);
-        np.set("isCancel", true);
-        getDevice().sendPacket(np);
+        // Create immutable packet
+        Map<String, Object> body = new HashMap<>();
+        body.put("id", id);
+        body.put("isCancel", true);
+        NetworkPacket packet = NetworkPacket.create(PACKET_TYPE_NOTIFICATION, body);
+
+        // Convert and send
+        getDevice().sendPacket(convertToLegacyPacket(packet));
         currentNotifications.remove(id);
     }
 
@@ -226,36 +230,23 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
             return;
         }
 
-        NetworkPacket np = new NetworkPacket(PACKET_TYPE_NOTIFICATION);
+        // Build packet body with required fields
+        Map<String, Object> body = new HashMap<>();
+        body.put("id", key);
+        body.put("isClearable", statusBarNotification.isClearable());
+        body.put("appName", StringUtils.defaultString(appName, packageName));
+        body.put("time", Long.toString(statusBarNotification.getPostTime()));
+        body.put("silent", isPreexisting);
+        body.put("actions", extractActions(notification, key));
 
-        boolean isUpdate = currentNotifications.contains(key);
-        //If it's an update, the other end should have the icon already: no need to extract it and create the payload again
-        if (!isUpdate) {
-
-            currentNotifications.add(key);
-
-            Bitmap appIcon = extractIcon(statusBarNotification, notification);
-
-            if (appIcon != null && !appDatabase.getPrivacy(packageName, AppDatabase.PrivacyOptions.BLOCK_IMAGES)) {
-                attachIcon(np, appIcon);
-            }
-        }
-
-        np.set("actions", extractActions(notification, key));
-
-        np.set("id", key);
-        np.set("isClearable", statusBarNotification.isClearable());
-        np.set("appName", StringUtils.defaultString(appName, packageName));
-        np.set("time", Long.toString(statusBarNotification.getPostTime()));
-        np.set("silent", isPreexisting);
-
+        // Add optional content fields if not blocked
         if (!appDatabase.getPrivacy(packageName, AppDatabase.PrivacyOptions.BLOCK_CONTENTS)) {
             RepliableNotification rn = extractRepliableNotification(statusBarNotification);
             if (rn != null) {
-                np.set("requestReplyId", rn.id);
+                body.put("requestReplyId", rn.id);
                 pendingIntents.put(rn.id, rn);
             }
-            np.set("ticker", getTickerText(notification));
+            body.put("ticker", getTickerText(notification));
 
             Pair<String, String> conversation = extractConversation(notification);
 
@@ -264,12 +255,31 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
                 title = extractStringFromExtra(getExtras(notification), NotificationCompat.EXTRA_TITLE);
             }
             if (title != null) {
-                np.set("title", title);
+                body.put("title", title);
             }
 
             String text = extractText(notification, conversation);
             if (text != null) {
-                np.set("text", text);
+                body.put("text", text);
+            }
+        }
+
+        // Create immutable packet
+        NetworkPacket packet = NetworkPacket.create(PACKET_TYPE_NOTIFICATION, body);
+
+        // Convert to legacy packet
+        org.cosmic.cosmicconnect.NetworkPacket np = convertToLegacyPacket(packet);
+
+        // Handle icon payload for new notifications
+        boolean isUpdate = currentNotifications.contains(key);
+        //If it's an update, the other end should have the icon already: no need to extract it and create the payload again
+        if (!isUpdate) {
+            currentNotifications.add(key);
+
+            Bitmap appIcon = extractIcon(statusBarNotification, notification);
+
+            if (appIcon != null && !appDatabase.getPrivacy(packageName, AppDatabase.PrivacyOptions.BLOCK_IMAGES)) {
+                attachIcon(np, appIcon);
             }
         }
 
@@ -297,12 +307,12 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
         return Objects.requireNonNull(NotificationCompat.getExtras(notification));
     }
 
-    private void attachIcon(NetworkPacket np, Bitmap appIcon) {
+    private void attachIcon(org.cosmic.cosmicconnect.NetworkPacket np, Bitmap appIcon) {
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         appIcon.compress(Bitmap.CompressFormat.PNG, 90, outStream);
         byte[] bitmapData = outStream.toByteArray();
 
-        np.setPayload(new NetworkPacket.Payload(bitmapData));
+        np.setPayload(new org.cosmic.cosmicconnect.NetworkPacket.Payload(bitmapData));
         np.set("payloadHash", getChecksum(bitmapData));
     }
 
@@ -527,7 +537,7 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
     }
 
     @Override
-    public boolean onPacketReceived(final NetworkPacket np) {
+    public boolean onPacketReceived(final org.cosmic.cosmicconnect.NetworkPacket np) {
 
         if (np.getType().equals(PACKET_TYPE_NOTIFICATION_ACTION)) {
 
@@ -623,6 +633,22 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
             hexChars[j * 2 + 1] = hexArray[v & 0x0F];
         }
         return new String(hexChars).toLowerCase();
+    }
+
+    /**
+     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
+     */
+    private org.cosmic.cosmicconnect.NetworkPacket convertToLegacyPacket(NetworkPacket ffi) {
+        org.cosmic.cosmicconnect.NetworkPacket legacy =
+            new org.cosmic.cosmicconnect.NetworkPacket(ffi.getType());
+
+        // Copy all body fields
+        Map<String, Object> body = ffi.getBody();
+        for (Map.Entry<String, Object> entry : body.entrySet()) {
+            legacy.set(entry.getKey(), entry.getValue());
+        }
+
+        return legacy;
     }
 
     public static String getPrefKey(){ return PREF_KEY;}

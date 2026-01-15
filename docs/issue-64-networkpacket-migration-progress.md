@@ -12,9 +12,9 @@ Migrating all plugins from mutable `NetworkPacket` to immutable `Core.NetworkPac
 
 ## Progress Overview
 
-**Completed**: 17 plugins ✅
-**Remaining**: ~8 plugins
-**Total LOC Migrated**: ~3,840 lines
+**Completed**: 18 plugins ✅
+**Remaining**: 2 plugins (SftpPlugin, SharePlugin)
+**Total LOC Migrated**: ~4,469 lines
 
 ---
 
@@ -659,6 +659,63 @@ private fun callBroadcastReceived(state: Int, phoneNumber: String?) {
 
 ---
 
+### ✅ NotificationsPlugin (629 lines)
+**Date**: 2025-01-15
+**Pattern**: Complex Optional Fields + Payload Handling (Java)
+**File**: `src/org/cosmic/cosmicconnect/Plugins/NotificationsPlugin/NotificationsPlugin.java`
+
+**Changes**:
+- Imported `Core.NetworkPacket` (removed old NetworkPacket import)
+- Updated `onPacketReceived()` signature to use fully qualified legacy NetworkPacket
+- Migrated 2 packet-creation methods:
+  - `onNotificationRemoved()` → creates cancel packet (simple: id + isCancel)
+  - `sendNotification()` → creates notification packet with many optional fields and payload
+- Updated `attachIcon()` signature to use fully qualified legacy NetworkPacket
+- Created `convertToLegacyPacket()` helper method
+
+**Pattern Demonstrated (Complex Optional Fields + Payload)**:
+```java
+// Build packet body with required and optional fields
+Map<String, Object> body = new HashMap<>();
+body.put("id", key);
+body.put("isClearable", statusBarNotification.isClearable());
+body.put("appName", StringUtils.defaultString(appName, packageName));
+body.put("time", Long.toString(statusBarNotification.getPostTime()));
+body.put("silent", isPreexisting);
+body.put("actions", extractActions(notification, key));
+
+// Add optional content fields conditionally
+if (!appDatabase.getPrivacy(packageName, AppDatabase.PrivacyOptions.BLOCK_CONTENTS)) {
+    RepliableNotification rn = extractRepliableNotification(statusBarNotification);
+    if (rn != null) {
+        body.put("requestReplyId", rn.id);
+        pendingIntents.put(rn.id, rn);
+    }
+
+    String title = conversation.first;
+    if (title != null) {
+        body.put("title", title);
+    }
+}
+
+// Create immutable packet
+NetworkPacket packet = NetworkPacket.create(PACKET_TYPE_NOTIFICATION, body);
+
+// Convert to legacy packet
+org.cosmic.cosmicconnect.NetworkPacket np = convertToLegacyPacket(packet);
+
+// Add payload to legacy packet after creation
+if (!isUpdate && appIcon != null) {
+    attachIcon(np, appIcon);  // Sets payload on legacy packet
+}
+
+getDevice().sendPacket(np);
+```
+
+**Key Learning**: For Java plugins with many optional fields, build the body in a HashMap and add fields conditionally. For payload handling, create the immutable packet first, convert to legacy, then set the payload on the legacy packet before sending. Use fully qualified class names (`org.cosmic.cosmicconnect.NetworkPacket`) for legacy packet references in Java files.
+
+---
+
 ## Remaining Plugins to Migrate
 
 ### Simple Plugins (Similar to FindRemoteDevice)
@@ -678,7 +735,7 @@ private fun callBroadcastReceived(state: Int, phoneNumber: String?) {
 
 ### Complex Plugins (Need Analysis)
 - [ ] SharePlugin (5 files, file transfers)
-- [ ] NotificationsPlugin (complex state)
+- [x] NotificationsPlugin ✅
 - [x] TelephonyPlugin ✅
 - [x] SMSPlugin ✅
 - [x] RunCommandPlugin ✅

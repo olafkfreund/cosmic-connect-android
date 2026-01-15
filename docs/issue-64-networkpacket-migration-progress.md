@@ -12,9 +12,9 @@ Migrating all plugins from mutable `NetworkPacket` to immutable `Core.NetworkPac
 
 ## Progress Overview
 
-**Completed**: 9 plugins ✅
-**Remaining**: ~16 plugins
-**Total LOC Migrated**: ~1,488 lines
+**Completed**: 10 plugins ✅
+**Remaining**: ~15 plugins
+**Total LOC Migrated**: ~1,999 lines
 
 ---
 
@@ -333,6 +333,66 @@ public boolean onPacketReceived(@NonNull org.cosmic.cosmicconnect.NetworkPacket 
 
 ---
 
+### ✅ MprisPlugin (511 lines)
+**Date**: 2025-01-15
+**Pattern**: Helper Methods for Overloaded Functions (Kotlin)
+**File**: `src/org/cosmic/cosmicconnect/Plugins/MprisPlugin/MprisPlugin.kt`
+
+**Changes**:
+- Imported `Core.NetworkPacket` and added `LegacyNetworkPacket` type alias
+- Changed `onPacketReceived()` signature to use `LegacyNetworkPacket`
+- Refactored 3 overloaded `sendCommand()` methods to use helper
+- Migrated 5 packet-sending methods:
+  - `sendCommand(String)`, `sendCommand(Boolean)`, `sendCommand(Int)` → use `sendMprisPacket()`
+  - `requestPlayerList()` → sends player list request
+  - `requestPlayerStatus()` → sends player status request
+  - `askTransferAlbumArt()` → sends album art transfer request
+- Created `sendMprisPacket()` helper
+- Created `convertToLegacyPacket()` helper
+
+**Pattern Demonstrated (Overloaded Methods)**:
+```kotlin
+// Before: 3 overloaded methods with duplication
+private fun sendCommand(player: String, method: String, value: String) {
+    val np = NetworkPacket(PACKET_TYPE_MPRIS_REQUEST)
+    np["player"] = player
+    np[method] = value
+    device.sendPacket(np)
+}
+// ... 2 more similar overloads for Boolean and Int
+
+// After: All use common helper
+private fun sendCommand(player: String, method: String, value: String) {
+    sendMprisPacket(mapOf(
+        "player" to player,
+        method to value
+    ))
+}
+
+private fun sendCommand(player: String, method: String, value: Boolean) {
+    sendMprisPacket(mapOf(
+        "player" to player,
+        method to value
+    ))
+}
+
+private fun sendCommand(player: String, method: String, value: Int) {
+    sendMprisPacket(mapOf(
+        "player" to player,
+        method to value
+    ))
+}
+
+private fun sendMprisPacket(body: Map<String, Any>) {
+    val packet = NetworkPacket.create(PACKET_TYPE_MPRIS_REQUEST, body)
+    device.sendPacket(convertToLegacyPacket(packet))
+}
+```
+
+**Key Learning**: Overloaded methods work perfectly with immutable packets - Kotlin's type inference handles different value types in the map.
+
+---
+
 ## Remaining Plugins to Migrate
 
 ### Simple Plugins (Similar to FindRemoteDevice)
@@ -344,7 +404,7 @@ public boolean onPacketReceived(@NonNull org.cosmic.cosmicconnect.NetworkPacket 
 - [x] ClipboardPlugin ✅
 - [x] MousePadPlugin ✅
 - [x] MouseReceiverPlugin ✅
-- [ ] MprisPlugin
+- [x] MprisPlugin ✅
 - [ ] MprisReceiverPlugin
 - [ ] SftpPlugin
 - [ ] ReceiveNotificationsPlugin

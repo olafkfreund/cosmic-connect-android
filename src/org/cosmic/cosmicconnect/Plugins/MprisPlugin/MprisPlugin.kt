@@ -22,7 +22,8 @@ import androidx.preference.PreferenceManager
 import org.cosmic.cosmicconnect.Helpers.NotificationHelper
 import org.cosmic.cosmicconnect.Helpers.ThreadHelper
 import org.cosmic.cosmicconnect.Helpers.VideoUrlsHelper
-import org.cosmic.cosmicconnect.NetworkPacket
+import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.MprisPlugin.AlbumArtCache.deregisterPlugin
 import org.cosmic.cosmicconnect.Plugins.MprisPlugin.AlbumArtCache.getAlbumArt
 import org.cosmic.cosmicconnect.Plugins.MprisPlugin.AlbumArtCache.initializeDiskCache
@@ -230,30 +231,27 @@ class MprisPlugin : Plugin() {
     }
 
     private fun sendCommand(player: String, method: String, value: String) {
-        val np = NetworkPacket(PACKET_TYPE_MPRIS_REQUEST).apply {
-            this["player"] = player
-            this[method] = value
-        }
-        device.sendPacket(np)
+        sendMprisPacket(mapOf(
+            "player" to player,
+            method to value
+        ))
     }
 
     private fun sendCommand(player: String, method: String, value: Boolean) {
-        val np = NetworkPacket(PACKET_TYPE_MPRIS_REQUEST).apply {
-            this["player"] = player
-            this[method] = value
-        }
-        device.sendPacket(np)
+        sendMprisPacket(mapOf(
+            "player" to player,
+            method to value
+        ))
     }
 
     private fun sendCommand(player: String, method: String, value: Int) {
-        val np = NetworkPacket(PACKET_TYPE_MPRIS_REQUEST).apply {
-            this["player"] = player
-            this[method] = value
-        }
-        device.sendPacket(np)
+        sendMprisPacket(mapOf(
+            "player" to player,
+            method to value
+        ))
     }
 
-    override fun onPacketReceived(np: NetworkPacket): Boolean {
+    override fun onPacketReceived(np: LegacyNetworkPacket): Boolean {
         if (np.getBoolean("transferringAlbumArt", false)) {
             payloadToDiskCache(np.getString("albumArtUrl"), np.payload)
             return true
@@ -457,19 +455,47 @@ class MprisPlugin : Plugin() {
     fun hasPlayer(player: MprisPlayer): Boolean = players.containsValue(player)
 
     private fun requestPlayerList() {
-        val np = NetworkPacket(PACKET_TYPE_MPRIS_REQUEST).apply {
-            this["requestPlayerList"] = true
-        }
-        device.sendPacket(np)
+        sendMprisPacket(mapOf("requestPlayerList" to true))
     }
 
     private fun requestPlayerStatus(player: String) {
-        val np = NetworkPacket(PACKET_TYPE_MPRIS_REQUEST).apply {
-            this["player"] = player
-            this["requestNowPlaying"] = true
-            this["requestVolume"] = true
+        sendMprisPacket(mapOf(
+            "player" to player,
+            "requestNowPlaying" to true,
+            "requestVolume" to true
+        ))
+    }
+
+    /**
+     * Helper to send MPRIS packets
+     */
+    private fun sendMprisPacket(body: Map<String, Any>) {
+        // Create immutable packet
+        val packet = NetworkPacket.create(PACKET_TYPE_MPRIS_REQUEST, body)
+
+        // Convert and send
+        device.sendPacket(convertToLegacyPacket(packet))
+    }
+
+    /**
+     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
+     */
+    private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
+        val legacy = LegacyNetworkPacket(ffi.type)
+
+        // Copy all body fields
+        ffi.body.forEach { (key, value) ->
+            when (value) {
+                is String -> legacy.set(key, value)
+                is Int -> legacy.set(key, value)
+                is Long -> legacy.set(key, value)
+                is Boolean -> legacy.set(key, value)
+                is Double -> legacy.set(key, value)
+                else -> legacy.set(key, value.toString())
+            }
         }
-        device.sendPacket(np)
+
+        return legacy
     }
 
     fun fetchedAlbumArt(url: String) {
@@ -486,10 +512,10 @@ class MprisPlugin : Plugin() {
         val player = getPlayerStatus(playerName) ?: return false
 
         if (player.albumArtUrl == url) {
-            val np = NetworkPacket(PACKET_TYPE_MPRIS_REQUEST)
-            np["player"] = player.playerName
-            np["albumArtUrl"] = url
-            device.sendPacket(np)
+            sendMprisPacket(mapOf(
+                "player" to player.playerName,
+                "albumArtUrl" to url
+            ))
             return true
         }
         return false

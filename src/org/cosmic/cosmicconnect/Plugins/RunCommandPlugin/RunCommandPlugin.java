@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.cosmic.cosmicconnect.NetworkPacket;
+import org.cosmic.cosmicconnect.Core.NetworkPacket;
 import org.cosmic.cosmicconnect.Plugins.Plugin;
 import org.cosmic.cosmicconnect.Plugins.PluginFactory;
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment;
@@ -33,7 +33,9 @@ import org.cosmic.cosmicconnect.R;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import kotlin.Unit;
 
@@ -111,7 +113,7 @@ public class RunCommandPlugin extends Plugin {
     }
 
     @Override
-    public boolean onPacketReceived(@NonNull NetworkPacket np) {
+    public boolean onPacketReceived(@NonNull org.cosmic.cosmicconnect.NetworkPacket np) {
 
         if (np.has("commandList")) {
             commandList.clear();
@@ -177,15 +179,23 @@ public class RunCommandPlugin extends Plugin {
     }
 
     public void runCommand(String cmdKey) {
-        NetworkPacket np = new NetworkPacket(PACKET_TYPE_RUNCOMMAND_REQUEST);
-        np.set("key", cmdKey);
-        getDevice().sendPacket(np);
+        // Create immutable packet
+        Map<String, Object> body = new HashMap<>();
+        body.put("key", cmdKey);
+        NetworkPacket packet = NetworkPacket.create(PACKET_TYPE_RUNCOMMAND_REQUEST, body);
+
+        // Convert and send
+        getDevice().sendPacket(convertToLegacyPacket(packet));
     }
 
     private void requestCommandList() {
-        NetworkPacket np = new NetworkPacket(PACKET_TYPE_RUNCOMMAND_REQUEST);
-        np.set("requestCommandList", true);
-        getDevice().sendPacket(np);
+        // Create immutable packet
+        Map<String, Object> body = new HashMap<>();
+        body.put("requestCommandList", true);
+        NetworkPacket packet = NetworkPacket.create(PACKET_TYPE_RUNCOMMAND_REQUEST, body);
+
+        // Convert and send
+        getDevice().sendPacket(convertToLegacyPacket(packet));
     }
 
     public boolean canAddCommand() {
@@ -193,9 +203,29 @@ public class RunCommandPlugin extends Plugin {
     }
 
     void sendSetupPacket() {
-        NetworkPacket np = new NetworkPacket(RunCommandPlugin.PACKET_TYPE_RUNCOMMAND_REQUEST);
-        np.set("setup", true);
-        getDevice().sendPacket(np);
+        // Create immutable packet
+        Map<String, Object> body = new HashMap<>();
+        body.put("setup", true);
+        NetworkPacket packet = NetworkPacket.create(RunCommandPlugin.PACKET_TYPE_RUNCOMMAND_REQUEST, body);
+
+        // Convert and send
+        getDevice().sendPacket(convertToLegacyPacket(packet));
+    }
+
+    /**
+     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
+     */
+    private org.cosmic.cosmicconnect.NetworkPacket convertToLegacyPacket(NetworkPacket ffi) {
+        org.cosmic.cosmicconnect.NetworkPacket legacy =
+            new org.cosmic.cosmicconnect.NetworkPacket(ffi.getType());
+
+        // Copy all body fields
+        Map<String, Object> body = ffi.getBody();
+        for (Map.Entry<String, Object> entry : body.entrySet()) {
+            legacy.set(entry.getKey(), entry.getValue());
+        }
+
+        return legacy;
     }
 
 }

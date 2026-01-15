@@ -30,7 +30,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.cosmic.cosmicconnect.Helpers.DeviceHelper;
 import org.cosmic.cosmicconnect.Helpers.LifecycleHelper;
 import org.cosmic.cosmicconnect.Helpers.NotificationHelper;
-import org.cosmic.cosmicconnect.NetworkPacket;
 import org.cosmic.cosmicconnect.Plugins.Plugin;
 import org.cosmic.cosmicconnect.Plugins.PluginFactory;
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment;
@@ -114,7 +113,7 @@ public class FindMyPhonePlugin extends Plugin {
     }
 
     @Override
-    public boolean onPacketReceived(@NonNull NetworkPacket np) {
+    public boolean onPacketReceived(@NonNull org.cosmic.cosmicconnect.NetworkPacket np) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q || LifecycleHelper.isInForeground()) {
             Intent intent = new Intent(context, FindMyPhoneActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

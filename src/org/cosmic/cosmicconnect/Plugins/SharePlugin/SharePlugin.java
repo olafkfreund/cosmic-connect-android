@@ -37,7 +37,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.cosmic.cosmicconnect.Helpers.FilesHelper;
 import org.cosmic.cosmicconnect.Helpers.IntentHelper;
-import org.cosmic.cosmicconnect.NetworkPacket;
+import org.cosmic.cosmicconnect.Core.NetworkPacket;
 import org.cosmic.cosmicconnect.Plugins.Plugin;
 import org.cosmic.cosmicconnect.Plugins.PluginFactory;
 import org.cosmic.cosmicconnect.UserInterface.MainActivity;
@@ -51,7 +51,9 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import kotlin.Unit;
@@ -335,9 +337,14 @@ public class SharePlugin extends Plugin {
                 } catch (MalformedURLException e) {
                     isUrl = false;
                 }
-                NetworkPacket np = new NetworkPacket(SharePlugin.PACKET_TYPE_SHARE_REQUEST);
-                np.set(isUrl ? "url" : "text", text);
-                device.sendPacket(np);
+
+                // Create immutable packet
+                Map<String, Object> body = new HashMap<>();
+                body.put(isUrl ? "url" : "text", text);
+                NetworkPacket packet = NetworkPacket.create(SharePlugin.PACKET_TYPE_SHARE_REQUEST, body);
+
+                // Convert and send
+                device.sendPacket(convertToLegacyPacket(packet));
                 return;
             }
         }
@@ -427,5 +434,21 @@ public class SharePlugin extends Plugin {
             mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         }
         mSharedPrefs.edit().remove(KEY_UNREACHABLE_URL_LIST + deviceId).apply();
+    }
+
+    /**
+     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
+     */
+    private org.cosmic.cosmicconnect.NetworkPacket convertToLegacyPacket(NetworkPacket ffi) {
+        org.cosmic.cosmicconnect.NetworkPacket legacy =
+            new org.cosmic.cosmicconnect.NetworkPacket(ffi.getType());
+
+        // Copy all body fields
+        Map<String, Object> body = ffi.getBody();
+        for (Map.Entry<String, Object> entry : body.entrySet()) {
+            legacy.set(entry.getKey(), entry.getValue());
+        }
+
+        return legacy;
     }
 }

@@ -18,7 +18,9 @@ import org.cosmic.cosmicconnect.async.BackgroundJob;
 import org.cosmic.cosmicconnect.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A type of {@link BackgroundJob} that sends Files to another device.
@@ -184,15 +186,22 @@ public class CompositeUploadFileJob extends BackgroundJob<Device, Void> {
      * Use this to send metadata ahead of all the other {@link #networkPacketList packets}.
      */
     private void sendUpdatePacket() {
-        NetworkPacket np = new NetworkPacket(SharePlugin.PACKET_TYPE_SHARE_REQUEST_UPDATE);
+        // Build packet body
+        Map<String, Object> body = new HashMap<>();
 
         synchronized (lock) {
-            np.set("numberOfFiles", totalNumFiles);
-            np.set("totalPayloadSize", totalPayloadSize);
+            body.put("numberOfFiles", totalNumFiles);
+            body.put("totalPayloadSize", totalPayloadSize);
             updatePacketPending = false;
         }
 
-        getDevice().sendPacket(np);
+        // Create immutable packet
+        org.cosmic.cosmicconnect.Core.NetworkPacket packet =
+            org.cosmic.cosmicconnect.Core.NetworkPacket.create(
+                SharePlugin.PACKET_TYPE_SHARE_REQUEST_UPDATE, body);
+
+        // Convert to legacy and send
+        getDevice().sendPacket(convertToLegacyPacket(packet));
     }
 
     @Override
@@ -231,5 +240,20 @@ public class CompositeUploadFileJob extends BackgroundJob<Device, Void> {
         public void onFailure(Throwable e) {
             // Handled in the run() function when sendPacketBlocking returns false
         }
+    }
+
+    /**
+     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
+     */
+    private NetworkPacket convertToLegacyPacket(org.cosmic.cosmicconnect.Core.NetworkPacket ffi) {
+        NetworkPacket legacy = new NetworkPacket(ffi.getType());
+
+        // Copy all body fields
+        Map<String, Object> body = ffi.getBody();
+        for (Map.Entry<String, Object> entry : body.entrySet()) {
+            legacy.set(entry.getKey(), entry.getValue());
+        }
+
+        return legacy;
     }
 }

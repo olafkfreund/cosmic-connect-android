@@ -18,7 +18,8 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.scale
 import org.cosmic.cosmicconnect.Helpers.NotificationHelper
-import org.cosmic.cosmicconnect.NetworkPacket
+import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory.LoadablePlugin
 import org.cosmic.cosmicconnect.UserInterface.MainActivity
@@ -36,13 +37,18 @@ class ReceiveNotificationsPlugin : Plugin() {
 
     override fun onCreate(): Boolean {
         // request all existing notifications
-        val np = NetworkPacket(PACKET_TYPE_NOTIFICATION_REQUEST)
-        np["request"] = true
-        device.sendPacket(np)
+        // Create immutable packet
+        val packet = NetworkPacket.create(
+            PACKET_TYPE_NOTIFICATION_REQUEST,
+            mapOf("request" to true)
+        )
+
+        // Convert and send
+        device.sendPacket(convertToLegacyPacket(packet))
         return true
     }
 
-    override fun onPacketReceived(np: NetworkPacket): Boolean {
+    override fun onPacketReceived(np: LegacyNetworkPacket): Boolean {
         if ("ticker" !in np || "appName" !in np || "id" !in np) {
             Log.e("NotificationsPlugin", "Received notification packet lacks properties")
             return true
@@ -105,6 +111,27 @@ class ReceiveNotificationsPlugin : Plugin() {
     }
 
     override val permissionExplanation: Int = R.string.receive_notifications_permission_explanation
+
+    /**
+     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
+     */
+    private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
+        val legacy = LegacyNetworkPacket(ffi.type)
+
+        // Copy all body fields
+        ffi.body.forEach { (key, value) ->
+            when (value) {
+                is String -> legacy.set(key, value)
+                is Int -> legacy.set(key, value)
+                is Long -> legacy.set(key, value)
+                is Boolean -> legacy.set(key, value)
+                is Double -> legacy.set(key, value)
+                else -> legacy.set(key, value.toString())
+            }
+        }
+
+        return legacy
+    }
 
     companion object {
         private const val PACKET_TYPE_NOTIFICATION = "cosmicconnect.notification"

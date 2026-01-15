@@ -12,9 +12,9 @@ Migrating all plugins from mutable `NetworkPacket` to immutable `Core.NetworkPac
 
 ## Progress Overview
 
-**Completed**: 12 plugins ✅
-**Remaining**: ~13 plugins
-**Total LOC Migrated**: ~2,428 lines
+**Completed**: 13 plugins ✅
+**Remaining**: ~12 plugins
+**Total LOC Migrated**: ~2,641 lines
 
 ---
 
@@ -472,6 +472,39 @@ device.sendPacket(convertToLegacyPacket(packet))
 
 ---
 
+### ✅ ContactsPlugin (213 lines)
+**Date**: 2025-01-15
+**Pattern**: Dynamic Field Building (Kotlin)
+**File**: `src/org/cosmic/cosmicconnect/Plugins/ContactsPlugin/ContactsPlugin.kt`
+
+**Changes**:
+- Imported `Core.NetworkPacket` and added `LegacyNetworkPacket` type alias
+- Changed `onPacketReceived()` and handler method signatures
+- Migrated 2 packet-sending methods:
+  - `handleRequestAllUIDsTimestamps()` → sends UIDs with timestamps
+  - `handleRequestVCardsByUIDs()` → sends VCards for specific UIDs
+- Created `convertToLegacyPacket()` helper
+
+**Pattern Demonstrated (Dynamic Fields)**:
+```kotlin
+// Build packet body dynamically
+val body = mutableMapOf<String, Any>()
+val uIDsAsString = mutableListOf<String>()
+for ((contactID: uID, timestamp: Long) in uIDsToTimestamps) {
+    body[contactID.toString()] = timestamp.toString()
+    uIDsAsString.add(contactID.toString())
+}
+body[PACKET_UIDS_KEY] = uIDsAsString
+
+// Create immutable packet
+val packet = NetworkPacket.create(PACKET_TYPE, body.toMap())
+device.sendPacket(convertToLegacyPacket(packet))
+```
+
+**Key Learning**: For packets with dynamic fields (like contact lists), build body in mutableMap, then convert to immutable Map when creating packet. Works well for loops that add variable number of fields.
+
+---
+
 ## Remaining Plugins to Migrate
 
 ### Simple Plugins (Similar to FindRemoteDevice)
@@ -486,6 +519,7 @@ device.sendPacket(convertToLegacyPacket(packet))
 - [x] MprisPlugin ✅
 - [x] MprisReceiverPlugin ✅
 - [x] ReceiveNotificationsPlugin ✅
+- [x] ContactsPlugin ✅
 - [ ] SftpPlugin
 
 ### Complex Plugins (Need Analysis)
@@ -494,7 +528,6 @@ device.sendPacket(convertToLegacyPacket(packet))
 - [ ] SMSPlugin (multiple packet types)
 - [ ] TelephonyPlugin (call handling)
 - [ ] RunCommandPlugin (command storage)
-- [ ] ContactsPlugin
 - [ ] FindMyPhonePlugin (240 lines, complex notification logic)
 
 **Note**: BatteryPlugin and PingPlugin already have full FFI implementations (BatteryPluginFFI, PingPluginFFI).

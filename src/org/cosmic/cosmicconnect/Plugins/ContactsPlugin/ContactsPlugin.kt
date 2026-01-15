@@ -16,7 +16,8 @@ import org.cosmic.cosmicconnect.Helpers.ContactsHelper
 import org.cosmic.cosmicconnect.Helpers.ContactsHelper.ContactNotFoundException
 import org.cosmic.cosmicconnect.Helpers.ContactsHelper.VCardBuilder
 import org.cosmic.cosmicconnect.Helpers.ContactsHelper.uID
-import org.cosmic.cosmicconnect.NetworkPacket
+import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory.LoadablePlugin
 import org.cosmic.cosmicconnect.UserInterface.AlertDialogFragment
@@ -107,23 +108,28 @@ class ContactsPlugin : Plugin() {
      * @param np The packet containing the request
      * @return true if successfully handled, false otherwise
      */
-    private fun handleRequestAllUIDsTimestamps(@Suppress("unused") np: NetworkPacket): Boolean {
+    private fun handleRequestAllUIDsTimestamps(@Suppress("unused") np: LegacyNetworkPacket): Boolean {
         val uIDsToTimestamps: Map<uID, Long> = ContactsHelper.getAllContactTimestamps(context)
-        val reply = NetworkPacket(PACKET_TYPE_CONTACTS_RESPONSE_UIDS_TIMESTAMPS).apply {
-            val uIDsAsString = mutableListOf<String>()
-            for ((contactID: uID, timestamp: Long) in uIDsToTimestamps) {
-                set(contactID.toString(), timestamp.toString())
-                uIDsAsString.add(contactID.toString())
-            }
-            set(PACKET_UIDS_KEY, uIDsAsString)
-        }
 
-        device.sendPacket(reply)
+        // Build packet body
+        val body = mutableMapOf<String, Any>()
+        val uIDsAsString = mutableListOf<String>()
+        for ((contactID: uID, timestamp: Long) in uIDsToTimestamps) {
+            body[contactID.toString()] = timestamp.toString()
+            uIDsAsString.add(contactID.toString())
+        }
+        body[PACKET_UIDS_KEY] = uIDsAsString
+
+        // Create immutable packet
+        val packet = NetworkPacket.create(PACKET_TYPE_CONTACTS_RESPONSE_UIDS_TIMESTAMPS, body.toMap())
+
+        // Convert and send
+        device.sendPacket(convertToLegacyPacket(packet))
 
         return true
     }
 
-    private fun handleRequestVCardsByUIDs(np: NetworkPacket): Boolean {
+    private fun handleRequestVCardsByUIDs(np: LegacyNetworkPacket): Boolean {
         if (PACKET_UIDS_KEY !in np) {
             Log.e("ContactsPlugin", "handleRequestNamesByUIDs received a malformed packet with no uids key")
             return false
@@ -137,35 +143,60 @@ class ContactsPlugin : Plugin() {
 
         val uIDsToVCards: Map<uID, VCardBuilder> = ContactsHelper.getVCardsForContactIDs(context, storedUIDs)
 
-        val reply = NetworkPacket(PACKET_TYPE_CONTACTS_RESPONSE_VCARDS).apply {
-            // ContactsHelper.getVCardsForContactIDs(..) is allowed to reply without some of the requested uIDs if they were not in the database, so update our list
-            val uIDsAsStrings = mutableListOf<String>()
-            for ((uID: uID, vcard: VCardBuilder) in uIDsToVCards) {
-                try {
-                    val vcardWithMetadata = addVCardMetadata(vcard, uID)
-                    // Store this as a valid uID
-                    uIDsAsStrings.add(uID.toString())
-                    // Add the uid -> vcard pairing to the packet
-                    set(uID.toString(), vcardWithMetadata.toString())
-                } catch (e: ContactNotFoundException) {
-                    Log.e("ContactsPlugin", "handleRequestVCardsByUIDs failed to find contact with uID $uID")
-                }
+        // Build packet body
+        val body = mutableMapOf<String, Any>()
+        val uIDsAsStrings = mutableListOf<String>()
+        // ContactsHelper.getVCardsForContactIDs(..) is allowed to reply without some of the requested uIDs if they were not in the database, so update our list
+        for ((uID: uID, vcard: VCardBuilder) in uIDsToVCards) {
+            try {
+                val vcardWithMetadata = addVCardMetadata(vcard, uID)
+                // Store this as a valid uID
+                uIDsAsStrings.add(uID.toString())
+                // Add the uid -> vcard pairing to the packet
+                body[uID.toString()] = vcardWithMetadata.toString()
+            } catch (e: ContactNotFoundException) {
+                Log.e("ContactsPlugin", "handleRequestVCardsByUIDs failed to find contact with uID $uID")
             }
-            set(PACKET_UIDS_KEY, uIDsAsStrings)
         }
+        body[PACKET_UIDS_KEY] = uIDsAsStrings
 
-        device.sendPacket(reply)
+        // Create immutable packet
+        val packet = NetworkPacket.create(PACKET_TYPE_CONTACTS_RESPONSE_VCARDS, body.toMap())
+
+        // Convert and send
+        device.sendPacket(convertToLegacyPacket(packet))
 
         return true
     }
 
-    override fun onPacketReceived(np: NetworkPacket): Boolean = when (np.type) {
+    override fun onPacketReceived(np: LegacyNetworkPacket): Boolean = when (np.type) {
         PACKET_TYPE_CONTACTS_REQUEST_ALL_UIDS_TIMESTAMPS -> this.handleRequestAllUIDsTimestamps(np)
         PACKET_TYPE_CONTACTS_REQUEST_VCARDS_BY_UIDS -> this.handleRequestVCardsByUIDs(np)
         else -> {
             Log.e("ContactsPlugin", "Contacts plugin received an unexpected packet!")
             false
         }
+    }
+
+    /**
+     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
+     */
+    private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
+        val legacy = LegacyNetworkPacket(ffi.type)
+
+        // Copy all body fields
+        ffi.body.forEach { (key, value) ->
+            when (value) {
+                is String -> legacy.set(key, value)
+                is Int -> legacy.set(key, value)
+                is Long -> legacy.set(key, value)
+                is Boolean -> legacy.set(key, value)
+                is Double -> legacy.set(key, value)
+                else -> legacy.set(key, value.toString())
+            }
+        }
+
+        return legacy
     }
 
     companion object {

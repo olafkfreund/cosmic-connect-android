@@ -13,7 +13,8 @@ import android.content.res.Configuration
 import android.util.Log
 import androidx.preference.PreferenceManager
 import org.cosmic.cosmicconnect.Helpers.DeviceHelper
-import org.cosmic.cosmicconnect.NetworkPacket
+import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory
 import org.cosmic.cosmicconnect.Plugins.PresenterPlugin.PresenterActivity
@@ -41,41 +42,73 @@ class DigitizerPlugin : Plugin() {
             parentActivity.startActivity(intent)
         })
 
-    override fun onPacketReceived(np: NetworkPacket): Boolean {
+    override fun onPacketReceived(np: LegacyNetworkPacket): Boolean {
         Log.e(TAG, "The drawing tablet plugin should not be able to receive any packets!")
         return false
     }
 
     fun startSession(width: Int, height: Int, resolutionX: Int, resolutionY: Int) {
-        val np = NetworkPacket(PACKET_TYPE_DIGITIZER_SESSION).apply {
-            set("action", "start")
-            set("width", width)
-            set("height", height)
-            set("resolutionX", resolutionX)
-            set("resolutionY", resolutionY)
-        }
-        device.sendPacket(np)
+        // Create immutable packet
+        val packet = NetworkPacket.create(PACKET_TYPE_DIGITIZER_SESSION, mapOf(
+            "action" to "start",
+            "width" to width,
+            "height" to height,
+            "resolutionX" to resolutionX,
+            "resolutionY" to resolutionY
+        ))
+
+        // Convert and send
+        device.sendPacket(convertToLegacyPacket(packet))
     }
 
     fun endSession() {
-        val np = NetworkPacket(PACKET_TYPE_DIGITIZER_SESSION).apply {
-            set("action", "end")
-        }
-        device.sendPacket(np)
+        // Create immutable packet
+        val packet = NetworkPacket.create(PACKET_TYPE_DIGITIZER_SESSION, mapOf(
+            "action" to "end"
+        ))
+
+        // Convert and send
+        device.sendPacket(convertToLegacyPacket(packet))
     }
 
     fun reportEvent(event: ToolEvent) {
         Log.d(TAG, "reportEvent: $event")
 
-        val np = NetworkPacket(PACKET_TYPE_DIGITIZER).also { packet ->
-            event.active?.let { packet["active"] = it }
-            event.touching?.let { packet["touching"] = it }
-            event.tool?.let { packet["tool"] = it.name }
-            event.x?.let { packet["x"] = it }
-            event.y?.let { packet["y"] = it }
-            event.pressure?.let { packet["pressure"] = it }
+        // Build body with optional fields
+        val body = mutableMapOf<String, Any>()
+        event.active?.let { body["active"] = it }
+        event.touching?.let { body["touching"] = it }
+        event.tool?.let { body["tool"] = it.name }
+        event.x?.let { body["x"] = it }
+        event.y?.let { body["y"] = it }
+        event.pressure?.let { body["pressure"] = it }
+
+        // Create immutable packet
+        val packet = NetworkPacket.create(PACKET_TYPE_DIGITIZER, body.toMap())
+
+        // Convert and send
+        device.sendPacket(convertToLegacyPacket(packet))
+    }
+
+    /**
+     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
+     */
+    private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
+        val legacy = LegacyNetworkPacket(ffi.type)
+
+        // Copy all body fields
+        ffi.body.forEach { (key, value) ->
+            when (value) {
+                is String -> legacy.set(key, value)
+                is Int -> legacy.set(key, value)
+                is Long -> legacy.set(key, value)
+                is Boolean -> legacy.set(key, value)
+                is Double -> legacy.set(key, value)
+                else -> legacy.set(key, value.toString())
+            }
         }
-        device.sendPacket(np)
+
+        return legacy
     }
 
     override fun hasSettings(): Boolean = true

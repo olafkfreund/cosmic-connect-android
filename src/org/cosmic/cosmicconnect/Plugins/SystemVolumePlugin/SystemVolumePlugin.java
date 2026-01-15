@@ -13,13 +13,15 @@ import androidx.annotation.NonNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.cosmic.cosmicconnect.NetworkPacket;
+import org.cosmic.cosmicconnect.Core.NetworkPacket;
 import org.cosmic.cosmicconnect.Plugins.Plugin;
 import org.cosmic.cosmicconnect.Plugins.PluginFactory;
 import org.cosmic.cosmicconnect.R;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @PluginFactory.LoadablePlugin
@@ -51,7 +53,7 @@ public class SystemVolumePlugin extends Plugin {
     }
 
     @Override
-    public boolean onPacketReceived(@NonNull NetworkPacket np) {
+    public boolean onPacketReceived(@NonNull org.cosmic.cosmicconnect.NetworkPacket np) {
 
         if (np.has("sinkList")) {
             sinks.clear();
@@ -92,30 +94,62 @@ public class SystemVolumePlugin extends Plugin {
     }
 
     void sendVolume(String name, int volume) {
-        NetworkPacket np = new NetworkPacket(PACKET_TYPE_SYSTEMVOLUME_REQUEST);
-        np.set("volume", volume);
-        np.set("name", name);
-        getDevice().sendPacket(np);
+        // Create immutable packet
+        Map<String, Object> body = new HashMap<>();
+        body.put("volume", volume);
+        body.put("name", name);
+        NetworkPacket packet = NetworkPacket.create(PACKET_TYPE_SYSTEMVOLUME_REQUEST, body);
+
+        // Convert and send
+        getDevice().sendPacket(convertToLegacyPacket(packet));
     }
 
     void sendMute(String name, boolean mute) {
-        NetworkPacket np = new NetworkPacket(PACKET_TYPE_SYSTEMVOLUME_REQUEST);
-        np.set("muted", mute);
-        np.set("name", name);
-        getDevice().sendPacket(np);
+        // Create immutable packet
+        Map<String, Object> body = new HashMap<>();
+        body.put("muted", mute);
+        body.put("name", name);
+        NetworkPacket packet = NetworkPacket.create(PACKET_TYPE_SYSTEMVOLUME_REQUEST, body);
+
+        // Convert and send
+        getDevice().sendPacket(convertToLegacyPacket(packet));
     }
 
     void sendEnable(String name) {
-        NetworkPacket np = new NetworkPacket(PACKET_TYPE_SYSTEMVOLUME_REQUEST);
-        np.set("enabled", true);
-        np.set("name", name);
-        getDevice().sendPacket(np);
+        // Create immutable packet
+        Map<String, Object> body = new HashMap<>();
+        body.put("enabled", true);
+        body.put("name", name);
+        NetworkPacket packet = NetworkPacket.create(PACKET_TYPE_SYSTEMVOLUME_REQUEST, body);
+
+        // Convert and send
+        getDevice().sendPacket(convertToLegacyPacket(packet));
     }
 
     void requestSinkList() {
-        NetworkPacket np = new NetworkPacket(PACKET_TYPE_SYSTEMVOLUME_REQUEST);
-        np.set("requestSinks", true);
-        getDevice().sendPacket(np);
+        // Create immutable packet
+        Map<String, Object> body = new HashMap<>();
+        body.put("requestSinks", true);
+        NetworkPacket packet = NetworkPacket.create(PACKET_TYPE_SYSTEMVOLUME_REQUEST, body);
+
+        // Convert and send
+        getDevice().sendPacket(convertToLegacyPacket(packet));
+    }
+
+    /**
+     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
+     */
+    private org.cosmic.cosmicconnect.NetworkPacket convertToLegacyPacket(NetworkPacket ffi) {
+        org.cosmic.cosmicconnect.NetworkPacket legacy =
+            new org.cosmic.cosmicconnect.NetworkPacket(ffi.getType());
+
+        // Copy all body fields
+        Map<String, Object> body = ffi.getBody();
+        for (Map.Entry<String, Object> entry : body.entrySet()) {
+            legacy.set(entry.getKey(), entry.getValue());
+        }
+
+        return legacy;
     }
 
     @Override

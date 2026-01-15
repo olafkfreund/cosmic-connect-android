@@ -26,7 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.core.util.Pair;
 import androidx.fragment.app.DialogFragment;
 
-import org.cosmic.cosmicconnect.NetworkPacket;
+import org.cosmic.cosmicconnect.Core.NetworkPacket;
 import org.cosmic.cosmicconnect.Plugins.Plugin;
 import org.cosmic.cosmicconnect.Plugins.PluginFactory;
 import org.cosmic.cosmicconnect.UserInterface.MainActivity;
@@ -35,7 +35,9 @@ import org.cosmic.cosmicconnect.UserInterface.StartActivityAlertDialogFragment;
 import org.cosmic.cosmicconnect.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 
 @PluginFactory.LoadablePlugin
@@ -328,7 +330,7 @@ public class RemoteKeyboardPlugin extends Plugin implements SharedPreferences.On
         return true;
     }
 
-    private boolean handleEvent(NetworkPacket np) {
+    private boolean handleEvent(org.cosmic.cosmicconnect.NetworkPacket np) {
         if (np.has("specialKey") && isValidSpecialKey(np.getInt("specialKey")))
             return handleSpecialKey(np.getInt("specialKey"), np.getBoolean("shift"),
                     np.getBoolean("ctrl"), np.getBoolean("alt"));
@@ -344,7 +346,7 @@ public class RemoteKeyboardPlugin extends Plugin implements SharedPreferences.On
         Mouse,
     }
 
-    public static MousePadPacketType getMousePadPacketType(NetworkPacket np) {
+    public static MousePadPacketType getMousePadPacketType(org.cosmic.cosmicconnect.NetworkPacket np) {
         if (np.has("key") || np.has("specialKey")) {
             return MousePadPacketType.Keyboard;
         } else {
@@ -353,7 +355,7 @@ public class RemoteKeyboardPlugin extends Plugin implements SharedPreferences.On
     }
 
     @Override
-    public boolean onPacketReceived(@NonNull NetworkPacket np) {
+    public boolean onPacketReceived(@NonNull org.cosmic.cosmicconnect.NetworkPacket np) {
 
         if (!np.getType().equals(PACKET_TYPE_MOUSEPAD_REQUEST)) {
             Log.e("RemoteKeyboardPlugin", "Invalid packet type for RemoteKeyboardPlugin: "+np.getType());
@@ -381,18 +383,24 @@ public class RemoteKeyboardPlugin extends Plugin implements SharedPreferences.On
         }
 
         if (np.getBoolean("sendAck")) {
-            NetworkPacket reply = new NetworkPacket(PACKET_TYPE_MOUSEPAD_ECHO);
-            reply.set("key", np.getString("key"));
+            // Build reply with optional fields
+            Map<String, Object> body = new HashMap<>();
+            body.put("key", np.getString("key"));
             if (np.has("specialKey"))
-                reply.set("specialKey", np.getInt("specialKey"));
+                body.put("specialKey", np.getInt("specialKey"));
             if (np.has("shift"))
-                reply.set("shift", np.getBoolean("shift"));
+                body.put("shift", np.getBoolean("shift"));
             if (np.has("ctrl"))
-                reply.set("ctrl", np.getBoolean("ctrl"));
+                body.put("ctrl", np.getBoolean("ctrl"));
             if (np.has("alt"))
-                reply.set("alt", np.getBoolean("alt"));
-            reply.set("isAck", true);
-            getDevice().sendPacket(reply);
+                body.put("alt", np.getBoolean("alt"));
+            body.put("isAck", true);
+
+            // Create immutable packet
+            NetworkPacket reply = NetworkPacket.create(PACKET_TYPE_MOUSEPAD_ECHO, body);
+
+            // Convert and send
+            getDevice().sendPacket(convertToLegacyPacket(reply));
         }
 
         return true;
@@ -400,9 +408,30 @@ public class RemoteKeyboardPlugin extends Plugin implements SharedPreferences.On
 
     public void notifyKeyboardState(boolean state) {
         Log.d("RemoteKeyboardPlugin", "Keyboardstate changed to " + state);
-        NetworkPacket np = new NetworkPacket(PACKET_TYPE_MOUSEPAD_KEYBOARDSTATE);
-        np.set("state", state);
-        getDevice().sendPacket(np);
+
+        // Create immutable packet
+        Map<String, Object> body = new HashMap<>();
+        body.put("state", state);
+        NetworkPacket packet = NetworkPacket.create(PACKET_TYPE_MOUSEPAD_KEYBOARDSTATE, body);
+
+        // Convert and send
+        getDevice().sendPacket(convertToLegacyPacket(packet));
+    }
+
+    /**
+     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
+     */
+    private org.cosmic.cosmicconnect.NetworkPacket convertToLegacyPacket(NetworkPacket ffi) {
+        org.cosmic.cosmicconnect.NetworkPacket legacy =
+            new org.cosmic.cosmicconnect.NetworkPacket(ffi.getType());
+
+        // Copy all body fields
+        Map<String, Object> body = ffi.getBody();
+        for (Map.Entry<String, Object> entry : body.entrySet()) {
+            legacy.set(entry.getKey(), entry.getValue());
+        }
+
+        return legacy;
     }
 
     String getDeviceId() {

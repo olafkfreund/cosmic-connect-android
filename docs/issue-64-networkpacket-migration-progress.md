@@ -12,9 +12,9 @@ Migrating all plugins from mutable `NetworkPacket` to immutable `Core.NetworkPac
 
 ## Progress Overview
 
-**Completed**: 3 plugins ✅
-**Remaining**: ~22 plugins
-**Total LOC Migrated**: ~215 lines
+**Completed**: 6 plugins ✅
+**Remaining**: ~19 plugins
+**Total LOC Migrated**: ~920 lines
 
 ---
 
@@ -153,12 +153,110 @@ var listener = object : ConnectivityListener.StateCallback {
 
 ---
 
+### ✅ DigitizerPlugin (100 lines)
+**Date**: 2025-01-15
+**Pattern**: Fixed Fields + Optional Fields
+**File**: `src/org/cosmic/cosmicconnect/Plugins/DigitizerPlugin/DigitizerPlugin.kt`
+
+**Changes**:
+- Migrated 3 packet-sending methods
+- `startSession()` - fixed fields (action, width, height, resolutionX, resolutionY)
+- `endSession()` - simple packet (action="end")
+- `reportEvent()` - optional fields pattern (active, touching, tool, x, y, pressure)
+
+**Pattern Demonstrated**:
+```kotlin
+// Optional fields with ?. let
+fun reportEvent(event: ToolEvent) {
+    val body = mutableMapOf<String, Any>()
+    event.active?.let { body["active"] = it }
+    event.touching?.let { body["touching"] = it }
+    event.tool?.let { body["tool"] = it.name }
+    // ... more optional fields
+
+    val packet = NetworkPacket.create(PACKET_TYPE_DIGITIZER, body.toMap())
+    device.sendPacket(convertToLegacyPacket(packet))
+}
+```
+
+---
+
+### ✅ SystemVolumePlugin (147 lines)
+**Date**: 2025-01-15
+**Pattern**: Fixed Fields (Java)
+**File**: `src/org/cosmic/cosmicconnect/Plugins/SystemVolumePlugin/SystemVolumePlugin.java`
+
+**Changes**:
+- Migrated 4 packet-sending methods in Java
+- `sendVolume()`, `sendMute()`, `sendEnable()`, `requestSinkList()`
+- Added conversion helper for Java
+
+**Pattern Demonstrated (Java)**:
+```java
+void sendVolume(String name, int volume) {
+    // Create immutable packet
+    Map<String, Object> body = new HashMap<>();
+    body.put("volume", volume);
+    body.put("name", name);
+    NetworkPacket packet = NetworkPacket.create(PACKET_TYPE_SYSTEMVOLUME_REQUEST, body);
+
+    // Convert and send
+    getDevice().sendPacket(convertToLegacyPacket(packet));
+}
+
+private org.cosmic.cosmicconnect.NetworkPacket convertToLegacyPacket(NetworkPacket ffi) {
+    org.cosmic.cosmicconnect.NetworkPacket legacy =
+        new org.cosmic.cosmicconnect.NetworkPacket(ffi.getType());
+
+    Map<String, Object> body = ffi.getBody();
+    for (Map.Entry<String, Object> entry : body.entrySet()) {
+        legacy.set(entry.getKey(), entry.getValue());
+    }
+
+    return legacy;
+}
+```
+
+**Key Learning**: Java migration works identically using HashMap instead of Kotlin maps.
+
+---
+
+### ✅ RemoteKeyboardPlugin (441 lines)
+**Date**: 2025-01-15
+**Pattern**: Conditional Fields (Java)
+**File**: `src/org/cosmic/cosmicconnect/Plugins/RemoteKeyboardPlugin/RemoteKeyboardPlugin.java`
+
+**Changes**:
+- Migrated 2 packet-sending methods
+- `notifyKeyboardState()` - simple packet with state
+- Reply packet in `onPacketReceived()` - conditional fields based on incoming packet
+
+**Pattern Demonstrated (Java with Conditionals)**:
+```java
+// Build reply with optional fields
+Map<String, Object> body = new HashMap<>();
+body.put("key", np.getString("key"));
+if (np.has("specialKey"))
+    body.put("specialKey", np.getInt("specialKey"));
+if (np.has("shift"))
+    body.put("shift", np.getBoolean("shift"));
+// ... more conditional fields
+body.put("isAck", true);
+
+NetworkPacket reply = NetworkPacket.create(PACKET_TYPE_MOUSEPAD_ECHO, body);
+getDevice().sendPacket(convertToLegacyPacket(reply));
+```
+
+**Key Learning**: Handles complex input with conditional packet fields - shows pattern works for complex plugins.
+
+---
+
 ## Remaining Plugins to Migrate
 
 ### Simple Plugins (Similar to FindRemoteDevice)
-- [ ] DigitizerPlugin
-- [ ] SystemVolumePlugin
-- [ ] RemoteKeyboardPlugin
+- [x] DigitizerPlugin ✅
+- [x] SystemVolumePlugin ✅
+- [x] RemoteKeyboardPlugin ✅
 
 ### Medium Plugins (Similar to Presenter)
 - [ ] ClipboardPlugin
@@ -311,7 +409,8 @@ For each migrated plugin:
 ## Commits
 
 - `e2387b23`: Initial project state
-- [Next]: Commit first batch of NetworkPacket migrations (3 plugins)
+- `2321491e`: First batch - Migrated 3 plugins (FindRemoteDevice, Presenter, ConnectivityReport)
+- [Next]: Second batch - Migrated 3 more plugins (Digitizer, SystemVolume, RemoteKeyboard)
 
 ---
 

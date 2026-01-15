@@ -11,6 +11,16 @@ This repository is configured to work with [Claude Code](https://docs.claude.ai/
 - [Best Practices](#best-practices)
 - [Troubleshooting](#troubleshooting)
 
+## 📂 Repository Locations
+
+**IMPORTANT**: All project repositories are already cloned on this host:
+
+- **cosmic-connect-android** (this repo): `/home/olafkfreund/Source/GitHub/Cosmic-kdeconnect-android`
+- **cosmic-applet-kdeconnect** (COSMIC Desktop): `/home/olafkfreund/Source/GitHub/cosmic-applet-kdeconnect`
+- **cosmic-connect-core** (Rust library): Will be created at `/home/olafkfreund/Source/GitHub/cosmic-connect-core`
+
+**When working on Phase 0 (Rust extraction)**: Reference the cosmic-applet-kdeconnect code directly at the path above - no need to clone.
+
 ## 🚀 Quick Start
 
 ### Prerequisites

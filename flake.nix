@@ -27,7 +27,9 @@
 
       in
       {
-        devShells.default = pkgs.mkShell {
+        devShells = {
+          # Default shell: Android development
+          default = pkgs.mkShell {
           buildInputs = with pkgs; [
             # Core Android development
             android-tools           # adb, fastboot, logcat
@@ -117,6 +119,104 @@
             echo ""
           '';
         };
+
+        # NixOS development shell
+        nixos-dev = pkgs.mkShell {
+          name = "nixos-development";
+
+          buildInputs = with pkgs; [
+            # Nix development tools
+            nixd                    # Nix language server (modern, recommended)
+            nil                     # Alternative Nix LSP
+            nixpkgs-fmt            # Nix code formatter
+            nixfmt                 # Official Nix formatter (RFC style)
+            statix                 # Nix linter & best practices checker
+            deadnix                # Find unused Nix code
+            nix-tree               # Visualize Nix dependencies
+            nix-diff               # Compare Nix derivations
+            nix-index              # Search for packages
+            nix-prefetch-github    # Fetch GitHub sources
+            nix-output-monitor     # Beautiful build output
+
+            # NixOS specific tools
+            nixos-rebuild          # Rebuild NixOS system
+            nixos-option           # Query NixOS options
+            nixos-container        # Manage NixOS containers
+
+            # Development utilities
+            git                    # Version control
+            gh                     # GitHub CLI
+            jq                     # JSON processing
+            yq                     # YAML processing
+            ripgrep                # Fast grep
+            fd                     # Fast find
+            bat                    # Better cat
+            eza                    # Better ls
+
+            # Documentation
+            man-pages
+            manix                  # Search Nix documentation
+          ];
+
+          shellHook = ''
+            echo ""
+            echo "╔════════════════════════════════════════════════════════════╗"
+            echo "║              🔧 NixOS Development Environment              ║"
+            echo "╚════════════════════════════════════════════════════════════╝"
+            echo ""
+            echo "📦 Nix Tools Available:"
+            echo "  • nixd              - Nix language server (LSP)"
+            echo "  • nil               - Alternative Nix LSP"
+            echo "  • nixpkgs-fmt       - Format Nix code"
+            echo "  • statix            - Lint Nix code"
+            echo "  • deadnix           - Find dead Nix code"
+            echo "  • nix-tree          - Visualize dependencies"
+            echo "  • nix-diff          - Compare derivations"
+            echo ""
+            echo "🎯 Common Commands:"
+            echo "  • Format:           nixpkgs-fmt *.nix"
+            echo "  • Lint:             statix check"
+            echo "  • Find dead code:   deadnix"
+            echo "  • Build flake:      nix build"
+            echo "  • Check flake:      nix flake check --impure"
+            echo "  • Update flake:     nix flake update"
+            echo ""
+            echo "🔍 NixOS System:"
+            echo "  • Rebuild:          sudo nixos-rebuild switch"
+            echo "  • Test config:      sudo nixos-rebuild test"
+            echo "  • Build config:     sudo nixos-rebuild build"
+            echo "  • Query options:    nixos-option [option-path]"
+            echo ""
+            echo "📚 Documentation:"
+            echo "  • Search packages:  nix search nixpkgs [package]"
+            echo "  • Search docs:      manix [query]"
+            echo "  • NixOS manual:     man configuration.nix"
+            echo ""
+            echo "💡 Tips:"
+            echo "  • Use 'nom' instead of 'nix' for prettier build output"
+            echo "  • Use 'nix-tree' to understand package dependencies"
+            echo "  • Use 'nix-diff' to compare derivation changes"
+            echo ""
+
+            # Set up environment variables
+            export NIXPKGS_ALLOW_UNFREE=1
+
+            # Helpful aliases
+            alias nb="nix build"
+            alias nf="nix flake"
+            alias nfc="nix flake check --impure"
+            alias nfu="nix flake update"
+            alias nfmt="nixpkgs-fmt"
+            alias nlint="statix check"
+            alias ndead="deadnix"
+            alias nom="nix-output-monitor"
+
+            echo "✅ NixOS dev environment ready!"
+            echo "💡 To switch to Android dev: nix develop"
+            echo ""
+          '';
+        };
+      };
       }
     );
 }

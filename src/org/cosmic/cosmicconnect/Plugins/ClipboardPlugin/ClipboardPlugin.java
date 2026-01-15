@@ -18,13 +18,15 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import org.jetbrains.annotations.NotNull;
-import org.cosmic.cosmicconnect.NetworkPacket;
+import org.cosmic.cosmicconnect.Core.NetworkPacket;
 import org.cosmic.cosmicconnect.Plugins.Plugin;
 import org.cosmic.cosmicconnect.Plugins.PluginFactory;
 import org.cosmic.cosmicconnect.R;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import kotlin.Unit;
 
@@ -67,7 +69,7 @@ public class ClipboardPlugin extends Plugin {
     }
 
     @Override
-    public boolean onPacketReceived(@NonNull NetworkPacket np) {
+    public boolean onPacketReceived(@NonNull org.cosmic.cosmicconnect.NetworkPacket np) {
         String content = np.getString("content");
         switch (np.getType()) {
             case (PACKET_TYPE_CLIPBOARD):
@@ -91,9 +93,13 @@ public class ClipboardPlugin extends Plugin {
     private final ClipboardListener.ClipboardObserver observer = this::propagateClipboard;
 
     void propagateClipboard(String content) {
-        NetworkPacket np = new NetworkPacket(ClipboardPlugin.PACKET_TYPE_CLIPBOARD);
-        np.set("content", content);
-        getDevice().sendPacket(np);
+        // Create immutable packet
+        Map<String, Object> body = new HashMap<>();
+        body.put("content", content);
+        NetworkPacket packet = NetworkPacket.create(ClipboardPlugin.PACKET_TYPE_CLIPBOARD, body);
+
+        // Convert and send
+        getDevice().sendPacket(convertToLegacyPacket(packet));
     }
 
     private void sendConnectPacket() {
@@ -102,11 +108,32 @@ public class ClipboardPlugin extends Plugin {
             // Send clipboard only if it had been initialized
             return;
         }
-        NetworkPacket np = new NetworkPacket(ClipboardPlugin.PACKET_TYPE_CLIPBOARD_CONNECT);
+
+        // Create immutable packet with timestamp
+        Map<String, Object> body = new HashMap<>();
         long timestamp = ClipboardListener.instance(context).getUpdateTimestamp();
-        np.set("timestamp", timestamp);
-        np.set("content", content);
-        getDevice().sendPacket(np);
+        body.put("timestamp", timestamp);
+        body.put("content", content);
+        NetworkPacket packet = NetworkPacket.create(ClipboardPlugin.PACKET_TYPE_CLIPBOARD_CONNECT, body);
+
+        // Convert and send
+        getDevice().sendPacket(convertToLegacyPacket(packet));
+    }
+
+    /**
+     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
+     */
+    private org.cosmic.cosmicconnect.NetworkPacket convertToLegacyPacket(NetworkPacket ffi) {
+        org.cosmic.cosmicconnect.NetworkPacket legacy =
+            new org.cosmic.cosmicconnect.NetworkPacket(ffi.getType());
+
+        // Copy all body fields
+        Map<String, Object> body = ffi.getBody();
+        for (Map.Entry<String, Object> entry : body.entrySet()) {
+            legacy.set(entry.getKey(), entry.getValue());
+        }
+
+        return legacy;
     }
 
 

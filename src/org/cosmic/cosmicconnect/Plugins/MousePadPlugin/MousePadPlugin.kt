@@ -11,7 +11,8 @@ import android.content.Intent
 import android.view.KeyEvent
 import androidx.preference.PreferenceManager
 import org.cosmic.cosmicconnect.DeviceType
-import org.cosmic.cosmicconnect.NetworkPacket
+import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory.LoadablePlugin
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment
@@ -23,7 +24,7 @@ class MousePadPlugin : Plugin() {
     var isKeyboardEnabled: Boolean = true
         private set
 
-    override fun onPacketReceived(np: NetworkPacket): Boolean {
+    override fun onPacketReceived(np: LegacyNetworkPacket): Boolean {
         this.isKeyboardEnabled = np.getBoolean("state", true)
         return true
     }
@@ -75,10 +76,10 @@ class MousePadPlugin : Plugin() {
     }
 
     fun sendMouseDelta(dx: Float, dy: Float) {
-        val np = NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST)
-        np["dx"] = dx.toDouble()
-        np["dy"] = dy.toDouble()
-        sendPacket(np)
+        sendMousePacket(mapOf(
+            "dx" to dx.toDouble(),
+            "dy" to dy.toDouble()
+        ))
     }
 
     fun hasMicPermission(): Boolean {
@@ -86,100 +87,110 @@ class MousePadPlugin : Plugin() {
     }
 
     fun sendLeftClick() {
-        val np = NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST)
-        np["singleclick"] = true
-        sendPacket(np)
+        sendMousePacket(mapOf("singleclick" to true))
     }
 
     fun sendDoubleClick() {
-        val np = NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST)
-        np["doubleclick"] = true
-        sendPacket(np)
+        sendMousePacket(mapOf("doubleclick" to true))
     }
 
     fun sendMiddleClick() {
-        val np = NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST)
-        np["middleclick"] = true
-        sendPacket(np)
+        sendMousePacket(mapOf("middleclick" to true))
     }
 
     fun sendRightClick() {
-        val np = NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST)
-        np["rightclick"] = true
-        sendPacket(np)
+        sendMousePacket(mapOf("rightclick" to true))
     }
 
     fun sendSingleHold() {
-        val np = NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST)
-        np["singlehold"] = true
-        sendPacket(np)
+        sendMousePacket(mapOf("singlehold" to true))
     }
 
     fun sendSingleRelease() {
-        val np = NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST)
-        np["singlerelease"] = true
-        sendPacket(np)
+        sendMousePacket(mapOf("singlerelease" to true))
     }
 
     fun sendScroll(dx: Float, dy: Float) {
-        val np = NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST)
-        np["scroll"] = true
-        np["dx"] = dx.toDouble()
-        np["dy"] = dy.toDouble()
-        sendPacket(np)
+        sendMousePacket(mapOf(
+            "scroll" to true,
+            "dx" to dx.toDouble(),
+            "dy" to dy.toDouble()
+        ))
     }
 
     fun sendLeft() {
-        val np = NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST)
-        np["specialKey"] = KeyListenerView.SpecialKeysMap.get(KeyEvent.KEYCODE_DPAD_LEFT)
-        sendPacket(np)
+        sendSpecialKey(KeyEvent.KEYCODE_DPAD_LEFT)
     }
 
     fun sendRight() {
-        val np = NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST)
-        np["specialKey"] = KeyListenerView.SpecialKeysMap.get(KeyEvent.KEYCODE_DPAD_RIGHT)
-        sendPacket(np)
+        sendSpecialKey(KeyEvent.KEYCODE_DPAD_RIGHT)
     }
 
     fun sendUp() {
-        val np = NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST)
-        np["specialKey"] = KeyListenerView.SpecialKeysMap.get(KeyEvent.KEYCODE_DPAD_UP)
-        sendPacket(np)
+        sendSpecialKey(KeyEvent.KEYCODE_DPAD_UP)
     }
 
     fun sendDown() {
-        val np = NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST)
-        np["specialKey"] = KeyListenerView.SpecialKeysMap.get(KeyEvent.KEYCODE_DPAD_DOWN)
-        sendPacket(np)
+        sendSpecialKey(KeyEvent.KEYCODE_DPAD_DOWN)
     }
 
     fun sendSelect() {
-        val np = NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST)
-        np["specialKey"] = KeyListenerView.SpecialKeysMap.get(KeyEvent.KEYCODE_ENTER)
-        sendPacket(np)
+        sendSpecialKey(KeyEvent.KEYCODE_ENTER)
     }
 
     fun sendHome() {
-        val np = NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST)
-        np["alt"] = true
-        np["specialKey"] = KeyListenerView.SpecialKeysMap.get(KeyEvent.KEYCODE_F4)
-        device.sendPacket(np)
+        sendMousePacket(mapOf(
+            "alt" to true,
+            "specialKey" to KeyListenerView.SpecialKeysMap.get(KeyEvent.KEYCODE_F4)
+        ))
     }
 
     fun sendBack() {
-        val np = NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST)
-        np["specialKey"] = KeyListenerView.SpecialKeysMap.get(KeyEvent.KEYCODE_ESCAPE)
-        device.sendPacket(np)
+        sendSpecialKey(KeyEvent.KEYCODE_ESCAPE)
     }
 
     fun sendText(content: String) {
-        val np = NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST)
-        np["key"] = content
-        sendPacket(np)
+        sendMousePacket(mapOf("key" to content))
     }
 
-    fun sendPacket(np: NetworkPacket) {
-        device.sendPacket(np)
+    /**
+     * Helper to send special key packets
+     */
+    private fun sendSpecialKey(keyCode: Int) {
+        val specialKey = KeyListenerView.SpecialKeysMap.get(keyCode)
+        sendMousePacket(mapOf("specialKey" to specialKey))
+    }
+
+    /**
+     * Helper to send mouse/keyboard packets
+     */
+    private fun sendMousePacket(body: Map<String, Any>) {
+        // Create immutable packet
+        val packet = NetworkPacket.create(PACKET_TYPE_MOUSEPAD_REQUEST, body)
+
+        // Convert and send
+        device.sendPacket(convertToLegacyPacket(packet))
+    }
+
+    /**
+     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
+     */
+    private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
+        val legacy = LegacyNetworkPacket(ffi.type)
+
+        // Copy all body fields
+        ffi.body.forEach { (key, value) ->
+            when (value) {
+                is String -> legacy.set(key, value)
+                is Int -> legacy.set(key, value)
+                is Long -> legacy.set(key, value)
+                is Boolean -> legacy.set(key, value)
+                is Double -> legacy.set(key, value)
+                else -> legacy.set(key, value.toString())
+            }
+        }
+
+        return legacy
     }
 
     override val supportedPacketTypes = arrayOf(PACKET_TYPE_MOUSEPAD_KEYBOARDSTATE)

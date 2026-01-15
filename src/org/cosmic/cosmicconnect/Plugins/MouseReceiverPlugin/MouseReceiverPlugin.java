@@ -15,7 +15,6 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.cosmic.cosmicconnect.NetworkPacket;
 import org.cosmic.cosmicconnect.Plugins.Plugin;
 import org.cosmic.cosmicconnect.Plugins.PluginFactory;
 import org.cosmic.cosmicconnect.Plugins.RemoteKeyboardPlugin.RemoteKeyboardPlugin;
@@ -47,7 +46,7 @@ public class MouseReceiverPlugin extends Plugin {
     }
 
     @Override
-    public boolean onPacketReceived(@NonNull NetworkPacket np) {
+    public boolean onPacketReceived(@NonNull org.cosmic.cosmicconnect.NetworkPacket np) {
         if (!np.getType().equals(PACKET_TYPE_MOUSEPAD_REQUEST)) {
             Log.e("MouseReceiverPlugin", "Invalid packet type for MouseReceiverPlugin: " + np.getType());
             return false;

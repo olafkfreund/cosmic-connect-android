@@ -12,9 +12,9 @@ Migrating all plugins from mutable `NetworkPacket` to immutable `Core.NetworkPac
 
 ## Progress Overview
 
-**Completed**: 16 plugins ✅
-**Remaining**: ~9 plugins
-**Total LOC Migrated**: ~3,612 lines
+**Completed**: 17 plugins ✅
+**Remaining**: ~8 plugins
+**Total LOC Migrated**: ~3,840 lines
 
 ---
 
@@ -608,6 +608,57 @@ val packet = NetworkPacket.create(PACKET_TYPE, body.toMap())
 
 ---
 
+### ✅ TelephonyPlugin (228 lines)
+**Date**: 2025-01-15
+**Pattern**: Stateful Packet with Mutation + Dynamic Fields (Kotlin)
+**File**: `src/org/cosmic/cosmicconnect/Plugins/TelephonyPlugin/TelephonyPlugin.kt`
+
+**Changes**:
+- Imported `Core.NetworkPacket` and added `LegacyNetworkPacket` type alias
+- Changed `lastPacket` field type from `NetworkPacket?` to `LegacyNetworkPacket?`
+- Refactored `callBroadcastReceived()` to create fresh immutable packets for each state
+- Changed `onPacketReceived()` signature to use `LegacyNetworkPacket`
+- Created `convertToLegacyPacket()` helper method
+
+**Pattern Demonstrated (Stateful Packet with Later Mutation)**:
+```kotlin
+private var lastPacket: LegacyNetworkPacket? = null
+
+private fun callBroadcastReceived(state: Int, phoneNumber: String?) {
+    // Build base body with optional contact info
+    val baseBody = mutableMapOf<String, Any>()
+
+    // Add optional fields conditionally
+    val name = contactInfo["name"]
+    if (name != null) {
+        baseBody["contactName"] = name
+    }
+
+    when (state) {
+        TelephonyManager.CALL_STATE_RINGING -> {
+            baseBody["event"] = "ringing"
+
+            // Create fresh immutable packet
+            val packet = NetworkPacket.create(PACKET_TYPE_TELEPHONY, baseBody.toMap())
+            val legacyPacket = convertToLegacyPacket(packet)
+
+            device.sendPacket(legacyPacket)
+            lastPacket = legacyPacket  // Store for later mutation
+        }
+        TelephonyManager.CALL_STATE_IDLE -> {
+            val lastPacket = lastPacket ?: return
+            // Mutate stored legacy packet (preserves existing behavior)
+            lastPacket["isCancel"] = "true"
+            device.sendPacket(lastPacket)
+        }
+    }
+}
+```
+
+**Key Learning**: When a plugin needs to store a packet and mutate it later (legacy behavior), create fresh immutable packets for each state but store the converted legacy version for later mutation. This preserves existing functionality while using immutable packets at creation time.
+
+---
+
 ## Remaining Plugins to Migrate
 
 ### Simple Plugins (Similar to FindRemoteDevice)
@@ -628,7 +679,7 @@ val packet = NetworkPacket.create(PACKET_TYPE, body.toMap())
 ### Complex Plugins (Need Analysis)
 - [ ] SharePlugin (5 files, file transfers)
 - [ ] NotificationsPlugin (complex state)
-- [ ] TelephonyPlugin (call handling)
+- [x] TelephonyPlugin ✅
 - [x] SMSPlugin ✅
 - [x] RunCommandPlugin ✅
 - [x] FindMyPhonePlugin ✅

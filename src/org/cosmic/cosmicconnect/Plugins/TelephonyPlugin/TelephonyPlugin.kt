@@ -20,7 +20,8 @@ import android.telephony.TelephonyManager
 import android.util.Log
 import androidx.core.content.ContextCompat
 import org.cosmic.cosmicconnect.Helpers.ContactsHelper
-import org.cosmic.cosmicconnect.NetworkPacket
+import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory.LoadablePlugin
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment
@@ -32,7 +33,7 @@ import java.util.TimerTask
 @LoadablePlugin
 class TelephonyPlugin : Plugin() {
     private var lastState = TelephonyManager.CALL_STATE_IDLE
-    private var lastPacket: NetworkPacket? = null
+    private var lastPacket: LegacyNetworkPacket? = null
     private var isMuted = false
 
     private val receiver: BroadcastReceiver = object : BroadcastReceiver() {
@@ -67,7 +68,8 @@ class TelephonyPlugin : Plugin() {
     private fun callBroadcastReceived(state: Int, phoneNumber: String?) {
         if (isNumberBlocked(phoneNumber)) return
 
-        val np = NetworkPacket(PACKET_TYPE_TELEPHONY)
+        // Build base packet body with contact info
+        val baseBody = mutableMapOf<String, Any>()
 
         val permissionCheck = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CONTACTS)
 
@@ -76,7 +78,7 @@ class TelephonyPlugin : Plugin() {
 
             val name = contactInfo["name"]
             if (name != null) {
-                np["contactName"] = name
+                baseBody["contactName"] = name
             }
 
             if (contactInfo.containsKey("photoID")) {
@@ -85,7 +87,7 @@ class TelephonyPlugin : Plugin() {
                     try {
                         val base64photo = ContactsHelper.photoId64Encoded(context, photoUri)
                         if (!base64photo.isNullOrEmpty()) {
-                            np["phoneThumbnail"] = base64photo
+                            baseBody["phoneThumbnail"] = base64photo
                         }
                     } catch (e: Exception) {
                         Log.e("TelephonyPlugin", "Failed to get contact photo")
@@ -93,22 +95,34 @@ class TelephonyPlugin : Plugin() {
                 }
             }
         } else if (phoneNumber != null) {
-            np["contactName"] = phoneNumber
+            baseBody["contactName"] = phoneNumber
         }
 
         if (phoneNumber != null) {
-            np["phoneNumber"] = phoneNumber
+            baseBody["phoneNumber"] = phoneNumber
         }
 
         when (state) {
             TelephonyManager.CALL_STATE_RINGING -> {
                 unmuteRinger()
-                np["event"] = "ringing"
-                device.sendPacket(np)
+                baseBody["event"] = "ringing"
+
+                // Create immutable packet
+                val packet = NetworkPacket.create(PACKET_TYPE_TELEPHONY, baseBody.toMap())
+                val legacyPacket = convertToLegacyPacket(packet)
+
+                device.sendPacket(legacyPacket)
+                lastPacket = legacyPacket
             }
             TelephonyManager.CALL_STATE_OFFHOOK -> {
-                np["event"] = "talking"
-                device.sendPacket(np)
+                baseBody["event"] = "talking"
+
+                // Create immutable packet
+                val packet = NetworkPacket.create(PACKET_TYPE_TELEPHONY, baseBody.toMap())
+                val legacyPacket = convertToLegacyPacket(packet)
+
+                device.sendPacket(legacyPacket)
+                lastPacket = legacyPacket
             }
             TelephonyManager.CALL_STATE_IDLE -> {
                 val lastPacket = lastPacket ?: return
@@ -127,21 +141,24 @@ class TelephonyPlugin : Plugin() {
 
                 // Emit a missed call notification if needed
                 if ("ringing" == lastPacket.getString("event")) {
-                    np["event"] = "missedCall"
+                    baseBody["event"] = "missedCall"
                     val phoneNumber = lastPacket.getStringOrNull("phoneNumber")
                     if (phoneNumber != null) {
-                        np["phoneNumber"] = phoneNumber
+                        baseBody["phoneNumber"] = phoneNumber
                     }
                     val contactName = lastPacket.getStringOrNull("contactName")
                     if (contactName != null) {
-                        np["contactName"] = contactName
+                        baseBody["contactName"] = contactName
                     }
-                    device.sendPacket(np)
+
+                    // Create immutable packet
+                    val packet = NetworkPacket.create(PACKET_TYPE_TELEPHONY, baseBody.toMap())
+                    device.sendPacket(convertToLegacyPacket(packet))
                 }
+
+                // Don't update lastPacket in IDLE state
             }
         }
-
-        lastPacket = np
     }
 
     private fun unmuteRinger() {
@@ -175,7 +192,7 @@ class TelephonyPlugin : Plugin() {
         context.unregisterReceiver(receiver)
     }
 
-    override fun onPacketReceived(np: NetworkPacket): Boolean {
+    override fun onPacketReceived(np: LegacyNetworkPacket): Boolean {
         when (np.type) {
             PACKET_TYPE_TELEPHONY_REQUEST_MUTE -> muteRinger()
         }
@@ -200,6 +217,27 @@ class TelephonyPlugin : Plugin() {
     override fun hasSettings(): Boolean = true
 
     override fun getSettingsFragment(activity: Activity): PluginSettingsFragment = newInstance(pluginKey, R.xml.telephonyplugin_preferences)
+
+    /**
+     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
+     */
+    private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
+        val legacy = LegacyNetworkPacket(ffi.type)
+
+        // Copy all body fields
+        ffi.body.forEach { (key, value) ->
+            when (value) {
+                is String -> legacy.set(key, value)
+                is Int -> legacy.set(key, value)
+                is Long -> legacy.set(key, value)
+                is Boolean -> legacy.set(key, value)
+                is Double -> legacy.set(key, value)
+                else -> legacy.set(key, value.toString())
+            }
+        }
+
+        return legacy
+    }
 
     companion object {
         /**

@@ -5,7 +5,8 @@
  */
 package org.cosmic.cosmicconnect.Plugins.FindRemoteDevicePlugin
 
-import org.cosmic.cosmicconnect.NetworkPacket
+import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.FindMyPhonePlugin
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory.LoadablePlugin
@@ -19,11 +20,19 @@ class FindRemoteDevicePlugin : Plugin() {
     override val description: String
         get() = context.resources.getString(R.string.pref_plugin_findremotedevice_desc)
 
-    override fun onPacketReceived(np: NetworkPacket): Boolean = true
+    override fun onPacketReceived(np: LegacyNetworkPacket): Boolean = true
 
     override fun getUiMenuEntries(): List<PluginUiMenuEntry> = listOf(
         PluginUiMenuEntry(context.getString(R.string.ring)) { parentActivity ->
-            device.sendPacket(NetworkPacket(FindMyPhonePlugin.PACKET_TYPE_FINDMYPHONE_REQUEST))
+            // Create immutable NetworkPacket via FFI
+            val packet = NetworkPacket.create(
+                FindMyPhonePlugin.PACKET_TYPE_FINDMYPHONE_REQUEST,
+                emptyMap()
+            )
+
+            // Convert to legacy packet for Device.sendPacket()
+            val legacyPacket = LegacyNetworkPacket(packet.type)
+            device.sendPacket(legacyPacket)
         }
     )
 

@@ -8,7 +8,8 @@ package org.cosmic.cosmicconnect.Plugins.ConnectivityReportPlugin
 import android.Manifest
 import org.json.JSONException
 import org.json.JSONObject
-import org.cosmic.cosmicconnect.NetworkPacket
+import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.ConnectivityReportPlugin.ConnectivityListener.Companion.getInstance
 import org.cosmic.cosmicconnect.Plugins.ConnectivityReportPlugin.ConnectivityListener.SubscriptionState
 import org.cosmic.cosmicconnect.Plugins.Plugin
@@ -25,7 +26,9 @@ class ConnectivityReportPlugin : Plugin() {
         get() = context.resources.getString(R.string.pref_plugin_connectivity_report_desc)
 
     /**
-     * Packet used to report the current connectivity state
+     * Connectivity state change listener
+     *
+     * Reports the current connectivity state when changed.
      *
      * The body should contain a key "signalStrengths" which has a dict that maps
      * a SubscriptionID (opaque value) to a dict with the connection info (See below)
@@ -45,13 +48,13 @@ class ConnectivityReportPlugin : Plugin() {
      *     }
      * }
      */
-    private val connectivityInfo = NetworkPacket(PACKET_TYPE_CONNECTIVITY_REPORT)
-
     var listener = object : ConnectivityListener.StateCallback {
         override fun statesChanged(states : Map<Int, SubscriptionState>) {
             if (states.isEmpty()) {
                 return
             }
+
+            // Build signal strengths JSON
             val signalStrengths = JSONObject()
             states.forEach { (subID: Int, subscriptionState: SubscriptionState) ->
                 try {
@@ -63,8 +66,15 @@ class ConnectivityReportPlugin : Plugin() {
                     e.printStackTrace()
                 }
             }
-            connectivityInfo["signalStrengths"] = signalStrengths
-            device.sendPacket(connectivityInfo)
+
+            // Create immutable packet with signal strengths
+            val packet = NetworkPacket.create(
+                PACKET_TYPE_CONNECTIVITY_REPORT,
+                mapOf("signalStrengths" to signalStrengths)
+            )
+
+            // Convert and send
+            device.sendPacket(convertToLegacyPacket(packet))
         }
     }
 
@@ -77,7 +87,7 @@ class ConnectivityReportPlugin : Plugin() {
         getInstance(context).cancelActiveListener(listener)
     }
 
-    override fun onPacketReceived(np: NetworkPacket): Boolean {
+    override fun onPacketReceived(np: LegacyNetworkPacket): Boolean {
         return false
     }
 
@@ -86,6 +96,20 @@ class ConnectivityReportPlugin : Plugin() {
     override val outgoingPacketTypes: Array<String> = arrayOf(PACKET_TYPE_CONNECTIVITY_REPORT)
 
     override val requiredPermissions: Array<String> = arrayOf(Manifest.permission.READ_PHONE_STATE)
+
+    /**
+     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
+     */
+    private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
+        val legacy = LegacyNetworkPacket(ffi.type)
+
+        // Copy all body fields
+        ffi.body.forEach { (key, value) ->
+            legacy.set(key, value)
+        }
+
+        return legacy
+    }
 
     companion object {
         private const val PACKET_TYPE_CONNECTIVITY_REPORT = "cosmicconnect.connectivity_report"

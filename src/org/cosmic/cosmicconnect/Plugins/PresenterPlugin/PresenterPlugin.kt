@@ -9,7 +9,8 @@ import android.app.Activity
 import android.content.Intent
 import android.view.KeyEvent
 import org.cosmic.cosmicconnect.DeviceType
-import org.cosmic.cosmicconnect.NetworkPacket
+import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.MousePadPlugin.KeyListenerView
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory.LoadablePlugin
@@ -45,40 +46,76 @@ class PresenterPlugin : Plugin() {
     override val outgoingPacketTypes: Array<String> = arrayOf(PACKET_TYPE_MOUSEPAD_REQUEST, PACKET_TYPE_PRESENTER)
 
     fun sendNext() {
-        val np = NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST)
-        np["specialKey"] = KeyListenerView.SpecialKeysMap.get(KeyEvent.KEYCODE_PAGE_DOWN)
-        device.sendPacket(np)
+        sendKeyPacket(KeyEvent.KEYCODE_PAGE_DOWN)
     }
 
     fun sendPrevious() {
-        val np = NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST)
-        np["specialKey"] = KeyListenerView.SpecialKeysMap.get(KeyEvent.KEYCODE_PAGE_UP)
-        device.sendPacket(np)
+        sendKeyPacket(KeyEvent.KEYCODE_PAGE_UP)
     }
 
     fun sendFullscreen() {
-        val np = NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST)
-        np["specialKey"] = KeyListenerView.SpecialKeysMap.get(KeyEvent.KEYCODE_F5)
-        device.sendPacket(np)
+        sendKeyPacket(KeyEvent.KEYCODE_F5)
     }
 
     fun sendEsc() {
-        val np = NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST)
-        np["specialKey"] = KeyListenerView.SpecialKeysMap.get(KeyEvent.KEYCODE_ESCAPE)
-        device.sendPacket(np)
+        sendKeyPacket(KeyEvent.KEYCODE_ESCAPE)
     }
 
     fun sendPointer(xDelta: Float, yDelta: Float) {
-        val np = NetworkPacket(PACKET_TYPE_PRESENTER)
-        np["dx"] = xDelta.toDouble()
-        np["dy"] = yDelta.toDouble()
-        device.sendPacket(np)
+        // Create immutable packet
+        val packet = NetworkPacket.create(PACKET_TYPE_PRESENTER, mapOf(
+            "dx" to xDelta.toDouble(),
+            "dy" to yDelta.toDouble()
+        ))
+
+        // Convert and send
+        device.sendPacket(convertToLegacyPacket(packet))
     }
 
     fun stopPointer() {
-        val np = NetworkPacket(PACKET_TYPE_PRESENTER)
-        np["stop"] = true
-        device.sendPacket(np)
+        // Create immutable packet
+        val packet = NetworkPacket.create(PACKET_TYPE_PRESENTER, mapOf(
+            "stop" to true
+        ))
+
+        // Convert and send
+        device.sendPacket(convertToLegacyPacket(packet))
+    }
+
+    /**
+     * Helper to send special key packets
+     */
+    private fun sendKeyPacket(keyCode: Int) {
+        val specialKey = KeyListenerView.SpecialKeysMap.get(keyCode)
+
+        // Create immutable packet
+        val packet = NetworkPacket.create(PACKET_TYPE_MOUSEPAD_REQUEST, mapOf(
+            "specialKey" to specialKey
+        ))
+
+        // Convert and send
+        device.sendPacket(convertToLegacyPacket(packet))
+    }
+
+    /**
+     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
+     */
+    private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
+        val legacy = LegacyNetworkPacket(ffi.type)
+
+        // Copy all body fields
+        ffi.body.forEach { (key, value) ->
+            when (value) {
+                is String -> legacy.set(key, value)
+                is Int -> legacy.set(key, value)
+                is Long -> legacy.set(key, value)
+                is Boolean -> legacy.set(key, value)
+                is Double -> legacy.set(key, value)
+                else -> legacy.set(key, value.toString())
+            }
+        }
+
+        return legacy
     }
 
     companion object {

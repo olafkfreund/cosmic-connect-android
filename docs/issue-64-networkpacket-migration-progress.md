@@ -12,9 +12,9 @@ Migrating all plugins from mutable `NetworkPacket` to immutable `Core.NetworkPac
 
 ## Progress Overview
 
-**Completed**: 18 plugins ✅
-**Remaining**: 2 plugins (SftpPlugin, SharePlugin)
-**Total LOC Migrated**: ~4,469 lines
+**Completed**: 19 plugins ✅
+**Remaining**: 1 plugin (SharePlugin - 5 files)
+**Total LOC Migrated**: ~4,732 lines
 
 ---
 
@@ -716,6 +716,65 @@ getDevice().sendPacket(np);
 
 ---
 
+### ✅ SftpPlugin (263 lines)
+**Date**: 2025-01-15
+**Pattern**: Optional Fields + List/Array Handling (Kotlin)
+**File**: `src/org/cosmic/cosmicconnect/Plugins/SftpPlugin/SftpPlugin.kt`
+
+**Changes**:
+- Imported `Core.NetworkPacket` and added `LegacyNetworkPacket` type alias
+- Changed `onPacketReceived()` signature to use `LegacyNetworkPacket`
+- Migrated 4 packet-creation locations:
+  - Error packet (no permissions) - simple single field
+  - Error packet (no storage locations) - simple single field
+  - Success packet with SFTP connection info - multiple required fields + optional multiPaths/pathNames lists
+  - Internal packet in `onSharedPreferenceChanged()` - simple request packet
+- Created `convertToLegacyPacket()` helper with List type handling
+
+**Pattern Demonstrated (Optional Fields with Lists)**:
+```kotlin
+// Build packet body with required fields
+val body = mutableMapOf<String, Any>(
+    "ip" to localIpAddress!!.hostAddress!!,
+    "port" to server.port,
+    "user" to SimpleSftpServer.USER,
+    "password" to server.regeneratePassword(),
+    "path" to if (paths.size == 1) paths[0] else "/"
+)
+
+// Add optional list fields conditionally
+if (paths.isNotEmpty()) {
+    body["multiPaths"] = paths       // List<String>
+    body["pathNames"] = pathNames    // List<String>
+}
+
+// Create immutable packet
+val packet = NetworkPacket.create(PACKET_TYPE_SFTP, body.toMap())
+device.sendPacket(convertToLegacyPacket(packet))
+```
+
+**Conversion Helper with List Support**:
+```kotlin
+private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
+    val legacy = LegacyNetworkPacket(ffi.type)
+
+    ffi.body.forEach { (key, value) ->
+        when (value) {
+            is String -> legacy.set(key, value)
+            is Int -> legacy.set(key, value)
+            is List<*> -> legacy.set(key, value)  // Handle lists
+            else -> legacy.set(key, value.toString())
+        }
+    }
+
+    return legacy
+}
+```
+
+**Key Learning**: For plugins with list/array fields, add `is List<*>` handling to the `convertToLegacyPacket()` helper. Build optional fields in mutableMap and conditionally add them before converting to immutable Map. The Kotlin `apply` block pattern (`NetworkPacket(type).apply { this["field"] = value }`) should be replaced with map-based construction (`NetworkPacket.create(type, mapOf("field" to value))`).
+
+---
+
 ## Remaining Plugins to Migrate
 
 ### Simple Plugins (Similar to FindRemoteDevice)
@@ -731,7 +790,7 @@ getDevice().sendPacket(np);
 - [x] MprisReceiverPlugin ✅
 - [x] ReceiveNotificationsPlugin ✅
 - [x] ContactsPlugin ✅
-- [ ] SftpPlugin
+- [x] SftpPlugin ✅
 
 ### Complex Plugins (Need Analysis)
 - [ ] SharePlugin (5 files, file transfers)

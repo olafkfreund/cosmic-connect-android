@@ -18,7 +18,8 @@ import androidx.core.net.toUri
 import org.json.JSONException
 import org.json.JSONObject
 import org.cosmic.cosmicconnect.Helpers.NetworkHelper.localIpAddress
-import org.cosmic.cosmicconnect.NetworkPacket
+import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory.LoadablePlugin
 import org.cosmic.cosmicconnect.UserInterface.AlertDialogFragment
@@ -76,14 +77,15 @@ class SftpPlugin : Plugin(), OnSharedPreferenceChangeListener {
 
     override fun loadPluginWhenRequiredPermissionsMissing() = true
 
-    override fun onPacketReceived(np: NetworkPacket): Boolean {
+    override fun onPacketReceived(np: LegacyNetworkPacket): Boolean {
         if (!np.getBoolean("startBrowsing")) return false
 
         if (!checkRequiredPermissions()) {
-            val noPermissionsPacket = NetworkPacket(PACKET_TYPE_SFTP).apply {
-                this["errorMessage"] = context.getString(R.string.sftp_missing_permission_error)
-            }
-            device.sendPacket(noPermissionsPacket)
+            // Create immutable packet
+            val packet = NetworkPacket.create(PACKET_TYPE_SFTP, mapOf(
+                "errorMessage" to context.getString(R.string.sftp_missing_permission_error)
+            ))
+            device.sendPacket(convertToLegacyPacket(packet))
             return true
         }
 
@@ -106,9 +108,11 @@ class SftpPlugin : Plugin(), OnSharedPreferenceChangeListener {
             val storageInfoList = SftpSettingsFragment.getStorageInfoList(context, this)
             storageInfoList.sortBy { it.uri }
             if (storageInfoList.isEmpty()) {
-                device.sendPacket(NetworkPacket(PACKET_TYPE_SFTP).apply {
-                    this["errorMessage"] = context.getString(R.string.sftp_no_storage_locations_configured)
-                })
+                // Create immutable packet
+                val packet = NetworkPacket.create(PACKET_TYPE_SFTP, mapOf(
+                    "errorMessage" to context.getString(R.string.sftp_no_storage_locations_configured)
+                ))
+                device.sendPacket(convertToLegacyPacket(packet))
                 return true
             }
             getPathsAndNamesForStorageInfoList(paths, pathNames, storageInfoList)
@@ -124,18 +128,25 @@ class SftpPlugin : Plugin(), OnSharedPreferenceChangeListener {
             preferences!!.registerOnSharedPreferenceChangeListener(this)
         }
 
-        device.sendPacket(NetworkPacket(PACKET_TYPE_SFTP).apply {
-            this["ip"] = localIpAddress!!.hostAddress
-            this["port"] = server.port
-            this["user"] = SimpleSftpServer.USER
-            this["password"] = server.regeneratePassword()
+        // Build packet body with required fields
+        val body = mutableMapOf<String, Any>(
+            "ip" to localIpAddress!!.hostAddress!!,
+            "port" to server.port,
+            "user" to SimpleSftpServer.USER,
+            "password" to server.regeneratePassword(),
             // Kept for compatibility, in case "multiPaths" is not possible or the other end does not support it
-            this["path"] = if (paths.size == 1) paths[0] else "/"
-            if (paths.isNotEmpty()) {
-                this["multiPaths"] = paths
-                this["pathNames"] = pathNames
-            }
-        })
+            "path" to if (paths.size == 1) paths[0] else "/"
+        )
+
+        // Add optional multiPaths fields if paths available
+        if (paths.isNotEmpty()) {
+            body["multiPaths"] = paths
+            body["pathNames"] = pathNames
+        }
+
+        // Create immutable packet
+        val packet = NetworkPacket.create(PACKET_TYPE_SFTP, body.toMap())
+        device.sendPacket(convertToLegacyPacket(packet))
 
         return true
     }
@@ -218,10 +229,11 @@ class SftpPlugin : Plugin(), OnSharedPreferenceChangeListener {
 
         server.stop()
 
-        val np = NetworkPacket(PACKET_TYPE_SFTP_REQUEST).apply {
-            this["startBrowsing"] = true
-        }
-        onPacketReceived(np)
+        // Create immutable packet
+        val packet = NetworkPacket.create(PACKET_TYPE_SFTP_REQUEST, mapOf(
+            "startBrowsing" to true
+        ))
+        onPacketReceived(convertToLegacyPacket(packet))
     }
 
     data class StorageInfo(@JvmField var displayName: String, @JvmField val uri: Uri) {
@@ -249,6 +261,28 @@ class SftpPlugin : Plugin(), OnSharedPreferenceChangeListener {
                 return StorageInfo(displayName, uri)
             }
         }
+    }
+
+    /**
+     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
+     */
+    private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
+        val legacy = LegacyNetworkPacket(ffi.type)
+
+        // Copy all body fields
+        ffi.body.forEach { (key, value) ->
+            when (value) {
+                is String -> legacy.set(key, value)
+                is Int -> legacy.set(key, value)
+                is Long -> legacy.set(key, value)
+                is Boolean -> legacy.set(key, value)
+                is Double -> legacy.set(key, value)
+                is List<*> -> legacy.set(key, value)
+                else -> legacy.set(key, value.toString())
+            }
+        }
+
+        return legacy
     }
 
     companion object {

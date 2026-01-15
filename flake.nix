@@ -4,25 +4,42 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
+  outputs = { self, nixpkgs, flake-utils, rust-overlay }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs {
           inherit system;
+          overlays = [ rust-overlay.overlays.default ];
           config = {
             allowUnfree = true;
             android_sdk.accept_license = true;
           };
         };
 
-        # Android SDK components
+        # Android SDK components with NDK for Rust compilation
         androidComposition = pkgs.androidenv.composeAndroidPackages {
           platformVersions = [ "34" ];
           buildToolsVersions = [ "34.0.0" ];
-          includeNDK = false;
+          includeNDK = true;
+          ndkVersions = [ "26.1.10909125" ];  # NDK for Rust Android targets
           includeSystemImages = false;
+        };
+
+        # Rust toolchain with Android cross-compilation targets
+        rustWithAndroidTargets = pkgs.rust-bin.stable.latest.default.override {
+          extensions = [ "rust-src" "rust-analyzer" ];
+          targets = [
+            "aarch64-linux-android"     # arm64-v8a
+            "armv7-linux-androideabi"   # armeabi-v7a
+            "x86_64-linux-android"      # x86_64
+            "i686-linux-android"        # x86
+          ];
         };
 
       in
@@ -41,11 +58,9 @@
             kotlin-language-server  # LSP for IDE integration
             ktlint                  # Kotlin linter
 
-            # Rust toolchain (for COSMIC applet testing)
-            rustc
-            cargo
-            rustfmt
-            rust-analyzer
+            # Rust toolchain with Android cross-compilation
+            rustWithAndroidTargets  # Rust with Android targets
+            cargo-ndk               # cargo-ndk for Android builds
 
             # Version control & collaboration
             git
@@ -108,6 +123,13 @@
             # Set ANDROID_HOME for Gradle
             export ANDROID_HOME="${androidComposition.androidsdk}/libexec/android-sdk"
             export ANDROID_SDK_ROOT="$ANDROID_HOME"
+
+            # Set ANDROID_NDK_HOME for cargo-ndk and Rust compilation
+            export ANDROID_NDK_HOME="$ANDROID_HOME/ndk-bundle"
+            if [ -d "$ANDROID_HOME/ndk" ]; then
+              # Use the specific NDK version if available
+              export ANDROID_NDK_HOME="$(ls -d $ANDROID_HOME/ndk/* 2>/dev/null | head -1)"
+            fi
 
             # Add Android SDK tools to PATH
             export PATH="$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH"

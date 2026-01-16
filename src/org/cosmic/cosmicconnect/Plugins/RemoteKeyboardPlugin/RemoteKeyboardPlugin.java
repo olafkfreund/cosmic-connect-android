@@ -33,6 +33,7 @@ import org.cosmic.cosmicconnect.UserInterface.MainActivity;
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment;
 import org.cosmic.cosmicconnect.UserInterface.StartActivityAlertDialogFragment;
 import org.cosmic.cosmicconnect.R;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -383,21 +384,25 @@ public class RemoteKeyboardPlugin extends Plugin implements SharedPreferences.On
         }
 
         if (np.getBoolean("sendAck")) {
-            // Create legacy reply packet directly
-            NetworkPacket reply = new NetworkPacket(PACKET_TYPE_MOUSEPAD_ECHO);
-            reply.set("key", np.getString("key"));
+            // Build echo packet body
+            Map<String, Object> body = new HashMap<>();
+            body.put("key", np.getString("key"));
             if (np.has("specialKey"))
-                reply.set("specialKey", np.getInt("specialKey"));
+                body.put("specialKey", np.getInt("specialKey"));
             if (np.has("shift"))
-                reply.set("shift", np.getBoolean("shift"));
+                body.put("shift", np.getBoolean("shift"));
             if (np.has("ctrl"))
-                reply.set("ctrl", np.getBoolean("ctrl"));
+                body.put("ctrl", np.getBoolean("ctrl"));
             if (np.has("alt"))
-                reply.set("alt", np.getBoolean("alt"));
-            reply.set("isAck", true);
+                body.put("alt", np.getBoolean("alt"));
+            body.put("isAck", true);
+
+            // Create packet using FFI
+            String json = new JSONObject(body).toString();
+            org.cosmic.cosmicconnect.Core.NetworkPacket packet = RemoteKeyboardPacketsFFI.INSTANCE.createEchoPacket(json);
 
             // Send packet
-            getDevice().sendPacket(reply);
+            getDevice().sendPacket(packet.toLegacyPacket());
         }
 
         return true;
@@ -406,12 +411,11 @@ public class RemoteKeyboardPlugin extends Plugin implements SharedPreferences.On
     public void notifyKeyboardState(boolean state) {
         Log.d("RemoteKeyboardPlugin", "Keyboardstate changed to " + state);
 
-        // Create legacy packet directly
-        NetworkPacket packet = new NetworkPacket(PACKET_TYPE_MOUSEPAD_KEYBOARDSTATE);
-        packet.set("state", state);
+        // Create packet using FFI
+        org.cosmic.cosmicconnect.Core.NetworkPacket packet = RemoteKeyboardPacketsFFI.INSTANCE.createKeyboardStatePacket(state);
 
         // Send packet
-        getDevice().sendPacket(packet);
+        getDevice().sendPacket(packet.toLegacyPacket());
     }
 
     String getDeviceId() {

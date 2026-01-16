@@ -1105,6 +1105,16 @@ internal interface UniffiLib : Library {
 
     fun uniffi_cosmic_connect_core_fn_func_create_findmyphone_request(uniffi_out_err: UniffiRustCallStatus): RustBuffer.ByValue
 
+    fun uniffi_cosmic_connect_core_fn_func_create_mousepad_echo(
+        `bodyJson`: RustBuffer.ByValue,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_mousepad_keyboardstate(
+        `state`: Byte,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
     fun uniffi_cosmic_connect_core_fn_func_create_mousepad_request(
         `bodyJson`: RustBuffer.ByValue,
         uniffi_out_err: UniffiRustCallStatus,
@@ -1521,6 +1531,10 @@ internal interface UniffiLib : Library {
 
     fun uniffi_cosmic_connect_core_checksum_func_create_findmyphone_request(): Short
 
+    fun uniffi_cosmic_connect_core_checksum_func_create_mousepad_echo(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_mousepad_keyboardstate(): Short
+
     fun uniffi_cosmic_connect_core_checksum_func_create_mousepad_request(): Short
 
     fun uniffi_cosmic_connect_core_checksum_func_create_mpris_request(): Short
@@ -1700,6 +1714,12 @@ private fun uniffiCheckApiChecksums(lib: UniffiLib) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cosmic_connect_core_checksum_func_create_findmyphone_request() != 26.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_mousepad_echo() != 41080.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_mousepad_keyboardstate() != 65153.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cosmic_connect_core_checksum_func_create_mousepad_request() != 36467.toShort()) {
@@ -4493,6 +4513,40 @@ fun `createFindmyphoneRequest`(): FfiPacket =
     FfiConverterTypeFfiPacket.lift(
         uniffiRustCallWithError(ProtocolException) { _status ->
             UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_findmyphone_request(_status)
+        },
+    )
+
+/**
+ * Create a MOUSEPAD echo packet
+ *
+ * Creates an acknowledgment/echo packet in response to keyboard input.
+ *
+ * # Arguments
+ *
+ * * `body_json` - JSON string containing key, modifiers, and isAck flag
+ */
+@Throws(ProtocolException::class)
+fun `createMousepadEcho`(`bodyJson`: kotlin.String): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_mousepad_echo(FfiConverterString.lower(`bodyJson`), _status)
+        },
+    )
+
+/**
+ * Create a MOUSEPAD keyboard state packet
+ *
+ * Creates a packet to notify the desktop of keyboard visibility state.
+ *
+ * # Arguments
+ *
+ * * `state` - Keyboard visible/active state (true = active)
+ */
+@Throws(ProtocolException::class)
+fun `createMousepadKeyboardstate`(`state`: kotlin.Boolean): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_mousepad_keyboardstate(FfiConverterBoolean.lower(`state`), _status)
         },
     )
 

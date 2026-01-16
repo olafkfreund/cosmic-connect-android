@@ -278,13 +278,14 @@ class FFIValidationTest {
     }
 
     /**
-     * Test 3.3: Ping Plugin
+     * Test 3.3: Ping Plugin (Legacy)
      *
-     * Test ping plugin packet handling
+     * Basic ping packet creation (non-FFI)
+     * NOTE: Full FFI test is in Test 3.9
      */
     @Test
-    fun testPingPlugin() {
-        Log.i(TAG, "=== Test 3.3: Ping Plugin ===")
+    fun testPingPluginLegacy() {
+        Log.i(TAG, "=== Test 3.3: Ping Plugin (Legacy) ===")
 
         try {
             val packet = createPacket(
@@ -845,7 +846,7 @@ class FFIValidationTest {
 
             // Test 4: Verify serialization
             Log.i(TAG, "   Test 4: Verify packet serialization")
-            val serialized = serializePacket(messagePing)
+            val serialized = messagePing.serialize()
             assertNotNull("Serialized bytes should not be null", serialized)
             assertTrue("Serialized bytes should not be empty", serialized.isNotEmpty())
 

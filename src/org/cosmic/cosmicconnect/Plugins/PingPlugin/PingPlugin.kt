@@ -1,12 +1,13 @@
 /*
  * SPDX-FileCopyrightText: 2014 Albert Vaca Cintora <albertvaka@gmail.com>
+ * SPDX-FileCopyrightText: 2026 FFI Migration by cosmic-connect-android team
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
+
 package org.cosmic.cosmicconnect.Plugins.PingPlugin
 
 import android.Manifest
-import android.app.Activity
 import android.app.Notification
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -20,56 +21,218 @@ import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
+import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.Helpers.NotificationHelper
-import org.cosmic.cosmicconnect.NetworkPacket
-import org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.FindMyPhonePlugin
+import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory.LoadablePlugin
-import org.cosmic.cosmicconnect.UserInterface.MainActivity
 import org.cosmic.cosmicconnect.R
+import org.cosmic.cosmicconnect.UserInterface.MainActivity
 
+/**
+ * PingPlugin - Simple connectivity test plugin
+ *
+ * This plugin provides a simple way to test connectivity between Android and
+ * COSMIC Desktop. Users can send pings with optional messages, and receive
+ * ping notifications from the desktop.
+ *
+ * ## Features
+ *
+ * - **Send Pings**: Send ping packets with optional custom messages
+ * - **Receive Pings**: Display notifications for incoming pings
+ * - **Statistics**: Track sent/received ping counts via FFI
+ * - **Fallback UI**: Shows toast if notifications are disabled (Android 13+)
+ *
+ * ## Protocol
+ *
+ * **Packet Type**: `kdeconnect.ping`
+ *
+ * **Direction**: Bidirectional (Android ↔ Desktop)
+ *
+ * **Body Fields**:
+ * - `message` (optional): String - Custom message to display in notification
+ *
+ * ## Usage Example
+ *
+ * ```kotlin
+ * // Send simple ping
+ * plugin.sendPing()
+ *
+ * // Send ping with message
+ * plugin.sendPing("Hello from Android!")
+ *
+ * // Get statistics
+ * val stats = plugin.getPingStats()
+ * Log.d(TAG, "Sent: ${stats.pingsSent}, Received: ${stats.pingsReceived}")
+ * ```
+ *
+ * @see PingPacketsFFI
+ */
 @LoadablePlugin
 class PingPlugin : Plugin() {
+
+    companion object {
+        private const val TAG = "PingPlugin"
+        private const val PACKET_TYPE_PING = "kdeconnect.ping"
+    }
+
+    // ========================================================================
+    // Plugin Metadata
+    // ========================================================================
+
     override val displayName: String
-        get() = context.resources.getString(R.string.pref_plugin_ping)
+        get() = context.getString(R.string.pref_plugin_ping)
 
     override val description: String
-        get() = context.resources.getString(R.string.pref_plugin_ping_desc)
+        get() = context.getString(R.string.pref_plugin_ping_desc)
 
-    override fun onPacketReceived(np: NetworkPacket): Boolean {
+    override val supportedPacketTypes: Array<String>
+        get() = arrayOf(PACKET_TYPE_PING)
+
+    override val outgoingPacketTypes: Array<String>
+        get() = arrayOf(PACKET_TYPE_PING)
+
+    // ========================================================================
+    // Public API
+    // ========================================================================
+
+    /**
+     * Send a ping packet to the remote device
+     *
+     * Creates a ping packet using the FFI wrapper and sends it to the connected
+     * device. The ping can optionally include a custom message to be displayed
+     * in the notification on the receiving device.
+     *
+     * ## Behavior
+     * - Without message: Sends basic ping (displays "Ping!" on receiver)
+     * - With message: Sends ping with custom message
+     * - Statistics: Increments ping sent counter in Rust core
+     *
+     * ## Error Handling
+     * Logs errors but does not throw exceptions. Failed pings are silently ignored.
+     *
+     * @param message Optional custom message to include in the ping
+     */
+    fun sendPing(message: String? = null) {
+        if (!isDeviceInitialized) {
+            Log.w(TAG, "Device not initialized, cannot send ping")
+            return
+        }
+
+        try {
+            val packet = PingPacketsFFI.createPing(message)
+            device.sendPacket(packet.toLegacyPacket())
+
+            if (message != null) {
+                Log.d(TAG, "Ping sent with message: $message")
+            } else {
+                Log.d(TAG, "Ping sent")
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to send ping", e)
+        }
+    }
+
+    /**
+     * Get ping statistics from the Rust FFI core
+     *
+     * Returns cumulative ping statistics tracked by the Rust plugin manager.
+     * Only counts pings created via FFI (not legacy packets).
+     *
+     * @return PingStats with pingsReceived and pingsSent counts, or null if unavailable
+     */
+    fun getPingStats(): org.cosmic.cosmicconnect.Core.PingStats? {
+        return try {
+            PingPacketsFFI.getPingStats()
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to get ping stats", e)
+            null
+        }
+    }
+
+    // ========================================================================
+    // Packet Handling
+    // ========================================================================
+
+    override fun onPacketReceived(legacyNp: LegacyNetworkPacket): Boolean {
+        // Convert to immutable NetworkPacket for type-safe inspection
+        val np = NetworkPacket.fromLegacy(legacyNp)
+
         if (np.type != PACKET_TYPE_PING) {
-            Log.e(LOG_TAG, "Ping plugin should not receive packets other than pings!")
+            Log.e(TAG, "Ping plugin should not receive packets other than pings!")
             return false
         }
 
-        val mutableUpdateFlags = PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        val resultPendingIntent = PendingIntent.getActivity(context, 0, Intent(context, MainActivity::class.java), mutableUpdateFlags)
+        // Extract message from packet body
+        val message = np.body["message"] as? String ?: "Ping!"
 
-        val (id: Int, message: String) = if (np.has("message")) {
-            val id = System.currentTimeMillis().toInt()
-            Pair(id, np.getString("message"))
-        } else {
-            val id = 42 // A unique id to create only one notification
-            Pair(id, "Ping!")
+        // Display notification to user
+        displayPingNotification(message)
+
+        return true
+    }
+
+    // ========================================================================
+    // UI Integration
+    // ========================================================================
+
+    override fun getUiMenuEntries(): List<PluginUiMenuEntry> = listOf(
+        PluginUiMenuEntry(context.getString(R.string.send_ping)) { _ ->
+            sendPing()
         }
+    )
 
+    // ========================================================================
+    // Private Implementation
+    // ========================================================================
+
+    /**
+     * Display ping notification to user
+     *
+     * Shows a notification with the ping message. If notification permission
+     * is denied on Android 13+, falls back to showing a toast message.
+     *
+     * @param message Message to display in notification/toast
+     */
+    private fun displayPingNotification(message: String) {
+        // Check notification permission (Android 13+)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            val permissionResult = ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS)
+            val permissionResult = ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.POST_NOTIFICATIONS
+            )
+
             if (permissionResult != PackageManager.PERMISSION_GRANTED) {
-                // If notifications are not allowed, show a toast instead of a notification
+                // Fallback: Show toast if notifications not allowed
                 Handler(Looper.getMainLooper()).post {
                     Toast.makeText(context, message, Toast.LENGTH_LONG).show()
                 }
-                return true
+                return
             }
         }
 
-        val notificationManager = context.getSystemService<NotificationManager>()!!
+        // Determine notification ID
+        val notificationId = if (message != "Ping!") {
+            // Unique ID for custom messages (allows multiple notifications)
+            System.currentTimeMillis().toInt()
+        } else {
+            // Fixed ID for default pings (replaces previous notification)
+            42
+        }
 
+        // Create pending intent for notification tap
+        val pendingIntent = PendingIntent.getActivity(
+            context,
+            0,
+            Intent(context, MainActivity::class.java),
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        // Build notification
         val notification = NotificationCompat.Builder(context, NotificationHelper.Channels.DEFAULT)
             .setContentTitle(device.name)
             .setContentText(message)
-            .setContentIntent(resultPendingIntent)
+            .setContentIntent(pendingIntent)
             .setTicker(message)
             .setSmallIcon(R.drawable.ic_notification)
             .setAutoCancel(true)
@@ -77,25 +240,8 @@ class PingPlugin : Plugin() {
             .setStyle(NotificationCompat.BigTextStyle().bigText(message))
             .build()
 
-        notificationManager.notify(id, notification)
-
-        return true
-    }
-
-    override fun getUiMenuEntries(): List<PluginUiMenuEntry> = listOf(
-        PluginUiMenuEntry(context.getString(R.string.send_ping)) { parentActivity ->
-            if (isDeviceInitialized) {
-                device.sendPacket(NetworkPacket(PACKET_TYPE_PING))
-            }
-        }
-    )
-
-    override val supportedPacketTypes: Array<String> = arrayOf(PACKET_TYPE_PING)
-
-    override val outgoingPacketTypes: Array<String> = arrayOf(PACKET_TYPE_PING)
-
-    companion object {
-        private const val PACKET_TYPE_PING = "kdeconnect.ping"
-        private const val LOG_TAG = "PingPlugin"
+        // Show notification
+        val notificationManager = context.getSystemService<NotificationManager>()!!
+        notificationManager.notify(notificationId, notification)
     }
 }

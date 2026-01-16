@@ -3,6 +3,7 @@ package org.cosmic.cosmicconnect
 import android.util.Log
 import org.cosmic.cosmicconnect.Core.CosmicConnectCore
 import org.cosmic.cosmicconnect.Core.CosmicConnectException
+import org.cosmic.cosmicconnect.Plugins.PingPlugin.PingPacketsFFI
 import org.junit.Test
 import org.junit.Assert.*
 import org.junit.Before
@@ -790,6 +791,87 @@ class FFIValidationTest {
         } catch (e: Exception) {
             Log.e(TAG, "⚠️ RunCommand plugin test failed", e)
             fail("RunCommand FFI tests failed: ${e.message}")
+        }
+    }
+
+    /**
+     * Test 3.9: Ping Plugin FFI (Issue #61)
+     *
+     * Validates FFI integration for the Ping plugin:
+     * - Simple ping packet creation
+     * - Ping with custom message
+     * - Statistics tracking
+     * - Packet uniqueness
+     * - Serialization
+     */
+    @Test
+    fun testPingPlugin() {
+        Log.i(TAG, "")
+        Log.i(TAG, "=" + "=".repeat(70))
+        Log.i(TAG, "Test 3.9: Ping Plugin FFI (Issue #61)")
+        Log.i(TAG, "=" + "=".repeat(70))
+
+        try {
+            // Test 1: Create simple ping packet
+            Log.i(TAG, "   Test 1: Create simple ping packet")
+            val simplePing = PingPacketsFFI.createPing()
+
+            assertNotNull("Simple ping packet should not be null", simplePing)
+            assertEquals(
+                "Packet type should be ping",
+                "kdeconnect.ping",
+                simplePing.type
+            )
+            Log.i(TAG, "   ✅ Simple ping packet creation successful")
+
+            // Test 2: Create ping with custom message
+            Log.i(TAG, "   Test 2: Create ping with custom message")
+            val messagePing = PingPacketsFFI.createPing("Hello from Android!")
+
+            assertNotNull("Message ping packet should not be null", messagePing)
+            assertEquals(
+                "Packet type should be ping",
+                "kdeconnect.ping",
+                messagePing.type
+            )
+            assertTrue("Should have message field", messagePing.body.containsKey("message"))
+            assertEquals("Message should match", "Hello from Android!", messagePing.body["message"])
+            Log.i(TAG, "   ✅ Message ping packet creation successful")
+
+            // Test 3: Verify packets are unique
+            Log.i(TAG, "   Test 3: Verify packet uniqueness")
+            assertNotEquals("Packet IDs should be unique", simplePing.id, messagePing.id)
+            Log.i(TAG, "   ✅ All packets have unique IDs")
+
+            // Test 4: Verify serialization
+            Log.i(TAG, "   Test 4: Verify packet serialization")
+            val serialized = serializePacket(messagePing)
+            assertNotNull("Serialized bytes should not be null", serialized)
+            assertTrue("Serialized bytes should not be empty", serialized.isNotEmpty())
+
+            val serializedStr = serialized.decodeToString()
+            assertTrue("Should contain message", serializedStr.contains("Hello from Android!"))
+            assertTrue("Should end with newline", serializedStr.endsWith("\n"))
+            Log.i(TAG, "   ✅ Packet serialization successful")
+
+            // Test 5: Get ping statistics
+            Log.i(TAG, "   Test 5: Get ping statistics")
+            val stats = PingPacketsFFI.getPingStats()
+            assertNotNull("Stats should not be null", stats)
+            assertTrue("Pings sent should be at least 2", stats.pingsSent >= 2u)
+            Log.i(TAG, "   ✅ Statistics: ${stats.pingsSent} sent, ${stats.pingsReceived} received")
+
+            // Summary
+            Log.i(TAG, "")
+            Log.i(TAG, "✅ All Ping plugin FFI tests passed (5/5)")
+            Log.i(TAG, "   - Simple ping packet creation")
+            Log.i(TAG, "   - Message ping packet creation")
+            Log.i(TAG, "   - Packet uniqueness")
+            Log.i(TAG, "   - Serialization")
+            Log.i(TAG, "   - Statistics tracking")
+        } catch (e: Exception) {
+            Log.e(TAG, "⚠️ Ping plugin test failed", e)
+            fail("Ping FFI tests failed: ${e.message}")
         }
     }
 

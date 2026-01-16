@@ -1105,6 +1105,11 @@ internal interface UniffiLib : Library {
 
     fun uniffi_cosmic_connect_core_fn_func_create_findmyphone_request(uniffi_out_err: UniffiRustCallStatus): RustBuffer.ByValue
 
+    fun uniffi_cosmic_connect_core_fn_func_create_mousepad_request(
+        `bodyJson`: RustBuffer.ByValue,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
     fun uniffi_cosmic_connect_core_fn_func_create_mpris_request(
         `bodyJson`: RustBuffer.ByValue,
         uniffi_out_err: UniffiRustCallStatus,
@@ -1516,6 +1521,8 @@ internal interface UniffiLib : Library {
 
     fun uniffi_cosmic_connect_core_checksum_func_create_findmyphone_request(): Short
 
+    fun uniffi_cosmic_connect_core_checksum_func_create_mousepad_request(): Short
+
     fun uniffi_cosmic_connect_core_checksum_func_create_mpris_request(): Short
 
     fun uniffi_cosmic_connect_core_checksum_func_create_multifile_update_packet(): Short
@@ -1693,6 +1700,9 @@ private fun uniffiCheckApiChecksums(lib: UniffiLib) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cosmic_connect_core_checksum_func_create_findmyphone_request() != 26.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_mousepad_request() != 36467.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cosmic_connect_core_checksum_func_create_mpris_request() != 31949.toShort()) {
@@ -4483,6 +4493,24 @@ fun `createFindmyphoneRequest`(): FfiPacket =
     FfiConverterTypeFfiPacket.lift(
         uniffiRustCallWithError(ProtocolException) { _status ->
             UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_findmyphone_request(_status)
+        },
+    )
+
+/**
+ * Create a MousePad request packet
+ *
+ * Creates a packet for sending mouse and keyboard events to the remote device.
+ * Supports mouse movement, clicks, scroll, and keyboard input.
+ *
+ * # Arguments
+ *
+ * * `body_json` - JSON string containing command and parameters
+ */
+@Throws(ProtocolException::class)
+fun `createMousepadRequest`(`bodyJson`: kotlin.String): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_mousepad_request(FfiConverterString.lower(`bodyJson`), _status)
         },
     )
 

@@ -18,6 +18,7 @@ import org.cosmic.cosmicconnect.Plugins.PluginFactory.LoadablePlugin
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment.Companion.newInstance
 import org.cosmic.cosmicconnect.R
+import org.json.JSONObject
 
 @LoadablePlugin
 class MousePadPlugin : Plugin() {
@@ -174,32 +175,9 @@ class MousePadPlugin : Plugin() {
      * Helper to send mouse/keyboard packets
      */
     private fun sendMousePacket(body: Map<String, Any>) {
-        // Create immutable packet
-        val packet = NetworkPacket.create(PACKET_TYPE_MOUSEPAD_REQUEST, body)
-
-        // Convert and send
-        device.sendPacket(convertToLegacyPacket(packet))
-    }
-
-    /**
-     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
-     */
-    private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
-        val legacy = LegacyNetworkPacket(ffi.type)
-
-        // Copy all body fields
-        ffi.body.forEach { (key, value) ->
-            when (value) {
-                is String -> legacy.set(key, value)
-                is Int -> legacy.set(key, value)
-                is Long -> legacy.set(key, value)
-                is Boolean -> legacy.set(key, value)
-                is Double -> legacy.set(key, value)
-                else -> legacy.set(key, value.toString())
-            }
-        }
-
-        return legacy
+        val json = JSONObject(body).toString()
+        val packet = MousePadPacketsFFI.createMousePadRequest(json)
+        device.sendPacket(packet.toLegacyPacket())
     }
 
     override val supportedPacketTypes = arrayOf(PACKET_TYPE_MOUSEPAD_KEYBOARDSTATE)

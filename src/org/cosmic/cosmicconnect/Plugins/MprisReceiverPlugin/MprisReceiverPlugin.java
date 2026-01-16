@@ -22,7 +22,7 @@ import androidx.fragment.app.DialogFragment;
 import org.apache.commons.lang3.StringUtils;
 import org.cosmic.cosmicconnect.Helpers.AppsHelper;
 import org.cosmic.cosmicconnect.Helpers.ThreadHelper;
-import org.cosmic.cosmicconnect.Core.NetworkPacket;
+import org.cosmic.cosmicconnect.NetworkPacket;
 import org.cosmic.cosmicconnect.Plugins.NotificationsPlugin.NotificationReceiver;
 import org.cosmic.cosmicconnect.Plugins.Plugin;
 import org.cosmic.cosmicconnect.Plugins.PluginFactory;

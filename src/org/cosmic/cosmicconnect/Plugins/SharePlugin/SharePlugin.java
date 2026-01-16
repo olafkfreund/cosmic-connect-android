@@ -37,7 +37,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.cosmic.cosmicconnect.Helpers.FilesHelper;
 import org.cosmic.cosmicconnect.Helpers.IntentHelper;
-import org.cosmic.cosmicconnect.Core.NetworkPacket;
+import org.cosmic.cosmicconnect.NetworkPacket;
 import org.cosmic.cosmicconnect.Plugins.Plugin;
 import org.cosmic.cosmicconnect.Plugins.SharePlugin.SharePacketsFFI;
 import static org.cosmic.cosmicconnect.Plugins.SharePlugin.SharePacketsFFIKt.*;

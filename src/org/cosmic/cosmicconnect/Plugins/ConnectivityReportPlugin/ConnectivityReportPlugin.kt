@@ -8,7 +8,6 @@ package org.cosmic.cosmicconnect.Plugins.ConnectivityReportPlugin
 import android.Manifest
 import org.json.JSONException
 import org.json.JSONObject
-import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.ConnectivityReportPlugin.ConnectivityListener.Companion.getInstance
 import org.cosmic.cosmicconnect.Plugins.ConnectivityReportPlugin.ConnectivityListener.SubscriptionState
@@ -67,14 +66,13 @@ class ConnectivityReportPlugin : Plugin() {
                 }
             }
 
-            // Create immutable packet with signal strengths
-            val packet = NetworkPacket.create(
-                PACKET_TYPE_CONNECTIVITY_REPORT,
-                mapOf("signalStrengths" to signalStrengths)
+            // Create packet using FFI
+            val packet = ConnectivityPacketsFFI.createConnectivityReport(
+                signalStrengths.toString()
             )
 
             // Convert and send
-            device.sendPacket(convertToLegacyPacket(packet))
+            device.sendPacket(packet.toLegacyPacket())
         }
     }
 
@@ -96,14 +94,6 @@ class ConnectivityReportPlugin : Plugin() {
     override val outgoingPacketTypes: Array<String> = arrayOf(PACKET_TYPE_CONNECTIVITY_REPORT)
 
     override val requiredPermissions: Array<String> = arrayOf(Manifest.permission.READ_PHONE_STATE)
-
-    /**
-     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
-     */
-    private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
-        // Use the standard conversion method
-        return ffi.toLegacyPacket()
-    }
 
     companion object {
         private const val PACKET_TYPE_CONNECTIVITY_REPORT = "cosmicconnect.connectivity_report"

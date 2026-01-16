@@ -1066,6 +1066,11 @@ internal interface UniffiLib : Library {
         uniffi_out_err: UniffiRustCallStatus,
     ): RustBuffer.ByValue
 
+    fun uniffi_cosmic_connect_core_fn_func_create_connectivity_report(
+        `signalStrengthsJson`: RustBuffer.ByValue,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
     fun uniffi_cosmic_connect_core_fn_func_create_conversation_request(
         `threadId`: Long,
         `startTimestamp`: RustBuffer.ByValue,
@@ -1480,6 +1485,8 @@ internal interface UniffiLib : Library {
 
     fun uniffi_cosmic_connect_core_checksum_func_create_clipboard_packet(): Short
 
+    fun uniffi_cosmic_connect_core_checksum_func_create_connectivity_report(): Short
+
     fun uniffi_cosmic_connect_core_checksum_func_create_conversation_request(): Short
 
     fun uniffi_cosmic_connect_core_checksum_func_create_conversations_request(): Short
@@ -1641,6 +1648,9 @@ private fun uniffiCheckApiChecksums(lib: UniffiLib) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cosmic_connect_core_checksum_func_create_clipboard_packet() != 11573.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_connectivity_report() != 22939.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cosmic_connect_core_checksum_func_create_conversation_request() != 44273.toShort()) {
@@ -4276,6 +4286,26 @@ fun `createClipboardPacket`(`content`: kotlin.String): FfiPacket =
     FfiConverterTypeFfiPacket.lift(
         uniffiRustCallWithError(ProtocolException) { _status ->
             UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_clipboard_packet(FfiConverterString.lower(`content`), _status)
+        },
+    )
+
+/**
+ * Create a connectivity report packet
+ *
+ * Creates a packet containing network connectivity state information.
+ *
+ * # Arguments
+ *
+ * * `signal_strengths_json` - JSON string with subscription states
+ */
+@Throws(ProtocolException::class)
+fun `createConnectivityReport`(`signalStrengthsJson`: kotlin.String): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_connectivity_report(
+                FfiConverterString.lower(`signalStrengthsJson`),
+                _status,
+            )
         },
     )
 

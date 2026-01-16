@@ -540,6 +540,98 @@ class FFIValidationTest {
         Log.i(TAG, "✅ End-to-end packet flow successful")
     }
 
+    /**
+     * Test 3.6: Clipboard Plugin FFI
+     *
+     * Verify clipboard packet creation via FFI functions:
+     * - createClipboardPacket()
+     * - createClipboardConnectPacket()
+     */
+    @Test
+    fun testClipboardPlugin() {
+        Log.i(TAG, "=== Test 3.6: Clipboard Plugin FFI ===")
+
+        // Test 1: Standard clipboard update packet
+        Log.i(TAG, "   Test 1: Create clipboard update packet")
+        val updatePacket = createClipboardPacket(
+            content = "Hello World from clipboard!"
+        )
+
+        assertNotNull("Clipboard update packet should not be null", updatePacket)
+        assertEquals("Packet type should be clipboard", "kdeconnect.clipboard", updatePacket.packetType)
+        assertEquals("Content should match", "Hello World from clipboard!", updatePacket.body["content"])
+        assertFalse("Standard update should not have timestamp", updatePacket.body.containsKey("timestamp"))
+        Log.i(TAG, "   ✅ Clipboard update packet creation successful")
+
+        // Test 2: Clipboard connect packet with timestamp
+        Log.i(TAG, "   Test 2: Create clipboard connect packet")
+        val connectPacket = createClipboardConnectPacket(
+            content = "Initial clipboard state",
+            timestamp = 1704067200000L
+        )
+
+        assertNotNull("Clipboard connect packet should not be null", connectPacket)
+        assertEquals("Packet type should be clipboard.connect", "kdeconnect.clipboard.connect", connectPacket.packetType)
+        assertEquals("Content should match", "Initial clipboard state", connectPacket.body["content"])
+        assertEquals("Timestamp should match", 1704067200000L, connectPacket.body["timestamp"])
+        Log.i(TAG, "   ✅ Clipboard connect packet creation successful")
+
+        // Test 3: Empty content (should still create packet)
+        Log.i(TAG, "   Test 3: Create packet with empty content")
+        val emptyPacket = createClipboardPacket(content = "")
+        assertNotNull("Empty content packet should be created", emptyPacket)
+        assertEquals("Empty content should be preserved", "", emptyPacket.body["content"])
+        Log.i(TAG, "   ✅ Empty content handled correctly")
+
+        // Test 4: Zero timestamp (valid - indicates unknown time)
+        Log.i(TAG, "   Test 4: Create packet with zero timestamp")
+        val zeroTimestampPacket = createClipboardConnectPacket(
+            content = "Content with unknown time",
+            timestamp = 0L
+        )
+        assertNotNull("Zero timestamp packet should be created", zeroTimestampPacket)
+        assertEquals("Zero timestamp should be preserved", 0L, zeroTimestampPacket.body["timestamp"])
+        Log.i(TAG, "   ✅ Zero timestamp handled correctly (indicates unknown time)")
+
+        // Test 5: Large content (1000+ characters)
+        Log.i(TAG, "   Test 5: Create packet with large content")
+        val largeContent = "A".repeat(5000)
+        val largePacket = createClipboardPacket(content = largeContent)
+        assertNotNull("Large content packet should be created", largePacket)
+        assertEquals("Large content length should match", 5000, (largePacket.body["content"] as String).length)
+        Log.i(TAG, "   ✅ Large content (5000 chars) handled correctly")
+
+        // Test 6: Special characters and unicode
+        Log.i(TAG, "   Test 6: Create packet with special characters")
+        val specialContent = "Hello 世界! Testing special chars: <>&\"' and emoji: 👍🎈🚀"
+        val specialPacket = createClipboardPacket(content = specialContent)
+        assertNotNull("Special characters packet should be created", specialPacket)
+        assertEquals("Special characters should be preserved", specialContent, specialPacket.body["content"])
+        Log.i(TAG, "   ✅ Special characters and unicode preserved")
+
+        // Test 7: Future timestamp
+        Log.i(TAG, "   Test 7: Create packet with future timestamp")
+        val futureTimestamp = System.currentTimeMillis() + 86400000L // +1 day
+        val futurePacket = createClipboardConnectPacket(
+            content = "Future clipboard",
+            timestamp = futureTimestamp
+        )
+        assertNotNull("Future timestamp packet should be created", futurePacket)
+        assertTrue("Future timestamp should be > current time", futurePacket.body["timestamp"] as Long > System.currentTimeMillis())
+        Log.i(TAG, "   ✅ Future timestamp handled correctly")
+
+        // Summary
+        Log.i(TAG, "")
+        Log.i(TAG, "✅ All clipboard plugin FFI tests passed (7/7)")
+        Log.i(TAG, "   - Standard update packets")
+        Log.i(TAG, "   - Connect packets with timestamps")
+        Log.i(TAG, "   - Empty content handling")
+        Log.i(TAG, "   - Zero timestamp (unknown time)")
+        Log.i(TAG, "   - Large content (5000+ chars)")
+        Log.i(TAG, "   - Special characters and unicode")
+        Log.i(TAG, "   - Future timestamps")
+    }
+
     // ============================================================================
     // Test Summary
     // ============================================================================

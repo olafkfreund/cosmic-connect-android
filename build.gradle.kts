@@ -108,7 +108,7 @@ android {
             java.srcDir("src") // by default is "java"
             res.setSrcDirs(listOf(licenseResDir, "res")) // add licenseResDir
             // Include Rust-generated JNI libraries
-            jniLibs.srcDir("${projectDir}/build/rustJniLibs/android")
+            jniLibs.setSrcDirs(listOf("${projectDir}/build/rustJniLibs/android"))
         }
         getByName("debug") {
             res.srcDir("dbg-res")
@@ -121,6 +121,10 @@ android {
     packaging {
         resources {
             merges += listOf("META-INF/DEPENDENCIES", "META-INF/LICENSE", "META-INF/NOTICE")
+        }
+        jniLibs {
+            // Handle duplicate native libraries from Rust builds
+            pickFirsts += listOf("**/libcosmic_connect_core.so")
         }
     }
     signingConfigs {

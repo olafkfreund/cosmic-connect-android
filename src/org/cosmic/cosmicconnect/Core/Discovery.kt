@@ -12,7 +12,7 @@ data class DeviceInfo(
     val deviceId: String,
     val deviceName: String,
     val deviceType: DeviceType,
-    val protocolVersion: Int = 7,
+    val protocolVersion: Int = 8,
     val incomingCapabilities: List<String> = emptyList(),
     val outgoingCapabilities: List<String> = emptyList(),
     val tcpPort: UShort = 1716u

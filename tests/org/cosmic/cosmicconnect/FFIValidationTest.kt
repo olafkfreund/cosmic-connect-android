@@ -82,7 +82,7 @@ class FFIValidationTest {
 
         // Test protocol version
         val protocolVersion = CosmicConnectCore.protocolVersion
-        assertEquals("Protocol version should be 7", 7, protocolVersion)
+        assertEquals("Protocol version should be 8", 8, protocolVersion)
         Log.i(TAG, "   Protocol Version: $protocolVersion")
 
         Log.i(TAG, "✅ Runtime initialization successful")
@@ -107,7 +107,7 @@ class FFIValidationTest {
                 "deviceId" to "test-device-123",
                 "deviceName" to "Test Device",
                 "deviceType" to "phone",
-                "protocolVersion" to 7
+                "protocolVersion" to 8
             )
         )
 

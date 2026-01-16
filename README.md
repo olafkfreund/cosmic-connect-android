@@ -18,21 +18,21 @@
 
 COSMIC Connect enables Android devices to communicate with COSMIC Desktop computers, providing features like clipboard sharing, notification sync, file transfer, and remote control. Built with a **hybrid Rust + Kotlin architecture** for maximum reliability, security, and code reuse.
 
-## ✨ Features
+## Features
 
-- **📋 Shared Clipboard** - Copy and paste between phone and desktop
-- **🔔 Notification Sync** - Read and reply to Android notifications from desktop
-- **📁 File & URL Sharing** - Transfer files and URLs between devices
-- **🎵 Multimedia Remote Control** - Use phone as media player remote
-- **🖱️ Virtual Touchpad & Keyboard** - Control computer from phone
-- **🔋 Battery Monitoring** - View phone battery status on desktop
-- **📱 Find My Phone** - Make phone ring to locate it
-- **⚙️ Run Commands** - Execute predefined commands remotely
-- **📞 Telephony Integration** - SMS and call notifications on desktop
+- **Shared Clipboard** - Copy and paste between phone and desktop
+- **Notification Sync** - Read and reply to Android notifications from desktop
+- **File & URL Sharing** - Transfer files and URLs between devices
+- **Multimedia Remote Control** - Use phone as media player remote
+- **Virtual Touchpad & Keyboard** - Control computer from phone
+- **Battery Monitoring** - View phone battery status on desktop
+- **Find My Phone** - Make phone ring to locate it
+- **Run Commands** - Execute predefined commands remotely
+- **Telephony Integration** - SMS and call notifications on desktop
 
-All features work wirelessly over Wi-Fi using **secure TLS encryption**.
+All features work wirelessly over Wi-Fi or Bluetooth using **secure TLS encryption**.
 
-## 🏗️ Architecture
+## Architecture
 
 ### Hybrid Approach
 
@@ -79,13 +79,13 @@ The project uses a **Rust core + Kotlin UI** architecture for optimal performanc
 - **JNA**: Native library loading
 - **AndroidX**: Jetpack libraries
 
-## 📊 Project Status
+## Project Status
 
 **Current Phase**: Plugin Migration & FFI Integration - **85% Complete**
 
 ### Completed Milestones
 
-#### Phase 0: Foundation ✅ (100%)
+#### Phase 0: Foundation (100% Complete)
 - **Issue #44**: Project restructuring and build system
 - **Issue #45**: NetworkPacket FFI implementation
 - **Issue #46**: Discovery service FFI
@@ -93,7 +93,7 @@ The project uses a **Rust core + Kotlin UI** architecture for optimal performanc
 - **Issue #48**: Core FFI validation
 - **Issue #51**: cargo-ndk build integration (9.3 MB native libs)
 
-#### Phase 1: Plugin FFI Migration ✅ (80%)
+#### Phase 1: Plugin FFI Migration (80% Complete)
 - **Issue #50**: FFI validation test framework (10 comprehensive tests)
 - **Issue #54**: Battery Plugin FFI migration
 - **Issue #55**: Telephony Plugin FFI migration
@@ -101,9 +101,9 @@ The project uses a **Rust core + Kotlin UI** architecture for optimal performanc
 - **Issue #57**: Notifications Plugin FFI migration
 - **Issue #58**: Clipboard Plugin FFI migration
 - **Issue #59**: FindMyPhone Plugin FFI migration
-- **Issue #60**: **RunCommand Plugin FFI migration** ✅ **JUST COMPLETED**
+- **Issue #60**: **RunCommand Plugin FFI migration** - **JUST COMPLETED**
 
-#### Build System Fixes ✅ (100%)
+#### Build System Fixes (100% Complete)
 - **168 compilation errors** resolved
   - Fixed Java plugin compatibility with FFI packets
   - Removed 520+ lines of duplicate helper functions
@@ -121,46 +121,46 @@ The project uses a **Rust core + Kotlin UI** architecture for optimal performanc
 ### Build Status
 
 ```
-✅ Kotlin Compilation: 0 errors
-✅ Java Compilation: 0 errors
-✅ APK Build: SUCCESSFUL (24 MB)
-✅ Native Libraries: Built (9.3 MB across 4 ABIs)
-✅ FFI Tests: 8/8 passing
+Kotlin Compilation: 0 errors
+Java Compilation: 0 errors
+APK Build: SUCCESSFUL (24 MB)
+Native Libraries: Built (9.3 MB across 4 ABIs)
+FFI Tests: 9/9 passing
 ```
 
 ### Plugin Migration Progress
 
 | Plugin | Status | FFI Wrapper | Kotlin Port | Tests |
 |--------|--------|-------------|-------------|-------|
-| Battery | ✅ | ✅ | ✅ | ✅ |
-| Telephony | ✅ | ✅ | ✅ | ✅ |
-| Share | ✅ | ✅ | ✅ | ✅ |
-| Notifications | ✅ | ✅ | ✅ | ✅ |
-| Clipboard | ✅ | ✅ | ✅ | ✅ |
-| FindMyPhone | ✅ | ✅ | ✅ | ✅ |
-| RunCommand | ✅ | ✅ | ✅ | ✅ |
-| Ping | ✅ | ✅ | ⏳ | ⏳ |
-| MPRIS | ⏳ | ⏳ | ❌ | ❌ |
-| MousePad | ⏳ | ⏳ | ❌ | ❌ |
-| SystemVolume | ⏳ | ⏳ | ❌ | ❌ |
-| Presenter | ⏳ | ⏳ | ❌ | ❌ |
-| Connectivity | ⏳ | ⏳ | ❌ | ❌ |
-| RemoteKeyboard | ⏳ | ⏳ | ❌ | ❌ |
-| Photo | ⏳ | ⏳ | ❌ | ❌ |
-| SFTP | ⏳ | ⏳ | ❌ | ❌ |
-| SMS | ⏳ | ⏳ | ❌ | ❌ |
-| LockDevice | ⏳ | ⏳ | ❌ | ❌ |
+| Battery | Done | Done | Done | Done |
+| Telephony | Done | Done | Done | Done |
+| Share | Done | Done | Done | Done |
+| Notifications | Done | Done | Done | Done |
+| Clipboard | Done | Done | Done | Done |
+| FindMyPhone | Done | Done | Done | Done |
+| RunCommand | Done | Done | Done | Done |
+| Ping | Done | Done | WIP | WIP |
+| MPRIS | WIP | WIP | Todo | Todo |
+| MousePad | WIP | WIP | Todo | Todo |
+| SystemVolume | WIP | WIP | Todo | Todo |
+| Presenter | WIP | WIP | Todo | Todo |
+| Connectivity | WIP | WIP | Todo | Todo |
+| RemoteKeyboard | WIP | WIP | Todo | Todo |
+| Photo | WIP | WIP | Todo | Todo |
+| SFTP | WIP | WIP | Todo | Todo |
+| SMS | WIP | WIP | Todo | Todo |
+| LockDevice | WIP | WIP | Todo | Todo |
 
 **Progress**: 7/18 plugins migrated (39%)
 
-## 🚀 Installation
+## Installation
 
 ### For Users
 
 **Coming Soon** - This modernized app will be available on:
-- 📱 Google Play Store
-- 🔓 F-Droid
-- 📦 GitHub Releases (direct APK downloads)
+- Google Play Store
+- F-Droid
+- GitHub Releases (direct APK downloads)
 
 **Desktop Requirement**: Install [cosmic-connect-desktop-app](https://github.com/olafkfreund/cosmic-connect-desktop-app) on your COSMIC Desktop system.
 
@@ -203,15 +203,15 @@ nix develop
 
 See [docs/guides/GETTING_STARTED.md](docs/guides/GETTING_STARTED.md) for detailed setup instructions.
 
-## 📚 Documentation
+## Documentation
 
 All documentation is organized in the `docs/` directory:
 
 ### Quick Links
-- 📖 [Documentation Index](docs/INDEX.md) - Complete documentation catalog
-- 🚀 [Getting Started](docs/guides/GETTING_STARTED.md) - Setup and first steps
-- 🏛️ [Architecture](docs/architecture/ARCHITECTURE.md) - System design
-- 🗺️ [Project Plan](docs/guides/PROJECT_PLAN.md) - Development roadmap
+- [Documentation Index](docs/INDEX.md) - Complete documentation catalog
+- [Getting Started](docs/guides/GETTING_STARTED.md) - Setup and first steps
+- [Architecture](docs/architecture/ARCHITECTURE.md) - System design
+- [Project Plan](docs/guides/PROJECT_PLAN.md) - Development roadmap
 
 ### Categories
 - `docs/guides/` - Setup, development, and implementation guides
@@ -226,7 +226,7 @@ All documentation is organized in the `docs/` directory:
 - [Issue #58 Completion Summary](docs/issue-58-completion-summary.md) - Clipboard plugin migration
 - [FFI Validation Plan](docs/issue-50-ffi-validation.md) - Comprehensive FFI testing
 
-## 🛠️ Development
+## Development
 
 ### Building
 
@@ -260,20 +260,20 @@ cosmic-connect-android/
 ├── src/                                    # Android source code
 │   ├── org/cosmic/cosmicconnect/           # Legacy Java/Kotlin code
 │   │   ├── Plugins/                        # Plugin implementations
-│   │   │   ├── BatteryPlugin/              # ✅ Migrated to FFI
-│   │   │   ├── RunCommandPlugin/           # ✅ Migrated to FFI + Kotlin
-│   │   │   ├── FindMyPhonePlugin/          # ✅ Migrated to FFI + Kotlin
-│   │   │   └── ...                         # ⏳ Others in progress
+│   │   │   ├── BatteryPlugin/              # Migrated to FFI
+│   │   │   ├── RunCommandPlugin/           # Migrated to FFI + Kotlin
+│   │   │   ├── FindMyPhonePlugin/          # Migrated to FFI + Kotlin
+│   │   │   └── ...                         # Others in progress
 │   │   ├── Device.kt                       # Device management
 │   │   └── BackgroundService.kt            # Main service
-│   ├── org/cosmic/cosmicconnect/Core/      # ✅ New FFI wrapper layer
+│   ├── org/cosmic/cosmicconnect/Core/      # New FFI wrapper layer
 │   │   ├── NetworkPacket.kt                # Immutable packet wrapper
 │   │   ├── DeviceInfo.kt                   # Device info types
 │   │   └── CosmicConnectCore.kt            # Core initialization
 │   └── uniffi/cosmic_connect_core/         # Generated FFI bindings
 ├── tests/                                  # Test suite
 │   └── org/cosmic/cosmicconnect/
-│       └── FFIValidationTest.kt            # ✅ 8 comprehensive tests
+│       └── FFIValidationTest.kt            # 9 comprehensive tests
 ├── build/rustJniLibs/                      # Built native libraries (9.3 MB)
 │   ├── arm64-v8a/                          # 2.4 MB
 │   ├── armeabi-v7a/                        # 2.3 MB
@@ -290,8 +290,8 @@ cosmic-connect-core/                        # Rust core library (separate repo)
 │   ├── network/                            # Discovery, connections
 │   ├── crypto/                             # TLS, certificates
 │   ├── plugins/                            # Plugin implementations
-│   │   ├── battery.rs                      # ✅ FFI enabled
-│   │   ├── runcommand.rs                   # ✅ FFI enabled
+│   │   ├── battery.rs                      # FFI enabled
+│   │   ├── runcommand.rs                   # FFI enabled
 │   │   └── ...
 │   └── ffi/                                # FFI interface (uniffi)
 └── bindings/                               # Generated language bindings
@@ -319,7 +319,7 @@ cosmic-connect-core/                        # Rust core library (separate repo)
 4. **Run tests**: `./gradlew test`
 5. **Install on device**: `./gradlew installDebug`
 
-## 🧪 Testing
+## Testing
 
 The project includes comprehensive FFI validation tests:
 
@@ -343,16 +343,16 @@ waydroid session start
 
 | Category | Tests | Status |
 |----------|-------|--------|
-| Native Library Loading | 1 | ✅ |
-| FFI Call Performance | 1 | ✅ |
-| NetworkPacket FFI | 1 | ✅ |
-| Battery Plugin FFI | 1 | ✅ |
-| Telephony Plugin FFI | 1 | ✅ |
-| Notifications Plugin FFI | 1 | ✅ |
-| Clipboard Plugin FFI | 1 | ✅ |
-| FindMyPhone Plugin FFI | 1 | ✅ |
-| RunCommand Plugin FFI | 1 | ✅ |
-| **Total** | **9** | **✅** |
+| Native Library Loading | 1 | Pass |
+| FFI Call Performance | 1 | Pass |
+| NetworkPacket FFI | 1 | Pass |
+| Battery Plugin FFI | 1 | Pass |
+| Telephony Plugin FFI | 1 | Pass |
+| Notifications Plugin FFI | 1 | Pass |
+| Clipboard Plugin FFI | 1 | Pass |
+| FindMyPhone Plugin FFI | 1 | Pass |
+| RunCommand Plugin FFI | 1 | Pass |
+| **Total** | **9** | **Pass** |
 
 Each test validates:
 - Packet creation correctness
@@ -361,7 +361,7 @@ Each test validates:
 - Packet uniqueness (ID generation)
 - Performance benchmarks
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please:
 
@@ -379,7 +379,7 @@ Contributions are welcome! Please:
 - **FFI Changes**: Update both Rust and Kotlin sides
 - **Breaking Changes**: Discuss in issues first
 
-## 🙏 Credits
+## Credits
 
 This project builds upon the excellent foundation of [KDE Connect](https://community.kde.org/KDEConnect):
 
@@ -395,20 +395,20 @@ We are grateful to the KDE team for:
 
 COSMIC Connect modernizes the Android app and adapts it for COSMIC Desktop while maintaining **full protocol compatibility** (v8).
 
-## 🔗 Related Projects
+## Related Projects
 
 - [cosmic-connect-core](https://github.com/olafkfreund/cosmic-connect-core) - Shared Rust core library
 - [cosmic-connect-desktop-app](https://github.com/olafkfreund/cosmic-connect-desktop-app) - COSMIC Desktop app
 - [COSMIC Desktop](https://github.com/pop-os/cosmic-epoch) - System76's COSMIC desktop environment
 - [KDE Connect](https://community.kde.org/KDEConnect) - Original KDE Connect project
 
-## 📜 License
+## License
 
 This project inherits the **GPL-3.0** license from KDE Connect.
 
 See [LICENSE](LICENSE) for full license text.
 
-## 📞 Contact & Support
+## Contact & Support
 
 - **Issues**: [GitHub Issues](https://github.com/olafkfreund/cosmic-connect-android/issues)
 - **Documentation**: [docs/INDEX.md](docs/INDEX.md)
@@ -425,6 +425,6 @@ See [LICENSE](LICENSE) for full license text.
 
 **Last Updated**: 2026-01-16
 
-**Made with** ❤️ **for COSMIC Desktop**
+**Made for COSMIC Desktop**
 
 </div>

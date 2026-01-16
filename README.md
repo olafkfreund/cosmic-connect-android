@@ -125,7 +125,7 @@ Kotlin Compilation: 0 errors
 Java Compilation: 0 errors
 APK Build: SUCCESSFUL (24 MB)
 Native Libraries: Built (9.3 MB across 4 ABIs)
-FFI Tests: 9/9 passing
+FFI Tests: 10/10 passing
 ```
 
 ### Plugin Migration Progress
@@ -139,7 +139,7 @@ FFI Tests: 9/9 passing
 | Clipboard | Done | Done | Done | Done |
 | FindMyPhone | Done | Done | Done | Done |
 | RunCommand | Done | Done | Done | Done |
-| Ping | Done | Done | WIP | WIP |
+| Ping | Done | Done | Done | Done |
 | MPRIS | WIP | WIP | Todo | Todo |
 | MousePad | WIP | WIP | Todo | Todo |
 | SystemVolume | WIP | WIP | Todo | Todo |
@@ -151,7 +151,7 @@ FFI Tests: 9/9 passing
 | SMS | WIP | WIP | Todo | Todo |
 | LockDevice | WIP | WIP | Todo | Todo |
 
-**Progress**: 7/18 plugins migrated (39%)
+**Progress**: 8/18 plugins migrated (44%)
 
 ## Installation
 
@@ -352,7 +352,8 @@ waydroid session start
 | Clipboard Plugin FFI | 1 | Pass |
 | FindMyPhone Plugin FFI | 1 | Pass |
 | RunCommand Plugin FFI | 1 | Pass |
-| **Total** | **9** | **Pass** |
+| Ping Plugin FFI | 1 | Pass |
+| **Total** | **10** | **Pass** |
 
 Each test validates:
 - Packet creation correctness

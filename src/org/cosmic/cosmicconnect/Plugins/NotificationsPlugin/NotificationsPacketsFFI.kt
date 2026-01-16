@@ -270,7 +270,7 @@ object NotificationsPacketsFFI {
             "Notification ID must not be empty"
         }
 
-        val ffiPacket = createCancelNotificationPacket(notificationId)
+        val ffiPacket = uniffi.cosmic_connect_core.createCancelNotificationPacket(notificationId)
         return NetworkPacket.fromFfiPacket(ffiPacket)
     }
 
@@ -295,7 +295,7 @@ object NotificationsPacketsFFI {
      * @return Immutable NetworkPacket ready to be sent
      */
     fun createNotificationRequestPacket(): NetworkPacket {
-        val ffiPacket = createNotificationRequestPacket()
+        val ffiPacket = uniffi.cosmic_connect_core.createNotificationRequestPacket()
         return NetworkPacket.fromFfiPacket(ffiPacket)
     }
 
@@ -326,7 +326,7 @@ object NotificationsPacketsFFI {
             "Notification ID must not be empty"
         }
 
-        val ffiPacket = createDismissNotificationPacket(notificationId)
+        val ffiPacket = uniffi.cosmic_connect_core.createDismissNotificationPacket(notificationId)
         return NetworkPacket.fromFfiPacket(ffiPacket)
     }
 
@@ -365,7 +365,7 @@ object NotificationsPacketsFFI {
             "Action name must not be empty"
         }
 
-        val ffiPacket = createNotificationActionPacket(notificationKey, action)
+        val ffiPacket = uniffi.cosmic_connect_core.createNotificationActionPacket(notificationKey, action)
         return NetworkPacket.fromFfiPacket(ffiPacket)
     }
 
@@ -406,7 +406,7 @@ object NotificationsPacketsFFI {
             "Reply message must not be empty"
         }
 
-        val ffiPacket = createNotificationReplyPacket(replyId, message)
+        val ffiPacket = uniffi.cosmic_connect_core.createNotificationReplyPacket(replyId, message)
         return NetworkPacket.fromFfiPacket(ffiPacket)
     }
 }

@@ -20,10 +20,11 @@ import android.telephony.TelephonyManager
 import android.util.Log
 import android.util.Pair
 import androidx.core.net.toUri
-import com.google.android.mms.pdu_alt.MultimediaMessagePdu
-import com.google.android.mms.pdu_alt.PduPersister
-import com.google.android.mms.util_alt.PduCache
-import com.google.android.mms.util_alt.PduCacheEntry
+// FIXME: MMS library not available - temporarily commented out
+// import com.google.android.mms.pdu_alt.MultimediaMessagePdu
+// import com.google.android.mms.pdu_alt.PduPersister
+// import com.google.android.mms.util_alt.PduCache
+// import com.google.android.mms.util_alt.PduCacheEntry
 import org.apache.commons.io.IOUtils
 import org.json.JSONArray
 import org.json.JSONException
@@ -649,7 +650,8 @@ object SMSHelper {
         }
 
         // Get address(es) of the message
-        val msg = getMessagePdu(context, uID)
+        // FIXME: getMessagePdu is temporarily unavailable due to MMS library
+        val msg = null // getMessagePdu(context, uID)
         val from = SmsMmsUtils.getMmsFrom(context, msg)
         val to = SmsMmsUtils.getMmsTo(context, msg)
         val addresses: MutableList<Address> = ArrayList()
@@ -700,6 +702,9 @@ object SMSHelper {
         )
     }
 
+    // FIXME: MMS library not available - temporarily commented out
+    // This function will need to be reimplemented when MMS support is added
+    /*
     private fun getMessagePdu(context: Context, uID: Long): MultimediaMessagePdu? {
         val uri = ContentUris.appendId(Telephony.Mms.CONTENT_URI.buildUpon(), uID).build()
         return try {
@@ -718,6 +723,7 @@ object SMSHelper {
             null
         }
     }
+    */
 
     /**
      * Get a text part of an MMS message

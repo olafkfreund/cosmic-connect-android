@@ -108,7 +108,7 @@ object BatteryPacketsFFI {
             "Threshold event must be 0 (none) or 1 (low battery), got: $thresholdEvent"
         }
 
-        val ffiPacket = createBatteryPacket(isCharging, currentCharge, thresholdEvent)
+        val ffiPacket = uniffi.cosmic_connect_core.createBatteryPacket(isCharging, currentCharge, thresholdEvent)
         return NetworkPacket.fromFfiPacket(ffiPacket)
     }
 
@@ -131,7 +131,7 @@ object BatteryPacketsFFI {
      * @return Immutable NetworkPacket ready to be sent
      */
     fun createBatteryRequest(): NetworkPacket {
-        val ffiPacket = createBatteryRequest()
+        val ffiPacket = uniffi.cosmic_connect_core.createBatteryRequest()
         return NetworkPacket.fromFfiPacket(ffiPacket)
     }
 }

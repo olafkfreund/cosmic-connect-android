@@ -758,6 +758,33 @@ internal interface UniffiCallbackInterfaceDiscoveryCallbackMethod2 : com.sun.jna
     )
 }
 
+internal interface UniffiCallbackInterfacePayloadCallbackMethod0 : com.sun.jna.Callback {
+    fun callback(
+        `uniffiHandle`: Long,
+        `bytesTransferred`: Long,
+        `totalBytes`: Long,
+        `uniffiOutReturn`: Pointer,
+        uniffiCallStatus: UniffiRustCallStatus,
+    )
+}
+
+internal interface UniffiCallbackInterfacePayloadCallbackMethod1 : com.sun.jna.Callback {
+    fun callback(
+        `uniffiHandle`: Long,
+        `uniffiOutReturn`: Pointer,
+        uniffiCallStatus: UniffiRustCallStatus,
+    )
+}
+
+internal interface UniffiCallbackInterfacePayloadCallbackMethod2 : com.sun.jna.Callback {
+    fun callback(
+        `uniffiHandle`: Long,
+        `error`: RustBuffer.ByValue,
+        `uniffiOutReturn`: Pointer,
+        uniffiCallStatus: UniffiRustCallStatus,
+    )
+}
+
 internal interface UniffiCallbackInterfacePluginCallbackMethod0 : com.sun.jna.Callback {
     fun callback(
         `uniffiHandle`: Long,
@@ -811,6 +838,29 @@ internal open class UniffiVTableCallbackInterfaceDiscoveryCallback(
     }
 }
 
+@Structure.FieldOrder("onProgress", "onComplete", "onError", "uniffiFree")
+internal open class UniffiVTableCallbackInterfacePayloadCallback(
+    @JvmField internal var `onProgress`: UniffiCallbackInterfacePayloadCallbackMethod0? = null,
+    @JvmField internal var `onComplete`: UniffiCallbackInterfacePayloadCallbackMethod1? = null,
+    @JvmField internal var `onError`: UniffiCallbackInterfacePayloadCallbackMethod2? = null,
+    @JvmField internal var `uniffiFree`: UniffiCallbackInterfaceFree? = null,
+) : Structure() {
+    class UniffiByValue(
+        `onProgress`: UniffiCallbackInterfacePayloadCallbackMethod0? = null,
+        `onComplete`: UniffiCallbackInterfacePayloadCallbackMethod1? = null,
+        `onError`: UniffiCallbackInterfacePayloadCallbackMethod2? = null,
+        `uniffiFree`: UniffiCallbackInterfaceFree? = null,
+    ) : UniffiVTableCallbackInterfacePayloadCallback(`onProgress`, `onComplete`, `onError`, `uniffiFree`),
+        Structure.ByValue
+
+    internal fun uniffiSetValue(other: UniffiVTableCallbackInterfacePayloadCallback) {
+        `onProgress` = other.`onProgress`
+        `onComplete` = other.`onComplete`
+        `onError` = other.`onError`
+        `uniffiFree` = other.`uniffiFree`
+    }
+}
+
 @Structure.FieldOrder("onBatteryUpdate", "onPingReceived", "onPacketReceived", "uniffiFree")
 internal open class UniffiVTableCallbackInterfacePluginCallback(
     @JvmField internal var `onBatteryUpdate`: UniffiCallbackInterfacePluginCallbackMethod0? = null,
@@ -845,6 +895,7 @@ internal interface UniffiLib : Library {
                     uniffiCheckContractApiVersion(lib)
                     uniffiCheckApiChecksums(lib)
                     uniffiCallbackInterfaceDiscoveryCallback.register(lib)
+                    uniffiCallbackInterfacePayloadCallback.register(lib)
                     uniffiCallbackInterfacePluginCallback.register(lib)
                 }
         }
@@ -879,6 +930,31 @@ internal interface UniffiLib : Library {
         `ptr`: Pointer,
         uniffi_out_err: UniffiRustCallStatus,
     ): Unit
+
+    fun uniffi_cosmic_connect_core_fn_clone_payloadtransferhandle(
+        `ptr`: Pointer,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): Pointer
+
+    fun uniffi_cosmic_connect_core_fn_free_payloadtransferhandle(
+        `ptr`: Pointer,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): Unit
+
+    fun uniffi_cosmic_connect_core_fn_method_payloadtransferhandle_cancel(
+        `ptr`: Pointer,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): Unit
+
+    fun uniffi_cosmic_connect_core_fn_method_payloadtransferhandle_get_id(
+        `ptr`: Pointer,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): Long
+
+    fun uniffi_cosmic_connect_core_fn_method_payloadtransferhandle_is_cancelled(
+        `ptr`: Pointer,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): Byte
 
     fun uniffi_cosmic_connect_core_fn_clone_pluginmanager(
         `ptr`: Pointer,
@@ -955,7 +1031,91 @@ internal interface UniffiLib : Library {
         `vtable`: UniffiVTableCallbackInterfaceDiscoveryCallback,
     ): Unit
 
+    fun uniffi_cosmic_connect_core_fn_init_callback_vtable_payloadcallback(`vtable`: UniffiVTableCallbackInterfacePayloadCallback): Unit
+
     fun uniffi_cosmic_connect_core_fn_init_callback_vtable_plugincallback(`vtable`: UniffiVTableCallbackInterfacePluginCallback): Unit
+
+    fun uniffi_cosmic_connect_core_fn_func_create_attachment_request(
+        `partId`: Long,
+        `uniqueIdentifier`: RustBuffer.ByValue,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_battery_packet(
+        `isCharging`: Byte,
+        `currentCharge`: Int,
+        `thresholdEvent`: Int,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_battery_request(uniffi_out_err: UniffiRustCallStatus): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_cancel_notification_packet(
+        `notificationId`: RustBuffer.ByValue,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_clipboard_connect_packet(
+        `content`: RustBuffer.ByValue,
+        `timestamp`: Long,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_clipboard_packet(
+        `content`: RustBuffer.ByValue,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_conversation_request(
+        `threadId`: Long,
+        `startTimestamp`: RustBuffer.ByValue,
+        `count`: RustBuffer.ByValue,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_conversations_request(uniffi_out_err: UniffiRustCallStatus): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_dismiss_notification_packet(
+        `notificationId`: RustBuffer.ByValue,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_file_share_packet(
+        `filename`: RustBuffer.ByValue,
+        `size`: Long,
+        `creationTime`: RustBuffer.ByValue,
+        `lastModified`: RustBuffer.ByValue,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_findmyphone_request(uniffi_out_err: UniffiRustCallStatus): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_multifile_update_packet(
+        `numberOfFiles`: Int,
+        `totalPayloadSize`: Long,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_mute_request(uniffi_out_err: UniffiRustCallStatus): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_notification_action_packet(
+        `notificationKey`: RustBuffer.ByValue,
+        `actionName`: RustBuffer.ByValue,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_notification_packet(
+        `notificationJson`: RustBuffer.ByValue,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_notification_reply_packet(
+        `replyId`: RustBuffer.ByValue,
+        `message`: RustBuffer.ByValue,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_notification_request_packet(uniffi_out_err: UniffiRustCallStatus): RustBuffer.ByValue
 
     fun uniffi_cosmic_connect_core_fn_func_create_packet(
         `packetType`: RustBuffer.ByValue,
@@ -971,6 +1131,43 @@ internal interface UniffiLib : Library {
     ): RustBuffer.ByValue
 
     fun uniffi_cosmic_connect_core_fn_func_create_plugin_manager(uniffi_out_err: UniffiRustCallStatus): Pointer
+
+    fun uniffi_cosmic_connect_core_fn_func_create_runcommand_execute(
+        `commandKey`: RustBuffer.ByValue,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_runcommand_request_list(uniffi_out_err: UniffiRustCallStatus): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_runcommand_setup(uniffi_out_err: UniffiRustCallStatus): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_send_sms_request(
+        `phoneNumber`: RustBuffer.ByValue,
+        `messageBody`: RustBuffer.ByValue,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_sms_messages(
+        `conversationsJson`: RustBuffer.ByValue,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_telephony_event(
+        `event`: RustBuffer.ByValue,
+        `phoneNumber`: RustBuffer.ByValue,
+        `contactName`: RustBuffer.ByValue,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_text_share_packet(
+        `text`: RustBuffer.ByValue,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_url_share_packet(
+        `url`: RustBuffer.ByValue,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
 
     fun uniffi_cosmic_connect_core_fn_func_deserialize_packet(
         `data`: RustBuffer.ByValue,
@@ -1016,6 +1213,14 @@ internal interface UniffiLib : Library {
 
     fun uniffi_cosmic_connect_core_fn_func_start_discovery(
         `localDevice`: RustBuffer.ByValue,
+        `callback`: Long,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): Pointer
+
+    fun uniffi_cosmic_connect_core_fn_func_start_payload_download(
+        `deviceHost`: RustBuffer.ByValue,
+        `port`: Short,
+        `expectedSize`: Long,
         `callback`: Long,
         uniffi_out_err: UniffiRustCallStatus,
     ): Pointer
@@ -1236,11 +1441,61 @@ internal interface UniffiLib : Library {
         uniffi_out_err: UniffiRustCallStatus,
     ): Unit
 
+    fun uniffi_cosmic_connect_core_checksum_func_create_attachment_request(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_battery_packet(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_battery_request(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_cancel_notification_packet(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_clipboard_connect_packet(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_clipboard_packet(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_conversation_request(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_conversations_request(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_dismiss_notification_packet(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_file_share_packet(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_findmyphone_request(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_multifile_update_packet(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_mute_request(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_notification_action_packet(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_notification_packet(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_notification_reply_packet(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_notification_request_packet(): Short
+
     fun uniffi_cosmic_connect_core_checksum_func_create_packet(): Short
 
     fun uniffi_cosmic_connect_core_checksum_func_create_packet_with_id(): Short
 
     fun uniffi_cosmic_connect_core_checksum_func_create_plugin_manager(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_runcommand_execute(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_runcommand_request_list(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_runcommand_setup(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_send_sms_request(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_sms_messages(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_telephony_event(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_text_share_packet(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_url_share_packet(): Short
 
     fun uniffi_cosmic_connect_core_checksum_func_deserialize_packet(): Short
 
@@ -1262,11 +1517,19 @@ internal interface UniffiLib : Library {
 
     fun uniffi_cosmic_connect_core_checksum_func_start_discovery(): Short
 
+    fun uniffi_cosmic_connect_core_checksum_func_start_payload_download(): Short
+
     fun uniffi_cosmic_connect_core_checksum_method_discoveryservice_get_devices(): Short
 
     fun uniffi_cosmic_connect_core_checksum_method_discoveryservice_is_running(): Short
 
     fun uniffi_cosmic_connect_core_checksum_method_discoveryservice_stop(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_method_payloadtransferhandle_cancel(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_method_payloadtransferhandle_get_id(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_method_payloadtransferhandle_is_cancelled(): Short
 
     fun uniffi_cosmic_connect_core_checksum_method_pluginmanager_create_ping(): Short
 
@@ -1296,6 +1559,12 @@ internal interface UniffiLib : Library {
 
     fun uniffi_cosmic_connect_core_checksum_method_discoverycallback_on_identity_received(): Short
 
+    fun uniffi_cosmic_connect_core_checksum_method_payloadcallback_on_progress(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_method_payloadcallback_on_complete(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_method_payloadcallback_on_error(): Short
+
     fun uniffi_cosmic_connect_core_checksum_method_plugincallback_on_battery_update(): Short
 
     fun uniffi_cosmic_connect_core_checksum_method_plugincallback_on_ping_received(): Short
@@ -1317,6 +1586,57 @@ private fun uniffiCheckContractApiVersion(lib: UniffiLib) {
 
 @Suppress("UNUSED_PARAMETER")
 private fun uniffiCheckApiChecksums(lib: UniffiLib) {
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_attachment_request() != 34889.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_battery_packet() != 43172.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_battery_request() != 42931.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_cancel_notification_packet() != 29893.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_clipboard_connect_packet() != 22866.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_clipboard_packet() != 11573.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_conversation_request() != 44273.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_conversations_request() != 33009.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_dismiss_notification_packet() != 33399.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_file_share_packet() != 24230.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_findmyphone_request() != 26.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_multifile_update_packet() != 62257.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_mute_request() != 32983.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_notification_action_packet() != 64804.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_notification_packet() != 28281.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_notification_reply_packet() != 7799.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_notification_request_packet() != 34500.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
     if (lib.uniffi_cosmic_connect_core_checksum_func_create_packet() != 33197.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
@@ -1324,6 +1644,30 @@ private fun uniffiCheckApiChecksums(lib: UniffiLib) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cosmic_connect_core_checksum_func_create_plugin_manager() != 26390.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_runcommand_execute() != 6813.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_runcommand_request_list() != 651.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_runcommand_setup() != 15630.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_send_sms_request() != 37218.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_sms_messages() != 48381.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_telephony_event() != 46498.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_text_share_packet() != 61205.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_url_share_packet() != 28515.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cosmic_connect_core_checksum_func_deserialize_packet() != 11876.toShort()) {
@@ -1356,6 +1700,9 @@ private fun uniffiCheckApiChecksums(lib: UniffiLib) {
     if (lib.uniffi_cosmic_connect_core_checksum_func_start_discovery() != 59411.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_start_payload_download() != 41177.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
     if (lib.uniffi_cosmic_connect_core_checksum_method_discoveryservice_get_devices() != 50355.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
@@ -1363,6 +1710,15 @@ private fun uniffiCheckApiChecksums(lib: UniffiLib) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cosmic_connect_core_checksum_method_discoveryservice_stop() != 42011.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_method_payloadtransferhandle_cancel() != 33771.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_method_payloadtransferhandle_get_id() != 56808.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_method_payloadtransferhandle_is_cancelled() != 53710.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cosmic_connect_core_checksum_method_pluginmanager_create_ping() != 45555.toShort()) {
@@ -1405,6 +1761,15 @@ private fun uniffiCheckApiChecksums(lib: UniffiLib) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cosmic_connect_core_checksum_method_discoverycallback_on_identity_received() != 44696.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_method_payloadcallback_on_progress() != 18347.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_method_payloadcallback_on_complete() != 45077.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_method_payloadcallback_on_error() != 56129.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cosmic_connect_core_checksum_method_plugincallback_on_battery_update() != 14609.toShort()) {
@@ -1948,6 +2313,273 @@ public object FfiConverterTypeDiscoveryService : FfiConverter<DiscoveryService, 
 
     override fun write(
         value: DiscoveryService,
+        buf: ByteBuffer,
+    ) {
+        // The Rust code always expects pointers written as 8 bytes,
+        // and will fail to compile if they don't fit.
+        buf.putLong(Pointer.nativeValue(lower(value)))
+    }
+}
+
+// This template implements a class for working with a Rust struct via a Pointer/Arc<T>
+// to the live Rust struct on the other side of the FFI.
+//
+// Each instance implements core operations for working with the Rust `Arc<T>` and the
+// Kotlin Pointer to work with the live Rust struct on the other side of the FFI.
+//
+// There's some subtlety here, because we have to be careful not to operate on a Rust
+// struct after it has been dropped, and because we must expose a public API for freeing
+// theq Kotlin wrapper object in lieu of reliable finalizers. The core requirements are:
+//
+//   * Each instance holds an opaque pointer to the underlying Rust struct.
+//     Method calls need to read this pointer from the object's state and pass it in to
+//     the Rust FFI.
+//
+//   * When an instance is no longer needed, its pointer should be passed to a
+//     special destructor function provided by the Rust FFI, which will drop the
+//     underlying Rust struct.
+//
+//   * Given an instance, calling code is expected to call the special
+//     `destroy` method in order to free it after use, either by calling it explicitly
+//     or by using a higher-level helper like the `use` method. Failing to do so risks
+//     leaking the underlying Rust struct.
+//
+//   * We can't assume that calling code will do the right thing, and must be prepared
+//     to handle Kotlin method calls executing concurrently with or even after a call to
+//     `destroy`, and to handle multiple (possibly concurrent!) calls to `destroy`.
+//
+//   * We must never allow Rust code to operate on the underlying Rust struct after
+//     the destructor has been called, and must never call the destructor more than once.
+//     Doing so may trigger memory unsafety.
+//
+//   * To mitigate many of the risks of leaking memory and use-after-free unsafety, a `Cleaner`
+//     is implemented to call the destructor when the Kotlin object becomes unreachable.
+//     This is done in a background thread. This is not a panacea, and client code should be aware that
+//      1. the thread may starve if some there are objects that have poorly performing
+//     `drop` methods or do significant work in their `drop` methods.
+//      2. the thread is shared across the whole library. This can be tuned by using `android_cleaner = true`,
+//         or `android = true` in the [`kotlin` section of the `uniffi.toml` file](https://mozilla.github.io/uniffi-rs/kotlin/configuration.html).
+//
+// If we try to implement this with mutual exclusion on access to the pointer, there is the
+// possibility of a race between a method call and a concurrent call to `destroy`:
+//
+//    * Thread A starts a method call, reads the value of the pointer, but is interrupted
+//      before it can pass the pointer over the FFI to Rust.
+//    * Thread B calls `destroy` and frees the underlying Rust struct.
+//    * Thread A resumes, passing the already-read pointer value to Rust and triggering
+//      a use-after-free.
+//
+// One possible solution would be to use a `ReadWriteLock`, with each method call taking
+// a read lock (and thus allowed to run concurrently) and the special `destroy` method
+// taking a write lock (and thus blocking on live method calls). However, we aim not to
+// generate methods with any hidden blocking semantics, and a `destroy` method that might
+// block if called incorrectly seems to meet that bar.
+//
+// So, we achieve our goals by giving each instance an associated `AtomicLong` counter to track
+// the number of in-flight method calls, and an `AtomicBoolean` flag to indicate whether `destroy`
+// has been called. These are updated according to the following rules:
+//
+//    * The initial value of the counter is 1, indicating a live object with no in-flight calls.
+//      The initial value for the flag is false.
+//
+//    * At the start of each method call, we atomically check the counter.
+//      If it is 0 then the underlying Rust struct has already been destroyed and the call is aborted.
+//      If it is nonzero them we atomically increment it by 1 and proceed with the method call.
+//
+//    * At the end of each method call, we atomically decrement and check the counter.
+//      If it has reached zero then we destroy the underlying Rust struct.
+//
+//    * When `destroy` is called, we atomically flip the flag from false to true.
+//      If the flag was already true we silently fail.
+//      Otherwise we atomically decrement and check the counter.
+//      If it has reached zero then we destroy the underlying Rust struct.
+//
+// Astute readers may observe that this all sounds very similar to the way that Rust's `Arc<T>` works,
+// and indeed it is, with the addition of a flag to guard against multiple calls to `destroy`.
+//
+// The overall effect is that the underlying Rust struct is destroyed only when `destroy` has been
+// called *and* all in-flight method calls have completed, avoiding violating any of the expectations
+// of the underlying Rust code.
+//
+// This makes a cleaner a better alternative to _not_ calling `destroy()` as
+// and when the object is finished with, but the abstraction is not perfect: if the Rust object's `drop`
+// method is slow, and/or there are many objects to cleanup, and it's on a low end Android device, then the cleaner
+// thread may be starved, and the app will leak memory.
+//
+// In this case, `destroy`ing manually may be a better solution.
+//
+// The cleaner can live side by side with the manual calling of `destroy`. In the order of responsiveness, uniffi objects
+// with Rust peers are reclaimed:
+//
+// 1. By calling the `destroy` method of the object, which calls `rustObject.free()`. If that doesn't happen:
+// 2. When the object becomes unreachable, AND the Cleaner thread gets to call `rustObject.free()`. If the thread is starved then:
+// 3. The memory is reclaimed when the process terminates.
+//
+// [1] https://stackoverflow.com/questions/24376768/can-java-finalize-an-object-when-it-is-still-in-scope/24380219
+//
+
+/**
+ * Payload transfer handle
+ */
+public interface PayloadTransferHandleInterface {
+    /**
+     * Cancel the payload transfer
+     */
+    fun `cancel`()
+
+    /**
+     * Get the transfer ID
+     */
+    fun `getId`(): kotlin.ULong
+
+    /**
+     * Check if transfer is cancelled
+     */
+    fun `isCancelled`(): kotlin.Boolean
+
+    companion object
+}
+
+/**
+ * Payload transfer handle
+ */
+open class PayloadTransferHandle :
+    Disposable,
+    AutoCloseable,
+    PayloadTransferHandleInterface {
+    constructor(pointer: Pointer) {
+        this.pointer = pointer
+        this.cleanable = UniffiLib.CLEANER.register(this, UniffiCleanAction(pointer))
+    }
+
+    /**
+     * This constructor can be used to instantiate a fake object. Only used for tests. Any
+     * attempt to actually use an object constructed this way will fail as there is no
+     * connected Rust object.
+     */
+    @Suppress("UNUSED_PARAMETER")
+    constructor(noPointer: NoPointer) {
+        this.pointer = null
+        this.cleanable = UniffiLib.CLEANER.register(this, UniffiCleanAction(pointer))
+    }
+
+    protected val pointer: Pointer?
+    protected val cleanable: UniffiCleaner.Cleanable
+
+    private val wasDestroyed = AtomicBoolean(false)
+    private val callCounter = AtomicLong(1)
+
+    override fun destroy() {
+        // Only allow a single call to this method.
+        // TODO: maybe we should log a warning if called more than once?
+        if (this.wasDestroyed.compareAndSet(false, true)) {
+            // This decrement always matches the initial count of 1 given at creation time.
+            if (this.callCounter.decrementAndGet() == 0L) {
+                cleanable.clean()
+            }
+        }
+    }
+
+    @Synchronized
+    override fun close() {
+        this.destroy()
+    }
+
+    internal inline fun <R> callWithPointer(block: (ptr: Pointer) -> R): R {
+        // Check and increment the call counter, to keep the object alive.
+        // This needs a compare-and-set retry loop in case of concurrent updates.
+        do {
+            val c = this.callCounter.get()
+            if (c == 0L) {
+                throw IllegalStateException("${this.javaClass.simpleName} object has already been destroyed")
+            }
+            if (c == Long.MAX_VALUE) {
+                throw IllegalStateException("${this.javaClass.simpleName} call counter would overflow")
+            }
+        } while (!this.callCounter.compareAndSet(c, c + 1L))
+        // Now we can safely do the method call without the pointer being freed concurrently.
+        try {
+            return block(this.uniffiClonePointer())
+        } finally {
+            // This decrement always matches the increment we performed above.
+            if (this.callCounter.decrementAndGet() == 0L) {
+                cleanable.clean()
+            }
+        }
+    }
+
+    // Use a static inner class instead of a closure so as not to accidentally
+    // capture `this` as part of the cleanable's action.
+    private class UniffiCleanAction(
+        private val pointer: Pointer?,
+    ) : Runnable {
+        override fun run() {
+            pointer?.let { ptr ->
+                uniffiRustCall { status ->
+                    UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_free_payloadtransferhandle(ptr, status)
+                }
+            }
+        }
+    }
+
+    fun uniffiClonePointer(): Pointer =
+        uniffiRustCall { status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_clone_payloadtransferhandle(pointer!!, status)
+        }
+
+    /**
+     * Cancel the payload transfer
+     */
+    @Throws(ProtocolException::class)
+    override fun `cancel`() =
+        callWithPointer {
+            uniffiRustCallWithError(ProtocolException) { _status ->
+                UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_method_payloadtransferhandle_cancel(it, _status)
+            }
+        }
+
+    /**
+     * Get the transfer ID
+     */
+    override fun `getId`(): kotlin.ULong =
+        FfiConverterULong.lift(
+            callWithPointer {
+                uniffiRustCall { _status ->
+                    UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_method_payloadtransferhandle_get_id(it, _status)
+                }
+            },
+        )
+
+    /**
+     * Check if transfer is cancelled
+     */
+    override fun `isCancelled`(): kotlin.Boolean =
+        FfiConverterBoolean.lift(
+            callWithPointer {
+                uniffiRustCall { _status ->
+                    UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_method_payloadtransferhandle_is_cancelled(it, _status)
+                }
+            },
+        )
+
+    companion object
+}
+
+public object FfiConverterTypePayloadTransferHandle : FfiConverter<PayloadTransferHandle, Pointer> {
+    override fun lower(value: PayloadTransferHandle): Pointer = value.uniffiClonePointer()
+
+    override fun lift(value: Pointer): PayloadTransferHandle = PayloadTransferHandle(value)
+
+    override fun read(buf: ByteBuffer): PayloadTransferHandle {
+        // The Rust code always writes pointers as 8 bytes, and will
+        // fail to compile if they don't fit.
+        return lift(Pointer(buf.getLong()))
+    }
+
+    override fun allocationSize(value: PayloadTransferHandle) = 8UL
+
+    override fun write(
+        value: PayloadTransferHandle,
         buf: ByteBuffer,
     ) {
         // The Rust code always expects pointers written as 8 bytes,
@@ -3051,6 +3683,117 @@ internal object uniffiCallbackInterfaceDiscoveryCallback {
 public object FfiConverterTypeDiscoveryCallback : FfiConverterCallbackInterface<DiscoveryCallback>()
 
 /**
+ * Payload transfer callback interface
+ *
+ * Receives progress updates and completion status for payload transfers.
+ */
+public interface PayloadCallback {
+    /**
+     * Called periodically during transfer with progress
+     *
+     * # Arguments
+     *
+     * * `bytes_transferred` - Number of bytes transferred so far
+     * * `total_bytes` - Total expected bytes
+     */
+    fun `onProgress`(
+        `bytesTransferred`: kotlin.ULong,
+        `totalBytes`: kotlin.ULong,
+    )
+
+    /**
+     * Called when transfer completes successfully
+     */
+    fun `onComplete`()
+
+    /**
+     * Called when transfer fails
+     *
+     * # Arguments
+     *
+     * * `error` - Error message describing the failure
+     */
+    fun `onError`(`error`: kotlin.String)
+
+    companion object
+}
+
+// Put the implementation in an object so we don't pollute the top-level namespace
+internal object uniffiCallbackInterfacePayloadCallback {
+    internal object `onProgress` : UniffiCallbackInterfacePayloadCallbackMethod0 {
+        override fun callback(
+            `uniffiHandle`: Long,
+            `bytesTransferred`: Long,
+            `totalBytes`: Long,
+            `uniffiOutReturn`: Pointer,
+            uniffiCallStatus: UniffiRustCallStatus,
+        ) {
+            val uniffiObj = FfiConverterTypePayloadCallback.handleMap.get(uniffiHandle)
+            val makeCall = {  uniffiObj.`onProgress`(
+                FfiConverterULong.lift(`bytesTransferred`),
+                FfiConverterULong.lift(`totalBytes`),
+            )
+            }
+            val writeReturn = { _: Unit -> Unit }
+            uniffiTraitInterfaceCall(uniffiCallStatus, makeCall, writeReturn)
+        }
+    }
+
+    internal object `onComplete` : UniffiCallbackInterfacePayloadCallbackMethod1 {
+        override fun callback(
+            `uniffiHandle`: Long,
+            `uniffiOutReturn`: Pointer,
+            uniffiCallStatus: UniffiRustCallStatus,
+        ) {
+            val uniffiObj = FfiConverterTypePayloadCallback.handleMap.get(uniffiHandle)
+            val makeCall = { uniffiObj.`onComplete`() }
+            val writeReturn = { _: Unit -> Unit }
+            uniffiTraitInterfaceCall(uniffiCallStatus, makeCall, writeReturn)
+        }
+    }
+
+    internal object `onError` : UniffiCallbackInterfacePayloadCallbackMethod2 {
+        override fun callback(
+            `uniffiHandle`: Long,
+            `error`: RustBuffer.ByValue,
+            `uniffiOutReturn`: Pointer,
+            uniffiCallStatus: UniffiRustCallStatus,
+        ) {
+            val uniffiObj = FfiConverterTypePayloadCallback.handleMap.get(uniffiHandle)
+            val makeCall = {  uniffiObj.`onError`(
+                FfiConverterString.lift(`error`),
+            )
+            }
+            val writeReturn = { _: Unit -> Unit }
+            uniffiTraitInterfaceCall(uniffiCallStatus, makeCall, writeReturn)
+        }
+    }
+
+    internal object uniffiFree : UniffiCallbackInterfaceFree {
+        override fun callback(handle: Long) {
+            FfiConverterTypePayloadCallback.handleMap.remove(handle)
+        }
+    }
+
+    internal var vtable =
+        UniffiVTableCallbackInterfacePayloadCallback.UniffiByValue(
+            `onProgress`,
+            `onComplete`,
+            `onError`,
+            uniffiFree,
+        )
+
+    // Registers the foreign callback with the Rust side.
+    // This method is generated for each callback interface.
+    internal fun register(lib: UniffiLib) {
+        lib.uniffi_cosmic_connect_core_fn_init_callback_vtable_payloadcallback(vtable)
+    }
+}
+
+// The ffiConverter which transforms the Callbacks in to handles to pass to Rust.
+public object FfiConverterTypePayloadCallback : FfiConverterCallbackInterface<PayloadCallback>()
+
+/**
  * Plugin event callback
  *
  * Receives events from plugins (battery updates, etc.)
@@ -3165,6 +3908,35 @@ internal object uniffiCallbackInterfacePluginCallback {
 
 // The ffiConverter which transforms the Callbacks in to handles to pass to Rust.
 public object FfiConverterTypePluginCallback : FfiConverterCallbackInterface<PluginCallback>()
+
+public object FfiConverterOptionalInt : FfiConverterRustBuffer<kotlin.Int?> {
+    override fun read(buf: ByteBuffer): kotlin.Int? {
+        if (buf.get().toInt() == 0) {
+            return null
+        }
+        return FfiConverterInt.read(buf)
+    }
+
+    override fun allocationSize(value: kotlin.Int?): ULong {
+        if (value == null) {
+            return 1UL
+        } else {
+            return 1UL + FfiConverterInt.allocationSize(value)
+        }
+    }
+
+    override fun write(
+        value: kotlin.Int?,
+        buf: ByteBuffer,
+    ) {
+        if (value == null) {
+            buf.put(0)
+        } else {
+            buf.put(1)
+            FfiConverterInt.write(value, buf)
+        }
+    }
+}
 
 public object FfiConverterOptionalLong : FfiConverterRustBuffer<kotlin.Long?> {
     override fun read(buf: ByteBuffer): kotlin.Long? {
@@ -3304,6 +4076,367 @@ public object FfiConverterSequenceTypeFfiDeviceInfo : FfiConverterRustBuffer<Lis
 }
 
 /**
+ * Create a request for a message attachment
+ *
+ * Creates a packet requesting a message attachment (MMS media).
+ *
+ * # Arguments
+ *
+ * * `part_id` - The attachment part ID from the message
+ * * `unique_identifier` - Unique file identifier for the attachment
+ */
+@Throws(ProtocolException::class)
+fun `createAttachmentRequest`(
+    `partId`: kotlin.Long,
+    `uniqueIdentifier`: kotlin.String,
+): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_attachment_request(
+                FfiConverterLong.lower(`partId`),
+                FfiConverterString.lower(`uniqueIdentifier`),
+                _status,
+            )
+        },
+    )
+
+/**
+ * Create a battery status packet
+ *
+ * Creates a packet containing current battery state.
+ *
+ * # Arguments
+ *
+ * * `is_charging` - Whether device is charging
+ * * `current_charge` - Battery percentage (0-100)
+ * * `threshold_event` - Threshold event (0=none, 1=low)
+ */
+@Throws(ProtocolException::class)
+fun `createBatteryPacket`(
+    `isCharging`: kotlin.Boolean,
+    `currentCharge`: kotlin.Int,
+    `thresholdEvent`: kotlin.Int,
+): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_battery_packet(
+                FfiConverterBoolean.lower(`isCharging`),
+                FfiConverterInt.lower(`currentCharge`),
+                FfiConverterInt.lower(`thresholdEvent`),
+                _status,
+            )
+        },
+    )
+
+/**
+ * Create a battery status request packet
+ *
+ * Creates a packet requesting battery status from remote device.
+ */
+@Throws(ProtocolException::class)
+fun `createBatteryRequest`(): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_battery_request(_status)
+        },
+    )
+
+/**
+ * Create a cancel notification packet
+ *
+ * Creates a packet to inform desktop that a notification was dismissed.
+ *
+ * # Arguments
+ *
+ * * `notification_id` - ID of the notification to cancel
+ */
+@Throws(ProtocolException::class)
+fun `createCancelNotificationPacket`(`notificationId`: kotlin.String): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_cancel_notification_packet(
+                FfiConverterString.lower(`notificationId`),
+                _status,
+            )
+        },
+    )
+
+/**
+ * Create a clipboard connect packet with timestamp
+ *
+ * Creates a packet for syncing clipboard state when devices connect.
+ * Includes timestamp for sync loop prevention.
+ *
+ * # Arguments
+ *
+ * * `content` - Text content to sync to clipboard
+ * * `timestamp` - UNIX epoch timestamp in milliseconds when content was last modified
+ */
+@Throws(ProtocolException::class)
+fun `createClipboardConnectPacket`(
+    `content`: kotlin.String,
+    `timestamp`: kotlin.Long,
+): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_clipboard_connect_packet(
+                FfiConverterString.lower(`content`),
+                FfiConverterLong.lower(`timestamp`),
+                _status,
+            )
+        },
+    )
+
+/**
+ * Create a standard clipboard update packet
+ *
+ * Creates a packet for syncing clipboard changes between devices.
+ * This packet does not include a timestamp and represents a standard clipboard update.
+ *
+ * # Arguments
+ *
+ * * `content` - Text content to sync to clipboard
+ */
+@Throws(ProtocolException::class)
+fun `createClipboardPacket`(`content`: kotlin.String): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_clipboard_packet(FfiConverterString.lower(`content`), _status)
+        },
+    )
+
+/**
+ * Create a request for messages in a specific conversation
+ *
+ * Creates a packet requesting messages from a specific SMS thread.
+ *
+ * # Arguments
+ *
+ * * `thread_id` - The conversation thread ID
+ * * `start_timestamp` - Optional earliest message timestamp (ms since epoch)
+ * * `count` - Optional maximum number of messages to return
+ */
+@Throws(ProtocolException::class)
+fun `createConversationRequest`(
+    `threadId`: kotlin.Long,
+    `startTimestamp`: kotlin.Long?,
+    `count`: kotlin.Int?,
+): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_conversation_request(
+                FfiConverterLong.lower(`threadId`),
+                FfiConverterOptionalLong.lower(`startTimestamp`),
+                FfiConverterOptionalInt.lower(`count`),
+                _status,
+            )
+        },
+    )
+
+/**
+ * Create a request for SMS conversations list
+ *
+ * Creates a packet requesting the list of SMS conversations.
+ */
+@Throws(ProtocolException::class)
+fun `createConversationsRequest`(): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_conversations_request(_status)
+        },
+    )
+
+/**
+ * Create a dismiss notification packet
+ *
+ * Creates a packet requesting the remote device to dismiss a notification.
+ *
+ * # Arguments
+ *
+ * * `notification_id` - ID of the notification to dismiss
+ */
+@Throws(ProtocolException::class)
+fun `createDismissNotificationPacket`(`notificationId`: kotlin.String): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_dismiss_notification_packet(
+                FfiConverterString.lower(`notificationId`),
+                _status,
+            )
+        },
+    )
+
+/**
+ * Create a file share packet
+ *
+ * Creates a packet for sharing a file with optional metadata.
+ * The file payload must be sent separately via payload transfer.
+ *
+ * # Arguments
+ *
+ * * `filename` - Name of the file being shared
+ * * `size` - Size of the file in bytes
+ * * `creation_time` - Optional creation timestamp (milliseconds since epoch)
+ * * `last_modified` - Optional last modified timestamp (milliseconds since epoch)
+ */
+@Throws(ProtocolException::class)
+fun `createFileSharePacket`(
+    `filename`: kotlin.String,
+    `size`: kotlin.Long,
+    `creationTime`: kotlin.Long?,
+    `lastModified`: kotlin.Long?,
+): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_file_share_packet(
+                FfiConverterString.lower(`filename`),
+                FfiConverterLong.lower(`size`),
+                FfiConverterOptionalLong.lower(`creationTime`),
+                FfiConverterOptionalLong.lower(`lastModified`),
+                _status,
+            )
+        },
+    )
+
+/**
+ * Create a find my phone request packet
+ *
+ * Creates a packet to make a remote device ring at maximum volume.
+ * Packet has an empty body.
+ */
+@Throws(ProtocolException::class)
+fun `createFindmyphoneRequest`(): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_findmyphone_request(_status)
+        },
+    )
+
+/**
+ * Create a multi-file update packet
+ *
+ * Creates a packet indicating multiple files will be transferred.
+ * This packet is sent before transferring multiple files.
+ *
+ * # Arguments
+ *
+ * * `number_of_files` - Total number of files to be transferred
+ * * `total_payload_size` - Combined size of all files in bytes
+ */
+@Throws(ProtocolException::class)
+fun `createMultifileUpdatePacket`(
+    `numberOfFiles`: kotlin.Int,
+    `totalPayloadSize`: kotlin.Long,
+): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_multifile_update_packet(
+                FfiConverterInt.lower(`numberOfFiles`),
+                FfiConverterLong.lower(`totalPayloadSize`),
+                _status,
+            )
+        },
+    )
+
+/**
+ * Create a mute ringer request packet
+ *
+ * Creates a packet requesting the phone to mute its ringer.
+ */
+@Throws(ProtocolException::class)
+fun `createMuteRequest`(): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_mute_request(_status)
+        },
+    )
+
+/**
+ * Create a notification action packet
+ *
+ * Creates a packet to trigger an action button on a remote notification.
+ *
+ * # Arguments
+ *
+ * * `notification_key` - ID of the notification
+ * * `action_name` - Name of the action button to trigger
+ */
+@Throws(ProtocolException::class)
+fun `createNotificationActionPacket`(
+    `notificationKey`: kotlin.String,
+    `actionName`: kotlin.String,
+): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_notification_action_packet(
+                FfiConverterString.lower(`notificationKey`),
+                FfiConverterString.lower(`actionName`),
+                _status,
+            )
+        },
+    )
+
+/**
+ * Create a full notification packet
+ *
+ * Pass notification data as JSON string to avoid massive parameter list.
+ * Required fields: id, appName, isClearable, time, silent
+ * Optional fields: title, text, ticker, requestReplyId, actions, payloadHash
+ *
+ * # Arguments
+ *
+ * * `notification_json` - JSON string with notification data
+ */
+@Throws(ProtocolException::class)
+fun `createNotificationPacket`(`notificationJson`: kotlin.String): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_notification_packet(
+                FfiConverterString.lower(`notificationJson`),
+                _status,
+            )
+        },
+    )
+
+/**
+ * Create a notification reply packet
+ *
+ * Creates a packet to send an inline reply to a notification.
+ *
+ * # Arguments
+ *
+ * * `reply_id` - UUID from the notification's requestReplyId field
+ * * `message` - Reply message text
+ */
+@Throws(ProtocolException::class)
+fun `createNotificationReplyPacket`(
+    `replyId`: kotlin.String,
+    `message`: kotlin.String,
+): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_notification_reply_packet(
+                FfiConverterString.lower(`replyId`),
+                FfiConverterString.lower(`message`),
+                _status,
+            )
+        },
+    )
+
+/**
+ * Create a notification request packet
+ *
+ * Creates a packet requesting all current notifications from remote device.
+ */
+@Throws(ProtocolException::class)
+fun `createNotificationRequestPacket`(): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_notification_request_packet(_status)
+        },
+    )
+
+/**
  * Create a new network packet
  *
  * # Arguments
@@ -3353,6 +4486,156 @@ fun `createPluginManager`(): PluginManager =
     FfiConverterTypePluginManager.lift(
         uniffiRustCall { _status ->
             UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_plugin_manager(_status)
+        },
+    )
+
+/**
+ * Create a run command execute packet
+ *
+ * Creates a packet requesting execution of a specific command.
+ *
+ * # Arguments
+ *
+ * * `command_key` - The unique key/ID of the command to execute
+ */
+@Throws(ProtocolException::class)
+fun `createRuncommandExecute`(`commandKey`: kotlin.String): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_runcommand_execute(FfiConverterString.lower(`commandKey`), _status)
+        },
+    )
+
+/**
+ * Create a run command request list packet
+ *
+ * Creates a packet requesting the list of available commands from the remote device.
+ */
+@Throws(ProtocolException::class)
+fun `createRuncommandRequestList`(): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_runcommand_request_list(_status)
+        },
+    )
+
+/**
+ * Create a run command setup packet
+ *
+ * Creates a packet requesting the remote device to open command setup interface.
+ */
+@Throws(ProtocolException::class)
+fun `createRuncommandSetup`(): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_runcommand_setup(_status)
+        },
+    )
+
+/**
+ * Create a request to send an SMS message
+ *
+ * Creates a packet requesting to send an SMS from the Android device.
+ *
+ * # Arguments
+ *
+ * * `phone_number` - Recipient phone number
+ * * `message_body` - Message text to send
+ */
+@Throws(ProtocolException::class)
+fun `createSendSmsRequest`(
+    `phoneNumber`: kotlin.String,
+    `messageBody`: kotlin.String,
+): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_send_sms_request(
+                FfiConverterString.lower(`phoneNumber`),
+                FfiConverterString.lower(`messageBody`),
+                _status,
+            )
+        },
+    )
+
+/**
+ * Create an SMS messages packet
+ *
+ * Creates a packet containing SMS conversations with messages.
+ *
+ * # Arguments
+ *
+ * * `conversations_json` - JSON string with conversations array
+ */
+@Throws(ProtocolException::class)
+fun `createSmsMessages`(`conversationsJson`: kotlin.String): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_sms_messages(
+                FfiConverterString.lower(`conversationsJson`),
+                _status,
+            )
+        },
+    )
+
+/**
+ * Create a telephony event packet (call notification)
+ *
+ * Creates a packet for notifying about phone call events.
+ *
+ * # Arguments
+ *
+ * * `event` - Event type: "ringing", "talking", "missedCall", or "sms"
+ * * `phone_number` - Caller's phone number (optional)
+ * * `contact_name` - Contact name from address book (optional)
+ */
+@Throws(ProtocolException::class)
+fun `createTelephonyEvent`(
+    `event`: kotlin.String,
+    `phoneNumber`: kotlin.String?,
+    `contactName`: kotlin.String?,
+): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_telephony_event(
+                FfiConverterString.lower(`event`),
+                FfiConverterOptionalString.lower(`phoneNumber`),
+                FfiConverterOptionalString.lower(`contactName`),
+                _status,
+            )
+        },
+    )
+
+/**
+ * Create a text share packet
+ *
+ * Creates a packet for sharing plain text content.
+ *
+ * # Arguments
+ *
+ * * `text` - Text content to share
+ */
+@Throws(ProtocolException::class)
+fun `createTextSharePacket`(`text`: kotlin.String): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_text_share_packet(FfiConverterString.lower(`text`), _status)
+        },
+    )
+
+/**
+ * Create a URL share packet
+ *
+ * Creates a packet for sharing a URL.
+ *
+ * # Arguments
+ *
+ * * `url` - URL to share
+ */
+@Throws(ProtocolException::class)
+fun `createUrlSharePacket`(`url`: kotlin.String): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_url_share_packet(FfiConverterString.lower(`url`), _status)
         },
     )
 
@@ -3489,6 +4772,42 @@ fun `startDiscovery`(
             UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_start_discovery(
                 FfiConverterTypeFfiDeviceInfo.lower(`localDevice`),
                 FfiConverterTypeDiscoveryCallback.lower(`callback`),
+                _status,
+            )
+        },
+    )
+
+/**
+ * Start a payload download
+ *
+ * Downloads a file payload from a remote device via TCP connection.
+ * Progress, completion, and errors are reported via the callback.
+ *
+ * # Arguments
+ *
+ * * `device_host` - IP address of the remote device
+ * * `port` - TCP port for payload transfer
+ * * `expected_size` - Expected size of the payload in bytes
+ * * `callback` - Callback for progress updates and completion
+ *
+ * # Returns
+ *
+ * A PayloadTransferHandle that can be used to cancel the transfer
+ */
+@Throws(ProtocolException::class)
+fun `startPayloadDownload`(
+    `deviceHost`: kotlin.String,
+    `port`: kotlin.UShort,
+    `expectedSize`: kotlin.Long,
+    `callback`: PayloadCallback,
+): PayloadTransferHandle =
+    FfiConverterTypePayloadTransferHandle.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_start_payload_download(
+                FfiConverterString.lower(`deviceHost`),
+                FfiConverterUShort.lower(`port`),
+                FfiConverterLong.lower(`expectedSize`),
+                FfiConverterTypePayloadCallback.lower(`callback`),
                 _status,
             )
         },

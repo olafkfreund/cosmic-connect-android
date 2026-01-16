@@ -163,6 +163,47 @@ data class NetworkPacket(
         }
 
         /**
+         * Convert legacy NetworkPacket to new immutable NetworkPacket
+         *
+         * @param legacyPacket Old mutable NetworkPacket from org.cosmic.cosmicconnect package
+         * @return New immutable NetworkPacket from org.cosmic.cosmicconnect.Core package
+         */
+        @JvmStatic
+        fun fromLegacyPacket(legacyPacket: org.cosmic.cosmicconnect.NetworkPacket): NetworkPacket {
+            // Extract type
+            val type = legacyPacket.type
+
+            // Parse serialized packet to extract body
+            val serialized = legacyPacket.serialize()
+            val jsonPacket = org.json.JSONObject(serialized)
+            val jsonBody = jsonPacket.getJSONObject("body")
+
+            // Convert JSONObject to Map<String, Any>
+            val body = mutableMapOf<String, Any>()
+            val keys = jsonBody.keys()
+            while (keys.hasNext()) {
+                val key = keys.next()
+                body[key] = jsonBody.get(key)
+            }
+
+            // Determine payloadSize from packet if available
+            val payloadSize = if (jsonPacket.has("payloadSize")) {
+                jsonPacket.getLong("payloadSize").takeIf { it > 0 }
+            } else null
+
+            // Create new packet
+            return create(type, body).copy(payloadSize = payloadSize)
+        }
+
+        /**
+         * Alias for fromLegacyPacket for consistency with some plugin code
+         */
+        @JvmStatic
+        fun fromLegacy(legacyPacket: org.cosmic.cosmicconnect.NetworkPacket): NetworkPacket {
+            return fromLegacyPacket(legacyPacket)
+        }
+
+        /**
          * Convert map to JSON string using Android's JSONObject
          *
          * This ensures proper JSON encoding with correct escape sequences

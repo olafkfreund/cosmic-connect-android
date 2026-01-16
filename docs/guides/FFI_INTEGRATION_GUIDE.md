@@ -665,8 +665,8 @@ private fun convertLegacyPacket(legacy: LegacyNetworkPacket): NetworkPacket {
 
 | Plugin | Status | FFI Support | Complexity | Notes |
 |--------|--------|-------------|------------|-------|
-| Ping | ✅ Complete | ✅ Yes | Low | Reference implementation |
-| Battery | ✅ Ready | ✅ Yes | Low | FFI available, needs integration |
+| Ping | ✅ Complete | ✅ Yes | Low | Reference implementation (PingPluginFFI.kt) |
+| Battery | ✅ Complete | ✅ Yes | Low | Production-ready (BatteryPluginFFI.kt) |
 | Share | 📋 Planned | ⚠️ Needs Device refactoring | High | Issue #53 |
 | Clipboard | 🔜 Future | ⚠️ Needs Device refactoring | Medium | Issue #54 |
 | Notification | 🔜 Future | ⚠️ Needs Device refactoring | Medium | Blocked |
@@ -675,13 +675,13 @@ private fun convertLegacyPacket(legacy: LegacyNetworkPacket): NetworkPacket {
 | SFTP | 🔜 Future | ❌ Not yet | High | Requires file system access |
 | RunCommand | 🔜 Future | ❌ Not yet | Medium | Requires command storage |
 
-### Next Plugin to Migrate: Battery
+### Next Plugin to Migrate: Share (Issue #53)
 
-The Battery plugin is the ideal next candidate because:
-- FFI support already exists in PluginManager
-- Similar complexity to Ping (low)
-- No payload transfers or complex state
-- Simple packet structure
+The Share plugin is the next candidate because:
+- High value feature (file sharing is critical)
+- Comprehensive implementation plan exists (docs/issues/issue-53-share-plugin-plan.md)
+- Requires Device architecture refactoring (challenging but documented)
+- 5-phase approach ready (15-22 hours estimated)
 
 ---
 
@@ -689,7 +689,8 @@ The Battery plugin is the ideal next candidate because:
 
 ### Reference Implementations
 
-- **PingPluginFFI.kt** - Production example (see: `src/org/cosmic/cosmicconnect/Plugins/PingPlugin/PingPluginFFI.kt`)
+- **PingPluginFFI.kt** - Simple plugin example (see: `src/org/cosmic/cosmicconnect/Plugins/PingPlugin/PingPluginFFI.kt`)
+- **BatteryPluginFFI.kt** - Android system integration example with BroadcastReceiver (see: `src/org/cosmic/cosmicconnect/Plugins/BatteryPlugin/BatteryPluginFFI.kt`)
 - **Issue #52 Status** - FFI wrapper layer details (see: `docs/issues/issue-52-wrapper-status.md`)
 - **Issue #53 Plan** - Share plugin migration plan (see: `docs/issues/issue-53-share-plugin-plan.md`)
 
@@ -706,7 +707,8 @@ The Battery plugin is the ideal next candidate because:
 
 ---
 
-**Document Version**: 1.0
+**Document Version**: 1.1
 **Last Updated**: 2026-01-16
-**Based On**: PingPluginFFI.kt production implementation
+**Based On**: PingPluginFFI.kt and BatteryPluginFFI.kt production implementations
 **Status**: Ready for use in plugin migrations
+**Progress**: 2/10 plugins migrated (Ping ✅, Battery ✅)

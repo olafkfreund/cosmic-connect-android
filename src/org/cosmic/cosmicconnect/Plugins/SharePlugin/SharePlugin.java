@@ -39,6 +39,8 @@ import org.cosmic.cosmicconnect.Helpers.FilesHelper;
 import org.cosmic.cosmicconnect.Helpers.IntentHelper;
 import org.cosmic.cosmicconnect.Core.NetworkPacket;
 import org.cosmic.cosmicconnect.Plugins.Plugin;
+import org.cosmic.cosmicconnect.Plugins.SharePlugin.SharePacketsFFI;
+import static org.cosmic.cosmicconnect.Plugins.SharePlugin.SharePacketsFFIKt.*;
 import org.cosmic.cosmicconnect.Plugins.PluginFactory;
 import org.cosmic.cosmicconnect.UserInterface.MainActivity;
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment;
@@ -71,8 +73,8 @@ public class SharePlugin extends Plugin {
     final static String CANCEL_SHARE_DEVICE_ID_EXTRA = "deviceId";
     final static String CANCEL_SHARE_BACKGROUND_JOB_ID_EXTRA = "backgroundJobId";
 
-    private final static String PACKET_TYPE_SHARE_REQUEST = "cosmicconnect.share.request";
-    final static String PACKET_TYPE_SHARE_REQUEST_UPDATE = "cosmicconnect.share.request.update";
+    private final static String PACKET_TYPE_SHARE_REQUEST = "kdeconnect.share.request";
+    final static String PACKET_TYPE_SHARE_REQUEST_UPDATE = "kdeconnect.share.request.update";
 
     final static String KEY_NUMBER_OF_FILES = "numberOfFiles";
     final static String KEY_TOTAL_PAYLOAD_SIZE = "totalPayloadSize";
@@ -215,12 +217,13 @@ public class SharePlugin extends Plugin {
                 return true;
             }
 
-            if (np.has("filename")) {
+            // Use FFI extension properties for type checking
+            if (getIsFileShare(np)) {
                 receiveFile(np);
-            } else if (np.has("text")) {
+            } else if (getIsTextShare(np)) {
                 Log.i("SharePlugin", "hasText");
                 receiveText(np);
-            } else if (np.has("url")) {
+            } else if (getIsUrlShare(np)) {
                 receiveUrl(np);
             } else {
                 Log.e("SharePlugin", "Error: Nothing attached!");
@@ -235,7 +238,12 @@ public class SharePlugin extends Plugin {
     }
 
     private void receiveUrl(NetworkPacket np) {
-        String url = np.getString("url");
+        // Use FFI extension property to extract URL
+        String url = getSharedUrl(np);
+        if (url == null) {
+            Log.e("SharePlugin", "URL is null");
+            return;
+        }
 
         Log.i("SharePlugin", "hasUrl: " + url);
 
@@ -246,7 +254,13 @@ public class SharePlugin extends Plugin {
     }
 
     private void receiveText(NetworkPacket np) {
-        String text = np.getString("text");
+        // Use FFI extension property to extract text
+        String text = getSharedText(np);
+        if (text == null) {
+            Log.e("SharePlugin", "Text is null");
+            return;
+        }
+
         ClipboardManager cm = ContextCompat.getSystemService(context, ClipboardManager.class);
         cm.setText(text);
         handler.post(() -> Toast.makeText(context, R.string.shareplugin_text_saved, Toast.LENGTH_LONG).show());
@@ -338,10 +352,13 @@ public class SharePlugin extends Plugin {
                     isUrl = false;
                 }
 
-                // Create immutable packet
-                Map<String, Object> body = new HashMap<>();
-                body.put(isUrl ? "url" : "text", text);
-                NetworkPacket packet = NetworkPacket.create(SharePlugin.PACKET_TYPE_SHARE_REQUEST, body);
+                // Create packet using FFI wrappers
+                NetworkPacket packet;
+                if (isUrl) {
+                    packet = SharePacketsFFI.INSTANCE.createUrlShare(text);
+                } else {
+                    packet = SharePacketsFFI.INSTANCE.createTextShare(text);
+                }
 
                 // Convert and send
                 device.sendPacket(convertToLegacyPacket(packet));

@@ -81,6 +81,7 @@ public class LanLinkProvider extends BaseLinkProvider {
     private DatagramSocket udpServer;
 
     private final MdnsDiscovery mdnsDiscovery;
+    private final DiscoveryManager discoveryManager;
 
     private long lastBroadcast = 0;
     private final static long delayBetweenBroadcasts = 200;
@@ -385,6 +386,7 @@ public class LanLinkProvider extends BaseLinkProvider {
     public LanLinkProvider(Context context) {
         this.context = context;
         this.mdnsDiscovery = new MdnsDiscovery(context, this);
+        this.discoveryManager = new DiscoveryManager(context, this);
     }
 
     private void setupUdpListener() {
@@ -559,11 +561,19 @@ public class LanLinkProvider extends BaseLinkProvider {
             setupUdpListener();
             setupTcpListener();
 
+            // Start FFI Discovery (replaces UDP broadcasts)
+            try {
+                discoveryManager.start();
+            } catch (Exception e) {
+                Log.e("LanLinkProvider", "Failed to start FFI discovery", e);
+            }
+
             mdnsDiscovery.startDiscovering();
             if (TrustedNetworkHelper.isTrustedNetwork(context)) {
                 mdnsDiscovery.startAnnouncing();
             }
 
+            // Keep UDP broadcast for backward compatibility with older devices
             broadcastUdpIdentityPacket(null);
         }
     }
@@ -576,6 +586,13 @@ public class LanLinkProvider extends BaseLinkProvider {
         }
         lastBroadcast = System.currentTimeMillis();
 
+        // Restart FFI Discovery on network change
+        try {
+            discoveryManager.restart();
+        } catch (Exception e) {
+            Log.e("LanLinkProvider", "Failed to restart FFI discovery", e);
+        }
+
         broadcastUdpIdentityPacket(network);
         mdnsDiscovery.stopDiscovering();
         mdnsDiscovery.startDiscovering();
@@ -585,6 +602,14 @@ public class LanLinkProvider extends BaseLinkProvider {
     public void onStop() {
         //Log.i("KDE/LanLinkProvider", "onStop");
         listening = false;
+
+        // Stop FFI Discovery
+        try {
+            discoveryManager.stop();
+        } catch (Exception e) {
+            Log.e("LanLink", "Exception stopping FFI discovery", e);
+        }
+
         mdnsDiscovery.stopAnnouncing();
         mdnsDiscovery.stopDiscovering();
         try {

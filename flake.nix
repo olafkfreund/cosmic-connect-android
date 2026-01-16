@@ -27,7 +27,7 @@
           platformVersions = [ "34" ];
           buildToolsVersions = [ "34.0.0" ];
           includeNDK = true;
-          ndkVersions = [ "26.1.10909125" ];  # NDK for Rust Android targets
+          ndkVersions = [ "27.0.12077973" ];  # NDK 27 for Rust Android targets (matches Gradle requirement)
           includeSystemImages = false;
         };
 

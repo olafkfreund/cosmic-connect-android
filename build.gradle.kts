@@ -25,6 +25,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.dependencyLicenseReport)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.rust.android)
 }
 
 val licenseResDir = File("$projectDir/build/dependency-license-res")
@@ -38,6 +39,15 @@ kotlin {
     compilerOptions {
         jvmTarget = JvmTarget.JVM_11
     }
+}
+
+// Configure Rust library building
+cargo {
+    module = "../cosmic-connect-core"
+    libname = "cosmic_connect_core"
+    targets = listOf("arm64", "arm", "x86_64", "x86")
+    profile = "release"
+    targetDirectory = "../cosmic-connect-core/target"
 }
 
 android {
@@ -74,6 +84,8 @@ android {
             setRoot(".") // By default AGP expects all directories under src/main/...
             java.srcDir("src") // by default is "java"
             res.setSrcDirs(listOf(licenseResDir, "res")) // add licenseResDir
+            // Include Rust-generated JNI libraries
+            jniLibs.srcDir("${projectDir}/build/rustJniLibs/android")
         }
         getByName("debug") {
             res.srcDir("dbg-res")
@@ -307,6 +319,9 @@ dependencies {
     implementation(libs.apache.mina.core)
 
     implementation(libs.bcpkix.jdk15on) //For SSL certificate generation
+
+    // JNA for Rust FFI bindings (UniFFI-generated)
+    implementation(libs.jna)
 
     ksp(libs.classindexksp)
 

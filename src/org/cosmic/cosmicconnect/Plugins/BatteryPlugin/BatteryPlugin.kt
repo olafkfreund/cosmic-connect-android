@@ -109,7 +109,7 @@ class BatteryPlugin : Plugin() {
     override val outgoingPacketTypes: Array<String> = arrayOf(PACKET_TYPE_BATTERY)
 
     companion object {
-        const val PACKET_TYPE_BATTERY = "cosmicconnect.battery"
+        const val PACKET_TYPE_BATTERY = "kdeconnect.battery"
 
         // keep these fields in sync with cosmicconnect-kded:BatteryPlugin.h:ThresholdBatteryEvent
         private const val THRESHOLD_EVENT_NONE = 0

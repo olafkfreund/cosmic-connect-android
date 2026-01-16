@@ -282,8 +282,8 @@ class NetworkPacket private constructor(
     }
 
     companion object {
-        const val PACKET_TYPE_IDENTITY: String = "cosmicconnect.identity"
-        const val PACKET_TYPE_PAIR: String = "cosmicconnect.pair"
+        const val PACKET_TYPE_IDENTITY: String = "kdeconnect.identity"
+        const val PACKET_TYPE_PAIR: String = "kdeconnect.pair"
 
         @JvmStatic
         @Throws(JSONException::class)

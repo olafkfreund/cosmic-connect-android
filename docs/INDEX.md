@@ -35,6 +35,9 @@ Essential guides for setting up and understanding the project.
 - [Optimization Roadmap](guides/optimization-roadmap.md) - Performance improvement plans
 - [Project Status (2025-01-15)](guides/project-status-2025-01-15.md) - Historical snapshot
 
+### FFI Integration
+- [FFI Integration Guide](guides/FFI_INTEGRATION_GUIDE.md) - Complete guide for migrating plugins to FFI (based on PingPluginFFI.kt)
+
 ---
 
 ## Architecture

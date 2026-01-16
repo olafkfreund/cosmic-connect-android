@@ -62,21 +62,19 @@ class PresenterPlugin : Plugin() {
     }
 
     fun sendPointer(xDelta: Float, yDelta: Float) {
-        // Create immutable packet
-        val packet = NetworkPacket.create(PACKET_TYPE_PRESENTER, mapOf(
-            "dx" to xDelta.toDouble(),
-            "dy" to yDelta.toDouble()
-        ))
+        // Create packet using FFI
+        val packet = PresenterPacketsFFI.createPointerMovement(
+            xDelta.toDouble(),
+            yDelta.toDouble()
+        )
 
         // Convert and send
         device.sendPacket(convertToLegacyPacket(packet))
     }
 
     fun stopPointer() {
-        // Create immutable packet
-        val packet = NetworkPacket.create(PACKET_TYPE_PRESENTER, mapOf(
-            "stop" to true
-        ))
+        // Create packet using FFI
+        val packet = PresenterPacketsFFI.createStop()
 
         // Convert and send
         device.sendPacket(convertToLegacyPacket(packet))

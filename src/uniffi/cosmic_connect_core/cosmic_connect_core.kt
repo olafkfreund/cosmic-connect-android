@@ -1132,6 +1132,14 @@ internal interface UniffiLib : Library {
 
     fun uniffi_cosmic_connect_core_fn_func_create_plugin_manager(uniffi_out_err: UniffiRustCallStatus): Pointer
 
+    fun uniffi_cosmic_connect_core_fn_func_create_presenter_pointer(
+        `dx`: Double,
+        `dy`: Double,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_presenter_stop(uniffi_out_err: UniffiRustCallStatus): RustBuffer.ByValue
+
     fun uniffi_cosmic_connect_core_fn_func_create_runcommand_execute(
         `commandKey`: RustBuffer.ByValue,
         uniffi_out_err: UniffiRustCallStatus,
@@ -1481,6 +1489,10 @@ internal interface UniffiLib : Library {
 
     fun uniffi_cosmic_connect_core_checksum_func_create_plugin_manager(): Short
 
+    fun uniffi_cosmic_connect_core_checksum_func_create_presenter_pointer(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_presenter_stop(): Short
+
     fun uniffi_cosmic_connect_core_checksum_func_create_runcommand_execute(): Short
 
     fun uniffi_cosmic_connect_core_checksum_func_create_runcommand_request_list(): Short
@@ -1644,6 +1656,12 @@ private fun uniffiCheckApiChecksums(lib: UniffiLib) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cosmic_connect_core_checksum_func_create_plugin_manager() != 26390.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_presenter_pointer() != 15996.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_presenter_stop() != 52126.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cosmic_connect_core_checksum_func_create_runcommand_execute() != 6813.toShort()) {
@@ -1887,6 +1905,23 @@ public object FfiConverterLong : FfiConverter<Long, Long> {
         buf: ByteBuffer,
     ) {
         buf.putLong(value)
+    }
+}
+
+public object FfiConverterDouble : FfiConverter<Double, Double> {
+    override fun lift(value: Double): Double = value
+
+    override fun read(buf: ByteBuffer): Double = buf.getDouble()
+
+    override fun lower(value: Double): Double = value
+
+    override fun allocationSize(value: Double) = 8UL
+
+    override fun write(
+        value: Double,
+        buf: ByteBuffer,
+    ) {
+        buf.putDouble(value)
     }
 }
 
@@ -4441,7 +4476,7 @@ fun `createNotificationRequestPacket`(): FfiPacket =
  *
  * # Arguments
  *
- * * `packet_type` - Packet type (e.g., "kdeconnect.ping")
+ * * `packet_type` - Packet type (e.g., "cconnect.ping")
  * * `body` - JSON string containing packet body
  */
 @Throws(ProtocolException::class)
@@ -4486,6 +4521,44 @@ fun `createPluginManager`(): PluginManager =
     FfiConverterTypePluginManager.lift(
         uniffiRustCall { _status ->
             UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_plugin_manager(_status)
+        },
+    )
+
+/**
+ * Create a presenter pointer movement packet
+ *
+ * Creates a packet to send pointer delta movements for a laser pointer effect.
+ *
+ * # Arguments
+ *
+ * * `dx` - Horizontal movement delta
+ * * `dy` - Vertical movement delta
+ */
+@Throws(ProtocolException::class)
+fun `createPresenterPointer`(
+    `dx`: kotlin.Double,
+    `dy`: kotlin.Double,
+): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_presenter_pointer(
+                FfiConverterDouble.lower(`dx`),
+                FfiConverterDouble.lower(`dy`),
+                _status,
+            )
+        },
+    )
+
+/**
+ * Create a presenter stop packet
+ *
+ * Creates a packet to stop presentation mode on the remote device.
+ */
+@Throws(ProtocolException::class)
+fun `createPresenterStop`(): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_presenter_stop(_status)
         },
     )
 

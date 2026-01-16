@@ -632,6 +632,80 @@ class FFIValidationTest {
         Log.i(TAG, "   - Future timestamps")
     }
 
+    /**
+     * Test 3.7: FindMyPhone Plugin FFI - Issue #59
+     *
+     * Verify FindMyPhone packet creation via FFI function:
+     * - createFindmyphoneRequest()
+     */
+    @Test
+    fun testFindMyPhonePlugin() {
+        Log.i(TAG, "=== Test 3.7: FindMyPhone Plugin FFI (Issue #59) ===")
+
+        try {
+            // Test 1: Create FindMyPhone ring request
+            Log.i(TAG, "   Test 1: Create FindMyPhone ring request")
+            val ringPacket = createFindmyphoneRequest()
+
+            assertNotNull("FindMyPhone packet should not be null", ringPacket)
+            assertEquals(
+                "Packet type should be findmyphone.request",
+                "kdeconnect.findmyphone.request",
+                ringPacket.packetType
+            )
+            Log.i(TAG, "   ✅ FindMyPhone packet creation successful")
+
+            // Test 2: Verify empty body
+            Log.i(TAG, "   Test 2: Verify packet has empty body")
+            assertTrue("Packet body should be empty", ringPacket.body.isEmpty())
+            Log.i(TAG, "   ✅ Empty body verified (no additional data needed)")
+
+            // Test 3: Verify packet can be serialized
+            Log.i(TAG, "   Test 3: Verify packet serialization")
+            val serializedBytes = serializePacket(ringPacket)
+            assertNotNull("Serialized bytes should not be null", serializedBytes)
+            assertTrue("Serialized bytes should not be empty", serializedBytes.isNotEmpty())
+
+            val serializedStr = serializedBytes.decodeToString()
+            assertTrue("Should contain packet type", serializedStr.contains("\"type\":\"kdeconnect.findmyphone.request\""))
+            assertTrue("Should end with newline", serializedStr.endsWith("\n"))
+            Log.i(TAG, "   ✅ Packet serialization successful")
+
+            // Test 4: Verify packet can be deserialized
+            Log.i(TAG, "   Test 4: Verify packet deserialization")
+            val deserializedPacket = deserializePacket(serializedBytes)
+            assertNotNull("Deserialized packet should not be null", deserializedPacket)
+            assertEquals(
+                "Deserialized type should match",
+                "kdeconnect.findmyphone.request",
+                deserializedPacket.packetType
+            )
+            assertTrue("Deserialized body should be empty", deserializedPacket.body.isEmpty())
+            Log.i(TAG, "   ✅ Packet deserialization successful")
+
+            // Test 5: Verify multiple requests are independent
+            Log.i(TAG, "   Test 5: Create multiple ring requests")
+            val request1 = createFindmyphoneRequest()
+            val request2 = createFindmyphoneRequest()
+
+            assertNotEquals("Packet IDs should be unique", request1.id, request2.id)
+            assertEquals("Both should have same type", request1.packetType, request2.packetType)
+            Log.i(TAG, "   ✅ Multiple requests are independent")
+
+            // Summary
+            Log.i(TAG, "")
+            Log.i(TAG, "✅ All FindMyPhone plugin FFI tests passed (5/5)")
+            Log.i(TAG, "   - Ring request creation")
+            Log.i(TAG, "   - Empty body validation")
+            Log.i(TAG, "   - Serialization")
+            Log.i(TAG, "   - Deserialization")
+            Log.i(TAG, "   - Multiple independent requests")
+        } catch (e: Exception) {
+            Log.e(TAG, "⚠️ FindMyPhone plugin test failed", e)
+            fail("FindMyPhone FFI tests failed: ${e.message}")
+        }
+    }
+
     // ============================================================================
     // Test Summary
     // ============================================================================

@@ -312,12 +312,12 @@ androidComponents {
 
 configurations.all {
     resolutionStrategy {
-        // Force androidx library versions compatible with SDK 34
+        // Force androidx library versions compatible with SDK 35
         force("androidx.core:core:1.13.1")
         force("androidx.core:core-ktx:1.13.1")
         force("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
         force("androidx.recyclerview:recyclerview:1.3.2")
-        force("androidx.activity:activity-compose:1.9.3")
+        // Remove activity-compose force to allow version from libs.versions.toml (1.12.2)
     }
 }
 

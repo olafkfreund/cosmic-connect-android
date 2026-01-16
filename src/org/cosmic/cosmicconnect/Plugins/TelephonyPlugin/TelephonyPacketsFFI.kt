@@ -136,7 +136,7 @@ object TelephonyPacketsFFI {
             "Event must be one of: ringing, talking, missedCall, sms"
         }
 
-        val ffiPacket = createTelephonyEvent(event, phoneNumber, contactName)
+        val ffiPacket = uniffi.cosmic_connect_core.createTelephonyEvent(event, phoneNumber, contactName)
         return NetworkPacket.fromFfiPacket(ffiPacket)
     }
 
@@ -156,7 +156,7 @@ object TelephonyPacketsFFI {
      * @return Immutable NetworkPacket ready to be sent
      */
     fun createMuteRequest(): NetworkPacket {
-        val ffiPacket = createMuteRequest()
+        val ffiPacket = uniffi.cosmic_connect_core.createMuteRequest()
         return NetworkPacket.fromFfiPacket(ffiPacket)
     }
 
@@ -210,7 +210,7 @@ object TelephonyPacketsFFI {
     fun createSmsMessages(conversationsJson: String): NetworkPacket {
         require(conversationsJson.isNotBlank()) { "Conversations JSON cannot be blank" }
 
-        val ffiPacket = createSmsMessages(conversationsJson)
+        val ffiPacket = uniffi.cosmic_connect_core.createSmsMessages(conversationsJson)
         return NetworkPacket.fromFfiPacket(ffiPacket)
     }
 
@@ -230,7 +230,7 @@ object TelephonyPacketsFFI {
      * @return Immutable NetworkPacket ready to be sent
      */
     fun createConversationsRequest(): NetworkPacket {
-        val ffiPacket = createConversationsRequest()
+        val ffiPacket = uniffi.cosmic_connect_core.createConversationsRequest()
         return NetworkPacket.fromFfiPacket(ffiPacket)
     }
 
@@ -283,7 +283,7 @@ object TelephonyPacketsFFI {
             require(count > 0) { "Count must be positive" }
         }
 
-        val ffiPacket = createConversationRequest(threadId, startTimestamp, count)
+        val ffiPacket = uniffi.cosmic_connect_core.createConversationRequest(threadId, startTimestamp, count)
         return NetworkPacket.fromFfiPacket(ffiPacket)
     }
 
@@ -319,7 +319,7 @@ object TelephonyPacketsFFI {
         require(partId > 0) { "Part ID must be positive" }
         require(uniqueIdentifier.isNotBlank()) { "Unique identifier cannot be blank" }
 
-        val ffiPacket = createAttachmentRequest(partId, uniqueIdentifier)
+        val ffiPacket = uniffi.cosmic_connect_core.createAttachmentRequest(partId, uniqueIdentifier)
         return NetworkPacket.fromFfiPacket(ffiPacket)
     }
 
@@ -354,7 +354,7 @@ object TelephonyPacketsFFI {
         require(phoneNumber.isNotBlank()) { "Phone number cannot be blank" }
         require(messageBody.isNotBlank()) { "Message body cannot be blank" }
 
-        val ffiPacket = createSendSmsRequest(phoneNumber, messageBody)
+        val ffiPacket = uniffi.cosmic_connect_core.createSendSmsRequest(phoneNumber, messageBody)
         return NetworkPacket.fromFfiPacket(ffiPacket)
     }
 }

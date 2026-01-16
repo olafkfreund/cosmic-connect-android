@@ -29,7 +29,7 @@ fun WindowInsetsCompat.getSafeDrawInsets(): Insets {
 }
 
 fun View.setupBottomPadding() {
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+    if (Build.VERSION.SDK_INT < 35) { // Android 15 (VANILLA_ICE_CREAM)
         return
     }
     val originalBottomPadding = paddingBottom
@@ -41,7 +41,7 @@ fun View.setupBottomPadding() {
 }
 
 fun View.setupBottomMargin() {
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+    if (Build.VERSION.SDK_INT < 35) { // Android 15 (VANILLA_ICE_CREAM)
         return
     }
     val originalBottomMargin = (layoutParams as MarginLayoutParams).bottomMargin
@@ -55,7 +55,7 @@ fun View.setupBottomMargin() {
 }
 
 fun Modifier.safeDrawPadding(): Modifier {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+    return if (Build.VERSION.SDK_INT >= 35) { // Android 15 (VANILLA_ICE_CREAM)
         safeDrawingPadding()
     } else {
         Modifier

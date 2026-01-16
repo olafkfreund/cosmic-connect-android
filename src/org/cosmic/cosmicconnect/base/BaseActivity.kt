@@ -25,7 +25,7 @@ abstract class BaseActivity<VB: ViewBinding> : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+        if (Build.VERSION.SDK_INT >= 35) { // Android 15 (VANILLA_ICE_CREAM)
             binding.root.setOnApplyWindowInsetsListenerCompat { view, insets ->
                 onWindowInsetsChanged(view, insets)
                 insets

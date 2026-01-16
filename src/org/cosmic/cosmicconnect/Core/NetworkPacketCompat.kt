@@ -268,8 +268,7 @@ operator fun NetworkPacket.contains(key: String): Boolean = key in body
 fun NetworkPacket.toBuilder(): NetworkPacketBuilder {
     return NetworkPacketBuilder(
         type = type,
-        body = body.toMutableMap(),
-        payloadSize = payloadSize
+        body = body.toMutableMap()
     )
 }
 

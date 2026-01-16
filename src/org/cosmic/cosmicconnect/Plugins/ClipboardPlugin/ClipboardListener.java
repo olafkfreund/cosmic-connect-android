@@ -76,7 +76,7 @@ public class ClipboardListener {
                     String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.US).format(new Date());
                     // Listen only ClipboardService errors after now
                     String logcatFilter;
-                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+                    if (Build.VERSION.SDK_INT > 35) { // Android 15 (VANILLA_ICE_CREAM)
                         logcatFilter = "E ClipboardService";
                     } else {
                         logcatFilter = "ClipboardService:E";

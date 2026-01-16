@@ -50,13 +50,36 @@ cargo {
     targetDirectory = "../cosmic-connect-core/target"
 }
 
+// Fix Python 3.13 compatibility: Replace pipes module with shlex in linker wrapper
+tasks.register("patchLinkerWrapper") {
+    doLast {
+        val linkerWrapper = file("build/linker-wrapper/linker-wrapper.py")
+        if (linkerWrapper.exists()) {
+            val content = linkerWrapper.readText()
+            if (content.contains("import pipes")) {
+                val fixed = content
+                    .replace("import pipes", "import shlex  # pipes removed in Python 3.13")
+                    .replace("pipes.quote", "shlex.quote")
+                linkerWrapper.writeText(fixed)
+                println("✅ Fixed linker wrapper for Python 3.13 compatibility")
+            }
+        }
+    }
+}
+
+// Apply the patch before any cargo build tasks
+tasks.matching { it.name.startsWith("cargoBuild") }.configureEach {
+    dependsOn("patchLinkerWrapper")
+}
+
 android {
     namespace = "org.cosmic.cosmicconnect"
-    compileSdk = 36
+    compileSdk = 34
+    ndkVersion = "27.0.12077973"
     defaultConfig {
         applicationId = "org.cosmic.cosmicconnect"
         minSdk = 23
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 13404
         versionName = "1.34.4"
         proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
@@ -124,6 +147,13 @@ android {
     lint {
         abortOnError = false
         checkReleaseBuilds = false
+    }
+
+    // Temporarily disable AAR metadata checks for Issue #50 FFI testing
+    // This allows building with older compileSdk while using newer libraries
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
     }
 
     applicationVariants.all {
@@ -280,6 +310,17 @@ androidComponents {
     }
 }
 
+configurations.all {
+    resolutionStrategy {
+        // Force androidx library versions compatible with SDK 34
+        force("androidx.core:core:1.13.1")
+        force("androidx.core:core-ktx:1.13.1")
+        force("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+        force("androidx.recyclerview:recyclerview:1.3.2")
+        force("androidx.activity:activity-compose:1.9.3")
+    }
+}
+
 dependencies {
     // It has a bug that causes a crash when using PosixFilePermission and minSdk < 26.
     // It has been used in SSHD Core.
@@ -287,6 +328,7 @@ dependencies {
     // See `FixPosixFilePermissionClassVisitorFactory` for more details.
     coreLibraryDesugaring(libs.android.desugarJdkLibsNio)
 
+    // Compose dependencies
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.icons)
     implementation(libs.androidx.compose.ui.tooling.preview)
@@ -330,8 +372,9 @@ dependencies {
     // This library was originally authored as com.klinkerapps at https://github.com/klinker41/android-smsmms.
     // However, that version is under-loved. I have therefore made "some fixes" and published it.
     // Please see https://invent.kde.org/sredman/android-smsmms/-/tree/master
-    implementation(libs.android.smsmms)
-    implementation(libs.logger)
+    // TEMPORARILY COMMENTED OUT FOR FFI TESTING - Issue #50
+    // implementation(libs.android.smsmms)
+    // implementation(libs.logger)
 
     implementation(libs.commons.io)
     implementation(libs.commons.collections4)

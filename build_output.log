@@ -1,0 +1,73 @@
+
+> Configure project :
+WARNING: The option setting 'android.experimental.lint.missingBaselineIsEmptyBaseline=true' is experimental.
+The current default is 'false'.
+Found a variant called debug
+    Found an output file cosmicconnect-android-debug.apk, renaming to cosmicconnect-android-debug-02f99703.apk
+Found a variant called release
+[CXX5106] NDK was located by using ndk.dir property. This method is deprecated and will be removed in a future release. Please delete ndk.dir from local.properties and set android.ndkVersion to [27.0.12077973] in all native modules in the project. https://developer.android.com/r/studio-ui/ndk-dir
+
+> Task :generateLicenseReport
+> Task :preBuild
+> Task :preDebugBuild
+> Task :mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :dataBindingMergeDependencyArtifactsDebug
+> Task :generateDebugResValues FROM-CACHE
+> Task :extractDebugSupportedLocales
+> Task :generateDebugLocaleConfig FROM-CACHE
+> Task :generateDebugResources
+
+> Task :mergeDebugResources
+/home/olafkfreund/Source/GitHub/cosmic-connect-android/res/values-az/strings.xml:83:2: Multiple substitutions specified in non-positional format of string resource string/sendkeystrokes_sent_text. Did you mean to add the formatted="false" attribute?
+/home/olafkfreund/Source/GitHub/cosmic-connect-android/res/values-fr/strings.xml:95:2: Multiple substitutions specified in non-positional format of string resource string/sendkeystrokes_sent_text. Did you mean to add the formatted="false" attribute?
+
+> Task :packageDebugResources
+> Task :generateDebugBuildConfig FROM-CACHE
+> Task :checkDebugAarMetadata FAILED
+> Task :mapDebugSourceSetPaths
+> Task :createDebugCompatibleScreenManifests
+> Task :parseDebugLocalResources
+
+[Incubating] Problems report is available at: file:///home/olafkfreund/Source/GitHub/cosmic-connect-android/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':checkDebugAarMetadata'.
+> A failure occurred while executing com.android.build.gradle.internal.tasks.CheckAarMetadataWorkAction
+   > An issue was found when checking AAR metadata:
+     
+       1.  Dependency 'androidx.recyclerview:recyclerview:1.4.0' requires libraries and applications that
+           depend on it to compile against version 35 or later of the
+           Android APIs.
+     
+           : is currently compiled against android-34.
+     
+           Also, the maximum recommended compile SDK version for Android Gradle
+           plugin 8.3.2 is 34.
+     
+           Recommended action: Update this project's version of the Android Gradle
+           plugin to one that supports 35, then update this project to use
+           compileSdk of at least 35.
+     
+           Note that updating a library or application's compileSdk (which
+           allows newer APIs to be used) can be done separately from updating
+           targetSdk (which opts the app in to new runtime behavior) and
+           minSdk (which determines which devices the app can be installed
+           on).
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.14.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 19s
+13 actionable tasks: 10 executed, 3 from cache

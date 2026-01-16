@@ -24,8 +24,8 @@
 
         # Android SDK components with NDK for Rust compilation
         androidComposition = pkgs.androidenv.composeAndroidPackages {
-          platformVersions = [ "34" ];
-          buildToolsVersions = [ "34.0.0" ];
+          platformVersions = [ "34" "35" "36" ];
+          buildToolsVersions = [ "34.0.0" "35.0.0" ];
           includeNDK = true;
           ndkVersions = [ "27.0.12077973" ];  # NDK 27 for Rust Android targets (matches Gradle requirement)
           includeSystemImages = false;

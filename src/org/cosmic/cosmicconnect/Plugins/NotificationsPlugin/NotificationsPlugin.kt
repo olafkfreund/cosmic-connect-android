@@ -131,11 +131,11 @@ class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener 
     private lateinit var keyguardManager: KeyguardManager
 
     // Plugin metadata
-    override fun getDisplayName(): String =
-        context.resources.getString(R.string.pref_plugin_notifications)
+    override val displayName: String
+        get() = context.resources.getString(R.string.pref_plugin_notifications)
 
-    override fun getDescription(): String =
-        context.resources.getString(R.string.pref_plugin_notifications_desc)
+    override val description: String
+        get() = context.resources.getString(R.string.pref_plugin_notifications_desc)
 
     override fun hasSettings(): Boolean = true
 
@@ -172,15 +172,17 @@ class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener 
     }
 
     // Packet types
-    override fun getSupportedPacketTypes(): Array<String> = arrayOf(
-        "kdeconnect.notification.request",
-        "kdeconnect.notification.reply",
-        "kdeconnect.notification.action"
-    )
+    override val supportedPacketTypes: Array<String>
+        get() = arrayOf(
+            "kdeconnect.notification.request",
+            "kdeconnect.notification.reply",
+            "kdeconnect.notification.action"
+        )
 
-    override fun getOutgoingPacketTypes(): Array<String> = arrayOf(
-        "kdeconnect.notification"
-    )
+    override val outgoingPacketTypes: Array<String>
+        get() = arrayOf(
+            "kdeconnect.notification"
+        )
 
     // Lifecycle
     override fun onCreate(): Boolean {

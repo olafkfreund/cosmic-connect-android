@@ -79,17 +79,17 @@ class ClipboardPlugin : Plugin() {
     // Plugin Metadata
     // ========================================================================
 
-    override fun getDisplayName(): String =
-        context.resources.getString(R.string.pref_plugin_clipboard)
+    override val displayName: String
+        get() = context.resources.getString(R.string.pref_plugin_clipboard)
 
-    override fun getDescription(): String =
-        context.resources.getString(R.string.pref_plugin_clipboard_desc)
+    override val description: String
+        get() = context.resources.getString(R.string.pref_plugin_clipboard_desc)
 
-    override fun getSupportedPacketTypes(): Array<String> =
-        arrayOf(PACKET_TYPE_CLIPBOARD, PACKET_TYPE_CLIPBOARD_CONNECT)
+    override val supportedPacketTypes: Array<String>
+        get() = arrayOf(PACKET_TYPE_CLIPBOARD, PACKET_TYPE_CLIPBOARD_CONNECT)
 
-    override fun getOutgoingPacketTypes(): Array<String> =
-        arrayOf(PACKET_TYPE_CLIPBOARD, PACKET_TYPE_CLIPBOARD_CONNECT)
+    override val outgoingPacketTypes: Array<String>
+        get() = arrayOf(PACKET_TYPE_CLIPBOARD, PACKET_TYPE_CLIPBOARD_CONNECT)
 
     // ========================================================================
     // Packet Reception

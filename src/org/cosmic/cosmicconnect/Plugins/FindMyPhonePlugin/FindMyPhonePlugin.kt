@@ -112,23 +112,24 @@ class FindMyPhonePlugin : Plugin() {
     // Plugin Metadata
     // ========================================================================
 
-    override fun getDisplayName(): String {
-        return when (DeviceHelper.getDeviceType()) {
-            DeviceHelper.DeviceType.TV -> context.getString(R.string.findmyphone_title_tv)
-            DeviceHelper.DeviceType.TABLET -> context.getString(R.string.findmyphone_title_tablet)
-            DeviceHelper.DeviceType.PHONE -> context.getString(R.string.findmyphone_title)
-            else -> context.getString(R.string.findmyphone_title)
+    override val displayName: String
+        get() {
+            return when (DeviceHelper.deviceType) {
+                DeviceHelper.DeviceType.TV -> context.getString(R.string.findmyphone_title_tv)
+                DeviceHelper.DeviceType.TABLET -> context.getString(R.string.findmyphone_title_tablet)
+                DeviceHelper.DeviceType.PHONE -> context.getString(R.string.findmyphone_title)
+                else -> context.getString(R.string.findmyphone_title)
+            }
         }
-    }
 
-    override fun getDescription(): String =
-        context.getString(R.string.findmyphone_description)
+    override val description: String
+        get() = context.getString(R.string.findmyphone_description)
 
-    override fun getSupportedPacketTypes(): Array<String> =
-        arrayOf(PACKET_TYPE_FINDMYPHONE_REQUEST)
+    override val supportedPacketTypes: Array<String>
+        get() = arrayOf(PACKET_TYPE_FINDMYPHONE_REQUEST)
 
-    override fun getOutgoingPacketTypes(): Array<String> =
-        emptyArray() // Receive-only plugin
+    override val outgoingPacketTypes: Array<String>
+        get() = emptyArray() // Receive-only plugin
 
     // ========================================================================
     // Lifecycle

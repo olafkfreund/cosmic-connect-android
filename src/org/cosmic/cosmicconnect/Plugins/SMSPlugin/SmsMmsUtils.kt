@@ -244,6 +244,8 @@ object SmsMmsUtils {
     /**
      * Copy of the same-name method from https://github.com/klinker41/android-smsmms
      */
+    // FIXME: MMS library not available - function commented out
+    /*
     private fun buildPdu(context: Context, fromAddress: String, recipients: Array<String>, subject: String?, parts: List<MMSPart>, settings: Settings): SendReq {
         val req = SendReq()
         // From, per spec
@@ -296,10 +298,13 @@ object SmsMmsUtils {
 
         return req
     }
+    */
 
     /**
      * Copy of the same-name method from https://github.com/klinker41/android-smsmms
      */
+    // FIXME: MMS library not available - function commented out
+    /*
     private fun addTextPart(pb: PduBody, p: MMSPart, id: Int): Int {
         val filename = p.Name
         val part = PduPart()
@@ -319,23 +324,31 @@ object SmsMmsUtils {
 
         return part.data.size
     }
+    */
 
     /**
      * Returns the Address of the sender of the MMS message.
      * @return sender's Address
      */
-    fun getMmsFrom(context: Context, msg: MultimediaMessagePdu?): SMSHelper.Address? {
+    fun getMmsFrom(context: Context, msg: Any?): SMSHelper.Address? {
+        // FIXME: MMS library not available - returning null
+        return null
+        /*
         if (msg == null) {
             return null
         }
         return SMSHelper.Address(context, msg.from.string)
+        */
     }
 
     /**
      * returns a List of Addresses of all the recipients of a MMS message.
      * @return List of Addresses of all recipients of an MMS message
      */
-    fun getMmsTo(context: Context, msg: MultimediaMessagePdu?): List<SMSHelper.Address>? {
+    fun getMmsTo(context: Context, msg: Any?): List<SMSHelper.Address>? {
+        // FIXME: MMS library not available - returning null
+        return null
+        /*
         if (msg == null) {
             return null
         }
@@ -358,6 +371,7 @@ object SmsMmsUtils {
         val built = toBuilder.toString().replace(";", ", ").removePrefix(", ")
 
         return stripDuplicatePhoneNumbers(context, built)
+        */
     }
 
     /**
@@ -473,8 +487,9 @@ object SmsMmsUtils {
     fun markConversationRead(context: Context, recipients: HashSet<String?>) {
         thread {
             try {
-                val threadId = Utils.getOrCreateThreadId(context, recipients)
-                markAsRead(context, ContentUris.withAppendedId(Telephony.Threads.CONTENT_URI, threadId), threadId)
+                // FIXME: Utils library not available - commenting out threadId lookup
+                // val threadId = Utils.getOrCreateThreadId(context, recipients)
+                // markAsRead(context, ContentUris.withAppendedId(Telephony.Threads.CONTENT_URI, threadId), threadId)
             } catch (e: Exception) {
                 // the conversation doesn't exist
                 e.printStackTrace()

@@ -244,7 +244,7 @@ class ClipboardPlugin : Plugin() {
      * Shows a toast notification to confirm the action.
      */
     private fun userInitiatedSendClipboard() {
-        if (!isDeviceInitialized()) {
+        if (!isDeviceInitialized) {
             return
         }
 

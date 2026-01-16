@@ -207,7 +207,7 @@ class FindMyPhonePlugin : Plugin() {
         }
 
         // Handle based on Android version and app state
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q || LifecycleHelper.isInForeground()) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q || LifecycleHelper.isInForeground) {
             // Android < 10 OR app in foreground: Launch activity directly
             launchActivity()
         } else {

@@ -25,8 +25,9 @@ import android.telephony.PhoneNumberUtils
 import android.telephony.SmsMessage
 import androidx.annotation.WorkerThread
 import androidx.core.content.ContextCompat
-import com.klinker.android.logger.Log
-import com.klinker.android.send_message.Transaction
+// FIXME: klinker library not available - temporarily commented out
+// import com.klinker.android.logger.Log
+// import com.klinker.android.send_message.Transaction
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject

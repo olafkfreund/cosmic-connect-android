@@ -32,13 +32,14 @@ import com.google.android.mms.pdu_alt.PduBody
 import com.google.android.mms.pdu_alt.PduComposer
 import com.google.android.mms.pdu_alt.PduHeaders
 import com.google.android.mms.pdu_alt.PduPart
-import com.google.android.mms.pdu_alt.RetrieveConf
-import com.google.android.mms.pdu_alt.SendReq
-import com.google.android.mms.smil.SmilHelper
-import com.klinker.android.send_message.Message
-import com.klinker.android.send_message.Settings
-import com.klinker.android.send_message.Transaction
-import com.klinker.android.send_message.Utils
+// FIXME: MMS and klinker libraries not available - temporarily commented out
+// import com.google.android.mms.pdu_alt.RetrieveConf
+// import com.google.android.mms.pdu_alt.SendReq
+// import com.google.android.mms.smil.SmilHelper
+// import com.klinker.android.send_message.Message
+// import com.klinker.android.send_message.Settings
+// import com.klinker.android.send_message.Transaction
+// import com.klinker.android.send_message.Utils
 import org.apache.commons.io.IOUtils
 import org.cosmic.cosmicconnect.Helpers.SMSHelper
 import org.cosmic.cosmicconnect.Helpers.TelephonyHelper

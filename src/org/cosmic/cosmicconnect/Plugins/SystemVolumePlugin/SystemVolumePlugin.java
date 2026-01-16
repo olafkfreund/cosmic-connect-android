@@ -94,42 +94,39 @@ public class SystemVolumePlugin extends Plugin {
     }
 
     void sendVolume(String name, int volume) {
-        // Create legacy packet directly
-        NetworkPacket packet = new NetworkPacket(PACKET_TYPE_SYSTEMVOLUME_REQUEST);
-        packet.set("volume", volume);
-        packet.set("name", name);
+        // Create packet using FFI
+        org.cosmic.cosmicconnect.Core.NetworkPacket ffiPacket =
+            SystemVolumePacketsFFI.INSTANCE.createVolumeRequest(name, volume);
 
-        // Send packet
-        getDevice().sendPacket(packet);
+        // Convert to legacy packet and send
+        getDevice().sendPacket(ffiPacket.toLegacyPacket());
     }
 
     void sendMute(String name, boolean mute) {
-        // Create legacy packet directly
-        NetworkPacket packet = new NetworkPacket(PACKET_TYPE_SYSTEMVOLUME_REQUEST);
-        packet.set("muted", mute);
-        packet.set("name", name);
+        // Create packet using FFI
+        org.cosmic.cosmicconnect.Core.NetworkPacket ffiPacket =
+            SystemVolumePacketsFFI.INSTANCE.createMuteRequest(name, mute);
 
-        // Send packet
-        getDevice().sendPacket(packet);
+        // Convert to legacy packet and send
+        getDevice().sendPacket(ffiPacket.toLegacyPacket());
     }
 
     void sendEnable(String name) {
-        // Create legacy packet directly
-        NetworkPacket packet = new NetworkPacket(PACKET_TYPE_SYSTEMVOLUME_REQUEST);
-        packet.set("enabled", true);
-        packet.set("name", name);
+        // Create packet using FFI
+        org.cosmic.cosmicconnect.Core.NetworkPacket ffiPacket =
+            SystemVolumePacketsFFI.INSTANCE.createEnableRequest(name);
 
-        // Send packet
-        getDevice().sendPacket(packet);
+        // Convert to legacy packet and send
+        getDevice().sendPacket(ffiPacket.toLegacyPacket());
     }
 
     void requestSinkList() {
-        // Create legacy packet directly
-        NetworkPacket packet = new NetworkPacket(PACKET_TYPE_SYSTEMVOLUME_REQUEST);
-        packet.set("requestSinks", true);
+        // Create packet using FFI
+        org.cosmic.cosmicconnect.Core.NetworkPacket ffiPacket =
+            SystemVolumePacketsFFI.INSTANCE.createSinkListRequest();
 
-        // Send packet
-        getDevice().sendPacket(packet);
+        // Convert to legacy packet and send
+        getDevice().sendPacket(ffiPacket.toLegacyPacket());
     }
 
     @Override

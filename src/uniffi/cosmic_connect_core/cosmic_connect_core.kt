@@ -1160,6 +1160,25 @@ internal interface UniffiLib : Library {
         uniffi_out_err: UniffiRustCallStatus,
     ): RustBuffer.ByValue
 
+    fun uniffi_cosmic_connect_core_fn_func_create_systemvolume_enable(
+        `sinkName`: RustBuffer.ByValue,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_systemvolume_mute(
+        `sinkName`: RustBuffer.ByValue,
+        `muted`: Byte,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_systemvolume_request_sinks(uniffi_out_err: UniffiRustCallStatus): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_systemvolume_volume(
+        `sinkName`: RustBuffer.ByValue,
+        `volume`: Int,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
     fun uniffi_cosmic_connect_core_fn_func_create_telephony_event(
         `event`: RustBuffer.ByValue,
         `phoneNumber`: RustBuffer.ByValue,
@@ -1503,6 +1522,14 @@ internal interface UniffiLib : Library {
 
     fun uniffi_cosmic_connect_core_checksum_func_create_sms_messages(): Short
 
+    fun uniffi_cosmic_connect_core_checksum_func_create_systemvolume_enable(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_systemvolume_mute(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_systemvolume_request_sinks(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_systemvolume_volume(): Short
+
     fun uniffi_cosmic_connect_core_checksum_func_create_telephony_event(): Short
 
     fun uniffi_cosmic_connect_core_checksum_func_create_text_share_packet(): Short
@@ -1677,6 +1704,18 @@ private fun uniffiCheckApiChecksums(lib: UniffiLib) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cosmic_connect_core_checksum_func_create_sms_messages() != 48381.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_systemvolume_enable() != 9646.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_systemvolume_mute() != 38900.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_systemvolume_request_sinks() != 20763.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_systemvolume_volume() != 60385.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cosmic_connect_core_checksum_func_create_telephony_event() != 46498.toShort()) {
@@ -4645,6 +4684,86 @@ fun `createSmsMessages`(`conversationsJson`: kotlin.String): FfiPacket =
         uniffiRustCallWithError(ProtocolException) { _status ->
             UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_sms_messages(
                 FfiConverterString.lower(`conversationsJson`),
+                _status,
+            )
+        },
+    )
+
+/**
+ * Create a systemvolume enable (set default) request packet
+ *
+ * Creates a packet to request enabling (setting as default) an audio sink.
+ *
+ * # Arguments
+ *
+ * * `sink_name` - Name of the audio sink to enable (e.g., "HDMI Output")
+ */
+@Throws(ProtocolException::class)
+fun `createSystemvolumeEnable`(`sinkName`: kotlin.String): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_systemvolume_enable(FfiConverterString.lower(`sinkName`), _status)
+        },
+    )
+
+/**
+ * Create a systemvolume mute request packet
+ *
+ * Creates a packet to request muting or unmuting a specific audio sink.
+ *
+ * # Arguments
+ *
+ * * `sink_name` - Name of the audio sink (e.g., "Speaker", "Headphones")
+ * * `muted` - True to mute, false to unmute
+ */
+@Throws(ProtocolException::class)
+fun `createSystemvolumeMute`(
+    `sinkName`: kotlin.String,
+    `muted`: kotlin.Boolean,
+): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_systemvolume_mute(
+                FfiConverterString.lower(`sinkName`),
+                FfiConverterBoolean.lower(`muted`),
+                _status,
+            )
+        },
+    )
+
+/**
+ * Create a systemvolume sink list request packet
+ *
+ * Creates a packet to request the list of available audio sinks.
+ */
+@Throws(ProtocolException::class)
+fun `createSystemvolumeRequestSinks`(): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_systemvolume_request_sinks(_status)
+        },
+    )
+
+/**
+ * Create a systemvolume set volume request packet
+ *
+ * Creates a packet to request changing the volume of a specific audio sink.
+ *
+ * # Arguments
+ *
+ * * `sink_name` - Name of the audio sink (e.g., "Speaker", "Headphones")
+ * * `volume` - Volume level (0-100)
+ */
+@Throws(ProtocolException::class)
+fun `createSystemvolumeVolume`(
+    `sinkName`: kotlin.String,
+    `volume`: kotlin.Int,
+): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_systemvolume_volume(
+                FfiConverterString.lower(`sinkName`),
+                FfiConverterInt.lower(`volume`),
                 _status,
             )
         },

@@ -20,11 +20,12 @@ import androidx.core.content.ContextCompat;
 import org.jetbrains.annotations.NotNull;
 import org.cosmic.cosmicconnect.Core.NetworkPacket;
 import org.cosmic.cosmicconnect.Plugins.Plugin;
+import org.cosmic.cosmicconnect.Plugins.ClipboardPlugin.ClipboardPacketsFFI;
+import static org.cosmic.cosmicconnect.Plugins.ClipboardPlugin.ClipboardPacketsFFIKt.*;
 import org.cosmic.cosmicconnect.Plugins.PluginFactory;
 import org.cosmic.cosmicconnect.R;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,7 +42,7 @@ public class ClipboardPlugin extends Plugin {
      * "content": "password"
      * }
      */
-    private final static String PACKET_TYPE_CLIPBOARD = "cosmicconnect.clipboard";
+    private final static String PACKET_TYPE_CLIPBOARD = "kdeconnect.clipboard";
 
     /**
      * Packet containing clipboard contents and a timestamp that the contents were last updated, sent
@@ -56,7 +57,7 @@ public class ClipboardPlugin extends Plugin {
      * "content": "password"
      * }
      */
-    private final static String PACKET_TYPE_CLIPBOARD_CONNECT = "cosmicconnect.clipboard.connect";
+    private final static String PACKET_TYPE_CLIPBOARD_CONNECT = "kdeconnect.clipboard.connect";
 
     @Override
     public @NonNull String getDisplayName() {
@@ -69,34 +70,40 @@ public class ClipboardPlugin extends Plugin {
     }
 
     @Override
-    public boolean onPacketReceived(@NonNull org.cosmic.cosmicconnect.NetworkPacket np) {
-        String content = np.getString("content");
-        switch (np.getType()) {
-            case (PACKET_TYPE_CLIPBOARD):
-                ClipboardListener.instance(context).setText(content);
-                return true;
-            case(PACKET_TYPE_CLIPBOARD_CONNECT):
-                long packetTime = np.getLong("timestamp");
-                // If the packetTime is 0, it means the timestamp is unknown (so do nothing).
-                if (packetTime == 0 || packetTime < ClipboardListener.instance(context).getUpdateTimestamp()) {
-                    return false;
-                }
+    public boolean onPacketReceived(@NonNull org.cosmic.cosmicconnect.NetworkPacket legacyNp) {
+        // Convert legacy packet to immutable for type-safe inspection
+        NetworkPacket np = NetworkPacket.fromLegacy(legacyNp);
 
-                if (np.has("content")) { // change clipboard if content is in NetworkPacket
-                    ClipboardListener.instance(context).setText(content);
-                }
-                return true;
+        // Use FFI extension properties for type checking
+        if (getIsClipboardUpdate(np)) {
+            String content = getClipboardContent(np);
+            if (content != null) {
+                ClipboardListener.instance(context).setText(content);
+            }
+            return true;
+        } else if (getIsClipboardConnect(np)) {
+            Long timestamp = getClipboardTimestamp(np);
+            // If the timestamp is null or 0, it means the timestamp is unknown (so do nothing).
+            if (timestamp == null || timestamp == 0 ||
+                timestamp < ClipboardListener.instance(context).getUpdateTimestamp()) {
+                return false;
+            }
+
+            String content = getClipboardContent(np);
+            if (content != null) {
+                ClipboardListener.instance(context).setText(content);
+            }
+            return true;
         }
-        throw new UnsupportedOperationException("Unknown packet type: " + np.getType());
+
+        return false;
     }
 
     private final ClipboardListener.ClipboardObserver observer = this::propagateClipboard;
 
     void propagateClipboard(String content) {
-        // Create immutable packet
-        Map<String, Object> body = new HashMap<>();
-        body.put("content", content);
-        NetworkPacket packet = NetworkPacket.create(ClipboardPlugin.PACKET_TYPE_CLIPBOARD, body);
+        // Create packet using FFI wrapper
+        NetworkPacket packet = ClipboardPacketsFFI.INSTANCE.createClipboardUpdate(content);
 
         // Convert and send
         getDevice().sendPacket(convertToLegacyPacket(packet));
@@ -109,12 +116,9 @@ public class ClipboardPlugin extends Plugin {
             return;
         }
 
-        // Create immutable packet with timestamp
-        Map<String, Object> body = new HashMap<>();
+        // Create packet using FFI wrapper with timestamp
         long timestamp = ClipboardListener.instance(context).getUpdateTimestamp();
-        body.put("timestamp", timestamp);
-        body.put("content", content);
-        NetworkPacket packet = NetworkPacket.create(ClipboardPlugin.PACKET_TYPE_CLIPBOARD_CONNECT, body);
+        NetworkPacket packet = ClipboardPacketsFFI.INSTANCE.createClipboardConnect(content, timestamp);
 
         // Convert and send
         getDevice().sendPacket(convertToLegacyPacket(packet));

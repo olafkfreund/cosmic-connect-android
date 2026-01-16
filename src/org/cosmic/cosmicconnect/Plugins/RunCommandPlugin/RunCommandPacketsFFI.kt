@@ -1,6 +1,7 @@
 package org.cosmic.cosmicconnect.Plugins.RunCommandPlugin
 
 import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.Core.*
 import uniffi.cosmic_connect_core.FfiPacket
 import uniffi.cosmic_connect_core.createRuncommandExecute
 import uniffi.cosmic_connect_core.createRuncommandRequestList

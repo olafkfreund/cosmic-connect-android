@@ -80,10 +80,11 @@ class PingPluginFFI : Plugin() {
 
             // Register ping plugin with FFI
             try {
-                if (!pluginManager!!.hasPlugin(PluginManager.Plugins.PING)) {
-                    pluginManager!!.registerPlugin(PluginManager.Plugins.PING)
-                    Log.i(TAG, "Registered ping plugin with FFI")
-                }
+                // FIXME: PluginManager.Plugins enum not available - temporarily commented out
+                // if (!pluginManager!!.hasPlugin(PluginManager.Plugins.PING)) {
+                //     pluginManager!!.registerPlugin(PluginManager.Plugins.PING)
+                //     Log.i(TAG, "Registered ping plugin with FFI")
+                // }
             } catch (e: Exception) {
                 Log.e(TAG, "Failed to register ping plugin", e)
                 // Continue anyway - ping will still work without stats

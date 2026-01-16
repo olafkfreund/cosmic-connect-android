@@ -172,10 +172,11 @@ class BatteryPluginFFI : Plugin() {
 
             // Register battery plugin with FFI
             try {
-                if (!pluginManager!!.hasPlugin(PluginManager.Plugins.BATTERY)) {
-                    pluginManager!!.registerPlugin(PluginManager.Plugins.BATTERY)
-                    Log.i(TAG, "Registered battery plugin with FFI")
-                }
+                // FIXME: PluginManager.Plugins enum not available - temporarily commented out
+                // if (!pluginManager!!.hasPlugin(PluginManager.Plugins.BATTERY)) {
+                //     pluginManager!!.registerPlugin(PluginManager.Plugins.BATTERY)
+                //     Log.i(TAG, "Registered battery plugin with FFI")
+                // }
             } catch (e: Exception) {
                 Log.e(TAG, "Failed to register battery plugin", e)
                 // Continue anyway - battery monitoring will still work locally

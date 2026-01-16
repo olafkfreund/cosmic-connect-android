@@ -302,6 +302,144 @@ class FFIValidationTest {
         }
     }
 
+    /**
+     * Test 3.4: Notifications Plugin - Issue #57
+     *
+     * Test notification plugin packet creation via FFI
+     */
+    @Test
+    fun testNotificationsPlugin() {
+        Log.i(TAG, "=== Test 3.4: Notifications Plugin (Issue #57) ===")
+
+        try {
+            // Test 1: Create notification packet
+            val notificationJson = """
+            {
+                "id": "test-notif-123",
+                "appName": "Messages",
+                "title": "New Message",
+                "text": "Hello from Android!",
+                "isClearable": true,
+                "time": "1704067200000",
+                "silent": "false"
+            }
+            """.trimIndent()
+
+            val notifPacket = createNotificationPacket(notificationJson)
+            assertNotNull("Notification packet should not be null", notifPacket)
+            assertEquals("Packet type should be notification", "kdeconnect.notification", notifPacket.packetType)
+            assertEquals("Notification ID should match", "test-notif-123", notifPacket.body["id"])
+            assertEquals("App name should match", "Messages", notifPacket.body["appName"])
+            assertEquals("Title should match", "New Message", notifPacket.body["title"])
+            assertEquals("Text should match", "Hello from Android!", notifPacket.body["text"])
+            assertEquals("isClearable should match", true, notifPacket.body["isClearable"])
+            Log.i(TAG, "   ✅ Notification packet creation successful")
+
+            // Test 2: Create cancel notification packet
+            val cancelPacket = createCancelNotificationPacket("test-notif-123")
+            assertNotNull("Cancel packet should not be null", cancelPacket)
+            assertEquals("Packet type should be notification", "kdeconnect.notification", cancelPacket.packetType)
+            assertEquals("ID should match", "test-notif-123", cancelPacket.body["id"])
+            assertEquals("isCancel should be true", true, cancelPacket.body["isCancel"])
+            Log.i(TAG, "   ✅ Cancel notification packet creation successful")
+
+            // Test 3: Create notification request packet
+            val requestPacket = createNotificationRequestPacket()
+            assertNotNull("Request packet should not be null", requestPacket)
+            assertEquals("Packet type should be request", "kdeconnect.notification.request", requestPacket.packetType)
+            assertEquals("Request flag should be true", true, requestPacket.body["request"])
+            Log.i(TAG, "   ✅ Notification request packet creation successful")
+
+            // Test 4: Create dismiss notification packet
+            val dismissPacket = createDismissNotificationPacket("test-notif-456")
+            assertNotNull("Dismiss packet should not be null", dismissPacket)
+            assertEquals("Packet type should be request", "kdeconnect.notification.request", dismissPacket.packetType)
+            assertEquals("Cancel ID should match", "test-notif-456", dismissPacket.body["cancel"])
+            Log.i(TAG, "   ✅ Dismiss notification packet creation successful")
+
+            // Test 5: Create notification action packet
+            val actionPacket = createNotificationActionPacket("notif-789", "Reply")
+            assertNotNull("Action packet should not be null", actionPacket)
+            assertEquals("Packet type should be action", "kdeconnect.notification.action", actionPacket.packetType)
+            assertEquals("Key should match", "notif-789", actionPacket.body["key"])
+            assertEquals("Action should match", "Reply", actionPacket.body["action"])
+            Log.i(TAG, "   ✅ Notification action packet creation successful")
+
+            // Test 6: Create notification reply packet
+            val replyPacket = createNotificationReplyPacket("reply-uuid-123", "Thanks!")
+            assertNotNull("Reply packet should not be null", replyPacket)
+            assertEquals("Packet type should be reply", "kdeconnect.notification.reply", replyPacket.packetType)
+            assertEquals("Reply ID should match", "reply-uuid-123", replyPacket.body["requestReplyId"])
+            assertEquals("Message should match", "Thanks!", replyPacket.body["message"])
+            Log.i(TAG, "   ✅ Notification reply packet creation successful")
+
+            Log.i(TAG, "✅ All notification plugin FFI tests passed (6/6)")
+        } catch (e: Exception) {
+            Log.e(TAG, "⚠️ Notifications plugin test failed", e)
+            fail("Notification FFI tests failed: ${e.message}")
+        }
+    }
+
+    /**
+     * Test 3.5: Notifications Plugin - Complex Notification
+     *
+     * Test notification with all optional fields
+     */
+    @Test
+    fun testComplexNotification() {
+        Log.i(TAG, "=== Test 3.5: Complex Notification (Issue #57) ===")
+
+        try {
+            val complexNotificationJson = """
+            {
+                "id": "complex-notif-001",
+                "appName": "WhatsApp",
+                "title": "Group Chat",
+                "text": "Alice: Hey everyone!",
+                "isClearable": true,
+                "time": "1704067200000",
+                "silent": "false",
+                "ticker": "WhatsApp: Group Chat - Alice: Hey everyone!",
+                "onlyOnce": true,
+                "requestReplyId": "reply-uuid-456",
+                "actions": ["Reply", "Mark as Read"],
+                "payloadHash": "1a2b3c4d5e6f"
+            }
+            """.trimIndent()
+
+            val packet = createNotificationPacket(complexNotificationJson)
+
+            assertNotNull("Packet should not be null", packet)
+            assertEquals("ID should match", "complex-notif-001", packet.body["id"])
+            assertEquals("App name should match", "WhatsApp", packet.body["appName"])
+            assertEquals("Title should match", "Group Chat", packet.body["title"])
+            assertEquals("Text should match", "Alice: Hey everyone!", packet.body["text"])
+            assertEquals("Ticker should match", "WhatsApp: Group Chat - Alice: Hey everyone!", packet.body["ticker"])
+            assertEquals("onlyOnce should match", true, packet.body["onlyOnce"])
+            assertEquals("requestReplyId should match", "reply-uuid-456", packet.body["requestReplyId"])
+            assertEquals("payloadHash should match", "1a2b3c4d5e6f", packet.body["payloadHash"])
+
+            // Check actions array
+            @Suppress("UNCHECKED_CAST")
+            val actions = packet.body["actions"] as? List<String>
+            assertNotNull("Actions should not be null", actions)
+            assertEquals("Actions count should match", 2, actions?.size)
+            assertTrue("Should contain Reply action", actions?.contains("Reply") == true)
+            assertTrue("Should contain Mark as Read action", actions?.contains("Mark as Read") == true)
+
+            Log.i(TAG, "   ID: ${packet.body["id"]}")
+            Log.i(TAG, "   App: ${packet.body["appName"]}")
+            Log.i(TAG, "   Title: ${packet.body["title"]}")
+            Log.i(TAG, "   Has reply: ${packet.body.containsKey("requestReplyId")}")
+            Log.i(TAG, "   Has actions: ${packet.body.containsKey("actions")}")
+            Log.i(TAG, "   Has icon: ${packet.body.containsKey("payloadHash")}")
+            Log.i(TAG, "✅ Complex notification test passed")
+        } catch (e: Exception) {
+            Log.e(TAG, "⚠️ Complex notification test failed", e)
+            fail("Complex notification test failed: ${e.message}")
+        }
+    }
+
     // ============================================================================
     // Phase 4: Performance Profiling
     // ============================================================================

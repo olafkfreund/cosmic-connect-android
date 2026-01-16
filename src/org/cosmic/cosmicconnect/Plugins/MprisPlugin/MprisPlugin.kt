@@ -35,6 +35,7 @@ import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment
 import org.cosmic.cosmicconnect.R
 import java.net.MalformedURLException
 import java.util.concurrent.ConcurrentHashMap
+import org.json.JSONObject
 
 @LoadablePlugin
 class MprisPlugin : Plugin() {
@@ -470,32 +471,12 @@ class MprisPlugin : Plugin() {
      * Helper to send MPRIS packets
      */
     private fun sendMprisPacket(body: Map<String, Any>) {
-        // Create immutable packet
-        val packet = NetworkPacket.create(PACKET_TYPE_MPRIS_REQUEST, body)
+        // Create packet using FFI
+        val json = JSONObject(body).toString()
+        val packet = MprisPacketsFFI.createMprisRequest(json)
 
         // Convert and send
-        device.sendPacket(convertToLegacyPacket(packet))
-    }
-
-    /**
-     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
-     */
-    private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
-        val legacy = LegacyNetworkPacket(ffi.type)
-
-        // Copy all body fields
-        ffi.body.forEach { (key, value) ->
-            when (value) {
-                is String -> legacy.set(key, value)
-                is Int -> legacy.set(key, value)
-                is Long -> legacy.set(key, value)
-                is Boolean -> legacy.set(key, value)
-                is Double -> legacy.set(key, value)
-                else -> legacy.set(key, value.toString())
-            }
-        }
-
-        return legacy
+        device.sendPacket(packet.toLegacyPacket())
     }
 
     fun fetchedAlbumArt(url: String) {

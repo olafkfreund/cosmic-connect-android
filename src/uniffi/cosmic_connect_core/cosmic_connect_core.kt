@@ -1105,6 +1105,11 @@ internal interface UniffiLib : Library {
 
     fun uniffi_cosmic_connect_core_fn_func_create_findmyphone_request(uniffi_out_err: UniffiRustCallStatus): RustBuffer.ByValue
 
+    fun uniffi_cosmic_connect_core_fn_func_create_mpris_request(
+        `bodyJson`: RustBuffer.ByValue,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
     fun uniffi_cosmic_connect_core_fn_func_create_multifile_update_packet(
         `numberOfFiles`: Int,
         `totalPayloadSize`: Long,
@@ -1511,6 +1516,8 @@ internal interface UniffiLib : Library {
 
     fun uniffi_cosmic_connect_core_checksum_func_create_findmyphone_request(): Short
 
+    fun uniffi_cosmic_connect_core_checksum_func_create_mpris_request(): Short
+
     fun uniffi_cosmic_connect_core_checksum_func_create_multifile_update_packet(): Short
 
     fun uniffi_cosmic_connect_core_checksum_func_create_mute_request(): Short
@@ -1686,6 +1693,9 @@ private fun uniffiCheckApiChecksums(lib: UniffiLib) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cosmic_connect_core_checksum_func_create_findmyphone_request() != 26.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_mpris_request() != 31949.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cosmic_connect_core_checksum_func_create_multifile_update_packet() != 62257.toShort()) {
@@ -4473,6 +4483,23 @@ fun `createFindmyphoneRequest`(): FfiPacket =
     FfiConverterTypeFfiPacket.lift(
         uniffiRustCallWithError(ProtocolException) { _status ->
             UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_findmyphone_request(_status)
+        },
+    )
+
+/**
+ * Create an MPRIS request packet
+ *
+ * Creates a packet for controlling media playback on the remote device.
+ *
+ * # Arguments
+ *
+ * * `body_json` - JSON string containing player name and command
+ */
+@Throws(ProtocolException::class)
+fun `createMprisRequest`(`bodyJson`: kotlin.String): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_mpris_request(FfiConverterString.lower(`bodyJson`), _status)
         },
     )
 

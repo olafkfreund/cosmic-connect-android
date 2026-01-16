@@ -68,6 +68,30 @@ data class NetworkPacket(
         )
     }
 
+    /**
+     * Convert to legacy NetworkPacket for backward compatibility
+     *
+     * @return Legacy mutable NetworkPacket from org.cosmic.cosmicconnect package
+     */
+    fun toLegacyPacket(): org.cosmic.cosmicconnect.NetworkPacket {
+        val legacyPacket = org.cosmic.cosmicconnect.NetworkPacket(type)
+
+        // Copy all body fields
+        body.forEach { (key, value) ->
+            when (value) {
+                is String -> legacyPacket[key] = value
+                is Int -> legacyPacket[key] = value
+                is Long -> legacyPacket[key] = value
+                is Boolean -> legacyPacket[key] = value
+                is Double -> legacyPacket[key] = value
+                // Collections and other types will be handled as strings via JSON
+                else -> legacyPacket[key] = value.toString()
+            }
+        }
+
+        return legacyPacket
+    }
+
     companion object {
 
         /**

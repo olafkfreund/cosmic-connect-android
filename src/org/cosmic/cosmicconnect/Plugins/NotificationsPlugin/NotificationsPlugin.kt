@@ -223,7 +223,7 @@ class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener 
 
         // Create cancel packet using FFI wrapper
         val packet = NotificationsPacketsFFI.createCancelNotificationPacket(id)
-        device.sendPacket(packet)
+        device.sendPacket(packet.toLegacyPacket())
         currentNotifications.remove(id)
     }
 
@@ -311,7 +311,7 @@ class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener 
             }
         }
 
-        device.sendPacket(packet)
+        device.sendPacket(packet.toLegacyPacket())
     }
 
     /**

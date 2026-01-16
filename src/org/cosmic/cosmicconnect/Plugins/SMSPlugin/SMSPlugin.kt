@@ -265,13 +265,13 @@ class SMSPlugin : Plugin() {
     override fun onPacketReceived(np: LegacyNetworkPacket): Boolean = when (np.type) {
         PACKET_TYPE_SMS_REQUEST_CONVERSATIONS -> {
             execute {
-                this.handleRequestAllConversations(np)
+                this.handleRequestAllConversations(NetworkPacket.fromLegacyPacket(np))
             }
             true
         }
         PACKET_TYPE_SMS_REQUEST_CONVERSATION -> {
             execute {
-                this.handleRequestSingleConversation(np)
+                this.handleRequestSingleConversation(NetworkPacket.fromLegacyPacket(np))
             }
             true
         }
@@ -299,7 +299,7 @@ class SMSPlugin : Plugin() {
             val networkPacket: NetworkPacket? = partIdToMessageAttachmentPacket(context, partID, uniqueIdentifier, PACKET_TYPE_SMS_ATTACHMENT_FILE)
 
             if (networkPacket != null) {
-                device.sendPacket(networkPacket)
+                device.sendPacket(networkPacket.toLegacyPacket())
             }
 
             true
@@ -320,7 +320,7 @@ class SMSPlugin : Plugin() {
         while (conversations.hasNext()) {
             val message: SMSHelper.Message = conversations.next()
             val partialReply: NetworkPacket = constructBulkMessagePacket(setOf(message))
-            device.sendPacket(partialReply)
+            device.sendPacket(partialReply.toLegacyPacket())
         }
 
         return true
@@ -346,7 +346,7 @@ class SMSPlugin : Plugin() {
 
         val reply: NetworkPacket = constructBulkMessagePacket(conversation)
 
-        device.sendPacket(reply)
+        device.sendPacket(reply.toLegacyPacket())
 
         return true
     }

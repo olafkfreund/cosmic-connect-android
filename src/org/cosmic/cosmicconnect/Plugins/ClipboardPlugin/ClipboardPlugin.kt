@@ -158,8 +158,8 @@ class ClipboardPlugin : Plugin() {
         // Create packet using FFI wrapper
         val packet = ClipboardPacketsFFI.createClipboardUpdate(content)
 
-        // Send to remote device
-        device.sendPacket(packet)
+        // Send to remote device (convert to legacy packet)
+        device.sendPacket(packet.toLegacyPacket())
     }
 
     /**
@@ -179,8 +179,8 @@ class ClipboardPlugin : Plugin() {
         val timestamp = ClipboardListener.instance(context).updateTimestamp
         val packet = ClipboardPacketsFFI.createClipboardConnect(content, timestamp)
 
-        // Send to remote device
-        device.sendPacket(packet)
+        // Send to remote device (convert to legacy packet)
+        device.sendPacket(packet.toLegacyPacket())
     }
 
     // ========================================================================

@@ -89,6 +89,8 @@ object SmsMmsUtils {
         return sendingPhoneNumber
     }
 
+    // FIXME: MMS library not available - function commented out
+    /*
     private fun getTransactionSettings(context: Context, subID: Int, prefs: SharedPreferences): Settings {
         val longTextAsMms = prefs.getBoolean(context.getString(R.string.set_long_text_as_mms), false)
         val groupMessageAsMms = prefs.getBoolean(context.getString(R.string.set_group_message_as_mms), true)
@@ -116,6 +118,7 @@ object SmsMmsUtils {
 
         return settings
     }
+    */
 
     /**
      * Sends SMS or MMS message.
@@ -128,6 +131,9 @@ object SmsMmsUtils {
      * I don't really know the exact reason why they implemented it as int instead of long
      */
     fun sendMessage(context: Context, textMessage: String?, attachedFiles: List<SMSHelper.Attachment>, addressList: MutableList<SMSHelper.Address>, subID: Int) {
+        // FIXME: MMS/Transaction library not available - function temporarily disabled
+        Log.w("SmsMmsUtils", "sendMessage not available: MMS library missing")
+        /*
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
 
         val sendingPhoneNumber: LocalPhoneNumber = getSendingPhoneNumber(context, subID)
@@ -173,6 +179,7 @@ object SmsMmsUtils {
             // TODO: Notify other end
             Log.e(SENDING_MESSAGE, "Exception", e)
         }
+        */
     }
 
     /**
@@ -182,6 +189,8 @@ object SmsMmsUtils {
      * @param message
      * @param klinkerSettings
      */
+    // FIXME: MMS library not available - function commented out
+    /*
     internal fun sendMmsMessageNative(context: Context, message: Message, klinkerSettings: Settings) {
         val data = ArrayList<MMSPart>()
 
@@ -237,9 +246,12 @@ object SmsMmsUtils {
 
         mSmsManager.sendMultimediaMessage(context, contentUri, null, null, null)
     }
+    */
 
     const val DEFAULT_EXPIRY_TIME: Long = (7 * 24 * 60 * 60).toLong()
-    const val DEFAULT_PRIORITY: Int = PduHeaders.PRIORITY_NORMAL
+    // FIXME: PduHeaders not available
+    // const val DEFAULT_PRIORITY: Int = PduHeaders.PRIORITY_NORMAL
+    const val DEFAULT_PRIORITY: Int = 129 // PduHeaders.PRIORITY_NORMAL value
 
     /**
      * Copy of the same-name method from https://github.com/klinker41/android-smsmms

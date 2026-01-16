@@ -23,10 +23,11 @@ import android.preference.PreferenceManager
 import android.provider.Telephony
 import android.telephony.PhoneNumberUtils
 import android.telephony.SmsMessage
+import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.core.content.ContextCompat
 // FIXME: klinker library not available - temporarily commented out
-// import com.klinker.android.logger.Log
+// import com.klinker.android.logger.Log (using android.util.Log instead)
 // import com.klinker.android.send_message.Transaction
 import org.json.JSONArray
 import org.json.JSONException

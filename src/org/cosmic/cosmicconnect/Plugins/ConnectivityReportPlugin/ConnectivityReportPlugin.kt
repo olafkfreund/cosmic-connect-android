@@ -101,14 +101,8 @@ class ConnectivityReportPlugin : Plugin() {
      * Convert immutable NetworkPacket to legacy NetworkPacket for sending
      */
     private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
-        val legacy = LegacyNetworkPacket(ffi.type)
-
-        // Copy all body fields
-        ffi.body.forEach { (key, value) ->
-            legacy.set(key, value)
-        }
-
-        return legacy
+        // Use the standard conversion method
+        return ffi.toLegacyPacket()
     }
 
     companion object {

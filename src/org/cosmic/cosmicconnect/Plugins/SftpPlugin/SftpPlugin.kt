@@ -267,22 +267,8 @@ class SftpPlugin : Plugin(), OnSharedPreferenceChangeListener {
      * Convert immutable NetworkPacket to legacy NetworkPacket for sending
      */
     private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
-        val legacy = LegacyNetworkPacket(ffi.type)
-
-        // Copy all body fields
-        ffi.body.forEach { (key, value) ->
-            when (value) {
-                is String -> legacy.set(key, value)
-                is Int -> legacy.set(key, value)
-                is Long -> legacy.set(key, value)
-                is Boolean -> legacy.set(key, value)
-                is Double -> legacy.set(key, value)
-                is List<*> -> legacy.set(key, value)
-                else -> legacy.set(key, value.toString())
-            }
-        }
-
-        return legacy
+        // Use the standard conversion method
+        return ffi.toLegacyPacket()
     }
 
     companion object {

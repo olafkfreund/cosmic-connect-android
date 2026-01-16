@@ -38,6 +38,7 @@ import org.apache.commons.collections4.multimap.ArrayListValuedHashMap
 import org.apache.commons.lang3.ArrayUtils
 import org.apache.commons.lang3.StringUtils
 import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Helpers.AppsHelper
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory
@@ -513,9 +514,17 @@ class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener 
         try {
             val foreignContext = context.createPackageContext(statusBarNotification.packageName, 0)
 
-            // Try large icon first
-            notification.largeIcon?.let { icon ->
-                return iconToBitmap(foreignContext, icon)
+            // Try large icon first (API 23+)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                notification.getLargeIcon()?.let { icon ->
+                    return iconToBitmap(foreignContext, icon)
+                }
+            } else {
+                // On older APIs, largeIcon is a Bitmap
+                @Suppress("DEPRECATION")
+                notification.largeIcon?.let { bitmap ->
+                    return bitmap
+                }
             }
 
             // Fall back to small icon
@@ -694,7 +703,10 @@ class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener 
     }
 
     // Packet handling
-    override fun onPacketReceived(np: NetworkPacket): Boolean {
+    override fun onPacketReceived(legacyNp: LegacyNetworkPacket): Boolean {
+        // Convert legacy packet to immutable for type-safe inspection
+        val np = NetworkPacket.fromLegacy(legacyNp)
+
         // Use extension properties from NotificationsPacketsFFI
         when {
             np.isNotificationAction -> {

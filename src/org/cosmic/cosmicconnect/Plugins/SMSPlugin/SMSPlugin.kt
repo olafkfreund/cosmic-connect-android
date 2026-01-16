@@ -43,6 +43,7 @@ import org.cosmic.cosmicconnect.Helpers.SMSHelper.jsonArrayToAddressList
 import org.cosmic.cosmicconnect.Helpers.SMSHelper.jsonArrayToAttachmentsList
 import org.cosmic.cosmicconnect.Helpers.ThreadHelper.execute
 import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.Core.*
 import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory.LoadablePlugin
@@ -126,9 +127,10 @@ class SMSPlugin : Plugin() {
         override fun onReceive(context: Context, intent: Intent) {
             val action: String? = intent.action
 
-            if (Transaction.REFRESH == action) {
-                sendLatestMessage()
-            }
+            // FIXME: Transaction library not available - temporarily commented out
+            // if (Transaction.REFRESH == action) {
+            //     sendLatestMessage()
+            // }
         }
     }
 
@@ -235,9 +237,10 @@ class SMSPlugin : Plugin() {
         filter.priority = 500
         context.registerReceiver(receiver, filter)
 
-        val refreshFilter = IntentFilter(Transaction.REFRESH)
-        refreshFilter.priority = 500
-        context.registerReceiver(messagesUpdateReceiver, refreshFilter, ContextCompat.RECEIVER_EXPORTED)
+        // FIXME: Transaction library not available - temporarily commented out
+        // val refreshFilter = IntentFilter(Transaction.REFRESH)
+        // refreshFilter.priority = 500
+        // context.registerReceiver(messagesUpdateReceiver, refreshFilter, ContextCompat.RECEIVER_EXPORTED)
 
         context.contentResolver.registerContentObserver(SMSHelper.mConversationUri, true, messageObserver)
 

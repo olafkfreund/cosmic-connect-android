@@ -21,18 +21,18 @@ import android.telephony.SmsManager
 import android.text.TextUtils
 import android.util.Base64
 import android.util.Log
-import com.android.mms.dom.smil.parser.SmilXmlSerializer
-import com.google.android.mms.ContentType
-import com.google.android.mms.InvalidHeaderValueException
-import com.google.android.mms.MMSPart
-import com.google.android.mms.pdu_alt.CharacterSets
-import com.google.android.mms.pdu_alt.EncodedStringValue
-import com.google.android.mms.pdu_alt.MultimediaMessagePdu
-import com.google.android.mms.pdu_alt.PduBody
-import com.google.android.mms.pdu_alt.PduComposer
-import com.google.android.mms.pdu_alt.PduHeaders
-import com.google.android.mms.pdu_alt.PduPart
 // FIXME: MMS and klinker libraries not available - temporarily commented out
+// import com.android.mms.dom.smil.parser.SmilXmlSerializer
+// import com.google.android.mms.ContentType
+// import com.google.android.mms.InvalidHeaderValueException
+// import com.google.android.mms.MMSPart
+// import com.google.android.mms.pdu_alt.CharacterSets
+// import com.google.android.mms.pdu_alt.EncodedStringValue
+// import com.google.android.mms.pdu_alt.MultimediaMessagePdu
+// import com.google.android.mms.pdu_alt.PduBody
+// import com.google.android.mms.pdu_alt.PduComposer
+// import com.google.android.mms.pdu_alt.PduHeaders
+// import com.google.android.mms.pdu_alt.PduPart
 // import com.google.android.mms.pdu_alt.RetrieveConf
 // import com.google.android.mms.pdu_alt.SendReq
 // import com.google.android.mms.smil.SmilHelper

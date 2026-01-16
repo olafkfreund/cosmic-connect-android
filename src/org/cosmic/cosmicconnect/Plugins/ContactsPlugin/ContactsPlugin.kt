@@ -22,6 +22,7 @@ import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory.LoadablePlugin
 import org.cosmic.cosmicconnect.UserInterface.AlertDialogFragment
 import org.cosmic.cosmicconnect.R
+import org.json.JSONObject
 
 @LoadablePlugin
 class ContactsPlugin : Plugin() {
@@ -120,11 +121,12 @@ class ContactsPlugin : Plugin() {
         }
         body[PACKET_UIDS_KEY] = uIDsAsString
 
-        // Create immutable packet
-        val packet = NetworkPacket.create(PACKET_TYPE_CONTACTS_RESPONSE_UIDS_TIMESTAMPS, body.toMap())
+        // Create packet using FFI
+        val json = JSONObject(body).toString()
+        val packet = ContactsPacketsFFI.createUidsTimestampsResponse(json)
 
         // Convert and send
-        device.sendPacket(convertToLegacyPacket(packet))
+        device.sendPacket(packet.toLegacyPacket())
 
         return true
     }
@@ -160,11 +162,12 @@ class ContactsPlugin : Plugin() {
         }
         body[PACKET_UIDS_KEY] = uIDsAsStrings
 
-        // Create immutable packet
-        val packet = NetworkPacket.create(PACKET_TYPE_CONTACTS_RESPONSE_VCARDS, body.toMap())
+        // Create packet using FFI
+        val json = JSONObject(body).toString()
+        val packet = ContactsPacketsFFI.createVCardsResponse(json)
 
         // Convert and send
-        device.sendPacket(convertToLegacyPacket(packet))
+        device.sendPacket(packet.toLegacyPacket())
 
         return true
     }
@@ -176,27 +179,6 @@ class ContactsPlugin : Plugin() {
             Log.e("ContactsPlugin", "Contacts plugin received an unexpected packet!")
             false
         }
-    }
-
-    /**
-     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
-     */
-    private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
-        val legacy = LegacyNetworkPacket(ffi.type)
-
-        // Copy all body fields
-        ffi.body.forEach { (key, value) ->
-            when (value) {
-                is String -> legacy.set(key, value)
-                is Int -> legacy.set(key, value)
-                is Long -> legacy.set(key, value)
-                is Boolean -> legacy.set(key, value)
-                is Double -> legacy.set(key, value)
-                else -> legacy.set(key, value.toString())
-            }
-        }
-
-        return legacy
     }
 
     companion object {

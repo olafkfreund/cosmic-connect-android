@@ -1071,6 +1071,16 @@ internal interface UniffiLib : Library {
         uniffi_out_err: UniffiRustCallStatus,
     ): RustBuffer.ByValue
 
+    fun uniffi_cosmic_connect_core_fn_func_create_contacts_response_uids(
+        `uidsJson`: RustBuffer.ByValue,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_contacts_response_vcards(
+        `vcardsJson`: RustBuffer.ByValue,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
     fun uniffi_cosmic_connect_core_fn_func_create_conversation_request(
         `threadId`: Long,
         `startTimestamp`: RustBuffer.ByValue,
@@ -1487,6 +1497,10 @@ internal interface UniffiLib : Library {
 
     fun uniffi_cosmic_connect_core_checksum_func_create_connectivity_report(): Short
 
+    fun uniffi_cosmic_connect_core_checksum_func_create_contacts_response_uids(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_contacts_response_vcards(): Short
+
     fun uniffi_cosmic_connect_core_checksum_func_create_conversation_request(): Short
 
     fun uniffi_cosmic_connect_core_checksum_func_create_conversations_request(): Short
@@ -1651,6 +1665,12 @@ private fun uniffiCheckApiChecksums(lib: UniffiLib) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cosmic_connect_core_checksum_func_create_connectivity_report() != 22939.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_contacts_response_uids() != 28688.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_contacts_response_vcards() != 42283.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cosmic_connect_core_checksum_func_create_conversation_request() != 44273.toShort()) {
@@ -4304,6 +4324,46 @@ fun `createConnectivityReport`(`signalStrengthsJson`: kotlin.String): FfiPacket 
         uniffiRustCallWithError(ProtocolException) { _status ->
             UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_connectivity_report(
                 FfiConverterString.lower(`signalStrengthsJson`),
+                _status,
+            )
+        },
+    )
+
+/**
+ * Create contacts response packet with UIDs and timestamps
+ *
+ * Creates a packet containing contact unique IDs and their last-modified timestamps.
+ *
+ * # Arguments
+ *
+ * * `uids_json` - JSON string containing UIDs and timestamps
+ */
+@Throws(ProtocolException::class)
+fun `createContactsResponseUids`(`uidsJson`: kotlin.String): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_contacts_response_uids(
+                FfiConverterString.lower(`uidsJson`),
+                _status,
+            )
+        },
+    )
+
+/**
+ * Create contacts response packet with vCards
+ *
+ * Creates a packet containing full vCard data for requested contacts.
+ *
+ * # Arguments
+ *
+ * * `vcards_json` - JSON string containing UIDs and vCard data
+ */
+@Throws(ProtocolException::class)
+fun `createContactsResponseVcards`(`vcardsJson`: kotlin.String): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_contacts_response_vcards(
+                FfiConverterString.lower(`vcardsJson`),
                 _status,
             )
         },

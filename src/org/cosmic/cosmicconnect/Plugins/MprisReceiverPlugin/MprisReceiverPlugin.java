@@ -223,14 +223,13 @@ public class MprisReceiverPlugin extends Plugin {
     }
 
     private void sendPlayerList() {
-        // Create immutable packet
-        Map<String, Object> body = new HashMap<>();
-        body.put("playerList", new ArrayList<>(players.keySet()));
-        body.put("supportAlbumArtPayload", true);
-        NetworkPacket packet = NetworkPacket.create(PACKET_TYPE_MPRIS, body);
+        // Create legacy packet directly
+        NetworkPacket packet = new NetworkPacket(PACKET_TYPE_MPRIS);
+        packet.set("playerList", new ArrayList<>(players.keySet()));
+        packet.set("supportAlbumArtPayload", true);
 
-        // Convert and send
-        getDevice().sendPacket(convertToLegacyPacket(packet));
+        // Send packet
+        getDevice().sendPacket(packet);
     }
 
     void sendAlbumArt(String playerName, @NonNull MprisReceiverCallback cb, @Nullable String requestedUrl) {
@@ -257,19 +256,15 @@ public class MprisReceiverPlugin extends Plugin {
             return;
         }
 
-        // Create immutable packet
-        Map<String, Object> body = new HashMap<>();
-        body.put("player", playerName);
-        body.put("transferringAlbumArt", true);
-        body.put("albumArtUrl", artUrl);
-        NetworkPacket packet = NetworkPacket.create(PACKET_TYPE_MPRIS, body);
+        // Create legacy packet directly
+        NetworkPacket packet = new NetworkPacket(PACKET_TYPE_MPRIS);
+        packet.set("player", playerName);
+        packet.set("transferringAlbumArt", true);
+        packet.set("albumArtUrl", artUrl);
+        packet.setPayload(new NetworkPacket.Payload(p));
 
-        // Convert to legacy and set payload
-        org.cosmic.cosmicconnect.NetworkPacket np = convertToLegacyPacket(packet);
-        np.setPayload(new org.cosmic.cosmicconnect.NetworkPacket.Payload(p));
-
-        // Send
-        getDevice().sendPacket(np);
+        // Send packet
+        getDevice().sendPacket(packet);
     }
 
     void sendMetadata(MprisReceiverPlayer player) {
@@ -285,27 +280,26 @@ public class MprisReceiverPlugin extends Plugin {
             }
         }
 
-        // Create immutable packet
-        Map<String, Object> body = new HashMap<>();
-        body.put("player", player.getName());
-        body.put("title", player.getTitle());
-        body.put("artist", player.getArtist());
-        body.put("nowPlaying", nowPlaying); // GSConnect 50 (so, Ubuntu 22.04) needs this
-        body.put("album", player.getAlbum());
-        body.put("isPlaying", player.isPlaying());
-        body.put("pos", player.getPosition());
-        body.put("length", player.getLength());
-        body.put("canPlay", player.canPlay());
-        body.put("canPause", player.canPause());
-        body.put("canGoPrevious", player.canGoPrevious());
-        body.put("canGoNext", player.canGoNext());
-        body.put("canSeek", player.canSeek());
-        body.put("volume", player.getVolume());
-        body.put("albumArtUrl", artUrl);
-        NetworkPacket packet = NetworkPacket.create(MprisReceiverPlugin.PACKET_TYPE_MPRIS, body);
+        // Create legacy packet directly
+        NetworkPacket packet = new NetworkPacket(PACKET_TYPE_MPRIS);
+        packet.set("player", player.getName());
+        packet.set("title", player.getTitle());
+        packet.set("artist", player.getArtist());
+        packet.set("nowPlaying", nowPlaying); // GSConnect 50 (so, Ubuntu 22.04) needs this
+        packet.set("album", player.getAlbum());
+        packet.set("isPlaying", player.isPlaying());
+        packet.set("pos", player.getPosition());
+        packet.set("length", player.getLength());
+        packet.set("canPlay", player.canPlay());
+        packet.set("canPause", player.canPause());
+        packet.set("canGoPrevious", player.canGoPrevious());
+        packet.set("canGoNext", player.canGoNext());
+        packet.set("canSeek", player.canSeek());
+        packet.set("volume", player.getVolume());
+        packet.set("albumArtUrl", artUrl);
 
-        // Convert and send
-        getDevice().sendPacket(convertToLegacyPacket(packet));
+        // Send packet
+        getDevice().sendPacket(packet);
     }
 
     @Override
@@ -330,22 +324,6 @@ public class MprisReceiverPlugin extends Plugin {
     private boolean hasPermission() {
         String notificationListenerList = Settings.Secure.getString(context.getContentResolver(), "enabled_notification_listeners");
         return notificationListenerList != null && notificationListenerList.contains(context.getPackageName());
-    }
-
-    /**
-     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
-     */
-    private org.cosmic.cosmicconnect.NetworkPacket convertToLegacyPacket(NetworkPacket ffi) {
-        org.cosmic.cosmicconnect.NetworkPacket legacy =
-            new org.cosmic.cosmicconnect.NetworkPacket(ffi.getType());
-
-        // Copy all body fields
-        Map<String, Object> body = ffi.getBody();
-        for (Map.Entry<String, Object> entry : body.entrySet()) {
-            legacy.set(entry.getKey(), entry.getValue());
-        }
-
-        return legacy;
     }
 
 }

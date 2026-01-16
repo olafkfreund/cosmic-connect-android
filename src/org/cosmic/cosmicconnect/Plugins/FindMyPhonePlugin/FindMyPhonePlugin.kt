@@ -327,7 +327,7 @@ class FindMyPhonePlugin : Plugin() {
      * Sets volume to maximum ALARM level (saves original) and starts MediaPlayer.
      * This bypasses silent mode and DND settings.
      */
-    internal fun startPlaying() {
+    fun startPlaying() {
         val player = mediaPlayer ?: return
         if (player.isPlaying) return
 
@@ -349,7 +349,7 @@ class FindMyPhonePlugin : Plugin() {
      *
      * Stops MediaPlayer, restores original volume, and re-prepares for next use.
      */
-    internal fun stopPlaying() {
+    fun stopPlaying() {
         val manager = audioManager
         if (manager == null) {
             // Plugin was destroyed (device disconnected)
@@ -385,7 +385,7 @@ class FindMyPhonePlugin : Plugin() {
      *
      * Called when user dismisses or stops ringing.
      */
-    internal fun hideNotification() {
+    fun hideNotification() {
         notificationManager?.cancel(notificationId)
     }
 

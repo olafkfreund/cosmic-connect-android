@@ -217,13 +217,13 @@ public class SharePlugin extends Plugin {
                 return true;
             }
 
-            // Use FFI extension properties for type checking
-            if (getIsFileShare(np)) {
+            // Check packet type using legacy NetworkPacket methods
+            if (np.has("filename")) {
                 receiveFile(np);
-            } else if (getIsTextShare(np)) {
+            } else if (np.has("text")) {
                 Log.i("SharePlugin", "hasText");
                 receiveText(np);
-            } else if (getIsUrlShare(np)) {
+            } else if (np.has("url")) {
                 receiveUrl(np);
             } else {
                 Log.e("SharePlugin", "Error: Nothing attached!");
@@ -238,8 +238,8 @@ public class SharePlugin extends Plugin {
     }
 
     private void receiveUrl(NetworkPacket np) {
-        // Use FFI extension property to extract URL
-        String url = getSharedUrl(np);
+        // Extract URL from legacy NetworkPacket
+        String url = np.getString("url");
         if (url == null) {
             Log.e("SharePlugin", "URL is null");
             return;
@@ -254,8 +254,8 @@ public class SharePlugin extends Plugin {
     }
 
     private void receiveText(NetworkPacket np) {
-        // Use FFI extension property to extract text
-        String text = getSharedText(np);
+        // Extract text from legacy NetworkPacket
+        String text = np.getString("text");
         if (text == null) {
             Log.e("SharePlugin", "Text is null");
             return;
@@ -353,15 +353,15 @@ public class SharePlugin extends Plugin {
                 }
 
                 // Create packet using FFI wrappers
-                NetworkPacket packet;
+                org.cosmic.cosmicconnect.Core.NetworkPacket ffiPacket;
                 if (isUrl) {
-                    packet = SharePacketsFFI.INSTANCE.createUrlShare(text);
+                    ffiPacket = SharePacketsFFI.INSTANCE.createUrlShare(text);
                 } else {
-                    packet = SharePacketsFFI.INSTANCE.createTextShare(text);
+                    ffiPacket = SharePacketsFFI.INSTANCE.createTextShare(text);
                 }
 
                 // Convert and send
-                device.sendPacket(convertToLegacyPacket(packet));
+                device.sendPacket(convertToLegacyPacket(ffiPacket));
                 return;
             }
         }
@@ -456,16 +456,8 @@ public class SharePlugin extends Plugin {
     /**
      * Convert immutable NetworkPacket to legacy NetworkPacket for sending
      */
-    private org.cosmic.cosmicconnect.NetworkPacket convertToLegacyPacket(NetworkPacket ffi) {
-        org.cosmic.cosmicconnect.NetworkPacket legacy =
-            new org.cosmic.cosmicconnect.NetworkPacket(ffi.getType());
-
-        // Copy all body fields
-        Map<String, Object> body = ffi.getBody();
-        for (Map.Entry<String, Object> entry : body.entrySet()) {
-            legacy.set(entry.getKey(), entry.getValue());
-        }
-
-        return legacy;
+    private org.cosmic.cosmicconnect.NetworkPacket convertToLegacyPacket(org.cosmic.cosmicconnect.Core.NetworkPacket ffi) {
+        // Use the standard conversion method from FFI NetworkPacket
+        return ffi.toLegacyPacket();
     }
 }

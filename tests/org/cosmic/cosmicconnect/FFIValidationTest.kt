@@ -706,6 +706,93 @@ class FFIValidationTest {
         }
     }
 
+    /**
+     * Test 3.8: RunCommand Plugin FFI - Issue #60
+     *
+     * Verify RunCommand packet creation via FFI functions:
+     * - createRuncommandRequestList()
+     * - createRuncommandExecute()
+     * - createRuncommandSetup()
+     */
+    @Test
+    fun testRunCommandPlugin() {
+        Log.i(TAG, "=== Test 3.8: RunCommand Plugin FFI (Issue #60) ===")
+
+        try {
+            // Test 1: Create command list request
+            Log.i(TAG, "   Test 1: Create command list request")
+            val requestListPacket = createRuncommandRequestList()
+
+            assertNotNull("Request list packet should not be null", requestListPacket)
+            assertEquals(
+                "Packet type should be runcommand.request",
+                "kdeconnect.runcommand.request",
+                requestListPacket.packetType
+            )
+            assertTrue("Should have requestCommandList field", requestListPacket.body.containsKey("requestCommandList"))
+            assertEquals("requestCommandList should be true", true, requestListPacket.body["requestCommandList"])
+            Log.i(TAG, "   ✅ Request list packet creation successful")
+
+            // Test 2: Create command execution request
+            Log.i(TAG, "   Test 2: Create command execution request")
+            val executePacket = createRuncommandExecute("test-command-123")
+
+            assertNotNull("Execute packet should not be null", executePacket)
+            assertEquals(
+                "Packet type should be runcommand.request",
+                "kdeconnect.runcommand.request",
+                executePacket.packetType
+            )
+            assertTrue("Should have key field", executePacket.body.containsKey("key"))
+            assertEquals("key should match", "test-command-123", executePacket.body["key"])
+            Log.i(TAG, "   ✅ Execute packet creation successful")
+
+            // Test 3: Create setup request
+            Log.i(TAG, "   Test 3: Create setup request")
+            val setupPacket = createRuncommandSetup()
+
+            assertNotNull("Setup packet should not be null", setupPacket)
+            assertEquals(
+                "Packet type should be runcommand.request",
+                "kdeconnect.runcommand.request",
+                setupPacket.packetType
+            )
+            assertTrue("Should have setup field", setupPacket.body.containsKey("setup"))
+            assertEquals("setup should be true", true, setupPacket.body["setup"])
+            Log.i(TAG, "   ✅ Setup packet creation successful")
+
+            // Test 4: Verify all packets are unique
+            Log.i(TAG, "   Test 4: Verify packet uniqueness")
+            assertNotEquals("Packet IDs should be unique", requestListPacket.id, executePacket.id)
+            assertNotEquals("Packet IDs should be unique", requestListPacket.id, setupPacket.id)
+            assertNotEquals("Packet IDs should be unique", executePacket.id, setupPacket.id)
+            Log.i(TAG, "   ✅ All packets have unique IDs")
+
+            // Test 5: Verify serialization
+            Log.i(TAG, "   Test 5: Verify packet serialization")
+            val serialized = serializePacket(executePacket)
+            assertNotNull("Serialized bytes should not be null", serialized)
+            assertTrue("Serialized bytes should not be empty", serialized.isNotEmpty())
+
+            val serializedStr = serialized.decodeToString()
+            assertTrue("Should contain command key", serializedStr.contains("test-command-123"))
+            assertTrue("Should end with newline", serializedStr.endsWith("\n"))
+            Log.i(TAG, "   ✅ Packet serialization successful")
+
+            // Summary
+            Log.i(TAG, "")
+            Log.i(TAG, "✅ All RunCommand plugin FFI tests passed (5/5)")
+            Log.i(TAG, "   - Request list packet creation")
+            Log.i(TAG, "   - Execute packet creation")
+            Log.i(TAG, "   - Setup packet creation")
+            Log.i(TAG, "   - Packet uniqueness")
+            Log.i(TAG, "   - Serialization")
+        } catch (e: Exception) {
+            Log.e(TAG, "⚠️ RunCommand plugin test failed", e)
+            fail("RunCommand FFI tests failed: ${e.message}")
+        }
+    }
+
     // ============================================================================
     // Test Summary
     // ============================================================================

@@ -94,62 +94,42 @@ public class SystemVolumePlugin extends Plugin {
     }
 
     void sendVolume(String name, int volume) {
-        // Create immutable packet
-        Map<String, Object> body = new HashMap<>();
-        body.put("volume", volume);
-        body.put("name", name);
-        NetworkPacket packet = NetworkPacket.create(PACKET_TYPE_SYSTEMVOLUME_REQUEST, body);
+        // Create legacy packet directly
+        NetworkPacket packet = new NetworkPacket(PACKET_TYPE_SYSTEMVOLUME_REQUEST);
+        packet.set("volume", volume);
+        packet.set("name", name);
 
-        // Convert and send
-        getDevice().sendPacket(convertToLegacyPacket(packet));
+        // Send packet
+        getDevice().sendPacket(packet);
     }
 
     void sendMute(String name, boolean mute) {
-        // Create immutable packet
-        Map<String, Object> body = new HashMap<>();
-        body.put("muted", mute);
-        body.put("name", name);
-        NetworkPacket packet = NetworkPacket.create(PACKET_TYPE_SYSTEMVOLUME_REQUEST, body);
+        // Create legacy packet directly
+        NetworkPacket packet = new NetworkPacket(PACKET_TYPE_SYSTEMVOLUME_REQUEST);
+        packet.set("muted", mute);
+        packet.set("name", name);
 
-        // Convert and send
-        getDevice().sendPacket(convertToLegacyPacket(packet));
+        // Send packet
+        getDevice().sendPacket(packet);
     }
 
     void sendEnable(String name) {
-        // Create immutable packet
-        Map<String, Object> body = new HashMap<>();
-        body.put("enabled", true);
-        body.put("name", name);
-        NetworkPacket packet = NetworkPacket.create(PACKET_TYPE_SYSTEMVOLUME_REQUEST, body);
+        // Create legacy packet directly
+        NetworkPacket packet = new NetworkPacket(PACKET_TYPE_SYSTEMVOLUME_REQUEST);
+        packet.set("enabled", true);
+        packet.set("name", name);
 
-        // Convert and send
-        getDevice().sendPacket(convertToLegacyPacket(packet));
+        // Send packet
+        getDevice().sendPacket(packet);
     }
 
     void requestSinkList() {
-        // Create immutable packet
-        Map<String, Object> body = new HashMap<>();
-        body.put("requestSinks", true);
-        NetworkPacket packet = NetworkPacket.create(PACKET_TYPE_SYSTEMVOLUME_REQUEST, body);
+        // Create legacy packet directly
+        NetworkPacket packet = new NetworkPacket(PACKET_TYPE_SYSTEMVOLUME_REQUEST);
+        packet.set("requestSinks", true);
 
-        // Convert and send
-        getDevice().sendPacket(convertToLegacyPacket(packet));
-    }
-
-    /**
-     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
-     */
-    private org.cosmic.cosmicconnect.NetworkPacket convertToLegacyPacket(NetworkPacket ffi) {
-        org.cosmic.cosmicconnect.NetworkPacket legacy =
-            new org.cosmic.cosmicconnect.NetworkPacket(ffi.getType());
-
-        // Copy all body fields
-        Map<String, Object> body = ffi.getBody();
-        for (Map.Entry<String, Object> entry : body.entrySet()) {
-            legacy.set(entry.getKey(), entry.getValue());
-        }
-
-        return legacy;
+        // Send packet
+        getDevice().sendPacket(packet);
     }
 
     @Override

@@ -154,6 +154,15 @@ class MousePadPlugin : Plugin() {
     }
 
     /**
+     * Send a pre-constructed legacy NetworkPacket
+     *
+     * Used by KeyListenerView for special key handling
+     */
+    fun sendPacket(legacyPacket: LegacyNetworkPacket) {
+        device.sendPacket(legacyPacket)
+    }
+
+    /**
      * Helper to send special key packets
      */
     private fun sendSpecialKey(keyCode: Int) {

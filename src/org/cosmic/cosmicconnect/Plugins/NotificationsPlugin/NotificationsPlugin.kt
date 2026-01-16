@@ -119,6 +119,7 @@ class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener 
             }
         }
 
+        @JvmStatic
         fun getPrefKey(): String = PREF_KEY
     }
 

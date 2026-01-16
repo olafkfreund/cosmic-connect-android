@@ -186,22 +186,17 @@ public class CompositeUploadFileJob extends BackgroundJob<Device, Void> {
      * Use this to send metadata ahead of all the other {@link #networkPacketList packets}.
      */
     private void sendUpdatePacket() {
-        // Build packet body
-        Map<String, Object> body = new HashMap<>();
+        // Create legacy packet directly
+        NetworkPacket packet = new NetworkPacket(SharePlugin.PACKET_TYPE_SHARE_REQUEST_UPDATE);
 
         synchronized (lock) {
-            body.put("numberOfFiles", totalNumFiles);
-            body.put("totalPayloadSize", totalPayloadSize);
+            packet.set("numberOfFiles", totalNumFiles);
+            packet.set("totalPayloadSize", totalPayloadSize);
             updatePacketPending = false;
         }
 
-        // Create immutable packet
-        org.cosmic.cosmicconnect.Core.NetworkPacket packet =
-            org.cosmic.cosmicconnect.Core.NetworkPacket.create(
-                SharePlugin.PACKET_TYPE_SHARE_REQUEST_UPDATE, body);
-
-        // Convert to legacy and send
-        getDevice().sendPacket(convertToLegacyPacket(packet));
+        // Send packet
+        getDevice().sendPacket(packet);
     }
 
     @Override
@@ -240,20 +235,5 @@ public class CompositeUploadFileJob extends BackgroundJob<Device, Void> {
         public void onFailure(Throwable e) {
             // Handled in the run() function when sendPacketBlocking returns false
         }
-    }
-
-    /**
-     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
-     */
-    private NetworkPacket convertToLegacyPacket(org.cosmic.cosmicconnect.Core.NetworkPacket ffi) {
-        NetworkPacket legacy = new NetworkPacket(ffi.getType());
-
-        // Copy all body fields
-        Map<String, Object> body = ffi.getBody();
-        for (Map.Entry<String, Object> entry : body.entrySet()) {
-            legacy.set(entry.getKey(), entry.getValue());
-        }
-
-        return legacy;
     }
 }

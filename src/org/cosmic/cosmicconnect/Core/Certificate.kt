@@ -141,19 +141,11 @@ data class Certificate(
     }
 
     /**
-     * Get SHA-256 fingerprint
-     *
-     * The fingerprint is used for device pairing verification.
-     * Users compare fingerprints to ensure they're connecting to the correct device.
-     */
-    fun getFingerprint(): String {
-        return fingerprint
-    }
-
-    /**
      * Get fingerprint in human-readable format (with colons)
      *
      * Example: "AB:CD:EF:12:34:56:..."
+     *
+     * Note: Use the `fingerprint` property to access the raw SHA-256 fingerprint.
      */
     fun getFingerprintFormatted(): String {
         return fingerprint.chunked(2).joinToString(":")

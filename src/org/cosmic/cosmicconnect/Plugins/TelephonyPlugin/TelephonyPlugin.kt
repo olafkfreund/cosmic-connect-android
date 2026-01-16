@@ -68,57 +68,42 @@ class TelephonyPlugin : Plugin() {
     private fun callBroadcastReceived(state: Int, phoneNumber: String?) {
         if (isNumberBlocked(phoneNumber)) return
 
-        // Build base packet body with contact info
-        val baseBody = mutableMapOf<String, Any>()
-
+        // Get contact name from contacts
+        var contactName: String? = null
         val permissionCheck = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CONTACTS)
 
         if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
             val contactInfo = ContactsHelper.phoneNumberLookup(context, phoneNumber)
+            contactName = contactInfo["name"] as? String
 
-            val name = contactInfo["name"]
-            if (name != null) {
-                baseBody["contactName"] = name
-            }
-
-            if (contactInfo.containsKey("photoID")) {
-                val photoUri = contactInfo["photoID"]
-                if (photoUri != null) {
-                    try {
-                        val base64photo = ContactsHelper.photoId64Encoded(context, photoUri)
-                        if (!base64photo.isNullOrEmpty()) {
-                            baseBody["phoneThumbnail"] = base64photo
-                        }
-                    } catch (e: Exception) {
-                        Log.e("TelephonyPlugin", "Failed to get contact photo")
-                    }
-                }
-            }
+            // TODO: Handle contact photo (phoneThumbnail)
+            // if (contactInfo.containsKey("photoID")) { ... }
         } else if (phoneNumber != null) {
-            baseBody["contactName"] = phoneNumber
-        }
-
-        if (phoneNumber != null) {
-            baseBody["phoneNumber"] = phoneNumber
+            contactName = phoneNumber
         }
 
         when (state) {
             TelephonyManager.CALL_STATE_RINGING -> {
                 unmuteRinger()
-                baseBody["event"] = "ringing"
 
-                // Create immutable packet
-                val packet = NetworkPacket.create(PACKET_TYPE_TELEPHONY, baseBody.toMap())
+                // Create telephony event packet using FFI
+                val packet = TelephonyPacketsFFI.createTelephonyEvent(
+                    event = "ringing",
+                    phoneNumber = phoneNumber,
+                    contactName = contactName
+                )
                 val legacyPacket = convertToLegacyPacket(packet)
 
                 device.sendPacket(legacyPacket)
                 lastPacket = legacyPacket
             }
             TelephonyManager.CALL_STATE_OFFHOOK -> {
-                baseBody["event"] = "talking"
-
-                // Create immutable packet
-                val packet = NetworkPacket.create(PACKET_TYPE_TELEPHONY, baseBody.toMap())
+                // Create telephony event packet using FFI
+                val packet = TelephonyPacketsFFI.createTelephonyEvent(
+                    event = "talking",
+                    phoneNumber = phoneNumber,
+                    contactName = contactName
+                )
                 val legacyPacket = convertToLegacyPacket(packet)
 
                 device.sendPacket(legacyPacket)
@@ -141,18 +126,15 @@ class TelephonyPlugin : Plugin() {
 
                 // Emit a missed call notification if needed
                 if ("ringing" == lastPacket.getString("event")) {
-                    baseBody["event"] = "missedCall"
-                    val phoneNumber = lastPacket.getStringOrNull("phoneNumber")
-                    if (phoneNumber != null) {
-                        baseBody["phoneNumber"] = phoneNumber
-                    }
-                    val contactName = lastPacket.getStringOrNull("contactName")
-                    if (contactName != null) {
-                        baseBody["contactName"] = contactName
-                    }
+                    val lastPhoneNumber = lastPacket.getStringOrNull("phoneNumber")
+                    val lastContactName = lastPacket.getStringOrNull("contactName")
 
-                    // Create immutable packet
-                    val packet = NetworkPacket.create(PACKET_TYPE_TELEPHONY, baseBody.toMap())
+                    // Create missed call packet using FFI
+                    val packet = TelephonyPacketsFFI.createTelephonyEvent(
+                        event = "missedCall",
+                        phoneNumber = lastPhoneNumber,
+                        contactName = lastContactName
+                    )
                     device.sendPacket(convertToLegacyPacket(packet))
                 }
 
@@ -193,8 +175,11 @@ class TelephonyPlugin : Plugin() {
     }
 
     override fun onPacketReceived(np: LegacyNetworkPacket): Boolean {
-        when (np.type) {
-            PACKET_TYPE_TELEPHONY_REQUEST_MUTE -> muteRinger()
+        // Convert to immutable NetworkPacket for type-safe inspection
+        val packet = NetworkPacket.fromLegacyPacket(np)
+
+        when {
+            packet.isMuteRequest -> muteRinger()
         }
         return true
     }
@@ -246,20 +231,20 @@ class TelephonyPlugin : Plugin() {
          * It contains the key "event" which maps to a string indicating the type of event:
          * - "ringing" - A phone call is incoming
          * - "missedCall" - An incoming call was not answered
-         * - "sms" - An incoming SMS message
+         * - "sms" - An incoming SMS message (deprecated, use SMS plugin)
          * - Note: As of this writing (15 May 2018) the SMS interface is being improved and this type of event
          * is no longer the preferred way of handling SMS. Use the packets defined by the SMS plugin instead.
          *
          * Depending on the event, other fields may be defined
          */
-        const val PACKET_TYPE_TELEPHONY: String = "cosmicconnect.telephony"
+        const val PACKET_TYPE_TELEPHONY: String = "kdeconnect.telephony"
 
         /**
          * Packet sent to indicate the user has requested the device mute its ringer
          *
          * The body should be empty
          */
-        private const val PACKET_TYPE_TELEPHONY_REQUEST_MUTE = "cosmicconnect.telephony.request_mute"
+        private const val PACKET_TYPE_TELEPHONY_REQUEST_MUTE = "kdeconnect.telephony.request_mute"
 
         private const val KEY_PREF_BLOCKED_NUMBERS = "telephony_blocked_numbers"
     }

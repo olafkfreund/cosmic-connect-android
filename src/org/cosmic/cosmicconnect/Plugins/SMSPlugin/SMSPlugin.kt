@@ -296,10 +296,10 @@ class SMSPlugin : Plugin() {
             val partID: Long = np.getLong("part_id")
             val uniqueIdentifier: String = np.getString("unique_identifier")
 
-            val networkPacket: NetworkPacket? = partIdToMessageAttachmentPacket(context, partID, uniqueIdentifier, PACKET_TYPE_SMS_ATTACHMENT_FILE)
+            val networkPacket: LegacyNetworkPacket? = partIdToMessageAttachmentPacket(context, partID, uniqueIdentifier, PACKET_TYPE_SMS_ATTACHMENT_FILE)
 
             if (networkPacket != null) {
-                device.sendPacket(networkPacket.toLegacyPacket())
+                device.sendPacket(networkPacket)
             }
 
             true
@@ -319,8 +319,8 @@ class SMSPlugin : Plugin() {
 
         while (conversations.hasNext()) {
             val message: SMSHelper.Message = conversations.next()
-            val partialReply: NetworkPacket = constructBulkMessagePacket(setOf(message))
-            device.sendPacket(partialReply.toLegacyPacket())
+            val partialReply: LegacyNetworkPacket = constructBulkMessagePacket(setOf(message))
+            device.sendPacket(partialReply)
         }
 
         return true
@@ -344,9 +344,9 @@ class SMSPlugin : Plugin() {
             getMessagesInRange(this.context, threadID, rangeStartTimestamp, numberToGet, true)
         }
 
-        val reply: NetworkPacket = constructBulkMessagePacket(conversation)
+        val reply: LegacyNetworkPacket = constructBulkMessagePacket(conversation)
 
-        device.sendPacket(reply.toLegacyPacket())
+        device.sendPacket(reply)
 
         return true
     }

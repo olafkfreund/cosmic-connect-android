@@ -159,17 +159,18 @@ class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener 
         return notificationListenerList?.contains(context.packageName) == true
     }
 
-    override fun getPermissionExplanationDialog(): DialogFragment {
-        return StartActivityAlertDialogFragment.Builder()
-            .setTitle(R.string.pref_plugin_notifications)
-            .setMessage(R.string.no_permissions)
-            .setPositiveButton(R.string.open_settings)
-            .setNegativeButton(R.string.cancel)
-            .setIntentAction("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS")
-            .setStartForResult(true)
-            .setRequestCode(MainActivity.RESULT_NEEDS_RELOAD)
-            .create()
-    }
+    override val permissionExplanationDialog: DialogFragment
+        get() {
+            return StartActivityAlertDialogFragment.Builder()
+                .setTitle(R.string.pref_plugin_notifications)
+                .setMessage(R.string.no_permissions)
+                .setPositiveButton(R.string.open_settings)
+                .setNegativeButton(R.string.cancel)
+                .setIntentAction("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS")
+                .setStartForResult(true)
+                .setRequestCode(MainActivity.RESULT_NEEDS_RELOAD)
+                .create()
+        }
 
     // Packet types
     override val supportedPacketTypes: Array<String>

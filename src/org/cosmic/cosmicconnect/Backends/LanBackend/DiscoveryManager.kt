@@ -8,6 +8,7 @@ import org.cosmic.cosmicconnect.Core.DeviceType
 import org.cosmic.cosmicconnect.Core.Discovery
 import org.cosmic.cosmicconnect.Core.DiscoveryEvent
 import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.DeviceType as AndroidDeviceType
 import org.cosmic.cosmicconnect.Helpers.DeviceHelper
 import org.cosmic.cosmicconnect.Plugins.PluginFactory
 import java.net.InetAddress
@@ -174,13 +175,13 @@ class DiscoveryManager(
     /**
      * Map Android device type to Core DeviceType enum
      */
-    private fun mapDeviceType(type: org.cosmic.cosmicconnect.Helpers.DeviceHelper.DeviceType): DeviceType {
+    private fun mapDeviceType(type: AndroidDeviceType): DeviceType {
         return when (type) {
-            org.cosmic.cosmicconnect.Helpers.DeviceHelper.DeviceType.Phone -> DeviceType.PHONE
-            org.cosmic.cosmicconnect.Helpers.DeviceHelper.DeviceType.Tablet -> DeviceType.TABLET
-            org.cosmic.cosmicconnect.Helpers.DeviceHelper.DeviceType.Tv -> DeviceType.TV
-            org.cosmic.cosmicconnect.Helpers.DeviceHelper.DeviceType.Desktop -> DeviceType.DESKTOP
-            org.cosmic.cosmicconnect.Helpers.DeviceHelper.DeviceType.Laptop -> DeviceType.LAPTOP
+            AndroidDeviceType.PHONE -> DeviceType.PHONE
+            AndroidDeviceType.TABLET -> DeviceType.TABLET
+            AndroidDeviceType.TV -> DeviceType.TV
+            AndroidDeviceType.DESKTOP -> DeviceType.DESKTOP
+            AndroidDeviceType.LAPTOP -> DeviceType.LAPTOP
         }
     }
 

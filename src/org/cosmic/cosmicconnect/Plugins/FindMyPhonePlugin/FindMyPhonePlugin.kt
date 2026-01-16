@@ -25,6 +25,7 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.DeviceType
 import org.cosmic.cosmicconnect.Helpers.DeviceHelper
 import org.cosmic.cosmicconnect.Helpers.LifecycleHelper
 import org.cosmic.cosmicconnect.Helpers.NotificationHelper
@@ -115,9 +116,9 @@ class FindMyPhonePlugin : Plugin() {
     override val displayName: String
         get() {
             return when (DeviceHelper.deviceType) {
-                DeviceHelper.DeviceType.TV -> context.getString(R.string.findmyphone_title_tv)
-                DeviceHelper.DeviceType.TABLET -> context.getString(R.string.findmyphone_title_tablet)
-                DeviceHelper.DeviceType.PHONE -> context.getString(R.string.findmyphone_title)
+                DeviceType.TV -> context.getString(R.string.findmyphone_title_tv)
+                DeviceType.TABLET -> context.getString(R.string.findmyphone_title_tablet)
+                DeviceType.PHONE -> context.getString(R.string.findmyphone_title)
                 else -> context.getString(R.string.findmyphone_title)
             }
         }
@@ -401,14 +402,16 @@ class FindMyPhonePlugin : Plugin() {
     // Permissions
     // ========================================================================
 
-    override fun getRequiredPermissions(): Array<String> {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            arrayOf(Manifest.permission.POST_NOTIFICATIONS)
-        } else {
-            emptyArray()
+    override val requiredPermissions: Array<String>
+        get() {
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                arrayOf(Manifest.permission.POST_NOTIFICATIONS)
+            } else {
+                emptyArray()
+            }
         }
-    }
 
-    override fun getPermissionExplanation(): Int =
-        R.string.findmyphone_notifications_explanation
+    @get:androidx.annotation.StringRes
+    override val permissionExplanation: Int
+        get() = R.string.findmyphone_notifications_explanation
 }

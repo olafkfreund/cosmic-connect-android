@@ -1,5 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2024 Albert Vaca Cintora <albertvaka@gmail.com>
+ * SPDX-FileCopyrightText: 2026 COSMIC Connect Contributors
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
@@ -7,30 +8,36 @@
 package org.cosmic.cosmicconnect.UserInterface.compose
 
 import android.content.Context
-import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 
+/**
+ * Legacy theme wrapper for backward compatibility.
+ *
+ * @deprecated Use [CosmicTheme] instead. This wrapper exists for backward compatibility
+ * during the migration period and will be removed in a future version.
+ *
+ * KdeTheme has been replaced by CosmicTheme which includes:
+ * - Custom COSMIC-branded color schemes
+ * - Comprehensive typography system
+ * - Consistent shape definitions
+ * - Better Material3 integration
+ */
+@Deprecated(
+  message = "Use CosmicTheme instead for enhanced design system support",
+  replaceWith = ReplaceWith(
+    "CosmicTheme(context, content = content)",
+    "org.cosmic.cosmicconnect.UserInterface.compose.CosmicTheme"
+  ),
+  level = DeprecationLevel.WARNING
+)
 @Composable
-fun KdeTheme(context : Context, content: @Composable () -> Unit) {
-    val colorScheme = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-        when (isSystemInDarkTheme()) {
-            true -> dynamicDarkColorScheme(context)
-            false -> dynamicLightColorScheme(context)
-        }
-    } else {
-        when (isSystemInDarkTheme()) {
-            true -> darkColorScheme()
-            false -> lightColorScheme()
-        }
-    }
-    MaterialTheme(
-        colorScheme = colorScheme,
-        content = content,
-    )
+fun KdeTheme(context: Context, content: @Composable () -> Unit) {
+  // Delegate to CosmicTheme with default settings
+  CosmicTheme(
+    context = context,
+    useDynamicColors = true,
+    darkTheme = isSystemInDarkTheme(),
+    content = content
+  )
 }

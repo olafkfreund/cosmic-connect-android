@@ -335,10 +335,12 @@ fun SectionHeader(
  *
  * Generic list item for various use cases (settings, navigation, etc.)
  *
- * @param text Primary text
- * @param icon Optional leading icon
- * @param secondaryText Optional secondary text
- * @param trailingIcon Optional trailing icon
+ * @param text Primary text (can also use 'title' as alias for better readability)
+ * @param icon Optional leading icon (drawable resource)
+ * @param iconVector Optional leading icon (ImageVector) - takes priority over icon
+ * @param secondaryText Optional secondary text (can also use 'subtitle' as alias)
+ * @param trailingIcon Optional trailing icon (drawable resource)
+ * @param trailingIconVector Optional trailing icon (ImageVector)
  * @param trailingContent Optional custom trailing content
  * @param showDivider Whether to show bottom divider
  * @param onClick Optional click callback
@@ -346,15 +348,25 @@ fun SectionHeader(
  */
 @Composable
 fun SimpleListItem(
-  text: String,
+  text: String? = null,
   icon: Int? = null,
+  iconVector: androidx.compose.ui.graphics.vector.ImageVector? = null,
   secondaryText: String? = null,
   trailingIcon: Int? = null,
+  trailingIconVector: androidx.compose.ui.graphics.vector.ImageVector? = null,
   trailingContent: (@Composable () -> Unit)? = null,
   showDivider: Boolean = true,
   onClick: (() -> Unit)? = null,
-  modifier: Modifier = Modifier
+  modifier: Modifier = Modifier,
+  // Alternate parameter names for better API
+  title: String? = null,
+  subtitle: String? = null,
+  leadingIcon: androidx.compose.ui.graphics.vector.ImageVector? = null
 ) {
+  // Resolve parameter aliases
+  val finalText = text ?: title ?: ""
+  val finalSecondaryText = secondaryText ?: subtitle
+  val finalIconVector = iconVector ?: leadingIcon
   Column(modifier = modifier.fillMaxWidth()) {
     Surface(
       onClick = onClick ?: {},
@@ -362,7 +374,7 @@ fun SimpleListItem(
       modifier = Modifier
         .fillMaxWidth()
         .height(
-          if (secondaryText != null) Dimensions.ListItem.largeHeight
+          if (finalSecondaryText != null) Dimensions.ListItem.largeHeight
           else Dimensions.ListItem.standardHeight
         )
         .then(
@@ -370,8 +382,8 @@ fun SimpleListItem(
             Modifier.semantics {
               role = Role.Button
               contentDescription = buildString {
-                append(text)
-                secondaryText?.let {
+                append(finalText)
+                finalSecondaryText?.let {
                   append(", ")
                   append(it)
                 }
@@ -389,10 +401,18 @@ fun SimpleListItem(
           .padding(horizontal = SpecialSpacing.ListItem.contentPadding),
         verticalAlignment = Alignment.CenterVertically
       ) {
-        // Leading icon
-        icon?.let { iconRes ->
+        // Leading icon (ImageVector takes priority, then drawable resource)
+        if (finalIconVector != null) {
           Icon(
-            painter = painterResource(iconRes),
+            imageVector = finalIconVector,
+            contentDescription = null, // Decorative
+            modifier = Modifier.size(Dimensions.Icon.standard),
+            tint = MaterialTheme.colorScheme.onSurfaceVariant
+          )
+          Spacer(modifier = Modifier.width(SpecialSpacing.ListItem.iconToText))
+        } else if (icon != null) {
+          Icon(
+            painter = painterResource(icon),
             contentDescription = null, // Decorative
             modifier = Modifier.size(Dimensions.Icon.standard),
             tint = MaterialTheme.colorScheme.onSurfaceVariant
@@ -406,12 +426,12 @@ fun SimpleListItem(
           verticalArrangement = Arrangement.spacedBy(Spacing.extraSmall)
         ) {
           Text(
-            text = text,
+            text = finalText,
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurface
           )
 
-          secondaryText?.let { secondary ->
+          finalSecondaryText?.let { secondary ->
             Text(
               text = secondary,
               style = MaterialTheme.typography.bodyMedium,
@@ -420,9 +440,17 @@ fun SimpleListItem(
           }
         }
 
-        // Trailing content
+        // Trailing content (ImageVector takes priority, then drawable resource)
         when {
           trailingContent != null -> trailingContent()
+          trailingIconVector != null -> {
+            Icon(
+              imageVector = trailingIconVector,
+              contentDescription = null, // Decorative
+              modifier = Modifier.size(Dimensions.Icon.standard),
+              tint = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+          }
           trailingIcon != null -> {
             Icon(
               painter = painterResource(trailingIcon),
@@ -438,7 +466,7 @@ fun SimpleListItem(
     if (showDivider) {
       HorizontalDivider(
         modifier = Modifier.padding(
-          start = if (icon != null) {
+          start = if (finalIconVector != null || icon != null) {
             Dimensions.Icon.standard + SpecialSpacing.ListItem.iconToText + SpecialSpacing.ListItem.contentPadding
           } else {
             SpecialSpacing.ListItem.contentPadding

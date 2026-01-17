@@ -3,13 +3,9 @@ package org.cosmic.cosmicconnect.UserInterface.compose.screens
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material.pullrefresh.PullRefreshIndicator
-import androidx.compose.material.pullrefresh.pullRefresh
-import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -47,7 +43,7 @@ import org.cosmic.cosmicconnect.R
  * @param onNavigateToSettings Callback to navigate to settings screen
  * @param modifier Modifier for customization
  */
-@OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DeviceListScreen(
   viewModel: DeviceListViewModel,
@@ -59,11 +55,6 @@ fun DeviceListScreen(
 ) {
   val uiState by viewModel.uiState.collectAsStateWithLifecycle()
   val isRefreshing by viewModel.isRefreshing.collectAsStateWithLifecycle()
-
-  val pullRefreshState = rememberPullRefreshState(
-    refreshing = isRefreshing,
-    onRefresh = { viewModel.refreshDevices() }
-  )
 
   var showMenu by remember { mutableStateOf(false) }
   var deviceToUnpair by remember { mutableStateOf<Device?>(null) }
@@ -143,27 +134,14 @@ fun DeviceListScreen(
       )
     }
   ) { paddingValues ->
-    Box(
+    DeviceListContent(
+      uiState = uiState,
+      onDeviceClick = onDeviceClick,
+      onDeviceUnpair = { device -> deviceToUnpair = device },
       modifier = Modifier
         .fillMaxSize()
         .padding(paddingValues)
-        .pullRefresh(pullRefreshState)
-    ) {
-      DeviceListContent(
-        uiState = uiState,
-        onDeviceClick = onDeviceClick,
-        onDeviceUnpair = { device -> deviceToUnpair = device },
-        modifier = Modifier.fillMaxSize()
-      )
-
-      PullRefreshIndicator(
-        refreshing = isRefreshing,
-        state = pullRefreshState,
-        modifier = Modifier.align(Alignment.TopCenter),
-        backgroundColor = MaterialTheme.colorScheme.surface,
-        contentColor = MaterialTheme.colorScheme.primary
-      )
-    }
+    )
   }
 
   // Unpair confirmation dialog

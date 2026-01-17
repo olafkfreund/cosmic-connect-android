@@ -27,7 +27,7 @@ class DeviceDetailViewModel(
   val uiState: StateFlow<DeviceDetailUiState> = _uiState.asStateFlow()
 
   private var device: Device? = null
-  private var pairingCallback: Device.PairingCallback? = null
+  private var pairingCallback: PairingHandler.PairingCallback? = null
   private var pluginsChangedListener: Device.PluginsChangedListener? = null
 
   init {
@@ -46,9 +46,29 @@ class DeviceDetailViewModel(
     }
 
     // Observe device changes
-    pairingCallback = Device.PairingCallback {
-      viewModelScope.launch {
-        updateDeviceState()
+    pairingCallback = object : PairingHandler.PairingCallback {
+      override fun incomingPairRequest() {
+        viewModelScope.launch {
+          updateDeviceState()
+        }
+      }
+
+      override fun pairingSuccessful() {
+        viewModelScope.launch {
+          updateDeviceState()
+        }
+      }
+
+      override fun pairingFailed(error: String) {
+        viewModelScope.launch {
+          updateDeviceState()
+        }
+      }
+
+      override fun unpaired(device: Device) {
+        viewModelScope.launch {
+          updateDeviceState()
+        }
       }
     }
     pairingCallback?.let { device?.addPairingCallback(it) }

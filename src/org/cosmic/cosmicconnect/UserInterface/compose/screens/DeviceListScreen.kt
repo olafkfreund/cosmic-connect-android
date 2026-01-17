@@ -126,12 +126,12 @@ fun DeviceListScreen(
           NavigationDestination(
             id = "devices",
             label = "Devices",
-            icon = R.drawable.ic_baseline_devices_24
+            icon = R.drawable.ic_device_phone_32dp
           ),
           NavigationDestination(
             id = "settings",
             label = "Settings",
-            icon = R.drawable.ic_baseline_settings_24
+            icon = R.drawable.ic_settings_white_32dp
           )
         ),
         selectedDestination = "devices",
@@ -545,7 +545,7 @@ private fun DeviceListItemWithActions(
 //       )
 //     }
 //   }
-}
+// }
 
 @Preview(name = "Empty State - No WiFi", showBackground = true)
 @Composable

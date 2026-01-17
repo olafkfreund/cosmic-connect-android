@@ -1,0 +1,154 @@
+name: Bug Report
+description: Report a bug or unexpected behavior
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the information below to help us fix it.
+
+  - type: checkboxes
+    id: prerequisites
+    attributes:
+      label: Prerequisites
+      description: Please confirm you've completed these steps before submitting
+      options:
+        - label: I have searched existing issues to avoid duplicates
+          required: true
+        - label: I am using the latest version of COSMIC Connect
+          required: true
+        - label: I have read the troubleshooting guide in the User Guide
+          required: false
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of the bug
+      placeholder: When I try to share a file...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Step-by-step instructions to reproduce the bug
+      placeholder: |
+        1. Open COSMIC Connect
+        2. Pair with desktop
+        3. Share a file > 100MB
+        4. Transfer fails at 50%
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What you expected to happen
+      placeholder: File should transfer successfully
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened
+      placeholder: Transfer fails with "Connection lost" error
+    validations:
+      required: true
+
+  - type: input
+    id: android-version
+    attributes:
+      label: Android Version
+      description: Which Android version are you using?
+      placeholder: "Android 14"
+    validations:
+      required: true
+
+  - type: input
+    id: device-model
+    attributes:
+      label: Device Model
+      description: What device are you using?
+      placeholder: "Google Pixel 8"
+    validations:
+      required: true
+
+  - type: input
+    id: app-version
+    attributes:
+      label: COSMIC Connect Version
+      description: Which version of COSMIC Connect? (Settings → About)
+      placeholder: "1.0.0-beta"
+    validations:
+      required: true
+
+  - type: input
+    id: desktop-version
+    attributes:
+      label: COSMIC Desktop Version
+      description: Which COSMIC Desktop version? (Optional)
+      placeholder: "Pop!_OS 24.04"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: connection-type
+    attributes:
+      label: Connection Type
+      description: How are devices connected?
+      options:
+        - WiFi
+        - Bluetooth
+        - Both
+        - Not applicable
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: |
+        Attach logs if available (Settings → Advanced → Debug Logging → Export)
+        Drag and drop or paste log files here
+      placeholder: Paste logs or attach file
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: Add screenshots if helpful
+      placeholder: Drag and drop images here
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other relevant information
+      placeholder: This started happening after...
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I have provided all required information
+          required: true
+        - label: I have attached logs if possible
+          required: false
+        - label: I am willing to help test fixes
+          required: false

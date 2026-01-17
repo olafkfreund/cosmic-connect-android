@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: GitHub Discussions
+    url: https://github.com/olafkfreund/cosmic-connect-android/discussions
+    about: Ask questions, share ideas, or discuss with the community
+  - name: User Guide
+    url: https://github.com/olafkfreund/cosmic-connect-android/blob/master/docs/USER_GUIDE.md
+    about: Read the comprehensive user guide
+  - name: FAQ
+    url: https://github.com/olafkfreund/cosmic-connect-android/blob/master/docs/FAQ.md
+    about: Check frequently asked questions
+  - name: Troubleshooting
+    url: https://github.com/olafkfreund/cosmic-connect-android/blob/master/docs/USER_GUIDE.md#troubleshooting
+    about: Common issues and solutions

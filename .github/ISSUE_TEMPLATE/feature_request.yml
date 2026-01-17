@@ -1,0 +1,170 @@
+name: Feature Request
+description: Suggest a new feature or enhancement
+title: "[Feature]: "
+labels: ["enhancement", "needs-triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a feature! Please provide as much detail as possible.
+
+  - type: checkboxes
+    id: prerequisites
+    attributes:
+      label: Prerequisites
+      description: Please confirm you've completed these steps
+      options:
+        - label: I have searched existing issues and discussions
+          required: true
+        - label: This feature does not already exist
+          required: true
+        - label: This feature fits within the scope of COSMIC Connect
+          required: false
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Description
+      description: What problem does this feature solve?
+      placeholder: |
+        Currently, clipboard sync is instant which means sensitive data
+        like passwords are synced immediately...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: How would you like this problem to be solved?
+      placeholder: |
+        Add a configurable delay for clipboard sync with an option
+        to cancel the sync before it happens...
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: What other solutions have you thought about?
+      placeholder: |
+        - Disable clipboard sync entirely (too drastic)
+        - Per-app clipboard whitelist (too complex)
+        - Current solution seems best
+    validations:
+      required: false
+
+  - type: dropdown
+    id: feature-type
+    attributes:
+      label: Feature Type
+      description: What type of feature is this?
+      options:
+        - New Plugin
+        - Enhancement to Existing Plugin
+        - UI/UX Improvement
+        - Performance Optimization
+        - Security Enhancement
+        - Accessibility Feature
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this feature to you?
+      options:
+        - Critical - Blocking my usage
+        - High - Significantly improves experience
+        - Medium - Would be nice to have
+        - Low - Minor improvement
+    validations:
+      required: true
+
+  - type: textarea
+    id: use-cases
+    attributes:
+      label: Use Cases
+      description: Describe specific scenarios where this feature would be useful
+      placeholder: |
+        1. Copying passwords without syncing to desktop
+        2. Copying work-in-progress text without interference
+        3. Privacy-sensitive clipboard operations
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Implementation Suggestions
+      description: |
+        (Optional) If you have technical ideas about how to implement this
+      placeholder: |
+        Could use a CoroutineScope.launch with delay():
+        - Read clipboard
+        - Wait N seconds (configurable)
+        - Check if user cancelled
+        - Send to paired device
+    validations:
+      required: false
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Affected Platform
+      description: Which platform does this feature affect?
+      options:
+        - Android only
+        - COSMIC Desktop only
+        - Both platforms
+        - Protocol level
+    validations:
+      required: true
+
+  - type: textarea
+    id: mockups
+    attributes:
+      label: Mockups/Examples
+      description: |
+        (Optional) Attach mockups, screenshots from other apps, or examples
+      placeholder: Drag and drop images here
+    validations:
+      required: false
+
+  - type: dropdown
+    id: breaking
+    attributes:
+      label: Breaking Change
+      description: Would this require breaking changes to existing functionality?
+      options:
+        - "No - Fully backwards compatible"
+        - "Yes - Requires breaking changes"
+        - "Unknown"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      options:
+        - label: I am willing to contribute this feature
+          required: false
+        - label: I am willing to help test this feature
+          required: false
+        - label: I am willing to help with documentation
+          required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other relevant information
+      placeholder: Similar features in other apps...
+    validations:
+      required: false

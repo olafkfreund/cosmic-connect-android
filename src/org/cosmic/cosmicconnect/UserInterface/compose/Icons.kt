@@ -107,6 +107,9 @@ object CosmicIcons {
     // Simple arrow
     @DrawableRes val arrowSimple: Int = R.drawable.ic_arrow_black
     @DrawableRes val arrowDropDownSimple: Int = R.drawable.ic_arrow_drop_down_24px
+
+    // Menu (placeholder - using settings icon temporarily)
+    @DrawableRes val menu: Int = R.drawable.ic_settings_24dp
   }
 
   /**
@@ -127,6 +130,9 @@ object CosmicIcons {
     @DrawableRes val paste: Int = R.drawable.ic_baseline_content_paste_24
     @DrawableRes val search: Int = R.drawable.ic_search_24
     @DrawableRes val openInFull: Int = R.drawable.ic_open_in_full_24dp
+
+    // More options (placeholder - using edit icon temporarily)
+    @DrawableRes val more: Int = R.drawable.ic_action_image_edit_24dp
   }
 
   /**
@@ -176,6 +182,7 @@ object CosmicIcons {
   object Communication {
     @DrawableRes val sms: Int = R.drawable.ic_baseline_sms_24
     @DrawableRes val web: Int = R.drawable.ic_baseline_web_24
+    @DrawableRes val notification: Int = R.drawable.ic_notification
   }
 
   /**

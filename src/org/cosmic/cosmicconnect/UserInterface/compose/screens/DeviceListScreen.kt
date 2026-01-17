@@ -487,7 +487,7 @@ private fun DeviceListItemWithActions(
 @Preview(name = "Device List - Connected", showBackground = true)
 @Composable
 private fun PreviewDeviceListConnected() {
-  CosmicTheme {
+  CosmicTheme(context = LocalContext.current) {
     Surface {
       DeviceList(
         devices = listOf(
@@ -512,7 +512,7 @@ private fun PreviewDeviceListConnected() {
 @Preview(name = "Device List - All Categories", showBackground = true)
 @Composable
 private fun PreviewDeviceListAllCategories() {
-  CosmicTheme {
+  CosmicTheme(context = LocalContext.current) {
     Surface {
       DeviceList(
         devices = listOf(
@@ -541,7 +541,7 @@ private fun PreviewDeviceListAllCategories() {
 @Preview(name = "Empty State - No WiFi", showBackground = true)
 @Composable
 private fun PreviewEmptyStateNoWiFi() {
-  CosmicTheme {
+  CosmicTheme(context = LocalContext.current) {
     Surface {
       EmptyState(connectivityState = ConnectivityState.NO_WIFI)
     }
@@ -551,7 +551,7 @@ private fun PreviewEmptyStateNoWiFi() {
 @Preview(name = "Empty State - Not Trusted", showBackground = true)
 @Composable
 private fun PreviewEmptyStateNotTrusted() {
-  CosmicTheme {
+  CosmicTheme(context = LocalContext.current) {
     Surface {
       EmptyState(connectivityState = ConnectivityState.NOT_TRUSTED)
     }
@@ -561,7 +561,7 @@ private fun PreviewEmptyStateNotTrusted() {
 @Preview(name = "Loading State", showBackground = true)
 @Composable
 private fun PreviewLoadingState() {
-  CosmicTheme {
+  CosmicTheme(context = LocalContext.current) {
     Surface {
       LoadingState()
     }

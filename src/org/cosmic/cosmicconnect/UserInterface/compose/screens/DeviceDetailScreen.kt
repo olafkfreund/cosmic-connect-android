@@ -9,6 +9,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -66,7 +67,7 @@ fun DeviceDetailScreen(
           if (uiState is DeviceDetailUiState.Paired) {
             IconButton(onClick = { showUnpairDialog = true }) {
               Icon(
-                imageVector = Icons.Default.LinkOff,
+                imageVector = Icons.Default.Close,
                 contentDescription = "Unpair device"
               )
             }
@@ -177,10 +178,10 @@ private fun ErrorContent(
       verticalArrangement = Arrangement.spacedBy(Spacing.medium)
     ) {
       Icon(
-        imageVector = Icons.Default.Error,
+        imageVector = Icons.Default.Info,
         contentDescription = null,
         tint = MaterialTheme.colorScheme.error,
-        modifier = Modifier.size(Dimensions.iconLarge)
+        modifier = Modifier.size(Dimensions.Icon.large)
       )
       Text(
         text = "Error",
@@ -214,14 +215,14 @@ private fun UnpairedDeviceContent(
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.spacedBy(Spacing.large)
   ) {
-    Spacer(modifier = Modifier.height(Spacing.xl))
+    Spacer(modifier = Modifier.height(Spacing.extraLarge))
 
     // Device icon
     Icon(
-      imageVector = Icons.Default.PhoneAndroid,
+      imageVector = Icons.Default.Phone,
       contentDescription = null,
       tint = MaterialTheme.colorScheme.primary,
-      modifier = Modifier.size(Dimensions.iconXLarge)
+      modifier = Modifier.size(Dimensions.Icon.extraLarge)
     )
 
     // Device info
@@ -313,9 +314,9 @@ private fun UnpairedDeviceContent(
           modifier = Modifier.fillMaxWidth()
         ) {
           Icon(
-            imageVector = Icons.Default.Link,
+            imageVector = Icons.Default.Share,
             contentDescription = null,
-            modifier = Modifier.size(Dimensions.iconSmall)
+            modifier = Modifier.size(Dimensions.Icon.small)
           )
           Spacer(modifier = Modifier.width(Spacing.small))
           Text("Request Pairing")
@@ -450,7 +451,7 @@ private fun DeviceInfoSection(
 @Preview(name = "Paired Device", showBackground = true)
 @Composable
 private fun PreviewPairedDevice() {
-  CosmicTheme {
+  CosmicTheme(context = LocalContext.current) {
     Surface {
       PairedDeviceContent(
         state = DeviceDetailUiState.Paired(
@@ -504,7 +505,7 @@ private fun PreviewPairedDevice() {
 @Preview(name = "Unpaired Device - Ready to Pair", showBackground = true)
 @Composable
 private fun PreviewUnpairedDevice() {
-  CosmicTheme {
+  CosmicTheme(context = LocalContext.current) {
     Surface {
       UnpairedDeviceContent(
         state = DeviceDetailUiState.Unpaired(
@@ -525,7 +526,7 @@ private fun PreviewUnpairedDevice() {
 @Preview(name = "Unpaired Device - Incoming Request", showBackground = true)
 @Composable
 private fun PreviewIncomingPairRequest() {
-  CosmicTheme {
+  CosmicTheme(context = LocalContext.current) {
     Surface {
       UnpairedDeviceContent(
         state = DeviceDetailUiState.Unpaired(
@@ -546,7 +547,7 @@ private fun PreviewIncomingPairRequest() {
 @Preview(name = "Unpaired Device - Waiting for Response", showBackground = true)
 @Composable
 private fun PreviewWaitingForPairResponse() {
-  CosmicTheme {
+  CosmicTheme(context = LocalContext.current) {
     Surface {
       UnpairedDeviceContent(
         state = DeviceDetailUiState.Unpaired(
@@ -567,7 +568,7 @@ private fun PreviewWaitingForPairResponse() {
 @Preview(name = "Loading State", showBackground = true)
 @Composable
 private fun PreviewLoadingState() {
-  CosmicTheme {
+  CosmicTheme(context = LocalContext.current) {
     Surface {
       LoadingContent()
     }
@@ -577,7 +578,7 @@ private fun PreviewLoadingState() {
 @Preview(name = "Error State", showBackground = true)
 @Composable
 private fun PreviewErrorState() {
-  CosmicTheme {
+  CosmicTheme(context = LocalContext.current) {
     Surface {
       ErrorContent(message = "Device not found")
     }

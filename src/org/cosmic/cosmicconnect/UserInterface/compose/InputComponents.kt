@@ -13,13 +13,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.ImeAction
@@ -218,7 +219,7 @@ fun CosmicPasswordField(
     modifier = modifier,
     label = label,
     placeholder = placeholder,
-    trailingIcon = if (passwordVisible) Icons.Default.Visibility else Icons.Default.VisibilityOff,
+    trailingIcon = if (passwordVisible) Icons.Default.Star else Icons.Default.Lock,
     onTrailingIconClick = { passwordVisible = !passwordVisible },
     supportingText = supportingText,
     isError = isError,
@@ -453,7 +454,7 @@ fun CosmicSwitch(
         }
       )
       if (description != null) {
-        Spacer(modifier = Modifier.height(Spacing.xxs))
+        Spacer(modifier = Modifier.height(Spacing.extraSmall))
         Text(
           text = description,
           style = MaterialTheme.typography.bodySmall,
@@ -706,7 +707,7 @@ fun CosmicDropdownMenu(
 @Preview(name = "Text Fields Light", showBackground = true)
 @Composable
 private fun PreviewTextFields() {
-  CosmicTheme(darkTheme = false) {
+  CosmicTheme(context = LocalContext.current, darkTheme = false) {
     Column(
       modifier = Modifier.padding(Spacing.medium),
       verticalArrangement = Arrangement.spacedBy(Spacing.medium)
@@ -749,7 +750,7 @@ private fun PreviewTextFields() {
 @Preview(name = "Text Fields Dark", showBackground = true)
 @Composable
 private fun PreviewTextFieldsDark() {
-  CosmicTheme(darkTheme = true) {
+  CosmicTheme(context = LocalContext.current, darkTheme = true) {
     Surface {
       Column(
         modifier = Modifier.padding(Spacing.medium),
@@ -779,7 +780,7 @@ private fun PreviewTextFieldsDark() {
 @Preview(name = "Sliders", showBackground = true)
 @Composable
 private fun PreviewSliders() {
-  CosmicTheme {
+  CosmicTheme(context = LocalContext.current) {
     Column(
       modifier = Modifier.padding(Spacing.medium),
       verticalArrangement = Arrangement.spacedBy(Spacing.large)
@@ -813,7 +814,7 @@ private fun PreviewSliders() {
 @Preview(name = "Selection Components", showBackground = true)
 @Composable
 private fun PreviewSelectionComponents() {
-  CosmicTheme {
+  CosmicTheme(context = LocalContext.current) {
     Column {
       CosmicSwitch(
         checked = true,
@@ -850,7 +851,7 @@ private fun PreviewSelectionComponents() {
 @Preview(name = "Chip Group", showBackground = true)
 @Composable
 private fun PreviewChipGroup() {
-  CosmicTheme {
+  CosmicTheme(context = LocalContext.current) {
     Surface {
       Column(modifier = Modifier.padding(Spacing.medium)) {
         Text(
@@ -871,7 +872,7 @@ private fun PreviewChipGroup() {
 @Preview(name = "Dropdown Menu", showBackground = true)
 @Composable
 private fun PreviewDropdownMenu() {
-  CosmicTheme {
+  CosmicTheme(context = LocalContext.current) {
     Surface {
       Column(modifier = Modifier.padding(Spacing.medium)) {
         CosmicDropdownMenu(

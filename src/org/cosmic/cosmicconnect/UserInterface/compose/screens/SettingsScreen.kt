@@ -100,7 +100,7 @@ fun SettingsScreen(
         SimpleListItem(
           title = "Theme",
           subtitle = getThemeDisplayName(uiState.theme),
-          leadingIcon = Icons.Default.Palette,
+          leadingIcon = Icons.Default.Settings,
           onClick = { showThemeDialog = true }
         )
       }
@@ -121,7 +121,7 @@ fun SettingsScreen(
         SimpleListItem(
           title = "Trusted Networks",
           subtitle = "Configure networks where devices can be discovered",
-          leadingIcon = Icons.Default.Wifi,
+          leadingIcon = Icons.Default.Phone,
           onClick = onNavigateToTrustedNetworks
         )
       }
@@ -131,7 +131,7 @@ fun SettingsScreen(
         SimpleListItem(
           title = "Custom Devices",
           subtitle = "${uiState.customDevicesCount} custom device(s) configured",
-          leadingIcon = Icons.Default.Devices,
+          leadingIcon = Icons.Default.Phone,
           onClick = {
             onNavigateToCustomDevices()
             viewModel.refreshCustomDevicesCount()
@@ -198,7 +198,7 @@ fun SettingsScreen(
         SimpleListItem(
           title = "Export Logs",
           subtitle = "Export diagnostic logs to a file",
-          leadingIcon = Icons.Default.BugReport,
+          leadingIcon = Icons.Default.Info,
           onClick = onExportLogs
         )
       }
@@ -229,7 +229,7 @@ fun SettingsScreen(
         SimpleListItem(
           title = "Source Code",
           subtitle = "View on GitHub",
-          leadingIcon = Icons.Default.Code,
+          leadingIcon = Icons.Default.Share,
           onClick = {
             val intent = Intent(Intent.ACTION_VIEW).apply {
               data = android.net.Uri.parse("https://github.com/olafkfreund/cosmic-connect-android")
@@ -423,7 +423,7 @@ private fun getThemeDisplayName(theme: String): String = when (theme) {
 @Preview(name = "Settings Screen", showBackground = true)
 @Composable
 private fun PreviewSettingsScreen() {
-  CosmicTheme {
+  CosmicTheme(context = LocalContext.current) {
     Surface {
       Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
         SectionHeader(title = "General")
@@ -436,7 +436,7 @@ private fun PreviewSettingsScreen() {
         SimpleListItem(
           title = "Theme",
           subtitle = "Follow System",
-          leadingIcon = Icons.Default.Palette,
+          leadingIcon = Icons.Default.Settings,
           onClick = {}
         )
 
@@ -444,13 +444,13 @@ private fun PreviewSettingsScreen() {
         SimpleListItem(
           title = "Trusted Networks",
           subtitle = "Configure networks where devices can be discovered",
-          leadingIcon = Icons.Default.Wifi,
+          leadingIcon = Icons.Default.Phone,
           onClick = {}
         )
         SimpleListItem(
           title = "Custom Devices",
           subtitle = "3 custom device(s) configured",
-          leadingIcon = Icons.Default.Devices,
+          leadingIcon = Icons.Default.Phone,
           onClick = {}
         )
         CosmicSwitch(
@@ -464,7 +464,7 @@ private fun PreviewSettingsScreen() {
         SimpleListItem(
           title = "Export Logs",
           subtitle = "Export diagnostic logs to a file",
-          leadingIcon = Icons.Default.BugReport,
+          leadingIcon = Icons.Default.Info,
           onClick = {}
         )
 
@@ -483,7 +483,7 @@ private fun PreviewSettingsScreen() {
 @Preview(name = "Theme Dialog", showBackground = true)
 @Composable
 private fun PreviewThemeDialog() {
-  CosmicTheme {
+  CosmicTheme(context = LocalContext.current) {
     ThemeSelectionDialog(
       currentTheme = "follow_system",
       onThemeSelected = {},
@@ -495,7 +495,7 @@ private fun PreviewThemeDialog() {
 @Preview(name = "About Dialog", showBackground = true)
 @Composable
 private fun PreviewAboutDialog() {
-  CosmicTheme {
+  CosmicTheme(context = LocalContext.current) {
     AboutDialog(
       appVersion = "1.0.0",
       onDismiss = {}

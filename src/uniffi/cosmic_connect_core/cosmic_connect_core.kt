@@ -1090,6 +1090,16 @@ internal interface UniffiLib : Library {
 
     fun uniffi_cosmic_connect_core_fn_func_create_conversations_request(uniffi_out_err: UniffiRustCallStatus): RustBuffer.ByValue
 
+    fun uniffi_cosmic_connect_core_fn_func_create_digitizer_event(
+        `bodyJson`: RustBuffer.ByValue,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
+    fun uniffi_cosmic_connect_core_fn_func_create_digitizer_session(
+        `bodyJson`: RustBuffer.ByValue,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
     fun uniffi_cosmic_connect_core_fn_func_create_dismiss_notification_packet(
         `notificationId`: RustBuffer.ByValue,
         uniffi_out_err: UniffiRustCallStatus,
@@ -1525,6 +1535,10 @@ internal interface UniffiLib : Library {
 
     fun uniffi_cosmic_connect_core_checksum_func_create_conversations_request(): Short
 
+    fun uniffi_cosmic_connect_core_checksum_func_create_digitizer_event(): Short
+
+    fun uniffi_cosmic_connect_core_checksum_func_create_digitizer_session(): Short
+
     fun uniffi_cosmic_connect_core_checksum_func_create_dismiss_notification_packet(): Short
 
     fun uniffi_cosmic_connect_core_checksum_func_create_file_share_packet(): Short
@@ -1705,6 +1719,12 @@ private fun uniffiCheckApiChecksums(lib: UniffiLib) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cosmic_connect_core_checksum_func_create_conversations_request() != 33009.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_digitizer_event() != 25868.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_digitizer_session() != 43899.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cosmic_connect_core_checksum_func_create_dismiss_notification_packet() != 33399.toShort()) {
@@ -4447,6 +4467,40 @@ fun `createConversationsRequest`(): FfiPacket =
     FfiConverterTypeFfiPacket.lift(
         uniffiRustCallWithError(ProtocolException) { _status ->
             UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_conversations_request(_status)
+        },
+    )
+
+/**
+ * Create a DIGITIZER event packet
+ *
+ * Creates a packet for pen/stylus input events.
+ *
+ * # Arguments
+ *
+ * * `body_json` - JSON string containing tool event data
+ */
+@Throws(ProtocolException::class)
+fun `createDigitizerEvent`(`bodyJson`: kotlin.String): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_digitizer_event(FfiConverterString.lower(`bodyJson`), _status)
+        },
+    )
+
+/**
+ * Create a DIGITIZER session packet
+ *
+ * Creates a packet for starting or ending a drawing session.
+ *
+ * # Arguments
+ *
+ * * `body_json` - JSON string containing action and session parameters
+ */
+@Throws(ProtocolException::class)
+fun `createDigitizerSession`(`bodyJson`: kotlin.String): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_digitizer_session(FfiConverterString.lower(`bodyJson`), _status)
         },
     )
 

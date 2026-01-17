@@ -20,6 +20,7 @@ import org.cosmic.cosmicconnect.Plugins.PluginFactory
 import org.cosmic.cosmicconnect.Plugins.PresenterPlugin.PresenterActivity
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment
 import org.cosmic.cosmicconnect.R
+import org.json.JSONObject
 
 @PluginFactory.LoadablePlugin
 class DigitizerPlugin : Plugin() {
@@ -48,27 +49,22 @@ class DigitizerPlugin : Plugin() {
     }
 
     fun startSession(width: Int, height: Int, resolutionX: Int, resolutionY: Int) {
-        // Create immutable packet
-        val packet = NetworkPacket.create(PACKET_TYPE_DIGITIZER_SESSION, mapOf(
+        val body = mapOf(
             "action" to "start",
             "width" to width,
             "height" to height,
             "resolutionX" to resolutionX,
             "resolutionY" to resolutionY
-        ))
-
-        // Convert and send
-        device.sendPacket(convertToLegacyPacket(packet))
+        )
+        val json = JSONObject(body).toString()
+        val packet = DigitizerPacketsFFI.createSessionPacket(json)
+        device.sendPacket(packet.toLegacyPacket())
     }
 
     fun endSession() {
-        // Create immutable packet
-        val packet = NetworkPacket.create(PACKET_TYPE_DIGITIZER_SESSION, mapOf(
-            "action" to "end"
-        ))
-
-        // Convert and send
-        device.sendPacket(convertToLegacyPacket(packet))
+        val json = JSONObject(mapOf("action" to "end")).toString()
+        val packet = DigitizerPacketsFFI.createSessionPacket(json)
+        device.sendPacket(packet.toLegacyPacket())
     }
 
     fun reportEvent(event: ToolEvent) {
@@ -83,32 +79,9 @@ class DigitizerPlugin : Plugin() {
         event.y?.let { body["y"] = it }
         event.pressure?.let { body["pressure"] = it }
 
-        // Create immutable packet
-        val packet = NetworkPacket.create(PACKET_TYPE_DIGITIZER, body.toMap())
-
-        // Convert and send
-        device.sendPacket(convertToLegacyPacket(packet))
-    }
-
-    /**
-     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
-     */
-    private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
-        val legacy = LegacyNetworkPacket(ffi.type)
-
-        // Copy all body fields
-        ffi.body.forEach { (key, value) ->
-            when (value) {
-                is String -> legacy.set(key, value)
-                is Int -> legacy.set(key, value)
-                is Long -> legacy.set(key, value)
-                is Boolean -> legacy.set(key, value)
-                is Double -> legacy.set(key, value)
-                else -> legacy.set(key, value.toString())
-            }
-        }
-
-        return legacy
+        val json = JSONObject(body).toString()
+        val packet = DigitizerPacketsFFI.createEventPacket(json)
+        device.sendPacket(packet.toLegacyPacket())
     }
 
     override fun hasSettings(): Boolean = true

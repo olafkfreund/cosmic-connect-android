@@ -535,6 +535,85 @@ private fun PluginCardPreview() {
   }
 }
 
+/**
+ * Info card for displaying informational messages, warnings, or alerts.
+ *
+ * Simpler than StatusCard, used for inline messages in lists or screens.
+ *
+ * @param message The message to display
+ * @param severity The severity level (info, warning, error)
+ * @param modifier Modifier for customization
+ */
+@Composable
+fun InfoCard(
+  message: String,
+  severity: InfoSeverity = InfoSeverity.Info,
+  modifier: Modifier = Modifier
+) {
+  val backgroundColor = when (severity) {
+    InfoSeverity.Info -> MaterialTheme.colorScheme.surfaceVariant
+    InfoSeverity.Warning -> MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
+    InfoSeverity.Error -> MaterialTheme.colorScheme.errorContainer
+  }
+
+  val textColor = when (severity) {
+    InfoSeverity.Info -> MaterialTheme.colorScheme.onSurfaceVariant
+    InfoSeverity.Warning -> MaterialTheme.colorScheme.onErrorContainer
+    InfoSeverity.Error -> MaterialTheme.colorScheme.onErrorContainer
+  }
+
+  Card(
+    modifier = modifier,
+    colors = CardDefaults.cardColors(
+      containerColor = backgroundColor
+    )
+  ) {
+    Text(
+      text = message,
+      style = MaterialTheme.typography.bodyMedium,
+      color = textColor,
+      modifier = Modifier.padding(Spacing.md)
+    )
+  }
+}
+
+/**
+ * Severity level for InfoCard.
+ */
+enum class InfoSeverity {
+  Info,
+  Warning,
+  Error
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun InfoCardPreview() {
+  CosmicTheme(
+    context = androidx.compose.ui.platform.LocalContext.current
+  ) {
+    Column(
+      modifier = Modifier.padding(Spacing.md),
+      verticalArrangement = Arrangement.spacedBy(Spacing.sm)
+    ) {
+      InfoCard(
+        message = "Make sure COSMIC Connect is running on the devices you want to connect to.",
+        severity = InfoSeverity.Info
+      )
+
+      InfoCard(
+        message = "Not connected to Wi-Fi. Connect to Wi-Fi to discover devices.",
+        severity = InfoSeverity.Warning
+      )
+
+      InfoCard(
+        message = "Connection failed. Please try again.",
+        severity = InfoSeverity.Error
+      )
+    }
+  }
+}
+
 @Preview(showBackground = true)
 @Composable
 private fun StatusCardPreview() {

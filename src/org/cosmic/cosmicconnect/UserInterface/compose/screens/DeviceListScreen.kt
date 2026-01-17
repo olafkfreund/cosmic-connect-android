@@ -236,7 +236,6 @@ private fun LoadingState(modifier: Modifier = Modifier) {
       verticalArrangement = Arrangement.spacedBy(Spacing.medium)
     ) {
       LoadingIndicator(
-        size = LoadingSize.Large,
         label = "Discovering devices..."
       )
     }
@@ -494,58 +493,58 @@ private fun DeviceListItemWithActions(
  * Preview Functions
  */
 
-@Preview(name = "Device List - Connected", showBackground = true)
-@Composable
-private fun PreviewDeviceListConnected() {
-  CosmicTheme(context = LocalContext.current) {
-    Surface {
-      DeviceList(
-        devices = listOf(
-          CategorizedDevice(
-            device = createMockDevice("Laptop", isPaired = true, isReachable = true, battery = 85),
-            category = DeviceCategory.CONNECTED
-          ),
-          CategorizedDevice(
-            device = createMockDevice("Phone", isPaired = true, isReachable = true, battery = 42),
-            category = DeviceCategory.CONNECTED
-          )
-        ),
-        connectivityState = ConnectivityState.OK,
-        hasDuplicateNames = false,
-        onDeviceClick = {},
-        onDeviceUnpair = {}
-      )
-    }
-  }
-}
+// @Preview(name = "Device List - Connected", showBackground = true)
+// @Composable
+// private fun PreviewDeviceListConnected() {
+//   CosmicTheme(context = LocalContext.current) {
+//     Surface {
+//       DeviceList(
+//         devices = listOf(
+//           CategorizedDevice(
+//             // device = createMockDevice("Laptop", isPaired = true, isReachable = true, battery = 85),
+//             category = DeviceCategory.CONNECTED
+//           ),
+//           CategorizedDevice(
+//             // device = createMockDevice("Phone", isPaired = true, isReachable = true, battery = 42),
+//             category = DeviceCategory.CONNECTED
+//           )
+//         ),
+//         connectivityState = ConnectivityState.OK,
+//         hasDuplicateNames = false,
+//         onDeviceClick = {},
+//         onDeviceUnpair = {}
+//       )
+//     }
+//   }
+// }
 
-@Preview(name = "Device List - All Categories", showBackground = true)
-@Composable
-private fun PreviewDeviceListAllCategories() {
-  CosmicTheme(context = LocalContext.current) {
-    Surface {
-      DeviceList(
-        devices = listOf(
-          CategorizedDevice(
-            device = createMockDevice("Laptop", isPaired = true, isReachable = true, battery = 85),
-            category = DeviceCategory.CONNECTED
-          ),
-          CategorizedDevice(
-            device = createMockDevice("New Phone", isPaired = false, isReachable = true),
-            category = DeviceCategory.AVAILABLE
-          ),
-          CategorizedDevice(
-            device = createMockDevice("Old Tablet", isPaired = true, isReachable = false),
-            category = DeviceCategory.REMEMBERED
-          )
-        ),
-        connectivityState = ConnectivityState.OK,
-        hasDuplicateNames = false,
-        onDeviceClick = {},
-        onDeviceUnpair = {}
-      )
-    }
-  }
+// @Preview(name = "Device List - All Categories", showBackground = true)
+// @Composable
+// private fun PreviewDeviceListAllCategories() {
+//   CosmicTheme(context = LocalContext.current) {
+//     Surface {
+//       DeviceList(
+//         devices = listOf(
+//           CategorizedDevice(
+//             // device = createMockDevice("Laptop", isPaired = true, isReachable = true, battery = 85),
+//             category = DeviceCategory.CONNECTED
+//           ),
+//           CategorizedDevice(
+//             // device = createMockDevice("New Phone", isPaired = false, isReachable = true),
+//             category = DeviceCategory.AVAILABLE
+//           ),
+//           CategorizedDevice(
+//             // device = createMockDevice("Old Tablet", isPaired = true, isReachable = false),
+//             category = DeviceCategory.REMEMBERED
+//           )
+//         ),
+//         connectivityState = ConnectivityState.OK,
+//         hasDuplicateNames = false,
+//         onDeviceClick = {},
+//         onDeviceUnpair = {}
+//       )
+//     }
+//   }
 }
 
 @Preview(name = "Empty State - No WiFi", showBackground = true)
@@ -581,18 +580,18 @@ private fun PreviewLoadingState() {
 /**
  * Mock device for previews
  */
-private fun createMockDevice(
-  name: String,
-  isPaired: Boolean,
-  isReachable: Boolean,
-  battery: Int? = null
-): Device {
-  return object : Device() {
-    override fun getName() = name
-    override fun isPaired() = isPaired
-    override fun isReachable() = isReachable
-    override fun getBatteryLevel() = battery ?: -1
-    override fun getDeviceId() = "mock-${name.lowercase()}"
-    override fun getDeviceType() = Device.DeviceType.Phone
-  }
-}
+// private fun createMockDevice(
+//   name: String,
+//   isPaired: Boolean,
+//   isReachable: Boolean,
+//   battery: Int? = null
+// ): Device {
+//   return object : Device() {
+//     override fun getName() = name
+//     override fun isPaired() = isPaired
+//     override fun isReachable() = isReachable
+//     override fun getBatteryLevel() = battery ?: -1
+//     override fun getDeviceId() = "mock-${name.lowercase()}"
+//     override fun getDeviceType() = Device.DeviceType.Phone
+//   }
+// }

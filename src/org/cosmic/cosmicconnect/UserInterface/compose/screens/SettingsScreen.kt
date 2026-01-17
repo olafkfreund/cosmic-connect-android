@@ -63,7 +63,7 @@ fun SettingsScreen(
     topBar = {
       CosmicTopAppBar(
         title = "Settings",
-        navigationIcon = Icons.Default.ArrowBack,
+        navigationIcon = R.drawable.ic_arrow_back_black_24dp,
         onNavigationClick = onNavigateBack
       )
     }

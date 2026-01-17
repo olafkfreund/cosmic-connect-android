@@ -60,7 +60,7 @@ fun DeviceDetailScreen(
           is DeviceDetailUiState.Unpaired -> state.deviceName
           else -> "Device Details"
         },
-        navigationIcon = Icons.Default.ArrowBack,
+        navigationIcon = R.drawable.ic_arrow_back_black_24dp,
         onNavigationClick = onNavigateBack,
         actions = {
           // Show actions only for paired devices
@@ -155,7 +155,6 @@ private fun LoadingContent(modifier: Modifier = Modifier) {
     contentAlignment = Alignment.Center
   ) {
     LoadingIndicator(
-      size = LoadingSize.Large,
       label = "Loading device..."
     )
   }
@@ -291,7 +290,6 @@ private fun UnpairedDeviceContent(
           verticalArrangement = Arrangement.spacedBy(Spacing.medium)
         ) {
           LoadingIndicator(
-            size = LoadingSize.Medium,
             label = "Waiting for ${state.deviceName} to accept..."
           )
 

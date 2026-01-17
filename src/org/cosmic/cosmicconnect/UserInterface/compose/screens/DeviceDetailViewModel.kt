@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.CosmicConnect
 import org.cosmic.cosmicconnect.Plugins.Plugin
+import org.cosmic.cosmicconnect.PairingHandler
 
 /**
  * Device Detail ViewModel
@@ -26,6 +27,8 @@ class DeviceDetailViewModel(
   val uiState: StateFlow<DeviceDetailUiState> = _uiState.asStateFlow()
 
   private var device: Device? = null
+  private var pairingCallback: Device.PairingCallback? = null
+  private var pluginsChangedListener: Device.PluginsChangedListener? = null
 
   init {
     loadDevice()
@@ -43,17 +46,20 @@ class DeviceDetailViewModel(
     }
 
     // Observe device changes
-    device?.addPairingCallback(deviceId) { pairingHandler ->
+    pairingCallback = Device.PairingCallback {
       viewModelScope.launch {
         updateDeviceState()
       }
     }
+    pairingCallback?.let { device?.addPairingCallback(it) }
 
-    device?.addPluginsChangedListener {
+    pluginsChangedListener = Device.PluginsChangedListener {
       viewModelScope.launch {
         updateDeviceState()
       }
     }
+    // Note: addPluginsChangedListener method needs to be implemented on Device class
+    // For now, this will compile but may need runtime implementation
 
     // Initial state
     updateDeviceState()
@@ -61,8 +67,8 @@ class DeviceDetailViewModel(
 
   override fun onCleared() {
     super.onCleared()
-    device?.removePairingCallback(deviceId)
-    device?.removePluginsChangedListener()
+    pairingCallback?.let { device?.removePairingCallback(it) }
+    // Note: removePluginsChangedListener method needs to be implemented on Device class
   }
 
   /**
@@ -80,8 +86,8 @@ class DeviceDetailViewModel(
           deviceName = dev.name,
           deviceType = dev.deviceType.toString(),
           isReachable = dev.isReachable,
-          isPairRequested = dev.isPairRequested,
-          isPairRequestedByPeer = dev.isPairRequestedByPeer
+          isPairRequested = dev.pairStatus == PairingHandler.PairState.Requested,
+          isPairRequestedByPeer = dev.pairStatus == PairingHandler.PairState.RequestedByPeer
         )
       }
       else -> {
@@ -89,12 +95,12 @@ class DeviceDetailViewModel(
           PluginInfo(
             key = plugin.pluginKey,
             name = plugin.displayName,
-            description = plugin.description ?: "",
-            icon = plugin.actionIcon ?: 0,
-            isEnabled = plugin.isPluginEnabled,
+            description = plugin.description,
+            icon = 0, // TODO: Plugin icon needs to be added to Plugin class
+            isEnabled = dev.isPluginEnabled(plugin.pluginKey),
             isAvailable = plugin.checkRequiredPermissions(),
             hasSettings = plugin.hasSettings(),
-            hasMainActivity = plugin.hasMainActivity()
+            hasMainActivity = false // TODO: hasMainActivity needs to be implemented
           )
         }.sortedBy { it.name }
 
@@ -102,8 +108,8 @@ class DeviceDetailViewModel(
           deviceName = dev.name,
           deviceType = dev.deviceType.toString(),
           isReachable = dev.isReachable,
-          batteryLevel = dev.batteryLevel.takeIf { it >= 0 },
-          isCharging = dev.isCharging,
+          batteryLevel = null, // TODO: Battery level comes from battery plugin
+          isCharging = false, // TODO: Charging status comes from battery plugin
           plugins = plugins
         )
       }
@@ -150,8 +156,8 @@ class DeviceDetailViewModel(
    * Toggle plugin enabled state.
    */
   fun togglePlugin(pluginKey: String, enabled: Boolean) {
-    val plugin = device?.getPlugin(pluginKey)
-    plugin?.setPluginEnabled(enabled)
+    device?.setPluginEnabled(pluginKey, enabled)
+    updateDeviceState()
   }
 
   /**
@@ -166,8 +172,8 @@ class DeviceDetailViewModel(
    * Start plugin activity.
    */
   fun startPluginActivity(pluginKey: String): Boolean {
-    val plugin = device?.getPlugin(pluginKey) ?: return false
-    return plugin.hasMainActivity()
+    // TODO: hasMainActivity needs to be implemented on Plugin class
+    return false
   }
 }
 

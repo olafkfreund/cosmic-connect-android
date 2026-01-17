@@ -24,6 +24,7 @@ import org.cosmic.cosmicconnect.Helpers.AppsHelper;
 import org.cosmic.cosmicconnect.Helpers.ThreadHelper;
 import org.cosmic.cosmicconnect.NetworkPacket;
 import org.cosmic.cosmicconnect.Plugins.NotificationsPlugin.NotificationReceiver;
+import org.json.JSONObject;
 import org.cosmic.cosmicconnect.Plugins.Plugin;
 import org.cosmic.cosmicconnect.Plugins.PluginFactory;
 import org.cosmic.cosmicconnect.UserInterface.MainActivity;
@@ -223,13 +224,17 @@ public class MprisReceiverPlugin extends Plugin {
     }
 
     private void sendPlayerList() {
-        // Create legacy packet directly
-        NetworkPacket packet = new NetworkPacket(PACKET_TYPE_MPRIS);
-        packet.set("playerList", new ArrayList<>(players.keySet()));
-        packet.set("supportAlbumArtPayload", true);
+        // Build body
+        Map<String, Object> body = new HashMap<>();
+        body.put("playerList", new ArrayList<>(players.keySet()));
+        body.put("supportAlbumArtPayload", true);
+
+        // Create packet using FFI
+        String json = new JSONObject(body).toString();
+        org.cosmic.cosmicconnect.Core.NetworkPacket packet = MprisReceiverPacketsFFI.INSTANCE.createMprisPacket(json);
 
         // Send packet
-        getDevice().sendPacket(packet);
+        getDevice().sendPacket(packet.toLegacyPacket());
     }
 
     void sendAlbumArt(String playerName, @NonNull MprisReceiverCallback cb, @Nullable String requestedUrl) {
@@ -256,15 +261,22 @@ public class MprisReceiverPlugin extends Plugin {
             return;
         }
 
-        // Create legacy packet directly
-        NetworkPacket packet = new NetworkPacket(PACKET_TYPE_MPRIS);
-        packet.set("player", playerName);
-        packet.set("transferringAlbumArt", true);
-        packet.set("albumArtUrl", artUrl);
-        packet.setPayload(new NetworkPacket.Payload(p));
+        // Build body
+        Map<String, Object> body = new HashMap<>();
+        body.put("player", playerName);
+        body.put("transferringAlbumArt", true);
+        body.put("albumArtUrl", artUrl);
+
+        // Create packet using FFI
+        String json = new JSONObject(body).toString();
+        org.cosmic.cosmicconnect.Core.NetworkPacket packet = MprisReceiverPacketsFFI.INSTANCE.createMprisPacket(json);
+
+        // Convert to legacy and set payload
+        org.cosmic.cosmicconnect.NetworkPacket legacyPacket = packet.toLegacyPacket();
+        legacyPacket.setPayload(new org.cosmic.cosmicconnect.NetworkPacket.Payload(p));
 
         // Send packet
-        getDevice().sendPacket(packet);
+        getDevice().sendPacket(legacyPacket);
     }
 
     void sendMetadata(MprisReceiverPlayer player) {
@@ -280,26 +292,30 @@ public class MprisReceiverPlugin extends Plugin {
             }
         }
 
-        // Create legacy packet directly
-        NetworkPacket packet = new NetworkPacket(PACKET_TYPE_MPRIS);
-        packet.set("player", player.getName());
-        packet.set("title", player.getTitle());
-        packet.set("artist", player.getArtist());
-        packet.set("nowPlaying", nowPlaying); // GSConnect 50 (so, Ubuntu 22.04) needs this
-        packet.set("album", player.getAlbum());
-        packet.set("isPlaying", player.isPlaying());
-        packet.set("pos", player.getPosition());
-        packet.set("length", player.getLength());
-        packet.set("canPlay", player.canPlay());
-        packet.set("canPause", player.canPause());
-        packet.set("canGoPrevious", player.canGoPrevious());
-        packet.set("canGoNext", player.canGoNext());
-        packet.set("canSeek", player.canSeek());
-        packet.set("volume", player.getVolume());
-        packet.set("albumArtUrl", artUrl);
+        // Build body
+        Map<String, Object> body = new HashMap<>();
+        body.put("player", player.getName());
+        body.put("title", player.getTitle());
+        body.put("artist", player.getArtist());
+        body.put("nowPlaying", nowPlaying); // GSConnect 50 (so, Ubuntu 22.04) needs this
+        body.put("album", player.getAlbum());
+        body.put("isPlaying", player.isPlaying());
+        body.put("pos", player.getPosition());
+        body.put("length", player.getLength());
+        body.put("canPlay", player.canPlay());
+        body.put("canPause", player.canPause());
+        body.put("canGoPrevious", player.canGoPrevious());
+        body.put("canGoNext", player.canGoNext());
+        body.put("canSeek", player.canSeek());
+        body.put("volume", player.getVolume());
+        body.put("albumArtUrl", artUrl);
+
+        // Create packet using FFI
+        String json = new JSONObject(body).toString();
+        org.cosmic.cosmicconnect.Core.NetworkPacket packet = MprisReceiverPacketsFFI.INSTANCE.createMprisPacket(json);
 
         // Send packet
-        getDevice().sendPacket(packet);
+        getDevice().sendPacket(packet.toLegacyPacket());
     }
 
     @Override

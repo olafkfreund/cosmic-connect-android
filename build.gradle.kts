@@ -105,7 +105,7 @@ android {
     sourceSets {
         getByName("main") {
             setRoot(".") // By default AGP expects all directories under src/main/...
-            java.setSrcDirs(listOf("src/org", "src/us"))
+            java.setSrcDirs(listOf("src/org", "src/us", "src/uniffi"))
             res.setSrcDirs(listOf(licenseResDir, "res")) // add licenseResDir
             // Include Rust-generated JNI libraries
             jniLibs.setSrcDirs(listOf("${projectDir}/build/rustJniLibs/android"))

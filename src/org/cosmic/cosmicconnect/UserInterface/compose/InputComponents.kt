@@ -327,7 +327,7 @@ fun CosmicSlider(
           )
         }
       }
-      Spacer(modifier = Modifier.height(Spacing.xs))
+      Spacer(modifier = Modifier.height(Spacing.extraSmall))
     }
 
     Slider(
@@ -393,7 +393,7 @@ fun CosmicRangeSlider(
           )
         }
       }
-      Spacer(modifier = Modifier.height(Spacing.xs))
+      Spacer(modifier = Modifier.height(Spacing.extraSmall))
     }
 
     RangeSlider(
@@ -436,12 +436,12 @@ fun CosmicSwitch(
     modifier = modifier
       .fillMaxWidth()
       .height(if (description != null) 72.dp else 56.dp)
-      .padding(horizontal = Spacing.md),
+      .padding(horizontal = Spacing.medium),
     verticalAlignment = Alignment.CenterVertically,
     horizontalArrangement = Arrangement.SpaceBetween
   ) {
     Column(
-      modifier = Modifier.weight(1f).padding(end = Spacing.md)
+      modifier = Modifier.weight(1f).padding(end = Spacing.medium)
     ) {
       Text(
         text = label,
@@ -496,7 +496,7 @@ fun CosmicCheckbox(
         role = Role.Checkbox,
         enabled = enabled
       )
-      .padding(horizontal = Spacing.md, vertical = Spacing.sm),
+      .padding(horizontal = Spacing.medium, vertical = Spacing.small),
     verticalAlignment = Alignment.CenterVertically
   ) {
     Checkbox(
@@ -504,7 +504,7 @@ fun CosmicCheckbox(
       onCheckedChange = null,
       enabled = enabled
     )
-    Spacer(modifier = Modifier.width(Spacing.md))
+    Spacer(modifier = Modifier.width(Spacing.medium))
     Text(
       text = label,
       style = MaterialTheme.typography.bodyLarge,
@@ -543,7 +543,7 @@ fun CosmicRadioButton(
         role = Role.RadioButton,
         enabled = enabled
       )
-      .padding(horizontal = Spacing.md, vertical = Spacing.sm),
+      .padding(horizontal = Spacing.medium, vertical = Spacing.small),
     verticalAlignment = Alignment.CenterVertically
   ) {
     RadioButton(
@@ -551,7 +551,7 @@ fun CosmicRadioButton(
       onClick = null,
       enabled = enabled
     )
-    Spacer(modifier = Modifier.width(Spacing.md))
+    Spacer(modifier = Modifier.width(Spacing.medium))
     Text(
       text = label,
       style = MaterialTheme.typography.bodyLarge,
@@ -617,8 +617,8 @@ fun CosmicChipGroup(
 ) {
   FlowRow(
     modifier = modifier,
-    horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
-    verticalArrangement = Arrangement.spacedBy(Spacing.sm)
+    horizontalArrangement = Arrangement.spacedBy(Spacing.small),
+    verticalArrangement = Arrangement.spacedBy(Spacing.small)
   ) {
     chips.forEach { chip ->
       val isSelected = chip in selectedChips
@@ -708,8 +708,8 @@ fun CosmicDropdownMenu(
 private fun PreviewTextFields() {
   CosmicTheme(darkTheme = false) {
     Column(
-      modifier = Modifier.padding(Spacing.md),
-      verticalArrangement = Arrangement.spacedBy(Spacing.md)
+      modifier = Modifier.padding(Spacing.medium),
+      verticalArrangement = Arrangement.spacedBy(Spacing.medium)
     ) {
       CosmicTextField(
         value = "Standard TextField",
@@ -752,8 +752,8 @@ private fun PreviewTextFieldsDark() {
   CosmicTheme(darkTheme = true) {
     Surface {
       Column(
-        modifier = Modifier.padding(Spacing.md),
-        verticalArrangement = Arrangement.spacedBy(Spacing.md)
+        modifier = Modifier.padding(Spacing.medium),
+        verticalArrangement = Arrangement.spacedBy(Spacing.medium)
       ) {
         CosmicTextField(
           value = "Standard TextField",
@@ -781,8 +781,8 @@ private fun PreviewTextFieldsDark() {
 private fun PreviewSliders() {
   CosmicTheme {
     Column(
-      modifier = Modifier.padding(Spacing.md),
-      verticalArrangement = Arrangement.spacedBy(Spacing.lg)
+      modifier = Modifier.padding(Spacing.medium),
+      verticalArrangement = Arrangement.spacedBy(Spacing.large)
     ) {
       CosmicSlider(
         value = 0.5f,
@@ -852,12 +852,12 @@ private fun PreviewSelectionComponents() {
 private fun PreviewChipGroup() {
   CosmicTheme {
     Surface {
-      Column(modifier = Modifier.padding(Spacing.md)) {
+      Column(modifier = Modifier.padding(Spacing.medium)) {
         Text(
           text = "Select plugins",
           style = MaterialTheme.typography.titleMedium
         )
-        Spacer(modifier = Modifier.height(Spacing.sm))
+        Spacer(modifier = Modifier.height(Spacing.small))
         CosmicChipGroup(
           chips = listOf("Battery", "Clipboard", "Share", "Ping", "RunCommand", "MPRIS"),
           selectedChips = setOf("Battery", "Clipboard", "Share"),
@@ -873,7 +873,7 @@ private fun PreviewChipGroup() {
 private fun PreviewDropdownMenu() {
   CosmicTheme {
     Surface {
-      Column(modifier = Modifier.padding(Spacing.md)) {
+      Column(modifier = Modifier.padding(Spacing.medium)) {
         CosmicDropdownMenu(
           options = listOf("Device 1", "Device 2", "Device 3"),
           selectedOption = "Device 1",

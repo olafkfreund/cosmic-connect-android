@@ -572,7 +572,7 @@ fun InfoCard(
       text = message,
       style = MaterialTheme.typography.bodyMedium,
       color = textColor,
-      modifier = Modifier.padding(Spacing.md)
+      modifier = Modifier.padding(Spacing.medium)
     )
   }
 }
@@ -593,8 +593,8 @@ private fun InfoCardPreview() {
     context = androidx.compose.ui.platform.LocalContext.current
   ) {
     Column(
-      modifier = Modifier.padding(Spacing.md),
-      verticalArrangement = Arrangement.spacedBy(Spacing.sm)
+      modifier = Modifier.padding(Spacing.medium),
+      verticalArrangement = Arrangement.spacedBy(Spacing.small)
     ) {
       InfoCard(
         message = "Make sure COSMIC Connect is running on the devices you want to connect to.",

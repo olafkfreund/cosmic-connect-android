@@ -172,9 +172,9 @@ private fun ErrorContent(
     contentAlignment = Alignment.Center
   ) {
     Column(
-      modifier = Modifier.padding(Spacing.lg),
+      modifier = Modifier.padding(Spacing.large),
       horizontalAlignment = Alignment.CenterHorizontally,
-      verticalArrangement = Arrangement.spacedBy(Spacing.md)
+      verticalArrangement = Arrangement.spacedBy(Spacing.medium)
     ) {
       Icon(
         imageVector = Icons.Default.Error,
@@ -210,9 +210,9 @@ private fun UnpairedDeviceContent(
   Column(
     modifier = modifier
       .fillMaxSize()
-      .padding(Spacing.md),
+      .padding(Spacing.medium),
     horizontalAlignment = Alignment.CenterHorizontally,
-    verticalArrangement = Arrangement.spacedBy(Spacing.lg)
+    verticalArrangement = Arrangement.spacedBy(Spacing.large)
   ) {
     Spacer(modifier = Modifier.height(Spacing.xl))
 
@@ -240,10 +240,10 @@ private fun UnpairedDeviceContent(
     // Connection status
     ConnectionStatusIndicator(
       isConnected = state.isReachable,
-      modifier = Modifier.padding(vertical = Spacing.sm)
+      modifier = Modifier.padding(vertical = Spacing.small)
     )
 
-    Spacer(modifier = Modifier.height(Spacing.md))
+    Spacer(modifier = Modifier.height(Spacing.medium))
 
     // Pairing status and actions
     when {
@@ -262,11 +262,11 @@ private fun UnpairedDeviceContent(
           modifier = Modifier.fillMaxWidth()
         )
 
-        Spacer(modifier = Modifier.height(Spacing.md))
+        Spacer(modifier = Modifier.height(Spacing.medium))
 
         Row(
           modifier = Modifier.fillMaxWidth(),
-          horizontalArrangement = Arrangement.spacedBy(Spacing.md)
+          horizontalArrangement = Arrangement.spacedBy(Spacing.medium)
         ) {
           OutlinedButton(
             onClick = onRejectPair,
@@ -286,7 +286,7 @@ private fun UnpairedDeviceContent(
         // Outgoing pairing request (waiting for response)
         Column(
           horizontalAlignment = Alignment.CenterHorizontally,
-          verticalArrangement = Arrangement.spacedBy(Spacing.md)
+          verticalArrangement = Arrangement.spacedBy(Spacing.medium)
         ) {
           LoadingIndicator(
             size = LoadingSize.Medium,
@@ -306,7 +306,7 @@ private fun UnpairedDeviceContent(
           modifier = Modifier.fillMaxWidth()
         )
 
-        Spacer(modifier = Modifier.height(Spacing.md))
+        Spacer(modifier = Modifier.height(Spacing.medium))
 
         Button(
           onClick = onRequestPair,
@@ -317,7 +317,7 @@ private fun UnpairedDeviceContent(
             contentDescription = null,
             modifier = Modifier.size(Dimensions.iconSmall)
           )
-          Spacer(modifier = Modifier.width(Spacing.sm))
+          Spacer(modifier = Modifier.width(Spacing.small))
           Text("Request Pairing")
         }
       }
@@ -339,7 +339,7 @@ private fun PairedDeviceContent(
 ) {
   LazyColumn(
     modifier = modifier,
-    contentPadding = PaddingValues(vertical = Spacing.sm)
+    contentPadding = PaddingValues(vertical = Spacing.small)
   ) {
     // Device info card
     item {
@@ -354,8 +354,8 @@ private fun PairedDeviceContent(
       SectionHeader(
         title = "Plugins",
         modifier = Modifier.padding(
-          horizontal = Spacing.md,
-          vertical = Spacing.sm
+          horizontal = Spacing.medium,
+          vertical = Spacing.small
         )
       )
     }
@@ -367,7 +367,7 @@ private fun PairedDeviceContent(
           severity = InfoSeverity.Info,
           modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = Spacing.md)
+            .padding(horizontal = Spacing.medium)
         )
       }
     } else {
@@ -386,8 +386,8 @@ private fun PairedDeviceContent(
             { onPluginActivity(plugin.key) }
           } else null,
           modifier = Modifier.padding(
-            horizontal = Spacing.md,
-            vertical = Spacing.xs
+            horizontal = Spacing.medium,
+            vertical = Spacing.extraSmall
           )
         )
       }
@@ -395,7 +395,7 @@ private fun PairedDeviceContent(
 
     // Bottom spacing
     item {
-      Spacer(modifier = Modifier.height(Spacing.lg))
+      Spacer(modifier = Modifier.height(Spacing.large))
     }
   }
 }
@@ -410,8 +410,8 @@ private fun DeviceInfoSection(
   modifier: Modifier = Modifier
 ) {
   Column(
-    modifier = modifier.padding(Spacing.md),
-    verticalArrangement = Arrangement.spacedBy(Spacing.md)
+    modifier = modifier.padding(Spacing.medium),
+    verticalArrangement = Arrangement.spacedBy(Spacing.medium)
   ) {
     DeviceCard(
       deviceName = state.deviceName,
@@ -425,7 +425,7 @@ private fun DeviceInfoSection(
     // Connection and battery indicators
     Row(
       modifier = Modifier.fillMaxWidth(),
-      horizontalArrangement = Arrangement.spacedBy(Spacing.md)
+      horizontalArrangement = Arrangement.spacedBy(Spacing.medium)
     ) {
       ConnectionStatusIndicator(
         isConnected = state.isReachable,

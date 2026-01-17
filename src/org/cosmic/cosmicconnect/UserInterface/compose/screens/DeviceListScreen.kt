@@ -77,7 +77,7 @@ fun DeviceListScreen(
           if (uiState.isDiscovering) {
             SyncStatusIndicator(
               status = SyncStatus.Syncing,
-              modifier = Modifier.padding(horizontal = Spacing.sm)
+              modifier = Modifier.padding(horizontal = Spacing.small)
             )
           }
 
@@ -220,7 +220,7 @@ private fun LoadingState(modifier: Modifier = Modifier) {
   ) {
     Column(
       horizontalAlignment = Alignment.CenterHorizontally,
-      verticalArrangement = Arrangement.spacedBy(Spacing.md)
+      verticalArrangement = Arrangement.spacedBy(Spacing.medium)
     ) {
       LoadingIndicator(
         size = LoadingSize.Large,
@@ -243,9 +243,9 @@ private fun ErrorState(
     contentAlignment = Alignment.Center
   ) {
     Column(
-      modifier = Modifier.padding(Spacing.lg),
+      modifier = Modifier.padding(Spacing.large),
       horizontalAlignment = Alignment.CenterHorizontally,
-      verticalArrangement = Arrangement.spacedBy(Spacing.md)
+      verticalArrangement = Arrangement.spacedBy(Spacing.medium)
     ) {
       Text(
         text = "Error",
@@ -274,9 +274,9 @@ private fun EmptyState(
     contentAlignment = Alignment.Center
   ) {
     Column(
-      modifier = Modifier.padding(Spacing.lg),
+      modifier = Modifier.padding(Spacing.large),
       horizontalAlignment = Alignment.CenterHorizontally,
-      verticalArrangement = Arrangement.spacedBy(Spacing.md)
+      verticalArrangement = Arrangement.spacedBy(Spacing.medium)
     ) {
       Text(
         text = "No devices found",
@@ -314,7 +314,7 @@ private fun DeviceList(
 ) {
   LazyColumn(
     modifier = modifier,
-    contentPadding = PaddingValues(vertical = Spacing.sm)
+    contentPadding = PaddingValues(vertical = Spacing.small)
   ) {
     // Connectivity info header
     item {
@@ -331,8 +331,8 @@ private fun DeviceList(
         SectionHeader(
           title = "Connected Devices",
           modifier = Modifier.padding(
-            horizontal = Spacing.md,
-            vertical = Spacing.sm
+            horizontal = Spacing.medium,
+            vertical = Spacing.small
           )
         )
       }
@@ -355,8 +355,8 @@ private fun DeviceList(
         SectionHeader(
           title = "Available Devices",
           modifier = Modifier.padding(
-            horizontal = Spacing.md,
-            vertical = Spacing.sm
+            horizontal = Spacing.medium,
+            vertical = Spacing.small
           )
         )
       }
@@ -378,8 +378,8 @@ private fun DeviceList(
         SectionHeader(
           title = "Remembered Devices",
           modifier = Modifier.padding(
-            horizontal = Spacing.md,
-            vertical = Spacing.sm
+            horizontal = Spacing.medium,
+            vertical = Spacing.small
           )
         )
       }
@@ -414,7 +414,7 @@ private fun ConnectivityInfoHeader(
           severity = InfoSeverity.Warning,
           modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = Spacing.md, vertical = Spacing.sm)
+            .padding(horizontal = Spacing.medium, vertical = Spacing.small)
         )
       }
       ConnectivityState.NO_NOTIFICATIONS -> {
@@ -423,7 +423,7 @@ private fun ConnectivityInfoHeader(
           severity = InfoSeverity.Warning,
           modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = Spacing.md, vertical = Spacing.sm)
+            .padding(horizontal = Spacing.medium, vertical = Spacing.small)
         )
       }
       ConnectivityState.NOT_TRUSTED -> {
@@ -432,7 +432,7 @@ private fun ConnectivityInfoHeader(
           severity = InfoSeverity.Info,
           modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = Spacing.md, vertical = Spacing.sm)
+            .padding(horizontal = Spacing.medium, vertical = Spacing.small)
         )
       }
       ConnectivityState.OK -> {
@@ -441,7 +441,7 @@ private fun ConnectivityInfoHeader(
           severity = InfoSeverity.Info,
           modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = Spacing.md, vertical = Spacing.sm)
+            .padding(horizontal = Spacing.medium, vertical = Spacing.small)
         )
       }
     }
@@ -452,7 +452,7 @@ private fun ConnectivityInfoHeader(
         severity = InfoSeverity.Warning,
         modifier = Modifier
           .fillMaxWidth()
-          .padding(horizontal = Spacing.md, vertical = Spacing.sm)
+          .padding(horizontal = Spacing.medium, vertical = Spacing.small)
       )
     }
   }

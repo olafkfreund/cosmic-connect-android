@@ -72,15 +72,15 @@ fun SettingsScreen(
       modifier = Modifier
         .fillMaxSize()
         .padding(paddingValues),
-      contentPadding = PaddingValues(vertical = Spacing.sm)
+      contentPadding = PaddingValues(vertical = Spacing.small)
     ) {
       // General Settings Section
       item {
         SectionHeader(
           title = "General",
           modifier = Modifier.padding(
-            horizontal = Spacing.md,
-            vertical = Spacing.sm
+            horizontal = Spacing.medium,
+            vertical = Spacing.small
           )
         )
       }
@@ -110,8 +110,8 @@ fun SettingsScreen(
         SectionHeader(
           title = "Connection",
           modifier = Modifier.padding(
-            horizontal = Spacing.md,
-            vertical = Spacing.sm
+            horizontal = Spacing.medium,
+            vertical = Spacing.small
           )
         )
       }
@@ -160,8 +160,8 @@ fun SettingsScreen(
         SectionHeader(
           title = "Advanced",
           modifier = Modifier.padding(
-            horizontal = Spacing.md,
-            vertical = Spacing.sm
+            horizontal = Spacing.medium,
+            vertical = Spacing.small
           )
         )
       }
@@ -208,8 +208,8 @@ fun SettingsScreen(
         SectionHeader(
           title = "About",
           modifier = Modifier.padding(
-            horizontal = Spacing.md,
-            vertical = Spacing.sm
+            horizontal = Spacing.medium,
+            vertical = Spacing.small
           )
         )
       }
@@ -241,7 +241,7 @@ fun SettingsScreen(
 
       // Bottom spacing
       item {
-        Spacer(modifier = Modifier.height(Spacing.lg))
+        Spacer(modifier = Modifier.height(Spacing.large))
       }
     }
   }
@@ -350,7 +350,7 @@ private fun AboutDialog(
     text = {
       Column(
         modifier = Modifier.verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.spacedBy(Spacing.md)
+        verticalArrangement = Arrangement.spacedBy(Spacing.medium)
       ) {
         Text(
           text = "Version $appVersion",
@@ -367,7 +367,7 @@ private fun AboutDialog(
           style = MaterialTheme.typography.titleSmall
         )
 
-        Column(modifier = Modifier.padding(start = Spacing.md)) {
+        Column(modifier = Modifier.padding(start = Spacing.medium)) {
           listOf(
             "Share files and links",
             "Sync clipboard",

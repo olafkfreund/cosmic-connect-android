@@ -14,6 +14,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -121,10 +122,22 @@ fun DeviceListScreen(
     },
     bottomBar = {
       CosmicBottomNavigationBar(
-        selectedItem = 0, // Devices tab selected
-        onItemSelected = { index ->
-          when (index) {
-            1 -> onNavigateToSettings()
+        destinations = listOf(
+          NavigationDestination(
+            id = "devices",
+            label = "Devices",
+            icon = R.drawable.ic_baseline_devices_24
+          ),
+          NavigationDestination(
+            id = "settings",
+            label = "Settings",
+            icon = R.drawable.ic_baseline_settings_24
+          )
+        ),
+        selectedDestination = "devices",
+        onDestinationSelected = { destination ->
+          when (destination) {
+            "settings" -> onNavigateToSettings()
           }
         }
       )
@@ -158,7 +171,7 @@ fun DeviceListScreen(
     ConfirmationDialog(
       title = "Unpair device?",
       message = "This will remove ${device.name} from your paired devices. You can pair again later.",
-      confirmText = "Unpair",
+      confirmLabel = "Unpair",
       onConfirm = {
         viewModel.unpairDevice(device)
         deviceToUnpair = null
@@ -472,10 +485,7 @@ private fun DeviceListItemWithActions(
     deviceName = device.name,
     deviceType = device.deviceType.toString(),
     isConnected = device.isReachable && device.isPaired,
-    isPaired = device.isPaired,
-    batteryLevel = device.batteryLevel,
     onClick = onClick,
-    onLongClick = onUnpair,
     modifier = modifier
   )
 }

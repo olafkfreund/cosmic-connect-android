@@ -251,6 +251,7 @@ fun SettingsScreen(
     InputDialog(
       title = "Rename Device",
       message = "Enter a new name for this device",
+      label = "Device name",
       initialValue = uiState.deviceName,
       placeholder = "Device name",
       onConfirm = { newName ->

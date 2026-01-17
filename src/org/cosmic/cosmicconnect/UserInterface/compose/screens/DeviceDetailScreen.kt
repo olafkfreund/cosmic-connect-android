@@ -117,7 +117,7 @@ fun DeviceDetailScreen(
     ConfirmationDialog(
       title = "Unpair device?",
       message = "This will remove $deviceName from your paired devices. You can pair again later.",
-      confirmText = "Unpair",
+      confirmLabel = "Unpair",
       onConfirm = {
         viewModel.unpairDevice()
         showUnpairDialog = false
@@ -133,6 +133,7 @@ fun DeviceDetailScreen(
     InputDialog(
       title = "Rename device",
       message = "Enter a new name for this device",
+      label = "Device name",
       initialValue = deviceName,
       placeholder = "Device name",
       onConfirm = { newName ->
@@ -240,7 +241,7 @@ private fun UnpairedDeviceContent(
 
     // Connection status
     ConnectionStatusIndicator(
-      isConnected = state.isReachable,
+      status = if (state.isReachable) ConnectionStatus.Connected else ConnectionStatus.Disconnected,
       modifier = Modifier.padding(vertical = Spacing.small)
     )
 
@@ -418,8 +419,8 @@ private fun DeviceInfoSection(
       deviceName = state.deviceName,
       deviceType = state.deviceType,
       connectionStatus = if (state.isReachable) "Connected" else "Disconnected",
+      isConnected = state.isReachable,
       batteryLevel = state.batteryLevel,
-      batteryCharging = state.isCharging,
       onClick = onRenameClick
     )
 
@@ -429,7 +430,7 @@ private fun DeviceInfoSection(
       horizontalArrangement = Arrangement.spacedBy(Spacing.medium)
     ) {
       ConnectionStatusIndicator(
-        isConnected = state.isReachable,
+        status = if (state.isReachable) ConnectionStatus.Connected else ConnectionStatus.Disconnected,
         modifier = Modifier.weight(1f)
       )
 

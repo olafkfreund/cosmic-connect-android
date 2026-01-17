@@ -81,11 +81,11 @@ class SftpPlugin : Plugin(), OnSharedPreferenceChangeListener {
         if (!np.getBoolean("startBrowsing")) return false
 
         if (!checkRequiredPermissions()) {
-            // Create immutable packet
-            val packet = NetworkPacket.create(PACKET_TYPE_SFTP, mapOf(
+            val json = JSONObject(mapOf(
                 "errorMessage" to context.getString(R.string.sftp_missing_permission_error)
-            ))
-            device.sendPacket(convertToLegacyPacket(packet))
+            )).toString()
+            val packet = SftpPacketsFFI.createSftpPacket(json)
+            device.sendPacket(packet.toLegacyPacket())
             return true
         }
 
@@ -108,11 +108,11 @@ class SftpPlugin : Plugin(), OnSharedPreferenceChangeListener {
             val storageInfoList = SftpSettingsFragment.getStorageInfoList(context, this)
             storageInfoList.sortBy { it.uri }
             if (storageInfoList.isEmpty()) {
-                // Create immutable packet
-                val packet = NetworkPacket.create(PACKET_TYPE_SFTP, mapOf(
+                val json = JSONObject(mapOf(
                     "errorMessage" to context.getString(R.string.sftp_no_storage_locations_configured)
-                ))
-                device.sendPacket(convertToLegacyPacket(packet))
+                )).toString()
+                val packet = SftpPacketsFFI.createSftpPacket(json)
+                device.sendPacket(packet.toLegacyPacket())
                 return true
             }
             getPathsAndNamesForStorageInfoList(paths, pathNames, storageInfoList)
@@ -144,9 +144,9 @@ class SftpPlugin : Plugin(), OnSharedPreferenceChangeListener {
             body["pathNames"] = pathNames
         }
 
-        // Create immutable packet
-        val packet = NetworkPacket.create(PACKET_TYPE_SFTP, body.toMap())
-        device.sendPacket(convertToLegacyPacket(packet))
+        val json = JSONObject(body).toString()
+        val packet = SftpPacketsFFI.createSftpPacket(json)
+        device.sendPacket(packet.toLegacyPacket())
 
         return true
     }
@@ -233,7 +233,7 @@ class SftpPlugin : Plugin(), OnSharedPreferenceChangeListener {
         val packet = NetworkPacket.create(PACKET_TYPE_SFTP_REQUEST, mapOf(
             "startBrowsing" to true
         ))
-        onPacketReceived(convertToLegacyPacket(packet))
+        onPacketReceived(packet.toLegacyPacket())
     }
 
     data class StorageInfo(@JvmField var displayName: String, @JvmField val uri: Uri) {
@@ -261,14 +261,6 @@ class SftpPlugin : Plugin(), OnSharedPreferenceChangeListener {
                 return StorageInfo(displayName, uri)
             }
         }
-    }
-
-    /**
-     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
-     */
-    private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
-        // Use the standard conversion method
-        return ffi.toLegacyPacket()
     }
 
     companion object {

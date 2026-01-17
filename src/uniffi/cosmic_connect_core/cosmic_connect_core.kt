@@ -1200,6 +1200,11 @@ internal interface UniffiLib : Library {
         uniffi_out_err: UniffiRustCallStatus,
     ): RustBuffer.ByValue
 
+    fun uniffi_cosmic_connect_core_fn_func_create_sftp_packet(
+        `bodyJson`: RustBuffer.ByValue,
+        uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+
     fun uniffi_cosmic_connect_core_fn_func_create_sms_messages(
         `conversationsJson`: RustBuffer.ByValue,
         uniffi_out_err: UniffiRustCallStatus,
@@ -1583,6 +1588,8 @@ internal interface UniffiLib : Library {
 
     fun uniffi_cosmic_connect_core_checksum_func_create_send_sms_request(): Short
 
+    fun uniffi_cosmic_connect_core_checksum_func_create_sftp_packet(): Short
+
     fun uniffi_cosmic_connect_core_checksum_func_create_sms_messages(): Short
 
     fun uniffi_cosmic_connect_core_checksum_func_create_systemvolume_enable(): Short
@@ -1791,6 +1798,9 @@ private fun uniffiCheckApiChecksums(lib: UniffiLib) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cosmic_connect_core_checksum_func_create_send_sms_request() != 37218.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_cosmic_connect_core_checksum_func_create_sftp_packet() != 50297.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_cosmic_connect_core_checksum_func_create_sms_messages() != 48381.toShort()) {
@@ -4919,6 +4929,23 @@ fun `createSendSmsRequest`(
                 FfiConverterString.lower(`messageBody`),
                 _status,
             )
+        },
+    )
+
+/**
+ * Create an SFTP packet
+ *
+ * Creates a packet for SFTP server connection details or error messages.
+ *
+ * # Arguments
+ *
+ * * `body_json` - JSON string containing SFTP server info or error message
+ */
+@Throws(ProtocolException::class)
+fun `createSftpPacket`(`bodyJson`: kotlin.String): FfiPacket =
+    FfiConverterTypeFfiPacket.lift(
+        uniffiRustCallWithError(ProtocolException) { _status ->
+            UniffiLib.INSTANCE.uniffi_cosmic_connect_core_fn_func_create_sftp_packet(FfiConverterString.lower(`bodyJson`), _status)
         },
     )
 

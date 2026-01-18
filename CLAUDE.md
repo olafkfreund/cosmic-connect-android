@@ -131,6 +131,35 @@ Comprehensive debugging techniques for both Android and Rust.
 - Testing protocol compatibility
 - Verifying security
 
+### 6. **android-testing-debug-SKILL.md** ⭐ NEW
+Comprehensive Android testing and debugging for COSMIC Connect.
+
+**What it covers:**
+- Testing frameworks (JUnit, Espresso, AndroidX Test 2026)
+- Unit tests, integration tests, UI tests, E2E tests
+- ADB debugging commands and logcat analysis
+- Performance profiling and benchmarking
+- Waydroid-specific testing (90% automation)
+- Real device testing (Samsung Galaxy Tab S8 Ultra)
+- Test organization patterns and best practices
+- Common debugging scenarios and solutions
+
+**Use when:**
+- Writing any type of test (unit, integration, UI, E2E)
+- Debugging test failures or app crashes
+- Analyzing logcat output for issues
+- Profiling app performance
+- Setting up testing infrastructure
+- Testing on Waydroid or real devices
+- Investigating memory leaks or ANRs
+- Optimizing test execution speed
+
+**Latest features (2026):**
+- androidx.test:core 1.7.0
+- androidx.test.espresso 3.7.0
+- Hybrid Waydroid + real device testing strategy
+- Automated testing scripts integration
+
 ## 🤖 Available Agents
 
 Agents are pre-configured combinations of skills for specific workflows, located in `.claude/agents/`:
@@ -263,9 +292,23 @@ claude-code "Update all dependencies to latest stable versions"
 claude-code "Implement Gradle caching and parallel execution"
 ```
 
-### Testing
+### Testing (NEW android-testing-debug skill available!)
 
 ```bash
+# Write tests using the new testing skill
+claude-code "Using android-testing-debug skill, create integration tests for clipboard sync"
+claude-code "Using android-testing-debug skill, write Espresso UI tests for device pairing flow"
+claude-code "Using android-testing-debug skill, add performance benchmarks for file transfer"
+
+# Debug test failures
+claude-code "Using android-testing-debug skill, debug failing instrumented tests on Waydroid"
+claude-code "Using android-testing-debug skill, analyze Bluetooth test failure on Samsung tablet"
+
+# Performance testing
+claude-code "Using android-testing-debug skill, profile memory usage during file transfer"
+claude-code "Using android-testing-debug skill, benchmark FFI call overhead"
+
+# Legacy testing commands still work
 # Unit tests
 claude-code "Create unit tests for NetworkPacket serialization"
 
@@ -314,6 +357,9 @@ claude-code "Follow the Repository pattern example from android-development skil
 ```bash
 # Multiple skills provide comprehensive coverage
 claude-code "Using android-development, gradle, and debugging skills, modernize and optimize the Telephony plugin"
+
+# Combine development and testing skills
+claude-code "Using android-development and android-testing-debug skills, implement clipboard sync with comprehensive tests"
 ```
 
 ### 6. Iterate on Results

@@ -464,9 +464,96 @@ cosmic-connect-core/                        # Rust core library (separate repo)
 
 ## Testing
 
-The project includes a comprehensive test suite with ~204 tests covering all aspects of the application.
+COSMIC Connect uses a **hybrid testing strategy** combining automated testing on Waydroid (90% coverage) with real device validation on Samsung Galaxy Tab S8 Ultra (10% Bluetooth + final validation). This approach provides comprehensive coverage while maintaining fast development iteration.
+
+### Testing Infrastructure
+
+We use two complementary testing platforms:
+
+| Platform | Coverage | Use Cases | Speed | Automation |
+|----------|----------|-----------|-------|------------|
+| **Waydroid** | 85-90% | Network features, UI, plugins (except Bluetooth) | Fast (5-10s boot) | Fully automated ✅ |
+| **Samsung Tab S8 Ultra** | 10% | Bluetooth testing, final E2E validation | Moderate | Automated via ADB ✅ |
+
+**Why Waydroid?**
+- Container-based (near-native performance, ~500 MB RAM)
+- Full ADB support for instrumented tests
+- Fast boot times (5-10 seconds vs 1-3 minutes for emulators)
+- Perfect for CI/CD automation
+- NixOS native integration
+
+**Why Real Device?**
+- Waydroid has no Bluetooth stack ([Issue #155](https://github.com/waydroid/waydroid/issues/155))
+- Final validation on actual hardware
+- Real-world network conditions
+- User experience validation
+
+### Quick Setup
+
+#### Waydroid Setup (NixOS)
+
+```bash
+# 1. Add to /etc/nixos/configuration.nix
+virtualisation.waydroid.enable = true;
+boot.kernelModules = [ "ashmem_linux" "binder_linux" ];
+users.users.YOUR_USERNAME.extraGroups = [ "waydroid" ];
+
+# 2. Apply configuration
+sudo nixos-rebuild switch
+
+# 3. Initialize Waydroid (first time only)
+sudo waydroid init
+
+# 4. Run automated tests
+./scripts/test-waydroid.sh
+```
+
+See [docs/testing/WAYDROID_TESTING_GUIDE.md](docs/testing/WAYDROID_TESTING_GUIDE.md) for complete setup and usage guide.
+
+#### Samsung Galaxy Tab S8 Ultra Setup
+
+```bash
+# 1. Enable Developer Options on tablet:
+#    Settings → About tablet → Tap "Build number" 7 times
+
+# 2. Enable Wireless Debugging:
+#    Settings → Developer options → Wireless debugging (ON)
+
+# 3. Configure wireless connection:
+#    Edit scripts/connect-tablet.sh with your tablet's IP and port
+
+# 4. Connect and test
+./scripts/connect-tablet.sh
+./scripts/test-samsung.sh --wireless
+```
+
+See [docs/testing/SAMSUNG_TAB_TESTING_GUIDE.md](docs/testing/SAMSUNG_TAB_TESTING_GUIDE.md) for complete setup guide.
 
 ### Running Tests
+
+#### Automated Testing Workflows
+
+```bash
+# Waydroid - Full automated test suite (recommended for daily development)
+./scripts/test-waydroid.sh
+
+# Waydroid - Headless mode (for CI/CD)
+./scripts/test-waydroid.sh --headless
+
+# Waydroid - Quick mode (skip clean build)
+./scripts/test-waydroid.sh --quick
+
+# Samsung Tablet - Full test suite
+./scripts/test-samsung.sh --wireless
+
+# Samsung Tablet - Quick tests
+./scripts/test-samsung.sh --wireless --quick
+
+# Samsung Tablet - Bluetooth-specific tests
+./scripts/test-bluetooth.sh <device-serial>
+```
+
+#### Manual Test Execution
 
 ```bash
 # Run all unit tests
@@ -485,10 +572,46 @@ The project includes a comprehensive test suite with ~204 tests covering all asp
 ./gradlew connectedAndroidTest \
   -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.performance.PerformanceBenchmarkTest
 
-# Run on Waydroid (NixOS)
+# Run on Waydroid manually
 waydroid session start
 ./gradlew connectedAndroidTest
+
+# Run on Samsung tablet
+export ANDROID_SERIAL=<device-serial>
+./gradlew connectedAndroidTest
 ```
+
+### Testing Coverage Matrix
+
+The following table shows which features can be tested on each platform:
+
+| Feature | Waydroid | Samsung Tab S8 | Priority |
+|---------|----------|----------------|----------|
+| Network Discovery (UDP) | ✅ | ✅ | High |
+| Network Pairing (Wi-Fi) | ✅ | ✅ | High |
+| **Bluetooth Discovery** | ❌ | ✅ | Medium |
+| **Bluetooth Pairing** | ❌ | ✅ | Medium |
+| **Bluetooth File Transfer** | ❌ | ✅ | Medium |
+| File Transfer (Wi-Fi) | ✅ | ✅ | High |
+| Clipboard Sync | ✅ | ✅ | High |
+| Notification Sync | ✅ | ✅ | High |
+| Media Control (MPRIS) | ✅ | ✅ | Medium |
+| Find My Phone | ✅ | ✅ | Medium |
+| Remote Input | ✅ | ✅ | Low |
+| Run Commands | ✅ | ✅ | Medium |
+| Battery Monitoring | ✅ | ✅ | Medium |
+| Telephony (SMS/Calls) | ⚠️ (simulated) | ✅ | Low |
+| **Overall Coverage** | **85-90%** | **100%** | - |
+
+**Legend:**
+- ✅ Fully supported and testable
+- ❌ Not supported (hardware limitation)
+- ⚠️ Partial support (simulated/mocked)
+
+**Testing Strategy:**
+- **Daily Development**: Use Waydroid for fast iteration (90% coverage)
+- **Weekly Validation**: Run Bluetooth tests on Samsung tablet
+- **Pre-Release**: Full E2E validation on Samsung tablet
 
 ### Test Suite Overview
 
@@ -601,6 +724,85 @@ waydroid session start
 - `docs/issue-33-e2e-test-android-to-cosmic.md` - Android → COSMIC E2E
 - `docs/issue-34-e2e-test-cosmic-to-android.md` - COSMIC → Android E2E
 - `docs/issue-35-performance-testing.md` - Performance benchmarks
+
+### Testing Platform Documentation
+
+**Comprehensive Testing Guides:**
+
+- **[Waydroid Testing Guide](docs/testing/WAYDROID_TESTING_GUIDE.md)** - Complete guide for automated testing with Waydroid
+  - Capabilities and limitations
+  - NixOS configuration
+  - Automation scripts usage
+  - CI/CD integration
+  - Performance comparison
+  - Troubleshooting
+
+- **[Waydroid NixOS Configuration](docs/testing/WAYDROID_NIXOS_CONFIG.md)** - Quick reference for NixOS setup
+  - System configuration snippets
+  - Flake integration examples
+  - First-time setup steps
+  - Command reference
+
+- **[Waydroid Testing Summary](docs/testing/WAYDROID_TESTING_SUMMARY.md)** - Executive summary and decision guide
+  - Quick decision matrix
+  - Testing coverage breakdown
+  - Recommended testing strategy
+  - Cost-benefit analysis
+
+- **[Samsung Tab S8 Ultra Testing Guide](docs/testing/SAMSUNG_TAB_TESTING_GUIDE.md)** - Real device testing guide
+  - Device specifications
+  - Initial setup (USB and Wireless ADB)
+  - Bluetooth testing scenarios
+  - Automation scripts
+  - Troubleshooting
+
+**Testing Scripts:**
+
+All testing automation scripts are located in `scripts/`:
+
+- `test-waydroid.sh` - Automated Waydroid testing workflow
+  - Supports `--headless` for CI/CD
+  - Supports `--quick` for rapid iteration
+  - Full test suite execution
+  - Test report generation
+
+- `test-samsung.sh` - Automated Samsung tablet testing
+  - Supports `--wireless` for ADB over Wi-Fi
+  - Supports `--quick` for skip clean build
+  - Device verification
+  - Permission grants
+  - Full test execution
+
+- `test-bluetooth.sh` - Bluetooth-specific testing
+  - Real-time log monitoring
+  - 6 manual test scenarios
+  - Bluetooth permission handling
+  - Color-coded output
+
+- `connect-tablet.sh` - Quick wireless ADB connection helper
+  - Automatic device verification
+  - Troubleshooting guidance
+
+**Performance Metrics:**
+
+- **Waydroid**: 5-10 second boot time, ~500 MB RAM usage, near-native performance
+- **Samsung Tablet**: Real hardware performance, Bluetooth 5.2 support, Android 14
+- **CI/CD Ready**: Headless Waydroid mode for fully automated testing pipelines
+
+**Recommended Workflow:**
+
+```bash
+# Daily development (fast iteration)
+./scripts/test-waydroid.sh --quick
+
+# Weekly Bluetooth validation
+./scripts/connect-tablet.sh
+./scripts/test-bluetooth.sh <device-serial>
+
+# Pre-release comprehensive testing
+./scripts/test-waydroid.sh          # Full Waydroid suite
+./scripts/test-samsung.sh --wireless # Full real device validation
+```
 
 ## Contributing
 

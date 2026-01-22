@@ -19,8 +19,8 @@ import org.cosmic.cosmicconnect.Helpers.LifecycleHelper
 import org.cosmic.cosmicconnect.Helpers.NotificationHelper
 import org.cosmic.cosmicconnect.Helpers.SecurityHelpers.RsaHelper
 import org.cosmic.cosmicconnect.Helpers.SecurityHelpers.SslHelper
-import org.cosmic.cosmicconnect.Helpers.ThreadHelper
 import org.cosmic.cosmicconnect.Helpers.TrustedDevices
+import kotlinx.coroutines.*
 import org.cosmic.cosmicconnect.PairingHandler.PairingCallback
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory
@@ -44,6 +44,8 @@ class CosmicConnect : Application() {
     }
 
     val devices: ConcurrentHashMap<String, Device> = ConcurrentHashMap()
+
+    private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
 
     private val deviceListChangedCallbacks = ConcurrentHashMap<String, DeviceListChangedCallback>()
 
@@ -188,14 +190,14 @@ class CosmicConnect : Application() {
         @WorkerThread
         override fun onConnectionLost(link: BaseLink) {
             val device = devices[link.deviceId]
-            Log.i("KDE/onConnectionLost", "removeLink, deviceId: ${link.deviceId}")
+            Log.i("Cosmic/onConnectionLost", "removeLink, deviceId: ${link.deviceId}")
             if (device != null) {
                 device.removeLink(link)
                 if (!device.isReachable && !device.isPaired) {
                     scheduleForDeletion(device)
                 }
             } else {
-                Log.d("KDE/onConnectionLost", "Removing connection to unknown device")
+                Log.d("Cosmic/onConnectionLost", "Removing connection to unknown device")
             }
             onDeviceListChanged()
         }
@@ -224,15 +226,15 @@ class CosmicConnect : Application() {
         //       deleting devices from the map is actually counterproductive because each time we
         //       detect the same device, a new Device object will be created (and leaked again).
         Log.i("CosmicConnect", "Scheduled for deletion: $device, paired: ${device.isPaired}, reachable: ${device.isReachable}")
-        ThreadHelper.execute {
-            try {Thread.sleep(1000)} catch (_: InterruptedException) { }
+        scope.launch {
+            delay(1000)
             if (device.isReachable) {
                 Log.i("CosmicConnect", "Not deleting device since it's reachable again: $device")
-                return@execute
+                return@launch
             }
             if (device.isPaired) {
                 Log.i("CosmicConnect", "Not deleting device since it's still paired: $device")
-                return@execute
+                return@launch
             }
             Log.i("CosmicConnect", "Deleting unpaired and unreachable device: $device")
             device.removePairingCallback(devicePairingCallback)

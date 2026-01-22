@@ -348,10 +348,10 @@ class Device : PacketReceiver {
 
         link.removePacketReceiver(this)
         links.remove(link)
-        Log.i(
-            "KDE/Device",
-            "removeLink: ${link.linkProvider.name} -> $name active links: ${links.size}"
-        )
+            Log.i(
+                "Cosmic/Device",
+                "removeLink: ${link.linkProvider.name} -> $name active links: ${links.size}"
+            )
         if (links.isEmpty()) {
             reloadPluginsFromSettings()
             synchronized(sendChannel) {
@@ -404,7 +404,7 @@ class Device : PacketReceiver {
         countReceived(deviceId, np.type)
 
         if (NetworkPacket.PACKET_TYPE_PAIR == np.type) {
-            Log.i("KDE/Device", "Pair packet")
+            Log.i("Cosmic/Device", "Pair packet")
             pairingHandler.packetReceived(np)
             return
         }
@@ -509,7 +509,7 @@ class Device : PacketReceiver {
             try {
                 link.sendPacket(np, callback, sendPayloadFromSameThread)
             } catch (e: IOException) {
-                Log.w("KDE/sendPacket", "Failed to send packet", e)
+                Log.w("Cosmic/sendPacket", "Failed to send packet", e)
                 false
             }.also { sent ->
                 countSent(deviceId, np.type, sent)
@@ -518,7 +518,7 @@ class Device : PacketReceiver {
 
         if (!success) {
             Log.e(
-                "KDE/sendPacket",
+                "Cosmic/sendPacket",
                 "No device link (of ${links.size} available) could send the packet. Packet ${np.type} to ${deviceInfo.name} lost!"
             )
         }
@@ -549,12 +549,12 @@ class Device : PacketReceiver {
                 ?: return false
 
         if (!plugin.isCompatible) {
-            Log.d("KDE/addPlugin", "Minimum requirements (e.g. API level) not fulfilled $pluginKey")
+            Log.d("Cosmic/addPlugin", "Minimum requirements (e.g. API level) not fulfilled $pluginKey")
             return false
         }
 
         if (!plugin.checkRequiredPermissions()) {
-            Log.d("KDE/addPlugin", "No permission $pluginKey")
+            Log.d("Cosmic/addPlugin", "No permission $pluginKey")
             pluginsWithoutPermissions[pluginKey] = plugin
             if (plugin.loadPluginWhenRequiredPermissionsMissing()) {
                 loadedPlugins[pluginKey] = plugin
@@ -563,14 +563,14 @@ class Device : PacketReceiver {
                 return false
             }
         } else {
-            Log.d("KDE/addPlugin", "Permissions OK $pluginKey")
+            Log.d("Cosmic/addPlugin", "Permissions OK $pluginKey")
             loadedPlugins[pluginKey] = plugin
             pluginsWithoutPermissions.remove(pluginKey)
             if (plugin.checkOptionalPermissions()) {
-                Log.d("KDE/addPlugin", "Optional Permissions OK $pluginKey")
+                Log.d("Cosmic/addPlugin", "Optional Permissions OK $pluginKey")
                 pluginsWithoutOptionalPermissions.remove(pluginKey)
             } else {
-                Log.d("KDE/addPlugin", "No optional permission $pluginKey")
+                Log.d("Cosmic/addPlugin", "No optional permission $pluginKey")
                 pluginsWithoutOptionalPermissions[pluginKey] = plugin
             }
         }
@@ -582,7 +582,7 @@ class Device : PacketReceiver {
         return runCatching {
             plugin.onCreate()
         }.onFailure {
-            Log.e("KDE/addPlugin", "plugin failed to load $pluginKey", it)
+            Log.e("Cosmic/addPlugin", "plugin failed to load $pluginKey", it)
         }.getOrDefault(false)
     }
 
@@ -594,7 +594,7 @@ class Device : PacketReceiver {
             plugin.onDestroy()
             // Log.e("removePlugin","removed " + pluginKey);
         } catch (e: Exception) {
-            Log.e("KDE/removePlugin", "Exception calling onDestroy for plugin $pluginKey", e)
+            Log.e("Cosmic/removePlugin", "Exception calling onDestroy for plugin $pluginKey", e)
         }
 
         return true

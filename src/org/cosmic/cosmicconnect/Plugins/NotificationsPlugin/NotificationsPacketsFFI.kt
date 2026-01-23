@@ -143,7 +143,17 @@ data class NotificationInfo(
     val actions: List<String>? = null,
 
     /** MD5 hash of notification icon */
-    val payloadHash: String? = null
+    val payloadHash: String? = null,
+
+    /** Messaging App Specific Fields */
+    val isMessagingApp: Boolean = false,
+    val packageName: String? = null,
+    val webUrl: String? = null,
+    val conversationId: String? = null,
+    val isGroupChat: Boolean = false,
+    val groupName: String? = null,
+    val hasReplyAction: Boolean = false,
+    val senderAvatar: String? = null
 ) {
     /**
      * Convert to JSON string for FFI layer.
@@ -173,6 +183,18 @@ data class NotificationInfo(
                 val actionsArray = JSONArray()
                 actionsList.forEach { actionsArray.put(it) }
                 put("actions", actionsArray)
+            }
+
+            // Messaging metadata
+            if (isMessagingApp) {
+                put("isMessagingApp", true)
+                packageName?.let { put("packageName", it) }
+                webUrl?.let { put("webUrl", it) }
+                conversationId?.let { put("conversationId", it) }
+                put("isGroupChat", isGroupChat)
+                groupName?.let { put("groupName", it) }
+                put("hasReplyAction", hasReplyAction)
+                senderAvatar?.let { put("senderAvatar", it) }
             }
         }
         return json.toString()

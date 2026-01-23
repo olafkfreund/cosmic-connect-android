@@ -29,6 +29,8 @@ import android.text.SpannableString
 import android.text.TextUtils
 import android.util.Log
 import android.util.Pair
+import org.cosmic.cosmicconnect.messaging.MessagingNotificationHandler
+import org.cosmic.cosmicconnect.messaging.MessagingNotificationData
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.os.BundleCompat
@@ -125,6 +127,7 @@ class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener 
 
     // State management
     private lateinit var appDatabase: AppDatabase
+    private lateinit var messagingHandler: MessagingNotificationHandler
     private val currentNotifications = mutableSetOf<String>()
     private val pendingIntents = mutableMapOf<String, RepliableNotification>()
     private val actions: MultiValuedMap<String, Notification.Action> = ArrayListValuedHashMap()
@@ -192,6 +195,7 @@ class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener 
         sharedPreferences = context.getSharedPreferences(sharedPreferencesName, Context.MODE_PRIVATE)
         keyguardManager = context.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
         appDatabase = AppDatabase.getInstance(context)
+        messagingHandler = MessagingNotificationHandler(context)
 
         NotificationReceiver.RunCommand(context) { service ->
             service.addListener(this@NotificationsPlugin)
@@ -332,6 +336,8 @@ class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener 
         notification: Notification,
         isPreexisting: Boolean
     ): NotificationInfo {
+        val messagingData = if (!isPreexisting) messagingHandler.processNotification(statusBarNotification) else null
+
         val blockContents = appDatabase.getPrivacy(packageName, AppDatabase.PrivacyOptions.BLOCK_CONTENTS)
 
         // Extract optional fields based on privacy settings
@@ -378,7 +384,14 @@ class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener 
             silent = isPreexisting.toString(),
             ticker = ticker,
             requestReplyId = requestReplyId,
-            actions = actions
+            actions = actions,
+            isMessagingApp = messagingData != null,
+            packageName = messagingData?.packageName,
+            webUrl = messagingData?.webUrl,
+            conversationId = messagingData?.conversationId,
+            isGroupChat = messagingData?.isGroupChat ?: false,
+            groupName = messagingData?.groupName,
+            hasReplyAction = messagingData?.hasReplyAction ?: false
         )
     }
 

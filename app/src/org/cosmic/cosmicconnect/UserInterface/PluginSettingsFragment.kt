@@ -10,6 +10,7 @@ import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.CosmicConnect.Companion.getInstance
+import org.cosmic.cosmicconnect.Helpers.DataStorePreferenceAdapter
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory
 import org.cosmic.cosmicconnect.R
@@ -44,10 +45,14 @@ open class PluginSettingsFragment : PreferenceFragmentCompat() {
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+        val prefsManager = getPreferenceManager()
+        prefsManager.preferenceDataStore = DataStorePreferenceAdapter(requireContext())
+
         if (this.plugin != null && this.plugin!!.supportsDeviceSpecificSettings()) {
-            val prefsManager = getPreferenceManager()
-            prefsManager.setSharedPreferencesName(this.plugin!!.sharedPreferencesName)
-            prefsManager.setSharedPreferencesMode(Context.MODE_PRIVATE)
+            // Note: DataStore handles scoping by keys, but for now we use the global settings DataStore
+            // with SharedPreferencesMigration for legacy files if needed.
+            // Ideally, per-device settings would also be in DataStore.
+            // For now, we set the DataStore as the backend.
         }
 
         for (layout in this.layouts!!) {

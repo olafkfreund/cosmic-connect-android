@@ -11,6 +11,7 @@ import android.preference.PreferenceManager
 import android.util.Base64
 import android.util.Log
 import androidx.core.content.edit
+import kotlinx.coroutines.runBlocking
 import org.bouncycastle.asn1.x500.X500Name
 import org.bouncycastle.asn1.x500.X500NameBuilder
 import org.bouncycastle.asn1.x500.style.BCStyle
@@ -19,6 +20,7 @@ import org.bouncycastle.cert.X509v3CertificateBuilder
 import org.bouncycastle.cert.jcajce.JcaX509v3CertificateBuilder
 import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder
 import org.cosmic.cosmicconnect.Helpers.DeviceHelper.getDeviceId
+import org.cosmic.cosmicconnect.Helpers.PreferenceDataStore
 import org.cosmic.cosmicconnect.Helpers.RandomHelper
 import org.cosmic.cosmicconnect.Helpers.SecurityHelpers.RsaHelper.getPrivateKey
 import org.cosmic.cosmicconnect.Helpers.SecurityHelpers.RsaHelper.getPublicKey
@@ -66,12 +68,12 @@ object SslHelper {
         val deviceId = getDeviceId(context)
 
         var needsToGenerateCertificate = false
-        val settings = PreferenceManager.getDefaultSharedPreferences(context)
+        val storedCert = PreferenceDataStore.getCertificateSync(context)
 
-        if (settings.contains("certificate")) {
+        if (storedCert.isNotEmpty()) {
             val currDate = Date()
             try {
-                val certificateBytes = Base64.decode(settings.getString("certificate", ""), 0)
+                val certificateBytes = Base64.decode(storedCert, 0)
                 val cert = parseCertificate(certificateBytes) as X509Certificate
 
                 val certDeviceId = getCommonNameFromCertificate(cert)
@@ -123,8 +125,8 @@ object SslHelper {
             val certificateBytes = certificateBuilder.build(contentSigner).encoded
             certificate = parseCertificate(certificateBytes)
 
-            settings.edit {
-                putString("certificate", Base64.encodeToString(certificateBytes, 0))
+            runBlocking {
+                PreferenceDataStore.setCertificate(context, Base64.encodeToString(certificateBytes, 0))
             }
 
             setLocale(initialLocale, context)

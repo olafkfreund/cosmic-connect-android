@@ -37,6 +37,7 @@ import org.apache.commons.io.IOUtils
 import org.cosmic.cosmicconnect.BackgroundService
 import org.cosmic.cosmicconnect.Helpers.CreateFileParams
 import org.cosmic.cosmicconnect.Helpers.CreateFileResultContract
+import org.cosmic.cosmicconnect.Helpers.DataStorePreferenceAdapter
 import org.cosmic.cosmicconnect.Helpers.DeviceHelper
 import org.cosmic.cosmicconnect.Helpers.DeviceHelper.filterInvalidCharactersFromDeviceName
 import org.cosmic.cosmicconnect.Helpers.DeviceHelper.getDeviceName
@@ -58,6 +59,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         val context = preferenceManager.context
+        preferenceManager.preferenceDataStore = DataStorePreferenceAdapter(context)
         val screen = preferenceManager.createPreferenceScreen(context)
 
         listOf(

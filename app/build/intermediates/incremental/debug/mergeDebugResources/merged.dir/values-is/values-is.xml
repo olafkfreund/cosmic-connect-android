@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2" xmlns:ns2="http://schemas.android.com/tools">
+    <string-array name="convert_to_mms_after_entries">
+    <item>Eftir ein skilaboð</item>
+    <item>Eftir tvenn skilaboð</item>
+    <item>Eftir þrenn skilaboð</item>
+    <item>Eftir fjögur skilaboð</item>
+    <item>Eftir fimm skilaboð</item>
+  </string-array>
+    <string-array name="digitizer_preference_entries_draw_button_side">
+    <item>Top left</item>
+    <item>Top right</item>
+    <item>Bottom left</item>
+    <item>Bottom right</item>
+  </string-array>
+    <string-array name="mousepad_acceleration_profile_entries">
+    <item>Engin hröðun</item>
+    <item>Veikast</item>
+    <item>Veikara</item>
+    <item>Miðlungs</item>
+    <item>Sterkara</item>
+    <item>Sterkast</item>
+  </string-array>
+    <string-array name="mousepad_sensitivity_entries">
+    <item>Hægast</item>
+    <item>Hraðar en hægast</item>
+    <item>Sjálfgefið</item>
+    <item>Hraðar en sjálfgefið</item>
+    <item>Hraðasta</item>
+  </string-array>
+    <string-array name="mousepad_tap_entries">
+    <item>Vinstri músarsmellur</item>
+    <item>Hægri músarsmellur</item>
+    <item>Miðjumúsarsmellur</item>
+    <item>Ekkert</item>
+  </string-array>
+    <string-array name="mpris_time_entries">
+    <item>10 sekúndur</item>
+    <item>20 sekúndur</item>
+    <item>30 sekúndur</item>
+    <item>1 mínúta</item>
+    <item>2 mínútur</item>
+  </string-array>
+    <string-array name="theme_list">
+    <item>Stillt af rafhlöðusparnaðarkerfi</item>
+    <item>Ljóst</item>
+    <item>Dökkt</item>
+  </string-array>
+    <string-array name="theme_list_v28">
+    <item>Sjálfgefið í kerfinu</item>
+    <item>Ljóst</item>
+    <item>Dökkt</item>
+  </string-array>
+    <plurals name="incoming_file_title">
+    <item quantity="one">Tek á móti %1$d skrá frá %2$s</item>
+    <item quantity="other">Tek á móti %1$d skrám frá %2$s</item>
+  </plurals>
+    <plurals name="incoming_files_text">
+    <item quantity="one">Skrá: %1s</item>
+    <item quantity="other">(Skrá %2$d af %3$d) : %1$s</item>
+  </plurals>
+    <plurals name="mtrl_badge_content_description">
+    <item quantity="one">%d ný tilkynning</item>
+    <item quantity="other">%d nýjar tilkynningar</item>
+  </plurals>
+    <plurals name="outgoing_file_title">
+    <item quantity="one">Sendi %1$d skrá til %2$s</item>
+    <item quantity="other">Sendi %1$d skrár til %2$s</item>
+  </plurals>
+    <plurals name="outgoing_files_text">
+    <item quantity="one">Skrá: %1$s</item>
+    <item quantity="other">(Skrá %2$d af %3$d) : %1$s</item>
+  </plurals>
+    <plurals name="received_files_fail_title">
+    <item quantity="one">Mistókst að taka við skrá frá %1$s</item>
+    <item quantity="other">Mistókst að taka við %2$d af %3$d skrám frá %1$s</item>
+  </plurals>
+    <plurals name="received_files_title">
+    <item quantity="one">Tók við skrá frá %1$s</item>
+    <item quantity="other">Tók við %2$d skrám frá %1$s</item>
+  </plurals>
+    <plurals name="send_files_fail_title">
+    <item quantity="one">Mistókst að senda skrá til %1$s</item>
+    <item quantity="other">Mistókst að senda %2$d af %3$d skrám til %1$s</item>
+  </plurals>
+    <plurals name="sent_files_title">
+    <item quantity="one">Sendi skrá til %1$s</item>
+    <item quantity="other">Sendi %2$d skrár til %1$s</item>
+  </plurals>
+    <string msgid="5976598919945601918" name="abc_action_bar_home_description">"Fara heim"</string>
+    <string msgid="8388173803310557296" name="abc_action_bar_up_description">"Fara upp"</string>
+    <string msgid="3937310113216875497" name="abc_action_menu_overflow_description">"Fleiri valkostir"</string>
+    <string msgid="4692188335987374352" name="abc_action_mode_done">"Lokið"</string>
+    <string msgid="1189761859438369441" name="abc_activity_chooser_view_see_all">"Sjá allt"</string>
+    <string msgid="2165779757652331008" name="abc_activitychooserview_choose_application">"Veldu forrit"</string>
+    <string msgid="4215997306490295099" name="abc_capital_off">"SLÖKKT"</string>
+    <string msgid="884982626291842264" name="abc_capital_on">"KVEIKT"</string>
+    <string msgid="8833365367933412986" name="abc_menu_alt_shortcut_label">"Alt+"</string>
+    <string msgid="2223301931652355242" name="abc_menu_ctrl_shortcut_label">"Ctrl+"</string>
+    <string msgid="838001238306846836" name="abc_menu_delete_shortcut_label">"eyða"</string>
+    <string msgid="7986526966204849475" name="abc_menu_enter_shortcut_label">"enter"</string>
+    <string msgid="375214403600139847" name="abc_menu_function_shortcut_label">"Aðgerðarlykill+"</string>
+    <string msgid="4192209724446364286" name="abc_menu_meta_shortcut_label">"Meta+"</string>
+    <string msgid="4741552369836443843" name="abc_menu_shift_shortcut_label">"Shift+"</string>
+    <string msgid="5473865519181928982" name="abc_menu_space_shortcut_label">"bilslá"</string>
+    <string msgid="6180552449598693998" name="abc_menu_sym_shortcut_label">"Sym+"</string>
+    <string msgid="5520303668377388990" name="abc_prepend_shortcut_label">"Valmynd+"</string>
+    <string msgid="7208076849092622260" name="abc_search_hint">"Leita…"</string>
+    <string msgid="3741173234950517107" name="abc_searchview_description_clear">"Hreinsa fyrirspurn"</string>
+    <string msgid="693312494995508443" name="abc_searchview_description_query">"Leitarfyrirspurn"</string>
+    <string msgid="3417662926640357176" name="abc_searchview_description_search">"Leit"</string>
+    <string msgid="1486535517437947103" name="abc_searchview_description_submit">"Senda fyrirspurn"</string>
+    <string msgid="2293578557972875415" name="abc_searchview_description_voice">"Raddleit"</string>
+    <string msgid="8875138169939072951" name="abc_shareactionprovider_share_with">"Deila með"</string>
+    <string msgid="9055268688411532828" name="abc_shareactionprovider_share_with_application">"Deila með <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
+    <string msgid="1656852541809559762" name="abc_toolbar_collapse_description">"Minnka"</string>
+    <string name="about">Um hugbúnaðinn</string>
+    <string name="about_kde">Um KDE</string>
+    <string name="add_command">Bæta við skipun</string>
+    <string name="add_command_description">Þú getur bætt við skipunum á skjáborðinu</string>
+    <string name="add_device_dialog_title">Bæta við tæki</string>
+    <string name="add_device_hint">Vélarheiti eða IP vistfang</string>
+    <string name="add_trusted_network">Bæta við %1s</string>
+    <string name="addcommand_explanation">Það eru engar skipanir skráðar</string>
+    <string name="addcommand_explanation2">Þú getur bætt við nýjum skipunum í stillingum COSMIC Connect</string>
+    <string name="alex_fiestas_task">Endurbætur á tengiliðaviðbót</string>
+    <string name="all">Allt</string>
+    <string name="all_permissions_granted">Allar heimildir veittar 🎉</string>
+    <string name="allow_all_networks_text">Leyfa allt</string>
+    <string name="aniket_kumar_task">Endurbætur á SMS-viðbót</string>
+    <string name="apple_support">Stuðningur við macOS. Unnið að stuðningi við iOS</string>
+    <string name="authors">Höfundar</string>
+    <string name="battery_status_charging_format">Rafhlaða: %d%% í hleðslu</string>
+    <string name="battery_status_format">Rafhlaða: %d%%</string>
+    <string name="battery_status_low_format">Rafhlaða: %d%% lítil hleðsla</string>
+    <string name="bigscreen_back">Til baka</string>
+    <string name="bigscreen_down">Niður</string>
+    <string name="bigscreen_home">Heim</string>
+    <string name="bigscreen_left">Vinstri</string>
+    <string name="bigscreen_mic">Hljóðnemi</string>
+    <string name="bigscreen_right">Hægri</string>
+    <string name="bigscreen_select">Velja</string>
+    <string name="bigscreen_show_back_title">Birta Til baka-hnapp</string>
+    <string name="bigscreen_show_home_title">Birta Heim-hnapp</string>
+    <string name="bigscreen_speech_extra_prompt">Tal</string>
+    <string name="bigscreen_up">Upp</string>
+    <string name="block_contents">Loka á efni tilkynninga</string>
+    <string name="block_images">Loka á myndir í tilkynningum</string>
+    <string name="block_notification_contents">Loka á efni í tilkynningum</string>
+    <string name="block_notification_images">Loka á myndir í tilkynningum</string>
+    <string name="bottomsheet_action_collapse">Minnka blað neðst</string>
+    <string name="bottomsheet_action_expand">Stækka blað neðst</string>
+    <string name="bottomsheet_action_expand_halfway">Stækka til hálfs</string>
+    <string name="bottomsheet_drag_handle_content_description">Dragkló</string>
+    <string name="bug_fixes_and_general_improvements">Villuleiðréttingar og almennar endurbætur</string>
+    <string msgid="881409763997275156" name="call_notification_answer_action">"Svara"</string>
+    <string msgid="8793775615905189152" name="call_notification_answer_video_action">"Myndsímtal"</string>
+    <string msgid="3229508546291798546" name="call_notification_decline_action">"Hafna"</string>
+    <string msgid="2659457946726154263" name="call_notification_hang_up_action">"Leggja á"</string>
+    <string msgid="6107532579223922871" name="call_notification_incoming_text">"Símtal berst"</string>
+    <string msgid="8623827134497363134" name="call_notification_ongoing_text">"Símtal í gangi"</string>
+    <string msgid="59049573811482460" name="call_notification_screening_text">"Síar símtal sem berst"</string>
+    <string name="cancel">Hætta við</string>
+    <string name="cancel_pairing">Hætta við pörun</string>
+    <string name="cannot_create_file">Get ekki búið til skrána %s</string>
+    <string name="cant_open_url">Næ ekki að opna slóð til að halda áfram spilun</string>
+    <string name="category_connected_devices">Tengd tæki</string>
+    <string name="category_not_paired_devices">Tiltæk tæki</string>
+    <string name="category_remembered_devices">Munuð tæki</string>
+    <string name="character_counter_content_description">Innslegnir stafir %1$d af %2$d</string>
+    <string name="character_counter_overflowed_content_description">Yfir hámarksstafafjölda, %1$d af %2$d</string>
+    <string name="clear_compose">Hreinsa</string>
+    <string name="clear_text_end_icon_content_description">Hreinsa texta</string>
+    <string name="click_here_to_type">Ýttu hér til að skrifa</string>
+    <string name="clipboard_android_x_incompat">Android 10 fjarlægði aðgang allra forrita að klippispjaldinu. Þessi viðbót verður gerð óvirk.</string>
+    <string name="clipboard_toast">Afritað á klippispjald</string>
+    <string name="close">Loka</string>
+    <string msgid="406453423630273620" name="close_drawer">"Loka yfirlitsvalmynd"</string>
+    <string msgid="7573152094250666567" name="close_sheet">"Loka blaði"</string>
+    <string name="compose_send_title">Semja og senda</string>
+    <string name="convert_to_mms_after_title">Umbreyta í MMS</string>
+    <string msgid="6083905920877235314" name="copy">"Afrita"</string>
+    <string name="copy_url_to_clipboard">Afrita slóð á klippispjaldið</string>
+    <string name="custom_device_deleted">Sérsniðnu tæki eytt</string>
+    <string name="custom_device_fab_hint">Bæta við tæki</string>
+    <string name="custom_device_list">Bæta við tækjum eftir auðkennum</string>
+    <string name="custom_devices_settings">Listi yfir sérsniðin tæki</string>
+    <string name="custom_devices_settings_summary">%d tækjum bætt við handvirkt</string>
+    <string msgid="8038256446254964252" name="default_error_message">"Ógildur innsláttur"</string>
+    <string msgid="6312721426453364202" name="default_popup_window_title">"Sprettigluggi"</string>
+    <string name="developer">Forritari</string>
+    <string name="device_host_duplicate">Hýsivélin er nú þegar á listanum</string>
+    <string name="device_host_invalid">Ógilt vélarheiti. Notaðu gilt vélarheiti, IPv4 eða IPv6</string>
+    <string name="device_list_empty">Engin tæki</string>
+    <string name="device_menu_plugins">Stillingar á forritsviðbót</string>
+    <string name="device_menu_unpair">Afpara</string>
+    <string name="device_not_paired">Tæki er ekki parað</string>
+    <string name="device_rename_confirm">Endurnefna</string>
+    <string name="device_rename_title">Endurnefna tæki</string>
+    <string name="devices">Tæki</string>
+    <string name="donate">Styrkja</string>
+    <string name="double_tap_to_drag">Ýta tvisvar til að draga</string>
+    <string msgid="1890207353314751437" name="dropdown_menu">"Fellivalmynd"</string>
+    <string name="easter_egg">Páskaegg</string>
+    <string name="email_contributor">Senda þátttakanda tölvupóst\n%s</string>
+    <string name="empty_trusted_networks_list_text">Þú hefur ekki ennþá bætt við neinum treystum netkerfum</string>
+    <string name="enable_bluetooth">Virkja bluetooth (beta)</string>
+    <string name="enable_udp_broadcast">Virkja UDP-uppgötvun tækis</string>
+    <string name="encryption_info_title">Upplýsingar um dulritun</string>
+    <string name="error_a11y_label">Villa: Ógilt</string>
+    <string name="error_already_paired">Tæki er þegar parað</string>
+    <string name="error_canceled_by_other_peer">Hætt við af hinum notandanum</string>
+    <string name="error_canceled_by_user">Hætt við af notanda</string>
+    <string name="error_clocks_not_match">Klukkur tækjanna eru ekki samstilltar</string>
+    <string name="error_icon_content_description">Villa</string>
+    <string name="error_not_reachable">Tæki er ekki aðgengilegt</string>
+    <string name="error_timed_out">Féll á tíma</string>
+    <string name="everyone_else">Allir aðrir sem hafa lagt af mörkum til COSMIC Connect í gegnum árin</string>
+    <string msgid="2427401033573778270" name="expand_button_title">"Ítarlegt"</string>
+    <string name="exposed_dropdown_menu_content_description">Sýna fellivalmynd</string>
+    <string name="extra_options">Fleiri valkostir</string>
+    <string name="filter_apps_info">Tilkynningar verða samstilltar fyrir völdu forritin.</string>
+    <string name="findmyphone_description">Hringir í þetta tæki svo þú getir fundið það</string>
+    <string name="findmyphone_found">Fann það</string>
+    <string name="findmyphone_title">Finna símann minn</string>
+    <string name="findmyphone_title_tablet">Finna spjaldtölvuna mína</string>
+    <string name="findmyphone_title_tv">Finna sjónvarpið mitt</string>
+    <string name="foreground_notification_devices">Tengt við: %s</string>
+    <string name="foreground_notification_no_devices">Ekki tengt við nein tæki</string>
+    <string name="foreground_notification_send_clipboard">Senda klippispjald</string>
+    <string name="gyro_mouse_enabled_title">Virkja mús með snúningsnema</string>
+    <string name="gyro_mouse_sensitivity_title">Næmni snúningsnema</string>
+    <string name="hold_to_drag">Halda til að draga</string>
+    <string name="holger_kaelberer_task">Viðbót fyrir fjartengt lyklaborð og lagfæringar á villum</string>
+    <string name="icon_content_description">Gluggatákn</string>
+    <string msgid="6827826412747255547" name="in_progress">"Í vinnslu"</string>
+    <string msgid="7933458017204019916" name="indeterminate">"Hakað við að hluta til"</string>
+    <string name="invalid_device_name">Ógilt heiti tækis</string>
+    <string name="item_view_role_description">Flipi</string>
+    <string name="kde">KDE</string>
+    <string name="kde_be_free">KDE - Vertu frjáls!</string>
+    <string name="kde_connect">COSMIC Connect</string>
+    <string name="konqi">Konqi</string>
+    <string name="left_click">Senda vinstri músarsmell</string>
+    <string name="licenses">Notkunarleyfi</string>
+    <string name="location_permission_needed_title">Krafist er heimildar</string>
+    <string name="m3_loading_indicator_content_description">Hleður</string>
+    <string msgid="2988463736136100848" name="m3c_bottom_sheet_collapse_description">"Minnka blað neðst"</string>
+    <string msgid="1555567894577437024" name="m3c_bottom_sheet_dismiss_description">"Hunsa blað neðst"</string>
+    <string msgid="8403354765404029791" name="m3c_bottom_sheet_drag_handle_description">"Dragkló"</string>
+    <string msgid="6670819569745899763" name="m3c_bottom_sheet_expand_description">"Stækka blað neðst"</string>
+    <string msgid="3010635850035863127" name="m3c_bottom_sheet_pane_title">"Blað neðst"</string>
+    <string msgid="8166741421776570875" name="m3c_date_input_headline">"Skráð dagsetning"</string>
+    <string msgid="229313757840775812" name="m3c_date_input_headline_description">"Skráð dagsetning: %1$s"</string>
+    <string msgid="6116910750161463197" name="m3c_date_input_invalid_for_pattern">"Dagsetning passar ekki við áætlað mynstur: %1$s"</string>
+    <string msgid="2521768508935305279" name="m3c_date_input_invalid_not_allowed">"Dagsetning er ekki leyfileg: %1$s"</string>
+    <string msgid="7052898923934555305" name="m3c_date_input_invalid_year_range">"Dagsetning er utan áætlaðra ára: %1$s–%2$s"</string>
+    <string msgid="2895559812010326913" name="m3c_date_input_label">"Dagsetning"</string>
+    <string msgid="1237013946323089826" name="m3c_date_input_no_input_description">"Ekkert"</string>
+    <string msgid="7306227249789210568" name="m3c_date_input_title">"Velja dagsetningu"</string>
+    <string msgid="7605002211875882969" name="m3c_date_picker_headline">"Valin dagsetning"</string>
+    <string msgid="3664277305226978227" name="m3c_date_picker_headline_description">"Núverandi val: %1$s"</string>
+    <string msgid="8436650776581492840" name="m3c_date_picker_navigate_to_year_description">"Fletta til ársins %1$s"</string>
+    <string msgid="5811000998184572395" name="m3c_date_picker_no_selection_description">"Ekkert"</string>
+    <string msgid="7813882352367152251" name="m3c_date_picker_scroll_to_earlier_years">"Flettu til að sjá fyrri ár"</string>
+    <string msgid="5727367015496556177" name="m3c_date_picker_scroll_to_later_years">"Flettu til að sjá síðari ár"</string>
+    <string msgid="1804346892470238807" name="m3c_date_picker_switch_to_calendar_mode">"Skipta yfir í innfærsluaðferð fyrir dagatal"</string>
+    <string msgid="395627960681594326" name="m3c_date_picker_switch_to_day_selection">"Strjúktu til að velja ár eða ýttu til að skipta aftur yfir í að velja dag"</string>
+    <string msgid="2219746470065162704" name="m3c_date_picker_switch_to_input_mode">"Skipta yfir í textainnslátt"</string>
+    <string msgid="7142101321095356500" name="m3c_date_picker_switch_to_next_month">"Breyta í næsta mánuð"</string>
+    <string msgid="228438865139394590" name="m3c_date_picker_switch_to_previous_month">"Breyta í fyrri mánuð"</string>
+    <string msgid="791651718641787594" name="m3c_date_picker_switch_to_year_selection">"Skipta yfir í val á ári"</string>
+    <string msgid="7430790972741451689" name="m3c_date_picker_title">"Velja dagsetningu"</string>
+    <string msgid="3199387177749801575" name="m3c_date_picker_today_description">"Í dag"</string>
+    <string msgid="2068382232816991922" name="m3c_date_picker_year_picker_pane_title">"Ársval birt"</string>
+    <string msgid="3190049423327661366" name="m3c_date_range_input_invalid_range_input">"Ógilt tímabil fært inn"</string>
+    <string msgid="3148384720560189467" name="m3c_date_range_input_title">"Slá inn dagsetningar"</string>
+    <string msgid="2138321128465719402" name="m3c_date_range_picker_day_in_range">"Innan tímabils"</string>
+    <string msgid="4947636797751277713" name="m3c_date_range_picker_end_headline">"Lokadagur"</string>
+    <string msgid="602077859540990149" name="m3c_date_range_picker_scroll_to_next_month">"Flettu til að sjá næsta mánuð"</string>
+    <string msgid="4592174524846109496" name="m3c_date_range_picker_scroll_to_previous_month">"Flettu til að sjá fyrri mánuð"</string>
+    <string msgid="4665981448952749820" name="m3c_date_range_picker_start_headline">"Upphafsdagur"</string>
+    <string msgid="3134165431120340385" name="m3c_date_range_picker_title">"Velja dagsetningar"</string>
+    <string msgid="7617233117134790350" name="m3c_dialog">"Gluggi"</string>
+    <string msgid="3177828188723359358" name="m3c_dropdown_menu_collapsed">"Minnkað"</string>
+    <string msgid="2360841780724299882" name="m3c_dropdown_menu_expanded">"Stækkað"</string>
+    <string msgid="8687821690726149911" name="m3c_dropdown_menu_toggle">"Velja eða afvelja fellivalmynd"</string>
+    <string msgid="6152806324422087846" name="m3c_search_bar_search">"Leit"</string>
+    <string msgid="6152755701819882931" name="m3c_snackbar_dismiss">"Hunsa"</string>
+    <string msgid="7655536806087401899" name="m3c_suggestions_available">"Tillögur hér fyrir neðan"</string>
+    <string msgid="2786685010796619560" name="m3c_time_picker_am">"fh"</string>
+    <string msgid="2349193472625211372" name="m3c_time_picker_hour">"Klukkustund"</string>
+    <string msgid="9179527532316922345" name="m3c_time_picker_hour_24h_suffix">"%1$d klst."</string>
+    <string msgid="8876759303332837035" name="m3c_time_picker_hour_selection">"Velja klst."</string>
+    <string msgid="3458167507790628988" name="m3c_time_picker_hour_suffix">"Kl. %1$d"</string>
+    <string msgid="6973808109666874069" name="m3c_time_picker_hour_text_field">"fyrir klukkustund"</string>
+    <string msgid="4313071914266462005" name="m3c_time_picker_minute">"Mínúta"</string>
+    <string msgid="4699133535056739733" name="m3c_time_picker_minute_selection">"Velja mínútur"</string>
+    <string msgid="5064177921781937179" name="m3c_time_picker_minute_suffix">"%1$d mínútur"</string>
+    <string msgid="7661234488295443182" name="m3c_time_picker_minute_text_field">"fyrir mínútur"</string>
+    <string msgid="5865171949528594571" name="m3c_time_picker_period_toggle_description">"Velja f.h. eða e.h."</string>
+    <string msgid="6616362054113087709" name="m3c_time_picker_pm">"eh"</string>
+    <string msgid="1805687647081129904" name="m3c_tooltip_long_press_label">"Sýna ábendingu"</string>
+    <string msgid="5460405025248574620" name="m3c_tooltip_pane_description">"Ábending"</string>
+    <string name="maintainer_and_developer">Umsjónarmaður og forritari</string>
+    <string name="manifest_label_share">Senda til tækis</string>
+    <string name="mark_as_read_label">MERKJA SEM LESIÐ</string>
+    <string name="material_clock_toggle_content_description">Velja f.h. eða e.h.</string>
+    <string name="material_hour_24h_suffix">%1$s klst.</string>
+    <string name="material_hour_selection">Velja tíma</string>
+    <string name="material_hour_suffix">klukkan %1$s</string>
+    <string name="material_minute_selection">Veldu mínútur</string>
+    <string name="material_minute_suffix">%1$s mínútur</string>
+    <string name="material_slider_range_end">Lok sviðs</string>
+    <string name="material_slider_range_start">Upphaf sviðs</string>
+    <string name="material_slider_value">Gildi</string>
+    <string name="material_timepicker_am">fh</string>
+    <string name="material_timepicker_clock_mode_description">Skipta yfir í klukkustillingu til að færa inn tíma.</string>
+    <string name="material_timepicker_hour">Klukkustund</string>
+    <string name="material_timepicker_minute">Mínúta</string>
+    <string name="material_timepicker_pm">eh</string>
+    <string name="material_timepicker_select_time">Veldu tíma</string>
+    <string name="material_timepicker_text_input_mode_description">Skipta yfir í textastillingu til að færa inn tíma.</string>
+    <string name="maxim_leshchenko_task">Endurbætur á viðmóti og þessi síða</string>
+    <string name="message_reply_label">SVARA</string>
+    <string name="middle_click">Senda miðjumúsarsmell</string>
+    <string name="mouse_receiver_plugin_description">"Taka á móti  fjartengdum músarhreyfingum"</string>
+    <string name="mouse_receiver_plugin_name">Móttakari músarmerkja</string>
+    <string name="mousepad_acceleration_profile_settings_title">Stilla hröðun bendils</string>
+    <string name="mousepad_double_tap_settings_title">Stilla aðgerð við pikk með tveimur fingrum</string>
+    <string name="mousepad_info">Færðu fingur á skjánum til að færa bendilinn. Pikkaðu til að smella og notaðu tvo/þrjá fingur sem hægri- og miðjuhnappa. Notaðu tvo fingur til að skruna. Ýttu lengi til að draga-sleppa. Snúningsskynjaraeiginleika músar er hægt að virkja í stillingum viðbótarinnar</string>
+    <string name="mousepad_info_no_gestures">Færðu fingur á skjánum til að færa bendilinn, pikkaðu til að smella.</string>
+    <string name="mousepad_keyboard_input_not_supported">Lyklaborðsinnsláttur er ekki studdur af paraða tækinu</string>
+    <string name="mousepad_mouse_buttons_title">Birta músarhnappa</string>
+    <string name="mousepad_scroll_direction_title">Öfug skrunstefna</string>
+    <string name="mousepad_scroll_sensitivity_title">Næmni skruns</string>
+    <string name="mousepad_sensitivity_settings_title">Stilla næmni snertiplatta</string>
+    <string name="mousepad_single_tap_settings_title">Stilla aðgerð við pikk með einum fingri</string>
+    <string name="mousepad_triple_tap_settings_title">Stilla aðgerð við pikk með þremur fingrum</string>
+    <string name="mpris_coverart_description">Umslagsmyndefni núverandi gagnamiðils</string>
+    <string name="mpris_ff">Spóla áfram</string>
+    <string name="mpris_keepwatching">Halda áfram spilun</string>
+    <string name="mpris_keepwatching_settings_title">Halda áfram spilun</string>
+    <string name="mpris_loop">Endurtaka</string>
+    <string name="mpris_next">Næsta</string>
+    <string name="mpris_notification_settings_summary">Gerir kleift að stýra margmiðlunarspilurunum þínum án þess að opna KDE-tengingar</string>
+    <string name="mpris_notification_settings_title">Birta tilkynningar fyrir margmiðlunarstýringar</string>
+    <string name="mpris_open_url">Halda áfram spilun hér</string>
+    <string name="mpris_pause">Í bið</string>
+    <string name="mpris_play">Spila</string>
+    <string name="mpris_previous">Fyrra</string>
+    <string name="mpris_rew">Spóla til baka</string>
+    <string name="mpris_shuffle">Stokka</string>
+    <string name="mpris_stop">Stöðva virkan spilara</string>
+    <string name="mpris_time_settings_summary">Aðlagaðu tímann þegar ýtt er á hraðspólun/spóla til baka</string>
+    <string name="mpris_time_settings_title">Áfram- og afturábak-hnappar</string>
+    <string name="mpris_volume">Hljóðstyrkur</string>
+    <string name="mtrl_badge_numberless_content_description">Ný tilkynning</string>
+    <string name="mtrl_checkbox_state_description_checked">Merkt</string>
+    <string name="mtrl_checkbox_state_description_indeterminate">Merkt við að hluta til</string>
+    <string name="mtrl_checkbox_state_description_unchecked">Ekki merkt</string>
+    <string name="mtrl_chip_close_icon_content_description">Fjarlægja %1$s</string>
+    <string name="mtrl_exceed_max_badge_number_content_description" ns2:ignore="PluralsCandidate">Yfir %1$d nýjar tilkynningar</string>
+    <string name="mtrl_picker_a11y_next_month">Breyta í næsta mánuð</string>
+    <string name="mtrl_picker_a11y_prev_month">Breyta í fyrri mánuð</string>
+    <string name="mtrl_picker_announce_current_range_selection">Val upphafsdags: %1$s – Val lokadags: %2$s</string>
+    <string name="mtrl_picker_announce_current_selection">Núverandi val: %1$s</string>
+    <string name="mtrl_picker_announce_current_selection_none">ekkert</string>
+    <string name="mtrl_picker_cancel">Hætta við</string>
+    <string name="mtrl_picker_confirm">Í lagi</string>
+    <string name="mtrl_picker_date_header_selected">%1$s</string>
+    <string name="mtrl_picker_date_header_title">Veldu dagsetningu</string>
+    <string name="mtrl_picker_date_header_unselected">Valin dagsetning</string>
+    <string name="mtrl_picker_day_of_week_column_header">%1$s</string>
+    <string name="mtrl_picker_end_date_description">Lokadagur %1$s</string>
+    <string name="mtrl_picker_invalid_format">Ógilt snið.</string>
+    <string name="mtrl_picker_invalid_format_example">Dæmi: %1$s</string>
+    <string name="mtrl_picker_invalid_format_use">Nota: %1$s</string>
+    <string name="mtrl_picker_invalid_range">Ógilt svið.</string>
+    <string name="mtrl_picker_navigate_to_current_year_description">Fara á núverandi ár %1$d</string>
+    <string name="mtrl_picker_navigate_to_year_description">Fara í árið %1$d</string>
+    <string name="mtrl_picker_out_of_range">Utan sviðs: %1$s</string>
+    <string name="mtrl_picker_range_header_only_end_selected">Upphafsdagur – %1$s</string>
+    <string name="mtrl_picker_range_header_only_start_selected">%1$s – Lokadagur</string>
+    <string name="mtrl_picker_range_header_selected">%1$s – %2$s</string>
+    <string name="mtrl_picker_range_header_title">Veldu tímabil</string>
+    <string name="mtrl_picker_range_header_unselected">Upphafsdagur – Lokadagur</string>
+    <string name="mtrl_picker_save">Vista</string>
+    <string name="mtrl_picker_start_date_description">Upphafsdagur %1$s</string>
+    <string name="mtrl_picker_text_input_date_hint">Dagsetning</string>
+    <string name="mtrl_picker_text_input_date_range_end_hint">Lokadagur</string>
+    <string name="mtrl_picker_text_input_date_range_start_hint">Upphafsdagur</string>
+    <string name="mtrl_picker_text_input_day_abbr">d</string>
+    <string name="mtrl_picker_text_input_month_abbr">m</string>
+    <string name="mtrl_picker_text_input_year_abbr">á</string>
+    <string name="mtrl_picker_today_description">Í dag %1$s</string>
+    <string name="mtrl_picker_toggle_to_calendar_input_mode">Skipta yfir í innfærsluaðferð fyrir dagatal</string>
+    <string name="mtrl_picker_toggle_to_day_selection">Skipta yfir í dagatalsyfirlit</string>
+    <string name="mtrl_picker_toggle_to_text_input_mode">Skipta yfir í innfærsluaðferð fyrir texta</string>
+    <string name="mtrl_picker_toggle_to_year_selection">Skipta yfir í ársyfirlit</string>
+    <string name="mtrl_picker_toggled_to_day_selection">Skipt yfir í dagatalsyfirlit</string>
+    <string name="mtrl_picker_toggled_to_year_selection">Skipt yfir í ársyfirlit</string>
+    <string name="mtrl_timepicker_cancel">Hætta við</string>
+    <string name="mtrl_timepicker_confirm">Í lagi</string>
+    <string name="mute">Hljóð af</string>
+    <string name="my_device_fingerprint">SHA256-fingrafar af skilríki tækisins þíns er:</string>
+    <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Fara upp"</string>
+    <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Opna yfirlitsskúffu"</string>
+    <string msgid="542007171693138492" name="navigation_menu">"Yfirlitsvalmynd"</string>
+    <string name="no_app_for_opening">Ekkert hentugt forrit fannst til að opna þessa skrá</string>
+    <string name="no_file_browser">Það eru engir skráavafrar uppsettir.</string>
+    <string name="no_permission_mprisreceiver">Til að geta stýrt margmiðlunarspilurunum þínum þarftu að gefa heimild fyrir aðgang að tilkynningum</string>
+    <string name="no_permissions">Þú verður að gefa heimild til að fá aðgang að tilkynningum</string>
+    <string name="no_permissions_remotekeyboard">Til að taka við lyklaáslætti þarftu að virkja fjartengt lyklaborð KDE-tenginga</string>
+    <string name="no_players_connected">Engir spilarar fundust</string>
+    <string msgid="6610465462668679431" name="not_selected">"Ekki valið"</string>
+    <string msgid="6573031135582639649" name="not_set">"Ekki stillt"</string>
+    <string name="notification_channel_default">Aðrar tilkynningar</string>
+    <string name="notification_channel_filetransfer">Skráaflutningur inn</string>
+    <string name="notification_channel_filetransfer_error">Villa í skráaflutningi</string>
+    <string name="notification_channel_filetransfer_upload">Skráaflutningur út</string>
+    <string name="notification_channel_high_priority">Hár forgangur</string>
+    <string name="notification_channel_keepwatching">Halda áfram spilun</string>
+    <string name="notification_channel_media_control">Margmiðlunarstýring</string>
+    <string name="notification_channel_persistent">Viðvarandi gaumvísir</string>
+    <string name="notification_channel_receivenotification">Tilkynningar frá öðrum tækjum</string>
+    <string name="ok">Í lagi</string>
+    <string name="on_non_trusted_message">Ekki á treystu netkerfi: sjálfvirk uppgötvun er óvirk.</string>
+    <string name="open">Opna</string>
+    <string name="open_compose_send">Semja texta</string>
+    <string name="open_mousepad">Fjartengd ritun</string>
+    <string name="open_mpris_controls">Margmiðlunarstýring</string>
+    <string name="open_settings">Opna stillingar</string>
+    <string name="optional_permission_explanation">Þú þarft að veita viðbótarheimildir til að virkja alla eiginleika</string>
+    <string name="pair_new_device">Para nýtt tæki</string>
+    <string name="pair_requested">Beðið um pörun</string>
+    <string name="pair_succeeded">Pörun tókst</string>
+    <string name="pairing_accept">Samþykkja</string>
+    <string name="pairing_description">Önnur tæki sem keyra KDE-tengingar á sama netkerfi ættu að birtast hér.</string>
+    <string name="pairing_duplicate_names">Varúð: Það eru mörg tæki með sama heiti</string>
+    <string name="pairing_reject">Hafna</string>
+    <string name="pairing_request_from">Beiðni um pörun frá \'%1s\'</string>
+    <string name="pairing_title">COSMIC Connect tæki</string>
+    <string name="password_toggle_content_description">Sýna aðgangsorð</string>
+    <string name="permission_explanation">Þessi viðbót þarf sérstakar heimildir til að virka</string>
+    <string name="ping_failed">Gat ekki sent ping-beiðni í tæki</string>
+    <string name="ping_in_progress">Sendi ping-beiðni…</string>
+    <string name="ping_result">Ping-beiðni tók %1$d millísekúndur</string>
+    <string name="plugin_settings_with_name">Stillingar %s</string>
+    <string name="plugin_stats">Tölfræði forritsviðbótar</string>
+    <string name="plugins_need_optional_permission">Sumar viðbætur eru með óvirka eiginleika vegna skorts á heimildum (ýttu til að sjá frekari upplýsingar):</string>
+    <string name="plugins_need_permission">Sumar viðbætur þurfa viðbótarheimildir til að virka (ýttu til að sjá frekari upplýsingar):</string>
+    <string name="pref_plugin_battery">Staða rafhlöðu</string>
+    <string name="pref_plugin_battery_desc">Tilkynnir reglulega um stöðu rafhlöðu</string>
+    <string name="pref_plugin_bigscreen_desc">Notaðu tækið þitt sem fjarstýringu fyrir Plasma Bigscreen</string>
+    <string name="pref_plugin_clipboard">Samstilling klippispjalda</string>
+    <string name="pref_plugin_clipboard_desc">Deildu innihaldi klippispjaldsins</string>
+    <string name="pref_plugin_clipboard_sent">Klippispjald sent</string>
+    <string name="pref_plugin_connectivity_report">Staða tenginga</string>
+    <string name="pref_plugin_connectivity_report_desc">Tilkynnir reglulega um styrk merkis og ástand</string>
+    <string name="pref_plugin_contacts">Samstilling tengiliða</string>
+    <string name="pref_plugin_contacts_desc">Gerir kleift að samstilla við tengiliðaskrá tækisins</string>
+    <string name="pref_plugin_findremotedevice">Finna fjartengt tæki</string>
+    <string name="pref_plugin_findremotedevice_desc">Hringdu fjartengda tækinu</string>
+    <string name="pref_plugin_mousepad">Fjartengd ritun</string>
+    <string name="pref_plugin_mousepad_desc_nontv">Notaðu símann þinn eða spjaldtölvu sem snertiplatta og lyklaborð</string>
+    <string name="pref_plugin_mousepad_desc_tv">Notaðu símann þinn eða spjaldtölvu sem sjónvarpsfjarstýringu</string>
+    <string name="pref_plugin_mousepad_send_keystrokes">Senda sem lyklaáslátt</string>
+    <string name="pref_plugin_mpris">Margmiðlunarstýringar</string>
+    <string name="pref_plugin_mpris_desc">Er með fjarstýringu fyrir margmiðlunarspilara</string>
+    <string name="pref_plugin_mprisreceiver">Margmiðlunarstýring</string>
+    <string name="pref_plugin_mprisreceiver_desc">Stýrðu margmiðlunarspilurum símans þíns frá öðru tæki</string>
+    <string name="pref_plugin_notifications">Samstilling tilkynninga</string>
+    <string name="pref_plugin_notifications_desc">Fáðu aðgang að tilkynningum frá öðrum tækjum</string>
+    <string name="pref_plugin_ping">Ping-beiðni</string>
+    <string name="pref_plugin_ping_desc">Senda og taka við ping-beiðnum</string>
+    <string name="pref_plugin_presenter">Kynningar-fjarstýring</string>
+    <string name="pref_plugin_presenter_desc">Notaðu tækið þitt til að skipta á milli skyggna í kynningum</string>
+    <string name="pref_plugin_receive_notifications">Taka á móti tilkynningum</string>
+    <string name="pref_plugin_receive_notifications_desc">Taktu á móti tilkynningum frá hinu tækinu og birtu þær á Android</string>
+    <string name="pref_plugin_remotekeyboard">"Tekur á móti  fjartengdum innslætti"</string>
+    <string name="pref_plugin_remotekeyboard_desc">Taktu á móti lyklainnslætti frá fjartengdum tækjum</string>
+    <string name="pref_plugin_runcommand">Keyra skipun</string>
+    <string name="pref_plugin_runcommand_desc">Settu fjartengt í gang skipanir frá símanum þínum eða spjaldtölvu</string>
+    <string name="pref_plugin_sftp">Aðgangur að skráakerfi</string>
+    <string name="pref_plugin_sftp_desc">Gerir kleift að fletta upp í skráakerfi þessa tækis</string>
+    <string name="pref_plugin_sharereceiver">Senda og taka við</string>
+    <string name="pref_plugin_sharereceiver_desc">Deildu skrám og slóðum á milli tækja</string>
+    <string name="pref_plugin_systemvolume">Hljóðstyrkur kerfis</string>
+    <string name="pref_plugin_systemvolume_desc">Stýrðu hljóðstyrk fjartengda tækisins</string>
+    <string name="pref_plugin_telepathy">Senda SMS</string>
+    <string name="pref_plugin_telepathy_desc">Sendu textaskilaboð úr tölvunni þinni</string>
+    <string name="pref_plugin_telepathy_mms">Senda MMS</string>
+    <string name="pref_plugin_telepathy_mms_desc">Til að geta sent MMS með COSMIC Connect þarftu að skilgreina það sem sjálfgefið SMS-forrit.</string>
+    <string name="pref_plugin_telephony">Símatilkynningar</string>
+    <string name="pref_plugin_telephony_desc">Birta tilkynningar fyrir innhringingar</string>
+    <string msgid="6685851473431805375" name="preference_copied">"„<ns1:g id="SUMMARY">%1$s</ns1:g>“ afritað á klippiborðið."</string>
+    <string name="presenter_exit">Fara úr kynningu</string>
+    <string name="presenter_fullscreen">Skjáfylli</string>
+    <string name="presenter_pointer">Bendill</string>
+    <string name="privacy_options">Valkostir friðhelgi</string>
+    <string name="protocol_version">Útgáfa samskiptamáta:</string>
+    <string name="protocol_version_newer">Þetta tæki notar nýrri útgáfu samskiptastaðals</string>
+    <string msgid="5941395253238309765" name="range_end">"Lok sviðs"</string>
+    <string msgid="7097486360902471446" name="range_start">"Upphaf sviðs"</string>
+    <string name="receive_notifications_permission_explanation">Leyfa þarf tilkynningar til að geta tekið við þeim frá öðrum tækjum</string>
+    <string name="received_file_text">Pikkaðu til að opna \'%1s\'</string>
+    <string name="refresh">Endurlesa</string>
+    <string name="remote_device_fingerprint">SHA256-fingrafar af skilríki fjartengda tækisins er:</string>
+    <string name="remote_keyboard_service">Fjartengt lyklaborð COSMIC Connect</string>
+    <string name="remotekeyboard_connected">Fjartenging lyklaborðs er virk</string>
+    <string name="remotekeyboard_editing_only_title">Aðeins meðhöndla fjartengda lykla við breytingar/ritun</string>
+    <string name="remotekeyboard_multiple_connections">Það eru fleiri en ein tenging fjartengds lyklaborðs, veldu það tæki sem á að stilla</string>
+    <string name="remotekeyboard_not_connected">Engin fjartenging lyklaborðs er virk, virkjaðu eina slíka í COSMIC Connect</string>
+    <string name="report_bug">Tilkynna galla</string>
+    <string name="request_pairing">Biðja um pörun</string>
+    <string name="right_click">Senda hægri músarsmell</string>
+    <string name="ring">Hringur</string>
+    <string name="rise_down">Ris niður</string>
+    <string name="rise_up">Ris upp</string>
+    <string name="runcommand_category_device_controls_title">Stýringar tækis</string>
+    <string name="runcommand_name_as_title_title">Sýna nafn sem titil</string>
+    <string name="runcommand_nosuchdevice">Það er ekkert slíkt tæki</string>
+    <string name="runcommand_notpaired">Tækið er ekki parað</string>
+    <string name="runcommand_notreachable">Tækið er ekki aðgengilegt</string>
+    <string name="sad_ok">Í lagi :(</string>
+    <string name="samoilenko_yuri_task">SFTP-innleiðing, villuleiðréttingar og almennar endurbætur</string>
+    <string msgid="6264217191555673260" name="search_menu_title">"Leit"</string>
+    <string name="searchview_clear_text_content_description">Hreinsa texta</string>
+    <string name="searchview_navigation_content_description">Til baka</string>
+    <string name="select_ringtone">Veldu hringitón</string>
+    <string msgid="6043586758067023" name="selected">"Valið"</string>
+    <string name="send_clipboard">Senda klippispjald</string>
+    <string name="send_compose">Senda</string>
+    <string name="send_files">Senda skrár</string>
+    <string name="send_ping">"Senda ping-beiðni "</string>
+    <string name="sendkeystrokes_disabled_toast">Sending lyklaásláttar er ekki virkt, virkjaðu það í stillingunum</string>
+    <string name="sendkeystrokes_pref_category_title">Senda lyklaáslátt</string>
+    <string name="sendkeystrokes_pref_enabled">Virkja sendingu lyklaásláttar</string>
+    <string name="sendkeystrokes_pref_enabled_summary">Hlusta eftir gögnum með MIME-tegund \'text/x-keystrokes\'</string>
+    <string name="sendkeystrokes_safe_text_enabled">Senda öruggan texta strax</string>
+    <string name="sendkeystrokes_safe_text_enabled_summary">Senda stutta strengi einungis með tölum án staðfestingar</string>
+    <string name="sendkeystrokes_send_to">Senda lyklaáslátt til</string>
+    <string name="sendkeystrokes_sent_text">Sendi %1$s til tækisins %2$s</string>
+    <string name="sendkeystrokes_textbox_hint">Senda lyklaáslátt til hýsilvélar</string>
+    <string name="sendkeystrokes_wrong_data">Ógild mime-tegund - þarf að vera \'text/x-keystrokes\'</string>
+    <string name="set_default_sms_app_title">Senda MMS</string>
+    <string name="set_group_message_as_mms_title">Senda hóp-MMS</string>
+    <string name="set_long_text_as_mms_title">Senda langan texta sem MMS</string>
+    <string name="set_privacy_options">Valkostir friðhelgi þinnar</string>
+    <string name="set_runcommand_name_as_title">set_runcommand_name_as_title</string>
+    <string name="setting_persistent_notification">Birta viðvarandi tilkynningu</string>
+    <string name="setting_persistent_notification_description">Ýttu til að gera virkt/óvirkt í stillingum tilkynninga</string>
+    <string name="setting_persistent_notification_oreo">Viðvarandi tilkynning</string>
+    <string name="settings">Stillingar</string>
+    <string name="settings_dark_mode">Dökkt þema</string>
+    <string name="settings_export_logs">Flytja út atvikaskrár COSMIC Connect</string>
+    <string name="settings_icon_description">Stillingatáknmynd</string>
+    <string name="settings_more_settings_title">Fleiri stillingar</string>
+    <string name="settings_rename">Heiti tækis</string>
+    <string name="sftp_action_mode_menu_delete">Eyða</string>
+    <string name="sftp_missing_permission_error">Heimildir vantar: aðgangur að skráakerfi</string>
+    <string name="sftp_no_storage_locations_configured">Engar geymslustaðsetningar stilltar</string>
+    <string name="sftp_preference_add_storage_location_title">Bæta við staðsetningu gagnageymslu</string>
+    <string name="sftp_preference_configured_storage_locations">Stilltar geymslustaðsetningar</string>
+    <string name="sftp_preference_edit_storage_location">Breyta staðsetningu gagnageymslu</string>
+    <string name="sftp_storage_preference_click_to_select">smelltu til að velja</string>
+    <string name="sftp_storage_preference_display_name">Birtingarnafn</string>
+    <string name="sftp_storage_preference_display_name_already_used">Birtingarnafnið er þegar í notkun</string>
+    <string name="sftp_storage_preference_display_name_cannot_be_empty">Birtingarnafn má ekki vera tómt</string>
+    <string name="sftp_storage_preference_storage_location">Staðsetning gagnageymslu</string>
+    <string name="sftp_storage_preference_storage_location_already_configured">Þessi staðsetning er þegar stillt.</string>
+    <string name="share">Deila</string>
+    <string name="share_destination_customize">Sérsníða móttökumöppu</string>
+    <string name="share_destination_customize_summary_disabled">Mótteknar skrár munu birtast í niðurhalsmöppu</string>
+    <string name="share_destination_customize_summary_enabled">Skrár verða geymdar í möppunni hér fyrir neðan</string>
+    <string name="share_destination_folder_preference">Móttökumappa</string>
+    <string name="share_notification_preference">Háværar tilkynningar</string>
+    <string name="share_notification_preference_summary">Titra og spila hljóð þegar tekið er á móti skrá</string>
+    <string name="share_optional_permission_explanation">Til að taka við skrám þarftu að veita aðgang að geymslurými</string>
+    <string name="share_received_file">Deila \"%s\"</string>
+    <string name="share_to">Deila með…</string>
+    <string name="shareplugin_text_saved">Tók við texta, vistaði á klippispjald</string>
+    <string name="shellwen_chen_task">Bætt öryggi SFTP, betra viðhald verkefnisins, villuleiðréttingar og almennar endurbætur</string>
+    <string name="show_keyboard">Birta lyklaborð</string>
+    <string name="show_mouse_and_keyboard">Birta mús og lyklaborð</string>
+    <string name="show_notification_if_screen_off">Senda tilkynningar einungis ef slökkt er á skjánum</string>
+    <string name="side_sheet_accessibility_pane_title">Hliðarblað</string>
+    <string name="source_code">Grunnkóði</string>
+    <string msgid="4139871816613051306" name="state_empty">"Autt"</string>
+    <string msgid="5834637030682409883" name="state_off">"Slökkt"</string>
+    <string msgid="1490883874751719580" name="state_on">"Kveikt"</string>
+    <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+    <string msgid="9167775378838880170" name="summary_collapsed_preference_list">"<ns1:g id="CURRENT_ITEMS">%1$s</ns1:g>, <ns1:g id="ADDED_ITEMS">%2$s</ns1:g>"</string>
+    <string msgid="2561197295334830845" name="switch_role">"Skipta"</string>
+    <string msgid="1672349317127674378" name="tab">"Flipi"</string>
+    <string name="tap_to_answer">Pikkaðu til að svara</string>
+    <string name="tap_to_execute">Pikkaðu til að keyra</string>
+    <string name="tap_to_open">Pikkaðu til að opna</string>
+    <string name="telepathy_permission_explanation">Til að geta lesið og skrifað SMS á vinnutölvunni, þarft þú að gefa heimild til að nota SMS</string>
+    <string name="telephony_optional_permission_explanation">Til að sjá nafn tengiliðar í stað símanúmers þarftu að leyfa aðgang að tengiliðaskrá símans</string>
+    <string name="telephony_permission_explanation">Til að geta skoðað símtöl á vinnutölvunni, þarft þú að gefa heimild til að nota atvikaskrá símtala og stöðu síma</string>
+    <string name="telephony_pref_blocked_title">Útilokuð símanúmer</string>
+    <string msgid="5946805113151406391" name="template_percent">"<ns1:g id="PERCENTAGE">%1$d</ns1:g> prósent."</string>
+    <string name="thanks_to">Þakkir fá</string>
+    <string name="theme_dialog_title">Veldu þema</string>
+    <string name="title_activity_notification_filter">Tilkynningasía</string>
+    <string msgid="3765533235322692011" name="tooltip_description">"ábending"</string>
+    <string msgid="3124740595719787496" name="tooltip_label">"sýna ábendingu"</string>
+    <string name="trusted_networks">Treyst netkerfi</string>
+    <string name="trusted_networks_desc">Takmarka sjálfvirka uppgötvun við þekkt netkerfi</string>
+    <string name="undo">Afturkalla</string>
+    <string name="unknown_device">Óþekkt tæki</string>
+    <string name="unreachable_description">Ekki næst í paraða tækið. Gakktu úr skugga um að það sé tengt inn á sama netkerfi.</string>
+    <string name="unreachable_device_dynamic_shortcut">%s (✕)</string>
+    <string name="user_display_name">Þú</string>
+    <string msgid="3140233346420563315" name="v7_preference_off">"SLÖKKT"</string>
+    <string msgid="89551595707643515" name="v7_preference_on">"KVEIKT"</string>
+    <string name="version">Útgáfa %s</string>
+    <string name="view_status_title">Staða</string>
+    <string name="visit_contributors_homepage">Fara á heimasíðu þátttakandans\n%s</string>
+    <string name="website">Vefsvæði</string>
+</resources>

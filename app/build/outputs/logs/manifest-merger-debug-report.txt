@@ -1,0 +1,1215 @@
+-- Merging decision tree log ---
+provider#androidx.core.content.FileProvider
+INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:359:9-367:20
+	android:grantUriPermissions
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:363:13-47
+	android:authorities
+		INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:361:13-64
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:362:13-37
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:360:13-62
+manifest
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:9:1-475:12
+INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:9:1-475:12
+INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:9:1-475:12
+INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:9:1-475:12
+MERGED from [androidx.databinding:viewbinding:8.7.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9bcc2040d2855df18149ca2eced45e14/transformed/viewbinding-8.7.3/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/551b0cc91b2f3afba7beefd538db9dd3/transformed/ui-tooling-release/AndroidManifest.xml:17:1-28:12
+MERGED from [androidx.navigation:navigation-common:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/92572e37df014d6afe9c839e4066d9eb/transformed/navigation-common-2.8.5/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-runtime:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6d8f7c9deba0015a3b8f6912a3127b85/transformed/navigation-runtime-2.8.5/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-common-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/07b74954c8e4cfc7b97b84f5cbff8598/transformed/navigation-common-ktx-2.8.5/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-ui:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/33bef52a7836a6ea67bd30ab5f64f9b7/transformed/navigation-ui-2.8.5/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-fragment:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/24331ff865b82fae3dfcc20d23c172ac/transformed/navigation-fragment-2.8.5/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f8c4b6c90797e421c4f42a480f1f87d5/transformed/navigation-runtime-ktx-2.8.5/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-ui-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b6ad89780f39a0125df6fa0093bf7342/transformed/navigation-ui-ktx-2.8.5/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-fragment-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ab0741982abb2bfbee1cb2e13a5a0f99/transformed/navigation-fragment-ktx-2.8.5/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-compose:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/044d2276ce541e887915c365813e7981/transformed/navigation-compose-2.8.5/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material3:material3-android:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b3790d01d1a3091b0fb13b91ba634393/transformed/material3-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.preference:preference-ktx:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f517082342b43aad08ffb16cd69307a4/transformed/preference-ktx-1.2.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.preference:preference:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d855a21a11ac300fafd3479cc79b2cf6/transformed/preference-1.2.1/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.material:material:1.13.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/4284dfee7a9883dca715f68895ad1f7b/transformed/material-1.13.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/afe134f33f4b8937f3daf833cd02f11b/transformed/appcompat-resources-1.7.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5754b18925d568652f9e3158c06a5740/transformed/constraintlayout-2.1.0/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.appcompat:appcompat:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cc14f700b33d22af268947268e3a2605/transformed/appcompat-1.7.1/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.dagger:hilt-android:2.51.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/707831528e8cd8bea7b2fd00245c908d/transformed/hilt-android-2.51.1/AndroidManifest.xml:16:1-19:12
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6c077af4a0856283d3ecdb25dbab1d04/transformed/lifecycle-extensions-2.2.0/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.recyclerview:recyclerview:1.3.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7f3ac69755a4c6e89ce544501e49f180/transformed/recyclerview-1.3.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager2:viewpager2:1.1.0-beta02] /home/olafkfreund/.gradle/caches/8.14.1/transforms/1214d5d63923d392d78fe19d0dea61c9/transformed/viewpager2-1.1.0-beta02/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.fragment:fragment-ktx:1.6.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/12a38b26a1264ff627bccbac238b02d8/transformed/fragment-ktx-1.6.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.fragment:fragment:1.6.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/2345985999dcb7a3d1b38ecc96cfd51c/transformed/fragment-1.6.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6669ec5d099b9730c10f7a2b66fbb712/transformed/activity-1.9.3/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity-ktx:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ffb41f05e796386277dcf6e862594b95/transformed/activity-ktx-1.9.3/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.activity:activity-compose:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/073a2b645d3364bf7aa855540af35894/transformed/activity-compose-1.9.3/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cbc6d90008240cd5a5127ff331fb631f/transformed/material-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ac78faeb8dd3ea9f6781e2b933866e50/transformed/material-icons-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.constraintlayout:constraintlayout-compose-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/26776ff4c9b257067b24029fa929021b/transformed/constraintlayout-compose-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/dbb32b8cdf185b6a29012bc99cff8e6c/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-ripple-android:1.7.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/3b73692245d2645384009df13c7e70a1/transformed/material-ripple-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/51a7269b6e96ffb2e287dccde86c58d5/transformed/foundation-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/1d923375af87ded13a4ef06a70a13d98/transformed/foundation-layout-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.animation:animation-core-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6ea94a3311766ecebd6cb17b737e6eb4/transformed/animation-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.animation:animation-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9580dca498a6d3db1c093e85726e60cf/transformed/animation-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-graphics-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/970349134402ce5fc7e0c1199999a7ef/transformed/ui-graphics-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-geometry-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c0df80c6310c962c33a5efb1aea127de/transformed/ui-geometry-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-unit-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/56ebe2bd9c13a2b58670594c0189f58d/transformed/ui-unit-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-util-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b3763cd2cf0390a7b29c0b387da3793a/transformed/ui-util-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9cd30cc1e3fc739c9c3db96ee06eb4c1/transformed/ui-tooling-data-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-text-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/61ef9a2df9bebdcd55db67bc61d573f8/transformed/ui-text-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cc7b1cfaaf4ff8d72a6892059823f3a2/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/185b1d60d64ddcd60f80a6dc08d7c324/transformed/savedstate-1.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media:media:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a83aefd7ec687f4a5e00a2313253e506/transformed/media-1.7.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0eaedc7bde8b6db5be8843db8125f4a7/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.graphics:graphics-shapes-android:1.0.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/181fd34a8aba90a5e1cd2d214ff4cfb7/transformed/graphics-shapes-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.core:core-ktx:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e506bca584737b39a9f467555ebad038/transformed/core-ktx-1.13.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c481461bef7997aa6832e19634c73a10/transformed/swiperefreshlayout-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.documentfile:documentfile:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5188b224400092fa11b5bf67484fe187/transformed/documentfile-1.1.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.gridlayout:gridlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d9728802f634177b27e37d8076dfeb85/transformed/gridlayout-1.1.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/994efa7c065deb2ae181791f4533aeea/transformed/drawerlayout-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e563553bbdea0a9b5040e7325739a714/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6bad0ace4ff15ac0556a85b06b2200c3/transformed/slidingpanelayout-1.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.transition:transition:1.5.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/43e2e217de96449449cd803b812a9a91/transformed/transition-1.5.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6039c4c41c87847e0b6198f08297d5ca/transformed/dynamicanimation-1.1.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/775a73a2016ecc46d0097e2afd46e995/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e60de6216d89696557b8c3f426f7fc44/transformed/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/aa82e6e1c75468c80f05b4a07ff64a30/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/25f69159145b0bd75dc0e431a0c592db/transformed/customview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.autofill:autofill:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/405f28e867e6de79d617b862f8046e1e/transformed/autofill-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.loader:loader:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9291e7d58b277720097aa29c4d3f5a21/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.graphics:graphics-path:1.0.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/472f0580c2d604b5ebb46a0fc0767f4e/transformed/graphics-path-1.0.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/79272955262de1dc2debff6e54755bc4/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b6e0772c121de43a598b24fa826ec2d3/transformed/lifecycle-livedata-core-ktx-2.8.7/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/2e81786835638b590b5ef67a043e760c/transformed/lifecycle-livedata-core-2.8.7/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/94b63a291858558a5c93212419a2cb6a/transformed/lifecycle-runtime-2.8.7/AndroidManifest.xml:2:1-5:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/53c425bf32c9b243098ac7a89a9a3428/transformed/lifecycle-runtime-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e5523dc485ef16c7c2465bcdc09c4288/transformed/lifecycle-viewmodel-2.8.7/AndroidManifest.xml:2:1-5:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/2957e1e1c05602ed5a8dd3b6474947fc/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-service:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0534da399560dbabaaceee0512f6e457/transformed/lifecycle-service-2.8.7/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/88dd3032fd166e36de575f015b3432c6/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cbb1bacd251cae8eee839c6477d5d64a/transformed/lifecycle-livedata-2.8.7/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/af3d29d84e11717d792cdbd6e04c0e2c/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/8617c5eee6a324259e19776f6fe60da5/transformed/lifecycle-viewmodel-savedstate-2.8.7/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/4f577929b43acdeb4fc8be2655ebc756/transformed/lifecycle-viewmodel-ktx-2.8.7/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/69ee49bd139ebc6163ca53e8d4c4eb82/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7f13eea197c83a537b5fde1d7faf2d52/transformed/ui-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5453ad70df5738200aea669961609950/transformed/ui-tooling-preview-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.datastore:datastore-preferences-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d497bfa4d1bf163e77b5081d4239730d/transformed/datastore-preferences-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.datastore:datastore-core-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e03c0e406c3702e242f1f8b2f17fed38/transformed/datastore-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.datastore:datastore-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c5f94fa19824f67efe70841e5b1c6f62/transformed/datastore-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/00e4035ecd6eee48cf99d49107060aef/transformed/runtime-saveable-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.runtime:runtime-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5e382c38fee04589067762d525041335/transformed/runtime-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e78c46349924bafbce5927eb45aa9592/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e446b45ecf7b08e0332fe85257f92b12/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:17:1-55:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b41de720c599643b189fcbe4ce1fa115/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.cardview:cardview:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/267d0292cec91d4822fd970c7ead30a8/transformed/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b4f62998614e890e42679adfeefc829a/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/95052b65cf5b8bf89d8f0fa8fa8547f6/transformed/startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/51251db8cec3264e688e04da4facca81/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.tracing:tracing:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0609d412bb6417206fe16ec78fe6d9ee/transformed/tracing-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.dagger:dagger-lint-aar:2.51.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7490bc4666e313692ad312357f3c6dea/transformed/dagger-lint-aar-2.51.1/AndroidManifest.xml:16:1-19:12
+	package
+		INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml
+	android:versionName
+		INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml
+	xmlns:tools
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:10:5-51
+	android:versionCode
+		INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:9:11-69
+uses-feature#android.hardware.telephony
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:12:5-14:36
+	android:required
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:14:9-33
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:13:9-50
+uses-feature#android.hardware.touchscreen
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:15:5-17:36
+	android:required
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:17:9-33
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:16:9-52
+uses-feature#android.software.leanback
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:18:5-20:36
+	android:required
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:20:9-33
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:19:9-49
+uses-feature#android.hardware.bluetooth
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:21:5-23:36
+	android:required
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:23:9-33
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:22:9-50
+uses-feature#android.hardware.location.gps
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:24:5-26:36
+	android:required
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:26:9-33
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:25:9-53
+uses-feature#android.hardware.microphone
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:27:5-29:36
+	android:required
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:29:9-33
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:28:9-51
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:31:5-81
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:31:22-78
+uses-permission#android.permission.INTERNET
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:32:5-67
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:32:22-64
+uses-permission#android.permission.BLUETOOTH
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:33:5-95
+	android:maxSdkVersion
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:33:66-92
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:33:22-65
+uses-permission#android.permission.BLUETOOTH_ADMIN
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:34:5-101
+	android:maxSdkVersion
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:34:72-98
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:34:22-71
+uses-permission#android.permission.BLUETOOTH_CONNECT
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:35:5-76
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:35:22-73
+uses-permission#android.permission.BLUETOOTH_SCAN
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:36:5-73
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:36:22-70
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:37:5-79
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:37:22-76
+uses-permission#android.permission.CHANGE_NETWORK_STATE
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:38:5-79
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:38:22-76
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:39:5-76
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:39:22-73
+uses-permission#android.permission.CHANGE_WIFI_STATE
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:40:5-76
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:40:22-73
+uses-permission#android.permission.CHANGE_WIFI_MULTICAST_STATE
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:41:5-86
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:41:22-83
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:42:5-75
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:42:22-72
+uses-permission#android.permission.READ_CONTACTS
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:43:5-72
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:43:22-69
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:44:5-80
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:44:22-77
+uses-permission#android.permission.VIBRATE
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:45:5-66
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:45:22-63
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:46:5-81
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:46:22-78
+uses-permission#android.permission.DOWNLOAD_WITHOUT_NOTIFICATION
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:47:5-88
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:47:22-85
+uses-permission#android.permission.FOREGROUND_SERVICE
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:48:5-77
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:48:22-74
+uses-permission#android.permission.READ_CALL_LOG
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:49:5-72
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:49:22-69
+uses-permission#android.permission.SEND_SMS
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:50:5-67
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:50:22-64
+uses-permission#android.permission.READ_SMS
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:51:5-67
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:51:22-64
+uses-permission#android.permission.RECEIVE_SMS
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:52:5-70
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:52:22-67
+uses-permission#android.permission.RECEIVE_MMS
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:53:5-70
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:53:22-67
+uses-permission#android.permission.WAKE_LOCK
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:54:5-68
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:54:22-65
+uses-permission#android.permission.REQUEST_INSTALL_PACKAGES
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:55:5-83
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:55:22-80
+uses-permission#android.permission.USE_FULL_SCREEN_INTENT
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:56:5-81
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:56:22-78
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:57:5-81
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:57:22-78
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:58:5-79
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:58:22-76
+uses-permission#android.permission.RECORD_AUDIO
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:59:5-71
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:59:22-68
+uses-permission#android.permission.QUERY_ALL_PACKAGES
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:60:5-119
+	tools:ignore
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:60:75-116
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:60:22-74
+uses-permission#android.permission.ACCESS_BACKGROUND_LOCATION
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:61:5-85
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:61:22-82
+uses-permission#android.permission.READ_LOGS
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:62:5-104
+	tools:ignore
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:62:66-101
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:62:22-65
+uses-permission#android.permission.SYSTEM_ALERT_WINDOW
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:63:5-78
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:63:22-75
+uses-permission#android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:64:5-94
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:64:22-91
+uses-permission#android.permission.MANAGE_EXTERNAL_STORAGE
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:65:5-111
+	tools:ignore
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:65:80-108
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:65:22-79
+uses-permission#android.permission.POST_NOTIFICATIONS
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:66:5-77
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:66:22-74
+application
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:68:5-473:19
+INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:68:5-473:19
+MERGED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/551b0cc91b2f3afba7beefd538db9dd3/transformed/ui-tooling-release/AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/551b0cc91b2f3afba7beefd538db9dd3/transformed/ui-tooling-release/AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.material:material:1.13.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/4284dfee7a9883dca715f68895ad1f7b/transformed/material-1.13.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.13.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/4284dfee7a9883dca715f68895ad1f7b/transformed/material-1.13.0/AndroidManifest.xml:22:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5754b18925d568652f9e3158c06a5740/transformed/constraintlayout-2.1.0/AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5754b18925d568652f9e3158c06a5740/transformed/constraintlayout-2.1.0/AndroidManifest.xml:9:5-20
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6c077af4a0856283d3ecdb25dbab1d04/transformed/lifecycle-extensions-2.2.0/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6c077af4a0856283d3ecdb25dbab1d04/transformed/lifecycle-extensions-2.2.0/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:24:5-31:19
+MERGED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:24:5-31:19
+MERGED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
+MERGED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/88dd3032fd166e36de575f015b3432c6/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/88dd3032fd166e36de575f015b3432c6/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b4f62998614e890e42679adfeefc829a/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b4f62998614e890e42679adfeefc829a/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/95052b65cf5b8bf89d8f0fa8fa8547f6/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/95052b65cf5b8bf89d8f0fa8fa8547f6/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+	android:extractNativeLibs
+		INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml
+	android:requestLegacyExternalStorage
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:80:9-52
+	android:roundIcon
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:70:9-54
+	android:icon
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:69:9-43
+	android:banner
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:72:9-52
+	android:networkSecurityConfig
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:76:9-69
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
+	android:supportsRtl
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:73:9-35
+	android:label
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:71:9-44
+	android:allowBackup
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:74:9-36
+	android:theme
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:77:9-62
+	android:enableOnBackInvokedCallback
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:79:9-51
+	android:dataExtractionRules
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:75:9-65
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:78:9-62
+receiver#com.android.mms.transaction.PushReceiver
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:83:9-92:20
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:85:13-36
+	android:permission
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:86:13-71
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:84:13-68
+intent-filter#action:name:android.provider.Telephony.WAP_PUSH_DELIVER+data:mimeType:application/vnd.wap.mms-message
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:87:13-91:29
+action#android.provider.Telephony.WAP_PUSH_DELIVER
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:88:17-86
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:88:25-83
+data
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:90:17-76
+	android:host
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:266:21-46
+	android:scheme
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:267:21-51
+	android:mimeType
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:90:23-73
+service#com.android.mms.transaction.TransactionService
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:94:9-97:39
+	android:enabled
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:96:13-35
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:97:13-36
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:95:13-74
+service#org.cosmic.cosmicconnect.BackgroundService
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:99:9-103:38
+	android:enabled
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:103:13-35
+	android:icon
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:102:13-42
+	android:foregroundServiceType
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:101:13-60
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:100:13-70
+service#org.cosmic.cosmicconnect.Plugins.RemoteKeyboardPlugin.RemoteKeyboardService
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:104:9-116:19
+	android:label
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:106:13-60
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:107:13-36
+	android:permission
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:108:13-70
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:105:13-103
+intent-filter#action:name:android.view.InputMethod
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:109:13-111:29
+action#android.view.InputMethod
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:110:17-67
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:110:25-64
+meta-data#android.view.im
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:113:13-115:71
+	android:resource
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:115:17-68
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:114:17-47
+activity#org.cosmic.cosmicconnect.UserInterface.MainActivity
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:118:9-135:20
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:120:13-36
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:119:13-79
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:121:13-125:29
+action#android.intent.action.MAIN
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:122:17-69
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:122:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:124:17-77
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:124:27-74
+intent-filter#action:name:android.service.quicksettings.action.QS_TILE_PREFERENCES
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:126:13-128:29
+action#android.service.quicksettings.action.QS_TILE_PREFERENCES
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:127:17-98
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:127:25-96
+intent-filter#action:name:android.intent.action.MAIN
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:129:13-131:29
+meta-data#android.app.shortcuts
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:133:13-134:53
+	android:resource
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:134:17-50
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:133:24-60
+activity#org.cosmic.cosmicconnect.UserInterface.PluginSettingsActivity
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:136:9-144:20
+	android:parentActivityName
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:140:13-93
+	android:label
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:138:13-56
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:139:13-37
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:137:13-89
+meta-data#android.support.PARENT_ACTIVITY
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:141:13-143:87
+	android:value
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:143:17-84
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:142:17-63
+activity#org.cosmic.cosmicconnect.UserInterface.CustomDevicesActivity
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:145:9-153:20
+	android:parentActivityName
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:149:13-93
+	android:label
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:147:13-60
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:148:13-37
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:146:13-88
+activity#org.cosmic.cosmicconnect.Plugins.SharePlugin.SendFileActivity
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:154:9-162:20
+	android:parentActivityName
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:158:13-93
+	android:label
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:156:13-43
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:157:13-36
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:155:13-89
+receiver#org.cosmic.cosmicconnect.CosmicConnectBroadcastReceiver
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:164:9-178:20
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:165:13-36
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:164:19-89
+intent-filter#action:name:android.intent.action.MY_PACKAGE_REPLACED
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:166:13-168:29
+action#android.intent.action.MY_PACKAGE_REPLACED
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:167:17-83
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:167:25-81
+intent-filter#action:name:android.intent.action.BOOT_COMPLETED
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:169:13-171:29
+action#android.intent.action.BOOT_COMPLETED
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:170:17-79
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:170:25-76
+intent-filter#action:name:android.net.conn.CONNECTIVITY_CHANGE
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:172:13-174:29
+action#android.net.conn.CONNECTIVITY_CHANGE
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:173:17-79
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:173:25-76
+intent-filter#action:name:android.net.wifi.WIFI_STATE_CHANGED
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:175:13-177:29
+action#android.net.wifi.WIFI_STATE_CHANGED
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:176:17-78
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:176:25-75
+activity#org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.FindMyPhoneActivity
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:180:9-185:51
+	android:label
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:184:13-54
+	android:excludeFromRecents
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:183:13-46
+	android:launchMode
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:185:13-48
+	android:configChanges
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:182:13-59
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:181:13-98
+receiver#org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.FindMyPhoneReceiver
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:187:9-192:20
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:188:13-36
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:187:19-104
+intent-filter#action:name:org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.foundIt
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:189:13-191:29
+action#org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.foundIt
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:190:17-101
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:190:25-98
+activity#org.cosmic.cosmicconnect.Plugins.ClipboardPlugin.ClipboardFloatingActivity
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:196:9-199:48
+	android:excludeFromRecents
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:199:13-46
+	android:theme
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:198:13-53
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:197:13-102
+activity#org.cosmic.cosmicconnect.Plugins.MprisPlugin.MprisActivity
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:201:9-209:20
+	android:parentActivityName
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:205:13-93
+	android:label
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:203:13-56
+	android:launchMode
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:204:13-43
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:202:13-86
+receiver#org.cosmic.cosmicconnect.Plugins.MprisPlugin.MprisMediaNotificationReceiver
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:211:9-216:20
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:212:13-36
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:211:19-109
+intent-filter#action:name:android.intent.action.MEDIA_BUTTON
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:213:13-215:29
+action#android.intent.action.MEDIA_BUTTON
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:214:17-77
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:214:25-74
+activity#org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandActivity
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:218:9-226:20
+	android:parentActivityName
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:222:13-93
+	android:label
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:220:13-59
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:221:13-37
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:219:13-96
+activity#org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandWidgetConfigActivity
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:227:9-233:47
+	android:screenOrientation
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:233:13-45
+	android:label
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:230:13-59
+	android:excludeFromRecents
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:229:13-46
+	android:launchMode
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:231:13-44
+	android:noHistory
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:232:13-37
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:228:13-108
+service#org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.CommandsRemoteViewsService
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:235:9-238:72
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:237:13-37
+	android:permission
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:238:13-69
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:236:13-104
+receiver#org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandWidgetProvider
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:240:9-254:20
+	android:label
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:242:13-59
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:243:13-36
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:241:13-102
+intent-filter#action:name:android.appwidget.action.APPWIDGET_UPDATE
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:244:13-246:29
+action#android.appwidget.action.APPWIDGET_UPDATE
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:245:17-84
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:245:25-81
+intent-filter#action:name:RUN_COMMAND_ACTION
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:247:13-249:29
+action#RUN_COMMAND_ACTION
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:248:17-61
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:248:25-58
+meta-data#android.appwidget.provider
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:251:13-253:70
+	android:resource
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:253:17-67
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:252:17-58
+activity#org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandUrlActivity
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:256:9-269:20
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:257:13-36
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:256:19-105
+intent-filter#action:name:android.intent.action.VIEW+action:name:android.nfc.action.NDEF_DISCOVERED+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:host:runcommand+data:scheme:cosmicconnect
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:258:13-268:29
+action#android.intent.action.VIEW
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:259:17-69
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:259:25-66
+action#android.nfc.action.NDEF_DISCOVERED
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:260:17-77
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:260:25-74
+category#android.intent.category.DEFAULT
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:262:17-76
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:262:27-73
+category#android.intent.category.BROWSABLE
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:263:17-78
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:263:27-75
+activity#org.cosmic.cosmicconnect.Plugins.MousePadPlugin.BigscreenActivity
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:270:9-280:20
+	android:parentActivityName
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:275:13-93
+	android:label
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:273:13-58
+	android:windowSoftInputMode
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:276:13-67
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:274:13-36
+	android:configChanges
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:272:13-74
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:271:13-93
+activity#org.cosmic.cosmicconnect.Plugins.MousePadPlugin.MousePadActivity
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:281:9-290:20
+	android:parentActivityName
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:286:13-93
+	android:label
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:283:13-57
+	android:launchMode
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:285:13-43
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:284:13-37
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:282:13-92
+activity#org.cosmic.cosmicconnect.Plugins.MousePadPlugin.ComposeSendActivity
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:291:9-300:20
+	android:parentActivityName
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:295:13-106
+	android:label
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:293:13-55
+	android:windowSoftInputMode
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:296:13-55
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:294:13-37
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:292:13-95
+activity#org.cosmic.cosmicconnect.Plugins.MousePadPlugin.SendKeystrokesToHostActivity
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:302:9-316:20
+	android:parentActivityName
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:306:13-93
+	android:label
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:304:13-73
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:305:13-36
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:303:13-104
+intent-filter#action:name:android.intent.action.SEND+category:name:android.intent.category.DEFAULT+data:mimeType:text/x-keystrokes
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:311:13-315:29
+action#android.intent.action.SEND
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:312:17-68
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:312:25-66
+activity#org.cosmic.cosmicconnect.Plugins.PresenterPlugin.PresenterActivity
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:317:9-327:20
+	android:parentActivityName
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:322:13-93
+	android:label
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:320:13-58
+	android:windowSoftInputMode
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:323:13-67
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:321:13-37
+	android:configChanges
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:319:13-74
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:318:13-94
+activity#org.cosmic.cosmicconnect.Plugins.SharePlugin.ShareActivity
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:328:9-350:20
+	android:label
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:331:13-57
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:330:13-36
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:329:13-86
+intent-filter#action:name:android.intent.action.SEND+category:name:android.intent.category.DEFAULT+data:mimeType:*/*
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:332:13-338:29
+intent-filter#action:name:android.intent.action.SEND_MULTIPLE+category:name:android.intent.category.DEFAULT+data:mimeType:*/*
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:339:13-345:29
+action#android.intent.action.SEND_MULTIPLE
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:340:17-78
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:340:25-75
+meta-data#android.service.chooser.chooser_target_service
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:347:13-349:106
+	android:value
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:349:17-103
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:348:17-78
+receiver#org.cosmic.cosmicconnect.Plugins.SharePlugin.ShareBroadcastReceiver
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:352:9-357:20
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:353:13-36
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:352:19-101
+intent-filter#action:name:org.cosmic.cosmicconnect.Plugins.SharePlugin.CancelShare
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:354:13-356:29
+action#org.cosmic.cosmicconnect.Plugins.SharePlugin.CancelShare
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:355:17-99
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:355:25-96
+service#org.cosmic.cosmicconnect.Plugins.NotificationsPlugin.NotificationReceiver
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:369:9-376:19
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:371:13-36
+	android:permission
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:372:13-87
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:370:13-101
+intent-filter#action:name:android.service.notification.NotificationListenerService
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:373:13-375:29
+action#android.service.notification.NotificationListenerService
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:374:17-99
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:374:25-96
+service#org.cosmic.cosmicconnect.Plugins.SharePlugin.ShareChooserTargetService
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:377:9-384:19
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:379:13-36
+	android:permission
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:380:13-80
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:378:13-98
+intent-filter#action:name:android.service.chooser.ChooserTargetService
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:381:13-383:29
+action#android.service.chooser.ChooserTargetService
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:382:17-87
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:382:25-84
+service#org.cosmic.cosmicconnect.Plugins.MouseReceiverPlugin.MouseReceiverService
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:385:9-395:19
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:387:13-36
+	android:permission
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:388:13-79
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:386:13-101
+intent-filter#action:name:android.accessibilityservice.AccessibilityService
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:389:13-391:29
+action#android.accessibilityservice.AccessibilityService
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:390:17-92
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:390:25-89
+meta-data#android.accessibilityservice
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:392:13-394:66
+	android:resource
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:394:17-63
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:393:17-60
+activity#org.cosmic.cosmicconnect.Plugins.NotificationsPlugin.NotificationFilterActivity
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:397:9-404:20
+	android:parentActivityName
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:400:13-103
+	android:label
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:399:13-71
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:398:13-107
+activity#org.cosmic.cosmicconnect.Plugins.DigitizerPlugin.DigitizerActivity
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:406:9-416:20
+	android:parentActivityName
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:412:13-93
+	android:label
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:409:13-58
+	android:launchMode
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:411:13-43
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:410:13-37
+	android:configChanges
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:408:13-59
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:407:13-94
+activity#org.cosmic.cosmicconnect.UserInterface.TrustedNetworksActivity
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:418:9-425:20
+	android:parentActivityName
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:421:13-93
+	android:label
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:420:13-53
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:419:13-90
+activity#org.cosmic.cosmicconnect.UserInterface.About.EasterEggActivity
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:427:9-434:20
+	android:parentActivityName
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:430:13-93
+	android:label
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:429:13-47
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:428:13-90
+activity#org.cosmic.cosmicconnect.UserInterface.About.AboutKDEActivity
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:436:9-443:20
+	android:parentActivityName
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:439:13-93
+	android:label
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:438:13-46
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:437:13-89
+activity#org.cosmic.cosmicconnect.UserInterface.About.LicensesActivity
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:445:9-452:20
+	android:parentActivityName
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:448:13-93
+	android:label
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:447:13-45
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:446:13-89
+service#org.cosmic.cosmicconnect.Plugins.ClipboardPlugin.ClipboardTileService
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:454:9-463:19
+	android:label
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:458:13-51
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:457:13-36
+	android:permission
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:459:13-77
+	android:icon
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:456:13-66
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:455:13-97
+intent-filter#action:name:android.service.quicksettings.action.QS_TILE
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:460:13-462:29
+action#android.service.quicksettings.action.QS_TILE
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:461:17-87
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:461:25-84
+service#org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandControlsProviderService
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:465:9-472:19
+	android:label
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:466:13-48
+	android:exported
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:467:13-36
+	android:permission
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:468:13-66
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:465:18-116
+intent-filter#action:name:android.service.controls.ControlsProviderService
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:469:13-471:29
+action#android.service.controls.ControlsProviderService
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:470:17-91
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:470:25-88
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:364:13-366:62
+	android:resource
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:366:17-59
+	android:name
+		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:365:17-67
+uses-sdk
+INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml
+INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml
+MERGED from [androidx.databinding:viewbinding:8.7.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9bcc2040d2855df18149ca2eced45e14/transformed/viewbinding-8.7.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.databinding:viewbinding:8.7.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9bcc2040d2855df18149ca2eced45e14/transformed/viewbinding-8.7.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/551b0cc91b2f3afba7beefd538db9dd3/transformed/ui-tooling-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/551b0cc91b2f3afba7beefd538db9dd3/transformed/ui-tooling-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-common:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/92572e37df014d6afe9c839e4066d9eb/transformed/navigation-common-2.8.5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-common:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/92572e37df014d6afe9c839e4066d9eb/transformed/navigation-common-2.8.5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-runtime:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6d8f7c9deba0015a3b8f6912a3127b85/transformed/navigation-runtime-2.8.5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-runtime:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6d8f7c9deba0015a3b8f6912a3127b85/transformed/navigation-runtime-2.8.5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-common-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/07b74954c8e4cfc7b97b84f5cbff8598/transformed/navigation-common-ktx-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-common-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/07b74954c8e4cfc7b97b84f5cbff8598/transformed/navigation-common-ktx-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-ui:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/33bef52a7836a6ea67bd30ab5f64f9b7/transformed/navigation-ui-2.8.5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-ui:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/33bef52a7836a6ea67bd30ab5f64f9b7/transformed/navigation-ui-2.8.5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-fragment:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/24331ff865b82fae3dfcc20d23c172ac/transformed/navigation-fragment-2.8.5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-fragment:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/24331ff865b82fae3dfcc20d23c172ac/transformed/navigation-fragment-2.8.5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f8c4b6c90797e421c4f42a480f1f87d5/transformed/navigation-runtime-ktx-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f8c4b6c90797e421c4f42a480f1f87d5/transformed/navigation-runtime-ktx-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-ui-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b6ad89780f39a0125df6fa0093bf7342/transformed/navigation-ui-ktx-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-ui-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b6ad89780f39a0125df6fa0093bf7342/transformed/navigation-ui-ktx-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-fragment-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ab0741982abb2bfbee1cb2e13a5a0f99/transformed/navigation-fragment-ktx-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-fragment-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ab0741982abb2bfbee1cb2e13a5a0f99/transformed/navigation-fragment-ktx-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-compose:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/044d2276ce541e887915c365813e7981/transformed/navigation-compose-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-compose:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/044d2276ce541e887915c365813e7981/transformed/navigation-compose-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material3:material3-android:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b3790d01d1a3091b0fb13b91ba634393/transformed/material3-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material3:material3-android:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b3790d01d1a3091b0fb13b91ba634393/transformed/material3-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.preference:preference-ktx:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f517082342b43aad08ffb16cd69307a4/transformed/preference-ktx-1.2.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.preference:preference-ktx:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f517082342b43aad08ffb16cd69307a4/transformed/preference-ktx-1.2.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.preference:preference:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d855a21a11ac300fafd3479cc79b2cf6/transformed/preference-1.2.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.preference:preference:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d855a21a11ac300fafd3479cc79b2cf6/transformed/preference-1.2.1/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.material:material:1.13.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/4284dfee7a9883dca715f68895ad1f7b/transformed/material-1.13.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.13.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/4284dfee7a9883dca715f68895ad1f7b/transformed/material-1.13.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/afe134f33f4b8937f3daf833cd02f11b/transformed/appcompat-resources-1.7.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/afe134f33f4b8937f3daf833cd02f11b/transformed/appcompat-resources-1.7.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5754b18925d568652f9e3158c06a5740/transformed/constraintlayout-2.1.0/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5754b18925d568652f9e3158c06a5740/transformed/constraintlayout-2.1.0/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.appcompat:appcompat:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cc14f700b33d22af268947268e3a2605/transformed/appcompat-1.7.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cc14f700b33d22af268947268e3a2605/transformed/appcompat-1.7.1/AndroidManifest.xml:5:5-44
+MERGED from [com.google.dagger:hilt-android:2.51.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/707831528e8cd8bea7b2fd00245c908d/transformed/hilt-android-2.51.1/AndroidManifest.xml:18:3-42
+MERGED from [com.google.dagger:hilt-android:2.51.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/707831528e8cd8bea7b2fd00245c908d/transformed/hilt-android-2.51.1/AndroidManifest.xml:18:3-42
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6c077af4a0856283d3ecdb25dbab1d04/transformed/lifecycle-extensions-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6c077af4a0856283d3ecdb25dbab1d04/transformed/lifecycle-extensions-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.3.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7f3ac69755a4c6e89ce544501e49f180/transformed/recyclerview-1.3.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.3.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7f3ac69755a4c6e89ce544501e49f180/transformed/recyclerview-1.3.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager2:viewpager2:1.1.0-beta02] /home/olafkfreund/.gradle/caches/8.14.1/transforms/1214d5d63923d392d78fe19d0dea61c9/transformed/viewpager2-1.1.0-beta02/AndroidManifest.xml:5:5-44
+MERGED from [androidx.viewpager2:viewpager2:1.1.0-beta02] /home/olafkfreund/.gradle/caches/8.14.1/transforms/1214d5d63923d392d78fe19d0dea61c9/transformed/viewpager2-1.1.0-beta02/AndroidManifest.xml:5:5-44
+MERGED from [androidx.fragment:fragment-ktx:1.6.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/12a38b26a1264ff627bccbac238b02d8/transformed/fragment-ktx-1.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment-ktx:1.6.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/12a38b26a1264ff627bccbac238b02d8/transformed/fragment-ktx-1.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.6.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/2345985999dcb7a3d1b38ecc96cfd51c/transformed/fragment-1.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.6.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/2345985999dcb7a3d1b38ecc96cfd51c/transformed/fragment-1.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6669ec5d099b9730c10f7a2b66fbb712/transformed/activity-1.9.3/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6669ec5d099b9730c10f7a2b66fbb712/transformed/activity-1.9.3/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity-ktx:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ffb41f05e796386277dcf6e862594b95/transformed/activity-ktx-1.9.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-ktx:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ffb41f05e796386277dcf6e862594b95/transformed/activity-ktx-1.9.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-compose:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/073a2b645d3364bf7aa855540af35894/transformed/activity-compose-1.9.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-compose:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/073a2b645d3364bf7aa855540af35894/transformed/activity-compose-1.9.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cbc6d90008240cd5a5127ff331fb631f/transformed/material-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cbc6d90008240cd5a5127ff331fb631f/transformed/material-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ac78faeb8dd3ea9f6781e2b933866e50/transformed/material-icons-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ac78faeb8dd3ea9f6781e2b933866e50/transformed/material-icons-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.constraintlayout:constraintlayout-compose-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/26776ff4c9b257067b24029fa929021b/transformed/constraintlayout-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.constraintlayout:constraintlayout-compose-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/26776ff4c9b257067b24029fa929021b/transformed/constraintlayout-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/dbb32b8cdf185b6a29012bc99cff8e6c/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/dbb32b8cdf185b6a29012bc99cff8e6c/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-ripple-android:1.7.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/3b73692245d2645384009df13c7e70a1/transformed/material-ripple-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-ripple-android:1.7.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/3b73692245d2645384009df13c7e70a1/transformed/material-ripple-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/51a7269b6e96ffb2e287dccde86c58d5/transformed/foundation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/51a7269b6e96ffb2e287dccde86c58d5/transformed/foundation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/1d923375af87ded13a4ef06a70a13d98/transformed/foundation-layout-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/1d923375af87ded13a4ef06a70a13d98/transformed/foundation-layout-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-core-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6ea94a3311766ecebd6cb17b737e6eb4/transformed/animation-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-core-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6ea94a3311766ecebd6cb17b737e6eb4/transformed/animation-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9580dca498a6d3db1c093e85726e60cf/transformed/animation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9580dca498a6d3db1c093e85726e60cf/transformed/animation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-graphics-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/970349134402ce5fc7e0c1199999a7ef/transformed/ui-graphics-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-graphics-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/970349134402ce5fc7e0c1199999a7ef/transformed/ui-graphics-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-geometry-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c0df80c6310c962c33a5efb1aea127de/transformed/ui-geometry-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-geometry-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c0df80c6310c962c33a5efb1aea127de/transformed/ui-geometry-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-unit-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/56ebe2bd9c13a2b58670594c0189f58d/transformed/ui-unit-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-unit-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/56ebe2bd9c13a2b58670594c0189f58d/transformed/ui-unit-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-util-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b3763cd2cf0390a7b29c0b387da3793a/transformed/ui-util-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-util-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b3763cd2cf0390a7b29c0b387da3793a/transformed/ui-util-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9cd30cc1e3fc739c9c3db96ee06eb4c1/transformed/ui-tooling-data-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9cd30cc1e3fc739c9c3db96ee06eb4c1/transformed/ui-tooling-data-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-text-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/61ef9a2df9bebdcd55db67bc61d573f8/transformed/ui-text-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-text-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/61ef9a2df9bebdcd55db67bc61d573f8/transformed/ui-text-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cc7b1cfaaf4ff8d72a6892059823f3a2/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cc7b1cfaaf4ff8d72a6892059823f3a2/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/185b1d60d64ddcd60f80a6dc08d7c324/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/185b1d60d64ddcd60f80a6dc08d7c324/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a83aefd7ec687f4a5e00a2313253e506/transformed/media-1.7.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.media:media:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a83aefd7ec687f4a5e00a2313253e506/transformed/media-1.7.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0eaedc7bde8b6db5be8843db8125f4a7/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0eaedc7bde8b6db5be8843db8125f4a7/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.graphics:graphics-shapes-android:1.0.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/181fd34a8aba90a5e1cd2d214ff4cfb7/transformed/graphics-shapes-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.graphics:graphics-shapes-android:1.0.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/181fd34a8aba90a5e1cd2d214ff4cfb7/transformed/graphics-shapes-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e506bca584737b39a9f467555ebad038/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e506bca584737b39a9f467555ebad038/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c481461bef7997aa6832e19634c73a10/transformed/swiperefreshlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c481461bef7997aa6832e19634c73a10/transformed/swiperefreshlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.documentfile:documentfile:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5188b224400092fa11b5bf67484fe187/transformed/documentfile-1.1.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.documentfile:documentfile:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5188b224400092fa11b5bf67484fe187/transformed/documentfile-1.1.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.gridlayout:gridlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d9728802f634177b27e37d8076dfeb85/transformed/gridlayout-1.1.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.gridlayout:gridlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d9728802f634177b27e37d8076dfeb85/transformed/gridlayout-1.1.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/994efa7c065deb2ae181791f4533aeea/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/994efa7c065deb2ae181791f4533aeea/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e563553bbdea0a9b5040e7325739a714/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e563553bbdea0a9b5040e7325739a714/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6bad0ace4ff15ac0556a85b06b2200c3/transformed/slidingpanelayout-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6bad0ace4ff15ac0556a85b06b2200c3/transformed/slidingpanelayout-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.5.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/43e2e217de96449449cd803b812a9a91/transformed/transition-1.5.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.transition:transition:1.5.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/43e2e217de96449449cd803b812a9a91/transformed/transition-1.5.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6039c4c41c87847e0b6198f08297d5ca/transformed/dynamicanimation-1.1.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6039c4c41c87847e0b6198f08297d5ca/transformed/dynamicanimation-1.1.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/775a73a2016ecc46d0097e2afd46e995/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/775a73a2016ecc46d0097e2afd46e995/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e60de6216d89696557b8c3f426f7fc44/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e60de6216d89696557b8c3f426f7fc44/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/aa82e6e1c75468c80f05b4a07ff64a30/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/aa82e6e1c75468c80f05b4a07ff64a30/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/25f69159145b0bd75dc0e431a0c592db/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/25f69159145b0bd75dc0e431a0c592db/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.autofill:autofill:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/405f28e867e6de79d617b862f8046e1e/transformed/autofill-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.autofill:autofill:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/405f28e867e6de79d617b862f8046e1e/transformed/autofill-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.loader:loader:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9291e7d58b277720097aa29c4d3f5a21/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9291e7d58b277720097aa29c4d3f5a21/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.graphics:graphics-path:1.0.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/472f0580c2d604b5ebb46a0fc0767f4e/transformed/graphics-path-1.0.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.graphics:graphics-path:1.0.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/472f0580c2d604b5ebb46a0fc0767f4e/transformed/graphics-path-1.0.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/79272955262de1dc2debff6e54755bc4/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/79272955262de1dc2debff6e54755bc4/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b6e0772c121de43a598b24fa826ec2d3/transformed/lifecycle-livedata-core-ktx-2.8.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b6e0772c121de43a598b24fa826ec2d3/transformed/lifecycle-livedata-core-ktx-2.8.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/2e81786835638b590b5ef67a043e760c/transformed/lifecycle-livedata-core-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/2e81786835638b590b5ef67a043e760c/transformed/lifecycle-livedata-core-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/94b63a291858558a5c93212419a2cb6a/transformed/lifecycle-runtime-2.8.7/AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/94b63a291858558a5c93212419a2cb6a/transformed/lifecycle-runtime-2.8.7/AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/53c425bf32c9b243098ac7a89a9a3428/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/53c425bf32c9b243098ac7a89a9a3428/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e5523dc485ef16c7c2465bcdc09c4288/transformed/lifecycle-viewmodel-2.8.7/AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e5523dc485ef16c7c2465bcdc09c4288/transformed/lifecycle-viewmodel-2.8.7/AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/2957e1e1c05602ed5a8dd3b6474947fc/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/2957e1e1c05602ed5a8dd3b6474947fc/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-service:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0534da399560dbabaaceee0512f6e457/transformed/lifecycle-service-2.8.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-service:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0534da399560dbabaaceee0512f6e457/transformed/lifecycle-service-2.8.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/88dd3032fd166e36de575f015b3432c6/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/88dd3032fd166e36de575f015b3432c6/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cbb1bacd251cae8eee839c6477d5d64a/transformed/lifecycle-livedata-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cbb1bacd251cae8eee839c6477d5d64a/transformed/lifecycle-livedata-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/af3d29d84e11717d792cdbd6e04c0e2c/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/af3d29d84e11717d792cdbd6e04c0e2c/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/8617c5eee6a324259e19776f6fe60da5/transformed/lifecycle-viewmodel-savedstate-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/8617c5eee6a324259e19776f6fe60da5/transformed/lifecycle-viewmodel-savedstate-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/4f577929b43acdeb4fc8be2655ebc756/transformed/lifecycle-viewmodel-ktx-2.8.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/4f577929b43acdeb4fc8be2655ebc756/transformed/lifecycle-viewmodel-ktx-2.8.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/69ee49bd139ebc6163ca53e8d4c4eb82/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/69ee49bd139ebc6163ca53e8d4c4eb82/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7f13eea197c83a537b5fde1d7faf2d52/transformed/ui-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7f13eea197c83a537b5fde1d7faf2d52/transformed/ui-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5453ad70df5738200aea669961609950/transformed/ui-tooling-preview-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5453ad70df5738200aea669961609950/transformed/ui-tooling-preview-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.datastore:datastore-preferences-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d497bfa4d1bf163e77b5081d4239730d/transformed/datastore-preferences-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.datastore:datastore-preferences-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d497bfa4d1bf163e77b5081d4239730d/transformed/datastore-preferences-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.datastore:datastore-core-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e03c0e406c3702e242f1f8b2f17fed38/transformed/datastore-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.datastore:datastore-core-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e03c0e406c3702e242f1f8b2f17fed38/transformed/datastore-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.datastore:datastore-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c5f94fa19824f67efe70841e5b1c6f62/transformed/datastore-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.datastore:datastore-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c5f94fa19824f67efe70841e5b1c6f62/transformed/datastore-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/00e4035ecd6eee48cf99d49107060aef/transformed/runtime-saveable-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/00e4035ecd6eee48cf99d49107060aef/transformed/runtime-saveable-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5e382c38fee04589067762d525041335/transformed/runtime-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5e382c38fee04589067762d525041335/transformed/runtime-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e78c46349924bafbce5927eb45aa9592/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e78c46349924bafbce5927eb45aa9592/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e446b45ecf7b08e0332fe85257f92b12/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e446b45ecf7b08e0332fe85257f92b12/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b41de720c599643b189fcbe4ce1fa115/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b41de720c599643b189fcbe4ce1fa115/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/267d0292cec91d4822fd970c7ead30a8/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/267d0292cec91d4822fd970c7ead30a8/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b4f62998614e890e42679adfeefc829a/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b4f62998614e890e42679adfeefc829a/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/95052b65cf5b8bf89d8f0fa8fa8547f6/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/95052b65cf5b8bf89d8f0fa8fa8547f6/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/51251db8cec3264e688e04da4facca81/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/51251db8cec3264e688e04da4facca81/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.tracing:tracing:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0609d412bb6417206fe16ec78fe6d9ee/transformed/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0609d412bb6417206fe16ec78fe6d9ee/transformed/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.dagger:dagger-lint-aar:2.51.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7490bc4666e313692ad312357f3c6dea/transformed/dagger-lint-aar-2.51.1/AndroidManifest.xml:18:3-42
+MERGED from [com.google.dagger:dagger-lint-aar:2.51.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7490bc4666e313692ad312357f3c6dea/transformed/dagger-lint-aar-2.51.1/AndroidManifest.xml:18:3-42
+	android:targetSdkVersion
+		INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml
+activity#androidx.compose.ui.tooling.PreviewActivity
+ADDED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/551b0cc91b2f3afba7beefd538db9dd3/transformed/ui-tooling-release/AndroidManifest.xml:23:9-25:39
+	android:exported
+		ADDED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/551b0cc91b2f3afba7beefd538db9dd3/transformed/ui-tooling-release/AndroidManifest.xml:25:13-36
+	android:name
+		ADDED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/551b0cc91b2f3afba7beefd538db9dd3/transformed/ui-tooling-release/AndroidManifest.xml:24:13-71
+provider#androidx.startup.InitializationProvider
+ADDED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/88dd3032fd166e36de575f015b3432c6/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/88dd3032fd166e36de575f015b3432c6/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/95052b65cf5b8bf89d8f0fa8fa8547f6/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/95052b65cf5b8bf89d8f0fa8fa8547f6/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+	tools:node
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:28:13-31
+	android:authorities
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
+	android:exported
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
+meta-data#androidx.emoji2.text.EmojiCompatInitializer
+ADDED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
+uses-library#androidx.window.extensions
+ADDED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:25:9-27:40
+	android:required
+		ADDED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:26:13-54
+uses-library#androidx.window.sidecar
+ADDED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:28:9-30:40
+	android:required
+		ADDED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:30:13-37
+	android:name
+		ADDED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:29:13-51
+permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+permission#org.cosmic.cosmicconnect.debug.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+uses-permission#org.cosmic.cosmicconnect.debug.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+meta-data#androidx.lifecycle.ProcessLifecycleInitializer
+ADDED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/88dd3032fd166e36de575f015b3432c6/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/88dd3032fd166e36de575f015b3432c6/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/88dd3032fd166e36de575f015b3432c6/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:30:17-78
+meta-data#androidx.profileinstaller.ProfileInstallerInitializer
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+receiver#androidx.profileinstaller.ProfileInstallReceiver
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+	android:enabled
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+	android:permission
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+	android:directBootAware
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+action#androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+intent-filter#action:name:androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+action#androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+intent-filter#action:name:androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+action#androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+intent-filter#action:name:androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+action#androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92

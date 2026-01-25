@@ -1,0 +1,28 @@
+{
+    "logs": [
+        {
+            "outputFile": "org.cosmic.cosmicconnect.app-mergeDebugResources-85:/values-v27/values-v27.xml",
+            "map": [
+                {
+                    "source": "/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/res/values-v27/styles.xml",
+                    "from": {
+                        "startLines": "15,9,23,17",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "541,214,930,618",
+                        "endLines": "15,13,25,21",
+                        "endColumns": "75,12,12,12",
+                        "endOffsets": "612,535,1130,924"
+                    },
+                    "to": {
+                        "startLines": "2,3,8,11",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,130,456,661",
+                        "endLines": "2,7,10,15",
+                        "endColumns": "74,12,12,12",
+                        "endOffsets": "125,451,656,936"
+                    }
+                }
+            ]
+        }
+    ]
+}

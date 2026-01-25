@@ -134,8 +134,11 @@
             # Add Android SDK tools to PATH
             export PATH="$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH"
 
+            # Set JAVA_HOME
+            export JAVA_HOME="${pkgs.jdk17.home}"
+
             # Gradle configuration
-            export GRADLE_OPTS="-Dorg.gradle.daemon=true -Dorg.gradle.parallel=true"
+            export GRADLE_OPTS="-Dorg.gradle.daemon=true -Dorg.gradle.parallel=true -Dorg.gradle.java.home=$JAVA_HOME"
 
             echo "✅ Environment ready! Type 'nix develop' to reload."
             echo ""

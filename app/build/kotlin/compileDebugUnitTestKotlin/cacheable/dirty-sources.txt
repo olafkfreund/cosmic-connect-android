@@ -1,0 +1,16 @@
+/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/tests/org/cosmic/cosmicconnect/Helpers/SafeTextCheckerTest.kt
+/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/tests/org/cosmic/cosmicconnect/FFIValidationTestMinimal.kt
+/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/tests/org/cosmic/cosmicconnect/Plugin/BatteryPluginTest.kt
+/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/tests/org/cosmic/cosmicconnect/MockSharedPreference.kt
+/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/tests/org/cosmic/cosmicconnect/Helpers/StorageHelperTest.kt
+/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/build/generated/ksp/debugUnitTest/kotlin/com/albertvaka/classindexksp/Index.kt
+/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/tests/org/cosmic/cosmicconnect/DeviceStatsTest.kt
+/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/tests/org/cosmic/cosmicconnect/NetworkPacketTest.kt
+/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/tests/org/cosmic/cosmicconnect/DeviceTest.kt
+/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/tests/org/cosmic/cosmicconnect/Helpers/SslHelperTest.kt
+/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/src/test/java/org/cosmic/cosmicconnect/messaging/MessagingNotificationHandlerTest.kt
+/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/tests/org/cosmic/cosmicconnect/Helpers/VideoUrlsHelperTest.kt
+/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/tests/org/cosmic/cosmicconnect/Helpers/TelephonyHelperTest.kt
+/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/tests/org/cosmic/cosmicconnect/Helpers/FilesHelperTest.kt
+/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/tests/org/cosmic/cosmicconnect/PairingHandlerTest.kt
+/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/tests/org/cosmic/cosmicconnect/Plugin/PingPluginTest.kt

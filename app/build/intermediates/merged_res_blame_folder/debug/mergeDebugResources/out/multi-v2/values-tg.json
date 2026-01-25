@@ -1,0 +1,28 @@
+{
+    "logs": [
+        {
+            "outputFile": "org.cosmic.cosmicconnect.app-mergeDebugResources-85:/values-tg/values-tg.xml",
+            "map": [
+                {
+                    "source": "/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/res/values-tg/strings.xml",
+                    "from": {
+                        "startLines": "39,33,18,11,5,26,46,51,4,3,2",
+                        "startColumns": "2,2,2,2,2,2,2,2,2,2,2",
+                        "startOffsets": "1291,1091,654,446,271,893,1545,1681,195,104,53",
+                        "endLines": "45,38,25,17,10,32,50,55,4,3,2",
+                        "endColumns": "17,17,17,17,17,17,17,17,75,90,50",
+                        "endOffsets": "1542,1288,890,651,443,1088,1678,1812,268,192,101"
+                    },
+                    "to": {
+                        "startLines": "2,9,15,23,30,36,43,48,53,54,55",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,311,513,754,964,1141,1341,1479,1615,1693,1786",
+                        "endLines": "8,14,22,29,35,42,47,52,53,54,55",
+                        "endColumns": "17,17,17,17,17,17,17,17,77,92,52",
+                        "endOffsets": "306,508,749,959,1136,1336,1474,1610,1688,1781,1834"
+                    }
+                }
+            ]
+        }
+    ]
+}

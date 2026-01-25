@@ -30,3 +30,4 @@ buildscript {
 }
 
 rootProject.name = "cosmicconnect-android"
+include(":app")

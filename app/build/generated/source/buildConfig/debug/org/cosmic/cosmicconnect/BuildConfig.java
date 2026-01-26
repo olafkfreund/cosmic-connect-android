@@ -1,0 +1,12 @@
+/**
+ * Automatically generated file. DO NOT MODIFY
+ */
+package org.cosmic.cosmicconnect;
+
+public final class BuildConfig {
+  public static final boolean DEBUG = Boolean.parseBoolean("true");
+  public static final String APPLICATION_ID = "org.cosmic.cosmicconnect.debug";
+  public static final String BUILD_TYPE = "debug";
+  public static final int VERSION_CODE = 13404;
+  public static final String VERSION_NAME = "1.34.4-debug";
+}

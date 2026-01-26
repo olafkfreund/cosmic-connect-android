@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+SPDX-FileCopyrightText: 2023 Albert Vaca Cintora <albertvaka@gmail.com>
+
+SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.cosmic.cosmicconnect.debug"
+    android:versionCode="13404"
+    android:versionName="1.34.4-debug" >
+
+    <uses-sdk
+        android:minSdkVersion="23"
+        android:targetSdkVersion="34" />
+
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.bluetooth"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.microphone"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH"
+        android:maxSdkVersion="30" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_ADMIN"
+        android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_MMS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <permission
+        android:name="org.cosmic.cosmicconnect.debug.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="org.cosmic.cosmicconnect.debug.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+
+    <application
+        android:name="org.cosmic.cosmicconnect.CosmicConnect"
+        android:allowBackup="false"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:banner="@mipmap/ic_launcher_banner"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:debuggable="true"
+        android:enableOnBackInvokedCallback="true"
+        android:extractNativeLibs="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/kde_connect"
+        android:localeConfig="@xml/_generated_res_locale_config"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/CosmicConnectTheme.NoActionBar" > <!-- requestLegacyExternalStorage is only used in Android 10: https://developer.android.com/training/data-storage/use-cases#opt-out-in-production-app -->
+
+        <receiver
+            android:name="com.android.mms.transaction.PushReceiver"
+            android:exported="true"
+            android:permission="android.permission.BROADCAST_WAP_PUSH" >
+            <intent-filter>
+                <action android:name="android.provider.Telephony.WAP_PUSH_DELIVER" />
+
+                <data android:mimeType="application/vnd.wap.mms-message" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.android.mms.transaction.TransactionService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name="org.cosmic.cosmicconnect.BackgroundService"
+            android:enabled="true"
+            android:foregroundServiceType="connectedDevice"
+            android:icon="@drawable/icon" />
+        <service
+            android:name="org.cosmic.cosmicconnect.Plugins.RemoteKeyboardPlugin.RemoteKeyboardService"
+            android:exported="true"
+            android:label="@string/remote_keyboard_service"
+            android:permission="android.permission.BIND_INPUT_METHOD" >
+            <intent-filter>
+                <action android:name="android.view.InputMethod" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.view.im"
+                android:resource="@xml/remotekeyboardplugin_method" />
+        </service>
+
+        <activity
+            android:name="org.cosmic.cosmicconnect.UserInterface.MainActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity>
+        <activity
+            android:name="org.cosmic.cosmicconnect.UserInterface.PluginSettingsActivity"
+            android:exported="false"
+            android:label="@string/device_menu_plugins"
+            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+        </activity>
+        <activity
+            android:name="org.cosmic.cosmicconnect.UserInterface.CustomDevicesActivity"
+            android:exported="false"
+            android:label="@string/custom_devices_settings"
+            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+        </activity>
+        <activity
+            android:name="org.cosmic.cosmicconnect.Plugins.SharePlugin.SendFileActivity"
+            android:exported="true"
+            android:label="COSMIC Connect"
+            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+        </activity>
+
+        <receiver
+            android:name="org.cosmic.cosmicconnect.CosmicConnectBroadcastReceiver"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.FindMyPhoneActivity"
+            android:configChanges="orientation|screenSize"
+            android:excludeFromRecents="true"
+            android:label="@string/findmyphone_title"
+            android:launchMode="singleInstance" />
+
+        <receiver
+            android:name="org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.FindMyPhoneReceiver"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.foundIt" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Plugin-related activities and services -->
+
+        <activity
+            android:name="org.cosmic.cosmicconnect.Plugins.ClipboardPlugin.ClipboardFloatingActivity"
+            android:excludeFromRecents="true"
+            android:theme="@style/Theme.Transparent" />
+        <activity
+            android:name="org.cosmic.cosmicconnect.Plugins.MprisPlugin.MprisActivity"
+            android:label="@string/open_mpris_controls"
+            android:launchMode="singleTop"
+            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+        </activity>
+
+        <receiver
+            android:name="org.cosmic.cosmicconnect.Plugins.MprisPlugin.MprisMediaNotificationReceiver"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandActivity"
+            android:exported="false"
+            android:label="@string/pref_plugin_runcommand"
+            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+        </activity>
+        <activity
+            android:name="org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandWidgetConfigActivity"
+            android:excludeFromRecents="true"
+            android:label="@string/pref_plugin_runcommand"
+            android:launchMode="singleTask"
+            android:noHistory="true"
+            android:screenOrientation="user" />
+
+        <service
+            android:name="org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.CommandsRemoteViewsService"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <receiver
+            android:name="org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandWidgetProvider"
+            android:exported="true"
+            android:label="@string/pref_plugin_runcommand" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="RUN_COMMAND_ACTION" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/remotecommandplugin_widget" />
+        </receiver>
+
+        <activity
+            android:name="org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandUrlActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="runcommand"
+                    android:scheme="cosmicconnect" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="org.cosmic.cosmicconnect.Plugins.MousePadPlugin.BigscreenActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
+            android:label="@string/pref_plugin_bigscreen"
+            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+        </activity>
+        <activity
+            android:name="org.cosmic.cosmicconnect.Plugins.MousePadPlugin.MousePadActivity"
+            android:exported="false"
+            android:label="@string/pref_plugin_mousepad"
+            android:launchMode="singleTop"
+            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+        </activity>
+        <activity
+            android:name="org.cosmic.cosmicconnect.Plugins.MousePadPlugin.ComposeSendActivity"
+            android:exported="false"
+            android:label="@string/compose_send_title"
+            android:parentActivityName="org.cosmic.cosmicconnect.Plugins.MousePadPlugin.MousePadActivity"
+            android:windowSoftInputMode="adjustResize" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.cosmic.cosmicconnect.Plugins.MousePadPlugin.MousePadActivity" />
+        </activity>
+        <!-- TODO: Remove? This is only used by https://github.com/andOTP/andOTP, which is unmaintained since 2021. Do people use forks or can we remove this? -->
+        <activity
+            android:name="org.cosmic.cosmicconnect.Plugins.MousePadPlugin.SendKeystrokesToHostActivity"
+            android:exported="true"
+            android:label="@string/pref_plugin_mousepad_send_keystrokes"
+            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+            <!-- Accept data with "text/x-keystrokes" to send the text to the connected host and emulate keystrokes -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/x-keystrokes" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="org.cosmic.cosmicconnect.Plugins.PresenterPlugin.PresenterActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            android:label="@string/pref_plugin_presenter"
+            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+        </activity>
+        <activity
+            android:name="org.cosmic.cosmicconnect.Plugins.SharePlugin.ShareActivity"
+            android:exported="true"
+            android:label="@string/manifest_label_share" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="*/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="*/*" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.service.chooser.chooser_target_service"
+                android:value="org.cosmic.cosmicconnect.Plugins.SharePlugin.ShareChooserTargetService" />
+        </activity>
+
+        <receiver
+            android:name="org.cosmic.cosmicconnect.Plugins.SharePlugin.ShareBroadcastReceiver"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="org.cosmic.cosmicconnect.Plugins.SharePlugin.CancelShare" />
+            </intent-filter>
+        </receiver>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="org.cosmic.cosmicconnect.debug.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/fileprovider_paths" />
+        </provider>
+
+        <service
+            android:name="org.cosmic.cosmicconnect.Plugins.NotificationsPlugin.NotificationReceiver"
+            android:exported="true"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" >
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="org.cosmic.cosmicconnect.Plugins.SharePlugin.ShareChooserTargetService"
+            android:exported="true"
+            android:permission="android.permission.BIND_CHOOSER_TARGET_SERVICE" >
+            <intent-filter>
+                <action android:name="android.service.chooser.ChooserTargetService" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="org.cosmic.cosmicconnect.Plugins.MouseReceiverPlugin.MouseReceiverService"
+            android:exported="true"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" >
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/mouse_receiver_service" />
+        </service>
+
+        <activity
+            android:name="org.cosmic.cosmicconnect.Plugins.NotificationsPlugin.NotificationFilterActivity"
+            android:label="@string/title_activity_notification_filter"
+            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.PluginSettingsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.cosmic.cosmicconnect.UserInterface.PluginSettingsActivity" />
+        </activity>
+        <activity
+            android:name="org.cosmic.cosmicconnect.Plugins.DigitizerPlugin.DigitizerActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false"
+            android:label="@string/pref_plugin_digitizer"
+            android:launchMode="singleTop"
+            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+        </activity>
+        <activity
+            android:name="org.cosmic.cosmicconnect.UserInterface.TrustedNetworksActivity"
+            android:label="@string/trusted_networks"
+            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+        </activity>
+        <activity
+            android:name="org.cosmic.cosmicconnect.UserInterface.About.EasterEggActivity"
+            android:label="@string/easter_egg"
+            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+        </activity>
+        <activity
+            android:name="org.cosmic.cosmicconnect.UserInterface.About.AboutKDEActivity"
+            android:label="@string/about_kde"
+            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+        </activity>
+        <activity
+            android:name="org.cosmic.cosmicconnect.UserInterface.About.LicensesActivity"
+            android:label="@string/licenses"
+            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+        </activity>
+
+        <service
+            android:name="org.cosmic.cosmicconnect.Plugins.ClipboardPlugin.ClipboardTileService"
+            android:exported="true"
+            android:icon="@drawable/ic_baseline_content_paste_24"
+            android:label="@string/send_clipboard"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE" >
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandControlsProviderService"
+            android:exported="true"
+            android:label="@string/kde_connect"
+            android:permission="android.permission.BIND_CONTROLS" >
+            <intent-filter>
+                <action android:name="android.service.controls.ControlsProviderService" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name="androidx.compose.ui.tooling.PreviewActivity"
+            android:exported="true" />
+
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="org.cosmic.cosmicconnect.debug.androidx-startup"
+            android:exported="false" >
+            <meta-data
+                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+                android:value="androidx.startup" />
+        </provider>
+
+        <uses-library
+            android:name="androidx.window.extensions"
+            android:required="false" />
+        <uses-library
+            android:name="androidx.window.sidecar"
+            android:required="false" />
+
+        <receiver
+            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+            android:directBootAware="false"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.DUMP" >
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

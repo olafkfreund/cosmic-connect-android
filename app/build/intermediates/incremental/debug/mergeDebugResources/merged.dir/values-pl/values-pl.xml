@@ -1,0 +1,685 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2" xmlns:ns2="http://schemas.android.com/tools">
+    <string-array name="convert_to_mms_after_entries">
+    <item>Po jednej wiadomości</item>
+    <item>Po dwóch wiadomościach</item>
+    <item>Po trzech wiadomościach</item>
+    <item>Po czterech wiadomościach</item>
+    <item>Po pięciu wiadomościach</item>
+  </string-array>
+    <string-array name="digitizer_preference_entries_draw_button_side">
+    <item>Na górze po lewej</item>
+    <item>Na górze po prawej</item>
+    <item>Na dole po lewej</item>
+    <item>Prawy dolny</item>
+  </string-array>
+    <string-array name="mousepad_acceleration_profile_entries">
+    <item>Brak przyspieszenia</item>
+    <item>Najsłabsze</item>
+    <item>Słabsze</item>
+    <item>Średnie</item>
+    <item>Silniejsze</item>
+    <item>Najsilniejsze</item>
+  </string-array>
+    <string-array name="mousepad_sensitivity_entries">
+    <item>Najmniejsza</item>
+    <item>Ponad najmniejszą</item>
+    <item>Domyślna</item>
+    <item>Powyżej domyślnej</item>
+    <item>Największa</item>
+  </string-array>
+    <string-array name="mousepad_tap_entries">
+    <item>Kliknięcie lewym</item>
+    <item>Kliknięcie prawym</item>
+    <item>Kliknięcie środkowym</item>
+    <item>Nic</item>
+  </string-array>
+    <string-array name="mpris_time_entries">
+    <item>10 sekund</item>
+    <item>20 sekund</item>
+    <item>30 sekund</item>
+    <item>1 minuta</item>
+    <item>2 minuty</item>
+  </string-array>
+    <string-array name="theme_list">
+    <item>Ustaw przy oszczędzaniu energii</item>
+    <item>Jasny</item>
+    <item>Ciemny</item>
+  </string-array>
+    <string-array name="theme_list_v28">
+    <item>Zgodny z systemowym</item>
+    <item>Jasny</item>
+    <item>Ciemny</item>
+  </string-array>
+    <plurals name="incoming_file_title">
+    <item quantity="one">Pobieranie %1$d pliku z %2$s</item>
+    <item quantity="few">Pobieranie %1$d plików z %2$s</item>
+    <item quantity="many">Pobieranie %1$d plików z %2$s</item>
+    <item quantity="other"/>
+  </plurals>
+    <plurals name="incoming_files_text">
+    <item quantity="one">Plik: %1s</item>
+    <item quantity="few">(Plik %2$d z %3$d) : %1$s</item>
+    <item quantity="many">(Plik %2$d z %3$d) : %1$s</item>
+    <item quantity="other"/>
+  </plurals>
+    <plurals name="mtrl_badge_content_description">
+    <item quantity="one">%d nowe powiadomienie</item>
+    <item quantity="few">%d nowe powiadomienia</item>
+    <item quantity="many">%d nowych powiadomień</item>
+    <item quantity="other">%d nowego powiadomienia</item>
+  </plurals>
+    <plurals name="outgoing_file_title">
+    <item quantity="one">Wysyłanie %1$d pliku do %2$s</item>
+    <item quantity="few">Wysyłanie %1$d plików do %2$s</item>
+    <item quantity="many">Wysyłanie %1$d plików do %2$s</item>
+    <item quantity="other"/>
+  </plurals>
+    <plurals name="outgoing_files_text">
+    <item quantity="one">Plik: %1$s</item>
+    <item quantity="few">(Plik %2$d z %3$d) : %1$s</item>
+    <item quantity="many">(Plik %2$d z %3$d) : %1$s</item>
+    <item quantity="other"/>
+  </plurals>
+    <plurals name="received_files_fail_title">
+    <item quantity="one">Nie udało się odebrać pliku od %1$s</item>
+    <item quantity="few">Nie udało się odebrać %2$d z %3$d plików od %1$s</item>
+    <item quantity="many">Nie udało się odebrać %2$d z %3$d plików od %1$s</item>
+    <item quantity="other"/>
+  </plurals>
+    <plurals name="received_files_title">
+    <item quantity="one">Odebrano plik od %1$s</item>
+    <item quantity="few">Odebrano %2$d pliki od %1$s</item>
+    <item quantity="many">Odebrano %2$d plików od %1$s</item>
+    <item quantity="other"/>
+  </plurals>
+    <plurals name="send_files_fail_title">
+    <item quantity="one">Nie udało się wysłać pliku do %1$s</item>
+    <item quantity="few">Nie udało się wysłać %2$d z %3$d plików do %1$s</item>
+    <item quantity="many">Nie udało się wysłać %2$d z %3$d plików do %1$s</item>
+    <item quantity="other"/>
+  </plurals>
+    <plurals name="sent_files_title">
+    <item quantity="one">Wysłano plik do %1$s</item>
+    <item quantity="few">Wysłano %2$d pliki do %1$s</item>
+    <item quantity="many">Wysłano %2$d plików do %1$s</item>
+    <item quantity="other"/>
+  </plurals>
+    <string msgid="5976598919945601918" name="abc_action_bar_home_description">"Przejdź na stronę główną"</string>
+    <string msgid="8388173803310557296" name="abc_action_bar_up_description">"Przejdź wyżej"</string>
+    <string msgid="3937310113216875497" name="abc_action_menu_overflow_description">"Więcej opcji"</string>
+    <string msgid="4692188335987374352" name="abc_action_mode_done">"Gotowe"</string>
+    <string msgid="1189761859438369441" name="abc_activity_chooser_view_see_all">"Pokaż wszystko"</string>
+    <string msgid="2165779757652331008" name="abc_activitychooserview_choose_application">"Wybierz aplikację"</string>
+    <string msgid="4215997306490295099" name="abc_capital_off">"WYŁ."</string>
+    <string msgid="884982626291842264" name="abc_capital_on">"WŁ."</string>
+    <string msgid="8833365367933412986" name="abc_menu_alt_shortcut_label">"Alt+"</string>
+    <string msgid="2223301931652355242" name="abc_menu_ctrl_shortcut_label">"Ctrl+"</string>
+    <string msgid="838001238306846836" name="abc_menu_delete_shortcut_label">"Delete"</string>
+    <string msgid="7986526966204849475" name="abc_menu_enter_shortcut_label">"Enter"</string>
+    <string msgid="375214403600139847" name="abc_menu_function_shortcut_label">"Funkcyjny+"</string>
+    <string msgid="4192209724446364286" name="abc_menu_meta_shortcut_label">"Meta+"</string>
+    <string msgid="4741552369836443843" name="abc_menu_shift_shortcut_label">"Shift+"</string>
+    <string msgid="5473865519181928982" name="abc_menu_space_shortcut_label">"spacja"</string>
+    <string msgid="6180552449598693998" name="abc_menu_sym_shortcut_label">"Sym+"</string>
+    <string msgid="5520303668377388990" name="abc_prepend_shortcut_label">"Menu+"</string>
+    <string msgid="7208076849092622260" name="abc_search_hint">"Szukaj…"</string>
+    <string msgid="3741173234950517107" name="abc_searchview_description_clear">"Wyczyść zapytanie"</string>
+    <string msgid="693312494995508443" name="abc_searchview_description_query">"Zapytanie"</string>
+    <string msgid="3417662926640357176" name="abc_searchview_description_search">"Szukaj"</string>
+    <string msgid="1486535517437947103" name="abc_searchview_description_submit">"Wyślij zapytanie"</string>
+    <string msgid="2293578557972875415" name="abc_searchview_description_voice">"Wyszukiwanie głosowe"</string>
+    <string msgid="8875138169939072951" name="abc_shareactionprovider_share_with">"Udostępnij przez:"</string>
+    <string msgid="9055268688411532828" name="abc_shareactionprovider_share_with_application">"Udostępnij przez: <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
+    <string msgid="1656852541809559762" name="abc_toolbar_collapse_description">"Zwiń"</string>
+    <string name="about">O programie</string>
+    <string name="about_kde">O KDE</string>
+    <string name="about_kde_about">"&lt;h1>O programie&lt;/h1> &lt;p>KDE to światowa społeczność inżynierów oprogramowania, artystów, pisarzy, tłumaczy i twórców, którzy są częścią rozwoju &lt;a href=https://www.gnu.org/philosophy/free-sw.html>Wolnego Oprogramowania&lt;/a>. KDE tworzy środowisko pulpitu Plazmy, setki aplikacji  i wiele bibliotek programistycznych, aby je wspierać.&lt;/p> &lt;p>KDE jest przedsięwzięciem istniejącym ze współpracy; jego ruchami, czy produktami, nie steruje żaden pojedynczy byt. Pracujemy razem, aby osiągnąć wspólny cel, czyli budowę najlepszego Wolnego Oprogramowania na świecie. Każdy jest mile wiedziany, żeby &lt;a href=https://community.kde.org/Get_Involved>dołączył i zaczął współtworzyć&lt;/a> KDE, włączając w to ciebie.&lt;/p> Odwiedź &lt; href=https://www.kde.org/>https://www.kde.org/&lt;/a> po więcej szczegółów nt. społeczności KDE i oprogramowania, które tworzymy."</string>
+    <string name="about_kde_join_kde">&lt;h1>Dołącz do KDE&lt;/h1> &lt;p>Nie musisz być programistą, aby być członkiem zespołu KDE. Możesz dołączyć do zespołów językowych, które tłumaczą oprogramowanie. Możesz dostarczać grafikę, zestawy wyglądu, dźwięki i ulepszać dokumentację. To ty decydujesz!&lt;/p> &lt;p>odwiedź &lt;a href=https://community.kde.org/Get_Involved>https://community.kde.org/Get_Involved&lt;/a> po szczegóły nt. projektów, w których możesz wziąć udział .&lt;/p> Jeśli potrzebujesz więcej szczegółów lub dokumentacji, to odwiedziny na &lt;a href=https://techbase.kde.org/>https://techbase.kde.org/&lt;/a> dadzą ci to, czego chcesz.</string>
+    <string name="about_kde_report_bugs_or_wishes">&lt;h1>Zgłaszaj błędy lub życzenia&lt;/h1> &lt;p>Oprogramowanie zawsze można ulepszyć, a zespół KDE jest gotowy, aby to robić. Jednakże ty - użytkownik - musisz nam powiedzieć o tym, co nie działa jak powinno lub co można zrobić lepiej.&lt;/p> &lt;p>KDE ma system obsługi błędów. Odwiedź &lt;a href=https://bugs.kde.org/>https://bugs.kde.org/&lt;/a> lub użyj przycisku \"Zgłoś błąd\" z ekranu o programie do zgłaszania błędów.&lt;/p> Jeśli masz sugestie nt. usprawnień, to także możesz ją zarejestrować w naszym systemie obsługi błędów. Upewnij się, że użyjesz ważności o nazwie \"Lista życzeń\".</string>
+    <string name="about_kde_support_kde">&lt;h1>Wesprzyj KDE&lt;/h1> &lt;p>Oprogramowanie KDE jest i zawsze będzie dostępne za darmo, jednakże tworzenie go nie jest darmowe.&lt;/p> &lt;p>Aby wesprzeć rozwój, społeczność KDE założyła KDE e.V., organizację non-profit prawnie założoną w Niemczech. KDE e.V. stanowi społeczność KDE w sprawach prawnych i finansowych. Zajrzyj na &lt;a href=https://ev.kde.org/>https://ev.kde.org/&lt;/a> po więcej szczegółów o KDE e.V.&lt;/p> &lt;p>KDE korzysta z wielu rodzajów pomocy, w tym także finansowej. Używamy środków do zwracania członkom i innym wydatków, które ponoszą podczas tworzenia. Dalsze środki są używane na wsparcie prawne oraz organizowanie konferencji i spotkań.&lt;/p> &lt;p>Zachęcamy do wspierania naszego wysiłku poprzez darowizny, przy użyciu jednego ze sposobów wymienionych na &lt;a href=https://www.kde.org/community/donations/>https://www.kde.org/community/donations/&lt;/a>.&lt;/p> Dzięki z góry za twoje wsparcie.</string>
+    <string name="add_command">Dodaj polecenie</string>
+    <string name="add_command_description">Możesz dodawać polecenia na pulpicie</string>
+    <string name="add_device_dialog_title">Dodawanie urządzenia</string>
+    <string name="add_device_hint">Nazwa gospodarza lub adres IP</string>
+    <string name="add_trusted_network">Dodaj %1s</string>
+    <string name="addcommand_explanation">Nie zarejestrowano żadnych poleceń</string>
+    <string name="addcommand_explanation2">Nowe polecenie można dodać w ustawieniach systemowych COSMIC Connect</string>
+    <string name="alex_fiestas_task">Usprawnienia we wtyczce kontaktów</string>
+    <string name="all">Wszystkie</string>
+    <string name="all_permissions_granted">Przyznano wszystkie uprawnienia 🎉</string>
+    <string name="allow_all_networks_text">Zezwól wszystkim</string>
+    <string name="aniket_kumar_task">Usprawnienia we wtyczce do SMSów</string>
+    <string name="apple_support">Obsługa macOS. Praca nad obsługą iOS</string>
+    <string name="authors">Autorzy</string>
+    <string name="battery_status_charging_format">Bateria: %d%% ładowanie</string>
+    <string name="battery_status_format">Bateria: %d%%</string>
+    <string name="battery_status_low_format">Bateria: %d%% niski poziom</string>
+    <string name="bigscreen_back">Wstecz</string>
+    <string name="bigscreen_down">Dół</string>
+    <string name="bigscreen_hide_mouse_input">Ukryj przycisk zdalnej obsługi myszą i klawiaturą</string>
+    <string name="bigscreen_home">Dom</string>
+    <string name="bigscreen_left">Lewo</string>
+    <string name="bigscreen_mic">Mikrofon</string>
+    <string name="bigscreen_optional_permission_explanation">Aby zezwolić na używanie mikrofonu twojego telefonu, musisz udzielić do niego dostępu na telefonie</string>
+    <string name="bigscreen_right">Prawo</string>
+    <string name="bigscreen_select">Wybierz</string>
+    <string name="bigscreen_show_back_title">Pokaż przycisk wstecz</string>
+    <string name="bigscreen_show_home_title">Pokaż przycisk domu</string>
+    <string name="bigscreen_speech_extra_prompt">Mowa</string>
+    <string name="bigscreen_up">Góra</string>
+    <string name="block_contents">Blokuj treści w powiadomieniach</string>
+    <string name="block_images">Blokuj obrazy w powiadomieniach</string>
+    <string name="block_notification_contents">Blokuj treść powiadomień</string>
+    <string name="block_notification_images">Blokuj obrazy powiadomień</string>
+    <string name="bluetooth_permission_needed_desc">COSMIC Connect wymaga pozwolenia na łączenie do sąsiednich urządzeń, aby urządzenia sparowane przy pomocy Bluetooth były widoczne w COSMIC Connect.</string>
+    <string name="bottomsheet_action_collapse">Zwiń planszę dolną</string>
+    <string name="bottomsheet_action_expand">Rozwiń planszę dolną</string>
+    <string name="bottomsheet_action_expand_halfway">Rozwiń do połowy</string>
+    <string name="bottomsheet_drag_handle_content_description">Uchwyt do przeciągania</string>
+    <string name="bug_fixes_and_general_improvements">Usuwanie błędów i poprawki</string>
+    <string msgid="881409763997275156" name="call_notification_answer_action">"Odbierz"</string>
+    <string msgid="8793775615905189152" name="call_notification_answer_video_action">"Wideo"</string>
+    <string msgid="3229508546291798546" name="call_notification_decline_action">"Odrzuć"</string>
+    <string msgid="2659457946726154263" name="call_notification_hang_up_action">"Rozłącz"</string>
+    <string msgid="6107532579223922871" name="call_notification_incoming_text">"Połączenie przychodzące"</string>
+    <string msgid="8623827134497363134" name="call_notification_ongoing_text">"Trwa połączenie"</string>
+    <string msgid="59049573811482460" name="call_notification_screening_text">"Filtruję połączenie przychodzące"</string>
+    <string name="cancel">Anuluj</string>
+    <string name="cancel_pairing">Przerwij parowanie</string>
+    <string name="cannot_create_file">Nie można utworzyć pliku %s</string>
+    <string name="cant_open_url">Nie można otworzyć adresu URL, aby kontynuować odtwarzanie</string>
+    <string name="category_connected_devices">Podłączone urządzenia</string>
+    <string name="category_not_paired_devices">Dostępne urządzenia</string>
+    <string name="category_remembered_devices">Zapamiętane urządzenia</string>
+    <string name="character_counter_content_description">%1$d z %2$d znaków</string>
+    <string name="character_counter_overflowed_content_description">Przekroczono limit znaków (%1$d z %2$d)</string>
+    <string name="clear_compose">Wyczyść</string>
+    <string name="clear_text_end_icon_content_description">Wyczyść tekst</string>
+    <string name="click_here_to_type">Stuknij tutaj, aby wpisać</string>
+    <string name="clipboard_android_x_incompat">Android 10 odebrał dostęp do schowka wszystkim programom. Ta wtyczka pozostanie wyłączona.</string>
+    <string name="clipboard_toast">Skopiowano do schowka</string>
+    <string name="close">Zamknij</string>
+    <string msgid="406453423630273620" name="close_drawer">"Zamknij menu nawigacyjne"</string>
+    <string msgid="7573152094250666567" name="close_sheet">"Zamknij arkusz"</string>
+    <string name="compose_send_title">Napisz do wysłania</string>
+    <string name="contacts_per_device_confirmation">Twoje kontakty telefoniczne zostaną skopiowane na to urządzenie, aby aplikacja do SMSów COSMIC Connect i inne mogły ich używać.</string>
+    <string name="contacts_permission_explanation">Aby współdzielić swoją książkę adresową z innym urządzeniem, musisz nadać uprawnienia do kontaktów</string>
+    <string name="convert_to_mms_after_title">Przekształć na MMS</string>
+    <string msgid="6083905920877235314" name="copy">"Kopiuj"</string>
+    <string name="copy_url_to_clipboard">Skopiuj adres URL do schowka</string>
+    <string name="custom_device_deleted">Usunięto własne urządzenie</string>
+    <string name="custom_device_fab_hint">Dodaj urządzenie</string>
+    <string name="custom_device_list">Dodaj urządzenie po adresie IP</string>
+    <string name="custom_device_list_help">Jeśli twoje urządzenie nie zostało wykryte samoczynnie, to możesz dodać je ręcznie po wpisaniu jego adresu IP lub nazwy gospodarza. Aby to zrobić, naciśnij na przycisk u dołu ekranu.</string>
+    <string name="custom_devices_settings">Lista własnych urządzeń</string>
+    <string name="custom_devices_settings_summary">%d urządzeń dodanych ręcznie</string>
+    <string msgid="8038256446254964252" name="default_error_message">"Nieprawidłowe dane wejściowe"</string>
+    <string msgid="6312721426453364202" name="default_popup_window_title">"Wyskakujące okienko"</string>
+    <string name="developer">Programista</string>
+    <string name="device_host_duplicate">Nazwa gospodarza już znajduje się na liście</string>
+    <string name="device_host_invalid">Nazwa gospodarza jest nieprawidłowa. Użyj prawidłowej nazwy, adresu IPv4 lub IPv6</string>
+    <string name="device_list_empty">Brak urządzeń</string>
+    <string name="device_menu_plugins">Ustawienia wtyczek</string>
+    <string name="device_menu_unpair">Odparuj</string>
+    <string name="device_not_paired">Urządzenie niesparowane</string>
+    <string name="device_rename_confirm">Zmień nazwę</string>
+    <string name="device_rename_title">Zmień nazwę urządzenia</string>
+    <string name="devices">Urządzenia</string>
+    <string name="digitizer_draw_button">Rysuj przy użyciu palca</string>
+    <string name="digitizer_preference_summary_enable_exit_fullscreen_gesture">Po włączeniu, stuknięcie i przytrzymanie palcem na obszarze rysowania zaprzestanie wyświetlania w trybie na całym ekranie.</string>
+    <string name="digitizer_preference_summary_hide_draw_button">Całkowicie ukrywa przycisk rysowania, uniemożliwiając rysowanie palcem. Włącz to, tylko gdy twoje urządzenie da się obsługiwać rysikiem.</string>
+    <string name="digitizer_preference_title_draw_button_side">Strona przycisku \"Rysuj palcem\"</string>
+    <string name="digitizer_preference_title_enable_exit_fullscreen_gesture">Włącz gest wyjścia z trybu pełnego ekranu</string>
+    <string name="digitizer_preference_title_hide_draw_button">Ukryj przycisk rysowania</string>
+    <string name="donate">Darowizna</string>
+    <string name="double_tap_to_drag">Stuknij dwukrotnie, aby przeciągnąć</string>
+    <string msgid="1890207353314751437" name="dropdown_menu">"Menu"</string>
+    <string name="easter_egg">Jajka wielkanocne</string>
+    <string name="email_contributor">Napisz do twórcy\n%s</string>
+    <string name="empty_trusted_networks_list_text">Nie dodałeś jeszcze żadnej zaufanej sieci</string>
+    <string name="enable_bluetooth">Włącz Bluetooth (beta)</string>
+    <string name="enable_fullscreen">Pokaż na całym ekranie</string>
+    <string name="enable_udp_broadcast">Włącz wykrywanie urządzeń UDP</string>
+    <string name="encryption_info_title">Dane o szyfrowaniu</string>
+    <string name="error_a11y_label">Błąd: nieprawidłowe</string>
+    <string name="error_already_paired">Urządzenie już sparowano</string>
+    <string name="error_canceled_by_other_peer">Inny uczestnik zaniechał</string>
+    <string name="error_canceled_by_user">Użytkownik zaniechał</string>
+    <string name="error_clocks_not_match">Zegary urządzenia nie są zsynchronizowane</string>
+    <string name="error_icon_content_description">Błąd</string>
+    <string name="error_not_reachable">Urządzenie nieosiągalne</string>
+    <string name="error_timed_out">Upłynął czas na odpowiedź</string>
+    <string name="everyone_else">Inni którzy współtworzyli COSMIC Connect na przestrzeni lat</string>
+    <string msgid="2427401033573778270" name="expand_button_title">"Zaawansowane"</string>
+    <string name="exposed_dropdown_menu_content_description">Pokaż menu</string>
+    <string name="extra_options">Ustawienia dodatkowe</string>
+    <string name="filter_apps_info">Współdzieli powiadomienia wybranych programów między urządzeniami.</string>
+    <string name="findmyphone_description">Dzwoni z innego urządzenia na to urządzenie</string>
+    <string name="findmyphone_found">Znaleziony</string>
+    <string name="findmyphone_notifications_explanation">Uprawnienia powiadomień są potrzebne, aby telefon mógł dzwonić, gdy aplikacja działa w tle</string>
+    <string name="findmyphone_title">Poszukiwania tego telefonu</string>
+    <string name="findmyphone_title_tablet">Poszukiwania tego tabletu</string>
+    <string name="findmyphone_title_tv">Poszukiwania tego telewizora</string>
+    <string name="foreground_notification_devices">Połączony z: %s</string>
+    <string name="foreground_notification_no_devices">Niepołączony z żadnym urządzeniem</string>
+    <string name="foreground_notification_send_clipboard">Wysyłanie schowka</string>
+    <string name="gyro_mouse_enabled_title">Włącz mysz żyroskopową</string>
+    <string name="gyro_mouse_sensitivity_title">Czułość żyroskopu</string>
+    <string name="hold_to_drag">Przytrzymaj, aby przeciągnąć</string>
+    <string name="holger_kaelberer_task">Wtyczka zdalnej klawiatury i usuwanie błędów</string>
+    <string name="icon_content_description">Ikona okna</string>
+    <string msgid="6827826412747255547" name="in_progress">"W toku"</string>
+    <string msgid="7933458017204019916" name="indeterminate">"Częściowo zaznaczone"</string>
+    <string name="invalid_device_name">Nieprawidłowa nazwa urządzenia</string>
+    <string name="item_view_role_description">Karta</string>
+    <string name="kde">KDE</string>
+    <string name="kde_be_free">KDE - Bądź wolny!</string>
+    <string name="kde_connect">COSMIC Connect</string>
+    <string name="konqi">Konqi</string>
+    <string name="left_click">Wyślij kliknięcie lewym</string>
+    <string name="licenses">Licencje</string>
+    <string name="location_permission_needed_desc">COSMIC Connect potrzebuje uprawnień do sprawdzania twojego położenia w tle, aby móc poznać sieć WiFi, do której jesteś podłączony także wtedy, gdy aplikacja działa w tle. Jest tak dlatego, że nazwy sieci WiFi wokół ciebie mogą zostać użyte do ustalenia twojego położenia, mimo że COSMIC Connect nie robi tego w ten sposób.</string>
+    <string name="location_permission_needed_title">Wymagana zgoda</string>
+    <string name="m3_loading_indicator_content_description">Wczytuję</string>
+    <string msgid="2988463736136100848" name="m3c_bottom_sheet_collapse_description">"Zwiń planszę dolną"</string>
+    <string msgid="1555567894577437024" name="m3c_bottom_sheet_dismiss_description">"Zamknij planszę dolną"</string>
+    <string msgid="8403354765404029791" name="m3c_bottom_sheet_drag_handle_description">"Uchwyt do przeciągania"</string>
+    <string msgid="6670819569745899763" name="m3c_bottom_sheet_expand_description">"Rozwiń planszę dolną"</string>
+    <string msgid="3010635850035863127" name="m3c_bottom_sheet_pane_title">"Plansza dolna"</string>
+    <string msgid="8166741421776570875" name="m3c_date_input_headline">"Wprowadzono datę"</string>
+    <string msgid="229313757840775812" name="m3c_date_input_headline_description">"Wprowadzono datę: %1$s"</string>
+    <string msgid="6116910750161463197" name="m3c_date_input_invalid_for_pattern">"Data nie pasuje do oczekiwanego wzorca: %1$s"</string>
+    <string msgid="2521768508935305279" name="m3c_date_input_invalid_not_allowed">"Data jest niedozwolona: %1$s"</string>
+    <string msgid="7052898923934555305" name="m3c_date_input_invalid_year_range">"Data jest poza oczekiwanym zakresem lat %1$s–%2$s"</string>
+    <string msgid="2895559812010326913" name="m3c_date_input_label">"Data"</string>
+    <string msgid="1237013946323089826" name="m3c_date_input_no_input_description">"Brak"</string>
+    <string msgid="7306227249789210568" name="m3c_date_input_title">"Wybierz datę"</string>
+    <string msgid="7605002211875882969" name="m3c_date_picker_headline">"Wybrana data"</string>
+    <string msgid="3664277305226978227" name="m3c_date_picker_headline_description">"Obecnie wybrane: %1$s"</string>
+    <string msgid="8436650776581492840" name="m3c_date_picker_navigate_to_year_description">"Przejdź do roku %1$s"</string>
+    <string msgid="5811000998184572395" name="m3c_date_picker_no_selection_description">"Brak"</string>
+    <string msgid="7813882352367152251" name="m3c_date_picker_scroll_to_earlier_years">"Przewiń, aby wyświetlić wcześniejsze lata"</string>
+    <string msgid="5727367015496556177" name="m3c_date_picker_scroll_to_later_years">"Przewiń, aby wyświetlić późniejsze lata"</string>
+    <string msgid="1804346892470238807" name="m3c_date_picker_switch_to_calendar_mode">"Włącz tryb wprowadzania danych kalendarzowych"</string>
+    <string msgid="395627960681594326" name="m3c_date_picker_switch_to_day_selection">"Przesuń, aby wybrać rok, lub kliknij, aby wrócić do wyboru dnia"</string>
+    <string msgid="2219746470065162704" name="m3c_date_picker_switch_to_input_mode">"Przełącz na tryb wprowadzania tekstu"</string>
+    <string msgid="7142101321095356500" name="m3c_date_picker_switch_to_next_month">"Zmień na następny miesiąc"</string>
+    <string msgid="228438865139394590" name="m3c_date_picker_switch_to_previous_month">"Zmień na poprzedni miesiąc"</string>
+    <string msgid="791651718641787594" name="m3c_date_picker_switch_to_year_selection">"Przełącz na wybór roku"</string>
+    <string msgid="7430790972741451689" name="m3c_date_picker_title">"Wybierz datę"</string>
+    <string msgid="3199387177749801575" name="m3c_date_picker_today_description">"Dzisiaj"</string>
+    <string msgid="2068382232816991922" name="m3c_date_picker_year_picker_pane_title">"Widoczny selektor roku"</string>
+    <string msgid="3190049423327661366" name="m3c_date_range_input_invalid_range_input">"Nieprawidłowy zakres dat"</string>
+    <string msgid="3148384720560189467" name="m3c_date_range_input_title">"Wprowadź daty"</string>
+    <string msgid="2138321128465719402" name="m3c_date_range_picker_day_in_range">"W zakresie"</string>
+    <string msgid="4947636797751277713" name="m3c_date_range_picker_end_headline">"Data końcowa"</string>
+    <string msgid="602077859540990149" name="m3c_date_range_picker_scroll_to_next_month">"Przewiń, aby wyświetlić następny miesiąc"</string>
+    <string msgid="4592174524846109496" name="m3c_date_range_picker_scroll_to_previous_month">"Przewiń, aby wyświetlić poprzedni miesiąc"</string>
+    <string msgid="4665981448952749820" name="m3c_date_range_picker_start_headline">"Data początkowa"</string>
+    <string msgid="3134165431120340385" name="m3c_date_range_picker_title">"Wybierz daty"</string>
+    <string msgid="7617233117134790350" name="m3c_dialog">"Okno"</string>
+    <string msgid="3177828188723359358" name="m3c_dropdown_menu_collapsed">"Zwinięte"</string>
+    <string msgid="2360841780724299882" name="m3c_dropdown_menu_expanded">"Rozwinięte"</string>
+    <string msgid="8687821690726149911" name="m3c_dropdown_menu_toggle">"Pokaż lub ukryj menu"</string>
+    <string msgid="6152806324422087846" name="m3c_search_bar_search">"Szukaj"</string>
+    <string msgid="6152755701819882931" name="m3c_snackbar_dismiss">"Zamknij"</string>
+    <string msgid="7655536806087401899" name="m3c_suggestions_available">"Sugestie znajdziesz poniżej"</string>
+    <string msgid="2786685010796619560" name="m3c_time_picker_am">"AM"</string>
+    <string msgid="2349193472625211372" name="m3c_time_picker_hour">"Godzina"</string>
+    <string msgid="9179527532316922345" name="m3c_time_picker_hour_24h_suffix">"%1$d"</string>
+    <string msgid="8876759303332837035" name="m3c_time_picker_hour_selection">"Wybierz godzinę"</string>
+    <string msgid="3458167507790628988" name="m3c_time_picker_hour_suffix">"%1$d"</string>
+    <string msgid="6973808109666874069" name="m3c_time_picker_hour_text_field">"aby wpisać godzinę"</string>
+    <string msgid="4313071914266462005" name="m3c_time_picker_minute">"Minuta"</string>
+    <string msgid="4699133535056739733" name="m3c_time_picker_minute_selection">"Wybierz minuty"</string>
+    <string msgid="5064177921781937179" name="m3c_time_picker_minute_suffix">"Minuty: %1$d"</string>
+    <string msgid="7661234488295443182" name="m3c_time_picker_minute_text_field">"aby wpisać minuty"</string>
+    <string msgid="5865171949528594571" name="m3c_time_picker_period_toggle_description">"Wybierz AM lub PM"</string>
+    <string msgid="6616362054113087709" name="m3c_time_picker_pm">"PM"</string>
+    <string msgid="1805687647081129904" name="m3c_tooltip_long_press_label">"Pokaż etykietkę"</string>
+    <string msgid="5460405025248574620" name="m3c_tooltip_pane_description">"Etykietka"</string>
+    <string name="maintainer_and_developer">Opiekun i programista</string>
+    <string name="manifest_label_share">Wyślij na urządzenie</string>
+    <string name="mark_as_read_label">OZNACZ JAKO PRZECZYTANĄ</string>
+    <string name="material_clock_toggle_content_description">Wybierz: przed południem czy po południu</string>
+    <string name="material_hour_24h_suffix">%1$s godz.</string>
+    <string name="material_hour_selection">Wybierz godzinę</string>
+    <string name="material_hour_suffix">%1$s</string>
+    <string name="material_minute_selection">Wybierz minuty</string>
+    <string name="material_minute_suffix">%1$s minut</string>
+    <string name="material_slider_range_end">Koniec zakresu</string>
+    <string name="material_slider_range_start">Początek zakresu</string>
+    <string name="material_slider_value">Wartość</string>
+    <string name="material_timepicker_am">AM</string>
+    <string name="material_timepicker_clock_mode_description">Aby wprowadzić czas, włącz tryb zegara.</string>
+    <string name="material_timepicker_hour">Godzina</string>
+    <string name="material_timepicker_minute">Minuta</string>
+    <string name="material_timepicker_pm">PM</string>
+    <string name="material_timepicker_select_time">Określ czas</string>
+    <string name="material_timepicker_text_input_mode_description">Aby wprowadzić czas, włącz tryb wprowadzania tekstu.</string>
+    <string name="maxim_leshchenko_task">Usprawnienia do interfejsu i strony o programie</string>
+    <string name="message_reply_label">ODPOWIEDZ</string>
+    <string name="middle_click">Wyślij kliknięcie środkowym</string>
+    <string name="mouse_receiver_no_permissions">Aby móc otrzymywać dotyk zdalnie musisz udzielić uprawnień Dostępności tak, aby mogły one w pełni sterować twoim urządzeniem</string>
+    <string name="mouse_receiver_plugin_description">Odbiera ruchy myszy z innego urządzenia do sterowania tym urządzeniem</string>
+    <string name="mouse_receiver_plugin_name">Odbieranie myszy</string>
+    <string name="mousepad_acceleration_profile_settings_title">Ustaw przyspieszenie wskaźnika</string>
+    <string name="mousepad_double_tap_settings_title">Ustaw działanie po stuknięciu dwoma palcami</string>
+    <string name="mousepad_info">Przesuwanie palcem po ekranie przesuwa wskaźnik myszy. Stuknięcie jednym, dwoma i trzema palcami wywołuje odpowiednio naciśnięcie lewym, prawym i środkowym przyciskiem myszy. Dwa palce przewijają. Długie naciśnięcie rozpoczyna czynność przeciągania i upuszczania. Zachowania żyroskopowe myszy mogą być włączone z poziomu ustawień wtyczki.</string>
+    <string name="mousepad_info_no_gestures">Przesuń palcem po ekranie, aby przesunąć wskaźnikiem myszy, dotknij, aby kliknąć.</string>
+    <string name="mousepad_keyboard_input_not_supported">Wpisywanie z klawiatury jest nieobsługiwane przez sparowane urządzenie</string>
+    <string name="mousepad_mouse_buttons_title">Pokaż przyciski myszy</string>
+    <string name="mousepad_scroll_direction_title">Odwróć stronę przewijania</string>
+    <string name="mousepad_scroll_sensitivity_title">Czułość przewijania</string>
+    <string name="mousepad_sensitivity_settings_title">Ustaw czułość gładzika</string>
+    <string name="mousepad_single_tap_settings_title">Ustaw działanie po stuknięciu jednym palcem</string>
+    <string name="mousepad_triple_tap_settings_title">Ustaw działanie po stuknięciu trzema palcami</string>
+    <string name="mpris_coverart_description">Okładka dla bieżących multimediów</string>
+    <string name="mpris_ff">Przewiń do przodu</string>
+    <string name="mpris_keepwatching">Kontynuuj odtwarzanie</string>
+    <string name="mpris_keepwatching_settings_summary">Pokaż ciche powiadomienie, aby kontynuować odtwarzanie na tym urządzeniu po zamknięciu mediów</string>
+    <string name="mpris_keepwatching_settings_title">Kontynuuj odtwarzanie</string>
+    <string name="mpris_loop">Zapętlij</string>
+    <string name="mpris_next">Następny</string>
+    <string name="mpris_notification_settings_summary">Steruje odtwarzaczami bez otwierania COSMIC Connect</string>
+    <string name="mpris_notification_settings_title">Pokaż powiadomienia sterowania mediami</string>
+    <string name="mpris_notifications_explanation">Uprawnienia powiadomień są potrzebne, aby móc pokazywać zdalne odtwarzacze na belce powiadomień</string>
+    <string name="mpris_open_url">Kontynuuj odtwarzanie tutaj</string>
+    <string name="mpris_pause">Wstrzymaj</string>
+    <string name="mpris_play">Odtwórz</string>
+    <string name="mpris_previous">Poprzedni</string>
+    <string name="mpris_rew">Przewiń</string>
+    <string name="mpris_shuffle">Wymieszaj</string>
+    <string name="mpris_stop">Zatrzymaj bieżący odtwarzacz</string>
+    <string name="mpris_time_settings_summary">Dostosuj czas do przewijania wprzód lub wstecz po naciśnięciu</string>
+    <string name="mpris_time_settings_title">Przyciski naprzód/wstecz</string>
+    <string name="mpris_volume">Głośność</string>
+    <string name="mtrl_badge_numberless_content_description">Nowe powiadomienie</string>
+    <string name="mtrl_checkbox_state_description_checked">Zaznaczono</string>
+    <string name="mtrl_checkbox_state_description_indeterminate">Częściowo zaznaczono</string>
+    <string name="mtrl_checkbox_state_description_unchecked">Nie zaznaczono</string>
+    <string name="mtrl_chip_close_icon_content_description">Usuń: (%1$s)</string>
+    <string name="mtrl_exceed_max_badge_number_content_description" ns2:ignore="PluralsCandidate">Liczba nowych powiadomień przekracza %1$d</string>
+    <string name="mtrl_picker_a11y_next_month">Zmień na następny miesiąc</string>
+    <string name="mtrl_picker_a11y_prev_month">Zmień na poprzedni miesiąc</string>
+    <string name="mtrl_picker_announce_current_range_selection">Wybrana data rozpoczęcia: %1$s – wybrana data zakończenia: %2$s</string>
+    <string name="mtrl_picker_announce_current_selection">Bieżący wybór: %1$s</string>
+    <string name="mtrl_picker_announce_current_selection_none">brak</string>
+    <string name="mtrl_picker_cancel">Anuluj</string>
+    <string name="mtrl_picker_confirm">OK</string>
+    <string name="mtrl_picker_date_header_selected">%1$s</string>
+    <string name="mtrl_picker_date_header_title">Wybierz datę</string>
+    <string name="mtrl_picker_date_header_unselected">Wybrana data</string>
+    <string name="mtrl_picker_day_of_week_column_header">%1$s</string>
+    <string name="mtrl_picker_end_date_description">Data zakończenia %1$s</string>
+    <string name="mtrl_picker_invalid_format">Nieprawidłowy format.</string>
+    <string name="mtrl_picker_invalid_format_example">Przykład: %1$s</string>
+    <string name="mtrl_picker_invalid_format_use">Użyj formatu: %1$s</string>
+    <string name="mtrl_picker_invalid_range">Nieprawidłowy zakres.</string>
+    <string name="mtrl_picker_navigate_to_current_year_description">Przejdź do bieżącego roku %1$d</string>
+    <string name="mtrl_picker_navigate_to_year_description">Przejdź do roku %1$d</string>
+    <string name="mtrl_picker_out_of_range">Poza zakresem: %1$s</string>
+    <string name="mtrl_picker_range_header_only_end_selected">Data rozpoczęcia – %1$s</string>
+    <string name="mtrl_picker_range_header_only_start_selected">%1$s – data zakończenia</string>
+    <string name="mtrl_picker_range_header_selected">%1$s–%2$s</string>
+    <string name="mtrl_picker_range_header_title">Wybierz zakres</string>
+    <string name="mtrl_picker_range_header_unselected">Data rozpoczęcia – data zakończenia</string>
+    <string name="mtrl_picker_save">Zapisz</string>
+    <string name="mtrl_picker_start_date_description">Data rozpoczęcia %1$s</string>
+    <string name="mtrl_picker_text_input_date_hint">Data</string>
+    <string name="mtrl_picker_text_input_date_range_end_hint">Data zakończenia</string>
+    <string name="mtrl_picker_text_input_date_range_start_hint">Data rozpoczęcia</string>
+    <string name="mtrl_picker_text_input_day_abbr">d</string>
+    <string name="mtrl_picker_text_input_month_abbr">m</string>
+    <string name="mtrl_picker_text_input_year_abbr">r</string>
+    <string name="mtrl_picker_today_description">Dzisiaj %1$s</string>
+    <string name="mtrl_picker_toggle_to_calendar_input_mode">Włącz kalendarzowy tryb wprowadzania</string>
+    <string name="mtrl_picker_toggle_to_day_selection">Przełącz na widok kalendarza</string>
+    <string name="mtrl_picker_toggle_to_text_input_mode">Włącz tekstowy tryb wprowadzania</string>
+    <string name="mtrl_picker_toggle_to_year_selection">Przełącz na widok roku</string>
+    <string name="mtrl_picker_toggled_to_day_selection">Przełączono na widok Kalendarza</string>
+    <string name="mtrl_picker_toggled_to_year_selection">Przełączono na widok roku</string>
+    <string name="mtrl_timepicker_cancel">Anuluj</string>
+    <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="mute">Wycisz</string>
+    <string name="my_device_fingerprint">Odcisk palca SHA256 certyfikatu twojego urządzenia to:</string>
+    <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Przejdź wyżej"</string>
+    <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Otwórz panel nawigacji"</string>
+    <string msgid="542007171693138492" name="navigation_menu">"Menu nawigacyjne"</string>
+    <string name="no_app_for_opening">Nie znaleziono aplikacji do otwarcia tego pliku</string>
+    <string name="no_file_browser">Nie wgrano żadnych przeglądarek plików.</string>
+    <string name="no_notifications">Powiadomienia są wyłączone, więc nie otrzymasz żadnych próśb o sparowanie.</string>
+    <string name="no_permission_mprisreceiver">Aby móc sterować odtwarzaczami na tym urządzeniu, należy udzielić dostępu do powiadomień</string>
+    <string name="no_permissions">Aby uzyskać dostęp do powiadomień, należy przydzielić uprawnienia</string>
+    <string name="no_permissions_remotekeyboard">Aby otrzymywać naciśnięcia klawiszy, należy włączyć zdalną klawiaturę COSMIC Connect</string>
+    <string name="no_players_connected">Nie znaleziono żadnych odtwarzaczy</string>
+    <string name="no_wifi">Nie jesteś połączony z siecią Wi-Fi, więc nie będziesz widział żadnych urządzeń. Naciśnij tutaj, aby włączyć Wi-Fi.</string>
+    <string msgid="6610465462668679431" name="not_selected">"Nie wybrano"</string>
+    <string msgid="6573031135582639649" name="not_set">"Nie ustawiono"</string>
+    <string name="notification_channel_default">Inne powiadomienia</string>
+    <string name="notification_channel_filetransfer">Przychodzący plik</string>
+    <string name="notification_channel_filetransfer_complete">Ukończono odbieranie pliku</string>
+    <string name="notification_channel_filetransfer_error">Błąd przesyłania pliku</string>
+    <string name="notification_channel_filetransfer_upload">Wychodzący plik</string>
+    <string name="notification_channel_high_priority">Wysoki priorytet</string>
+    <string name="notification_channel_keepwatching">Kontynuuj odtwarzanie</string>
+    <string name="notification_channel_media_control">Sterowanie multimediami</string>
+    <string name="notification_channel_persistent">Nieznikający wskaźnik</string>
+    <string name="notification_channel_receivenotification">Powiadomienia z innych urządzeń</string>
+    <string name="ok">OK</string>
+    <string name="on_non_trusted_message">Niezaufana sieć: wyłączono samowykrywanie.</string>
+    <string name="open">Otwórz</string>
+    <string name="open_compose_send">Napisz tekst</string>
+    <string name="open_mousepad">Zdalne sterowanie</string>
+    <string name="open_mousepad_tv">Pilot do TV</string>
+    <string name="open_mpris_controls">Sterowanie odtwarzaczem</string>
+    <string name="open_settings">Otwórz ustawienia</string>
+    <string name="optional_permission_explanation">Musisz przydzielić dodatkowe uprawnienia, aby włączyć wszystkie funkcje</string>
+    <string name="pair_new_device">Sparuj nowe urządzenie</string>
+    <string name="pair_requested">Poproszono o sparowanie</string>
+    <string name="pair_succeeded">Parowanie udane</string>
+    <string name="pairing_accept">Przyjmij</string>
+    <string name="pairing_description">Tu powinny pojawić się urządzenia podłączone do tej samej sieci i które także mają uruchomione KDE Connect.</string>
+    <string name="pairing_duplicate_names">Uwaga: Istnieje wiele urządzeń o tej samej nazwie.</string>
+    <string name="pairing_explanation">Sparowanie dwóch urządzeń da im dostęp do siebie nawzajem. Paruj tylko swoje własne urządzenia.</string>
+    <string name="pairing_reject">Odrzuć</string>
+    <string name="pairing_request_from">Prośba o sparowanie od \'%1s\'</string>
+    <string name="pairing_title">Urządzenia COSMIC Connect</string>
+    <string name="password_toggle_content_description">Pokaż hasło</string>
+    <string name="permission_explanation">Ta wtyczka wymaga uprawnień do działania</string>
+    <string name="ping_failed">Nie można wysłać pingu do urządzenia</string>
+    <string name="ping_in_progress">Wysyłanie pingu…</string>
+    <string name="ping_result">Odpowiedział w %1$d milisekund</string>
+    <string name="plugin_settings_with_name">Ustawienia %s</string>
+    <string name="plugin_stats">Statystyki wtyczek</string>
+    <string name="plugins_need_optional_permission">Niektóre wtyczki mają ograniczone możliwości ze względu na ograniczone uprawnienia (stuknij, aby dowiedzieć się więcej)</string>
+    <string name="plugins_need_permission">Niektóre wtyczki wymagają uprawnień do swojego działania (stuknij, aby dowiedzieć się więcej)</string>
+    <string name="pref_plugin_battery">Zgłaszanie stanu baterii</string>
+    <string name="pref_plugin_battery_desc">Okresowo zgłasza stan naładowania baterii</string>
+    <string name="pref_plugin_bigscreen">Pilot do TV</string>
+    <string name="pref_plugin_bigscreen_desc">Steruje Dużym Ekranem Plazmy</string>
+    <string name="pref_plugin_clipboard">Współdzielenie schowka</string>
+    <string name="pref_plugin_clipboard_desc">Współdzieli schowek między urządzeniami</string>
+    <string name="pref_plugin_clipboard_sent">Wysłano ze schowka</string>
+    <string name="pref_plugin_connectivity_report">Zgłaszanie łączności</string>
+    <string name="pref_plugin_connectivity_report_desc">Zgłasza siłę i stanu sygnału sieciowego</string>
+    <string name="pref_plugin_contacts">Udostępnianie kontaktów</string>
+    <string name="pref_plugin_contacts_desc">Udostępnia książkę kontaktów tego urządzenia innemu urządzeniu</string>
+    <string name="pref_plugin_digitizer">Tablet rysunkowy</string>
+    <string name="pref_plugin_digitizer_desc">Używaj swojego urządzenia jako tabletu rysunkowego czułego na nacisk</string>
+    <string name="pref_plugin_findremotedevice">Poszukiwania innego urządzenia</string>
+    <string name="pref_plugin_findremotedevice_desc">Dzwoni z tego urządzenia na inne urządzenie</string>
+    <string name="pref_plugin_mousepad">Obsługa zdalna</string>
+    <string name="pref_plugin_mousepad_desc_nontv">Używa telefonu lub tabletu jako gładzika i klawiatury do sterowania innym urządzeniem</string>
+    <string name="pref_plugin_mousepad_desc_tv">Używa telefonu lub tabletu jako pilota do TV</string>
+    <string name="pref_plugin_mousepad_send_keystrokes">Wysyłaj jako naciśnięcia klawiszy</string>
+    <string name="pref_plugin_mpris">Sterowanie odtwarzaczem</string>
+    <string name="pref_plugin_mpris_desc">Steruje odtwarzaczami tego urządzenia z innego urządzenia</string>
+    <string name="pref_plugin_mprisreceiver">Sterowanie odtwarzaczem</string>
+    <string name="pref_plugin_mprisreceiver_desc">Steruje odtwarzaczami innego urządzenia z tego urządzenia</string>
+    <string name="pref_plugin_notifications">Wysyłanie powiadomień</string>
+    <string name="pref_plugin_notifications_desc">Wysyła powiadomienia na inne urządzenia</string>
+    <string name="pref_plugin_ping">Wysyłanie pingów</string>
+    <string name="pref_plugin_ping_desc">Odbiera i wysyła pingi między urządzeniami</string>
+    <string name="pref_plugin_presenter">Pilot do prezentacji</string>
+    <string name="pref_plugin_presenter_desc">Przełącza strony przy użyciu telefonu</string>
+    <string name="pref_plugin_receive_notifications">Odbieranie powiadomień</string>
+    <string name="pref_plugin_receive_notifications_desc">Odbiera powiadomienia z innych urządzeń</string>
+    <string name="pref_plugin_remotekeyboard">Odbieranie klawiszy</string>
+    <string name="pref_plugin_remotekeyboard_desc">Odbiera naciśnięcia klawiszy z innego urządzenia do sterowania tym urządzeniem</string>
+    <string name="pref_plugin_runcommand">Wykonywanie poleceń</string>
+    <string name="pref_plugin_runcommand_desc">Wykonuje polecenia na innym urządzeniu z tego urządzenia</string>
+    <string name="pref_plugin_sftp">Dostęp do systemu plików</string>
+    <string name="pref_plugin_sftp_desc">Udostępnia system plików tego urządzenia do przeglądania innemu urządzeniu</string>
+    <string name="pref_plugin_sharereceiver">Udostępnianie i pobieranie</string>
+    <string name="pref_plugin_sharereceiver_desc">Udostępnia pliki i adresy URL pomiędzy urządzeniami</string>
+    <string name="pref_plugin_systemvolume">Głośność innego urządzenia</string>
+    <string name="pref_plugin_systemvolume_desc">Steruje głośnością innego urządzenia z tego urządzenia</string>
+    <string name="pref_plugin_telepathy">Wysyłanie SMSów</string>
+    <string name="pref_plugin_telepathy_desc">Wysyła wiadomości tekstowe tym urządzeniem z innego urządzenia</string>
+    <string name="pref_plugin_telepathy_mms">Wyślij MMSa</string>
+    <string name="pref_plugin_telepathy_mms_desc">Aby móc wysyłać MMSa z COSMIC Connect, musisz ustawić go jako domyślny program do SMSów</string>
+    <string name="pref_plugin_telephony">Powiadomienia o dzwonieniu</string>
+    <string name="pref_plugin_telephony_desc">Wysyła na inne urządzenie powiadomienia o rozmowach przychodzących na to urządzenie</string>
+    <string msgid="6685851473431805375" name="preference_copied">"Skopiowano „<ns1:g id="SUMMARY">%1$s</ns1:g>” do schowka."</string>
+    <string name="presenter_exit">Zakończ prezentację</string>
+    <string name="presenter_fullscreen">Pełny ekran</string>
+    <string name="presenter_lock_tip">Możesz zablokować swoje urządzenie i używać przycisków głośności, aby przejść do kolejnej/poprzedniej strony</string>
+    <string name="presenter_pointer">Wskaźnik</string>
+    <string name="privacy_options">Ustawienia prywatności</string>
+    <string name="protocol_version">Wersja protokołu:</string>
+    <string name="protocol_version_newer">Urządzenie to używa nowszej wersji protokołu</string>
+    <string msgid="5941395253238309765" name="range_end">"Koniec zakresu"</string>
+    <string msgid="7097486360902471446" name="range_start">"Początek zakresu"</string>
+    <string name="receive_notifications_permission_explanation">Należy zezwolić na powiadomienia, aby móc je otrzymywać z innych urządzeń</string>
+    <string name="received_file_text">Stuknij, aby otworzyć „%1s”</string>
+    <string name="refresh">Odśwież</string>
+    <string name="remote_device_fingerprint">Odcisk palca SHA256 certyfikatu twojego zdalnego urządzenia to:</string>
+    <string name="remote_keyboard_service">Zdalna klawiatura COSMIC Connect</string>
+    <string name="remotekeyboard_connected">Połączenie zdalnej klawiatury jest nawiązane</string>
+    <string name="remotekeyboard_editing_only_title">Obsługuj zdalne naciśnięcia klawiszy tylko podczas edycji</string>
+    <string name="remotekeyboard_multiple_connections">Nawiązano więcej niż jedno połączenie zdalnej klawiatury, wybierz urządzenie do ustawienia</string>
+    <string name="remotekeyboard_not_connected">Nie istnieje połączenie zdalnej klawiatury, nawiąż takie połączenie w cosmicconnect</string>
+    <string name="report_bug">Zgłoś błąd</string>
+    <string name="request_pairing">Prośba o sparowanie</string>
+    <string name="right_click">Wyślij kliknięcie prawym</string>
+    <string name="ring">Zadzwoń</string>
+    <string name="rise_down">Obniż</string>
+    <string name="rise_up">Podnieś</string>
+    <string name="runcommand_category_device_controls_title">Sterowanie urządzeniem</string>
+    <string name="runcommand_device_controls_summary">Jeśli twoje urządzeni obsługuje sterowanie nim, to polecenia, które ustawiłeś, pojawią się tutaj.</string>
+    <string name="runcommand_name_as_title_title">Pokaż nazwę jako tytuł</string>
+    <string name="runcommand_noruncommandplugin">To urządzenie nie ma włączonej wtyczki wykonywania poleceń</string>
+    <string name="runcommand_nosuchdevice">Nie ma takiego urządzenia</string>
+    <string name="runcommand_notpaired">Urządzenie jest niesparowane</string>
+    <string name="runcommand_notreachable">Urządzenie jest nieosiągalne</string>
+    <string name="sad_ok">OK :(</string>
+    <string name="saikrishna_arcot_task">Wsparcie do obsługi klawiatury we wtyczce zdalnego wprowadzania, usuwanie błędów i ogólne usprawnienia</string>
+    <string name="samoilenko_yuri_task">Implementacja SFTP, usuwanie błędów i ogólne usprawnienia</string>
+    <string msgid="6264217191555673260" name="search_menu_title">"Szukaj"</string>
+    <string name="searchview_clear_text_content_description">Wyczyść tekst</string>
+    <string name="searchview_navigation_content_description">Wstecz</string>
+    <string name="select_ringtone">Wybierz dzwonek</string>
+    <string msgid="6043586758067023" name="selected">"Wybrano"</string>
+    <string name="send_clipboard">Wysyłanie schowka</string>
+    <string name="send_compose">Wyślij</string>
+    <string name="send_files">Wysyłanie plików</string>
+    <string name="send_ping">Wyślij ping</string>
+    <string name="sendkeystrokes_disabled_toast">Wysyłanie naciśnięć klawiszy jest wyłączone - włącz je w ustawieniach</string>
+    <string name="sendkeystrokes_pref_category_summary">Ten moduł umożliwia innym programom współdzielenie odcinków tekstu jako naciśnięć klawiszy, które będą wysyłane do podłączonego gospodarza</string>
+    <string name="sendkeystrokes_pref_category_title">Wysyłanie klawiszy</string>
+    <string name="sendkeystrokes_pref_enabled">Wysyła naciśnięcia klawiszy z tego urządzenia do sterowania innym urządzeniem</string>
+    <string name="sendkeystrokes_pref_enabled_summary">Nasłuchuj danych o rodzaju mime \'text/x-keystrokes\'</string>
+    <string name="sendkeystrokes_safe_text_enabled">Wyślij bezpieczny tekst natychmiastowo</string>
+    <string name="sendkeystrokes_safe_text_enabled_summary">Wyślij krótkie, liczbowe ciągi znaków, bez potwierdzenia</string>
+    <string name="sendkeystrokes_send_to">Wyślij naciśnięcia klawiszy do</string>
+    <string name="sendkeystrokes_sent_text">Wysłano %1$s na urządzenie %2$s</string>
+    <string name="sendkeystrokes_textbox_hint">Wyślij naciśnięcia klawiszy do gospodarza</string>
+    <string name="sendkeystrokes_wrong_data">Nieprawidłowy rodzaj mime - musi być \'text/x-keystrokes\'</string>
+    <string name="set_default_sms_app_title">Wyślij SMSa</string>
+    <string name="set_group_message_as_mms_title">Wyślij MMSa do grupy</string>
+    <string name="set_long_text_as_mms_title">Wyślij długi tekst jako MMS</string>
+    <string name="set_privacy_options">Ustaw swoją prywatność</string>
+    <string name="set_runcommand_name_as_title">ustaw_nazwę_polecenia_jako_tytuł</string>
+    <string name="setting_persistent_notification">Pokaż nieznikające powiadomienia</string>
+    <string name="setting_persistent_notification_description">Stuknij, aby je ustawić w ustawieniach powiadomień</string>
+    <string name="setting_persistent_notification_oreo">Nieznikające powiadomienia</string>
+    <string name="settings">Ustawienia</string>
+    <string name="settings_dark_mode">Ciemny wygląd</string>
+    <string name="settings_export_logs">Wyeksportuj dziennik COSMIC Connect</string>
+    <string name="settings_export_logs_text">Utwórz plik zawierający ślad wykonywania, który może pomóc w rozwiązywaniu błędów.</string>
+    <string name="settings_icon_description">Ikona ustawień</string>
+    <string name="settings_more_settings_text">Dodatkowe ustawienia, dotyczące danego urządzenia, można znaleźć po wejściu na nie i wybranie „Ustawienia wtyczek”.</string>
+    <string name="settings_more_settings_title">Więcej ustawień</string>
+    <string name="settings_rename">Nazwa urządzenia</string>
+    <string name="sftp_action_mode_menu_delete">Usuń</string>
+    <string name="sftp_manage_storage_permission_explanation">Aby zezwolić na zdalny dostęp do plików tego urządzenia, musisz zezwolić na zarządzanie pamięcią przez COSMIC Connect.</string>
+    <string name="sftp_missing_permission_error">Brakuje uprawnień: dostęp do systemu plików</string>
+    <string name="sftp_no_storage_locations_configured">Nie ustawiono miejsc w pamięci</string>
+    <string name="sftp_preference_add_storage_location_title">Dodawanie miejsca w pamięci</string>
+    <string name="sftp_preference_configured_storage_locations">Wybrane miejsca w pamięci</string>
+    <string name="sftp_preference_edit_storage_location">Edytowanie miejsca w pamięci</string>
+    <string name="sftp_saf_permission_explanation">Aby przeglądać pliki zdalnie, należy ustawić miejsca w pamięci</string>
+    <string name="sftp_storage_preference_click_to_select">kliknij, aby wybrać</string>
+    <string name="sftp_storage_preference_display_name">Nazwa do wyświetlania</string>
+    <string name="sftp_storage_preference_display_name_already_used">Nazwa do wyświetlania jest już używana</string>
+    <string name="sftp_storage_preference_display_name_cannot_be_empty">Nazwa do wyświetlania nie może być pusta</string>
+    <string name="sftp_storage_preference_storage_location">Miejsce w pamięci</string>
+    <string name="sftp_storage_preference_storage_location_already_configured">To miejsce było już ustawione</string>
+    <string name="share">Udostępnij</string>
+    <string name="share_destination_customize">Własny katalog docelowy</string>
+    <string name="share_destination_customize_summary_disabled">Pobrane pliki ukażą się w Pobranych</string>
+    <string name="share_destination_customize_summary_enabled">Pliki zostaną zapisane w poniższym katalogu</string>
+    <string name="share_destination_folder_preference">Katalog docelowy</string>
+    <string name="share_notification_preference">Hałaśliwe powiadomienia</string>
+    <string name="share_notification_preference_summary">Zadrżyj i odegraj dźwięk przy odebraniu pliku</string>
+    <string name="share_notifications_explanation">Aby widzieć postęp podczas wysyłania i pobierania plików musisz zezwolić na powiadomienia</string>
+    <string name="share_optional_permission_explanation">Aby odbierać pliki musisz zezwolić na dostęp do pamięci</string>
+    <string name="share_received_file">Udostępnij \"%s\"</string>
+    <string name="share_to">Udostępnij urządzeniu...</string>
+    <string name="shareplugin_text_saved">Otrzymano tekst, zapisano do schowka</string>
+    <string name="shellwen_chen_task">Polepszenie bezpieczeństwa SFTP, polepszenie łatwości w utrzymaniu tego projektu, poprawki błędów oraz ogólne ulepszenia</string>
+    <string name="show_keyboard">Pokaż klawiaturę</string>
+    <string name="show_mouse_and_keyboard">Pokaż mysz i klawiaturę</string>
+    <string name="show_notification_if_screen_off">Wyślij powiadomienia tylko gdy ekran jest wyłączony</string>
+    <string name="side_sheet_accessibility_pane_title">Arkusz boczny</string>
+    <string name="source_code">Kod źródłowy</string>
+    <string msgid="4139871816613051306" name="state_empty">"Puste"</string>
+    <string msgid="5834637030682409883" name="state_off">"Wyłączono"</string>
+    <string msgid="1490883874751719580" name="state_on">"Włączono"</string>
+    <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+    <string msgid="9167775378838880170" name="summary_collapsed_preference_list">"<ns1:g id="CURRENT_ITEMS">%1$s</ns1:g>, <ns1:g id="ADDED_ITEMS">%2$s</ns1:g>"</string>
+    <string msgid="2561197295334830845" name="switch_role">"Przełącznik"</string>
+    <string msgid="1672349317127674378" name="tab">"Karta"</string>
+    <string name="tap_to_answer">Stuknij, aby odpowiedzieć</string>
+    <string name="tap_to_execute">Stuknij, aby wykonać</string>
+    <string name="tap_to_open">Stuknij, aby otworzyć</string>
+    <string name="telepathy_permission_explanation">Aby czytać i pisać esemesy na innym urządzeniu, należy nadać uprawnienia do esemesów</string>
+    <string name="telephony_optional_permission_explanation">Aby widzieć nazwę kontaktu zamiast numeru telefonu, należy zezwolić na dostęp do kontaktów telefonu</string>
+    <string name="telephony_permission_explanation">Aby widzieć rozmowy telefoniczne na innym urządzeniu, należy nadać uprawnienia do dziennika rozmów i stanu telefonu</string>
+    <string name="telephony_pref_blocked_dialog_desc">Nie pokazuj rozmów, ani SMSów z tych numerów. Podawaj jeden numer na wiersz</string>
+    <string name="telephony_pref_blocked_title">Zablokowane numery</string>
+    <string msgid="5946805113151406391" name="template_percent">"<ns1:g id="PERCENTAGE">%1$d</ns1:g> procent."</string>
+    <string name="thanks_to">Podziękowania</string>
+    <string name="theme_dialog_title">Obowiązujący wygląd</string>
+    <string name="title_activity_notification_filter">Filtr powiadomień</string>
+    <string msgid="3765533235322692011" name="tooltip_description">"etykietka"</string>
+    <string msgid="3124740595719787496" name="tooltip_label">"pokaż etykietkę"</string>
+    <string name="trusted_networks">Sieci zaufane</string>
+    <string name="trusted_networks_desc">Ogranicz samowykrywanie do znanych sieci</string>
+    <string name="undo">Cofnij</string>
+    <string name="unknown_device">Nieznane urządzenie</string>
+    <string name="unreachable_description">To sparowane urządzenie jest nieosiągalne. Upewnij się, że jest podłączone do tej samej sieci.</string>
+    <string name="unreachable_device_dynamic_shortcut">%s (✕)</string>
+    <string name="unreachable_device_url_share_text">Adres URL udostępniony nieosiągalnemu urządzeniu zostanie do niego dostarczony zaraz po tym jak stanie się osiągalne.\n\n</string>
+    <string name="unreachable_share_toast">Adres URL zostanie udostępniony podczas kolejnego podłączenia urządzenia.</string>
+    <string name="use_digitizer">Użyj jako tabletu rysunkowego</string>
+    <string name="user_display_name">Ty</string>
+    <string msgid="3140233346420563315" name="v7_preference_off">"WYŁ."</string>
+    <string msgid="89551595707643515" name="v7_preference_on">"WŁ."</string>
+    <string name="version">Wersja %s</string>
+    <string name="view_status_title">Stan</string>
+    <string name="visit_contributors_homepage">Odwiedź stronę twórcy\n%s</string>
+    <string name="website">Strona sieciowa</string>
+</resources>

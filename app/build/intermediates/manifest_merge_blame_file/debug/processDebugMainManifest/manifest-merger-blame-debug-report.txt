@@ -1,0 +1,1026 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<!--
+3SPDX-FileCopyrightText: 2023 Albert Vaca Cintora <albertvaka@gmail.com>
+4
+5SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+6-->
+7<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+8    package="org.cosmic.cosmicconnect.debug"
+9    android:versionCode="13404"
+10    android:versionName="1.34.4-debug" >
+11
+12    <uses-sdk
+13        android:minSdkVersion="23"
+14        android:targetSdkVersion="34" />
+15
+16    <uses-feature
+16-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:12:5-14:36
+17        android:name="android.hardware.telephony"
+17-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:13:9-50
+18        android:required="false" />
+18-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:14:9-33
+19    <uses-feature
+19-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:15:5-17:36
+20        android:name="android.hardware.touchscreen"
+20-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:16:9-52
+21        android:required="false" />
+21-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:17:9-33
+22    <uses-feature
+22-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:18:5-20:36
+23        android:name="android.software.leanback"
+23-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:19:9-49
+24        android:required="false" />
+24-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:20:9-33
+25    <uses-feature
+25-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:21:5-23:36
+26        android:name="android.hardware.bluetooth"
+26-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:22:9-50
+27        android:required="false" />
+27-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:23:9-33
+28    <uses-feature
+28-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:24:5-26:36
+29        android:name="android.hardware.location.gps"
+29-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:25:9-53
+30        android:required="false" />
+30-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:26:9-33
+31    <uses-feature
+31-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:27:5-29:36
+32        android:name="android.hardware.microphone"
+32-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:28:9-51
+33        android:required="false" />
+33-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:29:9-33
+34
+35    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+35-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:31:5-81
+35-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:31:22-78
+36    <uses-permission android:name="android.permission.INTERNET" />
+36-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:32:5-67
+36-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:32:22-64
+37    <uses-permission
+37-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:33:5-95
+38        android:name="android.permission.BLUETOOTH"
+38-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:33:22-65
+39        android:maxSdkVersion="30" />
+39-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:33:66-92
+40    <uses-permission
+40-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:34:5-101
+41        android:name="android.permission.BLUETOOTH_ADMIN"
+41-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:34:22-71
+42        android:maxSdkVersion="30" />
+42-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:34:72-98
+43    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+43-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:35:5-76
+43-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:35:22-73
+44    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+44-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:36:5-73
+44-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:36:22-70
+45    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+45-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:37:5-79
+45-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:37:22-76
+46    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+46-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:38:5-79
+46-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:38:22-76
+47    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+47-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:39:5-76
+47-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:39:22-73
+48    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+48-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:40:5-76
+48-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:40:22-73
+49    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+49-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:41:5-86
+49-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:41:22-83
+50    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+50-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:42:5-75
+50-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:42:22-72
+51    <uses-permission android:name="android.permission.READ_CONTACTS" />
+51-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:43:5-72
+51-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:43:22-69
+52    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+52-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:44:5-80
+52-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:44:22-77
+53    <uses-permission android:name="android.permission.VIBRATE" />
+53-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:45:5-66
+53-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:45:22-63
+54    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+54-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:46:5-81
+54-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:46:22-78
+55    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+55-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:47:5-88
+55-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:47:22-85
+56    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+56-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:48:5-77
+56-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:48:22-74
+57    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+57-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:49:5-72
+57-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:49:22-69
+58    <uses-permission android:name="android.permission.SEND_SMS" />
+58-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:50:5-67
+58-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:50:22-64
+59    <uses-permission android:name="android.permission.READ_SMS" />
+59-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:51:5-67
+59-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:51:22-64
+60    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+60-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:52:5-70
+60-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:52:22-67
+61    <uses-permission android:name="android.permission.RECEIVE_MMS" />
+61-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:53:5-70
+61-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:53:22-67
+62    <uses-permission android:name="android.permission.WAKE_LOCK" />
+62-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:54:5-68
+62-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:54:22-65
+63    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+63-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:55:5-83
+63-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:55:22-80
+64    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+64-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:56:5-81
+64-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:56:22-78
+65    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+65-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:57:5-81
+65-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:57:22-78
+66    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+66-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:58:5-79
+66-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:58:22-76
+67    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+67-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:59:5-71
+67-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:59:22-68
+68    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+68-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:60:5-119
+68-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:60:22-74
+69    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+69-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:61:5-85
+69-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:61:22-82
+70    <uses-permission android:name="android.permission.READ_LOGS" />
+70-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:62:5-104
+70-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:62:22-65
+71    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+71-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:63:5-78
+71-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:63:22-75
+72    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
+72-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:64:5-94
+72-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:64:22-91
+73    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+73-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:65:5-111
+73-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:65:22-79
+74    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+74-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:66:5-77
+74-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:66:22-74
+75
+76    <permission
+76-->[androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+77        android:name="org.cosmic.cosmicconnect.debug.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+77-->[androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+78        android:protectionLevel="signature" />
+78-->[androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+79
+80    <uses-permission android:name="org.cosmic.cosmicconnect.debug.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+80-->[androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+80-->[androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+81
+82    <application
+82-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:68:5-473:19
+83        android:name="org.cosmic.cosmicconnect.CosmicConnect"
+83-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:78:9-62
+84        android:allowBackup="false"
+84-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:74:9-36
+85        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+85-->[androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
+86        android:banner="@mipmap/ic_launcher_banner"
+86-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:72:9-52
+87        android:dataExtractionRules="@xml/data_extraction_rules"
+87-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:75:9-65
+88        android:debuggable="true"
+89        android:enableOnBackInvokedCallback="true"
+89-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:79:9-51
+90        android:extractNativeLibs="false"
+91        android:icon="@mipmap/ic_launcher"
+91-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:69:9-43
+92        android:label="@string/kde_connect"
+92-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:71:9-44
+93        android:localeConfig="@xml/_generated_res_locale_config"
+94        android:networkSecurityConfig="@xml/network_security_config"
+94-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:76:9-69
+95        android:requestLegacyExternalStorage="true"
+95-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:80:9-52
+96        android:roundIcon="@mipmap/ic_launcher_round"
+96-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:70:9-54
+97        android:supportsRtl="true"
+97-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:73:9-35
+98        android:theme="@style/CosmicConnectTheme.NoActionBar" > <!-- requestLegacyExternalStorage is only used in Android 10: https://developer.android.com/training/data-storage/use-cases#opt-out-in-production-app -->
+98-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:77:9-62
+99
+100        <receiver
+100-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:83:9-92:20
+101            android:name="com.android.mms.transaction.PushReceiver"
+101-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:84:13-68
+102            android:exported="true"
+102-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:85:13-36
+103            android:permission="android.permission.BROADCAST_WAP_PUSH" >
+103-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:86:13-71
+104            <intent-filter>
+104-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:87:13-91:29
+105                <action android:name="android.provider.Telephony.WAP_PUSH_DELIVER" />
+105-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:88:17-86
+105-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:88:25-83
+106
+107                <data android:mimeType="application/vnd.wap.mms-message" />
+107-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:90:17-76
+107-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:90:23-73
+108            </intent-filter>
+109        </receiver>
+110
+111        <service
+111-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:94:9-97:39
+112            android:name="com.android.mms.transaction.TransactionService"
+112-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:95:13-74
+113            android:enabled="true"
+113-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:96:13-35
+114            android:exported="true" />
+114-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:97:13-36
+115        <service
+115-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:99:9-103:38
+116            android:name="org.cosmic.cosmicconnect.BackgroundService"
+116-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:100:13-70
+117            android:enabled="true"
+117-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:103:13-35
+118            android:foregroundServiceType="connectedDevice"
+118-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:101:13-60
+119            android:icon="@drawable/icon" />
+119-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:102:13-42
+120        <service
+120-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:104:9-116:19
+121            android:name="org.cosmic.cosmicconnect.Plugins.RemoteKeyboardPlugin.RemoteKeyboardService"
+121-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:105:13-103
+122            android:exported="true"
+122-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:107:13-36
+123            android:label="@string/remote_keyboard_service"
+123-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:106:13-60
+124            android:permission="android.permission.BIND_INPUT_METHOD" >
+124-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:108:13-70
+125            <intent-filter>
+125-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:109:13-111:29
+126                <action android:name="android.view.InputMethod" />
+126-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:110:17-67
+126-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:110:25-64
+127            </intent-filter>
+128
+129            <meta-data
+129-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:113:13-115:71
+130                android:name="android.view.im"
+130-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:114:17-47
+131                android:resource="@xml/remotekeyboardplugin_method" />
+131-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:115:17-68
+132        </service>
+133
+134        <activity
+134-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:118:9-135:20
+135            android:name="org.cosmic.cosmicconnect.UserInterface.MainActivity"
+135-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:119:13-79
+136            android:exported="true" >
+136-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:120:13-36
+137            <intent-filter>
+137-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:121:13-125:29
+138                <action android:name="android.intent.action.MAIN" />
+138-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:122:17-69
+138-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:122:25-66
+139
+140                <category android:name="android.intent.category.LAUNCHER" />
+140-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:124:17-77
+140-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:124:27-74
+141            </intent-filter>
+142            <intent-filter>
+142-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:126:13-128:29
+143                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
+143-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:127:17-98
+143-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:127:25-96
+144            </intent-filter>
+145            <intent-filter>
+145-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:129:13-131:29
+146                <action android:name="android.intent.action.MAIN" />
+146-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:122:17-69
+146-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:122:25-66
+147            </intent-filter>
+148
+149            <meta-data
+149-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:133:13-134:53
+150                android:name="android.app.shortcuts"
+150-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:133:24-60
+151                android:resource="@xml/shortcuts" />
+151-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:134:17-50
+152        </activity>
+153        <activity
+153-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:136:9-144:20
+154            android:name="org.cosmic.cosmicconnect.UserInterface.PluginSettingsActivity"
+154-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:137:13-89
+155            android:exported="false"
+155-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:139:13-37
+156            android:label="@string/device_menu_plugins"
+156-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:138:13-56
+157            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity" >
+157-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:140:13-93
+158            <meta-data
+158-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:141:13-143:87
+159                android:name="android.support.PARENT_ACTIVITY"
+159-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:142:17-63
+160                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+160-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:143:17-84
+161        </activity>
+162        <activity
+162-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:145:9-153:20
+163            android:name="org.cosmic.cosmicconnect.UserInterface.CustomDevicesActivity"
+163-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:146:13-88
+164            android:exported="false"
+164-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:148:13-37
+165            android:label="@string/custom_devices_settings"
+165-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:147:13-60
+166            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity" >
+166-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:149:13-93
+167            <meta-data
+167-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:141:13-143:87
+168                android:name="android.support.PARENT_ACTIVITY"
+168-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:142:17-63
+169                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+169-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:143:17-84
+170        </activity>
+171        <activity
+171-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:154:9-162:20
+172            android:name="org.cosmic.cosmicconnect.Plugins.SharePlugin.SendFileActivity"
+172-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:155:13-89
+173            android:exported="true"
+173-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:157:13-36
+174            android:label="COSMIC Connect"
+174-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:156:13-43
+175            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity" >
+175-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:158:13-93
+176            <meta-data
+176-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:141:13-143:87
+177                android:name="android.support.PARENT_ACTIVITY"
+177-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:142:17-63
+178                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+178-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:143:17-84
+179        </activity>
+180
+181        <receiver
+181-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:164:9-178:20
+182            android:name="org.cosmic.cosmicconnect.CosmicConnectBroadcastReceiver"
+182-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:164:19-89
+183            android:exported="true" >
+183-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:165:13-36
+184            <intent-filter>
+184-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:166:13-168:29
+185                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+185-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:167:17-83
+185-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:167:25-81
+186            </intent-filter>
+187            <intent-filter>
+187-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:169:13-171:29
+188                <action android:name="android.intent.action.BOOT_COMPLETED" />
+188-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:170:17-79
+188-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:170:25-76
+189            </intent-filter>
+190            <intent-filter>
+190-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:172:13-174:29
+191                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+191-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:173:17-79
+191-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:173:25-76
+192            </intent-filter>
+193            <intent-filter>
+193-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:175:13-177:29
+194                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+194-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:176:17-78
+194-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:176:25-75
+195            </intent-filter>
+196        </receiver>
+197
+198        <activity
+198-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:180:9-185:51
+199            android:name="org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.FindMyPhoneActivity"
+199-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:181:13-98
+200            android:configChanges="orientation|screenSize"
+200-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:182:13-59
+201            android:excludeFromRecents="true"
+201-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:183:13-46
+202            android:label="@string/findmyphone_title"
+202-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:184:13-54
+203            android:launchMode="singleInstance" />
+203-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:185:13-48
+204
+205        <receiver
+205-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:187:9-192:20
+206            android:name="org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.FindMyPhoneReceiver"
+206-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:187:19-104
+207            android:exported="true" >
+207-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:188:13-36
+208            <intent-filter>
+208-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:189:13-191:29
+209                <action android:name="org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.foundIt" />
+209-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:190:17-101
+209-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:190:25-98
+210            </intent-filter>
+211        </receiver>
+212
+213        <!-- Plugin-related activities and services -->
+214
+215        <activity
+215-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:196:9-199:48
+216            android:name="org.cosmic.cosmicconnect.Plugins.ClipboardPlugin.ClipboardFloatingActivity"
+216-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:197:13-102
+217            android:excludeFromRecents="true"
+217-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:199:13-46
+218            android:theme="@style/Theme.Transparent" />
+218-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:198:13-53
+219        <activity
+219-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:201:9-209:20
+220            android:name="org.cosmic.cosmicconnect.Plugins.MprisPlugin.MprisActivity"
+220-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:202:13-86
+221            android:label="@string/open_mpris_controls"
+221-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:203:13-56
+222            android:launchMode="singleTop"
+222-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:204:13-43
+223            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity" >
+223-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:205:13-93
+224            <meta-data
+224-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:141:13-143:87
+225                android:name="android.support.PARENT_ACTIVITY"
+225-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:142:17-63
+226                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+226-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:143:17-84
+227        </activity>
+228
+229        <receiver
+229-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:211:9-216:20
+230            android:name="org.cosmic.cosmicconnect.Plugins.MprisPlugin.MprisMediaNotificationReceiver"
+230-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:211:19-109
+231            android:exported="true" >
+231-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:212:13-36
+232            <intent-filter>
+232-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:213:13-215:29
+233                <action android:name="android.intent.action.MEDIA_BUTTON" />
+233-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:214:17-77
+233-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:214:25-74
+234            </intent-filter>
+235        </receiver>
+236
+237        <activity
+237-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:218:9-226:20
+238            android:name="org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandActivity"
+238-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:219:13-96
+239            android:exported="false"
+239-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:221:13-37
+240            android:label="@string/pref_plugin_runcommand"
+240-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:220:13-59
+241            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity" >
+241-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:222:13-93
+242            <meta-data
+242-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:141:13-143:87
+243                android:name="android.support.PARENT_ACTIVITY"
+243-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:142:17-63
+244                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+244-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:143:17-84
+245        </activity>
+246        <activity
+246-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:227:9-233:47
+247            android:name="org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandWidgetConfigActivity"
+247-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:228:13-108
+248            android:excludeFromRecents="true"
+248-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:229:13-46
+249            android:label="@string/pref_plugin_runcommand"
+249-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:230:13-59
+250            android:launchMode="singleTask"
+250-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:231:13-44
+251            android:noHistory="true"
+251-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:232:13-37
+252            android:screenOrientation="user" />
+252-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:233:13-45
+253
+254        <service
+254-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:235:9-238:72
+255            android:name="org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.CommandsRemoteViewsService"
+255-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:236:13-104
+256            android:exported="false"
+256-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:237:13-37
+257            android:permission="android.permission.BIND_REMOTEVIEWS" />
+257-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:238:13-69
+258
+259        <receiver
+259-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:240:9-254:20
+260            android:name="org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandWidgetProvider"
+260-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:241:13-102
+261            android:exported="true"
+261-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:243:13-36
+262            android:label="@string/pref_plugin_runcommand" >
+262-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:242:13-59
+263            <intent-filter>
+263-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:244:13-246:29
+264                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+264-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:245:17-84
+264-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:245:25-81
+265            </intent-filter>
+266            <intent-filter>
+266-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:247:13-249:29
+267                <action android:name="RUN_COMMAND_ACTION" />
+267-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:248:17-61
+267-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:248:25-58
+268            </intent-filter>
+269
+270            <meta-data
+270-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:251:13-253:70
+271                android:name="android.appwidget.provider"
+271-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:252:17-58
+272                android:resource="@xml/remotecommandplugin_widget" />
+272-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:253:17-67
+273        </receiver>
+274
+275        <activity
+275-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:256:9-269:20
+276            android:name="org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandUrlActivity"
+276-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:256:19-105
+277            android:exported="true" >
+277-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:257:13-36
+278            <intent-filter>
+278-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:258:13-268:29
+279                <action android:name="android.intent.action.VIEW" />
+279-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:259:17-69
+279-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:259:25-66
+280                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+280-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:260:17-77
+280-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:260:25-74
+281
+282                <category android:name="android.intent.category.DEFAULT" />
+282-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:262:17-76
+282-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:262:27-73
+283                <category android:name="android.intent.category.BROWSABLE" />
+283-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:263:17-78
+283-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:263:27-75
+284
+285                <data
+285-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:90:17-76
+286                    android:host="runcommand"
+286-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:266:21-46
+287                    android:scheme="cosmicconnect" />
+287-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:267:21-51
+288            </intent-filter>
+289        </activity>
+290        <activity
+290-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:270:9-280:20
+291            android:name="org.cosmic.cosmicconnect.Plugins.MousePadPlugin.BigscreenActivity"
+291-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:271:13-93
+292            android:configChanges="orientation|keyboardHidden|screenSize"
+292-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:272:13-74
+293            android:exported="true"
+293-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:274:13-36
+294            android:label="@string/pref_plugin_bigscreen"
+294-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:273:13-58
+295            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity"
+295-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:275:13-93
+296            android:windowSoftInputMode="stateHidden|adjustResize" >
+296-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:276:13-67
+297            <meta-data
+297-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:141:13-143:87
+298                android:name="android.support.PARENT_ACTIVITY"
+298-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:142:17-63
+299                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+299-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:143:17-84
+300        </activity>
+301        <activity
+301-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:281:9-290:20
+302            android:name="org.cosmic.cosmicconnect.Plugins.MousePadPlugin.MousePadActivity"
+302-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:282:13-92
+303            android:exported="false"
+303-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:284:13-37
+304            android:label="@string/pref_plugin_mousepad"
+304-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:283:13-57
+305            android:launchMode="singleTop"
+305-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:285:13-43
+306            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity" >
+306-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:286:13-93
+307            <meta-data
+307-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:141:13-143:87
+308                android:name="android.support.PARENT_ACTIVITY"
+308-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:142:17-63
+309                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+309-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:143:17-84
+310        </activity>
+311        <activity
+311-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:291:9-300:20
+312            android:name="org.cosmic.cosmicconnect.Plugins.MousePadPlugin.ComposeSendActivity"
+312-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:292:13-95
+313            android:exported="false"
+313-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:294:13-37
+314            android:label="@string/compose_send_title"
+314-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:293:13-55
+315            android:parentActivityName="org.cosmic.cosmicconnect.Plugins.MousePadPlugin.MousePadActivity"
+315-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:295:13-106
+316            android:windowSoftInputMode="adjustResize" >
+316-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:296:13-55
+317            <meta-data
+317-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:141:13-143:87
+318                android:name="android.support.PARENT_ACTIVITY"
+318-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:142:17-63
+319                android:value="org.cosmic.cosmicconnect.Plugins.MousePadPlugin.MousePadActivity" />
+319-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:143:17-84
+320        </activity>
+321        <!-- TODO: Remove? This is only used by https://github.com/andOTP/andOTP, which is unmaintained since 2021. Do people use forks or can we remove this? -->
+322        <activity
+322-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:302:9-316:20
+323            android:name="org.cosmic.cosmicconnect.Plugins.MousePadPlugin.SendKeystrokesToHostActivity"
+323-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:303:13-104
+324            android:exported="true"
+324-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:305:13-36
+325            android:label="@string/pref_plugin_mousepad_send_keystrokes"
+325-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:304:13-73
+326            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity" >
+326-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:306:13-93
+327            <meta-data
+327-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:141:13-143:87
+328                android:name="android.support.PARENT_ACTIVITY"
+328-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:142:17-63
+329                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+329-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:143:17-84
+330            <!-- Accept data with "text/x-keystrokes" to send the text to the connected host and emulate keystrokes -->
+331            <intent-filter>
+331-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:311:13-315:29
+332                <action android:name="android.intent.action.SEND" />
+332-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:312:17-68
+332-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:312:25-66
+333
+334                <category android:name="android.intent.category.DEFAULT" />
+334-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:262:17-76
+334-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:262:27-73
+335
+336                <data android:mimeType="text/x-keystrokes" />
+336-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:90:17-76
+336-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:90:23-73
+337            </intent-filter>
+338        </activity>
+339        <activity
+339-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:317:9-327:20
+340            android:name="org.cosmic.cosmicconnect.Plugins.PresenterPlugin.PresenterActivity"
+340-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:318:13-94
+341            android:configChanges="orientation|keyboardHidden|screenSize"
+341-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:319:13-74
+342            android:exported="false"
+342-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:321:13-37
+343            android:label="@string/pref_plugin_presenter"
+343-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:320:13-58
+344            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity"
+344-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:322:13-93
+345            android:windowSoftInputMode="stateHidden|adjustResize" >
+345-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:323:13-67
+346            <meta-data
+346-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:141:13-143:87
+347                android:name="android.support.PARENT_ACTIVITY"
+347-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:142:17-63
+348                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+348-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:143:17-84
+349        </activity>
+350        <activity
+350-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:328:9-350:20
+351            android:name="org.cosmic.cosmicconnect.Plugins.SharePlugin.ShareActivity"
+351-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:329:13-86
+352            android:exported="true"
+352-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:330:13-36
+353            android:label="@string/manifest_label_share" >
+353-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:331:13-57
+354            <intent-filter>
+354-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:332:13-338:29
+355                <action android:name="android.intent.action.SEND" />
+355-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:312:17-68
+355-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:312:25-66
+356
+357                <category android:name="android.intent.category.DEFAULT" />
+357-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:262:17-76
+357-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:262:27-73
+358
+359                <data android:mimeType="*/*" />
+359-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:90:17-76
+359-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:90:23-73
+360            </intent-filter>
+361            <intent-filter>
+361-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:339:13-345:29
+362                <action android:name="android.intent.action.SEND_MULTIPLE" />
+362-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:340:17-78
+362-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:340:25-75
+363
+364                <category android:name="android.intent.category.DEFAULT" />
+364-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:262:17-76
+364-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:262:27-73
+365
+366                <data android:mimeType="*/*" />
+366-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:90:17-76
+366-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:90:23-73
+367            </intent-filter>
+368
+369            <meta-data
+369-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:347:13-349:106
+370                android:name="android.service.chooser.chooser_target_service"
+370-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:348:17-78
+371                android:value="org.cosmic.cosmicconnect.Plugins.SharePlugin.ShareChooserTargetService" />
+371-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:349:17-103
+372        </activity>
+373
+374        <receiver
+374-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:352:9-357:20
+375            android:name="org.cosmic.cosmicconnect.Plugins.SharePlugin.ShareBroadcastReceiver"
+375-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:352:19-101
+376            android:exported="true" >
+376-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:353:13-36
+377            <intent-filter>
+377-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:354:13-356:29
+378                <action android:name="org.cosmic.cosmicconnect.Plugins.SharePlugin.CancelShare" />
+378-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:355:17-99
+378-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:355:25-96
+379            </intent-filter>
+380        </receiver>
+381
+382        <provider
+383            android:name="androidx.core.content.FileProvider"
+383-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:360:13-62
+384            android:authorities="org.cosmic.cosmicconnect.debug.fileprovider"
+384-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:361:13-64
+385            android:exported="false"
+385-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:362:13-37
+386            android:grantUriPermissions="true" >
+386-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:363:13-47
+387            <meta-data
+387-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:364:13-366:62
+388                android:name="android.support.FILE_PROVIDER_PATHS"
+388-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:365:17-67
+389                android:resource="@xml/fileprovider_paths" />
+389-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:366:17-59
+390        </provider>
+391
+392        <service
+392-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:369:9-376:19
+393            android:name="org.cosmic.cosmicconnect.Plugins.NotificationsPlugin.NotificationReceiver"
+393-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:370:13-101
+394            android:exported="true"
+394-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:371:13-36
+395            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" >
+395-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:372:13-87
+396            <intent-filter>
+396-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:373:13-375:29
+397                <action android:name="android.service.notification.NotificationListenerService" />
+397-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:374:17-99
+397-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:374:25-96
+398            </intent-filter>
+399        </service>
+400        <service
+400-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:377:9-384:19
+401            android:name="org.cosmic.cosmicconnect.Plugins.SharePlugin.ShareChooserTargetService"
+401-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:378:13-98
+402            android:exported="true"
+402-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:379:13-36
+403            android:permission="android.permission.BIND_CHOOSER_TARGET_SERVICE" >
+403-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:380:13-80
+404            <intent-filter>
+404-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:381:13-383:29
+405                <action android:name="android.service.chooser.ChooserTargetService" />
+405-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:382:17-87
+405-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:382:25-84
+406            </intent-filter>
+407        </service>
+408        <service
+408-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:385:9-395:19
+409            android:name="org.cosmic.cosmicconnect.Plugins.MouseReceiverPlugin.MouseReceiverService"
+409-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:386:13-101
+410            android:exported="true"
+410-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:387:13-36
+411            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" >
+411-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:388:13-79
+412            <intent-filter>
+412-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:389:13-391:29
+413                <action android:name="android.accessibilityservice.AccessibilityService" />
+413-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:390:17-92
+413-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:390:25-89
+414            </intent-filter>
+415
+416            <meta-data
+416-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:392:13-394:66
+417                android:name="android.accessibilityservice"
+417-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:393:17-60
+418                android:resource="@xml/mouse_receiver_service" />
+418-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:394:17-63
+419        </service>
+420
+421        <activity
+421-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:397:9-404:20
+422            android:name="org.cosmic.cosmicconnect.Plugins.NotificationsPlugin.NotificationFilterActivity"
+422-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:398:13-107
+423            android:label="@string/title_activity_notification_filter"
+423-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:399:13-71
+424            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.PluginSettingsActivity" >
+424-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:400:13-103
+425            <meta-data
+425-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:141:13-143:87
+426                android:name="android.support.PARENT_ACTIVITY"
+426-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:142:17-63
+427                android:value="org.cosmic.cosmicconnect.UserInterface.PluginSettingsActivity" />
+427-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:143:17-84
+428        </activity>
+429        <activity
+429-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:406:9-416:20
+430            android:name="org.cosmic.cosmicconnect.Plugins.DigitizerPlugin.DigitizerActivity"
+430-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:407:13-94
+431            android:configChanges="orientation|screenSize"
+431-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:408:13-59
+432            android:exported="false"
+432-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:410:13-37
+433            android:label="@string/pref_plugin_digitizer"
+433-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:409:13-58
+434            android:launchMode="singleTop"
+434-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:411:13-43
+435            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity" >
+435-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:412:13-93
+436            <meta-data
+436-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:141:13-143:87
+437                android:name="android.support.PARENT_ACTIVITY"
+437-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:142:17-63
+438                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+438-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:143:17-84
+439        </activity>
+440        <activity
+440-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:418:9-425:20
+441            android:name="org.cosmic.cosmicconnect.UserInterface.TrustedNetworksActivity"
+441-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:419:13-90
+442            android:label="@string/trusted_networks"
+442-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:420:13-53
+443            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity" >
+443-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:421:13-93
+444            <meta-data
+444-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:141:13-143:87
+445                android:name="android.support.PARENT_ACTIVITY"
+445-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:142:17-63
+446                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+446-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:143:17-84
+447        </activity>
+448        <activity
+448-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:427:9-434:20
+449            android:name="org.cosmic.cosmicconnect.UserInterface.About.EasterEggActivity"
+449-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:428:13-90
+450            android:label="@string/easter_egg"
+450-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:429:13-47
+451            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity" >
+451-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:430:13-93
+452            <meta-data
+452-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:141:13-143:87
+453                android:name="android.support.PARENT_ACTIVITY"
+453-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:142:17-63
+454                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+454-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:143:17-84
+455        </activity>
+456        <activity
+456-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:436:9-443:20
+457            android:name="org.cosmic.cosmicconnect.UserInterface.About.AboutKDEActivity"
+457-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:437:13-89
+458            android:label="@string/about_kde"
+458-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:438:13-46
+459            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity" >
+459-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:439:13-93
+460            <meta-data
+460-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:141:13-143:87
+461                android:name="android.support.PARENT_ACTIVITY"
+461-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:142:17-63
+462                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+462-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:143:17-84
+463        </activity>
+464        <activity
+464-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:445:9-452:20
+465            android:name="org.cosmic.cosmicconnect.UserInterface.About.LicensesActivity"
+465-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:446:13-89
+466            android:label="@string/licenses"
+466-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:447:13-45
+467            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity" >
+467-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:448:13-93
+468            <meta-data
+468-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:141:13-143:87
+469                android:name="android.support.PARENT_ACTIVITY"
+469-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:142:17-63
+470                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+470-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:143:17-84
+471        </activity>
+472
+473        <service
+473-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:454:9-463:19
+474            android:name="org.cosmic.cosmicconnect.Plugins.ClipboardPlugin.ClipboardTileService"
+474-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:455:13-97
+475            android:exported="true"
+475-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:457:13-36
+476            android:icon="@drawable/ic_baseline_content_paste_24"
+476-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:456:13-66
+477            android:label="@string/send_clipboard"
+477-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:458:13-51
+478            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE" >
+478-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:459:13-77
+479            <intent-filter>
+479-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:460:13-462:29
+480                <action android:name="android.service.quicksettings.action.QS_TILE" />
+480-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:461:17-87
+480-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:461:25-84
+481            </intent-filter>
+482        </service>
+483        <service
+483-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:465:9-472:19
+484            android:name="org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandControlsProviderService"
+484-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:465:18-116
+485            android:exported="true"
+485-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:467:13-36
+486            android:label="@string/kde_connect"
+486-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:466:13-48
+487            android:permission="android.permission.BIND_CONTROLS" >
+487-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:468:13-66
+488            <intent-filter>
+488-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:469:13-471:29
+489                <action android:name="android.service.controls.ControlsProviderService" />
+489-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:470:17-91
+489-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:470:25-88
+490            </intent-filter>
+491        </service>
+492
+493        <activity
+493-->[androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/551b0cc91b2f3afba7beefd538db9dd3/transformed/ui-tooling-release/AndroidManifest.xml:23:9-25:39
+494            android:name="androidx.compose.ui.tooling.PreviewActivity"
+494-->[androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/551b0cc91b2f3afba7beefd538db9dd3/transformed/ui-tooling-release/AndroidManifest.xml:24:13-71
+495            android:exported="true" />
+495-->[androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/551b0cc91b2f3afba7beefd538db9dd3/transformed/ui-tooling-release/AndroidManifest.xml:25:13-36
+496
+497        <provider
+497-->[androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+498            android:name="androidx.startup.InitializationProvider"
+498-->[androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
+499            android:authorities="org.cosmic.cosmicconnect.debug.androidx-startup"
+499-->[androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
+500            android:exported="false" >
+500-->[androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
+501            <meta-data
+501-->[androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+502                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+502-->[androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
+503                android:value="androidx.startup" />
+503-->[androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+504            <meta-data
+504-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/88dd3032fd166e36de575f015b3432c6/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:29:13-31:52
+505                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+505-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/88dd3032fd166e36de575f015b3432c6/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:30:17-78
+506                android:value="androidx.startup" />
+506-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/88dd3032fd166e36de575f015b3432c6/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:31:17-49
+507            <meta-data
+507-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+508                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+508-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+509                android:value="androidx.startup" />
+509-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+510        </provider>
+511
+512        <uses-library
+512-->[androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:25:9-27:40
+513            android:name="androidx.window.extensions"
+513-->[androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:26:13-54
+514            android:required="false" />
+514-->[androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:27:13-37
+515        <uses-library
+515-->[androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:28:9-30:40
+516            android:name="androidx.window.sidecar"
+516-->[androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:29:13-51
+517            android:required="false" />
+517-->[androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:30:13-37
+518
+519        <receiver
+519-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+520            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+520-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+521            android:directBootAware="false"
+521-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+522            android:enabled="true"
+522-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+523            android:exported="true"
+523-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+524            android:permission="android.permission.DUMP" >
+524-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+525            <intent-filter>
+525-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+526                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+526-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+526-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+527            </intent-filter>
+528            <intent-filter>
+528-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+529                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+529-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+529-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+530            </intent-filter>
+531            <intent-filter>
+531-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+532                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+532-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+532-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+533            </intent-filter>
+534            <intent-filter>
+534-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+535                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+535-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+535-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
+536            </intent-filter>
+537        </receiver>
+538    </application>
+539
+540</manifest>

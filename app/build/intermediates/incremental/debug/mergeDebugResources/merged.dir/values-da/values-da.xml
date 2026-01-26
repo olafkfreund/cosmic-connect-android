@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2" xmlns:ns2="http://schemas.android.com/tools">
+    <string-array name="convert_to_mms_after_entries">
+    <item>After one message</item>
+    <item>After two messages</item>
+    <item>After three messages</item>
+    <item>After four messages</item>
+    <item>After five messages</item>
+  </string-array>
+    <string-array name="digitizer_preference_entries_draw_button_side">
+    <item>Top left</item>
+    <item>Top right</item>
+    <item>Bottom left</item>
+    <item>Bottom right</item>
+  </string-array>
+    <string-array name="mousepad_acceleration_profile_entries">
+    <item>No Acceleration</item>
+    <item>Weakest</item>
+    <item>Weaker</item>
+    <item>Medium</item>
+    <item>Stronger</item>
+    <item>Strongest</item>
+  </string-array>
+    <string-array name="mousepad_sensitivity_entries">
+    <item>Mest langsom</item>
+    <item>Over mest langsom</item>
+    <item>Standard</item>
+    <item>Over standard</item>
+    <item>Hurtigst</item>
+  </string-array>
+    <string-array name="mpris_time_entries">
+    <item>10 sekunder</item>
+    <item>20 sekunder</item>
+    <item>30 sekunder</item>
+    <item>1 minut</item>
+    <item>2 minutter</item>
+  </string-array>
+    <string-array name="theme_list">
+    <item>Set by Battery Saver</item>
+    <item/>
+    <item>Dark</item>
+  </string-array>
+    <string-array name="theme_list_v28">
+    <item/>
+    <item/>
+    <item>Dark</item>
+  </string-array>
+    <plurals name="mtrl_badge_content_description">
+    <item quantity="one">%d ny notifikation</item>
+    <item quantity="other">%d nye notifikationer</item>
+  </plurals>
+    <string msgid="5976598919945601918" name="abc_action_bar_home_description">"Find hjem"</string>
+    <string msgid="8388173803310557296" name="abc_action_bar_up_description">"Gå op"</string>
+    <string msgid="3937310113216875497" name="abc_action_menu_overflow_description">"Flere valgmuligheder"</string>
+    <string msgid="4692188335987374352" name="abc_action_mode_done">"Udfør"</string>
+    <string msgid="1189761859438369441" name="abc_activity_chooser_view_see_all">"Se alle"</string>
+    <string msgid="2165779757652331008" name="abc_activitychooserview_choose_application">"Vælg en app"</string>
+    <string msgid="4215997306490295099" name="abc_capital_off">"FRA"</string>
+    <string msgid="884982626291842264" name="abc_capital_on">"TIL"</string>
+    <string msgid="8833365367933412986" name="abc_menu_alt_shortcut_label">"Alt+"</string>
+    <string msgid="2223301931652355242" name="abc_menu_ctrl_shortcut_label">"Ctrl+"</string>
+    <string msgid="838001238306846836" name="abc_menu_delete_shortcut_label">"slet"</string>
+    <string msgid="7986526966204849475" name="abc_menu_enter_shortcut_label">"enter"</string>
+    <string msgid="375214403600139847" name="abc_menu_function_shortcut_label">"Fn+"</string>
+    <string msgid="4192209724446364286" name="abc_menu_meta_shortcut_label">"Meta+"</string>
+    <string msgid="4741552369836443843" name="abc_menu_shift_shortcut_label">"Shift+"</string>
+    <string msgid="5473865519181928982" name="abc_menu_space_shortcut_label">"mellemrum"</string>
+    <string msgid="6180552449598693998" name="abc_menu_sym_shortcut_label">"Sym+"</string>
+    <string msgid="5520303668377388990" name="abc_prepend_shortcut_label">"Menu+"</string>
+    <string msgid="7208076849092622260" name="abc_search_hint">"Søg…"</string>
+    <string msgid="3741173234950517107" name="abc_searchview_description_clear">"Ryd forespørgsel"</string>
+    <string msgid="693312494995508443" name="abc_searchview_description_query">"Søgeforespørgsel"</string>
+    <string msgid="3417662926640357176" name="abc_searchview_description_search">"Søg"</string>
+    <string msgid="1486535517437947103" name="abc_searchview_description_submit">"Indsend forespørgsel"</string>
+    <string msgid="2293578557972875415" name="abc_searchview_description_voice">"Talesøgning"</string>
+    <string msgid="8875138169939072951" name="abc_shareactionprovider_share_with">"Del med"</string>
+    <string msgid="9055268688411532828" name="abc_shareactionprovider_share_with_application">"Del med <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
+    <string msgid="1656852541809559762" name="abc_toolbar_collapse_description">"Skjul"</string>
+    <string name="bottomsheet_action_collapse">Skjul feltet i bunden</string>
+    <string name="bottomsheet_action_expand">Udvid feltet i bunden</string>
+    <string name="bottomsheet_action_expand_halfway">Udvid halvdelen</string>
+    <string name="bottomsheet_drag_handle_content_description">Håndtag</string>
+    <string msgid="881409763997275156" name="call_notification_answer_action">"Besvar"</string>
+    <string msgid="8793775615905189152" name="call_notification_answer_video_action">"Video"</string>
+    <string msgid="3229508546291798546" name="call_notification_decline_action">"Afvis"</string>
+    <string msgid="2659457946726154263" name="call_notification_hang_up_action">"Læg på"</string>
+    <string msgid="6107532579223922871" name="call_notification_incoming_text">"Indgående opkald"</string>
+    <string msgid="8623827134497363134" name="call_notification_ongoing_text">"Igangværende opkald"</string>
+    <string msgid="59049573811482460" name="call_notification_screening_text">"Et indgående opkald screenes"</string>
+    <string name="cancel">Annullér</string>
+    <string name="category_connected_devices">Forbundne enheder</string>
+    <string name="category_not_paired_devices">Tilgængelig enheder</string>
+    <string name="category_remembered_devices">Huskede enheder</string>
+    <string name="character_counter_content_description">Du har brugt %1$d ud af %2$d tegn</string>
+    <string name="character_counter_overflowed_content_description">Du har brugt %1$d tegn og dermed overskredet tegnbegrænsningen på %2$d.</string>
+    <string name="clear_text_end_icon_content_description">Ryd tekst</string>
+    <string name="close">Luk</string>
+    <string msgid="406453423630273620" name="close_drawer">"Luk navigationsmenuen"</string>
+    <string msgid="7573152094250666567" name="close_sheet">"Luk arket"</string>
+    <string msgid="6083905920877235314" name="copy">"Kopiér"</string>
+    <string name="custom_device_list">Tilføj enheder via IP</string>
+    <string name="custom_devices_settings">Brugertilpasset liste over enheder</string>
+    <string msgid="8038256446254964252" name="default_error_message">"Ugyldigt input"</string>
+    <string msgid="6312721426453364202" name="default_popup_window_title">"Pop op-vindue"</string>
+    <string name="device_list_empty">Ingen enheder</string>
+    <string name="device_menu_plugins">Plugin-indstillinger</string>
+    <string name="device_menu_unpair">Fjern parring</string>
+    <string name="device_not_paired">Enhed ikke parret</string>
+    <string name="device_rename_confirm">Omdøb</string>
+    <string name="device_rename_title">Omdøb enhed</string>
+    <string msgid="1890207353314751437" name="dropdown_menu">"Rullemenu"</string>
+    <string name="encryption_info_title">Krypteringsinfo</string>
+    <string name="error_a11y_label">Fejl: ugyldig</string>
+    <string name="error_already_paired">Enhed allerede parret</string>
+    <string name="error_canceled_by_other_peer">Annulleret af modpart</string>
+    <string name="error_canceled_by_user">Annulleret af brugeren</string>
+    <string name="error_icon_content_description">Fejl</string>
+    <string name="error_not_reachable">Enheden kan ikke nås</string>
+    <string name="error_timed_out">Tidsudløb</string>
+    <string msgid="2427401033573778270" name="expand_button_title">"Avanceret"</string>
+    <string name="exposed_dropdown_menu_content_description">Vis rullemenuen</string>
+    <string name="filter_apps_info">Bekendtgørelser vil blive synkroniseret for de valgte apps.</string>
+    <string name="findmyphone_description">Ringer til denne enhed, så du kan finde den.</string>
+    <string name="findmyphone_title">Find min telefon</string>
+    <string name="findmyphone_title_tablet">Find min tablet</string>
+    <string name="icon_content_description">Ikon for dialogboks</string>
+    <string msgid="6827826412747255547" name="in_progress">"I gang"</string>
+    <string msgid="7933458017204019916" name="indeterminate">"Delvist markeret"</string>
+    <string name="invalid_device_name">Ugyldigt enhedsnavn</string>
+    <string name="item_view_role_description">Fane</string>
+    <string name="m3_loading_indicator_content_description">Indlæser</string>
+    <string msgid="2988463736136100848" name="m3c_bottom_sheet_collapse_description">"Skjul felt i bunden"</string>
+    <string msgid="1555567894577437024" name="m3c_bottom_sheet_dismiss_description">"Luk felt i bunden"</string>
+    <string msgid="8403354765404029791" name="m3c_bottom_sheet_drag_handle_description">"Håndtag"</string>
+    <string msgid="6670819569745899763" name="m3c_bottom_sheet_expand_description">"Udvid felt i bunden"</string>
+    <string msgid="3010635850035863127" name="m3c_bottom_sheet_pane_title">"Felt i bunden"</string>
+    <string msgid="8166741421776570875" name="m3c_date_input_headline">"Angivet dato"</string>
+    <string msgid="229313757840775812" name="m3c_date_input_headline_description">"Angivet dato: %1$s"</string>
+    <string msgid="6116910750161463197" name="m3c_date_input_invalid_for_pattern">"Datoen svarer ikke til det forventede format: %1$s"</string>
+    <string msgid="2521768508935305279" name="m3c_date_input_invalid_not_allowed">"Datoen er ikke tilladt: %1$s"</string>
+    <string msgid="7052898923934555305" name="m3c_date_input_invalid_year_range">"Datoen er uden for det forventede årsinterval: %1$s-%2$s"</string>
+    <string msgid="2895559812010326913" name="m3c_date_input_label">"Dato"</string>
+    <string msgid="1237013946323089826" name="m3c_date_input_no_input_description">"Ingen"</string>
+    <string msgid="7306227249789210568" name="m3c_date_input_title">"Vælg dato"</string>
+    <string msgid="7605002211875882969" name="m3c_date_picker_headline">"Valgt dato"</string>
+    <string msgid="3664277305226978227" name="m3c_date_picker_headline_description">"Aktuelt valg: %1$s"</string>
+    <string msgid="8436650776581492840" name="m3c_date_picker_navigate_to_year_description">"Gå til år %1$s"</string>
+    <string msgid="5811000998184572395" name="m3c_date_picker_no_selection_description">"Ingen"</string>
+    <string msgid="7813882352367152251" name="m3c_date_picker_scroll_to_earlier_years">"Rul for at se tidligere år"</string>
+    <string msgid="5727367015496556177" name="m3c_date_picker_scroll_to_later_years">"Rul for at se senere år"</string>
+    <string msgid="1804346892470238807" name="m3c_date_picker_switch_to_calendar_mode">"Skift til input-tilstand for kalender"</string>
+    <string msgid="395627960681594326" name="m3c_date_picker_switch_to_day_selection">"Stryg for at vælge et år, eller tryk for at skifte tilbage til datovælgeren"</string>
+    <string msgid="2219746470065162704" name="m3c_date_picker_switch_to_input_mode">"Skift til input-tilstand for tekst"</string>
+    <string msgid="7142101321095356500" name="m3c_date_picker_switch_to_next_month">"Skift til næste måned"</string>
+    <string msgid="228438865139394590" name="m3c_date_picker_switch_to_previous_month">"Skift til forrige måned"</string>
+    <string msgid="791651718641787594" name="m3c_date_picker_switch_to_year_selection">"Skift til valg af år"</string>
+    <string msgid="7430790972741451689" name="m3c_date_picker_title">"Vælg dato"</string>
+    <string msgid="3199387177749801575" name="m3c_date_picker_today_description">"I dag"</string>
+    <string msgid="2068382232816991922" name="m3c_date_picker_year_picker_pane_title">"Årsvælgeren er synlig"</string>
+    <string msgid="3190049423327661366" name="m3c_date_range_input_invalid_range_input">"Det angivne datointerval er ugyldigt"</string>
+    <string msgid="3148384720560189467" name="m3c_date_range_input_title">"Angiv datoer"</string>
+    <string msgid="2138321128465719402" name="m3c_date_range_picker_day_in_range">"Inden for de valgte dage"</string>
+    <string msgid="4947636797751277713" name="m3c_date_range_picker_end_headline">"Slutdato"</string>
+    <string msgid="602077859540990149" name="m3c_date_range_picker_scroll_to_next_month">"Rul for at se næste måned"</string>
+    <string msgid="4592174524846109496" name="m3c_date_range_picker_scroll_to_previous_month">"Rul for at se forrige måned"</string>
+    <string msgid="4665981448952749820" name="m3c_date_range_picker_start_headline">"Startdato"</string>
+    <string msgid="3134165431120340385" name="m3c_date_range_picker_title">"Vælg datoer"</string>
+    <string msgid="7617233117134790350" name="m3c_dialog">"Dialogboks"</string>
+    <string msgid="3177828188723359358" name="m3c_dropdown_menu_collapsed">"Skjult"</string>
+    <string msgid="2360841780724299882" name="m3c_dropdown_menu_expanded">"Udvidet"</string>
+    <string msgid="8687821690726149911" name="m3c_dropdown_menu_toggle">"Skift visningen af rullemenuen"</string>
+    <string msgid="6152806324422087846" name="m3c_search_bar_search">"Søg"</string>
+    <string msgid="6152755701819882931" name="m3c_snackbar_dismiss">"Afvis"</string>
+    <string msgid="7655536806087401899" name="m3c_suggestions_available">"Forslag nedenfor"</string>
+    <string msgid="2786685010796619560" name="m3c_time_picker_am">"AM"</string>
+    <string msgid="2349193472625211372" name="m3c_time_picker_hour">"Time"</string>
+    <string msgid="9179527532316922345" name="m3c_time_picker_hour_24h_suffix">"%1$d timer"</string>
+    <string msgid="8876759303332837035" name="m3c_time_picker_hour_selection">"Vælg time"</string>
+    <string msgid="3458167507790628988" name="m3c_time_picker_hour_suffix">"kl. %1$d"</string>
+    <string msgid="6973808109666874069" name="m3c_time_picker_hour_text_field">"til timer"</string>
+    <string msgid="4313071914266462005" name="m3c_time_picker_minute">"Minut"</string>
+    <string msgid="4699133535056739733" name="m3c_time_picker_minute_selection">"Vælg minutter"</string>
+    <string msgid="5064177921781937179" name="m3c_time_picker_minute_suffix">"%1$d minutter"</string>
+    <string msgid="7661234488295443182" name="m3c_time_picker_minute_text_field">"til minutter"</string>
+    <string msgid="5865171949528594571" name="m3c_time_picker_period_toggle_description">"Vælg AM eller PM"</string>
+    <string msgid="6616362054113087709" name="m3c_time_picker_pm">"PM"</string>
+    <string msgid="1805687647081129904" name="m3c_tooltip_long_press_label">"Se værktøjstip"</string>
+    <string msgid="5460405025248574620" name="m3c_tooltip_pane_description">"Værktøjstip"</string>
+    <string name="material_clock_toggle_content_description">Vælg AM eller PM</string>
+    <string name="material_hour_24h_suffix">%1$s timer</string>
+    <string name="material_hour_selection">Vælg time</string>
+    <string name="material_hour_suffix">klokken %1$s</string>
+    <string name="material_minute_selection">Vælg minutter</string>
+    <string name="material_minute_suffix">%1$s minutter</string>
+    <string name="material_slider_range_end">Slut på interval</string>
+    <string name="material_slider_range_start">Start på interval</string>
+    <string name="material_slider_value">Værdi</string>
+    <string name="material_timepicker_am">AM</string>
+    <string name="material_timepicker_clock_mode_description">Skift til urtilstand for at angive klokkeslæt.</string>
+    <string name="material_timepicker_hour">Time</string>
+    <string name="material_timepicker_minute">Minut</string>
+    <string name="material_timepicker_pm">e.m.</string>
+    <string name="material_timepicker_select_time">Vælg tidspunkt</string>
+    <string name="material_timepicker_text_input_mode_description">Skift til teksttilstand for at angive klokkeslæt.</string>
+    <string name="middle_click">Send midterklik</string>
+    <string name="mousepad_double_tap_settings_title">Angiv handling for tap med to fingre</string>
+    <string name="mousepad_scroll_direction_title">Omvendt rulleretning</string>
+    <string name="mousepad_sensitivity_settings_title">Angiv følsomhed for touchpad</string>
+    <string name="mousepad_triple_tap_settings_title">Angiv handling for tap med tre fingre</string>
+    <string name="mpris_ff">Spol frem</string>
+    <string name="mpris_next">Næste</string>
+    <string name="mpris_play">Afspil</string>
+    <string name="mpris_previous">Forrige</string>
+    <string name="mpris_rew">Spol tilbage</string>
+    <string name="mpris_time_settings_title">Spol frem/tilbage-knapper</string>
+    <string name="mpris_volume">Lydstyrke</string>
+    <string name="mtrl_badge_numberless_content_description">Ny notifikation</string>
+    <string name="mtrl_checkbox_state_description_checked">Markeret</string>
+    <string name="mtrl_checkbox_state_description_indeterminate">Delvist markeret</string>
+    <string name="mtrl_checkbox_state_description_unchecked">Ikke markeret</string>
+    <string name="mtrl_chip_close_icon_content_description">Fjern %1$s</string>
+    <string name="mtrl_exceed_max_badge_number_content_description" ns2:ignore="PluralsCandidate">Flere end %1$d nye notifikationer</string>
+    <string name="mtrl_picker_a11y_next_month">Skift til næste måned</string>
+    <string name="mtrl_picker_a11y_prev_month">Skift til forrige måned</string>
+    <string name="mtrl_picker_announce_current_range_selection">Valg af startdato: %1$s – Valg af slutdato: %2$s</string>
+    <string name="mtrl_picker_announce_current_selection">Aktuelt valg: %1$s</string>
+    <string name="mtrl_picker_announce_current_selection_none">ingen</string>
+    <string name="mtrl_picker_cancel">Annuller</string>
+    <string name="mtrl_picker_confirm">OK</string>
+    <string name="mtrl_picker_date_header_selected">%1$s</string>
+    <string name="mtrl_picker_date_header_title">Vælg dato</string>
+    <string name="mtrl_picker_date_header_unselected">Valgt dato</string>
+    <string name="mtrl_picker_day_of_week_column_header">%1$s</string>
+    <string name="mtrl_picker_end_date_description">Slutdato %1$s</string>
+    <string name="mtrl_picker_invalid_format">Ugyldigt format.</string>
+    <string name="mtrl_picker_invalid_format_example">Eksempel: %1$s</string>
+    <string name="mtrl_picker_invalid_format_use">Brug: %1$s</string>
+    <string name="mtrl_picker_invalid_range">Ugyldigt interval.</string>
+    <string name="mtrl_picker_navigate_to_current_year_description">Gå til indeværende år %1$d</string>
+    <string name="mtrl_picker_navigate_to_year_description">Gå til år %1$d</string>
+    <string name="mtrl_picker_out_of_range">Uden for interval: %1$s</string>
+    <string name="mtrl_picker_range_header_only_end_selected">Startdato – %1$s</string>
+    <string name="mtrl_picker_range_header_only_start_selected">%1$s – Slutdato</string>
+    <string name="mtrl_picker_range_header_selected">%1$s – %2$s</string>
+    <string name="mtrl_picker_range_header_title">Vælg interval</string>
+    <string name="mtrl_picker_range_header_unselected">Startdato – Slutdato</string>
+    <string name="mtrl_picker_save">Gem</string>
+    <string name="mtrl_picker_start_date_description">Startdato %1$s</string>
+    <string name="mtrl_picker_text_input_date_hint">Dato</string>
+    <string name="mtrl_picker_text_input_date_range_end_hint">Slutdato</string>
+    <string name="mtrl_picker_text_input_date_range_start_hint">Startdato</string>
+    <string name="mtrl_picker_text_input_day_abbr">d</string>
+    <string name="mtrl_picker_text_input_month_abbr">m</string>
+    <string name="mtrl_picker_text_input_year_abbr">å</string>
+    <string name="mtrl_picker_today_description">I dag %1$s</string>
+    <string name="mtrl_picker_toggle_to_calendar_input_mode">Skift til input-tilstand for kalender</string>
+    <string name="mtrl_picker_toggle_to_day_selection">Skift til kalendervisning</string>
+    <string name="mtrl_picker_toggle_to_text_input_mode">Skift til input-tilstand for tekst</string>
+    <string name="mtrl_picker_toggle_to_year_selection">Skift til årsvisning</string>
+    <string name="mtrl_picker_toggled_to_day_selection">Skiftede til kalendervisning</string>
+    <string name="mtrl_picker_toggled_to_year_selection">Skiftede til årsvisning</string>
+    <string name="mtrl_timepicker_cancel">Annuller</string>
+    <string name="mtrl_timepicker_confirm">OK</string>
+    <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Naviger op"</string>
+    <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Åbn sidemenuen"</string>
+    <string msgid="542007171693138492" name="navigation_menu">"Navigationsmenu"</string>
+    <string name="no_file_browser">Der er ingen filhåndtering installeret.</string>
+    <string name="no_permissions">Du skal give tilladelse for at tilgå bekendtgørelser</string>
+    <string name="no_players_connected">Ingen afspillere fundet</string>
+    <string msgid="6610465462668679431" name="not_selected">"Ikke valgt"</string>
+    <string msgid="6573031135582639649" name="not_set">"Ikke angivet"</string>
+    <string name="ok">OK</string>
+    <string name="open">Åbn</string>
+    <string name="open_mousepad">Eksternt input</string>
+    <string name="open_mpris_controls">Multimediekontrol</string>
+    <string name="open_settings">Åbn indstillinger</string>
+    <string name="optional_permission_explanation">Du skal give ekstra tilladelser for at aktivere alle funktioner</string>
+    <string name="pair_new_device">Par med ny enhed</string>
+    <string name="pair_requested">Anmodet om parring</string>
+    <string name="pairing_accept">Acceptér</string>
+    <string name="pairing_description">Andre enheder som kører COSMIC Connect i samme netværk som dig, bør dukke op her.</string>
+    <string name="pairing_reject">Afvis</string>
+    <string name="pairing_title">COSMIC Connect-enheder</string>
+    <string name="password_toggle_content_description">Vis adgangskode</string>
+    <string name="permission_explanation">Dette plugin kræver tilladelser for at virke</string>
+    <string name="plugin_settings_with_name">Indstilling af %s</string>
+    <string name="plugins_need_optional_permission">Nogle plugins har deaktiverede funktioner pga. manglende tilladelser (tap for mere info):</string>
+    <string name="plugins_need_permission">Nogle plugins kræver tilladelser for at virke (tap for mere info):</string>
+    <string name="pref_plugin_battery">Batterirapport</string>
+    <string name="pref_plugin_battery_desc">Rapportér batteristatus periodisk</string>
+    <string name="pref_plugin_clipboard">Synk. af udklipsholder</string>
+    <string name="pref_plugin_clipboard_desc">Del indholdet af udklipsholderen</string>
+    <string name="pref_plugin_mousepad">Eksternt input</string>
+    <string name="pref_plugin_mpris">Multimediekontroller</string>
+    <string name="pref_plugin_mpris_desc">Giver en fjernbetjening til din medieafspiller</string>
+    <string name="pref_plugin_notifications">Synk. af bekendtgørelser</string>
+    <string name="pref_plugin_notifications_desc">Tilgå dine bekendtgørelser fra andre enheder</string>
+    <string name="pref_plugin_ping">Ping</string>
+    <string name="pref_plugin_ping_desc">Send og modtag ping</string>
+    <string name="pref_plugin_receive_notifications">Modtag bekendtgørelser</string>
+    <string name="pref_plugin_receive_notifications_desc">Modtag bekendtgørelser fra den anden enhed og vis dem på Android</string>
+    <string name="pref_plugin_remotekeyboard">Modtag eksterne tastetryk</string>
+    <string name="pref_plugin_remotekeyboard_desc">Modtag tastetryk-hændelser fra eksterne enheder</string>
+    <string name="pref_plugin_runcommand">Kør kommando</string>
+    <string name="pref_plugin_runcommand_desc">Kør eksterne kommandoer fra din telefon eller tablet</string>
+    <string name="pref_plugin_sftp_desc">Muliggør at gennemsøge denne enheds filsystem eksternt</string>
+    <string name="pref_plugin_sharereceiver">Del og modtag</string>
+    <string name="pref_plugin_sharereceiver_desc">Del filer og URL\'er mellem enheder</string>
+    <string name="pref_plugin_telepathy">Send SMS</string>
+    <string name="pref_plugin_telepathy_desc">Send SMS-beskeder fra din desktop</string>
+    <string name="pref_plugin_telephony">Telefonibekendtgørelse</string>
+    <string msgid="6685851473431805375" name="preference_copied">"\"<ns1:g id="SUMMARY">%1$s</ns1:g>\" blev kopieret til udklipsholderen."</string>
+    <string name="protocol_version_newer">Denne enhed bruger en nyere protokolversion</string>
+    <string msgid="5941395253238309765" name="range_end">"Slutinterval"</string>
+    <string msgid="7097486360902471446" name="range_start">"Startinterval"</string>
+    <string name="received_file_text">Tap for at åbne \"%1s\"</string>
+    <string name="refresh">Genopfrisk</string>
+    <string name="remotekeyboard_connected">Ekstern tastaturforbindelse er aktiv</string>
+    <string name="remotekeyboard_editing_only_title">Håndtér kun eksterne tastetryk under redigering</string>
+    <string name="remotekeyboard_multiple_connections">Der er mere end en ekstern tastaturforbindelse, vælg den enhed der skal konfigureres</string>
+    <string name="remotekeyboard_not_connected">Der er ingen aktiv ekstern tastaturforbindelse. Opret en i cosmicconnect</string>
+    <string name="request_pairing">Anmod om parring</string>
+    <string name="right_click">Send højreklik</string>
+    <string msgid="6264217191555673260" name="search_menu_title">"Søg"</string>
+    <string name="searchview_clear_text_content_description">Ryd tekst</string>
+    <string name="searchview_navigation_content_description">Tilbage</string>
+    <string msgid="6043586758067023" name="selected">"Valgt"</string>
+    <string name="send_files">Send filer</string>
+    <string name="send_ping">Send ping</string>
+    <string name="share_destination_customize">Tilpas destinationsmappe</string>
+    <string name="share_destination_customize_summary_disabled">Modtagne filer vil dukke op i Downloads</string>
+    <string name="share_destination_customize_summary_enabled">Filer vil blive gemt i mappen nedenfor</string>
+    <string name="share_destination_folder_preference">Destinationsmappe</string>
+    <string name="share_notification_preference">Støjende bekendtgørelser</string>
+    <string name="share_notification_preference_summary">Vibrér og afspil en lyd når en fil modtages</string>
+    <string name="shareplugin_text_saved">Modtog tekst, gemt til udklipsholder</string>
+    <string name="show_keyboard">Vis tastatur</string>
+    <string name="side_sheet_accessibility_pane_title">Felt i siden</string>
+    <string msgid="4139871816613051306" name="state_empty">"Tom"</string>
+    <string msgid="5834637030682409883" name="state_off">"Fra"</string>
+    <string msgid="1490883874751719580" name="state_on">"Til"</string>
+    <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+    <string msgid="9167775378838880170" name="summary_collapsed_preference_list">"<ns1:g id="CURRENT_ITEMS">%1$s</ns1:g>, <ns1:g id="ADDED_ITEMS">%2$s</ns1:g>"</string>
+    <string msgid="2561197295334830845" name="switch_role">"Kontakt"</string>
+    <string msgid="1672349317127674378" name="tab">"Fane"</string>
+    <string name="tap_to_answer">Tap for at svare</string>
+    <string name="telepathy_permission_explanation">For at læse og skrive sms\'er fra din desktop, skal du give tilladelse til sms</string>
+    <string name="telephony_optional_permission_explanation">For at se et kontaktnavn i stedet for et telefonnummer, skal du give adgang til telefonens kontakter</string>
+    <string msgid="5946805113151406391" name="template_percent">"<ns1:g id="PERCENTAGE">%1$d</ns1:g> procent."</string>
+    <string name="title_activity_notification_filter">Bekendtgørelsesfilter</string>
+    <string msgid="3765533235322692011" name="tooltip_description">"værktøjstip"</string>
+    <string msgid="3124740595719787496" name="tooltip_label">"se værktøjstip"</string>
+    <string name="unknown_device">Ukendt enhed</string>
+    <string name="unreachable_description">Denne parrede enhed kan ikke nås. Sørg for at den er forbundet til samme netværk som dig.</string>
+    <string msgid="3140233346420563315" name="v7_preference_off">"FRA"</string>
+    <string msgid="89551595707643515" name="v7_preference_on">"TIL"</string>
+</resources>

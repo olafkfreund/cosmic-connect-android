@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2" xmlns:ns2="http://schemas.android.com/tools">
+    <string-array name="convert_to_mms_after_entries">
+    <item>Yhden viestin jälkeen</item>
+    <item>Kahden viestin jälkeen</item>
+    <item>Kolmen viestin jälkeen</item>
+    <item>Neljän viestin jälkeen</item>
+    <item>Viiden viestin jälkeen</item>
+  </string-array>
+    <string-array name="digitizer_preference_entries_draw_button_side">
+    <item>Top left</item>
+    <item>Top right</item>
+    <item>Bottom left</item>
+    <item>Bottom right</item>
+  </string-array>
+    <string-array name="mousepad_acceleration_profile_entries">
+    <item>Ei kiihdytystä</item>
+    <item>Heikoin</item>
+    <item>Heikompi</item>
+    <item>Keskinkertainen</item>
+    <item>Vahvempi</item>
+    <item>Vahvin</item>
+  </string-array>
+    <string-array name="mousepad_sensitivity_entries">
+    <item>Hitain</item>
+    <item>Hitainta suurempi</item>
+    <item>Oletus</item>
+    <item>Oletusta suurempi</item>
+    <item>Nopein</item>
+  </string-array>
+    <string-array name="mousepad_tap_entries">
+    <item>Vasen napsautus</item>
+    <item>Oikea napsautus</item>
+    <item>Keskinapsautus</item>
+    <item>Ei toimintoa</item>
+  </string-array>
+    <string-array name="mpris_time_entries">
+    <item>10 sekuntia</item>
+    <item>20 sekuntia</item>
+    <item>30 sekuntia</item>
+    <item>1 minuutti</item>
+    <item>2 minuuttia</item>
+  </string-array>
+    <string-array name="theme_list">
+    <item>Akunsäästäjän asettama</item>
+    <item>Vaalea</item>
+    <item>Tumma</item>
+  </string-array>
+    <string-array name="theme_list_v28">
+    <item>Järjestelmän oletus</item>
+    <item>Vaalea</item>
+    <item>Tumma</item>
+  </string-array>
+    <plurals name="incoming_file_title">
+    <item quantity="one">Vastaanotetaan %1$d tiedosto lähettäjältä %2$s</item>
+    <item quantity="other">Vastaanotetaan %1$d tiedostoa lähettäjältä %2$s</item>
+  </plurals>
+    <plurals name="incoming_files_text">
+    <item quantity="one">Tiedosto: %1s</item>
+    <item quantity="other">(Tiedosto %2$d / %3$d) : %1$s</item>
+  </plurals>
+    <plurals name="mtrl_badge_content_description">
+    <item quantity="one">%d uusi ilmoitus</item>
+    <item quantity="other">%d uutta ilmoitusta</item>
+  </plurals>
+    <plurals name="outgoing_file_title">
+    <item quantity="one">Lähetetään %1$d tiedosto laitteeseen %2$s</item>
+    <item quantity="other">Lähetetään %1$d tiedostoa laitteeseen %2$s</item>
+  </plurals>
+    <plurals name="outgoing_files_text">
+    <item quantity="one">Tiedosto: %1$s</item>
+    <item quantity="other">(Tiedosto %2$d/%3$d) : %1$s</item>
+  </plurals>
+    <plurals name="received_files_fail_title">
+    <item quantity="one">Ei voitu vastaanottaa tiedostoa lähettäjältä %1$s</item>
+    <item quantity="other">Ei voitu vastaanottaa %2$d/%3$d tiedostoa lähettäjältä %1$s</item>
+  </plurals>
+    <plurals name="received_files_title">
+    <item quantity="one">Vastaanotettiin tiedosto lähettäjältä %1$s</item>
+    <item quantity="other">Vastaanotettiin %2$d tiedostoa lähettäjältä %1$s</item>
+  </plurals>
+    <plurals name="send_files_fail_title">
+    <item quantity="one">Tiedoston lähetys laitteelle %1$s epäonnistui</item>
+    <item quantity="other">%2$d/%3$d tiedoston lähetys laitteelle %1$s epäonnistui</item>
+  </plurals>
+    <plurals name="sent_files_title">
+    <item quantity="one">Tiedosto lähetetty laitteeseen %1$s</item>
+    <item quantity="other">%2$d tiedostoa lähetetty laitteeseen %1$s</item>
+  </plurals>
+    <string msgid="5976598919945601918" name="abc_action_bar_home_description">"Siirry etusivulle"</string>
+    <string msgid="8388173803310557296" name="abc_action_bar_up_description">"Siirry ylös"</string>
+    <string msgid="3937310113216875497" name="abc_action_menu_overflow_description">"Lisäasetukset"</string>
+    <string msgid="4692188335987374352" name="abc_action_mode_done">"Valmis"</string>
+    <string msgid="1189761859438369441" name="abc_activity_chooser_view_see_all">"Näytä kaikki"</string>
+    <string msgid="2165779757652331008" name="abc_activitychooserview_choose_application">"Valitse sovellus"</string>
+    <string msgid="4215997306490295099" name="abc_capital_off">"POIS PÄÄLTÄ"</string>
+    <string msgid="884982626291842264" name="abc_capital_on">"PÄÄLLÄ"</string>
+    <string msgid="8833365367933412986" name="abc_menu_alt_shortcut_label">"Alt+"</string>
+    <string msgid="2223301931652355242" name="abc_menu_ctrl_shortcut_label">"Ctrl+"</string>
+    <string msgid="838001238306846836" name="abc_menu_delete_shortcut_label">"delete"</string>
+    <string msgid="7986526966204849475" name="abc_menu_enter_shortcut_label">"enter"</string>
+    <string msgid="375214403600139847" name="abc_menu_function_shortcut_label">"Fn+"</string>
+    <string msgid="4192209724446364286" name="abc_menu_meta_shortcut_label">"Meta+"</string>
+    <string msgid="4741552369836443843" name="abc_menu_shift_shortcut_label">"Vaihto+"</string>
+    <string msgid="5473865519181928982" name="abc_menu_space_shortcut_label">"välilyönti"</string>
+    <string msgid="6180552449598693998" name="abc_menu_sym_shortcut_label">"Sym+"</string>
+    <string msgid="5520303668377388990" name="abc_prepend_shortcut_label">"Valikko+"</string>
+    <string msgid="7208076849092622260" name="abc_search_hint">"Haku…"</string>
+    <string msgid="3741173234950517107" name="abc_searchview_description_clear">"Tyhjennä kysely"</string>
+    <string msgid="693312494995508443" name="abc_searchview_description_query">"Hakukysely"</string>
+    <string msgid="3417662926640357176" name="abc_searchview_description_search">"Haku"</string>
+    <string msgid="1486535517437947103" name="abc_searchview_description_submit">"Lähetä kysely"</string>
+    <string msgid="2293578557972875415" name="abc_searchview_description_voice">"Puhehaku"</string>
+    <string msgid="8875138169939072951" name="abc_shareactionprovider_share_with">"Jaa…"</string>
+    <string msgid="9055268688411532828" name="abc_shareactionprovider_share_with_application">"Jaa: <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
+    <string msgid="1656852541809559762" name="abc_toolbar_collapse_description">"Tiivistä"</string>
+    <string name="about">Tietoa</string>
+    <string name="about_kde">Tietoa KDE:stä</string>
+    <string name="about_kde_about">&lt;h1>Tietoa&lt;/h1> &lt;p>KDE on ohjelmoijien, taiteilijoiden, kirjoittajien, kääntäjien ja muiden sisällönluojien kansainvälinen yhteisö, joka on sitoutunut &lt;a href=https://www.gnu.org/philosophy/free-sw.html>vapaiden ohjelmien&lt;/a> kehitykseen. KDE tuottaa Plasma-työpöytäympäristöä, satoja sovelluksia ja monia niitä tukevia ohjelmakirjastoja.&lt;/p> &lt;p>KDE pyrkii yhteistyöhön: mikään yksittäinen toimija ei hallitse sen suuntaa tai tuotteita, vaan teemme yhdessä työtä yhteisen päämäärän hyväksi: tuottaaksemme maailman hienointa vapaata ohjelmistoa. Kaikki ovat tervetulleita &lt;a href=https://community.kde.org/Get_Involved>liittymään ja avustamaan&lt;/a> KDE:ta – myös sinä.&lt;/p> Sivulta &lt;a href=https://www.kde.org/>https://www.kde.org/&lt;/a> löytyy KDE-yhteisöstä ja tuottamistamme ohjelmista lisätietoa.</string>
+    <string name="about_kde_join_kde">&lt;h1>Liity KDE:hen&lt;/h1> &lt;p>KDE-työryhmän jäseneksi tullakseen ei tarvitse olla ohjelmoija. Ohjelmien käyttöliittymien kääntämiseksi voi liittyä johonkin kansalliseen ryhmään, tuottaa grafiikkaa, teemoja tai ääniä tai parantaa ohjeistusta. Sinä päätät!&lt;/p> &lt;p>Sivulta &lt;a href=https://community.kde.org/Get_Involved>https://community.kde.org/Get_Involved&lt;/a> löytyy tietoa projekteista, joihin osallistua.&lt;/p> Kaikki tarvittava lisätieto ja ohjeet löytyvät sivulta &lt;a href=https://techbase.kde.org/>https://techbase.kde.org/&lt;/a>.</string>
+    <string name="about_kde_report_bugs_or_wishes">&lt;h1>Ilmoita ohjelmavirheistä tai -toiveista&lt;/h1> &lt;p>Ohjelmia voi aina parantaa, ja KDE-yhteisö on siihen valmis. Sinun – käyttäjän – on kuitenkin kerrottava meille, kun jokin ei toimi odotetusti tai voisi toimia paremmin.&lt;/p> &lt;p>KDE:lla on virheenseurantajärjestelmä. Käy sivulla &lt;a href=https://bugs.kde.org/>https://bugs.kde.org/&lt;/a> tai käytä Tietoa-sivun painiketta ”Ilmoita ohjelmavirheestä”.&lt;/p> Parannusehdotuksissakin olet tervetullut käyttämään virheenseurantajärjestelmää kirjataksesi toiveesi. Varmista, että käytät vakavuustasoa ”Wishlist”.</string>
+    <string name="about_kde_support_kde">&lt;h1>Tue KDE:tä&lt;/h1> &lt;p>KDE-ohjelmat ovat ja tulevat aina olemaan ilmaisia, mutta niiden luominen ei ole ilmaista.&lt;/p> &lt;p>Kehitystyön tukemiseksi KDE-yhteisö on muodostanut KDE e.V:n, voittoa tuottamattoman yhteisön, joka lain kannalta sijaitsee Saksassa. KDE e.V. edustaa KDE-yhteisöä laki- ja talousasioissa. Osoitteesta &lt;a href=https://ev.kde.org/>https://ev.kde.org/&lt;/a> löytyy KDE e.V:stä lisätietoa.&lt;/p> &lt;p>KDE voi hyötyä monenlaisista lahjoituksia, myös rahallisista. Varoja käytetään jäsenten ja muiden avustamiskulujen hyvittämiseen, lakitukeen ja konferenssien ja kokousten järjestämiseen.&lt;/p> &lt;p>Rohkaisemme sinua tukemaan pyrkimyksiämme rahalahjoituksella jollakin tavoista, jotka kuvataan osoitteessa &lt;a href=https://www.kde.org/community/donations/>https://www.kde.org/community/donations/&lt;/a>.&lt;/p> Kiitoksia tuestasi etukäteen!</string>
+    <string name="add_command">Lisää komento</string>
+    <string name="add_command_description">Voit lisätä komentoja työpöydälle</string>
+    <string name="add_device_dialog_title">Lisää laite</string>
+    <string name="add_device_hint">Konenimi tai IP-osoite</string>
+    <string name="add_trusted_network">Lisää %1s</string>
+    <string name="addcommand_explanation">Komentoja ei ole rekisteröity</string>
+    <string name="addcommand_explanation2">Voit lisätä uusia komentoja COSMIC Connectin järjestelmäasetuksissa</string>
+    <string name="alex_fiestas_task">Yhteystietoliitännäisen parannukset</string>
+    <string name="all">Kaikki</string>
+    <string name="all_permissions_granted">Kaikki oikeudet myönnetty 🎉</string>
+    <string name="allow_all_networks_text">Salli kaikki</string>
+    <string name="aniket_kumar_task">Tekstiviestiliitännäisen parannukset</string>
+    <string name="apple_support">macOS-tuki. Työn alla iOS-tuki</string>
+    <string name="authors">Tekijät</string>
+    <string name="battery_status_charging_format">Varaus: %d %%, latautuu</string>
+    <string name="battery_status_format">Varaus: %d %%</string>
+    <string name="battery_status_low_format">Varaus: %d %%, vähissä</string>
+    <string name="bigscreen_back">Takaisin</string>
+    <string name="bigscreen_down">Alemmas</string>
+    <string name="bigscreen_home">Koti</string>
+    <string name="bigscreen_left">Vasemmalle</string>
+    <string name="bigscreen_mic">Mikrofoni</string>
+    <string name="bigscreen_optional_permission_explanation">Jakaaksesi puhelimen mikrofonisyötteen puhelimen äänisyötteeseen on annettava käyttöoikeus</string>
+    <string name="bigscreen_right">Oikea</string>
+    <string name="bigscreen_select">Valitse</string>
+    <string name="bigscreen_show_back_title">Näytä Takaisin-painike</string>
+    <string name="bigscreen_show_home_title">Näytä Koti-painike</string>
+    <string name="bigscreen_speech_extra_prompt">Puhe</string>
+    <string name="bigscreen_up">Ylemmäs</string>
+    <string name="block_contents">Estä ilmoitusten sisältö</string>
+    <string name="block_images">Estä ilmoitusten kuvat</string>
+    <string name="block_notification_contents">Estä ilmoitusten sisältö</string>
+    <string name="block_notification_images">Estä ilmoitusten kuvat</string>
+    <string name="bluetooth_permission_needed_desc">COSMIC Connect vaatii oikeuden yhdistää lähellä oleviin laitteisiin, jotta voisi kytkeä niitä Bluetoothilla pariksi.</string>
+    <string name="bottomsheet_action_collapse">Tiivistä alapaneeli</string>
+    <string name="bottomsheet_action_expand">Laajenna alapaneeli</string>
+    <string name="bottomsheet_action_expand_halfway">Laajenna puoliväliin</string>
+    <string name="bottomsheet_drag_handle_content_description">Vetokahva</string>
+    <string name="bug_fixes_and_general_improvements">Virhekorjauksia ja yleisparannuksia</string>
+    <string msgid="881409763997275156" name="call_notification_answer_action">"Vastaa"</string>
+    <string msgid="8793775615905189152" name="call_notification_answer_video_action">"Video"</string>
+    <string msgid="3229508546291798546" name="call_notification_decline_action">"Hylkää"</string>
+    <string msgid="2659457946726154263" name="call_notification_hang_up_action">"Lopeta puhelu"</string>
+    <string msgid="6107532579223922871" name="call_notification_incoming_text">"Saapuva puhelu"</string>
+    <string msgid="8623827134497363134" name="call_notification_ongoing_text">"Käynnissä oleva puhelu"</string>
+    <string msgid="59049573811482460" name="call_notification_screening_text">"Seulotaan saapuvaa puhelua"</string>
+    <string name="cancel">Peru</string>
+    <string name="cancel_pairing">Peru paritus</string>
+    <string name="cannot_create_file">Ei voida luoda tiedostoa %s</string>
+    <string name="cant_open_url">Verkko-osoitetta ei voi avata toiston jatkamiseksi</string>
+    <string name="category_connected_devices">Yhdistetyt laitteet</string>
+    <string name="category_not_paired_devices">Saatavilla olevat laitteet</string>
+    <string name="category_remembered_devices">Muistetut laitteet</string>
+    <string name="character_counter_content_description">%1$d/%2$d merkkiä kirjoitettu</string>
+    <string name="character_counter_overflowed_content_description">Merkkiraja ylitetty: %1$d/%2$d</string>
+    <string name="clear_compose">Tyhjennä</string>
+    <string name="clear_text_end_icon_content_description">Tyhjennä teksti</string>
+    <string name="click_here_to_type">Napauta ja kirjoita</string>
+    <string name="clipboard_android_x_incompat">Android 10 on poistanut kaikkien sovellusten leikepöytäkäytön. Liitännäinen poistetaan käytöstä.</string>
+    <string name="clipboard_toast">Kopioitu leikepöydälle</string>
+    <string name="close">Sulje</string>
+    <string msgid="406453423630273620" name="close_drawer">"Sulje navigointivalikko"</string>
+    <string msgid="7573152094250666567" name="close_sheet">"Sulje taulukko"</string>
+    <string name="compose_send_title">Kirjoita teksti</string>
+    <string name="contacts_per_device_confirmation">Puhelimen yhteystiedot kopioidaan tälle laitteelle, jotta COSMIC Connectin tekstiviesti- ja muut sovellukset voivat käyttää niitä.</string>
+    <string name="contacts_permission_explanation">Käyttääksesi yhteystietoja työpöydältä sinun on annettava yhteystietojen käyttöoikeudet</string>
+    <string name="convert_to_mms_after_title">Muunna multimediaviestiksi</string>
+    <string msgid="6083905920877235314" name="copy">"Kopioi"</string>
+    <string name="copy_url_to_clipboard">Kopioi verkko-osoite leikepöydälle</string>
+    <string name="custom_device_deleted">Poistettiin mukautettu laite</string>
+    <string name="custom_device_fab_hint">Lisää laite</string>
+    <string name="custom_device_list">Lisää laitteita IP:llä</string>
+    <string name="custom_device_list_help">Ellei laitetta tunnisteta automaattisesti, sen IP-osoitteen tai konenimen voi lisätä napsauttamalla alla olevaa painiketta</string>
+    <string name="custom_devices_settings">Omien laitteiden luettelo</string>
+    <string name="custom_devices_settings_summary">Käyttäjä lisäsi %d laitetta</string>
+    <string msgid="8038256446254964252" name="default_error_message">"Virheellinen syöte"</string>
+    <string msgid="6312721426453364202" name="default_popup_window_title">"Ponnahdusikkuna"</string>
+    <string name="developer">Kehittäjä</string>
+    <string name="device_host_duplicate">Konenimi löytyy jo luettelosta</string>
+    <string name="device_host_invalid">Konenimi on virheellinen. Käytä kelvollista konenimeä tai IPv4- tai IPv6-osoitetta.</string>
+    <string name="device_list_empty">Ei laitteita</string>
+    <string name="device_menu_plugins">Liitännäisten asetukset</string>
+    <string name="device_menu_unpair">Poista laitepari</string>
+    <string name="device_not_paired">Laitetta ei ole kytketty pariksi</string>
+    <string name="device_rename_confirm">Muuta nimi</string>
+    <string name="device_rename_title">Muuta laitteen nimeä</string>
+    <string name="devices">Laitteet</string>
+    <string name="donate">Lahjoita</string>
+    <string name="double_tap_to_drag">Vedä kaksoisnapauttamalla</string>
+    <string msgid="1890207353314751437" name="dropdown_menu">"Avattava valikko"</string>
+    <string name="easter_egg">Yllätysmuna</string>
+    <string name="email_contributor">Sähköpostiavustaja\n%s</string>
+    <string name="empty_trusted_networks_list_text">Luotettuja verkkoja ei ole vielä lisätty</string>
+    <string name="enable_bluetooth">Käytä Bluetoothia (beeta)</string>
+    <string name="enable_udp_broadcast">Käytä UDP-laitehakua</string>
+    <string name="encryption_info_title">Salaustiedot</string>
+    <string name="error_a11y_label">Virhe: ei kelpaa</string>
+    <string name="error_already_paired">Laite on jo kytketty pariksi</string>
+    <string name="error_canceled_by_other_peer">Vertaiskäyttäjä perui</string>
+    <string name="error_canceled_by_user">Käyttäjä perui</string>
+    <string name="error_clocks_not_match">Laitteiden kelloja ei ole tahdistettu</string>
+    <string name="error_icon_content_description">Virhe</string>
+    <string name="error_not_reachable">Laite tavoittamattomissa</string>
+    <string name="error_timed_out">Aikakatkaisu</string>
+    <string name="everyone_else">Kaikki muut vuosien varrella COSMIC Connectia avustaneet</string>
+    <string msgid="2427401033573778270" name="expand_button_title">"Lisäasetukset"</string>
+    <string name="exposed_dropdown_menu_content_description">Näytä avattava valikko</string>
+    <string name="extra_options">Lisäasetukset</string>
+    <string name="filter_apps_info">Valittujen sovellusten ilmoitukset synkronoidaan.</string>
+    <string name="findmyphone_description">Laittaa laitteen soimaan, jotta voit löytää sen.</string>
+    <string name="findmyphone_found">Löytyi</string>
+    <string name="findmyphone_notifications_explanation">Ilmoituskäyttöoikeus vaaditaan, jotta puhelin voisi soida sovelluksen toimiessa taustalla</string>
+    <string name="findmyphone_title">Löydä puhelimeni</string>
+    <string name="findmyphone_title_tablet">Löydä tablettini</string>
+    <string name="findmyphone_title_tv">Etsi televeisioni</string>
+    <string name="foreground_notification_devices">Yhdistetty laitteeseen: %s</string>
+    <string name="foreground_notification_no_devices">Ei laiteyhteyttä</string>
+    <string name="foreground_notification_send_clipboard">Lähetä leikepöytä</string>
+    <string name="gyro_mouse_enabled_title">Käytä gyroskooppihiirtä</string>
+    <string name="gyro_mouse_sensitivity_title">Gyroskoopin herkkyys</string>
+    <string name="hold_to_drag">Vedä pitämällä pohjassa</string>
+    <string name="holger_kaelberer_task">Etänäppäimistöliitännäinen ja virheenkorjaukset</string>
+    <string name="icon_content_description">Valintaikkunan kuvake</string>
+    <string msgid="6827826412747255547" name="in_progress">"Kesken"</string>
+    <string msgid="7933458017204019916" name="indeterminate">"Osittain tarkistettu"</string>
+    <string name="invalid_device_name">Virheellinen laitenimi</string>
+    <string name="item_view_role_description">Välilehti</string>
+    <string name="kde">KDE</string>
+    <string name="kde_be_free">KDE – Ole vapaa!</string>
+    <string name="kde_connect">COSMIC Connect</string>
+    <string name="konqi">Konqi</string>
+    <string name="left_click">Lähetä vasemman painikkeen napsautus</string>
+    <string name="licenses">Lisenssit</string>
+    <string name="location_permission_needed_desc">COSMIC Connect tarvitsee taustasijaintioikeudet tietääkseen myös sovelluksen olleessa taustalla, mihin langattomaan verkkoon on kirjauduttu. Ympärilläsi olevien langattomien verkkojen nimiä voi käyttää sijaintisi selvittämiseen, vaikka COSMIC Connect ei tietoa siihen käytäkään.</string>
+    <string name="location_permission_needed_title">Käyttöoikeus vaaditaan</string>
+    <string name="m3_loading_indicator_content_description">Ladataan</string>
+    <string msgid="2988463736136100848" name="m3c_bottom_sheet_collapse_description">"Tiivistä alapaneeli"</string>
+    <string msgid="1555567894577437024" name="m3c_bottom_sheet_dismiss_description">"Hylkää alapaneeli"</string>
+    <string msgid="8403354765404029791" name="m3c_bottom_sheet_drag_handle_description">"Vetokahva"</string>
+    <string msgid="6670819569745899763" name="m3c_bottom_sheet_expand_description">"Laajenna alapaneeli"</string>
+    <string msgid="3010635850035863127" name="m3c_bottom_sheet_pane_title">"Alapaneeli"</string>
+    <string msgid="8166741421776570875" name="m3c_date_input_headline">"Lisätty päivämäärä"</string>
+    <string msgid="229313757840775812" name="m3c_date_input_headline_description">"Lisätty päivämäärä: %1$s"</string>
+    <string msgid="6116910750161463197" name="m3c_date_input_invalid_for_pattern">"Päivämäärä ei vastaa odotettua mallia: %1$s"</string>
+    <string msgid="2521768508935305279" name="m3c_date_input_invalid_not_allowed">"Päivämäärä ei sallittu: %1$s"</string>
+    <string msgid="7052898923934555305" name="m3c_date_input_invalid_year_range">"Päivämäärä ei sisälly odotettuun vuosiaikaväliin: %1$s–%2$s"</string>
+    <string msgid="2895559812010326913" name="m3c_date_input_label">"Päivämäärä"</string>
+    <string msgid="1237013946323089826" name="m3c_date_input_no_input_description">"–"</string>
+    <string msgid="7306227249789210568" name="m3c_date_input_title">"Valitse päivämäärä"</string>
+    <string msgid="7605002211875882969" name="m3c_date_picker_headline">"Valittu päivämäärä"</string>
+    <string msgid="3664277305226978227" name="m3c_date_picker_headline_description">"Nykyinen valinta: %1$s"</string>
+    <string msgid="8436650776581492840" name="m3c_date_picker_navigate_to_year_description">"Siirry vuoteen %1$s"</string>
+    <string msgid="5811000998184572395" name="m3c_date_picker_no_selection_description">"–"</string>
+    <string msgid="7813882352367152251" name="m3c_date_picker_scroll_to_earlier_years">"Vieritä nähdäksesi aiemmat vuodet"</string>
+    <string msgid="5727367015496556177" name="m3c_date_picker_scroll_to_later_years">"Vieritä nähdäksesi myöhemmät vuodet"</string>
+    <string msgid="1804346892470238807" name="m3c_date_picker_switch_to_calendar_mode">"Vaihda syöttötavaksi kalenteri"</string>
+    <string msgid="395627960681594326" name="m3c_date_picker_switch_to_day_selection">"Valitse vuosi pyyhkäisemällä tai palaa päivän valintaan napauttamalla"</string>
+    <string msgid="2219746470065162704" name="m3c_date_picker_switch_to_input_mode">"Vaihda tekstinsyöttötilaan"</string>
+    <string msgid="7142101321095356500" name="m3c_date_picker_switch_to_next_month">"Vaihda seuraavaan kuukauteen"</string>
+    <string msgid="228438865139394590" name="m3c_date_picker_switch_to_previous_month">"Vaihda edelliseen kuukauteen"</string>
+    <string msgid="791651718641787594" name="m3c_date_picker_switch_to_year_selection">"Vaihda vuoden valintaan"</string>
+    <string msgid="7430790972741451689" name="m3c_date_picker_title">"Valitse päivämäärä"</string>
+    <string msgid="3199387177749801575" name="m3c_date_picker_today_description">"Tänään"</string>
+    <string msgid="2068382232816991922" name="m3c_date_picker_year_picker_pane_title">"Vuosivalitsin näkyvillä"</string>
+    <string msgid="3190049423327661366" name="m3c_date_range_input_invalid_range_input">"Virheellinen aikaväli"</string>
+    <string msgid="3148384720560189467" name="m3c_date_range_input_title">"Lisää päivämäärät"</string>
+    <string msgid="2138321128465719402" name="m3c_date_range_picker_day_in_range">"Valitulla välillä"</string>
+    <string msgid="4947636797751277713" name="m3c_date_range_picker_end_headline">"Päättymispäivä"</string>
+    <string msgid="602077859540990149" name="m3c_date_range_picker_scroll_to_next_month">"Vieritä nähdäksesi seuraavan kuukauden"</string>
+    <string msgid="4592174524846109496" name="m3c_date_range_picker_scroll_to_previous_month">"Vieritä nähdäksesi edellisen kuukauden"</string>
+    <string msgid="4665981448952749820" name="m3c_date_range_picker_start_headline">"Alkamispäivä"</string>
+    <string msgid="3134165431120340385" name="m3c_date_range_picker_title">"Valitse päivämäärät"</string>
+    <string msgid="7617233117134790350" name="m3c_dialog">"Valintaikkuna"</string>
+    <string msgid="3177828188723359358" name="m3c_dropdown_menu_collapsed">"Tiivistetty"</string>
+    <string msgid="2360841780724299882" name="m3c_dropdown_menu_expanded">"Laajennettu"</string>
+    <string msgid="8687821690726149911" name="m3c_dropdown_menu_toggle">"Laita avattava valikko päälle"</string>
+    <string msgid="6152806324422087846" name="m3c_search_bar_search">"Hae"</string>
+    <string msgid="6152755701819882931" name="m3c_snackbar_dismiss">"Ohita"</string>
+    <string msgid="7655536806087401899" name="m3c_suggestions_available">"Ehdotuksia alla"</string>
+    <string msgid="2786685010796619560" name="m3c_time_picker_am">"AP"</string>
+    <string msgid="2349193472625211372" name="m3c_time_picker_hour">"Tunti"</string>
+    <string msgid="9179527532316922345" name="m3c_time_picker_hour_24h_suffix">"%1$d h"</string>
+    <string msgid="8876759303332837035" name="m3c_time_picker_hour_selection">"Valitse tunti"</string>
+    <string msgid="3458167507790628988" name="m3c_time_picker_hour_suffix">"Kello %1$d"</string>
+    <string msgid="6973808109666874069" name="m3c_time_picker_hour_text_field">"tuntien osalta"</string>
+    <string msgid="4313071914266462005" name="m3c_time_picker_minute">"Minuutti"</string>
+    <string msgid="4699133535056739733" name="m3c_time_picker_minute_selection">"Valitse minuutit"</string>
+    <string msgid="5064177921781937179" name="m3c_time_picker_minute_suffix">"%1$d minuuttia"</string>
+    <string msgid="7661234488295443182" name="m3c_time_picker_minute_text_field">"minuuttien osalta"</string>
+    <string msgid="5865171949528594571" name="m3c_time_picker_period_toggle_description">"Valitse AP tai IP"</string>
+    <string msgid="6616362054113087709" name="m3c_time_picker_pm">"IP"</string>
+    <string msgid="1805687647081129904" name="m3c_tooltip_long_press_label">"Näytä vihjeteksti"</string>
+    <string msgid="5460405025248574620" name="m3c_tooltip_pane_description">"Vihjeteksti"</string>
+    <string name="maintainer_and_developer">Ylläpitäjä ja kehittäjä</string>
+    <string name="manifest_label_share">Lähetä laitteeseen</string>
+    <string name="mark_as_read_label">MERKITSE LUETUKSI</string>
+    <string name="material_clock_toggle_content_description">Valitse AP tai IP</string>
+    <string name="material_hour_24h_suffix">%1$s tuntia</string>
+    <string name="material_hour_selection">Valitse tunti</string>
+    <string name="material_hour_suffix">klo %1$s</string>
+    <string name="material_minute_selection">Valitse minuutit</string>
+    <string name="material_minute_suffix">%1$s minuuttia</string>
+    <string name="material_slider_range_end">Alueen loppu</string>
+    <string name="material_slider_range_start">Alueen alku</string>
+    <string name="material_slider_value">Arvo</string>
+    <string name="material_timepicker_am">ap</string>
+    <string name="material_timepicker_clock_mode_description">Vaihda ajan syöttämiseen kellotilassa.</string>
+    <string name="material_timepicker_hour">Tunnit</string>
+    <string name="material_timepicker_minute">Minuutti</string>
+    <string name="material_timepicker_pm">ip</string>
+    <string name="material_timepicker_select_time">Valitse aika</string>
+    <string name="material_timepicker_text_input_mode_description">Vaihda ajan syöttämiseen tekstitilassa.</string>
+    <string name="maxim_leshchenko_task">Käyttöliittymäparannukset ja tämä tietosivu</string>
+    <string name="message_reply_label">VASTAA</string>
+    <string name="middle_click">Lähetä keskipainikkeen napsautus</string>
+    <string name="mouse_receiver_no_permissions">Etäkosketussyötteen vastaanottaminen vaatii saavutettavuuskäyttöoikeudet, jotta laitetta voi hallita</string>
+    <string name="mouse_receiver_plugin_description">Vastaanota etähiiren liike</string>
+    <string name="mouse_receiver_plugin_name">Hiirivastaanotin</string>
+    <string name="mousepad_acceleration_profile_settings_title">Aseta osoittimen kiihdytys</string>
+    <string name="mousepad_double_tap_settings_title">Aseta kahden sormen napautuksen toiminto</string>
+    <string name="mousepad_info">Siirrä hiirikohdistinta liikuttamalla sormea näytöllä. Tee hiirenpainallus napauttamalla, ja käytä kahta tai kolmea sormea oikealle ja keskipainikkeelle. Vieritä kahdella sormella. Pitkällä painalluksella voit vetää ja pudottaa. Gyrohiiritoiminnon voi ottaa käyttää liitännäisen asetuksista</string>
+    <string name="mousepad_info_no_gestures">Siirrä hiiriosoitinta liikuttamalla sormea näytöllä, napautus napsauttaa.</string>
+    <string name="mousepad_keyboard_input_not_supported">Paritettu laite ei tue näppäimistösyötettä</string>
+    <string name="mousepad_mouse_buttons_title">Näytä hiiripainikkeet</string>
+    <string name="mousepad_scroll_direction_title">Käänteinen vierityssuunta</string>
+    <string name="mousepad_scroll_sensitivity_title">Vieritysherkkyys</string>
+    <string name="mousepad_sensitivity_settings_title">Aseta kosketuslevyn herkkyys</string>
+    <string name="mousepad_single_tap_settings_title">Aseta yhden sormen napautuksen toiminto</string>
+    <string name="mousepad_triple_tap_settings_title">Aseta kolmen sormen napautuksen toiminto</string>
+    <string name="mpris_coverart_description">Nykyisen median kansikuva</string>
+    <string name="mpris_ff">Pikakelaa</string>
+    <string name="mpris_keepwatching">Jatka toistoa</string>
+    <string name="mpris_keepwatching_settings_summary">Näytä hiljainen ilmoitus toiston jatkamisesta laitteella median sulkeuduttua</string>
+    <string name="mpris_keepwatching_settings_title">Jatka toistoa</string>
+    <string name="mpris_loop">Silmukka</string>
+    <string name="mpris_next">Seuraava</string>
+    <string name="mpris_notification_settings_summary">Sallii mediasoitintesi hallinnan COSMIC Connectia avaamatta</string>
+    <string name="mpris_notification_settings_title">Näytä mediasäädinilmoitukset</string>
+    <string name="mpris_notifications_explanation">Ilmoituskäyttöoikeus vaaditaan etämedian näyttämiseksi ilmoitussovelmassa</string>
+    <string name="mpris_open_url">Jatka toistoa tästä</string>
+    <string name="mpris_pause">Tauko</string>
+    <string name="mpris_play">Toista</string>
+    <string name="mpris_previous">Edellinen</string>
+    <string name="mpris_rew">Kelaa takaisin</string>
+    <string name="mpris_shuffle">Sekoita</string>
+    <string name="mpris_stop">Pysäytä nykyinen soitin</string>
+    <string name="mpris_time_settings_summary">Säädä painettaessa tapahtuvan kelauksen kestoa</string>
+    <string name="mpris_time_settings_title">Kelauspainikkeet</string>
+    <string name="mpris_volume">Äänenvoimakkuus</string>
+    <string name="mtrl_badge_numberless_content_description">Uusi ilmoitus</string>
+    <string name="mtrl_checkbox_state_description_checked">Valittu</string>
+    <string name="mtrl_checkbox_state_description_indeterminate">Osittain valittu</string>
+    <string name="mtrl_checkbox_state_description_unchecked">Ei valittu</string>
+    <string name="mtrl_chip_close_icon_content_description">Poista %1$s</string>
+    <string name="mtrl_exceed_max_badge_number_content_description" ns2:ignore="PluralsCandidate">Yli %1$d uutta ilmoitusta</string>
+    <string name="mtrl_picker_a11y_next_month">Vaihda seuraavaan kuukauteen</string>
+    <string name="mtrl_picker_a11y_prev_month">Vaihda edelliseen kuukauteen</string>
+    <string name="mtrl_picker_announce_current_range_selection">Alkamispäivän valinta: %1$s – päättymispäivän valinta: %2$s</string>
+    <string name="mtrl_picker_announce_current_selection">Nykyinen valinta: %1$s</string>
+    <string name="mtrl_picker_announce_current_selection_none">–</string>
+    <string name="mtrl_picker_cancel">Peru</string>
+    <string name="mtrl_picker_confirm">OK</string>
+    <string name="mtrl_picker_date_header_selected">%1$s</string>
+    <string name="mtrl_picker_date_header_title">Valitse päivämäärä</string>
+    <string name="mtrl_picker_date_header_unselected">Valittu päivämäärä</string>
+    <string name="mtrl_picker_day_of_week_column_header">%1$s</string>
+    <string name="mtrl_picker_end_date_description">Päättyy %1$s</string>
+    <string name="mtrl_picker_invalid_format">Virheellinen muoto</string>
+    <string name="mtrl_picker_invalid_format_example">Esimerkki: %1$s</string>
+    <string name="mtrl_picker_invalid_format_use">Käytä muotoa %1$s</string>
+    <string name="mtrl_picker_invalid_range">Virheellinen alue</string>
+    <string name="mtrl_picker_navigate_to_current_year_description">Siirry kuluvaan vuoteen: %1$d</string>
+    <string name="mtrl_picker_navigate_to_year_description">Siirry vuoteen %1$d</string>
+    <string name="mtrl_picker_out_of_range">Aikavälin ulkop.: %1$s</string>
+    <string name="mtrl_picker_range_header_only_end_selected">Alkamispäivä – %1$s</string>
+    <string name="mtrl_picker_range_header_only_start_selected">%1$s – päättymispäivä</string>
+    <string name="mtrl_picker_range_header_selected">%1$s – %2$s</string>
+    <string name="mtrl_picker_range_header_title">Valitse jakso</string>
+    <string name="mtrl_picker_range_header_unselected">Alkamispäivä – päättymispäivä</string>
+    <string name="mtrl_picker_save">Tallenna</string>
+    <string name="mtrl_picker_start_date_description">Alkaa %1$s</string>
+    <string name="mtrl_picker_text_input_date_hint">Päivämäärä</string>
+    <string name="mtrl_picker_text_input_date_range_end_hint">Päättymispäivä</string>
+    <string name="mtrl_picker_text_input_date_range_start_hint">Alkamispäivä</string>
+    <string name="mtrl_picker_text_input_day_abbr">p</string>
+    <string name="mtrl_picker_text_input_month_abbr">k</string>
+    <string name="mtrl_picker_text_input_year_abbr">v</string>
+    <string name="mtrl_picker_today_description">Tänään: %1$s</string>
+    <string name="mtrl_picker_toggle_to_calendar_input_mode">Vaihda syöttötavaksi kalenteri</string>
+    <string name="mtrl_picker_toggle_to_day_selection">Vaihda kalenterinäkymään</string>
+    <string name="mtrl_picker_toggle_to_text_input_mode">Valitse syöttötavaksi teksti</string>
+    <string name="mtrl_picker_toggle_to_year_selection">Vaihda vuosinäkymään</string>
+    <string name="mtrl_picker_toggled_to_day_selection">Vaihdettiin kalenterinäkymään</string>
+    <string name="mtrl_picker_toggled_to_year_selection">Vaihdettiin vuosinäkymään</string>
+    <string name="mtrl_timepicker_cancel">Peru</string>
+    <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="mute">Vaimenna</string>
+    <string name="my_device_fingerprint">Laitevarmenteen SHA256-sormenjälki on:</string>
+    <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Siirry ylös"</string>
+    <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Avaa navigoinnin vetopaneeli"</string>
+    <string msgid="542007171693138492" name="navigation_menu">"Navigointivalikko"</string>
+    <string name="no_app_for_opening">Tämän tiedoston avaamiseen sopivaa sovellusta ei löytynyt</string>
+    <string name="no_file_browser">Tiedostoselaimia ei asennettu.</string>
+    <string name="no_permission_mprisreceiver">Hallitaksesi mediasoittimiasi sinun on annettava käyttöoikeudet ilmoituksiin</string>
+    <string name="no_permissions">Ilmoitusten näkemiseksi sinun on annettava käyttöoikeus ilmoituksiin</string>
+    <string name="no_permissions_remotekeyboard">Näppäinpainallusten vastaanottamiseksi COSMIC Connectin etänäppäimistö on aktivoitava</string>
+    <string name="no_players_connected">Soittimia ei löytynyt</string>
+    <string name="no_wifi">Langattomaan verkkoon ei ole yhteyttä, joten laitteita ei ehkä näy. Ota langaton verkko käyttöön napsauttamalla tästä.</string>
+    <string msgid="6610465462668679431" name="not_selected">"Ei valittu"</string>
+    <string msgid="6573031135582639649" name="not_set">"Ei asetettu"</string>
+    <string name="notification_channel_default">Muut ilmoitukset</string>
+    <string name="notification_channel_filetransfer">Saapuva tiedostonsiirto</string>
+    <string name="notification_channel_filetransfer_complete">Saapuva tiedostonsiirto valmis</string>
+    <string name="notification_channel_filetransfer_error">Tiedostonsiirtovirhe</string>
+    <string name="notification_channel_filetransfer_upload">Lähtevä tiedostonsiirto</string>
+    <string name="notification_channel_high_priority">Korkea etusija</string>
+    <string name="notification_channel_keepwatching">Jatka toistoa</string>
+    <string name="notification_channel_media_control">Mediaohjaimet</string>
+    <string name="notification_channel_persistent">Pysyvä ilmaisin</string>
+    <string name="notification_channel_receivenotification">Muiden laitteiden ilmoitukset</string>
+    <string name="ok">OK</string>
+    <string name="on_non_trusted_message">Ei luotetussa verkossa: automaattihaku on poistettu käytöstä.</string>
+    <string name="open">Avaa</string>
+    <string name="open_compose_send">Kirjoita teksti</string>
+    <string name="open_mousepad">Kauko-ohjaus</string>
+    <string name="open_mpris_controls">Multimedian ohjaus</string>
+    <string name="open_settings">Avaa asetukset</string>
+    <string name="optional_permission_explanation">Kaikkien toimintojen käyttämiseksi sinun on annettava lisäkäyttöoikeuksia</string>
+    <string name="pair_new_device">Kytke uusi laite pariksi</string>
+    <string name="pair_requested">Paripyyntö</string>
+    <string name="pair_succeeded">Paritus onnistui</string>
+    <string name="pairing_accept">Hyväksy</string>
+    <string name="pairing_description">Muiden samassa verkossa olevien COSMIC Connectia käyttävien laitteiden pitäisi ilmestyä tähän.</string>
+    <string name="pairing_duplicate_names">Varoitus: Useammalla laitteella on sama nimi.</string>
+    <string name="pairing_explanation">Laitteiden paritus sallii niiden käyttää toisiaan. Parita vain omia laitteitasi.</string>
+    <string name="pairing_reject">Hylkää</string>
+    <string name="pairing_request_from">Parituspyyntö laitteesta ”%1s”</string>
+    <string name="pairing_title">COSMIC Connect -laitteet</string>
+    <string name="password_toggle_content_description">Näytä salasana</string>
+    <string name="permission_explanation">Liitännäinen tarvitsee toimiakseen lisäkäyttöoikeuksia</string>
+    <string name="ping_failed">Laitetta ei voitu pingata</string>
+    <string name="ping_in_progress">Pingataan…</string>
+    <string name="ping_result">Pingattiin %1$d millisekunnissa</string>
+    <string name="plugin_settings_with_name">%s-asetukset</string>
+    <string name="plugin_stats">Liitännäisen tilastot</string>
+    <string name="plugins_need_optional_permission">Jotkin liitännäisten ominaisuudet eivät ole käytössä puuttuvien käyttöoikeuksien takia (lisätietoa napsauttamalla):</string>
+    <string name="plugins_need_permission">Jotkin liitännäiset vaativat toimiakseen lisäkäyttöoikeuksia (lisätietoa napsauttamalla):</string>
+    <string name="pref_plugin_battery">Akkuraportti</string>
+    <string name="pref_plugin_battery_desc">Raportoi akun tila säännöllisesti</string>
+    <string name="pref_plugin_bigscreen_desc">Käytä laitetta Plasma Bigscreen -kaukosäätimenä</string>
+    <string name="pref_plugin_clipboard">Leikepöydän synkronointi</string>
+    <string name="pref_plugin_clipboard_desc">Jaa leikepöydän sisältö</string>
+    <string name="pref_plugin_clipboard_sent">Leikepöytä lähetetty</string>
+    <string name="pref_plugin_connectivity_report">Verkkoyhteysraportti</string>
+    <string name="pref_plugin_connectivity_report_desc">Ilmoita kentän voimakkuus ja tila</string>
+    <string name="pref_plugin_contacts">Yhteystietosynkronointi</string>
+    <string name="pref_plugin_contacts_desc">Sallii laitteen yhteystietojen synkronoinnin</string>
+    <string name="pref_plugin_findremotedevice">Etsi etälaite</string>
+    <string name="pref_plugin_findremotedevice_desc">Soita etälaitteeseen</string>
+    <string name="pref_plugin_mousepad">Kauko-ohjaus</string>
+    <string name="pref_plugin_mousepad_desc_nontv">Käytä puhelinta tai tablettia kosketuslevynä ja näppäimistönä</string>
+    <string name="pref_plugin_mousepad_desc_tv">Käytä puhelinta tai tablettia TV-kaukosäätimenä</string>
+    <string name="pref_plugin_mousepad_send_keystrokes">Lähetä näppäinpainalluksina</string>
+    <string name="pref_plugin_mpris">Multimedian ohjaus</string>
+    <string name="pref_plugin_mpris_desc">Mahdollistaa mediasoittimen etäohjauksen</string>
+    <string name="pref_plugin_mprisreceiver">Mediasoittimen hallinta</string>
+    <string name="pref_plugin_mprisreceiver_desc">Hallitse puhelimesi mediasoittimia toiselta laitteelta</string>
+    <string name="pref_plugin_notifications">Ilmoitusten synkronointi</string>
+    <string name="pref_plugin_notifications_desc">Näe ilmoituksesi muissa laitteissa</string>
+    <string name="pref_plugin_ping">Tiedustelupaketti</string>
+    <string name="pref_plugin_ping_desc">Lähetä ja vastaanota tiedustelupaketteja</string>
+    <string name="pref_plugin_presenter">Esityskaukosäädin</string>
+    <string name="pref_plugin_presenter_desc">Käytä laitettasi esitysdiojen vaihtamiseen</string>
+    <string name="pref_plugin_receive_notifications">Vastaanota ilmoituksia</string>
+    <string name="pref_plugin_receive_notifications_desc">Vastaanota ilmoituksia toiselta laitteelta ja näytä ne Androidissa</string>
+    <string name="pref_plugin_remotekeyboard">Vastaanota etänäppäinpainallukset</string>
+    <string name="pref_plugin_remotekeyboard_desc">Vastaanottaa etälaitteiden näppäinpainallustapahtumat</string>
+    <string name="pref_plugin_runcommand">Suorita komento</string>
+    <string name="pref_plugin_runcommand_desc">Suorita komentoja etänä puhelimelta tai tabletilta</string>
+    <string name="pref_plugin_sftp">Tiedostojärjestelmän käyttö</string>
+    <string name="pref_plugin_sftp_desc">Mahdollistaa tämän laitteen tiedostojärjestelmän etäselaamisen</string>
+    <string name="pref_plugin_sharereceiver">Jako ja vastaanottaminen</string>
+    <string name="pref_plugin_sharereceiver_desc">Jaa tiedostoja ja osoitteita laitteiden välillä</string>
+    <string name="pref_plugin_systemvolume">Järjestelmän äänenvoimakkuus</string>
+    <string name="pref_plugin_systemvolume_desc">Säädä etälaitteen järjestelmän äänenvoimakkuutta</string>
+    <string name="pref_plugin_telepathy">Lähetä tekstiviesti</string>
+    <string name="pref_plugin_telepathy_desc">Lähetä tekstiviestejä työpöydältäsi</string>
+    <string name="pref_plugin_telepathy_mms">Lähetä multimediaviesti</string>
+    <string name="pref_plugin_telepathy_mms_desc">Multimediaviestien lähettämiseksi COSMIC Connect on asetettava oletustekstiviestisovellukseksi.</string>
+    <string name="pref_plugin_telephony">Puhelinilmoitukset</string>
+    <string name="pref_plugin_telephony_desc">Lähetä ilmoitukset saapuvista puheluista</string>
+    <string msgid="6685851473431805375" name="preference_copied">"<ns1:g id="SUMMARY">%1$s</ns1:g> kopioitiin leikepöydälle."</string>
+    <string name="presenter_exit">Poistu esitystilasta</string>
+    <string name="presenter_fullscreen">Koko näyttö</string>
+    <string name="presenter_lock_tip">Laitteen voi lukita ja käyttää äänenvoimakkuuspainikkeita edellinen/seuraava dia -painikkeina</string>
+    <string name="presenter_pointer">Osoitin</string>
+    <string name="privacy_options">Yksityisyysasetukset</string>
+    <string name="protocol_version">Yhteyskäytäntöversio:</string>
+    <string name="protocol_version_newer">Laite käyttää uudempaa yhteyskäytäntöversiota</string>
+    <string msgid="5941395253238309765" name="range_end">"Alueen loppu"</string>
+    <string msgid="7097486360902471446" name="range_start">"Alueen alku"</string>
+    <string name="receive_notifications_permission_explanation">Ilmoitukset tulee sallia, jotta niitä voi vastaanottaa muilta laitteilta</string>
+    <string name="received_file_text">Avaa ”%1s” napauttamalla</string>
+    <string name="refresh">Päivitä</string>
+    <string name="remote_device_fingerprint">Etälaitteen varmenteen SHA256-sormenjälki on:</string>
+    <string name="remote_keyboard_service">COSMIC Connect -etänäppäimistö</string>
+    <string name="remotekeyboard_connected">Etänäppäimistöyhteys on käytössä</string>
+    <string name="remotekeyboard_editing_only_title">Käsittele etänäppäimet vain muokattaessa</string>
+    <string name="remotekeyboard_multiple_connections">Etänäppäimistöyhteyksiä on useampia: valitse asetettava laite</string>
+    <string name="remotekeyboard_not_connected">Etänäppäimistöyhteyksiä ei ole käytössä: muodosta yhteys cosmicconnectissa</string>
+    <string name="report_bug">Ilmoita ohjelmavirheestä</string>
+    <string name="request_pairing">Pyydä pariksi kytkemistä</string>
+    <string name="right_click">Lähetä oikean painikkeen napsautus</string>
+    <string name="ring">Soita</string>
+    <string name="rise_down">Laskeudu alemmas</string>
+    <string name="rise_up">Nouse ylemmäs</string>
+    <string name="runcommand_category_device_controls_title">Laiteohjaimet</string>
+    <string name="runcommand_device_controls_summary">Jos laite tukee laiteohjaimia, määrittämäsi komennot ilmestyvät tähän.</string>
+    <string name="runcommand_name_as_title_title">Nämä otsikkona nimi</string>
+    <string name="runcommand_noruncommandplugin">Laitteen Suorita komento -liitännäinen ei ole käytössä</string>
+    <string name="runcommand_nosuchdevice">Tätä laitetta ei ole</string>
+    <string name="runcommand_notpaired">Laitetta ei ole kytketty pariksi</string>
+    <string name="runcommand_notreachable">Laite tavoittamattomissa</string>
+    <string name="sad_ok">OK :(</string>
+    <string name="saikrishna_arcot_task">Tuki näppäimistön käytölle etäsyöteliitännäisessä, virheenkorjaukset ja yleisparannukset</string>
+    <string name="samoilenko_yuri_task">SFTP-toteutus, virheenkorjaukset ja yleisparannukset</string>
+    <string msgid="6264217191555673260" name="search_menu_title">"Haku"</string>
+    <string name="searchview_clear_text_content_description">Tyhjennä teksti</string>
+    <string name="searchview_navigation_content_description">Takaisin</string>
+    <string name="select_ringtone">Valitse soittoääni</string>
+    <string msgid="6043586758067023" name="selected">"Valittu"</string>
+    <string name="send_clipboard">Lähetä leikepöytä</string>
+    <string name="send_compose">Lähetä</string>
+    <string name="send_files">Lähetä tiedostoja</string>
+    <string name="send_ping">Lähetä tiedustelupaketti</string>
+    <string name="sendkeystrokes_disabled_toast">Näppäinpainallusten lähetys ei ole käytössä: ota se käyttöön asetuksista</string>
+    <string name="sendkeystrokes_pref_category_summary">Tällä moduulilla muut sovellukset voivat jakaa tekstikatkelmia yhdistetylle koneelle lähetettyinä näppäinpainalluksina</string>
+    <string name="sendkeystrokes_pref_category_title">Lähetä näppäinpainalluksia</string>
+    <string name="sendkeystrokes_pref_enabled">Salli näppäinpainallusten lähettäminen</string>
+    <string name="sendkeystrokes_pref_enabled_summary">Kuuntele dataa, jonka MIME-tyyppi on ”text/x-keystrokes”</string>
+    <string name="sendkeystrokes_safe_text_enabled">Lähetä turvallinen teksti välittömästi</string>
+    <string name="sendkeystrokes_safe_text_enabled_summary">Lähetä lyhyet vain numeeriset jonot vahvistuksetta</string>
+    <string name="sendkeystrokes_send_to">Lähetä näppäinpainallukset…</string>
+    <string name="sendkeystrokes_sent_text">Lähetettiin %1$s laitteelle %2$s</string>
+    <string name="sendkeystrokes_textbox_hint">Lähetä näppäinpainallukset koneelle</string>
+    <string name="sendkeystrokes_wrong_data">Virheellinen MIME-tyyppi: vaaditaan ”text/x-keystrokes”</string>
+    <string name="set_default_sms_app_title">Lähetä multimediaviesti</string>
+    <string name="set_group_message_as_mms_title">Lähetä ryhmämultimediaviesti</string>
+    <string name="set_long_text_as_mms_title">Lähetä pitkä teksti multimediaviestinä</string>
+    <string name="set_privacy_options">Aseta yksityisyysasetukset</string>
+    <string name="set_runcommand_name_as_title">aseta_komennon_nimi_otsikoksi</string>
+    <string name="setting_persistent_notification">Näytä pysyvä ilmoitus</string>
+    <string name="setting_persistent_notification_description">Ota käyttöön tai poista käyttöön napauttamalla ilmoitusasetuksia</string>
+    <string name="setting_persistent_notification_oreo">Pysyvä ilmoitus</string>
+    <string name="settings">Asetukset</string>
+    <string name="settings_dark_mode">Tumma teema</string>
+    <string name="settings_export_logs">Vie COSMIC Connectin lokit</string>
+    <string name="settings_export_logs_text">Luo suoritustietotiedosto, josta voi olla apua ongelmien selvityksessä.</string>
+    <string name="settings_icon_description">Asetuskuvake</string>
+    <string name="settings_more_settings_text">Laitekohtaiset asetukset löytyvät laitteen ”Liitännäisasetuksista”.</string>
+    <string name="settings_more_settings_title">Lisää asetuksia</string>
+    <string name="settings_rename">Laitenimi</string>
+    <string name="sftp_action_mode_menu_delete">Poista</string>
+    <string name="sftp_manage_storage_permission_explanation">Tiedostojen etäkäytön sallimiseksi tällä laitteella COSMIC Connectin on annettava hallita talletustilaa.</string>
+    <string name="sftp_missing_permission_error">Käyttöoikeuksia puuttuu: tiedostojärjestelmän käyttö</string>
+    <string name="sftp_no_storage_locations_configured">Tallennustiloja ei ole asetettu</string>
+    <string name="sftp_preference_add_storage_location_title">Lisää tallennustila</string>
+    <string name="sftp_preference_configured_storage_locations">Asetetut tallennustilat</string>
+    <string name="sftp_preference_edit_storage_location">Muokkaa tallennustilaa</string>
+    <string name="sftp_saf_permission_explanation">Tallennustilat on asetettava etätiedostojen käyttämiseksi</string>
+    <string name="sftp_storage_preference_click_to_select">valitse napsauttamalla</string>
+    <string name="sftp_storage_preference_display_name">Näyttönimi</string>
+    <string name="sftp_storage_preference_display_name_already_used">Tämä näyttönimi on jo käytössä</string>
+    <string name="sftp_storage_preference_display_name_cannot_be_empty">Näyttönimi ei voi olla tyhjä</string>
+    <string name="sftp_storage_preference_storage_location">Tallennustila</string>
+    <string name="sftp_storage_preference_storage_location_already_configured">Tämä sijainti on jo asetettu</string>
+    <string name="share">Jaa</string>
+    <string name="share_destination_customize">Vaihda kohdekansio</string>
+    <string name="share_destination_customize_summary_disabled">Vastaanotetut tiedostot näkyvät Latauksissa</string>
+    <string name="share_destination_customize_summary_enabled">Tiedostot tallennetaan alla olevaan kansioon</string>
+    <string name="share_destination_folder_preference">Kohdekansio</string>
+    <string name="share_notification_preference">Äänekkäät ilmoitukset</string>
+    <string name="share_notification_preference_summary">Värise ja soita ääni tiedoston saapuessa</string>
+    <string name="share_notifications_explanation">Ilmoitukset on otetettava käyttöön, jotta tiedostojen siirron etenemisen voi näyttää</string>
+    <string name="share_optional_permission_explanation">Talletustilan käyttö on sallittava tiedostojen vastaanottamiseksi</string>
+    <string name="share_received_file">Jaa ”%s”</string>
+    <string name="share_to">Jaa…</string>
+    <string name="shareplugin_text_saved">Vastaanotettiin tekstiä, tallennettiin leikepöydälle</string>
+    <string name="shellwen_chen_task">Parantaa SFTP:n tietoturvaa ja tämän projektin ylläpidettävyyttä, korjaa virheitä ja yleisesti parantaa asioita</string>
+    <string name="show_keyboard">Näytä näppäimistö</string>
+    <string name="show_mouse_and_keyboard">Näytä hiiri ja näppäimistö</string>
+    <string name="show_notification_if_screen_off">Lähetä ilmoitukset vain näyttö ei ole käytössä</string>
+    <string name="side_sheet_accessibility_pane_title">Sivupalkki</string>
+    <string name="source_code">Lähdekoodi</string>
+    <string msgid="4139871816613051306" name="state_empty">"Tyhjä"</string>
+    <string msgid="5834637030682409883" name="state_off">"Pois päältä"</string>
+    <string msgid="1490883874751719580" name="state_on">"Päällä"</string>
+    <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+    <string msgid="9167775378838880170" name="summary_collapsed_preference_list">"<ns1:g id="CURRENT_ITEMS">%1$s</ns1:g>, <ns1:g id="ADDED_ITEMS">%2$s</ns1:g>"</string>
+    <string msgid="2561197295334830845" name="switch_role">"Vaihda"</string>
+    <string msgid="1672349317127674378" name="tab">"Välilehti"</string>
+    <string name="tap_to_answer">Vastaa napauttamalla</string>
+    <string name="tap_to_execute">Suorita napauttamalla</string>
+    <string name="tap_to_open">Avaa napauttamalla</string>
+    <string name="telepathy_permission_explanation">Lukeaksesi ja lähettääksesi tekstiviestejä työpöydältä sinun on annettava käyttöoikeudet tekstiviesteihin</string>
+    <string name="telephony_optional_permission_explanation">Puhelimen yhteystietoihin on annettava käyttöoikeudet, jotta voit nähdä yhteystiedoissa nimet puhelinnumerojen sijaan</string>
+    <string name="telephony_permission_explanation">Puhelujen näyttäminen työpöydällä vaatii käyttöoikeuden puhelulokiin ja puhelimen tilaan</string>
+    <string name="telephony_pref_blocked_dialog_desc">Älä näytä soittoja äläkä tekstiviestejä näistä numeroista. Anna numero per rivi.</string>
+    <string name="telephony_pref_blocked_title">Estetyt numerot</string>
+    <string msgid="5946805113151406391" name="template_percent">"<ns1:g id="PERCENTAGE">%1$d</ns1:g> prosenttia"</string>
+    <string name="thanks_to">Kiitokset</string>
+    <string name="theme_dialog_title">Valitse teema</string>
+    <string name="title_activity_notification_filter">Ilmoitussuodatin</string>
+    <string msgid="3765533235322692011" name="tooltip_description">"vihjeteksti"</string>
+    <string msgid="3124740595719787496" name="tooltip_label">"näytä vihjeteksti"</string>
+    <string name="trusted_networks">Luotetut verkot</string>
+    <string name="trusted_networks_desc">Rajaa automaattihaku tunnettuihin verkkoihin</string>
+    <string name="undo">Kumoa</string>
+    <string name="unknown_device">Tuntematon laite</string>
+    <string name="unreachable_description">Tämä pariksi kytketty laite ei ole tavoitettavissa. Tarkista, että se on yhteydessä samaan verkkoon.</string>
+    <string name="unreachable_device_dynamic_shortcut">%s (✕)</string>
+    <string name="unreachable_device_url_share_text">Tavoittamattomissa olevalle laitteelle jaetut verkko-osoitteet välitetään heti kun laite tavoitetaan.\n\n</string>
+    <string name="user_display_name">Sinä</string>
+    <string msgid="3140233346420563315" name="v7_preference_off">"POIS KÄYTÖSTÄ"</string>
+    <string msgid="89551595707643515" name="v7_preference_on">"KÄYTÖSSÄ"</string>
+    <string name="version">Versio %s</string>
+    <string name="view_status_title">Tila</string>
+    <string name="visit_contributors_homepage">Käy avustajan sivustolla\n%s</string>
+    <string name="website">Sivusto</string>
+</resources>

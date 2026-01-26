@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "org.cosmic.cosmicconnect.app-mergeDebugResources-86:/layout-v23/pairing_explanation_text_no_wifi.xml",
+        "source": "org.cosmic.cosmicconnect.app-app-89:/layout-v23/pairing_explanation_text_no_wifi.xml"
+    },
+    {
+        "merged": "org.cosmic.cosmicconnect.app-mergeDebugResources-86:/layout-v23/pairing_explanation_not_trusted.xml",
+        "source": "org.cosmic.cosmicconnect.app-app-89:/layout-v23/pairing_explanation_not_trusted.xml"
+    },
+    {
+        "merged": "org.cosmic.cosmicconnect.app-mergeDebugResources-86:/layout-v23/pairing_explanation_text_no_notifications.xml",
+        "source": "org.cosmic.cosmicconnect.app-app-89:/layout-v23/pairing_explanation_text_no_notifications.xml"
+    },
+    {
+        "merged": "org.cosmic.cosmicconnect.app-mergeDebugResources-86:/layout-v23/pairing_explanation_duplicate_names.xml",
+        "source": "org.cosmic.cosmicconnect.app-app-89:/layout-v23/pairing_explanation_duplicate_names.xml"
+    }
+]

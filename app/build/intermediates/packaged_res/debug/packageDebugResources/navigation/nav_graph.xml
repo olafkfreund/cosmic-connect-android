@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/pairingFragment">
+
+    <fragment
+        android:id="@+id/pairingFragment"
+        android:name="org.cosmic.cosmicconnect.UserInterface.PairingFragment"
+        android:label="@string/pair_new_device"
+        tools:layout="@layout/fragment_pairing" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="org.cosmic.cosmicconnect.UserInterface.SettingsFragment"
+        android:label="@string/settings"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="org.cosmic.cosmicconnect.UserInterface.About.AboutFragment"
+        android:label="@string/about"
+        tools:layout="@layout/fragment_about" />
+
+    <fragment
+        android:id="@+id/deviceFragment"
+        android:name="org.cosmic.cosmicconnect.UserInterface.DeviceFragment"
+        android:label="Device"
+        tools:layout="@layout/fragment_device">
+        <argument
+            android:name="deviceId"
+            app:argType="string" />
+        <argument
+            android:name="fromDeviceList"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </fragment>
+</navigation>

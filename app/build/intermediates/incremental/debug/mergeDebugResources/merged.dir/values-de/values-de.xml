@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2" xmlns:ns2="http://schemas.android.com/tools">
+    <string-array name="convert_to_mms_after_entries">
+    <item>Nach einer Nachricht</item>
+    <item>Nach zwei Nachrichten</item>
+    <item>Nach drei Nachrichten</item>
+    <item>Nach vier Nachrichten</item>
+    <item>Nach fünf Nachrichten</item>
+  </string-array>
+    <string-array name="digitizer_preference_entries_draw_button_side">
+    <item>Oben links</item>
+    <item>Oben rechts</item>
+    <item>Unten links</item>
+    <item>Unten rechts</item>
+  </string-array>
+    <string-array name="mousepad_acceleration_profile_entries">
+    <item>Keine Beschleunigung</item>
+    <item>Schwächste</item>
+    <item>Schwächer</item>
+    <item>Normal</item>
+    <item>Stärker</item>
+    <item>Stärkste</item>
+  </string-array>
+    <string-array name="mousepad_sensitivity_entries">
+    <item>Langsamste</item>
+    <item>Langsam</item>
+    <item>Standard</item>
+    <item>Schnell</item>
+    <item>Schnellste</item>
+  </string-array>
+    <string-array name="mousepad_tap_entries">
+    <item>Linksklick</item>
+    <item>Rechtsklick</item>
+    <item>Mittelklick</item>
+    <item>Nichts</item>
+  </string-array>
+    <string-array name="mpris_time_entries">
+    <item>10 Sekunden</item>
+    <item>20 Sekunden</item>
+    <item>30 Sekunden</item>
+    <item>1 Minute</item>
+    <item>2 Minuten</item>
+  </string-array>
+    <string-array name="theme_list">
+    <item>Von Energiespareinstellungen festgelegt</item>
+    <item>Hell</item>
+    <item>Dunkel</item>
+  </string-array>
+    <string-array name="theme_list_v28">
+    <item>Systemvoreinstellung</item>
+    <item>Hell</item>
+    <item>Dunkel</item>
+  </string-array>
+    <plurals name="incoming_file_title">
+    <item quantity="one">%1$d Datei wird von %2$s empfangen</item>
+    <item quantity="other">%1$d Dateien werden von %2$s empfangen</item>
+  </plurals>
+    <plurals name="incoming_files_text">
+    <item quantity="one">Datei: %1s</item>
+    <item quantity="other">(Datei %2$d von %3$d) : %1$s</item>
+  </plurals>
+    <plurals name="mtrl_badge_content_description">
+    <item quantity="one">%d neue Benachrichtigung</item>
+    <item quantity="other">%d neue Benachrichtigungen</item>
+  </plurals>
+    <plurals name="outgoing_file_title">
+    <item quantity="one">%1$d Datei wird an %2$s gesendet</item>
+    <item quantity="other">%1$d Dateien werden an %2$s gesendet</item>
+  </plurals>
+    <plurals name="outgoing_files_text">
+    <item quantity="one">Datei: %1$s</item>
+    <item quantity="other">(Datei %2$d von %3$d) : %1$s</item>
+  </plurals>
+    <plurals name="received_files_fail_title">
+    <item quantity="one">Die Datei von %1$s wurde nicht empfangen</item>
+    <item quantity="other">%2$d der %3$d Dateien von %1$s wurden nicht empfangen</item>
+  </plurals>
+    <plurals name="received_files_title">
+    <item quantity="one">Datei von %1$s empfangen</item>
+    <item quantity="other">%2$d Dateien von %1$s empfangen</item>
+  </plurals>
+    <plurals name="send_files_fail_title">
+    <item quantity="one">Die Datei kann nicht an %1$s gesendet werden</item>
+    <item quantity="other">%2$d der %3$d Dateien können nicht an %1$s gesendet werden</item>
+  </plurals>
+    <plurals name="sent_files_title">
+    <item quantity="one">Datei wurde an %1$s gesendet</item>
+    <item quantity="other">%2$d Dateien wurden an %1$s gesendet</item>
+  </plurals>
+    <string msgid="5976598919945601918" name="abc_action_bar_home_description">"Zur Startseite"</string>
+    <string msgid="8388173803310557296" name="abc_action_bar_up_description">"Nach oben"</string>
+    <string msgid="3937310113216875497" name="abc_action_menu_overflow_description">"Weitere Optionen"</string>
+    <string msgid="4692188335987374352" name="abc_action_mode_done">"Fertig"</string>
+    <string msgid="1189761859438369441" name="abc_activity_chooser_view_see_all">"Alle anzeigen"</string>
+    <string msgid="2165779757652331008" name="abc_activitychooserview_choose_application">"App auswählen"</string>
+    <string msgid="4215997306490295099" name="abc_capital_off">"AUS"</string>
+    <string msgid="884982626291842264" name="abc_capital_on">"AN"</string>
+    <string msgid="8833365367933412986" name="abc_menu_alt_shortcut_label">"Alt +"</string>
+    <string msgid="2223301931652355242" name="abc_menu_ctrl_shortcut_label">"Strg +"</string>
+    <string msgid="838001238306846836" name="abc_menu_delete_shortcut_label">"Löschen"</string>
+    <string msgid="7986526966204849475" name="abc_menu_enter_shortcut_label">"Eingabetaste"</string>
+    <string msgid="375214403600139847" name="abc_menu_function_shortcut_label">"Funktionstaste +"</string>
+    <string msgid="4192209724446364286" name="abc_menu_meta_shortcut_label">"Meta-Taste +"</string>
+    <string msgid="4741552369836443843" name="abc_menu_shift_shortcut_label">"Umschalttaste +"</string>
+    <string msgid="5473865519181928982" name="abc_menu_space_shortcut_label">"Leertaste"</string>
+    <string msgid="6180552449598693998" name="abc_menu_sym_shortcut_label">"Sym-Taste +"</string>
+    <string msgid="5520303668377388990" name="abc_prepend_shortcut_label">"Menütaste +"</string>
+    <string msgid="7208076849092622260" name="abc_search_hint">"Suchen…"</string>
+    <string msgid="3741173234950517107" name="abc_searchview_description_clear">"Suchanfrage löschen"</string>
+    <string msgid="693312494995508443" name="abc_searchview_description_query">"Suchanfrage"</string>
+    <string msgid="3417662926640357176" name="abc_searchview_description_search">"Suche"</string>
+    <string msgid="1486535517437947103" name="abc_searchview_description_submit">"Anfrage senden"</string>
+    <string msgid="2293578557972875415" name="abc_searchview_description_voice">"Sprachsuche"</string>
+    <string msgid="8875138169939072951" name="abc_shareactionprovider_share_with">"Teilen mit"</string>
+    <string msgid="9055268688411532828" name="abc_shareactionprovider_share_with_application">"Mit <ns1:g id="APPLICATION_NAME">%s</ns1:g> teilen"</string>
+    <string msgid="1656852541809559762" name="abc_toolbar_collapse_description">"Minimieren"</string>
+    <string name="about">Über</string>
+    <string name="about_kde">Über KDE</string>
+    <string name="about_kde_about">&lt;h1>Über&lt;/h1> &lt;p>KDE ist eine weltweite Gemeinschaft von Softwareentwicklern, Künstlern, Autoren, Übersetzern und Kreativen, die sich für die Entwicklung &lt;a href=https://www.gnu.org/philosophy/free-sw.de.html>freier Software&lt;/a> einsetzen. KDE entwickelt die Plasma-Desktopumgebung, hunderte Anwendungen und die vielen dafür benötigten Softwarebibliotheken.&lt;/p> &lt;p>KDE ist ein gemeinschaftliches Unternehmen: Es gibt keine einzelne Macht, die seine Ausrichtung oder Produkte kontrolliert. Stattdessen arbeiten wir zusammen, um das gemeinschaftliche Ziel – die Entwicklung der weltbesten freien Software – zu erreichen. Jeder ist eingeladen, bei KDE &lt;a href=https://community.kde.org/Get_Involved>mitzumachen und sich einzubringen&lt;/a>, auch Sie.&lt;/p> Besuchen Sie &lt;a href=https://www.kde.org/>https://www.kde.org/&lt;/a> für weitere Informationen über die KDE-Gemeinschaft und die Software, die wir entwickeln.</string>
+    <string name="about_kde_join_kde">&lt;h1>Bei KDE mitmachen&lt;/h1> &lt;p>Sie müssen kein Softwareentwickler sein, um ein Mitglied des KDE-Teams zu werden. Sie können einem Sprachen-Team beitreten, das die Benutzeroberflächen übersetzt. Sie können Grafiken, Designs, Klänge und Verbesserungen zur Dokumentation beisteuern. Sie entscheiden!&lt;/p> &lt;p>Besuchen Sie &lt;a href=https://community.kde.org/Get_Involved>https://community.kde.org/Get_Involved&lt;/a> für Informationen über einige Projekte, bei denen Sie sich einbringen können.&lt;/p> Wenn Sie weitere Informationen oder Dokumentation benötigen, werden Sie unter &lt;a href=https://techbase.kde.org/>https://techbase.kde.org/&lt;/a> fündig.</string>
+    <string name="about_kde_report_bugs_or_wishes">&lt;h1>Fehler und Wünsche melden&lt;/h1> &lt;p>Software kann immer verbessert werden und das KDE-Team ist immer bereit das zu tun. Jedoch müssen Sie - der Benutzer - uns sagen, wenn etwas nicht wie erwartet funktioniert oder verbessert werden könnte.&lt;/p> &lt;p>KDE hat ein Bug-Tracking-System. Besuchen Sie &lt;a href=https://bugs.kde.org/>https://bugs.kde.org/&lt;/a> oder verwenden Sie den Knopf „Probleme und Wünsche berichten“ auf dem Über-Bildschirm, um Bugs zu melden.&lt;/p> Wenn Sie Vorschläge für Verbesserungen haben, können Sie gerne das Bug-Tracking-System nutzen, um Ihren Wunsch zu melden. Verwenden Sie hierzu den Schweregrad „Wunschliste“.</string>
+    <string name="about_kde_support_kde">&lt;h1>KDE unterstützen&lt;/h1> &lt;p>Software von KDE ist und wird immer kostenlos bleiben, allerdings kostet deren Entwicklung Geld.&lt;/p> &lt;p>Um die Entwicklung zu unterstützen, gründete die Gemeinschaft „KDE e. V.“, eine in Deutschland gegründete gemeinnützige Organisation. KDE e. V. repräsentiert die KDE-Gemeinschaft in rechtlichen und finanziellen Angelegenheiten. Lesen Sie &lt;a href=https://ev.kde.org/>https://ev.kde.org/&lt;/a> für Informationen über KDE e. V.&lt;/p> &lt;p>KDE profitiert von vielerlei Arten von Beiträgen, auch von finanziellen. Wir nutzen die Mittel, um Mitgliedern und anderen Personen die Ausgaben zu erstatten, die ihnen im Projekt entstehen. Weitere Mittel werden für rechtliche Unterstützung oder die Organisation von Konferenzen und Treffen verwendet.&lt;/p> &lt;p>Wir möchten Sie dazu ermutigen, unsere Bemühungen mit einer finanziellen Spende zu unterstützen. Dazu stehen Ihnen die hier beschriebenen Methoden zur Verfügung: &lt;a href=https://www.kde.org/community/donations/>https://www.kde.org/community/donations/&lt;/a>.&lt;/p> Vielen Dank im Voraus für Ihre Unterstützung.</string>
+    <string name="add_command">Einen Befehl hinzufügen</string>
+    <string name="add_command_description">Sie können auf der Arbeitsfläche neue Befehle hinzufügen</string>
+    <string name="add_device_dialog_title">Gerät hinzufügen</string>
+    <string name="add_device_hint">Rechnername oder IP-Adresse</string>
+    <string name="add_trusted_network">%1s hinzufügen</string>
+    <string name="addcommand_explanation">Es sind keine Befehle eingerichtet</string>
+    <string name="addcommand_explanation2">Sie können in den Systemeinstellungen für COSMIC Connect neue Befehle hinzufügen</string>
+    <string name="alex_fiestas_task">Verbesserungen am Kontakte-Modul</string>
+    <string name="all">Alle</string>
+    <string name="all_permissions_granted">Alle Berechtigungen erteilt 🎉</string>
+    <string name="allow_all_networks_text">Alle erlauben</string>
+    <string name="aniket_kumar_task">Verbesserungen am SMS-Modul</string>
+    <string name="apple_support">macOS-Unterstützung. Arbeit an der macOS-Unterstützung</string>
+    <string name="authors">Autoren</string>
+    <string name="battery_status_charging_format">Akku: %d%% Wird geladen</string>
+    <string name="battery_status_format">Akku: %d%%</string>
+    <string name="battery_status_low_format">Akku: %d%% Niedriger Ladestand</string>
+    <string name="bigscreen_back">Zurück</string>
+    <string name="bigscreen_down">Unten</string>
+    <string name="bigscreen_hide_mouse_input">Knopf für entfernte Maus- und Tastatureingaben ausblenden</string>
+    <string name="bigscreen_home">Startseite</string>
+    <string name="bigscreen_left">Links</string>
+    <string name="bigscreen_mic">Mikrofon</string>
+    <string name="bigscreen_optional_permission_explanation">Um den Mikrofoneingang des Telefons freizugeben, müssen Sie den Zugriff auf den Audioeingang des Telefons erlauben</string>
+    <string name="bigscreen_right">Rechts</string>
+    <string name="bigscreen_select">Auswählen</string>
+    <string name="bigscreen_show_back_title">Zurück-Knopf anzeigen</string>
+    <string name="bigscreen_show_home_title">Home-Knopf anzeigen</string>
+    <string name="bigscreen_speech_extra_prompt">Sprache</string>
+    <string name="bigscreen_up">Oben</string>
+    <string name="block_contents">Inhalt von Benachrichtigungen blockieren</string>
+    <string name="block_images">Bilder in Benachrichtigungen blockieren</string>
+    <string name="block_notification_contents">Benachrichtigungsinhalte blockieren</string>
+    <string name="block_notification_images">Bilder in Benachrichtigungen blockieren</string>
+    <string name="bluetooth_permission_needed_desc">COSMIC Connect benötigt die Berechtigung, eine Verbindung zu Geräten in der Nähe aufzubauen, um per Bluetooth gekoppelte Geräte in COSMIC Connect verfügbar zu machen.</string>
+    <string name="bottomsheet_action_collapse">Ansicht am unteren Rand minimieren</string>
+    <string name="bottomsheet_action_expand">Ansicht am unteren Rand maximieren</string>
+    <string name="bottomsheet_action_expand_halfway">Zur Hälfte maximieren</string>
+    <string name="bottomsheet_drag_handle_content_description">Ziehpunkt</string>
+    <string name="bug_fixes_and_general_improvements">Fehlerbehebungen und allgemeine Verbesserungen</string>
+    <string msgid="881409763997275156" name="call_notification_answer_action">"Annehmen"</string>
+    <string msgid="8793775615905189152" name="call_notification_answer_video_action">"Video"</string>
+    <string msgid="3229508546291798546" name="call_notification_decline_action">"Ablehnen"</string>
+    <string msgid="2659457946726154263" name="call_notification_hang_up_action">"Auflegen"</string>
+    <string msgid="6107532579223922871" name="call_notification_incoming_text">"Eingehender Anruf"</string>
+    <string msgid="8623827134497363134" name="call_notification_ongoing_text">"Aktueller Anruf"</string>
+    <string msgid="59049573811482460" name="call_notification_screening_text">"Filter für eingehenden Anruf"</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="cancel_pairing">Kopplung abbrechen</string>
+    <string name="cannot_create_file">Die Datei %s kann nicht erstellt werden</string>
+    <string name="cant_open_url">Die URL zum Fortsetzen der Wiedergabe kann nicht geöffnet werden</string>
+    <string name="category_connected_devices">Verbundene Geräte</string>
+    <string name="category_not_paired_devices">Verfügbare Geräte</string>
+    <string name="category_remembered_devices">Gemerkte Geräte</string>
+    <string name="character_counter_content_description">Eingegebene Zeichen: %1$d von %2$d</string>
+    <string name="character_counter_overflowed_content_description">Zeichenbeschränkung überschritten: %1$d/%2$d</string>
+    <string name="clear_compose">Leeren</string>
+    <string name="clear_text_end_icon_content_description">Text löschen</string>
+    <string name="click_here_to_type">Hier tippen, um zu schreiben</string>
+    <string name="clipboard_android_x_incompat">In Android 10 wurde der Zugriff auf die Zwischenablage für alle Apps entfernt. Diese Modul wird deaktiviert.</string>
+    <string name="clipboard_toast">In die Zwischenablage kopiert</string>
+    <string name="close">Schließen</string>
+    <string msgid="406453423630273620" name="close_drawer">"Navigationsmenü schließen"</string>
+    <string msgid="7573152094250666567" name="close_sheet">"Tabelle schließen"</string>
+    <string name="contacts_per_device_confirmation">Ihre Telefonkontakte werden auf dieses Gerät übertragen, damit sie von der „COSMIC Connect“-SMS-App und anderen Apps verwendet werden können.</string>
+    <string name="contacts_permission_explanation">Um Ihr Adressbuch mit der Arbeitsfläche zu teilen, müssen Sie Zugriff auf die Kontakte erlauben</string>
+    <string name="convert_to_mms_after_title">In MMS umwandeln</string>
+    <string msgid="6083905920877235314" name="copy">"Kopieren"</string>
+    <string name="copy_url_to_clipboard">Adresse in die Zwischenablage kopieren</string>
+    <string name="custom_device_deleted">Benutzerdefiniertes Gerät gelöscht</string>
+    <string name="custom_device_fab_hint">Ein Gerät hinzufügen</string>
+    <string name="custom_device_list">Geräte nach IP-Adresse hinzufügen</string>
+    <string name="custom_device_list_help">Falls Ihr Gerät nicht automatisch erkannt wird, können Sie es über die IP-Adresse oder den Gerätenamen hinzufügen. Klicken Sie dafür auf den Knopf unten</string>
+    <string name="custom_devices_settings">Benutzerdefinierte Geräteliste</string>
+    <string name="custom_devices_settings_summary">%d Geräte manuell hinzugefügt</string>
+    <string msgid="8038256446254964252" name="default_error_message">"Ungültige Eingabe"</string>
+    <string msgid="6312721426453364202" name="default_popup_window_title">"Pop-up-Fenster"</string>
+    <string name="developer">Entwickler</string>
+    <string name="device_host_duplicate">Rechnername ist bereits in der Liste</string>
+    <string name="device_host_invalid">Rechnername ist ungültig. Verwenden Sie einen gültigen Rechnernamen, eine IPv4- oder IPv6-Adresse</string>
+    <string name="device_list_empty">Keine Geräte</string>
+    <string name="device_menu_plugins">Moduleinstellungen</string>
+    <string name="device_menu_unpair">Entkoppeln</string>
+    <string name="device_not_paired">Gerät nicht gekoppelt</string>
+    <string name="device_rename_confirm">Umbenennen</string>
+    <string name="device_rename_title">Gerät umbenennen</string>
+    <string name="devices">Geräte</string>
+    <string name="digitizer_draw_button">Mit dem Finger zeichnen</string>
+    <string name="digitizer_preference_summary_enable_exit_fullscreen_gesture">Wenn aktiviert, kann durch Tippen und Halten auf dem Zeichentablett der Vollbildmodus verlassen werden.</string>
+    <string name="digitizer_preference_summary_hide_draw_button">Versteckt den „Mit dem Finger zeichnen“-Knopf vollständig, somit ist kein Zeichnen mit dem Finger mehr möglich. Aktivieren Sie diese Einstellung nur, wenn Ihr Gerät Stift-Eingaben unterstützt.</string>
+    <string name="digitizer_preference_title_draw_button_side">Seite des „Mit dem Finger zeichnen“-Knopfs</string>
+    <string name="digitizer_preference_title_enable_exit_fullscreen_gesture">Geste zum Verlassen des Vollbildmodus aktivieren</string>
+    <string name="digitizer_preference_title_hide_draw_button">„Mit dem Finger zeichnen“-Knopf verstecken</string>
+    <string name="donate">Spenden</string>
+    <string name="double_tap_to_drag">Doppelklicken, um zu ziehen</string>
+    <string msgid="1890207353314751437" name="dropdown_menu">"Drop-down-Menü"</string>
+    <string name="easter_egg">Osterei</string>
+    <string name="email_contributor">E-Mail an den Mitwirkenden senden\n%s</string>
+    <string name="empty_trusted_networks_list_text">Sie haben bisher noch kein vertrauenswürdiges Netzwerk hinzugefügt</string>
+    <string name="enable_bluetooth">Bluetooth aktivieren (Beta)</string>
+    <string name="enable_fullscreen">Vollbildmodus aktivieren</string>
+    <string name="enable_udp_broadcast">UDP-Geräteerkennung aktivieren</string>
+    <string name="encryption_info_title">Verschlüsselungsinformationen</string>
+    <string name="error_a11y_label">Fehler: ungültig</string>
+    <string name="error_already_paired">Gerät bereits gekoppelt</string>
+    <string name="error_canceled_by_other_peer">Abbruch durch Gegenstelle</string>
+    <string name="error_canceled_by_user">Abbruch durch Benutzer</string>
+    <string name="error_clocks_not_match">Uhren der Geräte sind nicht synchron</string>
+    <string name="error_icon_content_description">Fehler</string>
+    <string name="error_not_reachable">Gerät nicht erreichbar</string>
+    <string name="error_timed_out">Zeitüberschreitung</string>
+    <string name="everyone_else">Jeder, der über die Jahre noch zu COSMIC Connect beigetragen hat</string>
+    <string msgid="2427401033573778270" name="expand_button_title">"Erweitert"</string>
+    <string name="exposed_dropdown_menu_content_description">Drop-down-Menü anzeigen</string>
+    <string name="extra_options">Weitere Einstellungen</string>
+    <string name="filter_apps_info">Benachrichtigungen der ausgewählten Apps werden abgeglichen.</string>
+    <string name="findmyphone_description">Lässt das Gerät klingeln, damit Sie es finden können</string>
+    <string name="findmyphone_found">Gefunden</string>
+    <string name="findmyphone_notifications_explanation">Die Berechtigung für Benachrichtigungen wird benötigt, damit das Telefon klingeln kann, wenn die App im Hintergrund ist</string>
+    <string name="findmyphone_title">Mein Telefon suchen</string>
+    <string name="findmyphone_title_tablet">Mein Tablet suchen</string>
+    <string name="findmyphone_title_tv">Meinen Fernseher suchen</string>
+    <string name="foreground_notification_devices">Verbunden mit: %s</string>
+    <string name="foreground_notification_no_devices">Keine bestehenden Verbindungen</string>
+    <string name="foreground_notification_send_clipboard">Zwischenablage senden</string>
+    <string name="gyro_mouse_enabled_title">Gyroskop-Maus aktivieren</string>
+    <string name="gyro_mouse_sensitivity_title">Gyroskop-Empfindlichkeit</string>
+    <string name="hold_to_drag">Halten, um zu ziehen</string>
+    <string name="holger_kaelberer_task">Modul „Entfernte Tastatur“ und Fehlerbehebungen</string>
+    <string name="icon_content_description">Dialogfeldsymbol</string>
+    <string msgid="6827826412747255547" name="in_progress">"In Bearbeitung"</string>
+    <string msgid="7933458017204019916" name="indeterminate">"Teilweise aktiviert"</string>
+    <string name="invalid_device_name">Ungültiger Gerätename</string>
+    <string name="item_view_role_description">Tab</string>
+    <string name="kde">KDE</string>
+    <string name="kde_be_free">KDE – Freiheit genießen!</string>
+    <string name="kde_connect">COSMIC Connect</string>
+    <string name="konqi">Konqi</string>
+    <string name="left_click">Linksklick senden</string>
+    <string name="licenses">Lizenzen</string>
+    <string name="location_permission_needed_desc">KDE connect benötigt die Berechtigung für die Verwendung des Standorts im Hintergrund, um festzustellen, mit welchem WLAN-Netzwerk Sie verbunden sind, auch wenn die App im Hintergrund ist. Dies ist notwendig, da die Namen der WLAN-Netzwerke verwendet werden können, um Ihren Standort zu bestimmen, auch wenn COSMIC Connect dies nicht tut.</string>
+    <string name="location_permission_needed_title">Berechtigung erforderlich</string>
+    <string name="m3_loading_indicator_content_description">Wird geladen</string>
+    <string msgid="2988463736136100848" name="m3c_bottom_sheet_collapse_description">"Ansicht am unteren Rand minimieren"</string>
+    <string msgid="1555567894577437024" name="m3c_bottom_sheet_dismiss_description">"Ansicht am unteren Rand schließen"</string>
+    <string msgid="8403354765404029791" name="m3c_bottom_sheet_drag_handle_description">"Ziehpunkt"</string>
+    <string msgid="6670819569745899763" name="m3c_bottom_sheet_expand_description">"Ansicht am unteren Rand maximieren"</string>
+    <string msgid="3010635850035863127" name="m3c_bottom_sheet_pane_title">"Ansicht am unteren Rand"</string>
+    <string msgid="8166741421776570875" name="m3c_date_input_headline">"Eingabedatum"</string>
+    <string msgid="229313757840775812" name="m3c_date_input_headline_description">"Eingabedatum: %1$s"</string>
+    <string msgid="6116910750161463197" name="m3c_date_input_invalid_for_pattern">"Datum entspricht nicht dem erwarteten Format: %1$s"</string>
+    <string msgid="2521768508935305279" name="m3c_date_input_invalid_not_allowed">"Unzulässiges Datum: %1$s"</string>
+    <string msgid="7052898923934555305" name="m3c_date_input_invalid_year_range">"Datum liegt außerhalb des erwarteten Jahresbereichs (%1$s–%2$s)"</string>
+    <string msgid="2895559812010326913" name="m3c_date_input_label">"Datum"</string>
+    <string msgid="1237013946323089826" name="m3c_date_input_no_input_description">"Kein Datum"</string>
+    <string msgid="7306227249789210568" name="m3c_date_input_title">"Datum auswählen"</string>
+    <string msgid="7605002211875882969" name="m3c_date_picker_headline">"Ausgewähltes Datum"</string>
+    <string msgid="3664277305226978227" name="m3c_date_picker_headline_description">"Aktuelle Auswahl: %1$s"</string>
+    <string msgid="8436650776581492840" name="m3c_date_picker_navigate_to_year_description">"Zum Jahr %1$s wechseln"</string>
+    <string msgid="5811000998184572395" name="m3c_date_picker_no_selection_description">"Kein Datum"</string>
+    <string msgid="7813882352367152251" name="m3c_date_picker_scroll_to_earlier_years">"Zum Ansehen vorheriger Jahre scrollen"</string>
+    <string msgid="5727367015496556177" name="m3c_date_picker_scroll_to_later_years">"Zum Ansehen nachfolgender Jahre scrollen"</string>
+    <string msgid="1804346892470238807" name="m3c_date_picker_switch_to_calendar_mode">"In den Kalendereingabemodus wechseln"</string>
+    <string msgid="395627960681594326" name="m3c_date_picker_switch_to_day_selection">"Wischen, um ein Jahr auszuwählen, oder tippen, um zur Tagesauswahl zurückzukehren"</string>
+    <string msgid="2219746470065162704" name="m3c_date_picker_switch_to_input_mode">"In den Texteingabemodus wechseln"</string>
+    <string msgid="7142101321095356500" name="m3c_date_picker_switch_to_next_month">"Zum nächsten Monat wechseln"</string>
+    <string msgid="228438865139394590" name="m3c_date_picker_switch_to_previous_month">"Zum vorherigen Monat wechseln"</string>
+    <string msgid="791651718641787594" name="m3c_date_picker_switch_to_year_selection">"Zur Jahresauswahl wechseln"</string>
+    <string msgid="7430790972741451689" name="m3c_date_picker_title">"Datum auswählen"</string>
+    <string msgid="3199387177749801575" name="m3c_date_picker_today_description">"Heute"</string>
+    <string msgid="2068382232816991922" name="m3c_date_picker_year_picker_pane_title">"Jahresauswahl sichtbar"</string>
+    <string msgid="3190049423327661366" name="m3c_date_range_input_invalid_range_input">"Angegebener Zeitraum ungültig"</string>
+    <string msgid="3148384720560189467" name="m3c_date_range_input_title">"Daten eingeben"</string>
+    <string msgid="2138321128465719402" name="m3c_date_range_picker_day_in_range">"Im Zeitraum"</string>
+    <string msgid="4947636797751277713" name="m3c_date_range_picker_end_headline">"Enddatum"</string>
+    <string msgid="602077859540990149" name="m3c_date_range_picker_scroll_to_next_month">"Zum Ansehen des nächsten Monats scrollen"</string>
+    <string msgid="4592174524846109496" name="m3c_date_range_picker_scroll_to_previous_month">"Zum Ansehen des vorherigen Monats scrollen"</string>
+    <string msgid="4665981448952749820" name="m3c_date_range_picker_start_headline">"Startdatum"</string>
+    <string msgid="3134165431120340385" name="m3c_date_range_picker_title">"Daten auswählen"</string>
+    <string msgid="7617233117134790350" name="m3c_dialog">"Dialogfeld"</string>
+    <string msgid="3177828188723359358" name="m3c_dropdown_menu_collapsed">"Minimiert"</string>
+    <string msgid="2360841780724299882" name="m3c_dropdown_menu_expanded">"Maximiert"</string>
+    <string msgid="8687821690726149911" name="m3c_dropdown_menu_toggle">"Drop-down-Menü maximieren/minimieren"</string>
+    <string msgid="6152806324422087846" name="m3c_search_bar_search">"Suche"</string>
+    <string msgid="6152755701819882931" name="m3c_snackbar_dismiss">"Schließen"</string>
+    <string msgid="7655536806087401899" name="m3c_suggestions_available">"Vorschläge unten"</string>
+    <string msgid="2786685010796619560" name="m3c_time_picker_am">"AM"</string>
+    <string msgid="2349193472625211372" name="m3c_time_picker_hour">"Stunde"</string>
+    <string msgid="9179527532316922345" name="m3c_time_picker_hour_24h_suffix">"%1$d Std."</string>
+    <string msgid="8876759303332837035" name="m3c_time_picker_hour_selection">"Stunde auswählen"</string>
+    <string msgid="3458167507790628988" name="m3c_time_picker_hour_suffix">"%1$d Uhr"</string>
+    <string msgid="6973808109666874069" name="m3c_time_picker_hour_text_field">"für Stunde"</string>
+    <string msgid="4313071914266462005" name="m3c_time_picker_minute">"Minute"</string>
+    <string msgid="4699133535056739733" name="m3c_time_picker_minute_selection">"Minuten auswählen"</string>
+    <string msgid="5064177921781937179" name="m3c_time_picker_minute_suffix">"%1$d Minuten"</string>
+    <string msgid="7661234488295443182" name="m3c_time_picker_minute_text_field">"für Minuten"</string>
+    <string msgid="5865171949528594571" name="m3c_time_picker_period_toggle_description">"Vormittags oder nachmittags auswählen"</string>
+    <string msgid="6616362054113087709" name="m3c_time_picker_pm">"Nachmittags"</string>
+    <string msgid="1805687647081129904" name="m3c_tooltip_long_press_label">"Kurzinfo anzeigen"</string>
+    <string msgid="5460405025248574620" name="m3c_tooltip_pane_description">"Kurzinfo"</string>
+    <string name="maintainer_and_developer">Betreuer und Entwickler</string>
+    <string name="manifest_label_share">An Gerät senden</string>
+    <string name="mark_as_read_label">ALS GELESEN MARKIEREN</string>
+    <string name="material_clock_toggle_content_description">Vormittags oder Nachmittags auswählen</string>
+    <string name="material_hour_24h_suffix">%1$s Stunden</string>
+    <string name="material_hour_selection">Stunde auswählen</string>
+    <string name="material_hour_suffix">%1$s Uhr</string>
+    <string name="material_minute_selection">Minuten auswählen</string>
+    <string name="material_minute_suffix">%1$s Minuten</string>
+    <string name="material_slider_range_end">Bereichsende</string>
+    <string name="material_slider_range_start">Bereichsstart</string>
+    <string name="material_slider_value">Wert</string>
+    <string name="material_timepicker_am">AM</string>
+    <string name="material_timepicker_clock_mode_description">In den Uhrzeitmodus wechseln, um die Uhrzeit einzugeben.</string>
+    <string name="material_timepicker_hour">Stunde</string>
+    <string name="material_timepicker_minute">Minute</string>
+    <string name="material_timepicker_pm">PM</string>
+    <string name="material_timepicker_select_time">Uhrzeit auswählen</string>
+    <string name="material_timepicker_text_input_mode_description">In den Texteingabemodus wechseln, um die Uhrzeit einzugeben.</string>
+    <string name="maxim_leshchenko_task">UI-Verbesserungen und diese Infoseite</string>
+    <string name="message_reply_label">ANTWORTEN</string>
+    <string name="middle_click">Mittelklick senden</string>
+    <string name="mouse_receiver_no_permissions">Um entfernte Touch-Eingaben zu empfangen, müssen Sie Bedienungshilfen-Berechtigungen gewähren. Diese ermöglichen die vollständige Kontrolle über das Gerät</string>
+    <string name="mouse_receiver_plugin_description">Entfernte Mausbewegungen empfangen</string>
+    <string name="mouse_receiver_plugin_name">Maus-Empfänger</string>
+    <string name="mousepad_acceleration_profile_settings_title">Zeigerbeschleunigung festlegen</string>
+    <string name="mousepad_double_tap_settings_title">Aktion für Tippen mit zwei Fingern festlegen</string>
+    <string name="mousepad_info">Bewegen Sie Ihren Finger über den Bildschirm, um den Mauszeiger zu bewegen. Tippen Sie auf den Bildschirm, um einen Klick zu simulieren und verwenden Sie entsprechend zwei/drei Finger für einen Rechts-/Mittelklick. Verwenden Sie zwei Finger, um zu scrollen und einen langen Druck für „Ziehen und Ablegen“. Gyroskop-Maus-Funktionen können Sie in den Modul-Einstellungen aktivieren.</string>
+    <string name="mousepad_info_no_gestures">Bewegen Sie den Finger auf dem Bildschirm, um den Mauszeiger zu bewegen. Tippen Sie, um zu klicken.</string>
+    <string name="mousepad_keyboard_input_not_supported">Das gekoppelte Gerät unterstützt keine Tasteneingaben</string>
+    <string name="mousepad_mouse_buttons_title">Maustasten anzeigen</string>
+    <string name="mousepad_scroll_direction_title">Bildlaufrichtung umkehren</string>
+    <string name="mousepad_scroll_sensitivity_title">Bildlaufgeschwindigkeit</string>
+    <string name="mousepad_sensitivity_settings_title">Empfindlichkeit des Touchpads festlegen</string>
+    <string name="mousepad_single_tap_settings_title">Aktion für Tippen mit einem Finger festlegen</string>
+    <string name="mousepad_triple_tap_settings_title">Aktion für Tippen mit drei Fingern festlegen</string>
+    <string name="mpris_coverart_description">Coverbild des aktuellen Mediums</string>
+    <string name="mpris_ff">Vorspulen</string>
+    <string name="mpris_keepwatching">Wiedergabe fortsetzen</string>
+    <string name="mpris_keepwatching_settings_summary">Eine stumme Benachrichtigung anzeigen, um nach dem Schließen von Medien die Wiedergabe auf diesem Gerät fortzusetzen</string>
+    <string name="mpris_keepwatching_settings_title">Wiedergabe fortsetzen</string>
+    <string name="mpris_loop">Wiederholen</string>
+    <string name="mpris_next">Weiter</string>
+    <string name="mpris_notification_settings_summary">Die Steuerung der Medienwiedergabe auch dann erlauben, wenn COSMIC Connect nicht geöffnet ist</string>
+    <string name="mpris_notification_settings_title">Benachrichtigung zur Medienkontrolle anzeigen</string>
+    <string name="mpris_notifications_explanation">Die Berechtigung für Benachrichtigungen ist notwendig, um entfernte Medien im Benachrichtigungsfenster anzuzeigen.</string>
+    <string name="mpris_open_url">Wiedergabe hier fortsetzen</string>
+    <string name="mpris_pause">Anhalten</string>
+    <string name="mpris_play">Wiedergabe</string>
+    <string name="mpris_previous">Zurück</string>
+    <string name="mpris_rew">Zurückspulen</string>
+    <string name="mpris_shuffle">Mischen</string>
+    <string name="mpris_stop">Die aktuelle Medienwiedergabe beenden</string>
+    <string name="mpris_time_settings_summary">Sprungweite für Vor-/Zurückspulen anpassen</string>
+    <string name="mpris_time_settings_title">Knöpfe für Vor–/Zurückspulen</string>
+    <string name="mpris_volume">Lautstärke</string>
+    <string name="mtrl_badge_numberless_content_description">Neue Benachrichtigung</string>
+    <string name="mtrl_checkbox_state_description_checked">Aktiviert</string>
+    <string name="mtrl_checkbox_state_description_indeterminate">Teilweise aktiviert</string>
+    <string name="mtrl_checkbox_state_description_unchecked">Nicht aktiviert</string>
+    <string name="mtrl_chip_close_icon_content_description">%1$s entfernen</string>
+    <string name="mtrl_exceed_max_badge_number_content_description" ns2:ignore="PluralsCandidate">Mehr als %1$d neue Benachrichtigungen</string>
+    <string name="mtrl_picker_a11y_next_month">Zum nächsten Monat wechseln</string>
+    <string name="mtrl_picker_a11y_prev_month">Zum vorherigen Monat wechseln</string>
+    <string name="mtrl_picker_announce_current_range_selection">Ausgewähltes Startdatum: %1$s – Ausgewähltes Enddatum: %2$s</string>
+    <string name="mtrl_picker_announce_current_selection">Aktuelle Auswahl: %1$s</string>
+    <string name="mtrl_picker_announce_current_selection_none">Keines</string>
+    <string name="mtrl_picker_cancel">Abbrechen</string>
+    <string name="mtrl_picker_confirm">OK</string>
+    <string name="mtrl_picker_date_header_selected">%1$s</string>
+    <string name="mtrl_picker_date_header_title">Datum auswählen</string>
+    <string name="mtrl_picker_date_header_unselected">Ausgewähltes Datum</string>
+    <string name="mtrl_picker_day_of_week_column_header">%1$s</string>
+    <string name="mtrl_picker_end_date_description">Enddatum %1$s</string>
+    <string name="mtrl_picker_invalid_format">Ungültiges Format.</string>
+    <string name="mtrl_picker_invalid_format_example">Beispiel: %1$s</string>
+    <string name="mtrl_picker_invalid_format_use">Format: %1$s</string>
+    <string name="mtrl_picker_invalid_range">Ungültiger Bereich.</string>
+    <string name="mtrl_picker_navigate_to_current_year_description">Zum aktuellen Jahr %1$d wechseln</string>
+    <string name="mtrl_picker_navigate_to_year_description">Zum Jahr %1$d wechseln</string>
+    <string name="mtrl_picker_out_of_range">Außerhalb des Bereichs: %1$s</string>
+    <string name="mtrl_picker_range_header_only_end_selected">Startdatum – %1$s</string>
+    <string name="mtrl_picker_range_header_only_start_selected">%1$s – Enddatum</string>
+    <string name="mtrl_picker_range_header_selected">%1$s – %2$s</string>
+    <string name="mtrl_picker_range_header_title">Zeitraum auswählen</string>
+    <string name="mtrl_picker_range_header_unselected">Startdatum – Enddatum</string>
+    <string name="mtrl_picker_save">Speichern</string>
+    <string name="mtrl_picker_start_date_description">Startdatum %1$s</string>
+    <string name="mtrl_picker_text_input_date_hint">Datum</string>
+    <string name="mtrl_picker_text_input_date_range_end_hint">Enddatum</string>
+    <string name="mtrl_picker_text_input_date_range_start_hint">Startdatum</string>
+    <string name="mtrl_picker_text_input_day_abbr">T</string>
+    <string name="mtrl_picker_text_input_month_abbr">M</string>
+    <string name="mtrl_picker_text_input_year_abbr">J</string>
+    <string name="mtrl_picker_today_description">Heute %1$s</string>
+    <string name="mtrl_picker_toggle_to_calendar_input_mode">In den Kalendereingabemodus wechseln</string>
+    <string name="mtrl_picker_toggle_to_day_selection">Zur Kalenderansicht wechseln</string>
+    <string name="mtrl_picker_toggle_to_text_input_mode">In den Texteingabemodus wechseln</string>
+    <string name="mtrl_picker_toggle_to_year_selection">Zur Jahresansicht wechseln</string>
+    <string name="mtrl_picker_toggled_to_day_selection">Kalenderansicht wird angezeigt</string>
+    <string name="mtrl_picker_toggled_to_year_selection">Jahresansicht wird angezeigt</string>
+    <string name="mtrl_timepicker_cancel">Abbrechen</string>
+    <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="mute">Stummschalten</string>
+    <string name="my_device_fingerprint">Der SHA256-Fingerabdruck Ihres Gerätezertifikats lautet:</string>
+    <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Nach oben"</string>
+    <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Navigationsleiste öffnen"</string>
+    <string msgid="542007171693138492" name="navigation_menu">"Navigationsmenü"</string>
+    <string name="no_app_for_opening">Es wurde keine passende App zum Öffnen dieser Datei gefunden</string>
+    <string name="no_file_browser">Es sind keine Dateiverwaltungsprogramme installiert.</string>
+    <string name="no_notifications">Benachrichtigungen sind deaktiviert, Sie erhalten keine Benachrichtigungen bei Kopplungsanfragen.</string>
+    <string name="no_permission_mprisreceiver">Um die Medienwiedergabe steuern zu können, müssen Sie Zugriff auf die Benachrichtigungen gewähren</string>
+    <string name="no_permissions">Sie müssen die Berechtigung zum Zugriff auf Benachrichtigungen erteilen</string>
+    <string name="no_permissions_remotekeyboard">Um Tasteneingaben empfangen zu können, muss die KDE-Connect-Tastatur aktiviert werden</string>
+    <string name="no_players_connected">Keine Medienspieler gefunden</string>
+    <string name="no_wifi">Sie sind nicht mit einem WLAN-Netzwerk verbunden, weshalb womöglich keine anderen Geräte angezeigt werden können. Klicken Sie hier, um WLAN zu aktivieren.</string>
+    <string msgid="6610465462668679431" name="not_selected">"Nicht ausgewählt"</string>
+    <string msgid="6573031135582639649" name="not_set">"Nicht festgelegt"</string>
+    <string name="notification_channel_default">Andere Benachrichtigungen</string>
+    <string name="notification_channel_filetransfer">Eingehende Dateiübertragung</string>
+    <string name="notification_channel_filetransfer_complete">Eingehende Dateiübertragung abgeschlossen</string>
+    <string name="notification_channel_filetransfer_error">Datenübertragungsfehler</string>
+    <string name="notification_channel_filetransfer_upload">Ausgehende Dateiübertragung</string>
+    <string name="notification_channel_high_priority">Hohe Priorität</string>
+    <string name="notification_channel_keepwatching">Wiedergabe fortsetzen</string>
+    <string name="notification_channel_media_control">Medienkontrolle</string>
+    <string name="notification_channel_persistent">Dauerhafte Benachrichtigung</string>
+    <string name="notification_channel_receivenotification">Benachrichtigungen von anderen Geräten</string>
+    <string name="ok">OK</string>
+    <string name="on_non_trusted_message">Kein vertrauenswürdiges Netzwerk: Automatische Erkennung ist deaktiviert.</string>
+    <string name="open">Öffnen</string>
+    <string name="open_compose_send">Text schreiben</string>
+    <string name="open_mousepad">Ferneingabe</string>
+    <string name="open_mousepad_tv">TV-Fernbedienung</string>
+    <string name="open_mpris_controls">Medienkontrolle</string>
+    <string name="open_settings">Einstellungen öffnen</string>
+    <string name="optional_permission_explanation">Es müssen weitere Berechtigungen erteilt werden, um alle Funktionen nutzen zu können</string>
+    <string name="pair_new_device">Neues Gerät koppeln</string>
+    <string name="pair_requested">Kopplung angefordert</string>
+    <string name="pair_succeeded">Kopplung erfolgreich</string>
+    <string name="pairing_accept">Annehmen</string>
+    <string name="pairing_description">Andere Geräte im selben Netzwerk, auf denen COSMIC Connect läuft, sollten hier angezeigt werden</string>
+    <string name="pairing_duplicate_names">Achtung: Es gibt mehrere Geräte mit dem gleichen Namen.</string>
+    <string name="pairing_explanation">Zwei Geräte zu koppeln ermöglicht diesen, auf das jeweils andere zuzugreifen. Koppeln Sie nur Ihre eigenen Geräte.</string>
+    <string name="pairing_reject">Ablehnen</string>
+    <string name="pairing_request_from">Kopplungsanfrage von „%1s“</string>
+    <string name="pairing_title">KDE-Connect-Geräte</string>
+    <string name="password_toggle_content_description">Passwort anzeigen</string>
+    <string name="permission_explanation">Dieses Modul benötigt zusätzliche Berechtigungen</string>
+    <string name="ping_failed">Gerät kann nicht angepingt werden</string>
+    <string name="ping_in_progress">Ping läuft …</string>
+    <string name="ping_result">Ping-Dauer: %1$d Millisekunden</string>
+    <string name="plugin_settings_with_name">%s-Einstellungen</string>
+    <string name="plugin_stats">Modulstatistik</string>
+    <string name="plugins_need_optional_permission">Einige Module haben eingeschränkte Funktionen aufgrund fehlender Berechtigungen, tippen Sie für weitere Informationen:</string>
+    <string name="plugins_need_permission">Einige Module benötigen zusätzliche Berechtigungen, tippen Sie für weitere Details:</string>
+    <string name="pref_plugin_battery">Akkubericht</string>
+    <string name="pref_plugin_battery_desc">Den Akkustand periodisch berichten</string>
+    <string name="pref_plugin_bigscreen">TV-Fernbedienung</string>
+    <string name="pref_plugin_bigscreen_desc">Verwenden Sie ihr Gerät als Fernbedienung für Plasma Bigscreen</string>
+    <string name="pref_plugin_clipboard">Abgleich der Zwischenablage</string>
+    <string name="pref_plugin_clipboard_desc">Den Inhalt der Zwischenablage teilen</string>
+    <string name="pref_plugin_clipboard_sent">Zwischenablage versendet</string>
+    <string name="pref_plugin_connectivity_report">Verbindungsbericht</string>
+    <string name="pref_plugin_connectivity_report_desc">Signalstärke und Status des Netzwerks anzeigen</string>
+    <string name="pref_plugin_contacts">Synchronisierung der Kontakte</string>
+    <string name="pref_plugin_contacts_desc">Das Adressbuch des Geräts synchronisieren</string>
+    <string name="pref_plugin_digitizer">Zeichentablett</string>
+    <string name="pref_plugin_digitizer_desc">Verwenden Sie ihr Gerät als druckempfindliches Grafiktablett</string>
+    <string name="pref_plugin_findremotedevice">Entferntes Gerät finden</string>
+    <string name="pref_plugin_findremotedevice_desc">Entferntes Gerät anklingeln</string>
+    <string name="pref_plugin_mousepad">Ferneingabe</string>
+    <string name="pref_plugin_mousepad_desc_nontv">Verwenden Sie Ihr Telefon oder Tablet als Touchpad und Tastatur</string>
+    <string name="pref_plugin_mousepad_desc_tv">Verwenden Sie Ihr Telefon oder Tablet als TV-Fernbedienung</string>
+    <string name="pref_plugin_mousepad_send_keystrokes">Als Tasteneingaben senden</string>
+    <string name="pref_plugin_mpris">Medienkontrolle</string>
+    <string name="pref_plugin_mpris_desc">Die Medienwiedergabe verbundener Geräte steuern</string>
+    <string name="pref_plugin_mprisreceiver">Steuerung der Medienwiedergabe</string>
+    <string name="pref_plugin_mprisreceiver_desc">Ein verbundenes Gerät zum Steuern der lokalen Medienwiedergabe verwenden</string>
+    <string name="pref_plugin_notifications">Synchronisierung der Benachrichtigungen</string>
+    <string name="pref_plugin_notifications_desc">Von anderen Geräten auf Benachrichtigungen zugreifen</string>
+    <string name="pref_plugin_ping">Ping</string>
+    <string name="pref_plugin_ping_desc">Pings senden und empfangen</string>
+    <string name="pref_plugin_presenter">Präsentationsfernbedienung</string>
+    <string name="pref_plugin_presenter_desc">Verwenden Sie Ihr Gerät zum Folienwechsel in einer Präsentation</string>
+    <string name="pref_plugin_receive_notifications">Benachrichtigungen empfangen</string>
+    <string name="pref_plugin_receive_notifications_desc">Benachrichtigungen des anderen Geräts empfangen und in Android anzeigen</string>
+    <string name="pref_plugin_remotekeyboard">Entfernte Tasteneingaben empfangen</string>
+    <string name="pref_plugin_remotekeyboard_desc">Tasteneingaben entfernter Geräte empfangen</string>
+    <string name="pref_plugin_runcommand">Befehl ausführen</string>
+    <string name="pref_plugin_runcommand_desc">Konsolen-Befehle auf verbundenen Geräten ausführen</string>
+    <string name="pref_plugin_sftp">Dateisystemzugriff</string>
+    <string name="pref_plugin_sftp_desc">Ermöglicht den verbundenen Geräten das Durchsuchen des Dateisystems dieses Geräts</string>
+    <string name="pref_plugin_sharereceiver">Teilen und Empfangen</string>
+    <string name="pref_plugin_sharereceiver_desc">Dateien und Webadressen zwischen Geräten teilen</string>
+    <string name="pref_plugin_systemvolume">Systemlaustärke</string>
+    <string name="pref_plugin_systemvolume_desc">Die Systemlautstärke verbundener Geräte steuern</string>
+    <string name="pref_plugin_telepathy">SMS senden</string>
+    <string name="pref_plugin_telepathy_desc">SMS von Ihrem Rechner senden</string>
+    <string name="pref_plugin_telepathy_mms">MMS senden</string>
+    <string name="pref_plugin_telepathy_mms_desc">Um MMS von COSMIC Connect aus versenden zu können, müssen Sie es als Standard-SMS-App festlegen.</string>
+    <string name="pref_plugin_telephony">Telefon-Integration</string>
+    <string name="pref_plugin_telephony_desc">Bei eingehenden Anrufen benachrichtigen</string>
+    <string msgid="6685851473431805375" name="preference_copied">"\"<ns1:g id="SUMMARY">%1$s</ns1:g>\" in Zwischenablage kopiert."</string>
+    <string name="presenter_exit">Präsentation beenden</string>
+    <string name="presenter_fullscreen">Vollbild</string>
+    <string name="presenter_lock_tip">Sie können Ihr Gerät sperren und mithilfe der Lauter-/Leiser-Taste zur vorherigen/nächsten Folie wechseln</string>
+    <string name="presenter_pointer">Laserpointer</string>
+    <string name="privacy_options">Privatsphäre-Einstellungen</string>
+    <string name="protocol_version">Protokollversion:</string>
+    <string name="protocol_version_newer">Dieses Gerät verwendet eine neuere Protokollversion</string>
+    <string msgid="5941395253238309765" name="range_end">"Bereichsende"</string>
+    <string msgid="7097486360902471446" name="range_start">"Bereichsstart"</string>
+    <string name="receive_notifications_permission_explanation">Benachrichtigungen müssen erlaubt sein, um sie von anderen Geräten empfangen zu können</string>
+    <string name="received_file_text">Tippen, um „%1s“ zu öffnen</string>
+    <string name="refresh">Aktualisieren</string>
+    <string name="remote_device_fingerprint">Der SHA256-Fingerabdruck des Gerätezertifikats der Gegenstelle lautet:</string>
+    <string name="remote_keyboard_service">Entfernte Tastatur für COSMIC Connect</string>
+    <string name="remotekeyboard_connected">Verbindung zu entfernter Tastatur ist aktiv</string>
+    <string name="remotekeyboard_editing_only_title">Entfernte Tasteneingaben nur empfangen, wenn ein Textfeld ausgewählt ist</string>
+    <string name="remotekeyboard_multiple_connections">Es besteht mehr als eine Verbindung zu einer entfernten Tastatur. Um Ihre Konfiguration anzupassen, wählen Sie bitte ein Gerät aus</string>
+    <string name="remotekeyboard_not_connected">Es besteht keine Verbindung zu einer entfernten Tastatur. Bitte stellen Sie eine Verbindung in COSMIC Connect her.</string>
+    <string name="report_bug">Fehler melden</string>
+    <string name="request_pairing">Kopplung anfordern</string>
+    <string name="right_click">Rechtsklick senden</string>
+    <string name="ring">Klingeln</string>
+    <string name="runcommand_category_device_controls_title">Gerätesteuerung</string>
+    <string name="runcommand_device_controls_summary">Wenn Ihr Gerät die Gerätesteuerung unterstützt, erscheinen Ihre eingerichteten Befehle dort.</string>
+    <string name="runcommand_name_as_title_title">Den Namen als Titel anzeigen</string>
+    <string name="runcommand_noruncommandplugin">Dieses Gerät hat das Modul zum Ausführen von Befehlen nicht aktiviert</string>
+    <string name="runcommand_nosuchdevice">Ein solches Gerät existiert nicht</string>
+    <string name="runcommand_notpaired">Das Gerät ist nicht gekoppelt</string>
+    <string name="runcommand_notreachable">Das Gerät ist nicht erreichbar</string>
+    <string name="sad_ok">OK :(</string>
+    <string name="saikrishna_arcot_task">Tastaturunterstützung im Ferneingabemodul, Fehlerbehebungen und allgemeine Verbesserungen</string>
+    <string name="samoilenko_yuri_task">SFTP-Implementierung, Fehlerbehebungen und allgemeine Verbesserungen</string>
+    <string msgid="6264217191555673260" name="search_menu_title">"Suche"</string>
+    <string name="searchview_clear_text_content_description">Text löschen</string>
+    <string name="searchview_navigation_content_description">Zurück</string>
+    <string name="select_ringtone">Einen Klingelton auswählen</string>
+    <string msgid="6043586758067023" name="selected">"Ausgewählt"</string>
+    <string name="send_clipboard">Zwischenablage senden</string>
+    <string name="send_compose">Senden</string>
+    <string name="send_files">Dateien senden</string>
+    <string name="send_ping">Ping senden</string>
+    <string name="sendkeystrokes_disabled_toast">Das Senden von Tasteneingaben ist deaktiviert – aktivieren Sie es in den Einstellungen</string>
+    <string name="sendkeystrokes_pref_category_summary">Mit diesem Modul können andere Anwendungen Textsegmente als Tastendrücke teilen, die an den verbundenen Rechner gesendet werden</string>
+    <string name="sendkeystrokes_pref_category_title">Tasteneingaben senden</string>
+    <string name="sendkeystrokes_pref_enabled">Senden von Tasteneingaben aktivieren</string>
+    <string name="sendkeystrokes_pref_enabled_summary">Auf Daten mit dem MIME-Typ „text/x-keystrokes“ warten</string>
+    <string name="sendkeystrokes_safe_text_enabled">Sicheren Text sofort senden</string>
+    <string name="sendkeystrokes_safe_text_enabled_summary">Kurze Ziffernfolgen ohne Bestätigung senden</string>
+    <string name="sendkeystrokes_send_to">Tasteneingaben senden an</string>
+    <string name="sendkeystrokes_sent_text">%1$s an Gerät %2$s gesendet</string>
+    <string name="sendkeystrokes_textbox_hint">Tasteneingaben an Rechner senden</string>
+    <string name="sendkeystrokes_wrong_data">Ungültiger MIME-Typ – muss „text/x-keystrokes“ sein</string>
+    <string name="set_default_sms_app_title">MMS senden</string>
+    <string name="set_group_message_as_mms_title">Gruppen-MMS senden</string>
+    <string name="set_long_text_as_mms_title">Langen Text als MMS senden</string>
+    <string name="set_privacy_options">Privatsphäre-Einstellungen festlegen</string>
+    <string name="setting_persistent_notification">Dauerhafte Benachrichtigung anzeigen</string>
+    <string name="setting_persistent_notification_description">Tippen, um in den Benachrichtigungseinstellungen zu aktivieren/deaktivieren</string>
+    <string name="setting_persistent_notification_oreo">Dauerhafte Benachrichtigung</string>
+    <string name="settings">Einstellungen</string>
+    <string name="settings_dark_mode">Dunkles Design</string>
+    <string name="settings_export_logs">Protokolle von COSMIC Connect exportieren</string>
+    <string name="settings_export_logs_text">Erstellen Sie eine Datei mit Ausführungsinformationen, die bei der Fehlerbehebung helfen können.</string>
+    <string name="settings_icon_description">Einstellungssymbol</string>
+    <string name="settings_more_settings_text">Gerätespezifische Einstellungen können über den Menüpunkt „Moduleinstellungen“ auf den jeweiligen Geräten abgerufen werden.</string>
+    <string name="settings_more_settings_title">Weitere Einstellungen</string>
+    <string name="settings_rename">Gerätename</string>
+    <string name="sftp_action_mode_menu_delete">Löschen</string>
+    <string name="sftp_manage_storage_permission_explanation">Um Fernzugriff auf Dateien auf diesem Gerät zu erlauben, müssen Sie COSMIC Connect erlauben, den Speicher zu verwalten.</string>
+    <string name="sftp_missing_permission_error">Fehlende Berechtigung: Dateisystemzugriff</string>
+    <string name="sftp_no_storage_locations_configured">Keine Speicherorte eingerichtet</string>
+    <string name="sftp_preference_add_storage_location_title">Speicherort hinzufügen</string>
+    <string name="sftp_preference_configured_storage_locations">Eingerichtete Speicherorte</string>
+    <string name="sftp_preference_edit_storage_location">Speicherort bearbeiten</string>
+    <string name="sftp_saf_permission_explanation">Um aus der Ferne auf Ihre Dateien zugreifen zu können, müssen Sie Speicherorte einrichten</string>
+    <string name="sftp_storage_preference_click_to_select">Zum Auswählen klicken</string>
+    <string name="sftp_storage_preference_display_name">Anzeigename</string>
+    <string name="sftp_storage_preference_display_name_already_used">Dieser Anzeigename wird bereits verwendet</string>
+    <string name="sftp_storage_preference_display_name_cannot_be_empty">Der Anzeigename darf nicht leer sein</string>
+    <string name="sftp_storage_preference_storage_location">Speicherort</string>
+    <string name="sftp_storage_preference_storage_location_already_configured">Dieser Ort wurde bereits eingerichtet</string>
+    <string name="share">Teilen</string>
+    <string name="share_destination_customize">Zielordner anpassen</string>
+    <string name="share_destination_customize_summary_disabled">Empfangene Dateien werden im Ordner „Downloads“ gespeichert</string>
+    <string name="share_destination_customize_summary_enabled">Dateien werden im folgenden Ordner gespeichert</string>
+    <string name="share_destination_folder_preference">Zielordner</string>
+    <string name="share_notification_preference">Ausführliche Benachrichtigungen</string>
+    <string name="share_notification_preference_summary">Beim Empfang einer Datei vibrieren und einen Klang abspielen</string>
+    <string name="share_notifications_explanation">Um den Fortschritt beim Senden und Empfangen von Dateien zu sehen, müssen Sie Benachrichtigungen erlauben</string>
+    <string name="share_optional_permission_explanation">Um Dateien zu empfangen, müssen Sie Speicherzugriff erlauben</string>
+    <string name="share_received_file">„%s“ teilen</string>
+    <string name="share_to">Teilen mit …</string>
+    <string name="shareplugin_text_saved">Text empfangen und in die Zwischenablage kopiert</string>
+    <string name="shellwen_chen_task">Verbesserung der SFTP-Sicherheit und der Wartbarkeit dieses Projekts, Fehlerbehebungen und allgemeine Verbesserungen</string>
+    <string name="show_keyboard">Tastatur anzeigen</string>
+    <string name="show_mouse_and_keyboard">Maus und Tastatur anzeigen</string>
+    <string name="show_notification_if_screen_off">Nur bei ausgeschaltetem Bildschirm Benachrichtigungen senden</string>
+    <string name="side_sheet_accessibility_pane_title">Seitenblatt</string>
+    <string name="source_code">Quelltext</string>
+    <string msgid="4139871816613051306" name="state_empty">"Leer"</string>
+    <string msgid="5834637030682409883" name="state_off">"Aus"</string>
+    <string msgid="1490883874751719580" name="state_on">"An"</string>
+    <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+    <string msgid="9167775378838880170" name="summary_collapsed_preference_list">"<ns1:g id="CURRENT_ITEMS">%1$s</ns1:g>, <ns1:g id="ADDED_ITEMS">%2$s</ns1:g>"</string>
+    <string msgid="2561197295334830845" name="switch_role">"Wechseln"</string>
+    <string msgid="1672349317127674378" name="tab">"Tab"</string>
+    <string name="tap_to_answer">Zum Antworten tippen</string>
+    <string name="tap_to_execute">Tippen, um auszuführen</string>
+    <string name="tap_to_open">Zum Öffnen tippen</string>
+    <string name="telepathy_permission_explanation">Um SMS vom Rechner aus zu lesen und zu versenden, müssen Sie Zugriff auf die SMS-Funktion erlauben</string>
+    <string name="telephony_optional_permission_explanation">Um einen Namen anstelle der Telefonnummer anzuzeigen, müssen Sie Zugriff auf das Adressbuch erlauben</string>
+    <string name="telephony_permission_explanation">Um eingehende Anrufe auf der Arbeitsfläche anzuzeigen, müssen Sie Zugriff auf die Anrufliste und den Telefonstatus erlauben</string>
+    <string name="telephony_pref_blocked_dialog_desc">Keine Anrufe und SMS von diesen Telefonnummern anzeigen. Bitte geben Sie eine Nummer pro Zeile ein</string>
+    <string name="telephony_pref_blocked_title">Blockierte Nummern</string>
+    <string msgid="5946805113151406391" name="template_percent">"<ns1:g id="PERCENTAGE">%1$d</ns1:g> Prozent."</string>
+    <string name="thanks_to">Dank an</string>
+    <string name="theme_dialog_title">Design auswählen</string>
+    <string name="title_activity_notification_filter">Benachrichtigungsfilter</string>
+    <string msgid="3765533235322692011" name="tooltip_description">"Kurzinfo"</string>
+    <string msgid="3124740595719787496" name="tooltip_label">"Kurzinfo anzeigen"</string>
+    <string name="trusted_networks">Vertrauenswürdige Netzwerke</string>
+    <string name="trusted_networks_desc">Automatische Erkennung auf bekannte Netzwerke beschränken</string>
+    <string name="undo">Rückgängig</string>
+    <string name="unknown_device">Unbekanntes Gerät</string>
+    <string name="unreachable_description">Dieses gekoppelte Gerät ist nicht erreichbar. Stellen Sie sicher, dass es mit demselben Netzwerk verbunden ist.</string>
+    <string name="unreachable_device_dynamic_shortcut">%s (✕)</string>
+    <string name="unreachable_device_url_share_text">URLs, die mit einem nicht erreichbaren Gerät geteilt werden, werden zugestellt, sobald es wieder erreichbar ist.\n\n</string>
+    <string name="use_digitizer">Als Zeichentablett verwenden</string>
+    <string name="user_display_name">Sie</string>
+    <string msgid="3140233346420563315" name="v7_preference_off">"AUS"</string>
+    <string msgid="89551595707643515" name="v7_preference_on">"AN"</string>
+    <string name="version">Version %s</string>
+    <string name="view_status_title">Status</string>
+    <string name="visit_contributors_homepage">Internetseite des Mitwirkenden besuchen\n%s</string>
+    <string name="website">Webseite</string>
+</resources>

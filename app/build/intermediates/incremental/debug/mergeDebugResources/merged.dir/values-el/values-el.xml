@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2" xmlns:ns2="http://schemas.android.com/tools">
+    <string-array name="convert_to_mms_after_entries">
+    <item>Μετά από ένα μήνυμα</item>
+    <item>Μετά από δύο μηνύματα</item>
+    <item>Μετά από τρία μηνύματα</item>
+    <item>Μετά από τέσσερα μηνύματα</item>
+    <item>Μετά από πέντε μηνύματα</item>
+  </string-array>
+    <string-array name="digitizer_preference_entries_draw_button_side">
+    <item>Top left</item>
+    <item>Top right</item>
+    <item>Bottom left</item>
+    <item>Bottom right</item>
+  </string-array>
+    <string-array name="mousepad_acceleration_profile_entries">
+    <item>Χωρίς επιτάχυνση</item>
+    <item>Η πιο αδύναμη</item>
+    <item>Πιο αδύναμη</item>
+    <item>Μέση</item>
+    <item>Πιο δυνατή</item>
+    <item>Η πιο δυνατή</item>
+  </string-array>
+    <string-array name="mousepad_sensitivity_entries">
+    <item>Το πιο αργό</item>
+    <item>Πάνω από το πιο αργό</item>
+    <item>Προκαθορισμένο</item>
+    <item>Πάνω από το προκαθορισμένο</item>
+    <item>Το ταχύτερο</item>
+  </string-array>
+    <string-array name="mpris_time_entries">
+    <item>10 seconds</item>
+    <item>20 seconds</item>
+    <item>30 seconds</item>
+    <item>1 λεπτό</item>
+    <item>2 λεπτά</item>
+  </string-array>
+    <string-array name="theme_list">
+    <item>Ρύθμιση με την εξοικονόμηση μπαταρίας</item>
+    <item>Φωτεινό</item>
+    <item>Σκούρο</item>
+  </string-array>
+    <string-array name="theme_list_v28">
+    <item>Προκαθορισμένο συστήματος</item>
+    <item>Φωτεινό</item>
+    <item>Σκούρο</item>
+  </string-array>
+    <plurals name="incoming_file_title">
+    <item quantity="one">Ελήφθη %1$d αρχείο από %2$s`</item>
+    <item quantity="other">Ελήφθησαν %1$d αρχεία από %2$s</item>
+  </plurals>
+    <plurals name="incoming_files_text">
+    <item quantity="one">Αρχείο: %1s</item>
+    <item quantity="other">(Αρχείο %2$d από %3$d) : %1$s</item>
+  </plurals>
+    <plurals name="mtrl_badge_content_description">
+    <item quantity="one">%d νέα ειδοποίηση</item>
+    <item quantity="other">%d νέες ειδοποιήσεις</item>
+  </plurals>
+    <plurals name="outgoing_file_title">
+    <item quantity="one">Αποστολή %1$d αρχείου σε %2$s</item>
+    <item quantity="other">Αποστολή %1$d αρχείων σε %2$s</item>
+  </plurals>
+    <plurals name="outgoing_files_text">
+    <item quantity="one">Αρχείο: %1$s</item>
+    <item quantity="other">(Αρχείο %2$d από %3$d) : %1$s</item>
+  </plurals>
+    <plurals name="received_files_fail_title">
+    <item quantity="one">Αποτυχία λήψης αρχείου από %1$s</item>
+    <item quantity="other">Αποτυχία λήψης %2$d από %3$d αρχείου από %1$s</item>
+  </plurals>
+    <plurals name="received_files_title">
+    <item quantity="one">Ελήφθη αρχείο από %1$s</item>
+    <item quantity="other">Ελήφθησαν %2$d αρχεία από %1$s</item>
+  </plurals>
+    <plurals name="send_files_fail_title">
+    <item quantity="one">Αποτυχία αποστολής αρχείου στο %1$s</item>
+    <item quantity="other">Αποτυχία αποστολής %2$d σπό %3$d αρχείων στο %1$s</item>
+  </plurals>
+    <plurals name="sent_files_title">
+    <item quantity="one">Εστάλη αρχείο στο %1$s</item>
+    <item quantity="other">Εστάλησαν %2$d αρχεία στο %1$s</item>
+  </plurals>
+    <string msgid="5976598919945601918" name="abc_action_bar_home_description">"Πλοήγηση στην αρχική σελίδα"</string>
+    <string msgid="8388173803310557296" name="abc_action_bar_up_description">"Πλοήγηση προς τα επάνω"</string>
+    <string msgid="3937310113216875497" name="abc_action_menu_overflow_description">"Περισσότερες επιλογές"</string>
+    <string msgid="4692188335987374352" name="abc_action_mode_done">"Τέλος"</string>
+    <string msgid="1189761859438369441" name="abc_activity_chooser_view_see_all">"Εμφάνιση όλων"</string>
+    <string msgid="2165779757652331008" name="abc_activitychooserview_choose_application">"Επιλέξτε μια εφαρμογή"</string>
+    <string msgid="4215997306490295099" name="abc_capital_off">"ΑΠΕΝΕΡΓΟΠΟΙΗΣΗ"</string>
+    <string msgid="884982626291842264" name="abc_capital_on">"ΕΝΕΡΓΟΠΟΙΗΣΗ"</string>
+    <string msgid="8833365367933412986" name="abc_menu_alt_shortcut_label">"Alt+"</string>
+    <string msgid="2223301931652355242" name="abc_menu_ctrl_shortcut_label">"Ctrl+"</string>
+    <string msgid="838001238306846836" name="abc_menu_delete_shortcut_label">"delete"</string>
+    <string msgid="7986526966204849475" name="abc_menu_enter_shortcut_label">"enter"</string>
+    <string msgid="375214403600139847" name="abc_menu_function_shortcut_label">"Function+"</string>
+    <string msgid="4192209724446364286" name="abc_menu_meta_shortcut_label">"Meta+"</string>
+    <string msgid="4741552369836443843" name="abc_menu_shift_shortcut_label">"Shift+"</string>
+    <string msgid="5473865519181928982" name="abc_menu_space_shortcut_label">"διάστημα"</string>
+    <string msgid="6180552449598693998" name="abc_menu_sym_shortcut_label">"Sym+"</string>
+    <string msgid="5520303668377388990" name="abc_prepend_shortcut_label">"Menu+"</string>
+    <string msgid="7208076849092622260" name="abc_search_hint">"Αναζήτηση…"</string>
+    <string msgid="3741173234950517107" name="abc_searchview_description_clear">"Διαγραφή ερωτήματος"</string>
+    <string msgid="693312494995508443" name="abc_searchview_description_query">"Ερώτημα αναζήτησης"</string>
+    <string msgid="3417662926640357176" name="abc_searchview_description_search">"Αναζήτηση"</string>
+    <string msgid="1486535517437947103" name="abc_searchview_description_submit">"Υποβολή ερωτήματος"</string>
+    <string msgid="2293578557972875415" name="abc_searchview_description_voice">"Φωνητική αναζήτηση"</string>
+    <string msgid="8875138169939072951" name="abc_shareactionprovider_share_with">"Κοινοποίηση σε"</string>
+    <string msgid="9055268688411532828" name="abc_shareactionprovider_share_with_application">"Κοινοποίηση στην εφαρμογή <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
+    <string msgid="1656852541809559762" name="abc_toolbar_collapse_description">"Σύμπτυξη"</string>
+    <string name="about">Σχετικά</string>
+    <string name="about_kde">Σχετικά με το KDE</string>
+    <string name="about_kde_about">&lt;h1>Σχετικά&lt;/h1> &lt;p>Το KDE είναι μια παγκόσμια κοινότητα μηχανικών λογισμικού, καλλιτεχνών, συγγραφέων, μεταφραστών και δημιουργών οι οποίοι είναι αφοσιωμένοι στην ανάπτυξη του &lt;a href=https://www.gnu.org/philosophy/free-sw.html>Ελεύθερου Λογισμικού&lt;/a>. Το KDE παράγει το περιβάλλον γραφείου Plasma, εκατοντάδες εφαρμογές και πολλές βιβλιοθήκες που τις υποστηρίζουν.&lt;/p> &lt;p>Το KDE είναι ένα συνεργατικό εγχείρημα: καμιά οντότητα από μόνη της δεν ελέγχει την κατεύθυνση ή τα προϊόντα του. Αντίθετα, συνεργαζόμαστε για να επιτύχουμε τον κοινό στόχο της κατασκευής του πληρέστερου στον κόσμο Ελεύθερου Λογισμικού. Οποιοσδήποτε είναι ευπρόσδεκτος να &lt;a href=https://community.kde.org/Get_Involved>γίνει μέλος και να συμβάλει&lt;/a> στο KDE, και εσείς φυσικά.&lt;/p> Επισκεφθείτε το &lt;a href=https://www.kde.org/>https://www.kde.org/&lt;/a> για περισσότερες πληροφορίες σχετικά με την κοινότητα του KDE και το λογισμικό που παράγουμε.</string>
+    <string name="about_kde_report_bugs_or_wishes">&lt;h1>Αναφέρετε σφάλματα ή επιθυμίες στο&lt;/h1> &lt;p>Το Λογισμικό μπορεί πάντα να βελτιώνεται και η ομάδα του KDE είναι έτοιμη γι\' αυτό. Ωστόσο, εσείς - ο χρήστης - πρέπει να μας ενημερώνετε αν κάτι δεν λειτουργεί όπως θα έπρεπε ή αν θα μπορούσε να γίνει καλύτερο.&lt;/p> &lt;p>Το KDE έχει ένα σύστημα ανίχνευσης σφαλμάτων. Επισκεφθείτε το &lt;a href=https://bugs.kde.org/>https://bugs.kde.org/&lt;/a> ή χρησιμοποιήστε το κουμπί «Αναφορά σφάλματος» από την οθόνη Σχετικά για να αναφέρετε σφάλματα.&lt;/p> Αν έχετε κάποια πρόταση για βελτίωση, χρησιμοποιήστε το σύστημα ανίχνευσης σφαλμάτων για να εγγράψετε την επιθυμία σας. Βεβαιωθείτε ότι χρησιμοποιείτε τη «Λίστα επιθυμιών».</string>
+    <string name="about_kde_support_kde">&lt;h1>Υποστηρίξτε το KDE&lt;/h1> &lt;p>Το λογισμικό του KDE είναι και θα είναι πάντα διαθέσιμο δωρεάν, ωστόσο η δημιουργία του δεν είναι δωρεάν.&lt;/p> &lt;p>Για να υποστηρίξετε την ανάπτυξη η κοινότητα του KDE έχει δημιουργήσει στη Γερμανία το KDE e.V., έναν μη-κερδοσκοπικό οργανισμό. Το KDE e.V. εκπροσωπεί την κοινότητα του KDE σε νομικά και χρηματοοικονομικά θέματα. Δείτε το&lt;a href=https://ev.kde.org/>https://ev.kde.org/&lt;/a> για πληροφορίες για το KDE e.V.&lt;/p> &lt;p>Το KDE ωφελείται από πολλά είδη συνεισφορών, και οικονομικών. Χρησιμοποιούμε τους οικονομικούς πόρους για αμοιβές μελών και άλλων για έξοδα που παρουσιάζονται όταν συμμετέχουν. Άλλα κονδύλια χρησιμοποιούνται για τη νομική υποστήριξη και τη διοργάνωση συνεδρίων και συναντήσεων.&lt;/p> &lt;p>Θα θέλαμε να σας ενθαρρύνουμε να υποστηρίξετε τις προσπάθειές μας με μια δωρεά, με έναν από τους τρόπους που περιγράφονται στο &lt;a href=https://www.kde.org/community/donations/>https://www.kde.org/community/donations/&lt;/a>.&lt;/p> Σας ευχαριστούμε πολύ εκ των προτέρων για την υποστήριξή σας.</string>
+    <string name="add_command">Προσθήκη εντολής</string>
+    <string name="add_command_description">Μπορείτε να προσθέσετε εντολές στην επιφάνεια εργασίας</string>
+    <string name="add_device_dialog_title">Προσθήκη συσκευής</string>
+    <string name="add_device_hint">Όνομα ή IP διεύθυνση</string>
+    <string name="add_trusted_network">Προσθήκη %1s</string>
+    <string name="addcommand_explanation">Δεν υπάρχουν καταχωρημένες εντολές</string>
+    <string name="addcommand_explanation2">Μπορείτε να προσθέσετε νέες εντολές στις ρυθμίσεις συστήματος του COSMIC Connect</string>
+    <string name="alex_fiestas_task">Βελτιώσεις πρόσθετου επαφών</string>
+    <string name="all">Όλα</string>
+    <string name="allow_all_networks_text">Να επιτρέπονται όλα</string>
+    <string name="aniket_kumar_task">Βελτιώσεις πρόσθετου SMS</string>
+    <string name="apple_support">Υποστήριξη macos. Εργασία υποστήριξης iOS</string>
+    <string name="authors">Συγγραφείς</string>
+    <string name="battery_status_charging_format">Μπαταρία: %d%% φόρτιση</string>
+    <string name="battery_status_format">Μπαταρία: %d%%</string>
+    <string name="battery_status_low_format">Μπαταρία: %d%% Χαμηλή συάθμη</string>
+    <string name="bigscreen_down">Κάτω</string>
+    <string name="bigscreen_home">Αρχική</string>
+    <string name="bigscreen_left">Αριστερά</string>
+    <string name="bigscreen_mic">Μικ</string>
+    <string name="bigscreen_optional_permission_explanation">Για να μοιραστείτε την είσοδο του μικροφώνου από το τηλέφωνό σας απαιτείται να παραχωρήσετε πρόσβαση στην είσοδο ήχου του τηλεφώνου</string>
+    <string name="bigscreen_right">Δεξιά</string>
+    <string name="bigscreen_select">Επιλογή</string>
+    <string name="bigscreen_speech_extra_prompt">Ομιλία</string>
+    <string name="bigscreen_up">Επάνω</string>
+    <string name="block_contents">Φραγή περιεχομένου ειδοποιήσεων</string>
+    <string name="block_images">Φραγή εικόνων σε ειδοποιήσεις</string>
+    <string name="bottomsheet_action_collapse">Σύμπτυξη του φύλλου κάτω μέρους</string>
+    <string name="bottomsheet_action_expand">Ανάπτυξη του φύλλου κάτω μέρους</string>
+    <string name="bottomsheet_action_expand_halfway">Ανάπτυξη μέχρι τη μέση</string>
+    <string name="bottomsheet_drag_handle_content_description">Λαβή μεταφοράς</string>
+    <string name="bug_fixes_and_general_improvements">Διόρθωση σφαλμάτων και γενικές βελτιώσεις</string>
+    <string msgid="881409763997275156" name="call_notification_answer_action">"Απάντηση"</string>
+    <string msgid="8793775615905189152" name="call_notification_answer_video_action">"Βίντεο"</string>
+    <string msgid="3229508546291798546" name="call_notification_decline_action">"Απόρριψη"</string>
+    <string msgid="2659457946726154263" name="call_notification_hang_up_action">"Τερματισμός"</string>
+    <string msgid="6107532579223922871" name="call_notification_incoming_text">"Εισερχόμενη κλήση"</string>
+    <string msgid="8623827134497363134" name="call_notification_ongoing_text">"Κλήση σε εξέλιξη"</string>
+    <string msgid="59049573811482460" name="call_notification_screening_text">"Διαλογή εισερχόμενης κλήσης"</string>
+    <string name="cancel">Ακύρωση</string>
+    <string name="cannot_create_file">Αδυναμία δημιουργίας αρχείου %s</string>
+    <string name="cant_open_url">Αδυναμία ανοίγματος URL για να συνεχίσετε να παίζετε</string>
+    <string name="category_connected_devices">Συνδεδεμένες συσκευές</string>
+    <string name="category_not_paired_devices">Διαθέσιμες συσκευές</string>
+    <string name="category_remembered_devices">Συσκευές στη μνήμη</string>
+    <string name="character_counter_content_description">Εισήχθησαν %1$d από %2$d χαρακτήρες</string>
+    <string name="character_counter_overflowed_content_description">Υπέρβαση ορίου χαρακτήρων %1$d από %2$d</string>
+    <string name="clear_text_end_icon_content_description">Διαγραφή κειμένου</string>
+    <string name="clipboard_android_x_incompat">Το android έχει αφαιρέσει την πρόσβαση στο πρόχειρο από όλες τις εφαρμογές. Αυτό το πρόσθετο θα απενεργοποιηθεί.</string>
+    <string name="clipboard_toast">Έγινε αντιγραφή στο πρόχειρο</string>
+    <string name="close">Κλείσιμο</string>
+    <string msgid="406453423630273620" name="close_drawer">"Κλείσιμο του μενού πλοήγησης"</string>
+    <string msgid="7573152094250666567" name="close_sheet">"Κλείσιμο φύλλου"</string>
+    <string name="contacts_permission_explanation">Για να μοιραστείτε το βιβλίο επαφών σας με την επιφάνεια εργασίας, απαιτείται να δώσετε δικαιώματα στις επαφές</string>
+    <string name="convert_to_mms_after_title">Μετατροπή σε MMS</string>
+    <string msgid="6083905920877235314" name="copy">"Αντιγραφή"</string>
+    <string name="copy_url_to_clipboard">Αντιγραφή του URL στο πρόχειρο</string>
+    <string name="custom_device_deleted">Η προσαρμοσμένη λίστα διαγράφηκε</string>
+    <string name="custom_device_fab_hint">Προσθήκη συσκευής</string>
+    <string name="custom_device_list">Προσθήκη συσκευών ανά IP</string>
+    <string name="custom_devices_settings">Προσαρμοσμένη λίστα συσκευών</string>
+    <string msgid="8038256446254964252" name="default_error_message">"Μη έγκυρη καταχώριση"</string>
+    <string msgid="6312721426453364202" name="default_popup_window_title">"Αναδυόμενο παράθυρο"</string>
+    <string name="developer">Προγραμματιστής</string>
+    <string name="device_list_empty">Χωρίς συσκευές</string>
+    <string name="device_menu_plugins">Ρυθμίσεις προσθέτων</string>
+    <string name="device_menu_unpair">Διαχωρισμός</string>
+    <string name="device_not_paired">Η συσκευή δεν συζεύχθηκε</string>
+    <string name="device_rename_confirm">Μετονομασία</string>
+    <string name="device_rename_title">Μετονομασία συσκευής</string>
+    <string name="devices">Συσκευές</string>
+    <string name="donate">Δωρεές</string>
+    <string msgid="1890207353314751437" name="dropdown_menu">"Αναπτυσσόμενο μενού"</string>
+    <string name="easter_egg">Πασχαλινό αυγό</string>
+    <string name="email_contributor">Email συμβαλλόμενου\n%s</string>
+    <string name="empty_trusted_networks_list_text">Δεν έχετε προσθέσει ακόμη κάποιο έμπιστο δίκτυο</string>
+    <string name="encryption_info_title">Πληροφορίες κρυπτογράφησης</string>
+    <string name="error_a11y_label">Σφάλμα: μη έγκυρο</string>
+    <string name="error_already_paired">Η συσκευή ήδη συζεύχθηκε</string>
+    <string name="error_canceled_by_other_peer">Ακυρώθηκε από άλλον χρήστη</string>
+    <string name="error_canceled_by_user">Ακυρώθηκε από τον χρήστη</string>
+    <string name="error_icon_content_description">Σφάλμα</string>
+    <string name="error_not_reachable">Η συσκευή δεν είναι προσβάσιμη</string>
+    <string name="error_timed_out">Τέλος χρονικού ορίου</string>
+    <string name="everyone_else">Οποιοσδήποτε άλλος έχει συμβάλλει στο παρελθόν στο KDE Contact</string>
+    <string msgid="2427401033573778270" name="expand_button_title">"Σύνθετες"</string>
+    <string name="exposed_dropdown_menu_content_description">Εμφάνιση αναπτυσσόμενου μενού</string>
+    <string name="extra_options">Επιπλέον επιλογές</string>
+    <string name="filter_apps_info">Οι ειδοποιήσεις θα συγχρονίζονται για επιλεγμένες εφαρμογές.</string>
+    <string name="findmyphone_description">Καλεί αυτή τη συσκευή ώστε να την εντοπίσετε</string>
+    <string name="findmyphone_found">Βρέθηκε</string>
+    <string name="findmyphone_title">Αναζήτηση του κινητού μου</string>
+    <string name="findmyphone_title_tablet">Αναζήτηση του πινακίου μου</string>
+    <string name="findmyphone_title_tv">Αναζήτηση της τηλεόρασής μου</string>
+    <string name="foreground_notification_devices">Συνδεδεμένό σε: %s</string>
+    <string name="foreground_notification_no_devices">Δεν είναι συνδεδεμένο σε συσκευή</string>
+    <string name="foreground_notification_send_clipboard">Αποστολή προχείρου</string>
+    <string name="holger_kaelberer_task">Πρόσθετο απομακρυσμένου πληκτρολπγίου και διορθώσεις σφαλμάτων</string>
+    <string name="icon_content_description">Εικονίδιο παραθύρου διαλόγου</string>
+    <string msgid="6827826412747255547" name="in_progress">"Σε εξέλιξη"</string>
+    <string msgid="7933458017204019916" name="indeterminate">"Έγινε μερικός έλεγχος"</string>
+    <string name="invalid_device_name">Μη έγκυρο όνομα συσκευής</string>
+    <string name="item_view_role_description">Καρτέλα</string>
+    <string name="kde">KDE</string>
+    <string name="kde_be_free">KDE - Απελευθερωθείτε!</string>
+    <string name="kde_connect">COSMIC Connect</string>
+    <string name="konqi">Konqi</string>
+    <string name="licenses">Άδειες χρήσης</string>
+    <string name="location_permission_needed_title">Απαιτείται πρόσβαση</string>
+    <string name="m3_loading_indicator_content_description">Γίνεται φόρτωση</string>
+    <string msgid="2988463736136100848" name="m3c_bottom_sheet_collapse_description">"Σύμπτυξη φύλλου κάτω μέρους"</string>
+    <string msgid="1555567894577437024" name="m3c_bottom_sheet_dismiss_description">"Παράβλεψη φύλλου κάτω μέρους"</string>
+    <string msgid="8403354765404029791" name="m3c_bottom_sheet_drag_handle_description">"Λαβή μεταφοράς"</string>
+    <string msgid="6670819569745899763" name="m3c_bottom_sheet_expand_description">"Ανάπτυξη φύλλου κάτω μέρους"</string>
+    <string msgid="3010635850035863127" name="m3c_bottom_sheet_pane_title">"Φύλλο κάτω μέρους"</string>
+    <string msgid="8166741421776570875" name="m3c_date_input_headline">"Εισαγωγή ημερομηνίας"</string>
+    <string msgid="229313757840775812" name="m3c_date_input_headline_description">"Εισαγωγή ημερομηνίας: %1$s"</string>
+    <string msgid="6116910750161463197" name="m3c_date_input_invalid_for_pattern">"Η ημερομηνία δεν αντιστοιχεί στο αναμενόμενο μοτίβο: %1$s"</string>
+    <string msgid="2521768508935305279" name="m3c_date_input_invalid_not_allowed">"Η ημερομηνία δεν επιτρέπεται: %1$s"</string>
+    <string msgid="7052898923934555305" name="m3c_date_input_invalid_year_range">"Η ημερομηνία είναι εκτός του αναμενόμενου εύρους ετών %1$s - %2$s"</string>
+    <string msgid="2895559812010326913" name="m3c_date_input_label">"Ημερομηνία"</string>
+    <string msgid="1237013946323089826" name="m3c_date_input_no_input_description">"Καμία"</string>
+    <string msgid="7306227249789210568" name="m3c_date_input_title">"Επιλογή ημερομηνίας"</string>
+    <string msgid="7605002211875882969" name="m3c_date_picker_headline">"Επιλεγμένη ημερομηνία"</string>
+    <string msgid="3664277305226978227" name="m3c_date_picker_headline_description">"Τρέχουσα επιλογή: %1$s"</string>
+    <string msgid="8436650776581492840" name="m3c_date_picker_navigate_to_year_description">"Μετάβαση στο έτος %1$s"</string>
+    <string msgid="5811000998184572395" name="m3c_date_picker_no_selection_description">"Καμία"</string>
+    <string msgid="7813882352367152251" name="m3c_date_picker_scroll_to_earlier_years">"Κάντε κύλιση για εμφάνιση προηγούμενων ετών"</string>
+    <string msgid="5727367015496556177" name="m3c_date_picker_scroll_to_later_years">"Κάντε κύλιση για εμφάνιση επόμενων ετών"</string>
+    <string msgid="1804346892470238807" name="m3c_date_picker_switch_to_calendar_mode">"Εναλλαγή στη λειτουργία εισαγωγής ημερολογίου"</string>
+    <string msgid="395627960681594326" name="m3c_date_picker_switch_to_day_selection">"Σύρετε για να επιλέξετε ένα έτος ή πατήστε για να επιστρέψετε στην επιλογή ημέρας."</string>
+    <string msgid="2219746470065162704" name="m3c_date_picker_switch_to_input_mode">"Εναλλαγή στη λειτουργία εισαγωγής κειμένου"</string>
+    <string msgid="7142101321095356500" name="m3c_date_picker_switch_to_next_month">"Αλλαγή στον επόμενο μήνα"</string>
+    <string msgid="228438865139394590" name="m3c_date_picker_switch_to_previous_month">"Αλλαγή στον προηγούμενο μήνα"</string>
+    <string msgid="791651718641787594" name="m3c_date_picker_switch_to_year_selection">"Εναλλαγή σε επιλογή έτους"</string>
+    <string msgid="7430790972741451689" name="m3c_date_picker_title">"Επιλογή ημερομηνίας"</string>
+    <string msgid="3199387177749801575" name="m3c_date_picker_today_description">"Σήμερα"</string>
+    <string msgid="2068382232816991922" name="m3c_date_picker_year_picker_pane_title">"Το εργαλείο επιλογής έτους είναι ορατό"</string>
+    <string msgid="3190049423327661366" name="m3c_date_range_input_invalid_range_input">"Μη έγκυρη εισαγωγή εύρους ημερομηνιών"</string>
+    <string msgid="3148384720560189467" name="m3c_date_range_input_title">"Εισαγωγή ημερομηνιών"</string>
+    <string msgid="2138321128465719402" name="m3c_date_range_picker_day_in_range">"Εντός εύρους"</string>
+    <string msgid="4947636797751277713" name="m3c_date_range_picker_end_headline">"Ημερομηνία λήξης"</string>
+    <string msgid="602077859540990149" name="m3c_date_range_picker_scroll_to_next_month">"Κάντε κύλιση για εμφάνιση του επόμενου μήνα"</string>
+    <string msgid="4592174524846109496" name="m3c_date_range_picker_scroll_to_previous_month">"Κάντε κύλιση για εμφάνιση του προηγούμενου μήνα"</string>
+    <string msgid="4665981448952749820" name="m3c_date_range_picker_start_headline">"Ημερομηνία έναρξης"</string>
+    <string msgid="3134165431120340385" name="m3c_date_range_picker_title">"Επιλογή ημερομηνιών"</string>
+    <string msgid="7617233117134790350" name="m3c_dialog">"Παράθυρο διαλόγου"</string>
+    <string msgid="3177828188723359358" name="m3c_dropdown_menu_collapsed">"Συμπτυγμένο"</string>
+    <string msgid="2360841780724299882" name="m3c_dropdown_menu_expanded">"Αναπτυγμένο"</string>
+    <string msgid="8687821690726149911" name="m3c_dropdown_menu_toggle">"Εναλλαγή αναπτυσσόμενου μενού"</string>
+    <string msgid="6152806324422087846" name="m3c_search_bar_search">"Αναζήτηση"</string>
+    <string msgid="6152755701819882931" name="m3c_snackbar_dismiss">"Παράβλεψη"</string>
+    <string msgid="7655536806087401899" name="m3c_suggestions_available">"Προτάσεις παρακάτω"</string>
+    <string msgid="2786685010796619560" name="m3c_time_picker_am">"πμ"</string>
+    <string msgid="2349193472625211372" name="m3c_time_picker_hour">"Ώρα"</string>
+    <string msgid="9179527532316922345" name="m3c_time_picker_hour_24h_suffix">"Ώρα %1$d"</string>
+    <string msgid="8876759303332837035" name="m3c_time_picker_hour_selection">"Επιλογή ώρας"</string>
+    <string msgid="3458167507790628988" name="m3c_time_picker_hour_suffix">"%1$d η ώρα"</string>
+    <string msgid="6973808109666874069" name="m3c_time_picker_hour_text_field">"για ώρα"</string>
+    <string msgid="4313071914266462005" name="m3c_time_picker_minute">"Λεπτό"</string>
+    <string msgid="4699133535056739733" name="m3c_time_picker_minute_selection">"Επιλογή λεπτών"</string>
+    <string msgid="5064177921781937179" name="m3c_time_picker_minute_suffix">"%1$d λεπτά"</string>
+    <string msgid="7661234488295443182" name="m3c_time_picker_minute_text_field">"για λεπτά"</string>
+    <string msgid="5865171949528594571" name="m3c_time_picker_period_toggle_description">"Επιλέξτε π.μ. ή μ.μ."</string>
+    <string msgid="6616362054113087709" name="m3c_time_picker_pm">"μμ"</string>
+    <string msgid="1805687647081129904" name="m3c_tooltip_long_press_label">"Προβολή επεξήγησης εργαλείου"</string>
+    <string msgid="5460405025248574620" name="m3c_tooltip_pane_description">"Επεξήγηση εργαλείου"</string>
+    <string name="maintainer_and_developer">Συντηρητής και προγραμματιστής</string>
+    <string name="mark_as_read_label">ΝΑ ΣΗΜΕΙΩΘΕΙ ΩΣ ΑΝΑΓΝΩΣΜΕΝΟ</string>
+    <string name="material_clock_toggle_content_description">Επιλέξτε π.μ. ή μ.μ.</string>
+    <string name="material_hour_24h_suffix">%1$s ώρες</string>
+    <string name="material_hour_selection">Επιλογή ώρας</string>
+    <string name="material_hour_suffix">%1$s ακριβώς</string>
+    <string name="material_minute_selection">Επιλογή λεπτών</string>
+    <string name="material_minute_suffix">%1$s λεπτά</string>
+    <string name="material_slider_range_end">Τέλος εύρους</string>
+    <string name="material_slider_range_start">Αρχή εύρους</string>
+    <string name="material_slider_value">Τιμή</string>
+    <string name="material_timepicker_am">ΠΜ</string>
+    <string name="material_timepicker_clock_mode_description">Κάντε εναλλαγή στη λειτουργία ρολογιού, για την εισαγωγή της ώρας.</string>
+    <string name="material_timepicker_hour">Ώρα</string>
+    <string name="material_timepicker_minute">Λεπτό</string>
+    <string name="material_timepicker_pm">ΜΜ</string>
+    <string name="material_timepicker_select_time">Επιλέξτε ώρα</string>
+    <string name="material_timepicker_text_input_mode_description">Κάντε εναλλαγή στη λειτουργία εισαγωγής κειμένου, για την εισαγωγή της ώρας.</string>
+    <string name="maxim_leshchenko_task">Βελτιώσεις γραφικού περιβάλλοντος και της σελίδας του περιγράμματος</string>
+    <string name="message_reply_label">ΑΠΑΝΤΗΣΗ</string>
+    <string name="middle_click">Αποστολή μεσαίου κλικ</string>
+    <string name="mouse_receiver_plugin_description">Λήψη απομακρυσμένων κινήσεων του ποντικιού</string>
+    <string name="mouse_receiver_plugin_name">Δέκτης ποντικιού</string>
+    <string name="mousepad_acceleration_profile_settings_title">Ρύθμιση επιτάχυνσης δείκτη</string>
+    <string name="mousepad_double_tap_settings_title">Ρύθμιση δύο δακτύλων για την ενέργεια χτυπήματος</string>
+    <string name="mousepad_scroll_direction_title">Κατεύθυνση ανάστροφης κύλησης</string>
+    <string name="mousepad_sensitivity_settings_title">Ρύθμιση ευαισθησίας της οθόνης αφής</string>
+    <string name="mousepad_triple_tap_settings_title">Ρύθμιση τριών δακτύλων για την ενέργεια χτυπήματος</string>
+    <string name="mpris_coverart_description">Καλλιτεχνικό εξώφυλλο των πολυμέσων</string>
+    <string name="mpris_ff">Ταχεία προώθηση</string>
+    <string name="mpris_loop">Βρόχος</string>
+    <string name="mpris_next">Επόμενο</string>
+    <string name="mpris_notification_settings_summary">Να επιτρέπεται ο έλεγχος των αναπαραφωγέων πολυμέσων χωρίς άνοιγμα του COSMIC Connect</string>
+    <string name="mpris_notification_settings_title">Εμφάνιση ειδοποίησης κονσόλας πολυμέσων</string>
+    <string name="mpris_open_url">Συνεχίστε να παίζετε εδώ</string>
+    <string name="mpris_pause">Παύση</string>
+    <string name="mpris_play">Αναπαραγωγή</string>
+    <string name="mpris_previous">Προηγούμενο</string>
+    <string name="mpris_rew">Ταχεία ώθηση όπισθεν</string>
+    <string name="mpris_shuffle">Ανάμιξη</string>
+    <string name="mpris_stop">Διακοπή του τρέχοντος αναπαραγωγέα</string>
+    <string name="mpris_time_settings_summary">Χρονική προσαρμογή ταχείας ώθησης ανάλογα με την πίεση</string>
+    <string name="mpris_time_settings_title">Κουμπιά ταχείας ώθησης</string>
+    <string name="mpris_volume">Τόμος</string>
+    <string name="mtrl_badge_numberless_content_description">Νέα ειδοποίηση</string>
+    <string name="mtrl_checkbox_state_description_checked">Επιλεγμένο</string>
+    <string name="mtrl_checkbox_state_description_indeterminate">Έγινε μερικός έλεγχος</string>
+    <string name="mtrl_checkbox_state_description_unchecked">Μη επιλεγμένο</string>
+    <string name="mtrl_chip_close_icon_content_description">Κατάργηση %1$s</string>
+    <string name="mtrl_exceed_max_badge_number_content_description" ns2:ignore="PluralsCandidate">Πάνω από %1$d νέες ειδοποιήσεις</string>
+    <string name="mtrl_picker_a11y_next_month">Αλλαγή στον επόμενο μήνα</string>
+    <string name="mtrl_picker_a11y_prev_month">Αλλαγή στον προηγούμενο μήνα</string>
+    <string name="mtrl_picker_announce_current_range_selection">Επιλογή ημερομηνίας έναρξης: %1$s – Επιλογή ημερομηνίας λήξης: %2$s</string>
+    <string name="mtrl_picker_announce_current_selection">Τρέχουσα επιλογή: %1$s</string>
+    <string name="mtrl_picker_announce_current_selection_none">χωρίς επιλογή</string>
+    <string name="mtrl_picker_cancel">Ακύρωση</string>
+    <string name="mtrl_picker_confirm">ΟΚ</string>
+    <string name="mtrl_picker_date_header_selected">%1$s</string>
+    <string name="mtrl_picker_date_header_title">Επιλογή ημερομηνίας</string>
+    <string name="mtrl_picker_date_header_unselected">Επιλεγμένη ημερομηνία</string>
+    <string name="mtrl_picker_day_of_week_column_header">%1$s</string>
+    <string name="mtrl_picker_end_date_description">Ημερομηνία λήξης %1$s</string>
+    <string name="mtrl_picker_invalid_format">Μη έγκυρη μορφή.</string>
+    <string name="mtrl_picker_invalid_format_example">Παράδειγμα: %1$s</string>
+    <string name="mtrl_picker_invalid_format_use">Χρησιμοποιήστε: %1$s</string>
+    <string name="mtrl_picker_invalid_range">Μη έγκυρο εύρος.</string>
+    <string name="mtrl_picker_navigate_to_current_year_description">Πλοήγηση στο τρέχον έτος %1$d</string>
+    <string name="mtrl_picker_navigate_to_year_description">Πλοήγηση στο έτος %1$d</string>
+    <string name="mtrl_picker_out_of_range">Εκτός εύρους: %1$s</string>
+    <string name="mtrl_picker_range_header_only_end_selected">Ημερομηνία έναρξης – %1$s</string>
+    <string name="mtrl_picker_range_header_only_start_selected">%1$s – Ημερομηνία λήξης</string>
+    <string name="mtrl_picker_range_header_selected">%1$s – %2$s</string>
+    <string name="mtrl_picker_range_header_title">Επιλογή εύρους</string>
+    <string name="mtrl_picker_range_header_unselected">Ημερομηνία έναρξης – Ημερομηνία λήξης</string>
+    <string name="mtrl_picker_save">Αποθήκευση</string>
+    <string name="mtrl_picker_start_date_description">Ημερομηνία έναρξης %1$s</string>
+    <string name="mtrl_picker_text_input_date_hint">Ημερομηνία</string>
+    <string name="mtrl_picker_text_input_date_range_end_hint">Ημερομηνία λήξης</string>
+    <string name="mtrl_picker_text_input_date_range_start_hint">Ημερομηνία έναρξης</string>
+    <string name="mtrl_picker_text_input_day_abbr">η</string>
+    <string name="mtrl_picker_text_input_month_abbr">μ</string>
+    <string name="mtrl_picker_text_input_year_abbr">ε</string>
+    <string name="mtrl_picker_today_description">Σήμερα %1$s</string>
+    <string name="mtrl_picker_toggle_to_calendar_input_mode">Εναλλαγή στη λειτουργία εισαγωγής ημερολογίου</string>
+    <string name="mtrl_picker_toggle_to_day_selection">Εναλλαγή στην προβολή Ημερολόγιο</string>
+    <string name="mtrl_picker_toggle_to_text_input_mode">Εναλλαγή στη λειτουργία εισαγωγής κειμένου</string>
+    <string name="mtrl_picker_toggle_to_year_selection">Εναλλαγή στην προβολή έτους</string>
+    <string name="mtrl_picker_toggled_to_day_selection">Έγινε αλλαγή στην προβολή Ημερολογίου</string>
+    <string name="mtrl_picker_toggled_to_year_selection">Έγινε αλλαγή στην προβολή έτους</string>
+    <string name="mtrl_timepicker_cancel">Ακύρωση</string>
+    <string name="mtrl_timepicker_confirm">ΟΚ</string>
+    <string name="mute">Σίγαση</string>
+    <string name="my_device_fingerprint">Το ίχνος SHA256 του πιστοποιητικού της συσκευής σας είναι:</string>
+    <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Πλοήγηση προς τα επάνω"</string>
+    <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Άνοιγμα συρταριού πλοήγησης"</string>
+    <string msgid="542007171693138492" name="navigation_menu">"Μενού πλοήγησης"</string>
+    <string name="no_app_for_opening">Δεν βρέθηκε κατάλληλη εφαρμογή για το άνοιγμα αυτού του αρχείου</string>
+    <string name="no_file_browser">Δεν υπάρχουν εγκατεστημένοι περιηγητές αρχείων.</string>
+    <string name="no_permission_mprisreceiver">Για να ελέγξετε τους αναπαραγωγείς πολυμέσων απαιτείται να παραχωρήσετε πρόσβαση στις ειδοποιήσεις</string>
+    <string name="no_permissions">Απαιτείται παραχώρηση δικαιωμάτων για την πρόσβαση σε ειδοποιήσεις</string>
+    <string name="no_permissions_remotekeyboard">Για να λαμβάνετε πατήματα πλήκτρων απαιτείται να ενεργοποιήσετε το πληκτρολόγιο απομακρυσμένης σύνδεσης του KDE</string>
+    <string name="no_players_connected">Δεν βρέθηκαν συσκευές αναπαραγωγής</string>
+    <string name="no_wifi">Δεν είστε συνδεδεμένοι σε ασύρματο δίκτυο, έτσι ίσως να μη βλέπετε καμία συσκευή.Κάνετε κλικ εδώ για να ενεργοποιήσετε το Wi-Fi.</string>
+    <string msgid="6610465462668679431" name="not_selected">"Δεν έχει επιλεχθεί"</string>
+    <string msgid="6573031135582639649" name="not_set">"Δεν έχει οριστεί"</string>
+    <string name="notification_channel_default">Άλλες ειδοποιήσεις</string>
+    <string name="notification_channel_high_priority">Υψηλής προτεραιότητας</string>
+    <string name="notification_channel_media_control">Κονσόλα πολυμέσων</string>
+    <string name="notification_channel_receivenotification">Ειδοποιήσεις από άλλες συσκευές</string>
+    <string name="ok">Εντάξει</string>
+    <string name="on_non_trusted_message">Δεν είστε σε έμπιστο δίκτυο: ο αυτόματος εντοπισμός είναι ανενεργός.</string>
+    <string name="open">Άνοιγμα</string>
+    <string name="open_mousepad">Απομακρυσμένη είσοδος στοιχείων</string>
+    <string name="open_mpris_controls">Έλεγχος πολυμέσων</string>
+    <string name="open_settings">Ρυθμίσεις ανοίγματος</string>
+    <string name="optional_permission_explanation">Απαιτείται παραχώρηση επιπλέον δικαιωμάτων για την ενεργοποίηση όλων των λειτουργιών</string>
+    <string name="pair_new_device">Σύζευξη νέας συσκευής</string>
+    <string name="pair_requested">Ζητήθηκε σύζευξη</string>
+    <string name="pairing_accept">Αποδοχή</string>
+    <string name="pairing_description">Άλλες συσκευές με COSMIC Connect στο ίδιο δίκτυο θα εμφανίζονται εδώ.</string>
+    <string name="pairing_reject">Απόρριψη</string>
+    <string name="pairing_title">Συσκευές COSMIC Connect</string>
+    <string name="password_toggle_content_description">Εμφάνιση κωδικού πρόσβασης</string>
+    <string name="permission_explanation">Αυτό το πρόσθετο χρειάζεται δικαιώματα για να λειτουργήσει</string>
+    <string name="plugin_settings_with_name">%s ρυθμίσεις</string>
+    <string name="plugins_need_optional_permission">Κάποια πρόσθετα έχουν λειτουργίες ανενεργές εξαιτίας της απουσίας δικαιωμάτων (χτυπήστε για περισσότερες πληροφορίες):</string>
+    <string name="plugins_need_permission">Κάποια πρόσθετα απαιτούν δικαιώματα για να λειτουργήσουν (χτυπήστε για περισσότερες πληροφορίες):</string>
+    <string name="pref_plugin_battery">Αναφορά μπαταρίας</string>
+    <string name="pref_plugin_battery_desc">Περιοδική αναφορά κατάστασης μπαταρίας</string>
+    <string name="pref_plugin_bigscreen_desc">Χρησιμοποιήστε τη συσκευή σας ως απομακρυσμένη για το Plasma Bigscreen</string>
+    <string name="pref_plugin_clipboard">Συγχρονισμός προχείρου</string>
+    <string name="pref_plugin_clipboard_desc">Διαμοιρασμός περιεχομένου προχείρου</string>
+    <string name="pref_plugin_clipboard_sent">Το πρόχειρο εστάλη</string>
+    <string name="pref_plugin_connectivity_report">Αναφορά συνδεσιμότητας</string>
+    <string name="pref_plugin_connectivity_report_desc">Αναφορά ισχύος δικτυακού σήματος και κατάστασης</string>
+    <string name="pref_plugin_contacts">Πρόγραμμα συγχρονισμού επαφών</string>
+    <string name="pref_plugin_contacts_desc">Επιτρέπει το συγχρονισμό του βιβλίου επαφών της συσκευής</string>
+    <string name="pref_plugin_findremotedevice">Εύρεση απομακρυσμένης συσκευής</string>
+    <string name="pref_plugin_findremotedevice_desc">Ενεργοποιήστε τον ήχο κλήσης της απομακρυσμένης συσκευής σας</string>
+    <string name="pref_plugin_mousepad">Απομακρυσμένη είσοδος στοιχείων</string>
+    <string name="pref_plugin_mousepad_send_keystrokes">Αποστολή ως πληκτρολογήσεις</string>
+    <string name="pref_plugin_mpris">Κονσόλα πολυμέσων</string>
+    <string name="pref_plugin_mpris_desc">Παρέχει ένα τηλεχειριστήριο για την αναπαραγωγή πολυμέσων</string>
+    <string name="pref_plugin_mprisreceiver">Κονσόλα αναπαραγωγέα πολυμέσων</string>
+    <string name="pref_plugin_mprisreceiver_desc">Ελέγξτε τους αναπαραγωγείς πολυμέσων του τηλεφώνου σας από άλλη συσκευή</string>
+    <string name="pref_plugin_notifications">Συγχρονισμός ειδοποιήσεων</string>
+    <string name="pref_plugin_notifications_desc">Πρόσβαση σε ειδοποιήσεις από άλλες συσκευές</string>
+    <string name="pref_plugin_ping">Ping</string>
+    <string name="pref_plugin_ping_desc">Αποστολή και λήψη pings</string>
+    <string name="pref_plugin_presenter_desc">Χρησιμοποιήστε τη συσκευή σας για να αλλάξετε διαφάνειες σε μία παρουσίαση</string>
+    <string name="pref_plugin_receive_notifications">Λήψη ειδοποιήσεων</string>
+    <string name="pref_plugin_receive_notifications_desc">Λήψη ειδοποιήσεων από την άλλη συσκευή και προβολή τους στο Android</string>
+    <string name="pref_plugin_remotekeyboard">Λήψη απομακρυσμένων πληκτρολογήσεων</string>
+    <string name="pref_plugin_remotekeyboard_desc">Λήψη συμβάντων πληκτρολόγησης από απομακρυσμένες συσκευές</string>
+    <string name="pref_plugin_runcommand">Εκτέλεση εντολής</string>
+    <string name="pref_plugin_runcommand_desc">Εκτέλεση απομακρυσμένων εντολών από το τηλέφωνο ή την ταμπλέτα</string>
+    <string name="pref_plugin_sftp_desc">Επιτρέπει την απομακρυσμένη περιήγηση του συστήματος αρχείων του κινητού</string>
+    <string name="pref_plugin_sharereceiver">Διαμοιρασμός και λήψη</string>
+    <string name="pref_plugin_sharereceiver_desc">Διαμοιρασμός αρχείων και URL μεταξύ συσκευών</string>
+    <string name="pref_plugin_systemvolume">Ένταση συστήματος</string>
+    <string name="pref_plugin_systemvolume_desc">Ελέγξτε την ένταση του συστήματος της απομακρυσμένης συσκευής</string>
+    <string name="pref_plugin_telepathy">Αποστολή SMS</string>
+    <string name="pref_plugin_telepathy_desc">Αποστολή μηνυμάτων κειμένου από τον υπολογιστή σας</string>
+    <string name="pref_plugin_telepathy_mms">Αποστολή MMS</string>
+    <string name="pref_plugin_telepathy_mms_desc">Για να μπορείτε να στέλνετε MMS από το COSMIC Connect απαιτείται να το ρυθμίσετε ως την προκαθορισμένη εφαρμογή για SMS.</string>
+    <string name="pref_plugin_telephony">Ειδοποιήσεις τηλεφωνίας</string>
+    <string name="pref_plugin_telephony_desc">Αποστολή ειδοποιήσεων για εισερχόμενες κλήσεις</string>
+    <string msgid="6685851473431805375" name="preference_copied">"Το \"<ns1:g id="SUMMARY">%1$s</ns1:g>\" αντιγράφηκε στο πρόχειρο."</string>
+    <string name="presenter_exit">Έξοδος από την παρουσίαση</string>
+    <string name="presenter_fullscreen">Πλήρης οθόνη</string>
+    <string name="presenter_lock_tip">Μπορείτε να κλειδώσετε τη συσκευή σας και να χρησιμοποιήσετε τα πλήκτρα της έντασης για να μεταβείτε σε προηγούμενη/επόμενη διαφάνεια</string>
+    <string name="presenter_pointer">Δείκτης</string>
+    <string name="privacy_options">Επιλογές ιδιωτικού απορρήτου</string>
+    <string name="protocol_version_newer">Η συσκευή αυτή χρησιμοποιεί νεότερη έκδοση πρωτοκόλλου</string>
+    <string msgid="5941395253238309765" name="range_end">"Τέλος εύρους"</string>
+    <string msgid="7097486360902471446" name="range_start">"Αρχή εύρους"</string>
+    <string name="received_file_text">Χτυπήστε για άνοιγμα \'%1s\'</string>
+    <string name="refresh">Ανανέωση</string>
+    <string name="remote_device_fingerprint">Το ίχνος SHA256 του πιστοποιητικού της απομακρυσμένης συσκευής είναι:</string>
+    <string name="remote_keyboard_service">Απομακρυσμένο πληκτρολόγιο COSMIC Connect</string>
+    <string name="remotekeyboard_connected">Η σύνδεση με απομακρυσμένο πληκτρολόγιο είναι ενεργή</string>
+    <string name="remotekeyboard_editing_only_title">Χειρισμός απομακρυσμένων πλήκτρων μόνο στην επεξεργασία</string>
+    <string name="remotekeyboard_multiple_connections">Υπάρχουν περισσότερες της μίας συνδέσεις με απομακρυσμένο πληκτρολόγιο, επιλέξτε ποια συσκευή θα διαμορφώσετε</string>
+    <string name="remotekeyboard_not_connected">Δεν υπάρχει ενεργή σύνδεση με απομακρυσμένο πληκτρολόγιο, άνοιξε μία στο cosmicconnect</string>
+    <string name="report_bug">Αναφορά σφάλματος</string>
+    <string name="request_pairing">Αίτημα σύζευξης</string>
+    <string name="right_click">Αποστολή δεξιού κλικ</string>
+    <string name="ring">Ήχος κλήσης</string>
+    <string name="rise_down">Κάθοδος</string>
+    <string name="rise_up">Άνοδος</string>
+    <string name="runcommand_noruncommandplugin">Αυτή η συσκευή δεν έχει ενεργοποιημένο το πρόσθετο εκτέλεσης εντολής</string>
+    <string name="runcommand_nosuchdevice">Δεν υπάρχει τέτοια συσκευή</string>
+    <string name="runcommand_notpaired">Η συσκευή δεν συζεύχθηκε</string>
+    <string name="runcommand_notreachable">Η συσκευή δεν είναι προσβάσιμη</string>
+    <string name="sad_ok">Εντάξει :(</string>
+    <string name="saikrishna_arcot_task">Υποστήριξη της χρήσης του πληκτρολογίου στο πρόσθετο απομακρυσμένης σύνδεσης, διορθώσεις σφαλμάτων και γενικές βελτιώσεις</string>
+    <string name="samoilenko_yuri_task">Υλοποίηση SFTP, διόρθωση σφαλμάτων και γενικές βελτιώσεις</string>
+    <string msgid="6264217191555673260" name="search_menu_title">"Αναζήτηση"</string>
+    <string name="searchview_clear_text_content_description">Διαγραφή κειμένου</string>
+    <string name="searchview_navigation_content_description">Πίσω</string>
+    <string name="select_ringtone">Επιλογή ήχου κλήσης</string>
+    <string msgid="6043586758067023" name="selected">"Επιλεγμένο"</string>
+    <string name="send_files">Αποστολή αρχείων</string>
+    <string name="send_ping">Αποστολή ping</string>
+    <string name="sendkeystrokes_disabled_toast">Η αποστολή πληκτρολογήσεων είναι ανενεργή - ενεργοποιήστε την στις ρυθμίσεις</string>
+    <string name="sendkeystrokes_pref_category_summary">Αυτό το άρθρωμα επιτρέπει σε άλλες εφαρμογές να μοιράζονται τμήματα κειμένου ως πληκτρολογήσεις οι οποίες θα αποστέλονται στον συνδεδεμένο υπολογιστή</string>
+    <string name="sendkeystrokes_pref_category_title">Αποστολή πληκτρολογήσεων</string>
+    <string name="sendkeystrokes_pref_enabled">ενεργοποίηση αποστολής πληκτρολογήσεων</string>
+    <string name="sendkeystrokes_pref_enabled_summary">Ετοιμότητα για δεδομένα με mime τύπο \'text/x-keystrokes\'</string>
+    <string name="sendkeystrokes_safe_text_enabled">Άμεση αποστολή ασφαλούς κειμένου</string>
+    <string name="sendkeystrokes_safe_text_enabled_summary">Αποστολή σύντομων αριθμητικών-μόνο συμβολοσειρών χωρίς επιβεβαίωση</string>
+    <string name="sendkeystrokes_send_to">Αποστολή πληκτρολογήσεων στο</string>
+    <string name="sendkeystrokes_sent_text">Εστάλησαν %1$s στη συσκευή %2$s</string>
+    <string name="sendkeystrokes_textbox_hint">Αποστολή πληκτρολογήσεων στον υπολογιστή</string>
+    <string name="sendkeystrokes_wrong_data">Μη έγκυρος τύπος mime - χρειάζεται να γίνει \'text/x-keystrokes\'</string>
+    <string name="set_default_sms_app_title">Αποστολή MMS</string>
+    <string name="set_group_message_as_mms_title">Αποστολή MMS σε ομάδα</string>
+    <string name="set_long_text_as_mms_title">Αποστολή μεγάλου κειμένου ως MMS</string>
+    <string name="set_privacy_options">Ρύθμιση επιλογών ιδιωτικού απορρήτου</string>
+    <string name="setting_persistent_notification">Εμφάνιση μόνιμων ειδοποιήσεων</string>
+    <string name="setting_persistent_notification_description">Χτύπημα για (απ)ενεργοποίηση στις ρυμίσεις ειδοποιήσεων</string>
+    <string name="setting_persistent_notification_oreo">Μόνιμες ειδοποιήσεις</string>
+    <string name="settings">Ρυθμίσεις</string>
+    <string name="settings_dark_mode">Σκούρο θέμα</string>
+    <string name="settings_icon_description">Εικονίδιο ρυθμίσεων</string>
+    <string name="settings_more_settings_text">Ρυθμίσεις ανά συσκευή είναι στο \'Ρυθμίσεις προσθέτων\' μέσα από τη συσκευή.</string>
+    <string name="settings_more_settings_title">Περισσότερες ρυθμίσεις</string>
+    <string name="settings_rename">Όνομα συσκευής</string>
+    <string name="sftp_action_mode_menu_delete">Διαγραφή</string>
+    <string name="sftp_no_storage_locations_configured">Δεν διαμορφώθηκαν τοποθεσίες αποθήκης</string>
+    <string name="sftp_preference_add_storage_location_title">Προσθήκη τοποθεσίας αποθήκης</string>
+    <string name="sftp_preference_configured_storage_locations">Διαμορφωμένες τοποθεσίες αποθήκης</string>
+    <string name="sftp_preference_edit_storage_location">Επεξεργασία τοποθεσίας αποθήκης</string>
+    <string name="sftp_saf_permission_explanation">Για να έχετε απομακρυσμένη πρόσβαση σε αρχεία απαιτείται να διαμορφώσετε τοποθεσίες αποθήκης</string>
+    <string name="sftp_storage_preference_click_to_select">κλικ για επιλογή</string>
+    <string name="sftp_storage_preference_display_name">Όνομα οθόνης</string>
+    <string name="sftp_storage_preference_display_name_already_used">Αυτό το όνομα οθόνης είναι σε χρήση</string>
+    <string name="sftp_storage_preference_display_name_cannot_be_empty">Το όνομα οθόνης δε γίνεται να είναι κενό</string>
+    <string name="sftp_storage_preference_storage_location">Τοποθεσία αποθήκης</string>
+    <string name="sftp_storage_preference_storage_location_already_configured">Αυτή η τοποθεσία έχει ήδη διαμορφωθεί</string>
+    <string name="share">Διαμοιρασμός</string>
+    <string name="share_destination_customize">Προσαρμογή καταλόγου προορισμού</string>
+    <string name="share_destination_customize_summary_disabled">Τα ληφθέντα αρχεία θα εμφανίζονται στις Λήψεις</string>
+    <string name="share_destination_customize_summary_enabled">Τα αρχεία θα αποθηκεύονται στον παρακάτω κατάλογο</string>
+    <string name="share_destination_folder_preference">Κατάλογος προορισμού</string>
+    <string name="share_notification_preference">Θορυβώδεις ειδοποιήσεις</string>
+    <string name="share_notification_preference_summary">Δόνηση και ηχητική ένδειξη με τη λήψη αρχείου</string>
+    <string name="share_received_file">Διαμοιρασμός «%s»</string>
+    <string name="shareplugin_text_saved">Ελήφθη κείμενο, αποθηκεύτηκε στο πρόχειρο</string>
+    <string name="show_keyboard">Εμφάνιση πληκτρολογίου</string>
+    <string name="side_sheet_accessibility_pane_title">Δευτερεύον φύλλο</string>
+    <string name="source_code">Πηγαίος κώδικας</string>
+    <string msgid="4139871816613051306" name="state_empty">"Κενό"</string>
+    <string msgid="5834637030682409883" name="state_off">"Ανενεργός"</string>
+    <string msgid="1490883874751719580" name="state_on">"Ενεργός"</string>
+    <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+    <string msgid="9167775378838880170" name="summary_collapsed_preference_list">"<ns1:g id="CURRENT_ITEMS">%1$s</ns1:g>, <ns1:g id="ADDED_ITEMS">%2$s</ns1:g>"</string>
+    <string msgid="2561197295334830845" name="switch_role">"Εναλλαγή"</string>
+    <string msgid="1672349317127674378" name="tab">"Καρτέλα"</string>
+    <string name="tap_to_answer">Χτυπήστε για να απαντήσετε</string>
+    <string name="tap_to_open">Χτυπήστε για άνοιγμα</string>
+    <string name="telepathy_permission_explanation">Για να διαβάσετε και να γράψετε SMS από την επιφάνεια εργασίας, χρειάζεται να δώσετε δικαιώματα στο SMS</string>
+    <string name="telephony_optional_permission_explanation">Για να δείτε το όνομα επαφής αντί για τον αριθμό κλήσης χρειάζεται να παραχωρήσετε πρόσβαση στις επαφές στο τηλέφωνο</string>
+    <string name="telephony_permission_explanation">Για να δείτε τηλεφωνικές κλήσεις στην επιφάνεια εργασίας απαιτείται να παραχωρήσετε δικαιώματα σε καταγραφές τηλεφωνικών κλήσεων και στην κατάσταση του τηλεφώνου</string>
+    <string name="telephony_pref_blocked_dialog_desc">Να μην εμφανίζονται κλήσεις ή SMS από αυτούς τους αριθμούς. Καθορίστε έναν αριθμό ανά γραμμή</string>
+    <string name="telephony_pref_blocked_title">Αριθμοί σε φραγή</string>
+    <string msgid="5946805113151406391" name="template_percent">"<ns1:g id="PERCENTAGE">%1$d</ns1:g> τοις εκατό."</string>
+    <string name="thanks_to">Ευχαριστίες</string>
+    <string name="theme_dialog_title">Επιλογή θέματος</string>
+    <string name="title_activity_notification_filter">Φιλτράρισμα ειδοποιήσεων</string>
+    <string msgid="3765533235322692011" name="tooltip_description">"επεξήγηση εργαλείου"</string>
+    <string msgid="3124740595719787496" name="tooltip_label">"εμφάνιση επεξήγησης εργαλείου"</string>
+    <string name="trusted_networks">Έμπιστα δίκτυα</string>
+    <string name="trusted_networks_desc">Να περιοριστεί η αυτόματη ανακάλυψη σε γνωστά δίκτυα</string>
+    <string name="undo">Αναίρεση</string>
+    <string name="unknown_device">Άγνωστη συσκευή</string>
+    <string name="unreachable_description">Αυτή η συζευγμένη συσκευή δεν είναι προσβάσιμη. Βεβαιωθείτε ότι είναι συνδεδεμένη στο δίκτυό σας.</string>
+    <string name="user_display_name">Εσείς</string>
+    <string msgid="3140233346420563315" name="v7_preference_off">"ΑΝΕΝΕΡΓΗ"</string>
+    <string msgid="89551595707643515" name="v7_preference_on">"ΕΝΕΡΓΗ"</string>
+    <string name="version">Έκδοση %s</string>
+    <string name="view_status_title">Κατάσταση</string>
+    <string name="visit_contributors_homepage">Επισκεφθείτε τη σελίδα του συμβαλλόμενου\n%s</string>
+    <string name="website">Ιστότοπος</string>
+</resources>

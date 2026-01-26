@@ -15,6 +15,7 @@ import androidx.core.content.edit
 import com.univocity.parsers.common.TextParsingException
 import com.univocity.parsers.csv.CsvParser
 import com.univocity.parsers.csv.CsvParserSettings
+import kotlinx.coroutines.runBlocking
 import org.cosmic.cosmicconnect.DeviceInfo
 import org.cosmic.cosmicconnect.DeviceType
 import org.cosmic.cosmicconnect.Helpers.SecurityHelpers.SslHelper
@@ -30,8 +31,6 @@ object DeviceHelper {
     const val PROTOCOL_VERSION = 8
 
     const val KEY_DEVICE_NAME_PREFERENCE = "device_name_preference"
-    private const val KEY_DEVICE_NAME_FETCHED_FROM_THE_INTERNET = "device_name_downloaded_preference"
-    private const val KEY_DEVICE_ID_PREFERENCE = "device_id_preference"
 
     private var fetchingName = false
 
@@ -63,17 +62,12 @@ object DeviceHelper {
     }
 
     @JvmStatic
-    fun getDeviceName(context: Context): String {
-        val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-        if (!preferences.contains(KEY_DEVICE_NAME_PREFERENCE)
-            && !preferences.getBoolean(KEY_DEVICE_NAME_FETCHED_FROM_THE_INTERNET, false)
-            && !fetchingName
-        ) {
+    fun getDeviceName(context: Context): String = runBlocking {
+        if (!fetchingName && !PreferenceDataStore.isDeviceNameDownloadedSync(context)) {
             fetchingName = true
             backgroundFetchDeviceName(context)
-            return Build.MODEL
         }
-        return preferences.getString(KEY_DEVICE_NAME_PREFERENCE, Build.MODEL)!!
+        PreferenceDataStore.getDeviceNameSync(context)
     }
 
     private fun backgroundFetchDeviceName(context: Context) {
@@ -83,8 +77,9 @@ object DeviceHelper {
                 val connection = url.openConnection()
 
                 // If we get here we managed to download the file. Mark that as done so we don't try again even if we don't end up finding a name.
-                val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-                preferences.edit { putBoolean(KEY_DEVICE_NAME_FETCHED_FROM_THE_INTERNET, true) }
+                runBlocking {
+                    PreferenceDataStore.setDeviceNameDownloaded(context, true)
+                }
 
                 BufferedReader(
                     InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_16)
@@ -122,24 +117,25 @@ object DeviceHelper {
 
     fun setDeviceName(context: Context, name: String) {
         val filteredName = filterInvalidCharactersFromDeviceNameAndLimitLength(name)
-        val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-        preferences.edit { putString(KEY_DEVICE_NAME_PREFERENCE, filteredName) }
+        runBlocking {
+            PreferenceDataStore.setDeviceName(context, filteredName)
+        }
     }
 
     fun initializeDeviceId(context: Context) {
-        val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-        val deviceId = preferences.getString(KEY_DEVICE_ID_PREFERENCE, "")!!
-        if (DeviceInfo.isValidDeviceId(deviceId)) {
-            return // We already have an ID
+        runBlocking {
+            val deviceId = PreferenceDataStore.getDeviceIdSync(context) ?: ""
+            if (DeviceInfo.isValidDeviceId(deviceId)) {
+                return@runBlocking // We already have an ID
+            }
+            val newDeviceId = UUID.randomUUID().toString().replace("-", "")
+            PreferenceDataStore.setDeviceId(context, newDeviceId)
         }
-        val deviceName = UUID.randomUUID().toString().replace("-", "")
-        preferences.edit { putString(KEY_DEVICE_ID_PREFERENCE, deviceName) }
     }
 
     @JvmStatic
-    fun getDeviceId(context: Context): String {
-        val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-        return preferences.getString(KEY_DEVICE_ID_PREFERENCE, null)!!
+    fun getDeviceId(context: Context): String = runBlocking {
+        PreferenceDataStore.getDeviceIdSync(context) ?: ""
     }
 
     @JvmStatic

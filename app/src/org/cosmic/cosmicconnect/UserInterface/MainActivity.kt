@@ -39,11 +39,13 @@ import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import org.apache.commons.lang3.ArrayUtils
 import org.cosmic.cosmicconnect.BackgroundService
 import org.cosmic.cosmicconnect.CosmicConnect
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Helpers.DeviceHelper
+import org.cosmic.cosmicconnect.Helpers.PreferenceDataStore
 import org.cosmic.cosmicconnect.Plugins.SharePlugin.ShareSettingsFragment
 import org.cosmic.cosmicconnect.UserInterface.About.AboutFragment
 import org.cosmic.cosmicconnect.UserInterface.About.getApplicationAboutData
@@ -73,7 +75,6 @@ class MainActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
 
     private var mCurrentDevice: String? = null
     private var mCurrentMenuEntry = 0
-    private val preferences: SharedPreferences by lazy { getSharedPreferences("stored_menu_selection", MODE_PRIVATE) }
     private val mMapMenuToDeviceId = HashMap<MenuItem, String>()
 
     private val storageLocationLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -133,7 +134,9 @@ class MainActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
             } else {
                  mCurrentDevice = null
             }
-            preferences.edit { putString(STATE_SELECTED_DEVICE, mCurrentDevice) }
+            CoroutineScope(Dispatchers.Main).launch {
+                PreferenceDataStore.setSelectedDevice(this@MainActivity, mCurrentDevice)
+            }
         }
 
         val mDrawerHeader = mNavigationView.getHeaderView(0)
@@ -162,17 +165,23 @@ class MainActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
             when (mCurrentMenuEntry) {
                 MENU_ENTRY_ADD_DEVICE -> {
                     mCurrentDevice = null
-                    preferences.edit { putString(STATE_SELECTED_DEVICE, null) }
+                    CoroutineScope(Dispatchers.Main).launch {
+                        PreferenceDataStore.setSelectedDevice(this@MainActivity, null)
+                    }
                     navController.navigate(R.id.pairingFragment)
                 }
 
                 MENU_ENTRY_SETTINGS -> {
-                    preferences.edit { putString(STATE_SELECTED_DEVICE, null) }
+                    CoroutineScope(Dispatchers.Main).launch {
+                        PreferenceDataStore.setSelectedDevice(this@MainActivity, null)
+                    }
                     navController.navigate(R.id.settingsFragment)
                 }
 
                 MENU_ENTRY_ABOUT -> {
-                    preferences.edit { putString(STATE_SELECTED_DEVICE, null) }
+                    CoroutineScope(Dispatchers.Main).launch {
+                        PreferenceDataStore.setSelectedDevice(this@MainActivity, null)
+                    }
                     val args = Bundle().apply { putParcelable("about_data", getApplicationAboutData(this@MainActivity)) }
                     navController.navigate(R.id.aboutFragment, args)
                 }
@@ -219,7 +228,7 @@ class MainActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
 
             else -> {
                 Log.i(this::class.simpleName, "Loading selected device from persistent storage")
-                savedDevice = preferences.getString(STATE_SELECTED_DEVICE, null)
+                savedDevice = runBlocking { PreferenceDataStore.getSelectedDeviceSync(this@MainActivity) }
                 savedMenuEntry = if (savedDevice != null) MENU_ENTRY_DEVICE_UNKNOWN else MENU_ENTRY_ADD_DEVICE
             }
         }
@@ -351,7 +360,9 @@ class MainActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
     @JvmOverloads
     fun onDeviceSelected(deviceId: String?, fromDeviceList: Boolean = false) {
         mCurrentDevice = deviceId
-        preferences.edit { putString(STATE_SELECTED_DEVICE, deviceId) }
+        CoroutineScope(Dispatchers.Main).launch {
+            PreferenceDataStore.setSelectedDevice(this@MainActivity, deviceId)
+        }
         if (mCurrentDevice != null) {
             mCurrentMenuEntry = deviceIdToMenuEntryId(deviceId)
             if (mCurrentMenuEntry == MENU_ENTRY_DEVICE_UNKNOWN) {

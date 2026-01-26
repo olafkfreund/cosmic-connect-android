@@ -10,32 +10,29 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.net.wifi.SupplicantState
 import android.net.wifi.WifiManager
-import android.preference.PreferenceManager
 import android.util.Log
 import androidx.core.content.ContextCompat
-import androidx.core.content.edit
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 
 class TrustedNetworkHelper(private val context: Context) {
 
     var trustedNetworks: List<String>
-        get() {
-            val serializedNetworks = PreferenceManager.getDefaultSharedPreferences(context).getString(KEY_CUSTOM_TRUSTED_NETWORKS, "") ?: ""
-            return serializedNetworks.split(NETWORK_SSID_DELIMITER, "#_#" /* TODO remove old delimiter in 2025 */).filter { it.isNotEmpty() }
+        get() = runBlocking {
+            val serializedNetworks = PreferenceDataStore.getTrustedNetworks(context).first()
+            serializedNetworks.split(NETWORK_SSID_DELIMITER, "#_#" /* TODO remove old delimiter in 2025 */).filter { it.isNotEmpty() }
         }
-        set(value) {
-            PreferenceManager.getDefaultSharedPreferences(context).edit {
-                    putString(
-                        KEY_CUSTOM_TRUSTED_NETWORKS,
-                        value.joinToString(NETWORK_SSID_DELIMITER)
-                    )
-                }
+        set(value) = runBlocking {
+            PreferenceDataStore.setTrustedNetworks(context, value.joinToString(NETWORK_SSID_DELIMITER))
         }
 
     var allNetworksAllowed: Boolean
-        get() = !hasPermissions || PreferenceManager.getDefaultSharedPreferences(context).getBoolean(KEY_CUSTOM_TRUST_ALL_NETWORKS, true)
-        set(value) = PreferenceManager.getDefaultSharedPreferences(context).edit {
-                putBoolean(KEY_CUSTOM_TRUST_ALL_NETWORKS, value)
-            }
+        get() = runBlocking {
+            !hasPermissions || PreferenceDataStore.getTrustAllNetworks(context).first()
+        }
+        set(value) = runBlocking {
+            PreferenceDataStore.setTrustAllNetworks(context, value)
+        }
 
     val hasPermissions: Boolean
         get() = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED

@@ -27,6 +27,7 @@ import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.cosmic.cosmicconnect.DeviceHost;
+import org.cosmic.cosmicconnect.Helpers.PreferenceDataStore;
 import org.cosmic.cosmicconnect.Helpers.WindowHelper;
 import org.cosmic.cosmicconnect.base.BaseActivity;
 import org.cosmic.cosmicconnect.R;
@@ -43,7 +44,6 @@ import kotlin.Unit;
 public class CustomDevicesActivity extends BaseActivity<ActivityCustomDevicesBinding> implements CustomDevicesAdapter.Callback {
     private static final String TAG_ADD_DEVICE_DIALOG = "AddDeviceDialog";
 
-    private static final String KEY_CUSTOM_DEVLIST_PREFERENCE = "device_list_preference";
     private static final String IP_DELIM = ",";
     private static final String KEY_EDITING_DEVICE_AT_POSITION = "EditingDeviceAtPosition";
 
@@ -140,12 +140,8 @@ public class CustomDevicesActivity extends BaseActivity<ActivityCustomDevicesBin
     }
 
     private void saveList() {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String serialized = TextUtils.join(IP_DELIM, customDeviceList);
-        sharedPreferences
-                .edit()
-                .putString(KEY_CUSTOM_DEVLIST_PREFERENCE, serialized)
-                .apply();
+        PreferenceDataStore.setCustomDeviceListSync(this, serialized);
     }
 
     private static ArrayList<DeviceHost> deserializeIpList(String serialized) {
@@ -165,8 +161,7 @@ public class CustomDevicesActivity extends BaseActivity<ActivityCustomDevicesBin
     }
 
     public static ArrayList<DeviceHost> getCustomDeviceList(Context context) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        String deviceListPrefs = sharedPreferences.getString(KEY_CUSTOM_DEVLIST_PREFERENCE, "");
+        String deviceListPrefs = PreferenceDataStore.getCustomDeviceListSync(context);
         ArrayList<DeviceHost> list = deserializeIpList(deviceListPrefs);
         list.sort(Comparator.comparing(DeviceHost::toString));
         return list;

@@ -6,13 +6,12 @@
 package org.cosmic.cosmicconnect.Helpers.SecurityHelpers
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Build
-import android.preference.PreferenceManager
 import android.security.keystore.KeyProperties
 import android.util.Base64
 import android.util.Log
-import androidx.core.content.edit
+import kotlinx.coroutines.runBlocking
+import org.cosmic.cosmicconnect.Helpers.PreferenceDataStore
 import java.security.GeneralSecurityException
 import java.security.KeyFactory
 import java.security.KeyPair
@@ -28,9 +27,10 @@ object RsaHelper {
 
     @JvmStatic
     fun initialiseRsaKeys(context: Context) {
-        val settings = PreferenceManager.getDefaultSharedPreferences(context)
+        val publicKeyStored = PreferenceDataStore.getPublicKeySync(context)
+        val privateKeyStored = PreferenceDataStore.getPrivateKeySync(context)
 
-        if (!settings.contains("publicKey") || !settings.contains("privateKey")) {
+        if (publicKeyStored.isEmpty() || privateKeyStored.isEmpty()) {
             val keyPair: KeyPair
             val keyAlgorithm: String
             try {
@@ -48,28 +48,27 @@ object RsaHelper {
             val publicKey = keyPair.public.encoded
             val privateKey = keyPair.private.encoded
 
-            settings.edit {
-                putString("publicKey", Base64.encodeToString(publicKey, 0))
-                putString("privateKey", Base64.encodeToString(privateKey, 0))
-                putString("keyAlgorithm", keyAlgorithm)
+            runBlocking {
+                PreferenceDataStore.setPublicKey(context, Base64.encodeToString(publicKey, 0))
+                PreferenceDataStore.setPrivateKey(context, Base64.encodeToString(privateKey, 0))
+                PreferenceDataStore.setAlgorithm(context, keyAlgorithm)
             }
         }
     }
 
-    /** For backwards compat: if no keyAlgorithm setting is set, it means it was generated using RSA */
-    private fun algorithmFromSettings(pref: SharedPreferences) = pref.getString("keyAlgorithm", RSA)!!
-
     @JvmStatic
     fun getPublicKey(context: Context): PublicKey {
-        val settings = PreferenceManager.getDefaultSharedPreferences(context)
-        val publicKeyBytes = Base64.decode(settings.getString("publicKey", ""), 0)
-        return KeyFactory.getInstance(algorithmFromSettings(settings)).generatePublic(X509EncodedKeySpec(publicKeyBytes))
+        val publicKeyStr = PreferenceDataStore.getPublicKeySync(context)
+        val publicKeyBytes = Base64.decode(publicKeyStr, 0)
+        val algorithm = PreferenceDataStore.getAlgorithmSync(context, RSA)
+        return KeyFactory.getInstance(algorithm).generatePublic(X509EncodedKeySpec(publicKeyBytes))
     }
 
     @JvmStatic
     fun getPrivateKey(context: Context): PrivateKey {
-        val settings = PreferenceManager.getDefaultSharedPreferences(context)
-        val privateKeyBytes = Base64.decode(settings.getString("privateKey", ""), 0)
-        return KeyFactory.getInstance(algorithmFromSettings(settings)).generatePrivate(PKCS8EncodedKeySpec(privateKeyBytes))
+        val privateKeyStr = PreferenceDataStore.getPrivateKeySync(context)
+        val privateKeyBytes = Base64.decode(privateKeyStr, 0)
+        val algorithm = PreferenceDataStore.getAlgorithmSync(context, RSA)
+        return KeyFactory.getInstance(algorithm).generatePrivate(PKCS8EncodedKeySpec(privateKeyBytes))
     }
 }

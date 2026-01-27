@@ -10,7 +10,6 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.Log
@@ -35,6 +34,7 @@ import org.cosmic.cosmicconnect.DeviceStats.countReceived
 import org.cosmic.cosmicconnect.DeviceStats.countSent
 import org.cosmic.cosmicconnect.Helpers.DeviceHelper
 import org.cosmic.cosmicconnect.Helpers.NotificationHelper
+import org.cosmic.cosmicconnect.Helpers.SecurityHelpers.SslHelper
 import org.cosmic.cosmicconnect.Helpers.TrustedDevices
 import org.cosmic.cosmicconnect.PairingHandler.PairingCallback
 import org.cosmic.cosmicconnect.Plugins.Plugin
@@ -54,6 +54,9 @@ class Device : PacketReceiver {
     data class NetworkPacketWithCallback(val np : NetworkPacket, val callback: SendPacketStatusCallback)
 
     val context: Context
+    private val deviceHelper: DeviceHelper
+    private val pluginFactory: PluginFactory
+    private val sslHelper: SslHelper
 
     @VisibleForTesting
     val deviceInfo: DeviceInfo
@@ -107,11 +110,14 @@ class Device : PacketReceiver {
      * Constructor for remembered, already-trusted devices.
      * Given the deviceId, it will load the other properties from SharedPreferences.
      */
-    internal constructor(context: Context, deviceId: String) {
+    internal constructor(context: Context, deviceId: String, deviceHelper: DeviceHelper, pluginFactory: PluginFactory, sslHelper: SslHelper) {
         this.context = context
+        this.deviceHelper = deviceHelper
+        this.pluginFactory = pluginFactory
+        this.sslHelper = sslHelper
         this.deviceInfo = loadFromSettings(context, deviceId)
-        this.pairingHandler = PairingHandler(this, createDefaultPairingCallback(), PairingHandler.PairState.Paired)
-        this.supportedPlugins = Vector(PluginFactory.availablePlugins) // Assume all are supported until we receive capabilities
+        this.pairingHandler = PairingHandler(this, createDefaultPairingCallback(), PairingHandler.PairState.Paired, sslHelper)
+        this.supportedPlugins = Vector(pluginFactory.availablePlugins) // Assume all are supported until we receive capabilities
         Log.i("Device", "Loading trusted device: ${deviceInfo.name}")
     }
 
@@ -120,11 +126,14 @@ class Device : PacketReceiver {
      * Gets the DeviceInfo by calling link.getDeviceInfo() on the link passed.
      * This constructor also calls addLink() with the link you pass to it, since it's not legal to have an unpaired Device with 0 links.
      */
-    internal constructor(context: Context, link: BaseLink) {
+    internal constructor(context: Context, link: BaseLink, deviceHelper: DeviceHelper, pluginFactory: PluginFactory, sslHelper: SslHelper) {
         this.context = context
+        this.deviceHelper = deviceHelper
+        this.pluginFactory = pluginFactory
+        this.sslHelper = sslHelper
         this.deviceInfo = link.deviceInfo
-        this.pairingHandler = PairingHandler(this, createDefaultPairingCallback(), PairingHandler.PairState.NotPaired)
-        this.supportedPlugins = Vector(PluginFactory.availablePlugins) // Assume all are supported until we receive capabilities
+        this.pairingHandler = PairingHandler(this, createDefaultPairingCallback(), PairingHandler.PairState.NotPaired, sslHelper)
+        this.supportedPlugins = Vector(pluginFactory.availablePlugins) // Assume all are supported until we receive capabilities
         Log.i("Device", "Creating untrusted device: " + deviceInfo.name)
         addLink(link)
     }
@@ -390,7 +399,7 @@ class Device : PacketReceiver {
             deviceInfo.outgoingCapabilities = newOutgoingCapabilities
             deviceInfo.incomingCapabilities = newIncomingCapabilities
             supportedPlugins = Vector(
-                PluginFactory.pluginsForCapabilities(
+                pluginFactory.pluginsForCapabilities(
                     newIncomingCapabilities,
                     newOutgoingCapabilities
                 )
@@ -545,7 +554,7 @@ class Device : PacketReceiver {
         val isNewPlugin = !loadedPlugins.containsKey(pluginKey)
 
         val plugin = loadedPlugins[pluginKey]
-            ?: PluginFactory.instantiatePluginForDevice(context, pluginKey, this)
+            ?: pluginFactory.instantiatePluginForDevice(context, pluginKey, this)
                 ?: return false
 
         if (!plugin.isCompatible) {
@@ -606,7 +615,7 @@ class Device : PacketReceiver {
     }
 
     fun isPluginEnabled(pluginKey: String): Boolean {
-        val enabledByDefault = PluginFactory.getPluginInfo(pluginKey).isEnabledByDefault
+        val enabledByDefault = pluginFactory.getPluginInfo(pluginKey).isEnabledByDefault
         return TrustedDevices.getDeviceSettings(context, deviceId).getBoolean(pluginKey, enabledByDefault)
     }
 
@@ -617,7 +626,7 @@ class Device : PacketReceiver {
             // unpair a device while that device is not reachable or 2) the plugin was never initialized
             // for this device, e.g., the plugins that need additional permissions from the user, and those
             // permissions were never granted.
-            val plugin = getPlugin(pluginKey) ?: PluginFactory.instantiatePluginForDevice(context, pluginKey, this)
+            val plugin = getPlugin(pluginKey) ?: pluginFactory.instantiatePluginForDevice(context, pluginKey, this)
             plugin?.onDeviceUnpaired(context, deviceId)
         }
     }
@@ -635,7 +644,7 @@ class Device : PacketReceiver {
         val newPluginsByIncomingInterface: MultiValuedMap<String, String> = ArrayListValuedHashMap()
 
         supportedPlugins.forEach { pluginKey ->
-            val pluginInfo = PluginFactory.getPluginInfo(pluginKey)
+            val pluginInfo = pluginFactory.getPluginInfo(pluginKey)
             val listenToUnpaired = pluginInfo.listenToUnpaired
 
             val pluginEnabled = (isPaired || listenToUnpaired) && this.isReachable && isPluginEnabled(pluginKey)

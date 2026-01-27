@@ -438,7 +438,7 @@ fun testCreateFileSharePacket() {
         size = 1024L
     )
 
-    assertEquals("kdeconnect.share.request", packet.type)
+    assertEquals("cconnect.share.request", packet.type)
     assertEquals("test.txt", packet.filename)
     assertEquals(1024L, packet.payloadSize)
 }
@@ -579,7 +579,7 @@ suspend fun PayloadTransferFFI.download(): Result<File> = suspendCoroutine { con
 
 ```java
 // Old way - manual packet creation
-NetworkPacket np = new NetworkPacket("kdeconnect.share.request");
+NetworkPacket np = new NetworkPacket("cconnect.share.request");
 np.set("filename", "photo.jpg");
 np.set("creationTime", System.currentTimeMillis());
 np.setPayload(new NetworkPacket.Payload(...));

@@ -276,7 +276,7 @@ Android: onTransferComplete() callback
 **Network Activity:**
 ```
 Android: Battery Packet → COSMIC (TLS)
-Packet Type: kdeconnect.battery
+Packet Type: cconnect.battery
 Body: { currentCharge: 85, isCharging: true }
 ```
 
@@ -298,7 +298,7 @@ Body: { currentCharge: 85, isCharging: true }
 **Network Activity:**
 ```
 Android: Clipboard Packet → COSMIC (TLS)
-Packet Type: kdeconnect.clipboard
+Packet Type: cconnect.clipboard
 Body: { content: "test text" }
 ```
 
@@ -320,7 +320,7 @@ Body: { content: "test text" }
 **Network Activity:**
 ```
 Android: Ping Packet → COSMIC (TLS)
-Packet Type: kdeconnect.ping
+Packet Type: cconnect.ping
 Body: { message: "E2E Test Ping" }
 ```
 

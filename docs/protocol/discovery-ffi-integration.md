@@ -287,7 +287,7 @@ The integration maintains **three discovery methods** for maximum compatibility:
 
 2. **mDNS/DNS-SD** (Existing - Complementary)
    - Android NsdManager
-   - Service type: `_cosmicconnect._udp`
+   - Service type: `_cconnect._udp`
    - Useful for local network discovery
 
 3. **UDP Broadcast** (Existing - Fallback)
@@ -321,23 +321,23 @@ DiscoveryManager maps between Android and FFI device types:
 
 ```kotlin
 private fun mapDeviceType(
-    type: org.cosmic.cosmicconnect.Helpers.DeviceHelper.DeviceType
+    type: org.cosmic.cconnect.Helpers.DeviceHelper.DeviceType
 ): DeviceType {
     return when (type) {
-        org.cosmic.cosmicconnect.Helpers.DeviceHelper.DeviceType.Phone -> DeviceType.PHONE
-        org.cosmic.cosmicconnect.Helpers.DeviceHelper.DeviceType.Tablet -> DeviceType.TABLET
-        org.cosmic.cosmicconnect.Helpers.DeviceHelper.DeviceType.Tv -> DeviceType.TV
-        org.cosmic.cosmicconnect.Helpers.DeviceHelper.DeviceType.Desktop -> DeviceType.DESKTOP
-        org.cosmic.cosmicconnect.Helpers.DeviceHelper.DeviceType.Laptop -> DeviceType.LAPTOP
+        org.cosmic.cconnect.Helpers.DeviceHelper.DeviceType.Phone -> DeviceType.PHONE
+        org.cosmic.cconnect.Helpers.DeviceHelper.DeviceType.Tablet -> DeviceType.TABLET
+        org.cosmic.cconnect.Helpers.DeviceHelper.DeviceType.Tv -> DeviceType.TV
+        org.cosmic.cconnect.Helpers.DeviceHelper.DeviceType.Desktop -> DeviceType.DESKTOP
+        org.cosmic.cconnect.Helpers.DeviceHelper.DeviceType.Laptop -> DeviceType.LAPTOP
     }
 }
 ```
 
-**Android Types** (`org.cosmic.cosmicconnect.Helpers.DeviceHelper.DeviceType`):
+**Android Types** (`org.cosmic.cconnect.Helpers.DeviceHelper.DeviceType`):
 - Enum defined in Android-specific code
 - Based on device characteristics (screen size, UI mode)
 
-**FFI Types** (`org.cosmic.cosmicconnect.Core.DeviceType`):
+**FFI Types** (`org.cosmic.cconnect.Core.DeviceType`):
 - Cross-platform enum from Rust FFI
 - Used in discovery protocol
 

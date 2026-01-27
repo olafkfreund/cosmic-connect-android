@@ -168,7 +168,7 @@ fun set(key: String, value: String) = apply { body[key] = value }  // ✅ Uses a
             "MutableNetworkPacket makes O(N) FFI calls for N mutations.",
     replaceWith = ReplaceWith(
         "NetworkPacketBuilder(type).set(key, value).build()",
-        "org.cosmic.cosmicconnect.Core.NetworkPacketBuilder"
+        "org.cosmic.cconnect.Core.NetworkPacketBuilder"
     ),
     level = DeprecationLevel.WARNING
 )
@@ -178,13 +178,13 @@ class MutableNetworkPacket(...)
 **Migration Path**:
 ```kotlin
 // OLD (inefficient - O(N) FFI calls)
-val packet = MutableNetworkPacket("kdeconnect.battery")
+val packet = MutableNetworkPacket("cconnect.battery")
 packet["currentCharge"] = 85
 packet["isCharging"] = true
 device.sendPacket(packet.toNetworkPacket())
 
 // NEW (efficient - O(1) FFI call)
-val packet = NetworkPacket.create("kdeconnect.battery", mapOf(
+val packet = NetworkPacket.create("cconnect.battery", mapOf(
     "currentCharge" to 85,
     "isCharging" to true
 ))

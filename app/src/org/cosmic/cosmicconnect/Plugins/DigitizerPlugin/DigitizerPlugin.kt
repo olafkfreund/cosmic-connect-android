@@ -22,6 +22,9 @@ import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment
 import org.cosmic.cosmicconnect.R
 import org.json.JSONObject
 
+import org.cosmic.cosmicconnect.di.HiltBridges
+import dagger.hilt.EntryPoints
+
 @PluginFactory.LoadablePlugin
 class DigitizerPlugin : Plugin() {
     override val displayName: String
@@ -30,8 +33,12 @@ class DigitizerPlugin : Plugin() {
     override val description: String
         get() = context.resources.getString(R.string.pref_plugin_digitizer_desc)
 
-    override val isEnabledByDefault: Boolean
-        get() = DeviceHelper.isTablet
+    override val isCompatible: Boolean
+        get() {
+            val deviceHelper = EntryPoints.get(context.applicationContext, HiltBridges::class.java).deviceHelper()
+            return deviceHelper.isTablet
+        }
+
 
     override fun getUiButtons(): List<PluginUiButton> = listOf(
         PluginUiButton(
@@ -98,8 +105,8 @@ class DigitizerPlugin : Plugin() {
         )
 
     companion object {
-        private const val PACKET_TYPE_DIGITIZER_SESSION = "cosmicconnect.digitizer.session"
-        private const val PACKET_TYPE_DIGITIZER = "cosmicconnect.digitizer"
+        private const val PACKET_TYPE_DIGITIZER_SESSION = "cconnect.digitizer.session"
+        private const val PACKET_TYPE_DIGITIZER = "cconnect.digitizer"
 
         private const val TAG = "DigitizerPlugin"
     }

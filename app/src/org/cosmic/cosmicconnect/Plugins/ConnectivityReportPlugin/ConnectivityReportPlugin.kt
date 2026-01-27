@@ -96,6 +96,6 @@ class ConnectivityReportPlugin : Plugin() {
     override val requiredPermissions: Array<String> = arrayOf(Manifest.permission.READ_PHONE_STATE)
 
     companion object {
-        private const val PACKET_TYPE_CONNECTIVITY_REPORT = "cosmicconnect.connectivity_report"
+        private const val PACKET_TYPE_CONNECTIVITY_REPORT = "cconnect.connectivity_report"
     }
 }

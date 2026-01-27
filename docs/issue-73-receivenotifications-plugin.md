@@ -91,7 +91,7 @@ private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
 ✅ **No changes needed** - `create_notification_request_packet()` already exists from Phase 2
 
 The function:
-- Creates a packet with type `cosmicconnect.notification.request`
+- Creates a packet with type `cconnect.notification.request`
 - Includes `{"request": true}` in the body
 - Takes no parameters
 
@@ -100,9 +100,9 @@ The function:
 **File**: `src/org/cosmic/cosmicconnect/Plugins/ReceiveNotificationsPlugin/ReceiveNotificationsPacketsFFI.kt`
 
 ```kotlin
-package org.cosmic.cosmicconnect.Plugins.ReceiveNotificationsPlugin
+package org.cosmic.cconnect.Plugins.ReceiveNotificationsPlugin
 
-import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cconnect.Core.NetworkPacket
 import uniffi.cosmic_connect_core.createNotificationRequestPacket
 
 /**

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "org.cosmic.cosmicconnect.app-mergeDebugResources-85:/values-eo/values-eo.xml",
+            "outputFile": "org.cosmic.cosmicconnect.app-mergeDebugResources-87:/values-eo/values-eo.xml",
             "map": [
                 {
                     "source": "/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/res/values-eo/strings.xml",

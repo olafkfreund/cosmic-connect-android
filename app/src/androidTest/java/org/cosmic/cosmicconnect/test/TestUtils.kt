@@ -1,9 +1,9 @@
-package org.cosmic.cosmicconnect.test
+package org.cosmic.cconnect.test
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
-import org.cosmic.cosmicconnect.Device
-import org.cosmic.cosmicconnect.NetworkPacket
+import org.cosmic.cconnect.Device
+import org.cosmic.cconnect.NetworkPacket
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 

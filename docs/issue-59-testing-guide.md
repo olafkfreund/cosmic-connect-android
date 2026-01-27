@@ -622,14 +622,14 @@ FindMyPhonePlugin: Cleanup complete
 **Ring Request Packet:**
 ```json
 {
-  "type": "kdeconnect.findmyphone.request",
+  "type": "cconnect.findmyphone.request",
   "id": 1234567890,
   "body": {}
 }
 ```
 
 **Key Characteristics:**
-- Packet type: `kdeconnect.findmyphone.request`
+- Packet type: `cconnect.findmyphone.request`
 - Body: Empty object `{}`
 - Direction: Desktop → Android (receive-only plugin)
 - No response packet (unidirectional)

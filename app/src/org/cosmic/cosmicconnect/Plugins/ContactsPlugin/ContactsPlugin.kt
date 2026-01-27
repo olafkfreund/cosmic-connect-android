@@ -15,7 +15,7 @@ import androidx.fragment.app.DialogFragment
 import org.cosmic.cosmicconnect.Helpers.ContactsHelper
 import org.cosmic.cosmicconnect.Helpers.ContactsHelper.ContactNotFoundException
 import org.cosmic.cosmicconnect.Helpers.ContactsHelper.VCardBuilder
-import org.cosmic.cosmicconnect.Helpers.ContactsHelper.uID
+import org.cosmic.cosmicconnect.Helpers.ContactsHelper.UID
 import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
@@ -89,12 +89,12 @@ class ContactsPlugin : Plugin() {
      * @return The same VCard as was passed in, but now with COSMIC Connect-specific fields
      */
     @Throws(ContactNotFoundException::class)
-    private fun addVCardMetadata(vcard: VCardBuilder, uID: uID): VCardBuilder {
+    private fun addVCardMetadata(vcard: VCardBuilder, uid: UID): VCardBuilder {
         // Append the device ID line
         // Unclear if the deviceID forms a valid name per the vcard spec. Worry about that later..
-        vcard.appendLine("X-KDECONNECT-ID-DEV-${device.deviceId}", uID.toString())
+        vcard.appendLine("X-KDECONNECT-ID-DEV-${device.deviceId}", uid.toString())
 
-        val timestamp: Long = ContactsHelper.getContactTimestamp(context, uID)
+        val timestamp: Long = ContactsHelper.getContactTimestamp(context, uid)
         vcard.appendLine("REV", timestamp.toString())
 
         return vcard
@@ -110,12 +110,12 @@ class ContactsPlugin : Plugin() {
      * @return true if successfully handled, false otherwise
      */
     private fun handleRequestAllUIDsTimestamps(@Suppress("unused") np: LegacyNetworkPacket): Boolean {
-        val uIDsToTimestamps: Map<uID, Long> = ContactsHelper.getAllContactTimestamps(context)
+        val uIDsToTimestamps: Map<UID, Long> = ContactsHelper.getAllContactTimestamps(context)
 
         // Build packet body
         val body = mutableMapOf<String, Any>()
         val uIDsAsString = mutableListOf<String>()
-        for ((contactID: uID, timestamp: Long) in uIDsToTimestamps) {
+        for ((contactID: UID, timestamp: Long) in uIDsToTimestamps) {
             body[contactID.toString()] = timestamp.toString()
             uIDsAsString.add(contactID.toString())
         }
@@ -137,27 +137,27 @@ class ContactsPlugin : Plugin() {
             return false
         }
 
-        val storedUIDs: List<uID>? = np.getStringList("uids")?.distinct()?.map { uID(it) }
+        val storedUIDs: List<UID>? = np.getStringList("uids")?.distinct()?.map { UID(it) }
         if (storedUIDs == null) {
             Log.e("ContactsPlugin", "handleRequestNamesByUIDs received a malformed packet with no uids")
             return false
         }
 
-        val uIDsToVCards: Map<uID, VCardBuilder> = ContactsHelper.getVCardsForContactIDs(context, storedUIDs)
+        val uIDsToVCards: Map<UID, VCardBuilder> = ContactsHelper.getVCardsForContactIDs(context, storedUIDs)
 
         // Build packet body
         val body = mutableMapOf<String, Any>()
         val uIDsAsStrings = mutableListOf<String>()
         // ContactsHelper.getVCardsForContactIDs(..) is allowed to reply without some of the requested uIDs if they were not in the database, so update our list
-        for ((uID: uID, vcard: VCardBuilder) in uIDsToVCards) {
+        for ((uid: UID, vcard: VCardBuilder) in uIDsToVCards) {
             try {
-                val vcardWithMetadata = addVCardMetadata(vcard, uID)
+                val vcardWithMetadata = addVCardMetadata(vcard, uid)
                 // Store this as a valid uID
-                uIDsAsStrings.add(uID.toString())
+                uIDsAsStrings.add(uid.toString())
                 // Add the uid -> vcard pairing to the packet
-                body[uID.toString()] = vcardWithMetadata.toString()
+                body[uid.toString()] = vcardWithMetadata.toString()
             } catch (e: ContactNotFoundException) {
-                Log.e("ContactsPlugin", "handleRequestVCardsByUIDs failed to find contact with uID $uID")
+                Log.e("ContactsPlugin", "handleRequestVCardsByUIDs failed to find contact with uID $uid")
             }
         }
         body[PACKET_UIDS_KEY] = uIDsAsStrings
@@ -187,7 +187,7 @@ class ContactsPlugin : Plugin() {
         /**
          * Used to request the device send the unique ID of every contact
          */
-        private const val PACKET_TYPE_CONTACTS_REQUEST_ALL_UIDS_TIMESTAMPS: String = "cosmicconnect.contacts.request_all_uids_timestamps"
+        private const val PACKET_TYPE_CONTACTS_REQUEST_ALL_UIDS_TIMESTAMPS: String = "cconnect.contacts.request_all_uids_timestamps"
 
         /**
          * Used to request the names for the contacts corresponding to a list of UIDs
@@ -195,7 +195,7 @@ class ContactsPlugin : Plugin() {
          *
          * It shall contain the key "uids", which will have a list of uIDs (long int, as string)
          */
-        private const val PACKET_TYPE_CONTACTS_REQUEST_VCARDS_BY_UIDS: String = "cosmicconnect.contacts.request_vcards_by_uid"
+        private const val PACKET_TYPE_CONTACTS_REQUEST_VCARDS_BY_UIDS: String = "cconnect.contacts.request_vcards_by_uid"
 
         /**
          * Response indicating the packet contains a list of contact uIDs
@@ -204,7 +204,7 @@ class ContactsPlugin : Plugin() {
          * It shall contain the key "uids", which will mark a list of uIDs (long int, as string)
          * The returned IDs can be used in future requests for more information about the contact
          */
-        private const val PACKET_TYPE_CONTACTS_RESPONSE_UIDS_TIMESTAMPS: String = "cosmicconnect.contacts.response_uids_timestamps"
+        private const val PACKET_TYPE_CONTACTS_RESPONSE_UIDS_TIMESTAMPS: String = "cconnect.contacts.response_uids_timestamps"
 
         /**
          * Response indicating the packet contains a list of contact names
@@ -221,6 +221,6 @@ class ContactsPlugin : Plugin() {
          * '15' : 'Mom'
          * }
          */
-        private const val PACKET_TYPE_CONTACTS_RESPONSE_VCARDS: String = "cosmicconnect.contacts.response_vcards"
+        private const val PACKET_TYPE_CONTACTS_RESPONSE_VCARDS: String = "cconnect.contacts.response_vcards"
     }
 }

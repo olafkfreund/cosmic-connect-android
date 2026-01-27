@@ -19,7 +19,7 @@ import uniffi.cosmic_connect_core.createRuncommandSetup
  * ### Request Command List
  * ```json
  * {
- *     "type": "kdeconnect.runcommand.request",
+ *     "type": "cconnect.runcommand.request",
  *     "body": {
  *         "requestCommandList": true
  *     }
@@ -29,7 +29,7 @@ import uniffi.cosmic_connect_core.createRuncommandSetup
  * ### Execute Command
  * ```json
  * {
- *     "type": "kdeconnect.runcommand.request",
+ *     "type": "cconnect.runcommand.request",
  *     "body": {
  *         "key": "cmd_id"
  *     }
@@ -39,7 +39,7 @@ import uniffi.cosmic_connect_core.createRuncommandSetup
  * ### Setup Command Configuration
  * ```json
  * {
- *     "type": "kdeconnect.runcommand.request",
+ *     "type": "cconnect.runcommand.request",
  *     "body": {
  *         "setup": true
  *     }
@@ -72,19 +72,19 @@ object RunCommandPacketsFFI {
      * Create a packet to request the command list from the remote device.
      *
      * This packet asks the desktop to send back its list of configured commands.
-     * The desktop will respond with a `kdeconnect.runcommand` packet containing
+     * The desktop will respond with a `cconnect.runcommand` packet containing
      * the command list as a JSON string.
      *
      * ## Protocol Details
-     * - **Type**: `kdeconnect.runcommand.request`
+     * - **Type**: `cconnect.runcommand.request`
      * - **Body**: `{"requestCommandList": true}`
      * - **Direction**: Android → Desktop
-     * - **Response**: Desktop sends `kdeconnect.runcommand` with command list
+     * - **Response**: Desktop sends `cconnect.runcommand` with command list
      *
      * ## Example Response
      * ```json
      * {
-     *     "type": "kdeconnect.runcommand",
+     *     "type": "cconnect.runcommand",
      *     "body": {
      *         "commandList": "{\"cmd1\":{\"name\":\"List Files\",\"command\":\"ls -la\"},\"cmd2\":{...}}",
      *         "canAddCommand": true
@@ -108,7 +108,7 @@ object RunCommandPacketsFFI {
      * If the command doesn't exist, the desktop will log a warning but won't crash.
      *
      * ## Protocol Details
-     * - **Type**: `kdeconnect.runcommand.request`
+     * - **Type**: `cconnect.runcommand.request`
      * - **Body**: `{"key": "<command_key>"}`
      * - **Direction**: Android → Desktop
      * - **Response**: None (command executes silently)
@@ -139,7 +139,7 @@ object RunCommandPacketsFFI {
      * settings screens.
      *
      * ## Protocol Details
-     * - **Type**: `kdeconnect.runcommand.request`
+     * - **Type**: `cconnect.runcommand.request`
      * - **Body**: `{"setup": true}`
      * - **Direction**: Android → Desktop
      * - **Response**: None (desktop opens UI)
@@ -195,7 +195,7 @@ object RunCommandPacketsFFI {
  * ## Packet Structure
  * ```json
  * {
- *     "type": "kdeconnect.runcommand",
+ *     "type": "cconnect.runcommand",
  *     "body": {
  *         "commandList": "{\"cmd1\":{\"name\":\"...\",\"command\":\"...\"},...}",
  *         "canAddCommand": true
@@ -204,10 +204,10 @@ object RunCommandPacketsFFI {
  * ```
  *
  * @receiver NetworkPacket to inspect
- * @return true if packet type is "kdeconnect.runcommand"
+ * @return true if packet type is "cconnect.runcommand"
  */
 val NetworkPacket.isRunCommandList: Boolean
-    get() = type == "kdeconnect.runcommand"
+    get() = type == "cconnect.runcommand"
 
 /**
  * Check if this packet is a RunCommand request packet.
@@ -218,10 +218,10 @@ val NetworkPacket.isRunCommandList: Boolean
  * - Setup request: `{"setup": true}`
  *
  * @receiver NetworkPacket to inspect
- * @return true if packet type is "kdeconnect.runcommand.request"
+ * @return true if packet type is "cconnect.runcommand.request"
  */
 val NetworkPacket.isRunCommandRequest: Boolean
-    get() = type == "kdeconnect.runcommand.request"
+    get() = type == "cconnect.runcommand.request"
 
 /**
  * Check if this packet is a command list request.

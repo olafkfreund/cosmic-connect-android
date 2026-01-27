@@ -22,6 +22,7 @@ import android.preference.PreferenceManager
 import android.util.Base64
 import android.util.Log
 import androidx.core.content.edit
+import dagger.hilt.android.qualifiers.ApplicationContext
 import org.apache.commons.io.IOUtils
 import org.cosmic.cosmicconnect.Backends.BaseLinkProvider
 import org.cosmic.cosmicconnect.Device
@@ -39,9 +40,16 @@ import java.io.InputStreamReader
 import java.io.Reader
 import java.security.cert.CertificateException
 import java.util.UUID
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.text.Charsets.UTF_8
 
-class BluetoothLinkProvider(private val context: Context) : BaseLinkProvider() {
+@Singleton
+class BluetoothLinkProvider @Inject constructor(
+    @ApplicationContext private val context: Context,
+    private val deviceHelper: DeviceHelper,
+    private val sslHelper: SslHelper
+) : BaseLinkProvider() {
     private val visibleDevices: MutableMap<String, BluetoothLink> = HashMap()
     private val sockets: MutableMap<BluetoothDevice?, BluetoothSocket> = HashMap()
     private val bluetoothAdapter: BluetoothAdapter? = (context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager).adapter
@@ -74,6 +82,7 @@ class BluetoothLinkProvider(private val context: Context) : BaseLinkProvider() {
     }
 
     override fun onStart() {
+        @Suppress("DEPRECATION")
         val preferences = PreferenceManager.getDefaultSharedPreferences(context)
         if (!preferences.getBoolean(SettingsFragment.KEY_BLUETOOTH_ENABLED, false)) {
             return
@@ -139,6 +148,7 @@ class BluetoothLinkProvider(private val context: Context) : BaseLinkProvider() {
             } catch (e: SecurityException) {
                 Log.e("COSMICConnect", "Security Exception for CONNECT", e)
 
+                @Suppress("DEPRECATION")
                 PreferenceManager.getDefaultSharedPreferences(context).edit {
                     putBoolean(SettingsFragment.KEY_BLUETOOTH_ENABLED, false)
                 }
@@ -179,9 +189,9 @@ class BluetoothLinkProvider(private val context: Context) : BaseLinkProvider() {
                 ConnectionMultiplexer(socket).use { connection ->
                     val outputStream = connection.defaultOutputStream
                     val inputStream = connection.defaultInputStream
-                    val myDeviceInfo = DeviceHelper.getDeviceInfo(context)
+                    val myDeviceInfo = deviceHelper.getDeviceInfo()
                     val np = myDeviceInfo.toIdentityPacket()
-                    np["certificate"] = Base64.encodeToString(SslHelper.certificate.encoded, 0)
+                    np["certificate"] = Base64.encodeToString(sslHelper.certificate.encoded, 0)
                     val message = np.serialize().toByteArray(UTF_8)
                     outputStream.write(message)
                     outputStream.flush()
@@ -207,7 +217,7 @@ class BluetoothLinkProvider(private val context: Context) : BaseLinkProvider() {
                             .replace("-----BEGIN CERTIFICATE-----\n", "")
                             .replace("-----END CERTIFICATE-----\n", "")
                     val pemEncodedCertificateBytes = Base64.decode(base64CertificateString, 0)
-                    val certificate = SslHelper.parseCertificate(pemEncodedCertificateBytes)
+                    val certificate = sslHelper.parseCertificate(pemEncodedCertificateBytes)
                     val deviceInfo = fromIdentityPacketAndCert(identityPacket, certificate)
                     Log.i("BTLinkProvider/Server", "About to create link")
                     val link = BluetoothLink(context, connection,
@@ -376,7 +386,7 @@ class BluetoothLinkProvider(private val context: Context) : BaseLinkProvider() {
                 }
 
                 Log.i("BTLinkProvider/Client", "Received identity packet")
-                val myId = DeviceHelper.getDeviceId(context)
+                val myId = deviceHelper.getDeviceId()
                 if (identityPacket.getString("deviceId") == myId) {
                     // Probably won't happen, but just to be safe
                     connection.close()
@@ -391,13 +401,13 @@ class BluetoothLinkProvider(private val context: Context) : BaseLinkProvider() {
                         .replace("-----BEGIN CERTIFICATE-----\n", "")
                         .replace("-----END CERTIFICATE-----\n", "")
                 val pemEncodedCertificateBytes = Base64.decode(base64CertificateString, 0)
-                val certificate = SslHelper.parseCertificate(pemEncodedCertificateBytes)
+                val certificate = sslHelper.parseCertificate(pemEncodedCertificateBytes)
                 val deviceInfo = fromIdentityPacketAndCert(identityPacket, certificate)
                 val link = BluetoothLink(context, connection, inputStream, outputStream,
                         socket.remoteDevice, deviceInfo, this@BluetoothLinkProvider)
-                val myDeviceInfo = DeviceHelper.getDeviceInfo(context)
+                val myDeviceInfo = deviceHelper.getDeviceInfo()
                 val np2 = myDeviceInfo.toIdentityPacket()
-                np2["certificate"] = Base64.encodeToString(SslHelper.certificate.encoded, 0)
+                np2["certificate"] = Base64.encodeToString(sslHelper.certificate.encoded, 0)
                 Log.i("BTLinkProvider/Client", "about to send packet np2")
                 link.sendPacket(np2, object : Device.SendPacketStatusCallback() {
                     override fun onSuccess() {

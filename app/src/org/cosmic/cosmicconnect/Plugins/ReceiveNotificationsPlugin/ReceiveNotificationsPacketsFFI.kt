@@ -36,7 +36,7 @@ object ReceiveNotificationsPacketsFFI {
      * refresh of notification state.
      *
      * The created packet will have:
-     * - Type: `cosmicconnect.notification.request`
+     * - Type: `cconnect.notification.request`
      * - Body: `{"request": true}`
      *
      * The remote device will respond with all its current notifications,

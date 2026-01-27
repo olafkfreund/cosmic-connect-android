@@ -13,8 +13,8 @@ const UDP_PORT: u16 = 1716;
 const MIN_TCP_PORT: u16 = 1714;
 const MAX_TCP_PORT: u16 = 1764;
 const PROTOCOL_VERSION: u8 = 7;
-const PACKET_TYPE_IDENTITY: &str = "cosmicconnect.identity";
-const PACKET_TYPE_PAIR: &str = "cosmicconnect.pair";
+const PACKET_TYPE_IDENTITY: &str = "cconnect.identity";
+const PACKET_TYPE_PAIR: &str = "cconnect.pair";
 ```
 
 ### Communication Flow Summary
@@ -63,7 +63,7 @@ const PACKET_TYPE_PAIR: &str = "cosmicconnect.pair";
 ```json
 {
     "id": 1642176543000,
-    "type": "cosmicconnect.identity",
+    "type": "cconnect.identity",
     "body": {
         "deviceId": "740bd4b9_b418_4ee4_97d6_caf1da8151be",
         "deviceName": "My COSMIC Desktop",
@@ -71,54 +71,54 @@ const PACKET_TYPE_PAIR: &str = "cosmicconnect.pair";
         "protocolVersion": 7,
         "tcpPort": 1716,
         "incomingCapabilities": [
-            "cosmicconnect.battery.request",
-            "cosmicconnect.clipboard",
-            "cosmicconnect.clipboard.connect",
-            "cosmicconnect.connectivity_report.request",
-            "cosmicconnect.contacts.request_all_uids_timestamps",
-            "cosmicconnect.contacts.request_vcards_by_uid",
-            "cosmicconnect.findmyphone.request",
-            "cosmicconnect.mousepad.keyboardstate",
-            "cosmicconnect.mousepad.request",
-            "cosmicconnect.mpris",
-            "cosmicconnect.mpris.request",
-            "cosmicconnect.notification",
-            "cosmicconnect.notification.action",
-            "cosmicconnect.notification.reply",
-            "cosmicconnect.notification.request",
-            "cosmicconnect.ping",
-            "cosmicconnect.runcommand",
-            "cosmicconnect.runcommand.request",
-            "cosmicconnect.sftp.request",
-            "cosmicconnect.share.request",
-            "cosmicconnect.sms.request",
-            "cosmicconnect.sms.request_conversation",
-            "cosmicconnect.sms.request_conversations",
-            "cosmicconnect.systemvolume.request",
-            "cosmicconnect.telephony.request_mute"
+            "cconnect.battery.request",
+            "cconnect.clipboard",
+            "cconnect.clipboard.connect",
+            "cconnect.connectivity_report.request",
+            "cconnect.contacts.request_all_uids_timestamps",
+            "cconnect.contacts.request_vcards_by_uid",
+            "cconnect.findmyphone.request",
+            "cconnect.mousepad.keyboardstate",
+            "cconnect.mousepad.request",
+            "cconnect.mpris",
+            "cconnect.mpris.request",
+            "cconnect.notification",
+            "cconnect.notification.action",
+            "cconnect.notification.reply",
+            "cconnect.notification.request",
+            "cconnect.ping",
+            "cconnect.runcommand",
+            "cconnect.runcommand.request",
+            "cconnect.sftp.request",
+            "cconnect.share.request",
+            "cconnect.sms.request",
+            "cconnect.sms.request_conversation",
+            "cconnect.sms.request_conversations",
+            "cconnect.systemvolume.request",
+            "cconnect.telephony.request_mute"
         ],
         "outgoingCapabilities": [
-            "cosmicconnect.battery",
-            "cosmicconnect.clipboard",
-            "cosmicconnect.clipboard.connect",
-            "cosmicconnect.connectivity_report",
-            "cosmicconnect.contacts.response_uids_timestamps",
-            "cosmicconnect.contacts.response_vcards",
-            "cosmicconnect.findmyphone.request",
-            "cosmicconnect.mousepad.echo",
-            "cosmicconnect.mousepad.keyboardstate",
-            "cosmicconnect.mousepad.request",
-            "cosmicconnect.mpris",
-            "cosmicconnect.mpris.request",
-            "cosmicconnect.notification",
-            "cosmicconnect.notification.request",
-            "cosmicconnect.ping",
-            "cosmicconnect.runcommand",
-            "cosmicconnect.sftp",
-            "cosmicconnect.share.request",
-            "cosmicconnect.sms.messages",
-            "cosmicconnect.systemvolume",
-            "cosmicconnect.telephony"
+            "cconnect.battery",
+            "cconnect.clipboard",
+            "cconnect.clipboard.connect",
+            "cconnect.connectivity_report",
+            "cconnect.contacts.response_uids_timestamps",
+            "cconnect.contacts.response_vcards",
+            "cconnect.findmyphone.request",
+            "cconnect.mousepad.echo",
+            "cconnect.mousepad.keyboardstate",
+            "cconnect.mousepad.request",
+            "cconnect.mpris",
+            "cconnect.mpris.request",
+            "cconnect.notification",
+            "cconnect.notification.request",
+            "cconnect.ping",
+            "cconnect.runcommand",
+            "cconnect.sftp",
+            "cconnect.share.request",
+            "cconnect.sms.messages",
+            "cconnect.systemvolume",
+            "cconnect.telephony"
         ]
     }
 }
@@ -324,7 +324,7 @@ openssl s_client -connect <phone_ip>:1716 -cert your_cert.pem -key your_key.pem
 // Request pairing
 {
     "id": 1642176600000,
-    "type": "cosmicconnect.pair",
+    "type": "cconnect.pair",
     "body": {
         "pair": true
     }
@@ -333,7 +333,7 @@ openssl s_client -connect <phone_ip>:1716 -cert your_cert.pem -key your_key.pem
 // Accept pairing
 {
     "id": 1642176601000,
-    "type": "cosmicconnect.pair", 
+    "type": "cconnect.pair", 
     "body": {
         "pair": true
     }
@@ -342,7 +342,7 @@ openssl s_client -connect <phone_ip>:1716 -cert your_cert.pem -key your_key.pem
 // Reject pairing OR unpair
 {
     "id": 1642176602000,
-    "type": "cosmicconnect.pair",
+    "type": "cconnect.pair",
     "body": {
         "pair": false
     }
@@ -511,7 +511,7 @@ openssl x509 -in <saved_cert> -fingerprint -noout
 ### Network Debugging
 ```bash
 # Monitor all COSMIC Connect traffic
-sudo tcpdump -i any "udp port 1716 or tcp portrange 1714-1764" -vvv -w cosmicconnect.pcap
+sudo tcpdump -i any "udp port 1716 or tcp portrange 1714-1764" -vvv -w cconnect.pcap
 
 # Real-time packet inspection
 sudo tshark -i any -f "port 1716" -Y "json" -T fields -e json.value.string
@@ -583,7 +583,7 @@ adb logcat | grep -E "(LanLinkProvider|Handshake|identity|pair)"
 - [ ] All packets terminated with `\n`
 - [ ] JSON serialization matches expected format
 - [ ] `id` field is integer timestamp (milliseconds)
-- [ ] `type` field follows `cosmicconnect.*` pattern
+- [ ] `type` field follows `cconnect.*` pattern
 - [ ] `body` field is object (even if empty `{}`)
 
 ---
@@ -614,7 +614,7 @@ impl NetworkPacket {
                 .duration_since(UNIX_EPOCH)
                 .unwrap()
                 .as_millis() as i64,
-            packet_type: "cosmicconnect.identity".to_string(),
+            packet_type: "cconnect.identity".to_string(),
             body: serde_json::json!({
                 "deviceId": device_info.device_id,
                 "deviceName": device_info.device_name,
@@ -635,7 +635,7 @@ impl NetworkPacket {
                 .duration_since(UNIX_EPOCH)
                 .unwrap()
                 .as_millis() as i64,
-            packet_type: "cosmicconnect.pair".to_string(),
+            packet_type: "cconnect.pair".to_string(),
             body: serde_json::json!({ "pair": pair }),
             payload_size: None,
             payload_transfer_info: None,

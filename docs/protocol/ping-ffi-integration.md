@@ -93,7 +93,7 @@ pingPluginFFI.sendPing(message = "Hello!")
 
 **Maintained Compatibility**:
 - ✅ Same `@LoadablePlugin` annotation
-- ✅ Same packet type: `kdeconnect.ping`
+- ✅ Same packet type: `cconnect.ping`
 - ✅ Same UI menu entry
 - ✅ Same notification display
 - ✅ Same Plugin interface methods

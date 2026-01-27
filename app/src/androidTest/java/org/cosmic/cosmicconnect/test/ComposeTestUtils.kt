@@ -1,4 +1,4 @@
-package org.cosmic.cosmicconnect.test
+package org.cosmic.cconnect.test
 
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.ComposeTestRule

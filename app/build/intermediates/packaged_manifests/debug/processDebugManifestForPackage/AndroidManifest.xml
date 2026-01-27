@@ -7,7 +7,7 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.cosmic.cosmicconnect.debug"
     android:versionCode="13404"
-    android:versionName="1.34.4-debug" >
+    android:versionName="1.0.0-beta-debug" >
 
     <uses-sdk
         android:minSdkVersion="23"

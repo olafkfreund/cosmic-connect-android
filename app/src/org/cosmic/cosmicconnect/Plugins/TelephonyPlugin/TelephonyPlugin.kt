@@ -237,14 +237,14 @@ class TelephonyPlugin : Plugin() {
          *
          * Depending on the event, other fields may be defined
          */
-        const val PACKET_TYPE_TELEPHONY: String = "kdeconnect.telephony"
+        const val PACKET_TYPE_TELEPHONY: String = "cconnect.telephony"
 
         /**
          * Packet sent to indicate the user has requested the device mute its ringer
          *
          * The body should be empty
          */
-        private const val PACKET_TYPE_TELEPHONY_REQUEST_MUTE = "kdeconnect.telephony.request_mute"
+        private const val PACKET_TYPE_TELEPHONY_REQUEST_MUTE = "cconnect.telephony.request_mute"
 
         private const val KEY_PREF_BLOCKED_NUMBERS = "telephony_blocked_numbers"
     }

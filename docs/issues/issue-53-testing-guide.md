@@ -438,7 +438,7 @@ ls ~/Downloads/<filename>
 ```json
 {
   "id": 1234567890,
-  "type": "kdeconnect.share.request",
+  "type": "cconnect.share.request",
   "body": {
     "text": "Hello World"
   }
@@ -446,7 +446,7 @@ ls ~/Downloads/<filename>
 ```
 
 **Verification**:
-- Packet type is `kdeconnect.share.request` (NOT `cosmicconnect.*`)
+- Packet type is `cconnect.share.request` (NOT `cconnect.*`)
 - JSON is well-formed
 - Body contains correct field (text/url/filename)
 - Newline terminator present
@@ -642,14 +642,14 @@ After any changes to Share plugin, verify:
 @Test
 fun testCreateTextSharePacket() {
     val packet = SharePacketsFFI.createTextShare("Hello")
-    assertEquals("kdeconnect.share.request", packet.type)
+    assertEquals("cconnect.share.request", packet.type)
     assertEquals("Hello", packet.sharedText)
 }
 
 @Test
 fun testCreateUrlSharePacket() {
     val packet = SharePacketsFFI.createUrlShare("https://example.com")
-    assertEquals("kdeconnect.share.request", packet.type)
+    assertEquals("cconnect.share.request", packet.type)
     assertEquals("https://example.com", packet.sharedUrl)
 }
 

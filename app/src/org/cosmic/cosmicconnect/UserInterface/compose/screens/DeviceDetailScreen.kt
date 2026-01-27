@@ -14,6 +14,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.cosmic.cosmicconnect.UserInterface.compose.*
+import org.cosmic.cosmicconnect.ui.components.status.BatteryStatusIndicator
+import org.cosmic.cosmicconnect.ui.components.status.ConnectionStatus
+import org.cosmic.cosmicconnect.ui.components.status.ConnectionStatusIndicator
+import org.cosmic.cosmicconnect.ui.components.status.LoadingIndicator
 import org.cosmic.cosmicconnect.R
 
 /**

@@ -1,4 +1,4 @@
-package org.cosmic.cosmicconnect.test
+package org.cosmic.cconnect.test
 
 /**
  * FFI Test Utilities

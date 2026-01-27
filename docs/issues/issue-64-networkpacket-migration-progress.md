@@ -206,9 +206,9 @@ void sendVolume(String name, int volume) {
     getDevice().sendPacket(convertToLegacyPacket(packet));
 }
 
-private org.cosmic.cosmicconnect.NetworkPacket convertToLegacyPacket(NetworkPacket ffi) {
-    org.cosmic.cosmicconnect.NetworkPacket legacy =
-        new org.cosmic.cosmicconnect.NetworkPacket(ffi.getType());
+private org.cosmic.cconnect.NetworkPacket convertToLegacyPacket(NetworkPacket ffi) {
+    org.cosmic.cconnect.NetworkPacket legacy =
+        new org.cosmic.cconnect.NetworkPacket(ffi.getType());
 
     Map<String, Object> body = ffi.getBody();
     for (Map.Entry<String, Object> entry : body.entrySet()) {
@@ -326,7 +326,7 @@ private fun sendMousePacket(body: Map<String, Any>) {
 ```java
 // Only needs method signature update
 @Override
-public boolean onPacketReceived(@NonNull org.cosmic.cosmicconnect.NetworkPacket np) {
+public boolean onPacketReceived(@NonNull org.cosmic.cconnect.NetworkPacket np) {
     // Process received packet (unchanged)
 }
 ```
@@ -420,8 +420,8 @@ body.put("albumArtUrl", artUrl);
 NetworkPacket packet = NetworkPacket.create(PACKET_TYPE_MPRIS, body);
 
 // Convert to legacy and set payload
-org.cosmic.cosmicconnect.NetworkPacket np = convertToLegacyPacket(packet);
-np.setPayload(new org.cosmic.cosmicconnect.NetworkPacket.Payload(p));
+org.cosmic.cconnect.NetworkPacket np = convertToLegacyPacket(packet);
+np.setPayload(new org.cosmic.cconnect.NetworkPacket.Payload(p));
 
 // Send
 getDevice().sendPacket(np);
@@ -521,7 +521,7 @@ device.sendPacket(convertToLegacyPacket(packet))
 ```java
 // Only needs method signature update
 @Override
-public boolean onPacketReceived(@NonNull org.cosmic.cosmicconnect.NetworkPacket np) {
+public boolean onPacketReceived(@NonNull org.cosmic.cconnect.NetworkPacket np) {
     // Process received packet (unchanged)
 }
 ```
@@ -704,7 +704,7 @@ if (!appDatabase.getPrivacy(packageName, AppDatabase.PrivacyOptions.BLOCK_CONTEN
 NetworkPacket packet = NetworkPacket.create(PACKET_TYPE_NOTIFICATION, body);
 
 // Convert to legacy packet
-org.cosmic.cosmicconnect.NetworkPacket np = convertToLegacyPacket(packet);
+org.cosmic.cconnect.NetworkPacket np = convertToLegacyPacket(packet);
 
 // Add payload to legacy packet after creation
 if (!isUpdate && appIcon != null) {
@@ -714,7 +714,7 @@ if (!isUpdate && appIcon != null) {
 getDevice().sendPacket(np);
 ```
 
-**Key Learning**: For Java plugins with many optional fields, build the body in a HashMap and add fields conditionally. For payload handling, create the immutable packet first, convert to legacy, then set the payload on the legacy packet before sending. Use fully qualified class names (`org.cosmic.cosmicconnect.NetworkPacket`) for legacy packet references in Java files.
+**Key Learning**: For Java plugins with many optional fields, build the body in a HashMap and add fields conditionally. For payload handling, create the immutable packet first, convert to legacy, then set the payload on the legacy packet before sending. Use fully qualified class names (`org.cosmic.cconnect.NetworkPacket`) for legacy packet references in Java files.
 
 ---
 
@@ -800,7 +800,7 @@ private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
 ```java
 // In CompositeUploadFileJob.java
 // Keep legacy import for file transfer packets
-import org.cosmic.cosmicconnect.NetworkPacket;
+import org.cosmic.cconnect.NetworkPacket;
 
 // File transfer packets remain legacy (received from SharePlugin)
 private List<NetworkPacket> networkPacketList;
@@ -813,8 +813,8 @@ private void sendUpdatePacket() {
     body.put("totalPayloadSize", totalPayloadSize);
 
     // Use fully qualified name for immutable packet
-    org.cosmic.cosmicconnect.Core.NetworkPacket packet =
-        org.cosmic.cosmicconnect.Core.NetworkPacket.create(
+    org.cosmic.cconnect.Core.NetworkPacket packet =
+        org.cosmic.cconnect.Core.NetworkPacket.create(
             SharePlugin.PACKET_TYPE_SHARE_REQUEST_UPDATE, body);
 
     // Convert and send
@@ -822,7 +822,7 @@ private void sendUpdatePacket() {
 }
 
 // Conversion helper uses fully qualified name for immutable type
-private NetworkPacket convertToLegacyPacket(org.cosmic.cosmicconnect.Core.NetworkPacket ffi) {
+private NetworkPacket convertToLegacyPacket(org.cosmic.cconnect.Core.NetworkPacket ffi) {
     NetworkPacket legacy = new NetworkPacket(ffi.getType());
     // ... copy fields
     return legacy;
@@ -830,8 +830,8 @@ private NetworkPacket convertToLegacyPacket(org.cosmic.cosmicconnect.Core.Networ
 ```
 
 **Key Learning**: For plugins with multiple files where some files handle legacy packets (file transfers) and others create new packets, use fully qualified class names to distinguish types:
-- `org.cosmic.cosmicconnect.Core.NetworkPacket` for immutable creation
-- `org.cosmic.cosmicconnect.NetworkPacket` (or just `NetworkPacket` with import) for legacy handling
+- `org.cosmic.cconnect.Core.NetworkPacket` for immutable creation
+- `org.cosmic.cconnect.NetworkPacket` (or just `NetworkPacket` with import) for legacy handling
 This allows mixing both packet types in the same class without conflicts.
 
 ---

@@ -61,7 +61,7 @@ Issue #53 involves migrating the Share plugin from the old Java/Kotlin implement
 #### 1. File Transfer
 ```json
 {
-  "type": "kdeconnect.share.request",
+  "type": "cconnect.share.request",
   "body": {
     "filename": "image.png",
     "creationTime": 1640000000000,
@@ -85,7 +85,7 @@ Issue #53 involves migrating the Share plugin from the old Java/Kotlin implement
 #### 2. Text Sharing
 ```json
 {
-  "type": "kdeconnect.share.request",
+  "type": "cconnect.share.request",
   "body": {
     "text": "Some text to share"
   }
@@ -100,7 +100,7 @@ Issue #53 involves migrating the Share plugin from the old Java/Kotlin implement
 #### 3. URL Sharing
 ```json
 {
-  "type": "kdeconnect.share.request",
+  "type": "cconnect.share.request",
   "body": {
     "url": "https://example.com"
   }
@@ -114,7 +114,7 @@ Issue #53 involves migrating the Share plugin from the old Java/Kotlin implement
 #### 4. Multi-File Transfer
 ```json
 {
-  "type": "kdeconnect.share.request.update",
+  "type": "cconnect.share.request.update",
   "body": {
     "numberOfFiles": 5,
     "totalPayloadSize": 10485760

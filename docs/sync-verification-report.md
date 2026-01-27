@@ -158,7 +158,7 @@ assertEquals("Protocol version should be 7", 7, protocolVersion)
 ```kotlin
 // Line 110 - Test packet creation
 val packet = createPacket(
-    packetType = "kdeconnect.identity",
+    packetType = "cconnect.identity",
     body = mapOf(
         // ...
         "protocolVersion" to 7  // ⚠️ Should be 8
@@ -232,7 +232,7 @@ assertEquals("Protocol version should be 8", 8, protocolVersion)
 ```kotlin
 // BEFORE
 val packet = createPacket(
-    packetType = "kdeconnect.identity",
+    packetType = "cconnect.identity",
     body = mapOf(
         "deviceId" to "test-device-123",
         "deviceName" to "Test Device",
@@ -243,7 +243,7 @@ val packet = createPacket(
 
 // AFTER
 val packet = createPacket(
-    packetType = "kdeconnect.identity",
+    packetType = "cconnect.identity",
     body = mapOf(
         "deviceId" to "test-device-123",
         "deviceName" to "Test Device",

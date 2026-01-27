@@ -22,7 +22,12 @@ import java.util.Formatter
 import kotlin.math.abs
 import kotlin.time.Duration.Companion.seconds
 
-class PairingHandler(private val device: Device, private val callback: PairingCallback, var state: PairState) {
+class PairingHandler(
+    private val device: Device,
+    private val callback: PairingCallback,
+    var state: PairState,
+    private val sslHelper: SslHelper
+) {
     enum class PairState {
         NotPaired,
         Requested,
@@ -118,10 +123,10 @@ class PairingHandler(private val device: Device, private val callback: PairingCa
             if (state != PairState.Requested && state != PairState.RequestedByPeer) {
                 return null
             } else {
-                getVerificationKey(SslHelper.certificate, device.certificate, pairingTimestamp)
+                getVerificationKey(sslHelper.certificate, device.certificate, pairingTimestamp)
             }
         } else {
-            getVerificationKeyV7(SslHelper.certificate, device.certificate)
+            getVerificationKeyV7(sslHelper.certificate, device.certificate)
         }
     }
 

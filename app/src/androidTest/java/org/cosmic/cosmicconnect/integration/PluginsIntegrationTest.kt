@@ -1,21 +1,21 @@
-package org.cosmic.cosmicconnect.integration
+package org.cosmic.cconnect.integration
 
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.cosmic.cosmicconnect.CosmicConnect
-import org.cosmic.cosmicconnect.Device
-import org.cosmic.cosmicconnect.NetworkPacket
-import org.cosmic.cosmicconnect.plugins.battery.BatteryPlugin
-import org.cosmic.cosmicconnect.plugins.clipboard.ClipboardPlugin
-import org.cosmic.cosmicconnect.plugins.mpris.MprisPlugin
-import org.cosmic.cosmicconnect.plugins.ping.PingPlugin
-import org.cosmic.cosmicconnect.plugins.runcommand.RunCommandPlugin
-import org.cosmic.cosmicconnect.plugins.telephony.TelephonyPlugin
-import org.cosmic.cosmicconnect.test.FfiTestUtils
-import org.cosmic.cosmicconnect.test.MockFactory
-import org.cosmic.cosmicconnect.test.TestUtils
+import org.cosmic.cconnect.CosmicConnect
+import org.cosmic.cconnect.Device
+import org.cosmic.cconnect.NetworkPacket
+import org.cosmic.cconnect.plugins.battery.BatteryPlugin
+import org.cosmic.cconnect.plugins.clipboard.ClipboardPlugin
+import org.cosmic.cconnect.plugins.mpris.MprisPlugin
+import org.cosmic.cconnect.plugins.ping.PingPlugin
+import org.cosmic.cconnect.plugins.runcommand.RunCommandPlugin
+import org.cosmic.cconnect.plugins.telephony.TelephonyPlugin
+import org.cosmic.cconnect.test.FfiTestUtils
+import org.cosmic.cconnect.test.MockFactory
+import org.cosmic.cconnect.test.TestUtils
 import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
@@ -688,7 +688,7 @@ class PluginsIntegrationTest {
     // Simulate receiving media status from COSMIC
     // Note: MockFactory would need an MPRIS packet creator
     // For now, create a basic packet
-    val mprisPacket = NetworkPacket("kdeconnect.mpris")
+    val mprisPacket = NetworkPacket("cconnect.mpris")
     // Add body fields for status
     cosmicConnect.processIncomingPacket(mprisPacket)
 
@@ -854,7 +854,7 @@ class PluginsIntegrationTest {
     telephonyPlugin.addTelephonyListener(listener)
 
     // Simulate receiving mute request from COSMIC
-    val mutePacket = NetworkPacket("kdeconnect.telephony.request_mute")
+    val mutePacket = NetworkPacket("cconnect.telephony.request_mute")
     cosmicConnect.processIncomingPacket(mutePacket)
 
     // Verify mute request received

@@ -19,10 +19,10 @@ This guide provides comprehensive testing instructions for the Battery Plugin FF
 
 ### Packet Types
 
-1. **kdeconnect.battery** - Battery status (bi-directional)
+1. **cconnect.battery** - Battery status (bi-directional)
    - Fields: `isCharging` (boolean), `currentCharge` (0-100), `thresholdEvent` (0=none, 1=low)
 
-2. **kdeconnect.battery.request** - Request battery status (incoming)
+2. **cconnect.battery.request** - Request battery status (incoming)
    - No fields (empty body)
 
 ## Testing Layers
@@ -41,7 +41,7 @@ cargo test create_battery_packet
 **Expected Behavior:**
 - Accepts `is_charging`, `current_charge`, `threshold_event` parameters
 - Clamps `current_charge` to 0-100 range
-- Creates packet with type "kdeconnect.battery"
+- Creates packet with type "cconnect.battery"
 - Returns `FfiPacket` with correct fields
 
 **Manual Test:**
@@ -50,7 +50,7 @@ cargo test create_battery_packet
 fn test_ffi_battery_packet_creation() {
     // Normal case
     let packet = create_battery_packet(true, 85, 0).unwrap();
-    assert_eq!(packet.packet_type, "kdeconnect.battery");
+    assert_eq!(packet.packet_type, "cconnect.battery");
 
     // Out-of-range clamping
     let packet_low = create_battery_packet(false, -10, 1).unwrap();
@@ -63,7 +63,7 @@ fn test_ffi_battery_packet_creation() {
 
 **Pass Criteria:**
 - ✅ All existing battery.rs tests pass (11 tests)
-- ✅ Packet type is "kdeconnect.battery"
+- ✅ Packet type is "cconnect.battery"
 - ✅ All fields present in body
 - ✅ Charge values clamped to 0-100
 
@@ -77,7 +77,7 @@ cargo test create_battery_request
 
 **Expected Behavior:**
 - No parameters required
-- Creates packet with type "kdeconnect.battery.request"
+- Creates packet with type "cconnect.battery.request"
 - Empty body
 - Returns `FfiPacket`
 
@@ -86,13 +86,13 @@ cargo test create_battery_request
 #[test]
 fn test_ffi_battery_request_creation() {
     let packet = create_battery_request().unwrap();
-    assert_eq!(packet.packet_type, "kdeconnect.battery.request");
+    assert_eq!(packet.packet_type, "cconnect.battery.request");
     assert_eq!(packet.body, "{}");
 }
 ```
 
 **Pass Criteria:**
-- ✅ Packet type is "kdeconnect.battery.request"
+- ✅ Packet type is "cconnect.battery.request"
 - ✅ Body is empty JSON object
 - ✅ No errors returned
 
@@ -133,7 +133,7 @@ fun testCreateBatteryPacket_validInput() {
         thresholdEvent = 0
     )
 
-    assertEquals("kdeconnect.battery", packet.type)
+    assertEquals("cconnect.battery", packet.type)
     assertTrue(packet.body.containsKey("isCharging"))
     assertTrue(packet.body.containsKey("currentCharge"))
     assertTrue(packet.body.containsKey("thresholdEvent"))
@@ -198,7 +198,7 @@ fun testCreateBatteryPacket_edgeCases() {
 fun testCreateBatteryRequest() {
     val packet = BatteryPacketsFFI.createBatteryRequest()
 
-    assertEquals("kdeconnect.battery.request", packet.type)
+    assertEquals("cconnect.battery.request", packet.type)
     assertTrue(packet.isBatteryRequest)
     assertFalse(packet.isBatteryPacket)
 }
@@ -224,7 +224,7 @@ fun testExtensionProperties_packetTypeDetection() {
     assertFalse(requestPacket.isBatteryPacket)
 
     // Non-battery packet
-    val pingPacket = NetworkPacket("kdeconnect.ping", emptyMap())
+    val pingPacket = NetworkPacket("cconnect.ping", emptyMap())
     assertFalse(pingPacket.isBatteryPacket)
     assertFalse(pingPacket.isBatteryRequest)
 }
@@ -277,7 +277,7 @@ fun testExtensionProperties_computedProperties() {
 @Test
 fun testExtensionProperties_nullSafety() {
     // Non-battery packet should return null
-    val pingPacket = NetworkPacket("kdeconnect.ping", emptyMap())
+    val pingPacket = NetworkPacket("cconnect.ping", emptyMap())
     assertNull(pingPacket.batteryIsCharging)
     assertNull(pingPacket.batteryCurrentCharge)
     assertNull(pingPacket.batteryThresholdEvent)
@@ -381,7 +381,7 @@ fun testBatteryPlugin_packetCreation() {
         verify(device).sendPacket(capture())
 
         val sentPacket = firstValue
-        assertEquals("kdeconnect.battery", sentPacket.type)
+        assertEquals("cconnect.battery", sentPacket.type)
         assertTrue(sentPacket.has("isCharging"))
         assertEquals(85, sentPacket.getInt("currentCharge"))
     }
@@ -481,7 +481,7 @@ fun testBatteryPlugin_thresholdEvents() {
 
         // Find the low battery packet
         val lowPacket = allValues.find {
-            it.type == "kdeconnect.battery" &&
+            it.type == "cconnect.battery" &&
             it.getInt("thresholdEvent") == 1
         }
         assertNotNull(lowPacket)
@@ -709,7 +709,7 @@ fun testPerformance_memoryUsage() {
 @Test
 fun testBackwardCompatibility_legacyPackets() {
     // Create packet the old way
-    val legacyPacket = NetworkPacket("kdeconnect.battery")
+    val legacyPacket = NetworkPacket("cconnect.battery")
     legacyPacket.set("isCharging", true)
     legacyPacket.set("currentCharge", 85)
     legacyPacket.set("thresholdEvent", 0)

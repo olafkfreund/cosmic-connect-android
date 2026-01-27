@@ -406,7 +406,7 @@ adb shell monkey -p org.cosmic.cosmicconnect -c android.intent.category.LAUNCHER
 
 # Run specific test
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.integration.DiscoveryPairingTest
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.integration.DiscoveryPairingTest
 ```
 
 ---

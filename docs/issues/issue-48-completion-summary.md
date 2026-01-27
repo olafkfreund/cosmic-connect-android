@@ -120,8 +120,8 @@ impl PingPlugin {
 ```
 
 **Capabilities**:
-- Incoming: `kdeconnect.ping`
-- Outgoing: `kdeconnect.ping`
+- Incoming: `cconnect.ping`
+- Outgoing: `cconnect.ping`
 
 ### 4. Battery Plugin (`src/plugins/battery.rs`)
 
@@ -163,8 +163,8 @@ impl BatteryPlugin {
 ```
 
 **Capabilities**:
-- Incoming: `kdeconnect.battery`, `kdeconnect.battery.request`
-- Outgoing: `kdeconnect.battery`
+- Incoming: `cconnect.battery`, `cconnect.battery.request`
+- Outgoing: `cconnect.battery`
 
 ### 5. Module Organization (`src/plugins/mod.rs`)
 
@@ -320,7 +320,7 @@ async fn example() -> Result<()> {
     let (incoming, outgoing) = manager.get_capabilities().await;
 
     // Route incoming packet
-    let packet = Packet::new("kdeconnect.ping", json!({}));
+    let packet = Packet::new("cconnect.ping", json!({}));
     manager.route_packet(&packet).await?;
 
     // Shutdown
@@ -349,11 +349,11 @@ impl Plugin for MyPlugin {
     }
 
     fn incoming_capabilities(&self) -> Vec<String> {
-        vec!["kdeconnect.myplugin".to_string()]
+        vec!["cconnect.myplugin".to_string()]
     }
 
     fn outgoing_capabilities(&self) -> Vec<String> {
-        vec!["kdeconnect.myplugin.response".to_string()]
+        vec!["cconnect.myplugin.response".to_string()]
     }
 
     async fn handle_packet(&mut self, packet: &Packet) -> Result<()> {

@@ -34,7 +34,7 @@ Migrate the MousePad Plugin to use dedicated Rust FFI functions for packet creat
 - Single packet type for all mouse/keyboard commands
 - Variable body based on command type
 
-**Packet Type**: `cosmicconnect.mousepad.request`
+**Packet Type**: `cconnect.mousepad.request`
 
 ## Android Status
 
@@ -69,7 +69,7 @@ pub fn create_mousepad_request(body_json: String) -> Result<FfiPacket> {
     // Parse the request body JSON
     let body_data: serde_json::Value = serde_json::from_str(&body_json)?;
 
-    let packet = Packet::new("cosmicconnect.mousepad.request", body_data);
+    let packet = Packet::new("cconnect.mousepad.request", body_data);
     Ok(packet.into())
 }
 ```
@@ -108,9 +108,9 @@ pub use ffi::{
 **File**: `src/org/cosmic/cosmicconnect/Plugins/MousePadPlugin/MousePadPacketsFFI.kt`
 
 ```kotlin
-package org.cosmic.cosmicconnect.Plugins.MousePadPlugin
+package org.cosmic.cconnect.Plugins.MousePadPlugin
 
-import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cconnect.Core.NetworkPacket
 import uniffi.cosmic_connect_core.createMousepadRequest
 
 /**
@@ -250,7 +250,7 @@ private fun sendMousePadPacket(body: Map<String, Any>) {
         }).to_string();
 
         let packet = create_mousepad_request(body_json).unwrap();
-        assert_eq!(packet.packet_type, "cosmicconnect.mousepad.request");
+        assert_eq!(packet.packet_type, "cconnect.mousepad.request");
 
         let body: serde_json::Value = serde_json::from_str(&packet.body).unwrap();
         assert_eq!(body["dx"], 10.0);
@@ -264,7 +264,7 @@ private fun sendMousePadPacket(body: Map<String, Any>) {
         }).to_string();
 
         let packet = create_mousepad_request(body_json).unwrap();
-        assert_eq!(packet.packet_type, "cosmicconnect.mousepad.request");
+        assert_eq!(packet.packet_type, "cconnect.mousepad.request");
     }
 
     #[test]
@@ -275,7 +275,7 @@ private fun sendMousePadPacket(body: Map<String, Any>) {
         }).to_string();
 
         let packet = create_mousepad_request(body_json).unwrap();
-        assert_eq!(packet.packet_type, "cosmicconnect.mousepad.request");
+        assert_eq!(packet.packet_type, "cconnect.mousepad.request");
 
         let body: serde_json::Value = serde_json::from_str(&packet.body).unwrap();
         assert_eq!(body["key"], "a");
@@ -348,7 +348,7 @@ private fun sendMousePadPacket(body: Map<String, Any>) {
 **Packet Format**:
 ```json
 {
-  "type": "cosmicconnect.mousepad.request",
+  "type": "cconnect.mousepad.request",
   "body": {
     "dx": 10.0,
     "dy": -5.0

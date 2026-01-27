@@ -113,10 +113,10 @@ async fn handle_packet(&mut self, packet: &Packet) -> Result<()> {
     let device_host = self.device_host.as_deref();
 
     match packet.packet_type.as_str() {
-        "kdeconnect.share.request" => {
+        "cconnect.share.request" => {
             self.handle_share_request(packet, device_id, device_name, device_host).await;
         }
-        "kdeconnect.share.request.update" => {
+        "cconnect.share.request.update" => {
             self.handle_multifile_update(packet, device_id, device_name);
         }
         _ => {}

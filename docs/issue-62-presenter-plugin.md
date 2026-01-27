@@ -101,9 +101,9 @@ pub fn create_presenter_stop() -> Result<FfiPacket> {
 **File**: `src/org/cosmic/cosmicconnect/Plugins/PresenterPlugin/PresenterPacketsFFI.kt`
 
 ```kotlin
-package org.cosmic.cosmicconnect.Plugins.PresenterPlugin
+package org.cosmic.cconnect.Plugins.PresenterPlugin
 
-import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cconnect.Core.NetworkPacket
 import uniffi.cosmic_connect_core.createPresenterPointer
 import uniffi.cosmic_connect_core.createPresenterStop
 

@@ -139,12 +139,12 @@ data class NetworkPacket(
 
 // Packet type constants
 object PacketType {
-    const val IDENTITY = "kdeconnect.identity"
-    const val PAIR = "kdeconnect.pair"
-    const val PING = "kdeconnect.ping"
-    const val BATTERY = "kdeconnect.battery"
-    const val SHARE_REQUEST = "kdeconnect.share.request"
-    const val CLIPBOARD = "kdeconnect.clipboard"
+    const val IDENTITY = "cconnect.identity"
+    const val PAIR = "cconnect.pair"
+    const val PING = "cconnect.ping"
+    const val BATTERY = "cconnect.battery"
+    const val SHARE_REQUEST = "cconnect.share.request"
+    const val CLIPBOARD = "cconnect.clipboard"
     // ... more types
 }
 ```

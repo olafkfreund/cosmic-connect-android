@@ -7,10 +7,9 @@ package org.cosmic.cosmicconnect.Helpers.SecurityHelpers
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.preference.PreferenceManager
 import android.util.Base64
 import android.util.Log
-import androidx.core.content.edit
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.runBlocking
 import org.bouncycastle.asn1.x500.X500Name
 import org.bouncycastle.asn1.x500.X500NameBuilder
@@ -19,11 +18,9 @@ import org.bouncycastle.asn1.x500.style.IETFUtils
 import org.bouncycastle.cert.X509v3CertificateBuilder
 import org.bouncycastle.cert.jcajce.JcaX509v3CertificateBuilder
 import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder
-import org.cosmic.cosmicconnect.Helpers.DeviceHelper.getDeviceId
+import org.cosmic.cosmicconnect.Helpers.DeviceHelper
 import org.cosmic.cosmicconnect.Helpers.PreferenceDataStore
 import org.cosmic.cosmicconnect.Helpers.RandomHelper
-import org.cosmic.cosmicconnect.Helpers.SecurityHelpers.RsaHelper.getPrivateKey
-import org.cosmic.cosmicconnect.Helpers.SecurityHelpers.RsaHelper.getPublicKey
 import org.cosmic.cosmicconnect.Helpers.TrustedDevices
 import java.io.ByteArrayInputStream
 import java.math.BigInteger
@@ -40,6 +37,8 @@ import java.time.ZoneId
 import java.util.Date
 import java.util.Formatter
 import java.util.Locale
+import javax.inject.Inject
+import javax.inject.Singleton
 import javax.net.ssl.KeyManagerFactory
 import javax.net.ssl.SSLContext
 import javax.net.ssl.SSLSocket
@@ -47,7 +46,11 @@ import javax.net.ssl.TrustManager
 import javax.net.ssl.TrustManagerFactory
 import javax.net.ssl.X509TrustManager
 
-object SslHelper {
+@Singleton
+class SslHelper @Inject constructor(
+    @ApplicationContext private val context: Context,
+    private val rsaHelper: RsaHelper
+) {
     lateinit var certificate: Certificate //my device's certificate
     private val factory: CertificateFactory = CertificateFactory.getInstance("X.509")
 
@@ -59,13 +62,13 @@ object SslHelper {
         override fun checkServerTrusted(certs: Array<X509Certificate?>?, authType: String?) = Unit
     })
 
-    fun initialiseCertificate(context: Context) {
-        val privateKey: PrivateKey = getPrivateKey(context)
-        val publicKey: PublicKey = getPublicKey(context)
+    fun initialiseCertificate() {
+        val privateKey: PrivateKey = rsaHelper.getPrivateKey()
+        val publicKey: PublicKey = rsaHelper.getPublicKey()
 
         Log.i(LOG_TAG, "Key algorithm: " + publicKey.algorithm)
 
-        val deviceId = getDeviceId(context)
+        val deviceId = DeviceHelper.getDeviceId(context)
 
         var needsToGenerateCertificate = false
         val storedCert = PreferenceDataStore.getCertificateSync(context)
@@ -138,12 +141,12 @@ object SslHelper {
         val resources = context.resources
         val config = resources.configuration
         config.locale = locale
+        @Suppress("DEPRECATION")
         resources.updateConfiguration(config, resources.displayMetrics)
     }
 
-    private fun getSslContextForDevice(context: Context, deviceId: String, isDeviceTrusted: Boolean): SSLContext {
-        // TODO: This method is called for each payload that is sent. Cache the result.
-        val privateKey = getPrivateKey(context)
+    private fun getSslContextForDevice(deviceId: String, isDeviceTrusted: Boolean): SSLContext {
+        val privateKey = rsaHelper.getPrivateKey()
 
         // Setup keystore
         val keyStore = KeyStore.getInstance(KeyStore.getDefaultType())
@@ -188,10 +191,9 @@ object SslHelper {
         }
     }
 
-    @JvmStatic
-    fun convertToSslSocket(context: Context, socket: Socket, deviceId: String, isDeviceTrusted: Boolean, clientMode: Boolean): SSLSocket {
-        val sslSocketFactory = getSslContextForDevice(context, deviceId, isDeviceTrusted).socketFactory
-        val sslSocket = sslSocketFactory.createSocket(socket, socket.getInetAddress().hostAddress, socket.getPort(), true) as SSLSocket
+    fun convertToSslSocket(socket: Socket, deviceId: String, isDeviceTrusted: Boolean, clientMode: Boolean): SSLSocket {
+        val sslSocketFactory = getSslContextForDevice(deviceId, isDeviceTrusted).socketFactory
+        val sslSocket = sslSocketFactory.createSocket(socket, socket.inetAddress.hostAddress, socket.port, true) as SSLSocket
         configureSslSocket(sslSocket, isDeviceTrusted, clientMode)
         return sslSocket
     }
@@ -210,11 +212,13 @@ object SslHelper {
     }
 
     fun getCommonNameFromCertificate(cert: X509Certificate): String {
-        val principal = cert.getSubjectX500Principal()
+        val principal = cert.subjectX500Principal
         val x500name = X500Name(principal.name)
         val rdn = x500name.getRDNs(BCStyle.CN).first()
-        return IETFUtils.valueToString(rdn.getFirst().value)
+        return IETFUtils.valueToString(rdn.first.value)
     }
 
-    private const val LOG_TAG = "KDE/SslHelper"
+    companion object {
+        private const val LOG_TAG = "KDE/SslHelper"
+    }
 }

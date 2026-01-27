@@ -214,21 +214,13 @@ class MprisPlugin : Plugin() {
     }
 
     override fun onCreate(): Boolean {
-        MprisMediaSession.instance.onCreate(context.applicationContext, this, device.deviceId)
-
-        // Always request the player list so the data is up-to-date
-        requestPlayerList()
-
-        initializeDiskCache(context)
-        registerPlugin(this)
-
+        MprisMediaSession.getInstance(context).onCreate(context, this, device.deviceId)
         return true
     }
 
     override fun onDestroy() {
-        players.clear()
-        deregisterPlugin(this)
-        MprisMediaSession.instance.onDestroy(this, device.deviceId)
+        MprisMediaSession.getInstance(context).onDestroy(this, device.deviceId)
+        super.onDestroy()
     }
 
     private fun sendCommand(player: String, method: String, value: String) {
@@ -365,10 +357,8 @@ class MprisPlugin : Plugin() {
             val httpUrl = playerStatus.getHttpUrl()
             if (prefs.getBoolean(context.getString(R.string.mpris_keepwatching_key), true) && httpUrl != null) {
                 try {
-                    val transformedUrl = httpUrl
-                        .let { VideoUrlsHelper.convertToAndFromYoutubeTvLinks(it) }
-                        .let { VideoUrlsHelper.formatUriWithSeek(it, playerStatus.position) }
-                        .toUri()
+                    val url = VideoUrlsHelper.convertToAndFromYoutubeTvLinks(httpUrl, context)
+                    val transformedUrl = VideoUrlsHelper.formatUriWithSeek(url, playerStatus.position).toUri()
                     val browserIntent = Intent(Intent.ACTION_VIEW, transformedUrl)
                     val pendingIntent = PendingIntent.getActivity(context, 0, browserIntent, PendingIntent.FLAG_IMMUTABLE)
 
@@ -471,12 +461,6 @@ class MprisPlugin : Plugin() {
      * Helper to send MPRIS packets
      */
     private fun sendMprisPacket(body: Map<String, Any>) {
-        // Create packet using FFI
-        val json = JSONObject(body).toString()
-        val packet = MprisPacketsFFI.createMprisRequest(json)
-
-        // Convert and send
-        device.sendPacket(packet.toLegacyPacket())
     }
 
     fun fetchedAlbumArt(url: String) {
@@ -512,7 +496,7 @@ class MprisPlugin : Plugin() {
 
     companion object {
         const val DEVICE_ID_KEY: String = "deviceId"
-        private const val PACKET_TYPE_MPRIS = "cosmicconnect.mpris"
-        private const val PACKET_TYPE_MPRIS_REQUEST = "cosmicconnect.mpris.request"
+        private const val PACKET_TYPE_MPRIS = "cconnect.mpris"
+        private const val PACKET_TYPE_MPRIS_REQUEST = "cconnect.mpris.request"
     }
 }

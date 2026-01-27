@@ -6,127 +6,50 @@
 
 package org.cosmic.cosmicconnect.UserInterface.About
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
-import org.cosmic.cosmicconnect.UserInterface.List.ListAdapter
-import org.cosmic.cosmicconnect.base.BaseFragment
-import org.cosmic.cosmicconnect.extensions.getParcelableCompat
-import org.cosmic.cosmicconnect.extensions.setupBottomPadding
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import org.cosmic.cosmicconnect.R
-import org.cosmic.cosmicconnect.databinding.FragmentAboutBinding
+import org.cosmic.cosmicconnect.UserInterface.compose.CosmicTheme
+import org.cosmic.cosmicconnect.UserInterface.compose.screens.about.AboutScreen
+import org.cosmic.cosmicconnect.UserInterface.compose.screens.about.AboutViewModel
 
-class AboutFragment : BaseFragment<FragmentAboutBinding>() {
+@AndroidEntryPoint
+class AboutFragment : Fragment() {
 
-    companion object {
-        private const val KEY_ABOUT_DATA = "about_data"
+    private val viewModel: AboutViewModel by viewModels()
 
-        @JvmStatic
-        fun newInstance(aboutData: AboutData): Fragment {
-            val fragment = AboutFragment()
-
-            val args = Bundle(1)
-            args.putParcelable(KEY_ABOUT_DATA, aboutData)
-            fragment.arguments = args
-
-            return fragment
-        }
-    }
-
-    override fun getActionBarTitle() = getString(R.string.about)
-
-    private lateinit var aboutData: AboutData
-    private var tapCount = 0
-    private var firstTapMillis: Long? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        aboutData = arguments?.getParcelableCompat(KEY_ABOUT_DATA) ?: throw IllegalArgumentException("AboutData is null")
-    }
-
-    override fun onInflateBinding(
+    override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): FragmentAboutBinding {
-        return FragmentAboutBinding.inflate(inflater, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.scrollView.setupBottomPadding()
-        updateData()
-    }
-
-    @SuppressLint("SetTextI18n")
-    fun updateData() {
-        // Update general info
-
-        binding.appName.text = aboutData.name
-        binding.appIcon.setImageDrawable(context?.let { ContextCompat.getDrawable(it, aboutData.icon) })
-        binding.appVersion.text = context?.getString(R.string.version, aboutData.versionName)
-
-        // Setup Easter Egg onClickListener
-
-        binding.generalInfoCard.setOnClickListener {
-            if (firstTapMillis == null) {
-                firstTapMillis = System.currentTimeMillis()
-            }
-
-            if (++tapCount == 3) {
-                tapCount = 0
-
-                if (firstTapMillis!! >= (System.currentTimeMillis() - 500)) {
-                    startActivity(Intent(context, EasterEggActivity::class.java))
+    ): View {
+        return ComposeView(requireContext()).apply {
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+            setContent {
+                CosmicTheme(context = context) {
+                    AboutScreen(
+                        viewModel = viewModel,
+                        onNavigateBack = { requireActivity().onBackPressedDispatcher.onBackPressed() },
+                        onNavigateToLicenses = {
+                            startActivity(Intent(context, LicensesActivity::class.java))
+                        },
+                        onNavigateToEasterEgg = {
+                            startActivity(Intent(context, EasterEggActivity::class.java))
+                        },
+                        onNavigateToAboutKde = {
+                            startActivity(Intent(context, AboutKDEActivity::class.java))
+                        }
+                    )
                 }
-
-                firstTapMillis = null
-            }
-        }
-
-        // Update button onClickListeners
-
-        setupInfoButton(aboutData.bugURL, binding.reportBugButton)
-        setupInfoButton(aboutData.donateURL, binding.donateButton)
-        setupInfoButton(aboutData.sourceCodeURL, binding.sourceCodeButton)
-
-        binding.licensesButton.setOnClickListener {
-            startActivity(Intent(context, LicensesActivity::class.java))
-        }
-
-        binding.aboutKdeButton.setOnClickListener {
-            startActivity(Intent(context, AboutKDEActivity::class.java))
-        }
-
-        setupInfoButton(aboutData.websiteURL, binding.websiteButton)
-
-        // Update authors
-        binding.authorsList.adapter = ListAdapter(requireContext(), aboutData.authors.map { AboutPersonEntryItem(it) }, false)
-        if (aboutData.authorsFooterText != null) {
-            binding.authorsFooterText.text = context?.getString(aboutData.authorsFooterText!!)
-        }
-    }
-
-    override fun onDestroyView() {
-        binding.authorsList.adapter = null
-        super.onDestroyView()
-    }
-
-    private fun setupInfoButton(url: String?, button: FrameLayout) {
-        if (url == null) {
-            button.visibility = View.GONE
-        } else {
-            button.setOnClickListener {
-                startActivity(Intent(Intent.ACTION_VIEW, url.toUri()))
             }
         }
     }
-
 }

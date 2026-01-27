@@ -16,8 +16,8 @@ Successfully migrated all Phase 2 (advanced) plugins to use dedicated Rust FFI f
 **Complexity**: LOW
 **Packet Types**: 2
 
-- `kdeconnect.presenter` (movement)
-- `kdeconnect.presenter` (stop)
+- `cconnect.presenter` (movement)
+- `cconnect.presenter` (stop)
 
 **Functions Added**:
 - `create_presenter_pointer(dx: f64, dy: f64)`
@@ -28,7 +28,7 @@ Successfully migrated all Phase 2 (advanced) plugins to use dedicated Rust FFI f
 **Complexity**: MEDIUM
 **Packet Types**: 1 (with multiple commands)
 
-- `kdeconnect.systemvolume.request`
+- `cconnect.systemvolume.request`
 
 **Functions Added**:
 - `create_systemvolume_volume(sink_name, volume)`
@@ -41,7 +41,7 @@ Successfully migrated all Phase 2 (advanced) plugins to use dedicated Rust FFI f
 **Complexity**: LOW
 **Packet Types**: 1
 
-- `kdeconnect.connectivity_report`
+- `cconnect.connectivity_report`
 
 **Functions Added**:
 - `create_connectivity_report(signal_strengths_json)`
@@ -61,8 +61,8 @@ Successfully migrated all Phase 2 (advanced) plugins to use dedicated Rust FFI f
 **Complexity**: MEDIUM
 **Packet Types**: 2
 
-- `cosmicconnect.contacts.response_uids_timestamps`
-- `cosmicconnect.contacts.response_vcards`
+- `cconnect.contacts.response_uids_timestamps`
+- `cconnect.contacts.response_vcards`
 
 **Functions Added**:
 - `create_contacts_response_uids(uids_json)`
@@ -84,7 +84,7 @@ Successfully migrated all Phase 2 (advanced) plugins to use dedicated Rust FFI f
 **Complexity**: MEDIUM
 **Packet Types**: 1 (with many commands)
 
-- `cosmicconnect.mpris.request`
+- `cconnect.mpris.request`
 
 **Functions Added**:
 - `create_mpris_request(body_json)`

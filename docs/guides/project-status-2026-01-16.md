@@ -387,8 +387,8 @@ val NetworkPacket.pluginData: String?
 
 **Pattern 4: Java Integration**
 ```java
-import org.cosmic.cosmicconnect.Plugins.Plugin.PluginPacketsFFI;
-import static org.cosmic.cosmicconnect.Plugins.Plugin.PluginPacketsFFIKt.*;
+import org.cosmic.cconnect.Plugins.Plugin.PluginPacketsFFI;
+import static org.cosmic.cconnect.Plugins.Plugin.PluginPacketsFFIKt.*;
 
 NetworkPacket packet = PluginPacketsFFI.INSTANCE.createPacket(args);
 if (getIsPluginPacket(np)) { ... }

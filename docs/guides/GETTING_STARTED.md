@@ -279,7 +279,7 @@ gh project create --title "COSMIC Connect Modernization" --body "12-week moderni
 ```json
 {
   "id": 1234567890,
-  "type": "cosmicconnect.identity",
+  "type": "cconnect.identity",
   "body": { ... }
 }\n  ← MUST END WITH NEWLINE!
 ```

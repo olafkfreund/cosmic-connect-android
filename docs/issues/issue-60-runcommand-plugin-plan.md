@@ -53,8 +53,8 @@ RunCommandPlugin allows Android users to:
 - Android sends execution requests to desktop
 
 **Packet Types:**
-1. `kdeconnect.runcommand` (receive) - Command list from desktop
-2. `kdeconnect.runcommand.request` (send) - Command execution requests
+1. `cconnect.runcommand` (receive) - Command list from desktop
+2. `cconnect.runcommand.request` (send) - Command execution requests
 
 **Security:**
 - Only pre-configured commands can be executed
@@ -168,13 +168,13 @@ RunCommandPlugin allows Android users to:
 /// Create a command list request packet
 ///
 /// Creates a packet requesting the list of available commands from the desktop.
-/// The desktop will respond with a `kdeconnect.runcommand` packet containing
+/// The desktop will respond with a `cconnect.runcommand` packet containing
 /// all configured commands.
 ///
 /// ## Packet Structure
 /// ```json
 /// {
-///   "type": "kdeconnect.runcommand.request",
+///   "type": "cconnect.runcommand.request",
 ///   "id": 1234567890,
 ///   "body": {
 ///     "requestCommandList": true
@@ -201,7 +201,7 @@ pub fn create_runcommand_request_list() -> Result<FfiPacket> {
     use serde_json::json;
 
     let packet = Packet::new(
-        "kdeconnect.runcommand.request".to_string(),
+        "cconnect.runcommand.request".to_string(),
         json!({
             "requestCommandList": true
         })
@@ -223,7 +223,7 @@ pub fn create_runcommand_request_list() -> Result<FfiPacket> {
 /// ## Packet Structure
 /// ```json
 /// {
-///   "type": "kdeconnect.runcommand.request",
+///   "type": "cconnect.runcommand.request",
 ///   "id": 1234567890,
 ///   "body": {
 ///     "key": "command-id-123"
@@ -259,7 +259,7 @@ pub fn create_runcommand_execute(command_key: String) -> Result<FfiPacket> {
     use serde_json::json;
 
     let packet = Packet::new(
-        "kdeconnect.runcommand.request".to_string(),
+        "cconnect.runcommand.request".to_string(),
         json!({
             "key": command_key
         })
@@ -281,7 +281,7 @@ pub fn create_runcommand_execute(command_key: String) -> Result<FfiPacket> {
 /// ## Packet Structure
 /// ```json
 /// {
-///   "type": "kdeconnect.runcommand.request",
+///   "type": "cconnect.runcommand.request",
 ///   "id": 1234567890,
 ///   "body": {
 ///     "setup": true
@@ -308,7 +308,7 @@ pub fn create_runcommand_setup() -> Result<FfiPacket> {
     use serde_json::json;
 
     let packet = Packet::new(
-        "kdeconnect.runcommand.request".to_string(),
+        "cconnect.runcommand.request".to_string(),
         json!({
             "setup": true
         })
@@ -394,9 +394,9 @@ cargo build --release
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
-package org.cosmic.cosmicconnect.Plugins.RunCommandPlugin
+package org.cosmic.cconnect.Plugins.RunCommandPlugin
 
-import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cconnect.Core.NetworkPacket
 import uniffi.cosmic_connect_core.createRuncommandRequestList
 import uniffi.cosmic_connect_core.createRuncommandExecute
 import uniffi.cosmic_connect_core.createRuncommandSetup
@@ -410,8 +410,8 @@ import uniffi.cosmic_connect_core.createRuncommandSetup
  * ## Protocol
  *
  * **Packet Types:**
- * - `kdeconnect.runcommand` - Command list from desktop (receive)
- * - `kdeconnect.runcommand.request` - Command execution requests (send)
+ * - `cconnect.runcommand` - Command list from desktop (receive)
+ * - `cconnect.runcommand.request` - Command execution requests (send)
  *
  * **Direction:**
  * - Desktop → Android: Send command list
@@ -459,7 +459,7 @@ import uniffi.cosmic_connect_core.createRuncommandSetup
  *
  * **Receive Command List:**
  * ```kotlin
- * override fun onPacketReceived(legacyNp: org.cosmic.cosmicconnect.NetworkPacket): Boolean {
+ * override fun onPacketReceived(legacyNp: org.cosmic.cconnect.NetworkPacket): Boolean {
  *     val np = NetworkPacket.fromLegacy(legacyNp)
  *
  *     if (np.isRunCommandList) {
@@ -480,13 +480,13 @@ object RunCommandPacketsFFI {
      * Create a command list request packet
      *
      * Creates a packet requesting the list of available commands from the desktop.
-     * The desktop will respond with a `kdeconnect.runcommand` packet containing
+     * The desktop will respond with a `cconnect.runcommand` packet containing
      * all configured commands.
      *
      * ## Packet Structure
      * ```json
      * {
-     *   "type": "kdeconnect.runcommand.request",
+     *   "type": "cconnect.runcommand.request",
      *   "id": 1234567890,
      *   "body": {
      *     "requestCommandList": true
@@ -518,7 +518,7 @@ object RunCommandPacketsFFI {
      * ## Packet Structure
      * ```json
      * {
-     *   "type": "kdeconnect.runcommand.request",
+     *   "type": "cconnect.runcommand.request",
      *   "id": 1234567890,
      *   "body": {
      *     "key": "command-id-123"
@@ -555,7 +555,7 @@ object RunCommandPacketsFFI {
      * ## Packet Structure
      * ```json
      * {
-     *   "type": "kdeconnect.runcommand.request",
+     *   "type": "cconnect.runcommand.request",
      *   "id": 1234567890,
      *   "body": {
      *     "setup": true
@@ -589,7 +589,7 @@ object RunCommandPacketsFFI {
 /**
  * Check if packet is a runcommand list
  *
- * Returns true if the packet is a `kdeconnect.runcommand` packet,
+ * Returns true if the packet is a `cconnect.runcommand` packet,
  * which contains the list of available commands from the desktop.
  *
  * ## Usage
@@ -604,12 +604,12 @@ object RunCommandPacketsFFI {
  * @return true if packet is a command list, false otherwise
  */
 val NetworkPacket.isRunCommandList: Boolean
-    get() = type == "kdeconnect.runcommand"
+    get() = type == "cconnect.runcommand"
 
 /**
  * Check if packet is a runcommand request
  *
- * Returns true if the packet is a `kdeconnect.runcommand.request` packet.
+ * Returns true if the packet is a `cconnect.runcommand.request` packet.
  * Android sends these, desktop receives them. This is primarily for
  * desktop-side code or testing.
  *
@@ -627,7 +627,7 @@ val NetworkPacket.isRunCommandList: Boolean
  * @return true if packet is a command request, false otherwise
  */
 val NetworkPacket.isRunCommandRequest: Boolean
-    get() = type == "kdeconnect.runcommand.request"
+    get() = type == "cconnect.runcommand.request"
 ```
 
 **Deliverables:**
@@ -734,7 +734,7 @@ fun testRunCommandPlugin() {
         assertNotNull("Request list packet should not be null", requestListPacket)
         assertEquals(
             "Packet type should be runcommand.request",
-            "kdeconnect.runcommand.request",
+            "cconnect.runcommand.request",
             requestListPacket.packetType
         )
         assertTrue("Should have requestCommandList field", requestListPacket.body.containsKey("requestCommandList"))
@@ -748,7 +748,7 @@ fun testRunCommandPlugin() {
         assertNotNull("Execute packet should not be null", executePacket)
         assertEquals(
             "Packet type should be runcommand.request",
-            "kdeconnect.runcommand.request",
+            "cconnect.runcommand.request",
             executePacket.packetType
         )
         assertTrue("Should have key field", executePacket.body.containsKey("key"))
@@ -762,7 +762,7 @@ fun testRunCommandPlugin() {
         assertNotNull("Setup packet should not be null", setupPacket)
         assertEquals(
             "Packet type should be runcommand.request",
-            "kdeconnect.runcommand.request",
+            "cconnect.runcommand.request",
             setupPacket.packetType
         )
         assertTrue("Should have setup field", setupPacket.body.containsKey("setup"))
@@ -851,12 +851,12 @@ fun testRunCommandPlugin() {
 
 #### 1. Command List (Desktop → Android)
 
-**Type:** `kdeconnect.runcommand`
+**Type:** `cconnect.runcommand`
 
 ```json
 {
   "id": 1234567890,
-  "type": "kdeconnect.runcommand",
+  "type": "cconnect.runcommand",
   "body": {
     "commandList": "{\"cmd1\":{\"name\":\"Screenshot\",\"command\":\"spectacle -f\"},\"cmd2\":{\"name\":\"Lock Screen\",\"command\":\"loginctl lock-session\"}}",
     "canAddCommand": true
@@ -886,12 +886,12 @@ fun testRunCommandPlugin() {
 
 #### 2. Request Command List (Android → Desktop)
 
-**Type:** `kdeconnect.runcommand.request`
+**Type:** `cconnect.runcommand.request`
 
 ```json
 {
   "id": 1234567890,
-  "type": "kdeconnect.runcommand.request",
+  "type": "cconnect.runcommand.request",
   "body": {
     "requestCommandList": true
   }
@@ -905,12 +905,12 @@ fun testRunCommandPlugin() {
 
 #### 3. Execute Command (Android → Desktop)
 
-**Type:** `kdeconnect.runcommand.request`
+**Type:** `cconnect.runcommand.request`
 
 ```json
 {
   "id": 1234567890,
-  "type": "kdeconnect.runcommand.request",
+  "type": "cconnect.runcommand.request",
   "body": {
     "key": "command-id-123"
   }
@@ -924,12 +924,12 @@ fun testRunCommandPlugin() {
 
 #### 4. Setup Mode (Android → Desktop)
 
-**Type:** `kdeconnect.runcommand.request`
+**Type:** `cconnect.runcommand.request`
 
 ```json
 {
   "id": 1234567890,
-  "type": "kdeconnect.runcommand.request",
+  "type": "cconnect.runcommand.request",
   "body": {
     "setup": true
   }

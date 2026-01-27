@@ -277,6 +277,34 @@ fun getMediaControlIcon(action: String, useWhite: Boolean = false): Int {
 }
 
 /**
+ * Get plugin icon based on plugin key
+ *
+ * @param pluginKey Plugin unique identifier
+ * @return Drawable resource ID for the plugin icon
+ */
+@DrawableRes
+fun getPluginIcon(pluginKey: String): Int {
+  return when (pluginKey.lowercase()) {
+    "battery", "batteryplugin" -> CosmicIcons.Pairing.connected // Needs dedicated icon
+    "clipboard", "clipboardplugin" -> CosmicIcons.Action.paste
+    "mpris", "mprisplugin" -> CosmicIcons.Plugin.mpris
+    "notification", "notificationsplugin" -> CosmicIcons.Communication.notification
+    "mousepad", "mousepadplugin" -> CosmicIcons.Plugin.touchpad
+    "runcommand", "runcommandplugin" -> CosmicIcons.Plugin.runCommand
+    "share", "shareplugin" -> CosmicIcons.Plugin.share
+    "telephony", "telephonyplugin" -> CosmicIcons.Communication.sms
+    "findmyphone", "findmyphoneplugin" -> CosmicIcons.Navigation.home // Needs dedicated
+    "sftp", "sftpplugin" -> CosmicIcons.Action.openInFull
+    "presenter", "presenterplugin" -> CosmicIcons.Plugin.presenter
+    "connectivity", "connectivityreportplugin" -> CosmicIcons.Pairing.wifi
+    "systemvolume", "systemvolumeplugin" -> CosmicIcons.Media.volume
+    "contacts", "contactsplugin" -> CosmicIcons.About.code // Needs dedicated
+    "digitizer", "digitizerplugin" -> CosmicIcons.Plugin.draw
+    else -> CosmicIcons.Status.info
+  }
+}
+
+/**
  * Usage examples:
  *
  * ```kotlin

@@ -95,11 +95,11 @@ Provide type-safe packet inspection without manual HashMap access or type castin
 **Code** (Lines 135-136):
 ```kotlin
 val NetworkPacket.isClipboardUpdate: Boolean
-    get() = type == "kdeconnect.clipboard" && body.containsKey("content")
+    get() = type == "cconnect.clipboard" && body.containsKey("content")
 ```
 
 **Logic**:
-- Check packet type is exactly "kdeconnect.clipboard"
+- Check packet type is exactly "cconnect.clipboard"
 - AND check body contains "content" field
 - Returns Boolean (true/false)
 
@@ -118,13 +118,13 @@ if (packet.isClipboardUpdate) {
 **Code** (Lines 155-158):
 ```kotlin
 val NetworkPacket.isClipboardConnect: Boolean
-    get() = type == "kdeconnect.clipboard.connect" &&
+    get() = type == "cconnect.clipboard.connect" &&
             body.containsKey("content") &&
             body.containsKey("timestamp")
 ```
 
 **Logic**:
-- Check packet type is exactly "kdeconnect.clipboard.connect"
+- Check packet type is exactly "cconnect.clipboard.connect"
 - AND check body contains "content" field
 - AND check body contains "timestamp" field
 - Returns Boolean (true/false)
@@ -222,7 +222,7 @@ fun getIsClipboardUpdate(packet: NetworkPacket): Boolean {
 
 **Usage in Java**:
 ```java
-import static org.cosmic.cosmicconnect.Plugins.ClipboardPlugin.ClipboardPacketsFFIKt.*;
+import static org.cosmic.cconnect.Plugins.ClipboardPlugin.ClipboardPacketsFFIKt.*;
 
 if (getIsClipboardUpdate(packet)) {
     // Handle clipboard update
@@ -303,7 +303,7 @@ Every element includes:
 /**
  * Create a standard clipboard update packet.
  *
- * Creates a `kdeconnect.clipboard` packet for syncing clipboard changes
+ * Creates a `cconnect.clipboard` packet for syncing clipboard changes
  * between devices. Does not include a timestamp.
  *
  * ## Validation

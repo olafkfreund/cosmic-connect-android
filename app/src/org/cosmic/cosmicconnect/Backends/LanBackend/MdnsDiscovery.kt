@@ -1,203 +1,141 @@
 /*
- * SPDX-FileCopyrightText: 2023 Albert Vaca Cintora <albertvaka@gmail.com>
+ * SPDX-FileCopyrightText: 2024 Albert Vaca Cintora <albertvaka@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
- */
+*/
+
 package org.cosmic.cosmicconnect.Backends.LanBackend
 
 import android.content.Context
 import android.net.nsd.NsdManager
-import android.net.nsd.NsdManager.DiscoveryListener
-import android.net.nsd.NsdManager.RegistrationListener
 import android.net.nsd.NsdServiceInfo
-import android.net.wifi.WifiManager
-import android.net.wifi.WifiManager.MulticastLock
+import android.os.Build
 import android.util.Log
 import org.cosmic.cosmicconnect.Helpers.DeviceHelper
-import org.cosmic.cosmicconnect.Helpers.DeviceHelper.deviceType
-import org.cosmic.cosmicconnect.Helpers.DeviceHelper.getDeviceId
-import org.cosmic.cosmicconnect.Helpers.DeviceHelper.getDeviceName
 import java.net.InetAddress
 
-class MdnsDiscovery {
-    private val context: Context
-    private val lanLinkProvider: LanLinkProvider
-    private val mNsdManager: NsdManager
-    private var registrationListener: RegistrationListener? = null
-    private var discoveryListener: DiscoveryListener? = null
-    private val multicastLock: MulticastLock
-    private val mNsdResolveQueue: NsdResolveQueue
+class MdnsDiscovery(
+    private val context: Context,
+    private val lanLinkProvider: LanLinkProvider,
+    private val deviceHelper: DeviceHelper
+) {
 
-    constructor(context: Context, lanLinkProvider: LanLinkProvider) {
-        this.context = context
-        this.lanLinkProvider = lanLinkProvider
-        this.mNsdManager = context.getSystemService(Context.NSD_SERVICE) as NsdManager
-        this.mNsdResolveQueue = NsdResolveQueue(this.mNsdManager)
-        val wifiManager = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
-        multicastLock = wifiManager.createMulticastLock("kdeConnectMdnsMulticastLock")
+    private val nsdManager: NsdManager? by lazy {
+        context.getSystemService(Context.NSD_SERVICE) as? NsdManager
     }
 
+    private var discoveryListener: NsdManager.DiscoveryListener? = null
+    private var registrationListener: NsdManager.RegistrationListener? = null
+
+    private val nsdResolveQueue = NsdResolveQueue()
+
     fun startDiscovering() {
-        if (discoveryListener == null) {
-            multicastLock.acquire()
-            discoveryListener = createDiscoveryListener()
-            mNsdManager.discoverServices(SERVICE_TYPE, NsdManager.PROTOCOL_DNS_SD, discoveryListener)
+        if (discoveryListener != null) return
+
+        discoveryListener = object : NsdManager.DiscoveryListener {
+            override fun onDiscoveryStarted(regType: String) {
+                Log.d("MdnsDiscovery", "Service discovery started")
+            }
+
+            override fun onServiceFound(service: NsdServiceInfo) {
+                Log.d("MdnsDiscovery", "Service discovery success: $service")
+                if (service.serviceType != SERVICE_TYPE) {
+                    Log.d("MdnsDiscovery", "Unknown Service Type: ${service.serviceType}")
+                } else if (service.serviceName.contains(deviceHelper.getDeviceId())) {
+                    Log.d("MdnsDiscovery", "Same machine")
+                } else {
+                    val manager = nsdManager ?: return
+                    nsdResolveQueue.resolveOrEnqueue(manager, service, object : NsdManager.ResolveListener {
+                        override fun onResolveFailed(serviceInfo: NsdServiceInfo, errorCode: Int) {
+                            Log.e("MdnsDiscovery", "Resolve failed: $errorCode")
+                        }
+
+                        override fun onServiceResolved(serviceInfo: NsdServiceInfo) {
+                            Log.d("MdnsDiscovery", "Resolve Succeeded. $serviceInfo")
+
+                            val host: InetAddress = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                                serviceInfo.hostAddresses[0]
+                            } else {
+                                @Suppress("DEPRECATION")
+                                serviceInfo.host
+                            }
+
+                            lanLinkProvider.sendUdpIdentityPacket(listOf(host), null)
+                        }
+                    })
+                }
+            }
+
+            override fun onServiceLost(service: NsdServiceInfo) {
+                Log.e("MdnsDiscovery", "service lost: $service")
+            }
+
+            override fun onDiscoveryStopped(serviceType: String) {
+                Log.i("MdnsDiscovery", "Discovery stopped: $serviceType")
+            }
+
+            override fun onStartDiscoveryFailed(serviceType: String, errorCode: Int) {
+                Log.e("MdnsDiscovery", "Discovery failed: Error code: $errorCode")
+                stopDiscovering()
+            }
+
+            override fun onStopDiscoveryFailed(serviceType: String, errorCode: Int) {
+                Log.e("MdnsDiscovery", "Discovery failed: Error code: $errorCode")
+                stopDiscovering()
+            }
         }
+
+        nsdManager?.discoverServices(SERVICE_TYPE, NsdManager.PROTOCOL_DNS_SD, discoveryListener)
     }
 
     fun stopDiscovering() {
-        try {
-            if (discoveryListener != null) {
-                mNsdManager.stopServiceDiscovery(discoveryListener)
-                multicastLock.release()
-            }
-        } catch (_: IllegalArgumentException) {
-            // Ignore "listener not registered" exception
+        discoveryListener?.let {
+            nsdManager?.stopServiceDiscovery(it)
+            discoveryListener = null
         }
-        discoveryListener = null
     }
 
     fun startAnnouncing() {
-        if (registrationListener == null) {
-            val serviceInfo: NsdServiceInfo?
-            try {
-                serviceInfo = createNsdServiceInfo()
-            } catch (e: IllegalAccessException) {
-                Log.w(LOG_TAG, "Couldn't start announcing via MDNS: " + e.message)
-                return
-            }
-            registrationListener = createRegistrationListener()
-            mNsdManager.registerService(serviceInfo, NsdManager.PROTOCOL_DNS_SD, registrationListener)
+        if (registrationListener != null) return
+
+        val serviceInfo = NsdServiceInfo().apply {
+            serviceName = "cosmicconnect-" + deviceHelper.getDeviceId()
+            serviceType = SERVICE_TYPE
+            port = lanLinkProvider.tcpPort
+            // We can't use setAttribute because it's only available since API 21,
+            // and we support API 16. Also, NsdManager is quite buggy.
+            // Better keep it simple and just use the name to identify the device.
         }
+
+        registrationListener = object : NsdManager.RegistrationListener {
+            override fun onServiceRegistered(NsdServiceInfo: NsdServiceInfo) {
+                Log.d("MdnsDiscovery", "Service registered: ${NsdServiceInfo.serviceName}")
+            }
+
+            override fun onRegistrationFailed(serviceInfo: NsdServiceInfo, errorCode: Int) {
+                Log.e("MdnsDiscovery", "Registration failed: $errorCode")
+            }
+
+            override fun onServiceUnregistered(arg0: NsdServiceInfo) {
+                Log.d("MdnsDiscovery", "Service unregistered: ${arg0.serviceName}")
+            }
+
+            override fun onUnregistrationFailed(serviceInfo: NsdServiceInfo, errorCode: Int) {
+                Log.e("MdnsDiscovery", "Unregistration failed: $errorCode")
+            }
+        }
+
+        nsdManager?.registerService(serviceInfo, NsdManager.PROTOCOL_DNS_SD, registrationListener)
     }
 
     fun stopAnnouncing() {
-        try {
-            if (registrationListener != null) {
-                mNsdManager.unregisterService(registrationListener)
-            }
-        } catch (_: IllegalArgumentException) {
-            // Ignore "listener not registered" exception
-        }
-        registrationListener = null
-    }
-
-    fun createRegistrationListener() = object : RegistrationListener {
-        override fun onServiceRegistered(serviceInfo: NsdServiceInfo) {
-            // If Android changed the service name to avoid conflicts, here we can read it.
-            Log.i(LOG_TAG, "Registered ${serviceInfo.serviceName}")
-        }
-
-        override fun onRegistrationFailed(serviceInfo: NsdServiceInfo?, errorCode: Int) {
-            Log.e(LOG_TAG, "Registration failed with: $errorCode")
-        }
-
-        override fun onServiceUnregistered(serviceInfo: NsdServiceInfo?) {
-            Log.d(LOG_TAG, "Service unregistered: $serviceInfo")
-        }
-
-        override fun onUnregistrationFailed(serviceInfo: NsdServiceInfo?, errorCode: Int) {
-            Log.e(LOG_TAG, "Unregister of $serviceInfo failed with: $errorCode")
-        }
-    }
-
-    @Throws(IllegalAccessException::class)
-    fun createNsdServiceInfo(): NsdServiceInfo {
-        val serviceInfo = NsdServiceInfo()
-
-        val deviceId = getDeviceId(context)
-        // Without resolving the DNS, the service name is the only info we have so it must be sufficient to identify a device.
-        // Also, it must be unique, otherwise it will be automatically renamed. For these reasons we use the deviceId.
-        serviceInfo.serviceName = deviceId
-        serviceInfo.serviceType = SERVICE_TYPE
-        serviceInfo.port = lanLinkProvider.tcpPort
-
-        // The following fields aren't really used for anything, since we can't include enough info
-        // for it to be useful (namely: we can't include the device certificate).
-        // Each field (key + value) needs to be < 255 bytes. All the fields combined need to be < 1300 bytes.
-        val deviceName = getDeviceName(context)
-        val deviceType = deviceType.toString()
-        val protocolVersion = DeviceHelper.PROTOCOL_VERSION.toString()
-        serviceInfo.setAttribute("id", deviceId)
-        serviceInfo.setAttribute("name", deviceName)
-        serviceInfo.setAttribute("type", deviceType)
-        serviceInfo.setAttribute("protocol", protocolVersion)
-
-        Log.i(LOG_TAG, "My MDNS info: $serviceInfo")
-
-        return serviceInfo
-    }
-
-    fun createDiscoveryListener() = object : DiscoveryListener {
-        val myId: String = getDeviceId(context)
-
-        override fun onDiscoveryStarted(serviceType: String?) {
-            Log.i(LOG_TAG, "Service discovery started: $serviceType")
-        }
-
-        override fun onServiceFound(serviceInfo: NsdServiceInfo) {
-            Log.d(LOG_TAG, "Service discovered: $serviceInfo")
-
-            val deviceId = serviceInfo.serviceName
-
-            if (myId == deviceId) {
-                Log.d(LOG_TAG, "Discovered myself, ignoring.")
-                return
-            }
-
-            if (lanLinkProvider.visibleDevices.containsKey(deviceId)) {
-                Log.i(LOG_TAG, "MDNS discovered $deviceId to which I'm already connected to. Ignoring.")
-                return
-            }
-
-            // We use a queue because only one service can be resolved at
-            // a time, otherwise we get error 3 (already active) in onResolveFailed.
-            mNsdResolveQueue.resolveOrEnqueue(serviceInfo, createResolveListener())
-        }
-
-        override fun onServiceLost(serviceInfo: NsdServiceInfo?) {
-            Log.w(LOG_TAG, "Service lost: $serviceInfo")
-            // We can't see this device via mdns. This probably means it's not reachable anymore
-            // but we do nothing here since we have other ways to do detect unreachable devices
-            // that hopefully will also trigger.
-        }
-
-        override fun onDiscoveryStopped(serviceType: String?) {
-            Log.i(LOG_TAG, "MDNS discovery stopped: $serviceType")
-        }
-
-        override fun onStartDiscoveryFailed(serviceType: String?, errorCode: Int) {
-            Log.e(LOG_TAG, "MDNS discovery start failed: $errorCode")
-        }
-
-        override fun onStopDiscoveryFailed(serviceType: String?, errorCode: Int) {
-            Log.e(LOG_TAG, "MDNS discovery stop failed: $errorCode")
-        }
-    }
-
-    /**
-     * Returns a new listener instance since NsdManager wants a different listener each time you call resolveService
-     */
-    fun createResolveListener() = object : NsdManager.ResolveListener {
-        override fun onResolveFailed(serviceInfo: NsdServiceInfo?, errorCode: Int) {
-            Log.w(LOG_TAG, "MDNS error $errorCode resolving service: $serviceInfo")
-        }
-
-        override fun onServiceResolved(serviceInfo: NsdServiceInfo) {
-            Log.i(LOG_TAG, "MDNS successfully resolved $serviceInfo")
-
-            // Let the LanLinkProvider handle the connection
-            val remoteAddress = serviceInfo.host ?: return
-            // TODO: In protocol version 8 we should be able to call "identityPacketReceived"
-            //       here, since we already have all the info we need to start a connection
-            //       and the remaining identity info will be exchanged later.
-            lanLinkProvider.sendUdpIdentityPacket(listOf(remoteAddress), null)
+        registrationListener?.let {
+            nsdManager?.unregisterService(it)
+            registrationListener = null
         }
     }
 
     companion object {
-        const val LOG_TAG: String = "MdnsDiscovery"
-
-        const val SERVICE_TYPE: String = "_cosmicconnect._udp"
+        const val SERVICE_TYPE = "_cosmicconnect._tcp."
     }
 }

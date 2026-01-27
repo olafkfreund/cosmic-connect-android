@@ -124,7 +124,7 @@ private fun testCreatePacket(type: String, body: Map<String, Any>): NetworkPacke
 }
 
 // Or use actual API directly:
-val packet = NetworkPacket.create("kdeconnect.ping", mapOf("message" to "hello"))
+val packet = NetworkPacket.create("cconnect.ping", mapOf("message" to "hello"))
 ```
 
 ### Phase 3: Fix Tests Systematically
@@ -176,13 +176,13 @@ companion object {
 ```kotlin
 // Before:
 val packet = createPacket(
-    packetType = "kdeconnect.identity",
+    packetType = "cconnect.identity",
     body = mapOf(...)
 )
 
 // After:
 val packet = NetworkPacket.create(
-    type = "kdeconnect.identity",
+    type = "cconnect.identity",
     body = mapOf(...)
 )
 // Access with packet.type not packet.packetType
@@ -203,11 +203,11 @@ val bytes = packet.serialize()
 ```kotlin
 // Before:
 val packet = deserializePacket(json.encodeToByteArray())
-assertEquals("kdeconnect.ping", packet.packetType)
+assertEquals("cconnect.ping", packet.packetType)
 
 // After:
 val packet = NetworkPacket.deserialize(json.encodeToByteArray())
-assertEquals("kdeconnect.ping", packet.type)
+assertEquals("cconnect.ping", packet.type)
 ```
 
 ### Task 3: Fix Plugin Tests

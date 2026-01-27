@@ -376,7 +376,7 @@ object BatteryPacketsFFI {
 ```kotlin
 // src/org/cosmic/cosmicconnect/Plugins/BatteryPlugin/BatteryPlugin.kt
 class BatteryPlugin : Plugin() {
-    override val pluginKey = "kdeconnect.battery"
+    override val pluginKey = "cconnect.battery"
 
     fun sendBatteryStatus() {
         val packet = BatteryPacketsFFI.createBatteryPacket(
@@ -440,7 +440,7 @@ If you've created custom KDE Connect plugins, here's how to migrate:
 public class CustomPlugin extends Plugin {
     @Override
     public String getPluginKey() {
-        return "kdeconnect.custom";
+        return "cconnect.custom";
     }
 
     public void sendData(String data) {
@@ -464,7 +464,7 @@ public class CustomPlugin extends Plugin {
 ```rust
 // In cosmic-connect-core fork
 // src/plugins/custom.rs
-pub const CUSTOM_PACKET_TYPE: &str = "kdeconnect.custom";
+pub const CUSTOM_PACKET_TYPE: &str = "cconnect.custom";
 
 pub fn create_custom_packet(data: String) -> Result<NetworkPacket, ProtocolError> {
     let mut packet = NetworkPacket::new(CUSTOM_PACKET_TYPE.to_string());
@@ -498,14 +498,14 @@ val NetworkPacket.customData: String?
     get() = getString("data")
 
 val NetworkPacket.isCustomPacket: Boolean
-    get() = type == "kdeconnect.custom"
+    get() = type == "cconnect.custom"
 ```
 
 **Step 4: Migrate plugin class:**
 ```kotlin
 // src/org/cosmic/cosmicconnect/Plugins/CustomPlugin/CustomPlugin.kt
 class CustomPlugin : Plugin() {
-    override val pluginKey = "kdeconnect.custom"
+    override val pluginKey = "cconnect.custom"
 
     fun sendData(data: String) {
         val packet = CustomPacketsFFI.createCustomPacket(data)
@@ -533,7 +533,7 @@ class CustomPlugin : Plugin() {
 fun testCustomPacketCreation() {
     val packet = CustomPacketsFFI.createCustomPacket("test data")
 
-    assertEquals("kdeconnect.custom", packet.type)
+    assertEquals("cconnect.custom", packet.type)
     assertEquals("test data", packet.customData)
     assertTrue(packet.isCustomPacket)
 }
@@ -718,7 +718,7 @@ org.cosmic.cosmicconnect
 **Before:**
 ```kotlin
 // Create packets in Kotlin
-val np = NetworkPacket("kdeconnect.battery")
+val np = NetworkPacket("cconnect.battery")
 np.set("isCharging", true)
 np.set("currentCharge", 75)
 ```
@@ -1043,11 +1043,11 @@ cd cosmic-connect-android
 # Run specific test suite
 ./gradlew test --tests FFIValidationTest
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.integration.DiscoveryPairingTest
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.integration.DiscoveryPairingTest
 
 # Run performance benchmarks
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.performance.PerformanceBenchmarkTest
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.performance.PerformanceBenchmarkTest
 ```
 
 #### Creating a Custom Plugin
@@ -1408,7 +1408,7 @@ Unable to load native library: libcosmic_connect_core.so
 **Symptoms:**
 ```
 FFIValidationTest > testBatteryPlugin FAILED
-Expected packet type: kdeconnect.battery
+Expected packet type: cconnect.battery
 Actual: null
 ```
 
@@ -1554,7 +1554,7 @@ fun createBatteryPacket(...): FfiPacket  // throws ProtocolError
 public class BatteryPlugin extends Plugin {
     @Override
     public String getPluginKey() {
-        return "kdeconnect.battery";
+        return "cconnect.battery";
     }
 }
 ```
@@ -1562,7 +1562,7 @@ public class BatteryPlugin extends Plugin {
 **After (Kotlin):**
 ```kotlin
 class BatteryPlugin : Plugin() {
-    override val pluginKey = "kdeconnect.battery"
+    override val pluginKey = "cconnect.battery"
 }
 ```
 
@@ -1784,7 +1784,7 @@ adb logcat | grep -E "(FFI|cosmicconnect)"
 
 # Performance benchmarks
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.performance.PerformanceBenchmarkTest
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.performance.PerformanceBenchmarkTest
 ```
 
 **Test Coverage:**

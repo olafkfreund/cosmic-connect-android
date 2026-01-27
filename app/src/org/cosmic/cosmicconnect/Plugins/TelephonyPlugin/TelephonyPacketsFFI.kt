@@ -18,15 +18,15 @@ import uniffi.cosmic_connect_core.*
  * ## Packet Types
  *
  * ### Telephony (Call Events)
- * - **Call Event** (`kdeconnect.telephony`): Phone call notifications (incoming)
- * - **Mute Request** (`kdeconnect.telephony.request_mute`): Request to mute ringer (outgoing)
+ * - **Call Event** (`cconnect.telephony`): Phone call notifications (incoming)
+ * - **Mute Request** (`cconnect.telephony.request_mute`): Request to mute ringer (outgoing)
  *
  * ### SMS Messaging
- * - **SMS Messages** (`kdeconnect.sms.messages`): SMS conversation data (incoming)
- * - **Conversations Request** (`kdeconnect.sms.request_conversations`): Request conversation list (outgoing)
- * - **Conversation Request** (`kdeconnect.sms.request_conversation`): Request thread messages (outgoing)
- * - **Attachment Request** (`kdeconnect.sms.request_attachment`): Request MMS attachment (outgoing)
- * - **Send SMS Request** (`kdeconnect.sms.request`): Send SMS message (outgoing)
+ * - **SMS Messages** (`cconnect.sms.messages`): SMS conversation data (incoming)
+ * - **Conversations Request** (`cconnect.sms.request_conversations`): Request conversation list (outgoing)
+ * - **Conversation Request** (`cconnect.sms.request_conversation`): Request thread messages (outgoing)
+ * - **Attachment Request** (`cconnect.sms.request_attachment`): Request MMS attachment (outgoing)
+ * - **Send SMS Request** (`cconnect.sms.request`): Send SMS message (outgoing)
  *
  * ## Call Events
  *
@@ -96,7 +96,7 @@ object TelephonyPacketsFFI {
     /**
      * Create a telephony event packet (call notification).
      *
-     * Creates a `kdeconnect.telephony` packet for notifying about phone call
+     * Creates a `cconnect.telephony` packet for notifying about phone call
      * events. Sent from Android to desktop when call state changes.
      *
      * ## Validation
@@ -143,7 +143,7 @@ object TelephonyPacketsFFI {
     /**
      * Create a mute ringer request packet.
      *
-     * Creates a `kdeconnect.telephony.request_mute` packet requesting the phone
+     * Creates a `cconnect.telephony.request_mute` packet requesting the phone
      * to mute its ringer. Sent from desktop to Android when user wants to
      * silence an incoming call.
      *
@@ -167,34 +167,35 @@ object TelephonyPacketsFFI {
     /**
      * Create an SMS messages packet.
      *
-     * Creates a `kdeconnect.sms.messages` packet containing SMS conversations
+     * Creates a `cconnect.sms.messages` packet containing SMS conversations
      * with messages. Sent from Android to desktop in response to conversation
      * requests.
      *
      * ## Validation
      * - JSON must be valid and contain "conversations" array
      *
-     * ## JSON Format
-     * ```json
-     * {
-     *   "conversations": [
-     *     {
-     *       "thread_id": 123,
-     *       "messages": [
-     *         {
-     *           "_id": 456,
-     *           "thread_id": 123,
-     *           "address": "+1234567890",
-     *           "body": "Hello!",
-     *           "date": 1705507200000,
-     *           "type": 1,
-     *           "read": 1
-     *         }
-     *       ]
-     *     }
-     *   ]
-     * }
-     * ```
+      * ## JSON Format
+      * ```json
+      * {
+      *   "conversations": [
+      *     {
+      *       "threadId": 123,
+      *       "messages": [
+      *         {
+      *           "_id": 456,
+      *           "threadId": 123,
+      *           "address": "+1234567890",
+      *           "body": "Hello!",
+      *           "date": 1705507200000,
+      *           "type": 1,
+      *           "read": 1
+      *         }
+      *       ]
+      *     }
+      *   ]
+      * }
+      * ```
+     
      *
      * ## Example
      * ```kotlin
@@ -217,7 +218,7 @@ object TelephonyPacketsFFI {
     /**
      * Create a request for SMS conversations list.
      *
-     * Creates a `kdeconnect.sms.request_conversations` packet requesting the
+     * Creates a `cconnect.sms.request_conversations` packet requesting the
      * list of SMS conversations (latest message in each thread). Sent from
      * desktop to Android to get overview of SMS threads.
      *
@@ -237,7 +238,7 @@ object TelephonyPacketsFFI {
     /**
      * Create a request for messages in a specific conversation.
      *
-     * Creates a `kdeconnect.sms.request_conversation` packet requesting messages
+     * Creates a `cconnect.sms.request_conversation` packet requesting messages
      * from a specific SMS thread. Sent from desktop to Android to view
      * conversation history.
      *
@@ -290,7 +291,7 @@ object TelephonyPacketsFFI {
     /**
      * Create a request for a message attachment.
      *
-     * Creates a `kdeconnect.sms.request_attachment` packet requesting a message
+     * Creates a `cconnect.sms.request_attachment` packet requesting a message
      * attachment (MMS image, video, etc.). Sent from desktop to Android to
      * download attachment.
      *
@@ -326,7 +327,7 @@ object TelephonyPacketsFFI {
     /**
      * Create a request to send an SMS message.
      *
-     * Creates a `kdeconnect.sms.request` packet requesting to send an SMS from
+     * Creates a `cconnect.sms.request` packet requesting to send an SMS from
      * the Android device. Sent from desktop to Android when user composes a message.
      *
      * ## Validation
@@ -370,7 +371,7 @@ object TelephonyPacketsFFI {
 /**
  * Check if packet is a telephony event (call notification).
  *
- * Returns true if the packet is a `kdeconnect.telephony` packet with an event field.
+ * Returns true if the packet is a `cconnect.telephony` packet with an event field.
  *
  * ## Example
  * ```kotlin
@@ -384,12 +385,12 @@ object TelephonyPacketsFFI {
  * @return true if packet is a telephony event, false otherwise
  */
 val NetworkPacket.isTelephonyEvent: Boolean
-    get() = type == "kdeconnect.telephony" && body.containsKey("event")
+    get() = type == "cconnect.telephony" && body.containsKey("event")
 
 /**
  * Check if packet is a mute ringer request.
  *
- * Returns true if the packet is a `kdeconnect.telephony.request_mute` packet.
+ * Returns true if the packet is a `cconnect.telephony.request_mute` packet.
  *
  * ## Example
  * ```kotlin
@@ -401,7 +402,7 @@ val NetworkPacket.isTelephonyEvent: Boolean
  * @return true if packet is a mute request, false otherwise
  */
 val NetworkPacket.isMuteRequest: Boolean
-    get() = type == "kdeconnect.telephony.request_mute"
+    get() = type == "cconnect.telephony.request_mute"
 
 /**
  * Extract call event type from telephony packet.
@@ -468,7 +469,7 @@ val NetworkPacket.telephonyContactName: String?
 /**
  * Check if packet is an SMS messages packet.
  *
- * Returns true if the packet is a `kdeconnect.sms.messages` packet with
+ * Returns true if the packet is a `cconnect.sms.messages` packet with
  * conversations data.
  *
  * ## Example
@@ -482,12 +483,12 @@ val NetworkPacket.telephonyContactName: String?
  * @return true if packet is SMS messages, false otherwise
  */
 val NetworkPacket.isSmsMessages: Boolean
-    get() = type == "kdeconnect.sms.messages" && body.containsKey("conversations")
+    get() = type == "cconnect.sms.messages" && body.containsKey("conversations")
 
 /**
  * Check if packet is a conversations list request.
  *
- * Returns true if the packet is a `kdeconnect.sms.request_conversations` packet.
+ * Returns true if the packet is a `cconnect.sms.request_conversations` packet.
  *
  * ## Example
  * ```kotlin
@@ -500,12 +501,12 @@ val NetworkPacket.isSmsMessages: Boolean
  * @return true if packet is a conversations request, false otherwise
  */
 val NetworkPacket.isConversationsRequest: Boolean
-    get() = type == "kdeconnect.sms.request_conversations"
+    get() = type == "cconnect.sms.request_conversations"
 
 /**
  * Check if packet is a conversation messages request.
  *
- * Returns true if the packet is a `kdeconnect.sms.request_conversation` packet
+ * Returns true if the packet is a `cconnect.sms.request_conversation` packet
  * with a thread ID.
  *
  * ## Example
@@ -521,12 +522,12 @@ val NetworkPacket.isConversationsRequest: Boolean
  * @return true if packet is a conversation request, false otherwise
  */
 val NetworkPacket.isConversationRequest: Boolean
-    get() = type == "kdeconnect.sms.request_conversation" && body.containsKey("threadID")
+    get() = type == "cconnect.sms.request_conversation" && body.containsKey("threadId")
 
 /**
  * Check if packet is an attachment request.
  *
- * Returns true if the packet is a `kdeconnect.sms.request_attachment` packet
+ * Returns true if the packet is a `cconnect.sms.request_attachment` packet
  * with part ID and unique identifier.
  *
  * ## Example
@@ -542,14 +543,14 @@ val NetworkPacket.isConversationRequest: Boolean
  * @return true if packet is an attachment request, false otherwise
  */
 val NetworkPacket.isAttachmentRequest: Boolean
-    get() = type == "kdeconnect.sms.request_attachment" &&
-            body.containsKey("part_id") &&
-            body.containsKey("unique_identifier")
+    get() = type == "cconnect.sms.request_attachment" &&
+            body.containsKey("partId") &&
+            body.containsKey("uniqueIdentifier")
 
 /**
  * Check if packet is a send SMS request.
  *
- * Returns true if the packet is a `kdeconnect.sms.request` packet with phone
+ * Returns true if the packet is a `cconnect.sms.request` packet with phone
  * number and message body.
  *
  * ## Example
@@ -566,14 +567,14 @@ val NetworkPacket.isAttachmentRequest: Boolean
  * @return true if packet is a send SMS request, false otherwise
  */
 val NetworkPacket.isSendSmsRequest: Boolean
-    get() = type == "kdeconnect.sms.request" &&
+    get() = type == "cconnect.sms.request" &&
             body.containsKey("phoneNumber") &&
             body.containsKey("messageBody")
 
 /**
  * Extract thread ID from conversation request packet.
  *
- * Returns the conversation thread ID from a `kdeconnect.sms.request_conversation`
+ * Returns the conversation thread ID from a `cconnect.sms.request_conversation`
  * packet. Returns null if not a conversation request or thread ID is missing.
  *
  * ## Example
@@ -591,7 +592,7 @@ val NetworkPacket.isSendSmsRequest: Boolean
  */
 val NetworkPacket.smsRequestThreadId: Long?
     get() = if (isConversationRequest) {
-        (body["threadID"] as? Number)?.toLong()
+        (body["threadId"] as? Number)?.toLong()
     } else null
 
 /**
@@ -637,7 +638,7 @@ val NetworkPacket.smsRequestCount: Int?
 /**
  * Extract attachment part ID from attachment request packet.
  *
- * Returns the attachment part ID from a `kdeconnect.sms.request_attachment`
+ * Returns the attachment part ID from a `cconnect.sms.request_attachment`
  * packet. Returns null if not an attachment request or part ID is missing.
  *
  * ## Example
@@ -656,14 +657,14 @@ val NetworkPacket.smsRequestCount: Int?
  */
 val NetworkPacket.smsAttachmentPartId: Long?
     get() = if (isAttachmentRequest) {
-        (body["part_id"] as? Number)?.toLong()
+        (body["partId"] as? Number)?.toLong()
     } else null
 
 /**
  * Extract unique identifier from attachment request packet.
  *
- * Returns the unique file identifier from a `kdeconnect.sms.request_attachment`
- * packet. Returns null if not an attachment request or identifier is missing.
+ * Returns the unique file identifier from a `cconnect.sms.request_attachment`
+ * packet. Returns null if an attachment request or identifier is missing.
  *
  * ## Example
  * ```kotlin
@@ -676,13 +677,13 @@ val NetworkPacket.smsAttachmentPartId: Long?
  */
 val NetworkPacket.smsAttachmentUniqueId: String?
     get() = if (isAttachmentRequest) {
-        body["unique_identifier"] as? String
+        body["uniqueIdentifier"] as? String
     } else null
 
 /**
  * Extract recipient phone number from send SMS request packet.
  *
- * Returns the recipient phone number from a `kdeconnect.sms.request` packet.
+ * Returns the recipient phone number from a `cconnect.sms.request` packet.
  * Returns null if not a send SMS request or phone number is missing.
  *
  * ## Example
@@ -704,7 +705,7 @@ val NetworkPacket.smsRecipientNumber: String?
 /**
  * Extract message body from send SMS request packet.
  *
- * Returns the message body text from a `kdeconnect.sms.request` packet.
+ * Returns the message body text from a `cconnect.sms.request` packet.
  * Returns null if not a send SMS request or message body is missing.
  *
  * ## Example

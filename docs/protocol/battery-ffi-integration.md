@@ -142,7 +142,7 @@ BatteryState(isCharging, currentCharge, thresholdEvent)
   ↓
 PluginManager.updateBattery(state)
   ↓
-FFI: Rust plugin creates kdeconnect.battery packet
+FFI: Rust plugin creates cconnect.battery packet
   ↓
 Sent to remote device
 ```
@@ -315,7 +315,7 @@ class BatteryPluginFFI : Plugin() {
 
 **Compatibility**:
 - ✅ Same `@LoadablePlugin` annotation (PluginFactory still finds it)
-- ✅ Same packet type: `kdeconnect.battery`
+- ✅ Same packet type: `cconnect.battery`
 - ✅ Same Plugin interface methods
 - ✅ Same `remoteBatteryInfo` property (API unchanged)
 - ✅ Same threshold events (BATTERY_LOW, BATTERY_OKAY)
@@ -628,7 +628,7 @@ adb shell dumpsys battery reset
 **Possible Causes**:
 1. **Packet routing failed**
    - Check: Logs show "Failed to route packet"
-   - Fix: Ensure packet type is correct (`kdeconnect.battery`)
+   - Fix: Ensure packet type is correct (`cconnect.battery`)
 
 2. **FFI not returning remote battery**
    - Check: `getRemoteBattery()` returns null

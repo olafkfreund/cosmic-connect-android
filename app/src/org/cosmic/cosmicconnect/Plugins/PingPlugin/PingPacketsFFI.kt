@@ -41,7 +41,7 @@ import org.cosmic.cosmicconnect.Core.PluginManagerProvider
  *
  * ## Protocol
  *
- * **Packet Type**: `kdeconnect.ping`
+ * **Packet Type**: `cconnect.ping`
  *
  * **Body Fields**:
  * - `message` (optional): String - Custom message to display
@@ -50,7 +50,7 @@ import org.cosmic.cosmicconnect.Core.PluginManagerProvider
  * ```json
  * {
  *   "id": "1234567890",
- *   "type": "kdeconnect.ping",
+ *   "type": "cconnect.ping",
  *   "body": {
  *     "message": "Hello from Android!"
  *   }
@@ -74,7 +74,7 @@ object PingPacketsFFI {
     /**
      * Create a ping packet
      *
-     * Creates a `kdeconnect.ping` packet using the Rust FFI core. The packet
+     * Creates a `cconnect.ping` packet using the Rust FFI core. The packet
      * can optionally include a custom message to be displayed on the receiving
      * device.
      *

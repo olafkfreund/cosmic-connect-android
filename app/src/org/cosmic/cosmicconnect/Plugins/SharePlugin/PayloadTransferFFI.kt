@@ -59,7 +59,7 @@ import java.util.concurrent.atomic.AtomicBoolean
  *
  * ### From Share Packet
  * ```kotlin
- * val packet: NetworkPacket = ... // kdeconnect.share.request
+ * val packet: NetworkPacket = ... // cconnect.share.request
  * val deviceHost = "192.168.1.100" // From device connection info
  *
  * val transfer = PayloadTransferFFI.fromPacket(
@@ -103,7 +103,7 @@ class PayloadTransferFFI(
             deviceHost: String,
             outputFile: File
         ): PayloadTransferFFI? {
-            require(packet.type == "kdeconnect.share.request") {
+            require(packet.type == "cconnect.share.request") {
                 "Packet must be a share request"
             }
 

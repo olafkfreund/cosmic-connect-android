@@ -1,16 +1,16 @@
-package org.cosmic.cosmicconnect.performance
+package org.cosmic.cconnect.performance
 
 import android.content.Context
 import android.net.Uri
 import android.os.Debug
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import org.cosmic.cosmicconnect.CosmicConnect
-import org.cosmic.cosmicconnect.Device
-import org.cosmic.cosmicconnect.NetworkPacket
-import org.cosmic.cosmicconnect.plugins.*
-import org.cosmic.cosmicconnect.test.MockFactory
-import org.cosmic.cosmicconnect.test.TestUtils
+import org.cosmic.cconnect.CosmicConnect
+import org.cosmic.cconnect.Device
+import org.cosmic.cconnect.NetworkPacket
+import org.cosmic.cconnect.plugins.*
+import org.cosmic.cconnect.test.MockFactory
+import org.cosmic.cconnect.test.TestUtils
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -35,7 +35,7 @@ import kotlin.system.measureTimeMillis
  * - Concurrent operations
  * - Stress testing under load
  *
- * Run with: ./gradlew connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.performance.PerformanceBenchmarkTest
+ * Run with: ./gradlew connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.performance.PerformanceBenchmarkTest
  */
 @RunWith(AndroidJUnit4::class)
 class PerformanceBenchmarkTest {

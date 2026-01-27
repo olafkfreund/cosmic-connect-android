@@ -54,12 +54,12 @@ Tests both FFI functions with various inputs:
 
 1. **Standard clipboard update packet**
    - `createClipboardPacket(content)`
-   - Verifies packet type: `kdeconnect.clipboard`
+   - Verifies packet type: `cconnect.clipboard`
    - Verifies no timestamp field
 
 2. **Clipboard connect packet with timestamp**
    - `createClipboardConnectPacket(content, timestamp)`
-   - Verifies packet type: `kdeconnect.clipboard.connect`
+   - Verifies packet type: `cconnect.clipboard.connect`
    - Verifies timestamp field present
 
 3. **Empty content handling**
@@ -154,7 +154,7 @@ adb logcat | grep "ClipboardPlugin"
 **Verification:**
 ```bash
 # Check for clipboard update packet received
-adb logcat | grep "kdeconnect.clipboard"
+adb logcat | grep "cconnect.clipboard"
 
 # Expected log:
 # ClipboardPlugin: Received clipboard update: "Desktop text"

@@ -107,48 +107,48 @@ pub const MAX_TCP_PORT: u16 = 1764;
 pub const PROTOCOL_VERSION: u8 = 7;
 
 /// Packet types
-pub const PACKET_TYPE_IDENTITY: &str = "cosmicconnect.identity";
-pub const PACKET_TYPE_PAIR: &str = "cosmicconnect.pair";
+pub const PACKET_TYPE_IDENTITY: &str = "cconnect.identity";
+pub const PACKET_TYPE_PAIR: &str = "cconnect.pair";
 
 /// Default capabilities
 pub const DEFAULT_INCOMING_CAPABILITIES: &[&str] = &[
-    "cosmicconnect.battery.request",
-    "cosmicconnect.clipboard",
-    "cosmicconnect.clipboard.connect",
-    "cosmicconnect.connectivity_report.request",
-    "cosmicconnect.findmyphone.request",
-    "cosmicconnect.mousepad.keyboardstate",
-    "cosmicconnect.mousepad.request",
-    "cosmicconnect.mpris",
-    "cosmicconnect.mpris.request",
-    "cosmicconnect.notification",
-    "cosmicconnect.notification.action",
-    "cosmicconnect.notification.reply",
-    "cosmicconnect.notification.request",
-    "cosmicconnect.ping",
-    "cosmicconnect.runcommand",
-    "cosmicconnect.runcommand.request",
-    "cosmicconnect.sftp.request",
-    "cosmicconnect.share.request",
+    "cconnect.battery.request",
+    "cconnect.clipboard",
+    "cconnect.clipboard.connect",
+    "cconnect.connectivity_report.request",
+    "cconnect.findmyphone.request",
+    "cconnect.mousepad.keyboardstate",
+    "cconnect.mousepad.request",
+    "cconnect.mpris",
+    "cconnect.mpris.request",
+    "cconnect.notification",
+    "cconnect.notification.action",
+    "cconnect.notification.reply",
+    "cconnect.notification.request",
+    "cconnect.ping",
+    "cconnect.runcommand",
+    "cconnect.runcommand.request",
+    "cconnect.sftp.request",
+    "cconnect.share.request",
 ];
 
 pub const DEFAULT_OUTGOING_CAPABILITIES: &[&str] = &[
-    "cosmicconnect.battery",
-    "cosmicconnect.clipboard",
-    "cosmicconnect.clipboard.connect",
-    "cosmicconnect.connectivity_report",
-    "cosmicconnect.findmyphone.request",
-    "cosmicconnect.mousepad.echo",
-    "cosmicconnect.mousepad.keyboardstate",
-    "cosmicconnect.mousepad.request",
-    "cosmicconnect.mpris",
-    "cosmicconnect.mpris.request",
-    "cosmicconnect.notification",
-    "cosmicconnect.notification.request",
-    "cosmicconnect.ping",
-    "cosmicconnect.runcommand",
-    "cosmicconnect.sftp",
-    "cosmicconnect.share.request",
+    "cconnect.battery",
+    "cconnect.clipboard",
+    "cconnect.clipboard.connect",
+    "cconnect.connectivity_report",
+    "cconnect.findmyphone.request",
+    "cconnect.mousepad.echo",
+    "cconnect.mousepad.keyboardstate",
+    "cconnect.mousepad.request",
+    "cconnect.mpris",
+    "cconnect.mpris.request",
+    "cconnect.notification",
+    "cconnect.notification.request",
+    "cconnect.ping",
+    "cconnect.runcommand",
+    "cconnect.sftp",
+    "cconnect.share.request",
 ];
 ```
 
@@ -164,7 +164,7 @@ pub struct NetworkPacket {
     /// Unique packet ID (timestamp in milliseconds)
     pub id: i64,
     
-    /// Packet type (e.g., "cosmicconnect.identity", "cosmicconnect.pair")
+    /// Packet type (e.g., "cconnect.identity", "cconnect.pair")
     #[serde(rename = "type")]
     pub packet_type: String,
     
@@ -192,7 +192,7 @@ impl NetworkPacket {
     ) -> Self {
         Self {
             id: Self::generate_id(),
-            packet_type: "cosmicconnect.identity".to_string(),
+            packet_type: "cconnect.identity".to_string(),
             body: serde_json::json!({
                 "deviceId": device_id,
                 "deviceName": device_name,
@@ -211,7 +211,7 @@ impl NetworkPacket {
     pub fn new_pair(pair: bool) -> Self {
         Self {
             id: Self::generate_id(),
-            packet_type: "cosmicconnect.pair".to_string(),
+            packet_type: "cconnect.pair".to_string(),
             body: serde_json::json!({ "pair": pair }),
             payload_size: None,
             payload_transfer_info: None,
@@ -259,12 +259,12 @@ impl NetworkPacket {
     
     /// Check if this is an identity packet
     pub fn is_identity(&self) -> bool {
-        self.packet_type == "cosmicconnect.identity"
+        self.packet_type == "cconnect.identity"
     }
     
     /// Check if this is a pair packet
     pub fn is_pair(&self) -> bool {
-        self.packet_type == "cosmicconnect.pair"
+        self.packet_type == "cconnect.pair"
     }
 }
 
@@ -750,7 +750,7 @@ sudo tcpdump -i any udp port 1716 -vvv -X
 2. **Test UDP Broadcast**:
 ```bash
 # Send test broadcast manually
-echo '{"id":1234567890,"type":"cosmicconnect.identity","body":{"deviceId":"test","deviceName":"Test","deviceType":"desktop","protocolVersion":7,"tcpPort":1716}}
+echo '{"id":1234567890,"type":"cconnect.identity","body":{"deviceId":"test","deviceName":"Test","deviceType":"desktop","protocolVersion":7,"tcpPort":1716}}
 ' | nc -u -b 255.255.255.255 1716
 ```
 
@@ -1705,7 +1705,7 @@ netstat -tuln | grep -E "171[4-9]|17[2-5][0-9]|176[0-4]"
 
 ```bash
 #!/bin/bash
-# capture-cosmicconnect.sh
+# capture-cconnect.sh
 
 DURATION=${1:-60}
 

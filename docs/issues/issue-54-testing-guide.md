@@ -54,16 +54,16 @@ fn test_create_clipboard_packet() {
     let content = "Hello World";
     let packet = create_clipboard_packet(content.to_string()).unwrap();
 
-    assert_eq!(packet.packet_type, "kdeconnect.clipboard");
+    assert_eq!(packet.packet_type, "cconnect.clipboard");
     assert!(packet.body.contains("\"content\":\"Hello World\""));
     assert!(packet.payload_size.is_none());
 }
 ```
 
-**Expected Result**: Packet with type "kdeconnect.clipboard" and content field
+**Expected Result**: Packet with type "cconnect.clipboard" and content field
 
 **Pass Criteria**:
-- ✅ Packet type is exactly "kdeconnect.clipboard"
+- ✅ Packet type is exactly "cconnect.clipboard"
 - ✅ Body contains content field with correct value
 - ✅ No payload_size field present
 - ✅ Function returns Ok(FfiPacket)
@@ -83,16 +83,16 @@ fn test_create_clipboard_connect_packet() {
     let timestamp = 1705507200000i64; // 2024-01-17 12:00:00 UTC
     let packet = create_clipboard_connect_packet(content.to_string(), timestamp).unwrap();
 
-    assert_eq!(packet.packet_type, "kdeconnect.clipboard.connect");
+    assert_eq!(packet.packet_type, "cconnect.clipboard.connect");
     assert!(packet.body.contains("\"content\":\"Test Content\""));
     assert!(packet.body.contains("\"timestamp\":1705507200000"));
 }
 ```
 
-**Expected Result**: Packet with type "kdeconnect.clipboard.connect", content, and timestamp
+**Expected Result**: Packet with type "cconnect.clipboard.connect", content, and timestamp
 
 **Pass Criteria**:
-- ✅ Packet type is exactly "kdeconnect.clipboard.connect"
+- ✅ Packet type is exactly "cconnect.clipboard.connect"
 - ✅ Body contains content field with correct value
 - ✅ Body contains timestamp field with correct value
 - ✅ Function returns Ok(FfiPacket)
@@ -163,7 +163,7 @@ fun testCreateClipboardUpdate() {
     val content = "Test clipboard content"
     val packet = ClipboardPacketsFFI.createClipboardUpdate(content)
 
-    assertEquals("kdeconnect.clipboard", packet.type)
+    assertEquals("cconnect.clipboard", packet.type)
     assertEquals(content, packet.body["content"])
     assertNull(packet.body["timestamp"])
     assertTrue(packet.isClipboardUpdate)
@@ -173,7 +173,7 @@ fun testCreateClipboardUpdate() {
 **Expected Result**: Immutable NetworkPacket with content field, no timestamp
 
 **Pass Criteria**:
-- ✅ Packet type is "kdeconnect.clipboard"
+- ✅ Packet type is "cconnect.clipboard"
 - ✅ Content field matches input
 - ✅ No timestamp field present
 - ✅ isClipboardUpdate extension property returns true
@@ -193,7 +193,7 @@ fun testCreateClipboardConnect() {
     val timestamp = System.currentTimeMillis()
     val packet = ClipboardPacketsFFI.createClipboardConnect(content, timestamp)
 
-    assertEquals("kdeconnect.clipboard.connect", packet.type)
+    assertEquals("cconnect.clipboard.connect", packet.type)
     assertEquals(content, packet.body["content"])
     assertEquals(timestamp, (packet.body["timestamp"] as Number).toLong())
     assertTrue(packet.isClipboardConnect)
@@ -203,7 +203,7 @@ fun testCreateClipboardConnect() {
 **Expected Result**: Immutable NetworkPacket with content and timestamp
 
 **Pass Criteria**:
-- ✅ Packet type is "kdeconnect.clipboard.connect"
+- ✅ Packet type is "cconnect.clipboard.connect"
 - ✅ Content field matches input
 - ✅ Timestamp field matches input
 - ✅ isClipboardConnect extension property returns true
@@ -422,7 +422,7 @@ fun testPropagateClipboard() {
 
     // Verify packet sent to device
     val sentPacket = device.lastSentPacket
-    assertEquals("kdeconnect.clipboard", sentPacket.type)
+    assertEquals("cconnect.clipboard", sentPacket.type)
     assertEquals(content, sentPacket.getString("content"))
     assertFalse(sentPacket.has("timestamp"))
 }
@@ -431,7 +431,7 @@ fun testPropagateClipboard() {
 **Expected Result**: FFI-created packet sent to device
 
 **Pass Criteria**:
-- ✅ Packet type is "kdeconnect.clipboard"
+- ✅ Packet type is "cconnect.clipboard"
 - ✅ Content field matches clipboard content
 - ✅ No timestamp field present
 - ✅ Packet sent via device.sendPacket()
@@ -459,7 +459,7 @@ fun testSendConnectPacket() {
 
     // Verify packet sent to device
     val sentPacket = device.lastSentPacket
-    assertEquals("kdeconnect.clipboard.connect", sentPacket.type)
+    assertEquals("cconnect.clipboard.connect", sentPacket.type)
     assertEquals("Connect content", sentPacket.getString("content"))
     assertEquals(expectedTimestamp, sentPacket.getLong("timestamp"))
 }
@@ -468,7 +468,7 @@ fun testSendConnectPacket() {
 **Expected Result**: FFI-created connect packet with timestamp sent
 
 **Pass Criteria**:
-- ✅ Packet type is "kdeconnect.clipboard.connect"
+- ✅ Packet type is "cconnect.clipboard.connect"
 - ✅ Content field matches clipboard content
 - ✅ Timestamp field matches ClipboardListener timestamp
 - ✅ Packet sent via device.sendPacket()
@@ -643,7 +643,7 @@ fun testReceiveConnectPacketNullTimestamp() {
     ClipboardListener.instance(context).setText("Local content")
 
     // Create malformed connect packet (missing timestamp)
-    val legacyPacket = org.cosmic.cosmicconnect.NetworkPacket("kdeconnect.clipboard.connect")
+    val legacyPacket = org.cosmic.cconnect.NetworkPacket("cconnect.clipboard.connect")
     legacyPacket.set("content", "Remote content")
     // No timestamp field
 
@@ -816,22 +816,22 @@ fun testReceiveConnectPacketNullTimestamp() {
 fun testPacketTypeCompliance() {
     // Verify standard update uses correct packet type
     val updatePacket = ClipboardPacketsFFI.createClipboardUpdate("content")
-    assertEquals("kdeconnect.clipboard", updatePacket.type)
-    assertNotEquals("cosmicconnect.clipboard", updatePacket.type) // Old incorrect type
+    assertEquals("cconnect.clipboard", updatePacket.type)
+    assertNotEquals("cconnect.clipboard", updatePacket.type) // Old incorrect type
 
     // Verify connect packet uses correct packet type
     val connectPacket = ClipboardPacketsFFI.createClipboardConnect("content", 100)
-    assertEquals("kdeconnect.clipboard.connect", connectPacket.type)
-    assertNotEquals("cosmicconnect.clipboard.connect", connectPacket.type) // Old incorrect type
+    assertEquals("cconnect.clipboard.connect", connectPacket.type)
+    assertNotEquals("cconnect.clipboard.connect", connectPacket.type) // Old incorrect type
 }
 ```
 
-**Expected Result**: All packets use "kdeconnect.*" prefix
+**Expected Result**: All packets use "cconnect.*" prefix
 
 **Pass Criteria**:
-- ✅ Standard update: "kdeconnect.clipboard"
-- ✅ Connect packet: "kdeconnect.clipboard.connect"
-- ✅ No "cosmicconnect.*" types used
+- ✅ Standard update: "cconnect.clipboard"
+- ✅ Connect packet: "cconnect.clipboard.connect"
+- ✅ No "cconnect.*" types used
 
 ---
 
@@ -846,7 +846,7 @@ fun testBackwardCompatibility() {
     plugin.onCreate()
 
     // Create legacy-style packet (manually constructed)
-    val legacyPacket = org.cosmic.cosmicconnect.NetworkPacket("kdeconnect.clipboard")
+    val legacyPacket = org.cosmic.cconnect.NetworkPacket("cconnect.clipboard")
     legacyPacket.set("content", "Legacy content")
 
     // Process packet
@@ -878,7 +878,7 @@ fun testForwardCompatibility() {
     plugin.onCreate()
 
     // Create packet with unknown fields
-    val legacyPacket = org.cosmic.cosmicconnect.NetworkPacket("kdeconnect.clipboard")
+    val legacyPacket = org.cosmic.cconnect.NetworkPacket("cconnect.clipboard")
     legacyPacket.set("content", "Known field")
     legacyPacket.set("unknown_field", "Unknown value")
     legacyPacket.set("another_unknown", 12345)
@@ -913,7 +913,7 @@ cargo test clipboard --lib
 
 # Android instrumentation tests
 cd /home/olafkfreund/Source/GitHub/cosmic-connect-android
-./gradlew connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.Plugins.ClipboardPlugin.ClipboardPluginTest
+./gradlew connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.Plugins.ClipboardPlugin.ClipboardPluginTest
 
 # End-to-end tests (manual)
 # Follow Test Suite 4 procedures with physical devices
@@ -958,7 +958,7 @@ open app/build/reports/jacoco/jacocoTestReport/html/index.html
 
 ✅ **All 22 test cases pass** (4 FFI + 8 Kotlin + 7 Integration + 3 Regression)
 ✅ **Zero compilation errors**
-✅ **Protocol compliance verified** (kdeconnect.* packet types)
+✅ **Protocol compliance verified** (cconnect.* packet types)
 ✅ **End-to-end sync working** bidirectionally
 ✅ **Sync loop prevention working** (timestamp comparison)
 ✅ **Backward compatibility maintained**

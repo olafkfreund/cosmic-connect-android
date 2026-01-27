@@ -79,10 +79,10 @@ The integration maintains backward compatibility while introducing FFI functiona
 Use type aliases to distinguish between legacy and FFI types:
 
 ```kotlin
-import org.cosmic.cosmicconnect.Core.NetworkPacket           // FFI wrapper
-import org.cosmic.cosmicconnect.Core.PluginManager            // FFI wrapper
-import org.cosmic.cosmicconnect.Core.PluginManagerProvider    // Singleton provider
-import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket  // Old class
+import org.cosmic.cconnect.Core.NetworkPacket           // FFI wrapper
+import org.cosmic.cconnect.Core.PluginManager            // FFI wrapper
+import org.cosmic.cconnect.Core.PluginManagerProvider    // Singleton provider
+import org.cosmic.cconnect.NetworkPacket as LegacyNetworkPacket  // Old class
 ```
 
 **Why**: Avoids naming conflicts and makes conversion points explicit.
@@ -305,7 +305,7 @@ fun getPluginStats(): PluginStats? {
    class YourPluginFFI : Plugin() {
        companion object {
            private const val TAG = "YourPluginFFI"
-           const val PACKET_TYPE = "kdeconnect.your.packet"
+           const val PACKET_TYPE = "cconnect.your.packet"
        }
 
        private var pluginManager: PluginManager? = null
@@ -334,7 +334,7 @@ fun getPluginStats(): PluginStats? {
 1. **Document packet structure**
    ```kotlin
    /**
-    * Packet structure for kdeconnect.your.packet:
+    * Packet structure for cconnect.your.packet:
     * {
     *   "field1": String - description
     *   "field2": Long - description (optional)
@@ -471,7 +471,7 @@ Create tests for conversion and logic:
 @Test
 fun testPacketConversion() {
     // Test legacy → FFI → legacy round-trip
-    val original = LegacyNetworkPacket("kdeconnect.ping")
+    val original = LegacyNetworkPacket("cconnect.ping")
     original.set("message", "Hello")
 
     val ffi = convertLegacyPacket(original)
@@ -724,10 +724,10 @@ The Clipboard plugin migration is complete with full protocol compliance and typ
 - Input validation (non-blank content, non-negative timestamp)
 
 **Key Features**:
-- Standard clipboard updates: `kdeconnect.clipboard` (content field only)
-- Connection sync: `kdeconnect.clipboard.connect` (content + timestamp)
+- Standard clipboard updates: `cconnect.clipboard` (content field only)
+- Connection sync: `cconnect.clipboard.connect` (content + timestamp)
 - Timestamp-based sync loop prevention (only accept newer timestamps)
-- Protocol compliance fixed (cosmicconnect.* → kdeconnect.*)
+- Protocol compliance fixed (cconnect.* → cconnect.*)
 - Type-safe packet inspection via extension properties
 
 **Current Status**:

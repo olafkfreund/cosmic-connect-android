@@ -71,7 +71,7 @@ Added comprehensive ping plugin validation:
 fun testPingPlugin() {
     // Test 1: Create simple ping packet
     val simplePing = PingPacketsFFI.createPing()
-    assertEquals("kdeconnect.ping", simplePing.type)
+    assertEquals("cconnect.ping", simplePing.type)
 
     // Test 2: Create ping with custom message
     val messagePing = PingPacketsFFI.createPing("Hello from Android!")
@@ -142,7 +142,7 @@ Ping statistics are tracked in the Rust core:
 
 ## Protocol Compatibility
 
-**Packet Type**: `kdeconnect.ping`
+**Packet Type**: `cconnect.ping`
 
 **Direction**: Bidirectional (Android ↔ Desktop)
 
@@ -155,7 +155,7 @@ Simple ping:
 ```json
 {
   "id": 1234567890,
-  "type": "kdeconnect.ping",
+  "type": "cconnect.ping",
   "body": {}
 }
 ```
@@ -164,7 +164,7 @@ Ping with message:
 ```json
 {
   "id": 1234567891,
-  "type": "kdeconnect.ping",
+  "type": "cconnect.ping",
   "body": {
     "message": "Hello from Android!"
   }

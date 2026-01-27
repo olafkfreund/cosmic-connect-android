@@ -1393,7 +1393,7 @@ These issues must be completed in order:
 
 # 2. Clone repositories
 git clone https://github.com/olafkfreund/cosmic-connect-android.git
-git clone https://github.com/olafkfreund/cosmic-applet-cosmicconnect.git
+git clone https://github.com/olafkfreund/cosmic-applet-cconnect.git
 
 # 3. Install Claude Code skills
 cd cosmic-connect-android

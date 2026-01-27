@@ -612,7 +612,7 @@ mod tests {
 
     #[test]
     fn test_packet_serialization() {
-        let packet = NetworkPacket::new("kdeconnect.ping", 123);
+        let packet = NetworkPacket::new("cconnect.ping", 123);
         let bytes = packet.serialize().unwrap();
 
         // CRITICAL: Verify newline terminator
@@ -664,7 +664,7 @@ async fn test_kde_connect_compatibility() {
 
     // Receive response
     let response = receive_from_kde_connect().await.unwrap();
-    assert_eq!(response.packet_type, "kdeconnect.identity");
+    assert_eq!(response.packet_type, "cconnect.identity");
 }
 ```
 

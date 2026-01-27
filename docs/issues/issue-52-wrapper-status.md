@@ -105,10 +105,10 @@ data class NetworkPacket(
 }
 
 object PacketType {
-    const val IDENTITY = "kdeconnect.identity"
-    const val PAIR = "kdeconnect.pair"
-    const val PING = "kdeconnect.ping"
-    const val BATTERY = "kdeconnect.battery"
+    const val IDENTITY = "cconnect.identity"
+    const val PAIR = "cconnect.pair"
+    const val PING = "cconnect.ping"
+    const val BATTERY = "cconnect.battery"
     // ... 20+ packet type constants
 }
 ```
@@ -298,12 +298,12 @@ val myDevice = DeviceInfo(
     deviceType = DeviceType.PHONE,
     protocolVersion = 7,
     incomingCapabilities = listOf(
-        "kdeconnect.ping",
-        "kdeconnect.battery"
+        "cconnect.ping",
+        "cconnect.battery"
     ),
     outgoingCapabilities = listOf(
-        "kdeconnect.ping",
-        "kdeconnect.battery.request"
+        "cconnect.ping",
+        "cconnect.battery.request"
     )
 )
 

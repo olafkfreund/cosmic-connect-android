@@ -12,7 +12,7 @@ import uniffi.cosmic_connect_core.*
  * ```json
  * {
  *   "id": 1234567890,
- *   "type": "kdeconnect.ping",
+ *   "type": "cconnect.ping",
  *   "body": {"message": "hello"}
  * }
  * ```
@@ -20,7 +20,7 @@ import uniffi.cosmic_connect_core.*
  * ## Usage
  * ```kotlin
  * // Create packet
- * val packet = NetworkPacket.create("kdeconnect.ping", mapOf("message" to "hello"))
+ * val packet = NetworkPacket.create("cconnect.ping", mapOf("message" to "hello"))
  *
  * // Serialize to bytes (for network transmission)
  * val bytes = packet.serialize()
@@ -97,7 +97,7 @@ data class NetworkPacket(
         /**
          * Create a new network packet with auto-generated ID
          *
-         * @param type Packet type (e.g., "kdeconnect.ping", "kdeconnect.battery")
+         * @param type Packet type (e.g., "cconnect.ping", "cconnect.battery")
          * @param body Packet body as key-value map
          * @return New NetworkPacket with unique ID
          * @throws CosmicConnectException if packet creation fails
@@ -180,7 +180,7 @@ data class NetworkPacket(
 
             return NetworkPacket(
                 id = ffiPacket.id,
-                type = ffiPacket.packetType,
+                type = PacketType.normalize(ffiPacket.packetType),
                 body = bodyMap,
                 payloadSize = ffiPacket.payloadSize
             )
@@ -299,32 +299,46 @@ data class NetworkPacket(
  * Common packet types (for convenience)
  */
 object PacketType {
-    const val IDENTITY = "kdeconnect.identity"
-    const val PAIR = "kdeconnect.pair"
-    const val ENCRYPTED = "kdeconnect.encrypted"
+    private const val CC_PREFIX = "cconnect."
+    private const val KDE_PREFIX = "cconnect."
+
+    const val IDENTITY = CC_PREFIX + "identity"
+    const val PAIR = CC_PREFIX + "pair"
+    const val ENCRYPTED = CC_PREFIX + "encrypted"
 
     // Plugin packet types
-    const val PING = "kdeconnect.ping"
-    const val BATTERY = "kdeconnect.battery"
-    const val BATTERY_REQUEST = "kdeconnect.battery.request"
-    const val SHARE_REQUEST = "kdeconnect.share.request"
-    const val SHARE_REQUEST_UPDATE = "kdeconnect.share.request.update"
-    const val CLIPBOARD = "kdeconnect.clipboard"
-    const val CLIPBOARD_CONNECT = "kdeconnect.clipboard.connect"
-    const val MPRIS = "kdeconnect.mpris"
-    const val MPRIS_REQUEST = "kdeconnect.mpris.request"
-    const val NOTIFICATION = "kdeconnect.notification"
-    const val NOTIFICATION_REQUEST = "kdeconnect.notification.request"
-    const val RUNCOMMAND = "kdeconnect.runcommand"
-    const val RUNCOMMAND_REQUEST = "kdeconnect.runcommand.request"
-    const val TELEPHONY = "kdeconnect.telephony"
-    const val SMS_REQUEST = "kdeconnect.sms.request"
-    const val SMS_MESSAGES = "kdeconnect.sms.messages"
-    const val MOUSEPAD_REQUEST = "kdeconnect.mousepad.request"
-    const val MOUSEPAD_ECHO = "kdeconnect.mousepad.echo"
-    const val MOUSEPAD_KEYBOARDSTATE = "kdeconnect.mousepad.keyboardstate"
-    const val PRESENTER = "kdeconnect.presenter"
-    const val SFTP = "kdeconnect.sftp"
-    const val SFTP_REQUEST = "kdeconnect.sftp.request"
-    const val FINDMYPHONE_REQUEST = "kdeconnect.findmyphone.request"
+    const val PING = CC_PREFIX + "ping"
+    const val BATTERY = CC_PREFIX + "battery"
+    const val BATTERY_REQUEST = CC_PREFIX + "battery.request"
+    const val SHARE_REQUEST = CC_PREFIX + "share.request"
+    const val SHARE_REQUEST_UPDATE = CC_PREFIX + "share.request.update"
+    const val CLIPBOARD = CC_PREFIX + "clipboard"
+    const val CLIPBOARD_CONNECT = CC_PREFIX + "clipboard.connect"
+    const val MPRIS = CC_PREFIX + "mpris"
+    const val MPRIS_REQUEST = CC_PREFIX + "mpris.request"
+    const val NOTIFICATION = CC_PREFIX + "notification"
+    const val NOTIFICATION_REQUEST = CC_PREFIX + "notification.request"
+    const val RUNCOMMAND = CC_PREFIX + "runcommand"
+    const val RUNCOMMAND_REQUEST = CC_PREFIX + "runcommand.request"
+    const val TELEPHONY = CC_PREFIX + "telephony"
+    const val SMS_REQUEST = CC_PREFIX + "sms.request"
+    const val SMS_MESSAGES = CC_PREFIX + "sms.messages"
+    const val MOUSEPAD_REQUEST = CC_PREFIX + "mousepad.request"
+    const val MOUSEPAD_ECHO = CC_PREFIX + "mousepad.echo"
+    const val MOUSEPAD_KEYBOARDSTATE = CC_PREFIX + "mousepad.keyboardstate"
+    const val PRESENTER = CC_PREFIX + "presenter"
+    const val SFTP = CC_PREFIX + "sftp"
+    const val SFTP_REQUEST = CC_PREFIX + "sftp.request"
+    const val FINDMYPHONE_REQUEST = CC_PREFIX + "findmyphone.request"
+
+    /**
+     * Normalizes a packet type string by converting legacy namespaces to cconnect
+     */
+    fun normalize(type: String): String {
+        return if (type.startsWith(KDE_PREFIX)) {
+            type.replace(KDE_PREFIX, CC_PREFIX)
+        } else {
+            type
+        }
+    }
 }

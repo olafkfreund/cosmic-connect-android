@@ -14,21 +14,21 @@ This document provides the migration pattern for converting plugins from the old
 
 ### Old Pattern (Mutable NetworkPacket)
 ```kotlin
-import org.cosmic.cosmicconnect.NetworkPacket
+import org.cosmic.cconnect.NetworkPacket
 
 // Mutable - can be modified after creation
-val packet = NetworkPacket("kdeconnect.ping")
+val packet = NetworkPacket("cconnect.ping")
 packet.set("message", "Hello")  // ❌ Mutability can cause bugs
 device.sendPacket(packet)
 ```
 
 ### New Pattern (Immutable NetworkPacket)
 ```kotlin
-import org.cosmic.cosmicconnect.Core.NetworkPacket
-import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
+import org.cosmic.cconnect.Core.NetworkPacket
+import org.cosmic.cconnect.NetworkPacket as LegacyNetworkPacket
 
 // Immutable - thread-safe, no accidental modifications
-val packet = NetworkPacket.create("kdeconnect.ping", mapOf(
+val packet = NetworkPacket.create("cconnect.ping", mapOf(
     "message" to "Hello"
 ))  // ✅ Created with all data upfront
 
@@ -52,13 +52,13 @@ device.sendPacket(legacyPacket)
 
 **Before**:
 ```kotlin
-import org.cosmic.cosmicconnect.NetworkPacket
+import org.cosmic.cconnect.NetworkPacket
 ```
 
 **After**:
 ```kotlin
-import org.cosmic.cosmicconnect.Core.NetworkPacket
-import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
+import org.cosmic.cconnect.Core.NetworkPacket
+import org.cosmic.cconnect.NetworkPacket as LegacyNetworkPacket
 ```
 
 **Why**:
@@ -97,13 +97,13 @@ override fun onPacketReceived(np: LegacyNetworkPacket): Boolean {
 
 **Before**:
 ```kotlin
-device.sendPacket(NetworkPacket("kdeconnect.ping"))
+device.sendPacket(NetworkPacket("cconnect.ping"))
 ```
 
 **After**:
 ```kotlin
 // Create immutable packet
-val packet = NetworkPacket.create("kdeconnect.ping", emptyMap())
+val packet = NetworkPacket.create("cconnect.ping", emptyMap())
 
 // Convert to legacy for Device.sendPacket()
 val legacyPacket = LegacyNetworkPacket(packet.type)
@@ -114,7 +114,7 @@ device.sendPacket(legacyPacket)
 
 **Before**:
 ```kotlin
-val np = NetworkPacket("kdeconnect.battery")
+val np = NetworkPacket("cconnect.battery")
 np.set("currentCharge", 75)
 np.set("isCharging", true)
 np.set("thresholdEvent", 0)
@@ -124,7 +124,7 @@ device.sendPacket(np)
 **After**:
 ```kotlin
 // Create immutable packet with all data upfront
-val packet = NetworkPacket.create("kdeconnect.battery", mapOf(
+val packet = NetworkPacket.create("cconnect.battery", mapOf(
     "currentCharge" to 75,
     "isCharging" to true,
     "thresholdEvent" to 0
@@ -190,13 +190,13 @@ private fun convertLegacyPacket(legacy: LegacyNetworkPacket): NetworkPacket {
 **File**: `FindRemoteDevicePlugin.kt` (33 lines)
 
 ```kotlin
-package org.cosmic.cosmicconnect.Plugins.FindRemoteDevicePlugin
+package org.cosmic.cconnect.Plugins.FindRemoteDevicePlugin
 
-import org.cosmic.cosmicconnect.NetworkPacket  // ❌ Old mutable
-import org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.FindMyPhonePlugin
-import org.cosmic.cosmicconnect.Plugins.Plugin
-import org.cosmic.cosmicconnect.Plugins.PluginFactory.LoadablePlugin
-import org.cosmic.cosmicconnect.R
+import org.cosmic.cconnect.NetworkPacket  // ❌ Old mutable
+import org.cosmic.cconnect.Plugins.FindMyPhonePlugin.FindMyPhonePlugin
+import org.cosmic.cconnect.Plugins.Plugin
+import org.cosmic.cconnect.Plugins.PluginFactory.LoadablePlugin
+import org.cosmic.cconnect.R
 
 @LoadablePlugin
 class FindRemoteDevicePlugin : Plugin() {
@@ -225,14 +225,14 @@ class FindRemoteDevicePlugin : Plugin() {
 **File**: `FindRemoteDevicePlugin.kt` (41 lines)
 
 ```kotlin
-package org.cosmic.cosmicconnect.Plugins.FindRemoteDevicePlugin
+package org.cosmic.cconnect.Plugins.FindRemoteDevicePlugin
 
-import org.cosmic.cosmicconnect.Core.NetworkPacket  // ✅ New immutable
-import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket  // ✅ Type alias
-import org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.FindMyPhonePlugin
-import org.cosmic.cosmicconnect.Plugins.Plugin
-import org.cosmic.cosmicconnect.Plugins.PluginFactory.LoadablePlugin
-import org.cosmic.cosmicconnect.R
+import org.cosmic.cconnect.Core.NetworkPacket  // ✅ New immutable
+import org.cosmic.cconnect.NetworkPacket as LegacyNetworkPacket  // ✅ Type alias
+import org.cosmic.cconnect.Plugins.FindMyPhonePlugin.FindMyPhonePlugin
+import org.cosmic.cconnect.Plugins.Plugin
+import org.cosmic.cconnect.Plugins.PluginFactory.LoadablePlugin
+import org.cosmic.cconnect.R
 
 @LoadablePlugin
 class FindRemoteDevicePlugin : Plugin() {

@@ -161,8 +161,8 @@
 **Integration**: ClipboardPlugin.java updated
 
 **Key Features**:
-- Standard clipboard update packets (kdeconnect.clipboard)
-- Connection sync packets with timestamp (kdeconnect.clipboard.connect)
+- Standard clipboard update packets (cconnect.clipboard)
+- Connection sync packets with timestamp (cconnect.clipboard.connect)
 - Timestamp-based sync loop prevention
 - Extension properties for type-safe inspection
 - Java-compatible helper functions
@@ -295,7 +295,7 @@
 
 ✅ **All 5 phases complete** (100%)
 ✅ **Zero compilation errors** (Rust + Android)
-✅ **Protocol compliance verified** (kdeconnect.* packet types)
+✅ **Protocol compliance verified** (cconnect.* packet types)
 ✅ **Type-safe API created** (ClipboardPacketsFFI)
 ✅ **Comprehensive documentation** (~3,500 lines)
 ✅ **Testing guide complete** (22 test cases)

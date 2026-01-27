@@ -11,6 +11,7 @@ import android.net.Network
 import android.util.Log
 import android.util.Pair
 import androidx.annotation.WorkerThread
+import dagger.hilt.android.qualifiers.ApplicationContext
 import org.cosmic.cosmicconnect.Backends.BaseLink
 import org.cosmic.cosmicconnect.Backends.BaseLinkProvider
 import org.cosmic.cosmicconnect.DeviceHost
@@ -33,8 +34,9 @@ import java.net.Socket
 import java.net.SocketException
 import java.net.UnknownHostException
 import java.util.concurrent.ConcurrentHashMap
+import javax.inject.Inject
+import javax.inject.Singleton
 import javax.net.SocketFactory
-import javax.net.ssl.SSLHandshakeException
 import javax.net.ssl.SSLSocket
 import kotlin.text.Charsets
 
@@ -45,7 +47,12 @@ import kotlin.text.Charsets
  *
  * @see .identityPacketReceived
  */
-class LanLinkProvider(private val context: Context) : BaseLinkProvider() {
+@Singleton
+class LanLinkProvider @Inject constructor(
+    @ApplicationContext private val context: Context,
+    private val deviceHelper: DeviceHelper,
+    private val sslHelper: SslHelper
+) : BaseLinkProvider() {
 
     internal val visibleDevices = HashMap<String, LanLink>() // Links by device id
 
@@ -55,8 +62,8 @@ class LanLinkProvider(private val context: Context) : BaseLinkProvider() {
     private var tcpServer: ServerSocket? = null
     private var udpServer: DatagramSocket? = null
 
-    private val mdnsDiscovery = MdnsDiscovery(context, this)
-    private val discoveryManager = DiscoveryManager(context, this)
+    private val mdnsDiscovery = MdnsDiscovery(context, this, deviceHelper)
+    private val discoveryManager = DiscoveryManager(context, this, deviceHelper)
 
     private var lastBroadcast: Long = 0
 
@@ -83,7 +90,7 @@ class LanLinkProvider(private val context: Context) : BaseLinkProvider() {
         }
 
         val deviceId = identityPacket.getString("deviceId")
-        val myId = DeviceHelper.getDeviceId(context)
+        val myId = deviceHelper.getDeviceId()
         if (deviceId == myId) {
             //Ignore my own broadcast
             return null
@@ -141,7 +148,7 @@ class LanLinkProvider(private val context: Context) : BaseLinkProvider() {
 
         val targetDeviceId = identityPacket.getStringOrNull("targetDeviceId")
         val targetProtocolVersion = identityPacket.getIntOrNull("targetProtocolVersion")
-        if (targetDeviceId != null && targetDeviceId != DeviceHelper.getDeviceId(context)) {
+        if (targetDeviceId != null && targetDeviceId != deviceHelper.getDeviceId()) {
             Log.e(
                 "KDE/LanLinkProvider",
                 "Received a connection request for a device that isn't me: $targetDeviceId"
@@ -244,7 +251,7 @@ class LanLinkProvider(private val context: Context) : BaseLinkProvider() {
         val socket = socketFactory.createSocket(address, tcpPort)
         configureSocket(socket)
 
-        val myDeviceInfo = DeviceHelper.getDeviceInfo(context)
+        val myDeviceInfo = deviceHelper.getDeviceInfo()
         val myIdentity = myDeviceInfo.toIdentityPacket()
         myIdentity.set("targetDeviceId", identityPacket.getString("deviceId"))
         myIdentity.set("targetProtocolVersion", identityPacket.getString("protocolVersion"))
@@ -309,7 +316,7 @@ class LanLinkProvider(private val context: Context) : BaseLinkProvider() {
 
         // If I'm the TCP server I will be the SSL client and vice-versa.
         val clientMode = (connectionStarted == LanLink.ConnectionStarted.Locally)
-        val sslSocket = SslHelper.convertToSslSocket(context, socket, deviceId, deviceTrusted, clientMode)
+        val sslSocket = sslHelper.convertToSslSocket(socket, deviceId, deviceTrusted, clientMode)
         sslSocket.addHandshakeCompletedListener { event ->
             // Start a new thread because some Android versions don't allow calling sslSocket.getOutputStream() from the callback
             ThreadHelper.execute {
@@ -317,7 +324,7 @@ class LanLinkProvider(private val context: Context) : BaseLinkProvider() {
                 try {
                     val secureIdentityPacket: NetworkPacket
                     if (protocolVersion >= 8) {
-                        val myDeviceInfo = DeviceHelper.getDeviceInfo(context)
+                        val myDeviceInfo = deviceHelper.getDeviceInfo()
                         val myIdentity = myDeviceInfo.toIdentityPacket()
                         val writer = sslSocket.outputStream
                         writer.write(myIdentity.serialize().toByteArray(Charsets.UTF_8))
@@ -411,7 +418,7 @@ class LanLinkProvider(private val context: Context) : BaseLinkProvider() {
         } else {
             // Create a new link
             Log.d("KDE/LanLinkProvider", "Creating a new link for device " + deviceInfo.id)
-            link = LanLink(context, deviceInfo, this, socket)
+            link = LanLink(context, deviceInfo, this, socket, sslHelper)
             visibleDevices[deviceInfo.id] = link
             onConnectionReceived(link)
         }
@@ -527,7 +534,7 @@ class LanLinkProvider(private val context: Context) : BaseLinkProvider() {
 
         // TODO: In protocol version 8 this packet doesn't need to contain identity info
         //       since it will be exchanged after the socket is encrypted.
-        val myDeviceInfo = DeviceHelper.getDeviceInfo(context)
+        val myDeviceInfo = deviceHelper.getDeviceInfo()
         val identity = myDeviceInfo.toIdentityPacket()
         identity.set("tcpPort", tcpServer!!.localPort)
 

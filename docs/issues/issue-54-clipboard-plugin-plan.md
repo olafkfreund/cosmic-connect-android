@@ -48,7 +48,7 @@ Migrate the Clipboard plugin from manual packet creation to FFI-based architectu
 **Status**: ⚠️ Protocol compliance issue, manual packet creation
 
 **Current Issues**:
-1. **Protocol Violation**: Uses `cosmicconnect.clipboard` instead of `kdeconnect.clipboard` (lines 44, 59)
+1. **Protocol Violation**: Uses `cconnect.clipboard` instead of `cconnect.clipboard` (lines 44, 59)
 2. **Manual Packet Creation**: HashMap construction for packets (lines 97-99, 113-117)
 3. **No Type Safety**: String-based field access ("content", "timestamp")
 4. **Code Duplication**: convertToLegacyPacket helper (lines 126-137)
@@ -70,7 +70,7 @@ Migrate the Clipboard plugin from manual packet creation to FFI-based architectu
 ```json
 {
     "id": 1234567890,
-    "type": "kdeconnect.clipboard",
+    "type": "cconnect.clipboard",
     "body": {
         "content": "text content"
     }
@@ -81,7 +81,7 @@ Migrate the Clipboard plugin from manual packet creation to FFI-based architectu
 ```json
 {
     "id": 1234567890,
-    "type": "kdeconnect.clipboard.connect",
+    "type": "cconnect.clipboard.connect",
     "body": {
         "content": "text content",
         "timestamp": 1640000000000
@@ -193,9 +193,9 @@ FfiPacket create_clipboard_connect_packet(
 
 **ClipboardPacketsFFI.kt Structure**:
 ```kotlin
-package org.cosmic.cosmicconnect.Plugins.ClipboardPlugin
+package org.cosmic.cconnect.Plugins.ClipboardPlugin
 
-import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cconnect.Core.NetworkPacket
 import uniffi.cosmic_connect_core.*
 
 object ClipboardPacketsFFI {
@@ -226,10 +226,10 @@ object ClipboardPacketsFFI {
 
 // Extension properties for type-safe packet inspection
 val NetworkPacket.isClipboardUpdate: Boolean
-    get() = type == "kdeconnect.clipboard" && body.containsKey("content")
+    get() = type == "cconnect.clipboard" && body.containsKey("content")
 
 val NetworkPacket.isClipboardConnect: Boolean
-    get() = type == "kdeconnect.clipboard.connect" &&
+    get() = type == "cconnect.clipboard.connect" &&
             body.containsKey("content") &&
             body.containsKey("timestamp")
 
@@ -271,18 +271,18 @@ val NetworkPacket.clipboardTimestamp: Long?
 #### 1. Fix Packet Type Constants (Lines 44, 59)
 ```java
 // Before
-private final static String PACKET_TYPE_CLIPBOARD = "cosmicconnect.clipboard";
-private final static String PACKET_TYPE_CLIPBOARD_CONNECT = "cosmicconnect.clipboard.connect";
+private final static String PACKET_TYPE_CLIPBOARD = "cconnect.clipboard";
+private final static String PACKET_TYPE_CLIPBOARD_CONNECT = "cconnect.clipboard.connect";
 
 // After
-private final static String PACKET_TYPE_CLIPBOARD = "kdeconnect.clipboard";
-private final static String PACKET_TYPE_CLIPBOARD_CONNECT = "kdeconnect.clipboard.connect";
+private final static String PACKET_TYPE_CLIPBOARD = "cconnect.clipboard";
+private final static String PACKET_TYPE_CLIPBOARD_CONNECT = "cconnect.clipboard.connect";
 ```
 
 #### 2. Add FFI Imports
 ```java
-import org.cosmic.cosmicconnect.Plugins.ClipboardPlugin.ClipboardPacketsFFI;
-import static org.cosmic.cosmicconnect.Plugins.ClipboardPlugin.ClipboardPacketsFFIKt.*;
+import org.cosmic.cconnect.Plugins.ClipboardPlugin.ClipboardPacketsFFI;
+import static org.cosmic.cconnect.Plugins.ClipboardPlugin.ClipboardPacketsFFIKt.*;
 ```
 
 #### 3. Update propagateClipboard() (Lines 95-103)
@@ -334,7 +334,7 @@ private void sendConnectPacket() {
 ```java
 // Before
 @Override
-public boolean onPacketReceived(@NonNull org.cosmic.cosmicconnect.NetworkPacket np) {
+public boolean onPacketReceived(@NonNull org.cosmic.cconnect.NetworkPacket np) {
     String content = np.getString("content");
     switch (np.getType()) {
         case (PACKET_TYPE_CLIPBOARD):
@@ -355,7 +355,7 @@ public boolean onPacketReceived(@NonNull org.cosmic.cosmicconnect.NetworkPacket 
 
 // After
 @Override
-public boolean onPacketReceived(@NonNull org.cosmic.cosmicconnect.NetworkPacket legacyNp) {
+public boolean onPacketReceived(@NonNull org.cosmic.cconnect.NetworkPacket legacyNp) {
     // Convert legacy packet to immutable for type-safe inspection
     NetworkPacket np = NetworkPacket.fromLegacy(legacyNp);
 
@@ -384,7 +384,7 @@ public boolean onPacketReceived(@NonNull org.cosmic.cosmicconnect.NetworkPacket 
 ```
 
 **Success Criteria**:
-- ✅ Protocol compliance (kdeconnect.clipboard)
+- ✅ Protocol compliance (cconnect.clipboard)
 - ✅ FFI wrappers used
 - ✅ Extension properties used
 - ✅ convertToLegacyPacket helper still present
@@ -437,7 +437,7 @@ public boolean onPacketReceived(@NonNull org.cosmic.cosmicconnect.NetworkPacket 
 3. Network failure during sync
 
 #### Test Suite 5: Protocol Compliance (3 tests)
-1. Packet type verification (kdeconnect.clipboard)
+1. Packet type verification (cconnect.clipboard)
 2. Field name correctness
 3. KDE Connect compatibility
 
@@ -458,7 +458,7 @@ public boolean onPacketReceived(@NonNull org.cosmic.cosmicconnect.NetworkPacket 
 ```java
 Map<String, Object> body = new HashMap<>();
 body.put("content", text);
-NetworkPacket packet = NetworkPacket.create("cosmicconnect.clipboard", body);
+NetworkPacket packet = NetworkPacket.create("cconnect.clipboard", body);
 ```
 
 **After**:
@@ -488,8 +488,8 @@ if (getIsClipboardUpdate(np)) {
 
 ### Protocol Compliance
 
-**Before**: `cosmicconnect.clipboard` ❌
-**After**: `kdeconnect.clipboard` ✅
+**Before**: `cconnect.clipboard` ❌
+**After**: `cconnect.clipboard` ✅
 
 ### Maintainability
 

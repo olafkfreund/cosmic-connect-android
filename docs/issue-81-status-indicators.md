@@ -12,7 +12,11 @@ Implemented comprehensive status indicator components for COSMIC Connect Android
 
 ### Created Files
 
-1. **StatusIndicators.kt** - Five status indicator components with accessibility (550+ lines)
+1. **ui/components/status/ConnectionStatus.kt** - Connection status indicator
+2. **ui/components/status/BatteryIndicator.kt** - Battery status indicator
+3. **ui/components/status/TransferProgress.kt** - File transfer progress
+4. **ui/components/status/SyncStatus.kt** - Sync status indicator
+5. **ui/components/status/LoadingIndicator.kt** - Loading indicator variants
 
 ### Components Implemented
 

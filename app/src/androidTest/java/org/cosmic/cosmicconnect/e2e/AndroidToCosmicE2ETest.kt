@@ -1,14 +1,14 @@
-package org.cosmic.cosmicconnect.e2e
+package org.cosmic.cconnect.e2e
 
 import android.net.Uri
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.cosmic.cosmicconnect.CosmicConnect
-import org.cosmic.cosmicconnect.Device
-import org.cosmic.cosmicconnect.plugins.battery.BatteryPlugin
-import org.cosmic.cosmicconnect.plugins.clipboard.ClipboardPlugin
-import org.cosmic.cosmicconnect.plugins.ping.PingPlugin
-import org.cosmic.cosmicconnect.plugins.share.SharePlugin
-import org.cosmic.cosmicconnect.test.TestUtils
+import org.cosmic.cconnect.CosmicConnect
+import org.cosmic.cconnect.Device
+import org.cosmic.cconnect.plugins.battery.BatteryPlugin
+import org.cosmic.cconnect.plugins.clipboard.ClipboardPlugin
+import org.cosmic.cconnect.plugins.ping.PingPlugin
+import org.cosmic.cconnect.plugins.share.SharePlugin
+import org.cosmic.cconnect.test.TestUtils
 import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before

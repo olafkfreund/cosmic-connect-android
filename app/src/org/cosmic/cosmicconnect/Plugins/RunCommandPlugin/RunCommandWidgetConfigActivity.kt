@@ -11,19 +11,33 @@ import android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.Window
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.core.content.edit
-import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.CosmicConnect
-import org.cosmic.cosmicconnect.UserInterface.List.DeviceItem
-import org.cosmic.cosmicconnect.UserInterface.List.ListAdapter
-import org.cosmic.cosmicconnect.databinding.WidgetRemoteCommandPluginDialogBinding
+import org.cosmic.cosmicconnect.Device
+import org.cosmic.cosmicconnect.R
+import org.cosmic.cosmicconnect.UserInterface.compose.CosmicTheme
 
-class RunCommandWidgetConfigActivity : AppCompatActivity() {
+class RunCommandWidgetConfigActivity : ComponentActivity() {
 
     private var appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID
 
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(bundle: Bundle?) {
         super.onCreate(bundle)
 
@@ -35,19 +49,46 @@ class RunCommandWidgetConfigActivity : AppCompatActivity() {
             return
         }
 
-        supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
+        setContent {
+            CosmicTheme(context = this) {
+                Scaffold(
+                    topBar = {
+                        TopAppBar(
+                            title = { Text(getString(R.string.pref_plugin_runcommand)) }
+                        )
+                    }
+                ) { padding ->
+                    val pairedDevices = remember {
+                        CosmicConnect.getInstance().devices.values
+                            .filter { it.isPaired }
+                            .toList()
+                    }
 
-        val binding = WidgetRemoteCommandPluginDialogBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        val pairedDevices = CosmicConnect.getInstance().devices.values.asSequence().filter(Device::isPaired).toList()
-
-        val list = ListAdapter(this, pairedDevices.map { DeviceItem(it, ::deviceClicked) })
-        binding.runCommandsDeviceList.adapter = list
-        binding.runCommandsDeviceList.emptyView = binding.noDevices
+                    if (pairedDevices.isEmpty()) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(padding),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(getString(R.string.device_list_empty))
+                        }
+                    } else {
+                        LazyColumn(modifier = Modifier.padding(padding)) {
+                            items(pairedDevices) { device ->
+                                ListItem(
+                                    headlineContent = { Text(device.name) },
+                                    modifier = Modifier.clickable { deviceClicked(device) }
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
-    fun deviceClicked(device: Device) {
+    private fun deviceClicked(device: Device) {
         val deviceId = device.deviceId
         saveWidgetDeviceIdPref(this, appWidgetId, deviceId)
 

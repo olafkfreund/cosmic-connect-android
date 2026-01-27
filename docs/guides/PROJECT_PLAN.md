@@ -1006,7 +1006,7 @@ cargo install uniffi-bindgen
 # 2. Clone repositories
 git clone https://github.com/olafkfreund/cosmic-connect-core.git      # NEW
 git clone https://github.com/olafkfreund/cosmic-connect-android.git
-git clone https://github.com/olafkfreund/cosmic-applet-kdeconnect.git
+git clone https://github.com/olafkfreund/cosmic-applet-cconnect.git
 
 # 3. Build Rust core
 cd cosmic-connect-core

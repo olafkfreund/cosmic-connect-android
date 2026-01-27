@@ -194,7 +194,7 @@ object CosmicConnectCore {
 The library is automatically loaded when `CosmicConnectCore` is first accessed:
 
 ```kotlin
-import org.cosmic.cosmicconnect.Core.CosmicConnectCore
+import org.cosmic.cconnect.Core.CosmicConnectCore
 
 class MyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -231,7 +231,7 @@ val version = getVersion()
 val protocolVersion = getProtocolVersion()
 
 // Create packet
-val packet = createPacket("kdeconnect.ping", "{}")
+val packet = createPacket("cconnect.ping", "{}")
 
 // Generate certificate
 val cert = generateCertificate("device_id_12345")
@@ -242,8 +242,8 @@ val localDevice = FfiDeviceInfo(
     deviceName = "My Phone",
     deviceType = "phone",
     protocolVersion = 7,
-    incomingCapabilities = listOf("kdeconnect.battery"),
-    outgoing Capabilities = listOf("kdeconnect.battery"),
+    incomingCapabilities = listOf("cconnect.battery"),
+    outgoing Capabilities = listOf("cconnect.battery"),
     tcpPort = 1716u
 )
 

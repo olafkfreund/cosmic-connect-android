@@ -45,7 +45,7 @@ import org.cosmic.cosmicconnect.UserInterface.MainActivity
  *
  * ## Protocol
  *
- * **Packet Type**: `kdeconnect.ping`
+ * **Packet Type**: `cconnect.ping`
  *
  * **Direction**: Bidirectional (Android ↔ Desktop)
  *
@@ -73,7 +73,7 @@ class PingPlugin : Plugin() {
 
     companion object {
         private const val TAG = "PingPlugin"
-        private const val PACKET_TYPE_PING = "kdeconnect.ping"
+        private const val PACKET_TYPE_PING = "cconnect.ping"
     }
 
     // ========================================================================

@@ -29,27 +29,33 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import dagger.hilt.android.AndroidEntryPoint
 import org.cosmic.cosmicconnect.Backends.BaseLinkProvider
 import org.cosmic.cosmicconnect.Backends.BaseLinkProvider.ConnectionReceiver
 import org.cosmic.cosmicconnect.Backends.BluetoothBackend.BluetoothLinkProvider
 import org.cosmic.cosmicconnect.Backends.LanBackend.LanLinkProvider
+import org.cosmic.cosmicconnect.Core.DeviceRegistry
 import org.cosmic.cosmicconnect.Helpers.NotificationHelper
 import org.cosmic.cosmicconnect.Plugins.ClipboardPlugin.ClipboardFloatingActivity
 import org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandActivity
 import org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandPlugin
 import org.cosmic.cosmicconnect.Plugins.SharePlugin.SendFileActivity
 import org.cosmic.cosmicconnect.UserInterface.MainActivity
-import org.cosmic.cosmicconnect.R
+import javax.inject.Inject
 
 /**
  * This class (still) does 3 things:
  * - Keeps the app running by creating a foreground notification.
- * - Holds references to the active LinkProviders, but doesn't handle the DeviceLink those create (the CosmicConnect class does that).
+ * - Holds references to the active LinkProviders, but doesn't handle the DeviceLink those create (the DeviceRegistry class does that).
  * - Listens for network connectivity changes and tells the LinkProviders to re-check for devices.
  * It can be started by the CosmicConnectBroadcastReceiver on some events or when the MainActivity is launched.
  */
+@AndroidEntryPoint
 class BackgroundService : Service() {
-    private lateinit var applicationInstance: CosmicConnect
+
+    @Inject lateinit var deviceRegistry: DeviceRegistry
+    @Inject lateinit var lanLinkProvider: LanLinkProvider
+    @Inject lateinit var bluetoothLinkProvider: BluetoothLinkProvider
 
     private val linkProviders = mutableListOf<BaseLinkProvider>()
 
@@ -67,9 +73,8 @@ class BackgroundService : Service() {
     }
 
     private fun registerLinkProviders() {
-        linkProviders.add(LanLinkProvider(this))
-        //linkProviders.add(LoopbackLinkProvider(this))
-        linkProviders.add(BluetoothLinkProvider(this))
+        linkProviders.add(lanLinkProvider)
+        linkProviders.add(bluetoothLinkProvider)
     }
 
     fun onNetworkChange(network: Network?) {
@@ -100,10 +105,9 @@ class BackgroundService : Service() {
     override fun onCreate() {
         super.onCreate()
         Log.d("CosmicConnect/BgService", "onCreate")
-        this.applicationInstance = CosmicConnect.getInstance()
         instance = this
 
-        CosmicConnect.getInstance().addDeviceListChangedCallback("BackgroundService", this::updateForegroundNotification)
+        deviceRegistry.addDeviceListChangedCallback("BackgroundService", this::updateForegroundNotification)
 
         // Register screen on listener
         val filter = IntentFilter(Intent.ACTION_SCREEN_ON)
@@ -133,7 +137,7 @@ class BackgroundService : Service() {
         })
 
         registerLinkProviders()
-        addConnectionListener(applicationInstance.connectionListener) // Link Providers need to be already registered
+        addConnectionListener(deviceRegistry.connectionListener) // Link Providers need to be already registered
         for (linkProvider in linkProviders) {
             linkProvider.onStart()
         }
@@ -145,6 +149,7 @@ class BackgroundService : Service() {
             updateForegroundNotification()
         }
         else {
+            @Suppress("DEPRECATION")
             stopForeground(true)
             Start(this)
         }
@@ -155,7 +160,7 @@ class BackgroundService : Service() {
 
         val connectedDevices = mutableListOf<String>()
         val connectedDeviceIds = mutableListOf<String>()
-        for (device in applicationInstance.devices.values) {
+        for (device in deviceRegistry.devices.values) {
             if (device.isReachable && device.isPaired) {
                 connectedDeviceIds.add(device.deviceId)
                 connectedDevices.add(device.name)
@@ -200,7 +205,7 @@ class BackgroundService : Service() {
 
             if (connectedDeviceIds.size == 1) {
                 val deviceId = connectedDeviceIds[0]
-                val device = CosmicConnect.getInstance().getDevice(deviceId)
+                val device = deviceRegistry.getDevice(deviceId)
                 if (device != null) {
                     // Adding two action buttons only when there is a single device connected.
                     // Setting up Send File Intent.
@@ -229,7 +234,7 @@ class BackgroundService : Service() {
         for (linkProvider in linkProviders) {
             linkProvider.onStop()
         }
-        CosmicConnect.getInstance().removeDeviceListChangedCallback("BackgroundService")
+        deviceRegistry.removeDeviceListChangedCallback("BackgroundService")
         super.onDestroy()
     }
 

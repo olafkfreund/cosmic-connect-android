@@ -547,7 +547,7 @@ private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
 
 ### Decision 3: Add Battery Request Feature
 
-**Context:** Original plugin didn't handle `kdeconnect.battery.request` packets.
+**Context:** Original plugin didn't handle `cconnect.battery.request` packets.
 
 **Options Considered:**
 1. Only migrate existing functionality

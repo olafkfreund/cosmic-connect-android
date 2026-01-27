@@ -21,8 +21,8 @@ Convert ClipboardPlugin from Java to Kotlin and verify integration with Clipboar
 
 The ClipboardPlugin enables automatic clipboard synchronization between Android and COSMIC Desktop devices. It uses the KDE Connect protocol v7 clipboard packet format with two packet types:
 
-1. **`kdeconnect.clipboard`** - Standard clipboard update (no timestamp)
-2. **`kdeconnect.clipboard.connect`** - Connection sync with timestamp for loop prevention
+1. **`cconnect.clipboard`** - Standard clipboard update (no timestamp)
+2. **`cconnect.clipboard.connect`** - Connection sync with timestamp for loop prevention
 
 ### Current Status
 
@@ -271,14 +271,14 @@ fun testClipboardPlugin() {
     // Test 1: Standard clipboard update
     val updatePacket = createClipboardUpdate("Hello World")
     assertNotNull(updatePacket)
-    assertEquals("kdeconnect.clipboard", updatePacket.packetType)
+    assertEquals("cconnect.clipboard", updatePacket.packetType)
     assertTrue(updatePacket.isClipboardUpdate)
     assertEquals("Hello World", updatePacket.clipboardContent)
 
     // Test 2: Clipboard connect with timestamp
     val connectPacket = createClipboardConnect("Hello World", 1704067200000)
     assertNotNull(connectPacket)
-    assertEquals("kdeconnect.clipboard.connect", connectPacket.packetType)
+    assertEquals("cconnect.clipboard.connect", connectPacket.packetType)
     assertTrue(connectPacket.isClipboardConnect)
     assertEquals("Hello World", connectPacket.clipboardContent)
     assertEquals(1704067200000, connectPacket.clipboardTimestamp)
@@ -377,7 +377,7 @@ Kotlin Plugin ← Extension properties
 ### Standard Update Packet
 ```json
 {
-  "type": "kdeconnect.clipboard",
+  "type": "cconnect.clipboard",
   "id": 1234567890,
   "body": {
     "content": "Hello World"
@@ -388,7 +388,7 @@ Kotlin Plugin ← Extension properties
 ### Connect Packet (with Timestamp)
 ```json
 {
-  "type": "kdeconnect.clipboard.connect",
+  "type": "cconnect.clipboard.connect",
   "id": 1234567891,
   "body": {
     "content": "Hello World",
@@ -402,7 +402,7 @@ Kotlin Plugin ← Extension properties
 ## Clipboard Synchronization Flow
 
 ### On Device Connection
-1. Desktop sends `kdeconnect.clipboard.connect` with current content + timestamp
+1. Desktop sends `cconnect.clipboard.connect` with current content + timestamp
 2. Android receives packet
 3. Android compares timestamp with local clipboard timestamp
 4. If remote timestamp > local timestamp: Update local clipboard
@@ -412,7 +412,7 @@ Kotlin Plugin ← Extension properties
 1. User copies text on Android
 2. ClipboardListener detects change
 3. ClipboardPlugin.propagateClipboard() called
-4. Creates `kdeconnect.clipboard` packet via FFI
+4. Creates `cconnect.clipboard` packet via FFI
 5. Sends packet to desktop
 6. Desktop updates its clipboard
 

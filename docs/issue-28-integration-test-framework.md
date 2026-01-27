@@ -169,7 +169,7 @@ val certificate = FfiTestUtils.createTestCertificate()
 
 // Test packet serialization
 FfiTestUtils.testNetworkPacketSerialization(
-  type = "kdeconnect.battery",
+  type = "cconnect.battery",
   body = mapOf("currentCharge" to 75)
 )
 
@@ -205,7 +205,7 @@ fun testNetworkPacketSerialization() {
 
   // Verify packet created via FFI
   assertNotNull(packet)
-  assertEquals("kdeconnect.battery", packet.type)
+  assertEquals("cconnect.battery", packet.type)
 }
 
 @Test
@@ -540,7 +540,7 @@ class NetworkPacketFfiTest {
 
     // Verify FFI call succeeded
     assertNotNull(packet)
-    assertEquals("kdeconnect.battery", packet.type)
+    assertEquals("cconnect.battery", packet.type)
 
     // Test serialization roundtrip via FFI
     val result = FfiTestUtils.testNetworkPacketSerialization(

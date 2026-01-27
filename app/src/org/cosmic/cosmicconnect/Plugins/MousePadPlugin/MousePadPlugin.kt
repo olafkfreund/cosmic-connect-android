@@ -184,7 +184,7 @@ class MousePadPlugin : Plugin() {
     override val outgoingPacketTypes = arrayOf(PACKET_TYPE_MOUSEPAD_REQUEST)
 
     companion object {
-        const val PACKET_TYPE_MOUSEPAD_REQUEST: String = "cosmicconnect.mousepad.request"
-        private const val PACKET_TYPE_MOUSEPAD_KEYBOARDSTATE = "cosmicconnect.mousepad.keyboardstate"
+        const val PACKET_TYPE_MOUSEPAD_REQUEST: String = "cconnect.mousepad.request"
+        private const val PACKET_TYPE_MOUSEPAD_KEYBOARDSTATE = "cconnect.mousepad.keyboardstate"
     }
 }

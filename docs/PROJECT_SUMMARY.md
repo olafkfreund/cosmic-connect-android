@@ -749,7 +749,7 @@ Full license: [LICENSE](../LICENSE)
 
 ### External Resources
 - **COSMIC Desktop**: https://github.com/pop-os/cosmic-epoch
-- **KDE Connect**: https://kdeconnect.kde.org/
+- **KDE Connect**: https://cconnect.kde.org/
 - **Android Developers**: https://developer.android.com/
 - **Rust Programming**: https://www.rust-lang.org/
 

@@ -428,9 +428,9 @@ All components maintain consistency:
 ### Dependencies
 
 ```kotlin
-import org.cosmic.cosmicconnect.UserInterface.compose.CosmicTheme
-import org.cosmic.cosmicconnect.UserInterface.compose.Spacing
-import org.cosmic.cosmicconnect.UserInterface.compose.Dimensions
+import org.cosmic.cconnect.UserInterface.compose.CosmicTheme
+import org.cosmic.cconnect.UserInterface.compose.Spacing
+import org.cosmic.cconnect.UserInterface.compose.Dimensions
 ```
 
 ### Theme Integration

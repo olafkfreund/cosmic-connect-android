@@ -15,103 +15,105 @@ ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidMan
 INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:9:1-475:12
 INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:9:1-475:12
 INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:9:1-475:12
-MERGED from [androidx.databinding:viewbinding:8.7.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9bcc2040d2855df18149ca2eced45e14/transformed/viewbinding-8.7.3/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/551b0cc91b2f3afba7beefd538db9dd3/transformed/ui-tooling-release/AndroidManifest.xml:17:1-28:12
-MERGED from [androidx.navigation:navigation-common:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/92572e37df014d6afe9c839e4066d9eb/transformed/navigation-common-2.8.5/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.navigation:navigation-runtime:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6d8f7c9deba0015a3b8f6912a3127b85/transformed/navigation-runtime-2.8.5/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.navigation:navigation-common-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/07b74954c8e4cfc7b97b84f5cbff8598/transformed/navigation-common-ktx-2.8.5/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.navigation:navigation-ui:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/33bef52a7836a6ea67bd30ab5f64f9b7/transformed/navigation-ui-2.8.5/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.navigation:navigation-fragment:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/24331ff865b82fae3dfcc20d23c172ac/transformed/navigation-fragment-2.8.5/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f8c4b6c90797e421c4f42a480f1f87d5/transformed/navigation-runtime-ktx-2.8.5/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.navigation:navigation-ui-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b6ad89780f39a0125df6fa0093bf7342/transformed/navigation-ui-ktx-2.8.5/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.navigation:navigation-fragment-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ab0741982abb2bfbee1cb2e13a5a0f99/transformed/navigation-fragment-ktx-2.8.5/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.navigation:navigation-compose:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/044d2276ce541e887915c365813e7981/transformed/navigation-compose-2.8.5/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.material3:material3-android:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b3790d01d1a3091b0fb13b91ba634393/transformed/material3-release/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.preference:preference-ktx:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f517082342b43aad08ffb16cd69307a4/transformed/preference-ktx-1.2.1/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.preference:preference:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d855a21a11ac300fafd3479cc79b2cf6/transformed/preference-1.2.1/AndroidManifest.xml:17:1-24:12
-MERGED from [com.google.android.material:material:1.13.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/4284dfee7a9883dca715f68895ad1f7b/transformed/material-1.13.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.appcompat:appcompat-resources:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/afe134f33f4b8937f3daf833cd02f11b/transformed/appcompat-resources-1.7.1/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5754b18925d568652f9e3158c06a5740/transformed/constraintlayout-2.1.0/AndroidManifest.xml:2:1-11:12
-MERGED from [androidx.appcompat:appcompat:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cc14f700b33d22af268947268e3a2605/transformed/appcompat-1.7.1/AndroidManifest.xml:2:1-7:12
-MERGED from [com.google.dagger:hilt-android:2.51.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/707831528e8cd8bea7b2fd00245c908d/transformed/hilt-android-2.51.1/AndroidManifest.xml:16:1-19:12
-MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6c077af4a0856283d3ecdb25dbab1d04/transformed/lifecycle-extensions-2.2.0/AndroidManifest.xml:17:1-27:12
-MERGED from [androidx.recyclerview:recyclerview:1.3.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7f3ac69755a4c6e89ce544501e49f180/transformed/recyclerview-1.3.2/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.viewpager2:viewpager2:1.1.0-beta02] /home/olafkfreund/.gradle/caches/8.14.1/transforms/1214d5d63923d392d78fe19d0dea61c9/transformed/viewpager2-1.1.0-beta02/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.fragment:fragment-ktx:1.6.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/12a38b26a1264ff627bccbac238b02d8/transformed/fragment-ktx-1.6.2/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.fragment:fragment:1.6.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/2345985999dcb7a3d1b38ecc96cfd51c/transformed/fragment-1.6.2/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.activity:activity:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6669ec5d099b9730c10f7a2b66fbb712/transformed/activity-1.9.3/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.activity:activity-ktx:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ffb41f05e796386277dcf6e862594b95/transformed/activity-ktx-1.9.3/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.activity:activity-compose:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/073a2b645d3364bf7aa855540af35894/transformed/activity-compose-1.9.3/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.material:material:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cbc6d90008240cd5a5127ff331fb631f/transformed/material-1.0.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.compose.material:material-icons-core-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ac78faeb8dd3ea9f6781e2b933866e50/transformed/material-icons-core-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.constraintlayout:constraintlayout-compose-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/26776ff4c9b257067b24029fa929021b/transformed/constraintlayout-compose-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/dbb32b8cdf185b6a29012bc99cff8e6c/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.material:material-ripple-android:1.7.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/3b73692245d2645384009df13c7e70a1/transformed/material-ripple-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.foundation:foundation-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/51a7269b6e96ffb2e287dccde86c58d5/transformed/foundation-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.foundation:foundation-layout-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/1d923375af87ded13a4ef06a70a13d98/transformed/foundation-layout-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.animation:animation-core-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6ea94a3311766ecebd6cb17b737e6eb4/transformed/animation-core-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.animation:animation-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9580dca498a6d3db1c093e85726e60cf/transformed/animation-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.ui:ui-graphics-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/970349134402ce5fc7e0c1199999a7ef/transformed/ui-graphics-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.ui:ui-geometry-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c0df80c6310c962c33a5efb1aea127de/transformed/ui-geometry-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.ui:ui-unit-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/56ebe2bd9c13a2b58670594c0189f58d/transformed/ui-unit-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.ui:ui-util-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b3763cd2cf0390a7b29c0b387da3793a/transformed/ui-util-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.ui:ui-tooling-data-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9cd30cc1e3fc739c9c3db96ee06eb4c1/transformed/ui-tooling-data-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.ui:ui-text-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/61ef9a2df9bebdcd55db67bc61d573f8/transformed/ui-text-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:17:1-35:12
-MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cc7b1cfaaf4ff8d72a6892059823f3a2/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.savedstate:savedstate:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/185b1d60d64ddcd60f80a6dc08d7c324/transformed/savedstate-1.2.1/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.media:media:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a83aefd7ec687f4a5e00a2313253e506/transformed/media-1.7.1/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0eaedc7bde8b6db5be8843db8125f4a7/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:17:1-23:12
-MERGED from [androidx.graphics:graphics-shapes-android:1.0.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/181fd34a8aba90a5e1cd2d214ff4cfb7/transformed/graphics-shapes-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.core:core-ktx:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e506bca584737b39a9f467555ebad038/transformed/core-ktx-1.13.1/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c481461bef7997aa6832e19634c73a10/transformed/swiperefreshlayout-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.documentfile:documentfile:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5188b224400092fa11b5bf67484fe187/transformed/documentfile-1.1.0/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.gridlayout:gridlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d9728802f634177b27e37d8076dfeb85/transformed/gridlayout-1.1.0/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/994efa7c065deb2ae181791f4533aeea/transformed/drawerlayout-1.1.1/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e563553bbdea0a9b5040e7325739a714/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6bad0ace4ff15ac0556a85b06b2200c3/transformed/slidingpanelayout-1.2.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.transition:transition:1.5.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/43e2e217de96449449cd803b812a9a91/transformed/transition-1.5.0/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.dynamicanimation:dynamicanimation:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6039c4c41c87847e0b6198f08297d5ca/transformed/dynamicanimation-1.1.0/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/775a73a2016ecc46d0097e2afd46e995/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e60de6216d89696557b8c3f426f7fc44/transformed/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.viewpager:viewpager:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/aa82e6e1c75468c80f05b4a07ff64a30/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.customview:customview:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/25f69159145b0bd75dc0e431a0c592db/transformed/customview-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:17:1-33:12
-MERGED from [androidx.autofill:autofill:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/405f28e867e6de79d617b862f8046e1e/transformed/autofill-1.0.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.loader:loader:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9291e7d58b277720097aa29c4d3f5a21/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.graphics:graphics-path:1.0.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/472f0580c2d604b5ebb46a0fc0767f4e/transformed/graphics-path-1.0.1/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:17:1-30:12
-MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/79272955262de1dc2debff6e54755bc4/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b6e0772c121de43a598b24fa826ec2d3/transformed/lifecycle-livedata-core-ktx-2.8.7/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/2e81786835638b590b5ef67a043e760c/transformed/lifecycle-livedata-core-2.8.7/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/94b63a291858558a5c93212419a2cb6a/transformed/lifecycle-runtime-2.8.7/AndroidManifest.xml:2:1-5:12
-MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/53c425bf32c9b243098ac7a89a9a3428/transformed/lifecycle-runtime-release/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e5523dc485ef16c7c2465bcdc09c4288/transformed/lifecycle-viewmodel-2.8.7/AndroidManifest.xml:2:1-5:12
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/2957e1e1c05602ed5a8dd3b6474947fc/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-service:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0534da399560dbabaaceee0512f6e457/transformed/lifecycle-service-2.8.7/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/88dd3032fd166e36de575f015b3432c6/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:17:1-35:12
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cbb1bacd251cae8eee839c6477d5d64a/transformed/lifecycle-livedata-2.8.7/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/af3d29d84e11717d792cdbd6e04c0e2c/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/8617c5eee6a324259e19776f6fe60da5/transformed/lifecycle-viewmodel-savedstate-2.8.7/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/4f577929b43acdeb4fc8be2655ebc756/transformed/lifecycle-viewmodel-ktx-2.8.7/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/69ee49bd139ebc6163ca53e8d4c4eb82/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.ui:ui-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7f13eea197c83a537b5fde1d7faf2d52/transformed/ui-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5453ad70df5738200aea669961609950/transformed/ui-tooling-preview-release/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.datastore:datastore-preferences-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d497bfa4d1bf163e77b5081d4239730d/transformed/datastore-preferences-release/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.datastore:datastore-core-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e03c0e406c3702e242f1f8b2f17fed38/transformed/datastore-core-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.datastore:datastore-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c5f94fa19824f67efe70841e5b1c6f62/transformed/datastore-release/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.compose.runtime:runtime-saveable-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/00e4035ecd6eee48cf99d49107060aef/transformed/runtime-saveable-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.runtime:runtime-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5e382c38fee04589067762d525041335/transformed/runtime-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.annotation:annotation-experimental:1.4.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e78c46349924bafbce5927eb45aa9592/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e446b45ecf7b08e0332fe85257f92b12/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:17:1-55:12
-MERGED from [androidx.interpolator:interpolator:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b41de720c599643b189fcbe4ce1fa115/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.cardview:cardview:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/267d0292cec91d4822fd970c7ead30a8/transformed/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b4f62998614e890e42679adfeefc829a/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
-MERGED from [androidx.startup:startup-runtime:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/95052b65cf5b8bf89d8f0fa8fa8547f6/transformed/startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
-MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/51251db8cec3264e688e04da4facca81/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.tracing:tracing:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0609d412bb6417206fe16ec78fe6d9ee/transformed/tracing-1.0.0/AndroidManifest.xml:17:1-24:12
-MERGED from [com.google.dagger:dagger-lint-aar:2.51.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7490bc4666e313692ad312357f3c6dea/transformed/dagger-lint-aar-2.51.1/AndroidManifest.xml:16:1-19:12
+MERGED from [androidx.databinding:viewbinding:8.7.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f135f7f7eb8d58485993e5476d818a1f/transformed/viewbinding-8.7.3/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e9c29556c12ac2c97d73b07c7ce90a62/transformed/ui-tooling-release/AndroidManifest.xml:17:1-28:12
+MERGED from [androidx.hilt:hilt-navigation-compose:1.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f571652b40b188c6a697f711d7ecc8e3/transformed/hilt-navigation-compose-1.2.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.hilt:hilt-navigation:1.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a8633478fb00c89a217e3416e1257b1f/transformed/hilt-navigation-1.2.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-common:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5896260db426449251bf62657b97c72e/transformed/navigation-common-2.8.5/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-runtime:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/75bb29f0fe7f87b64274055ab3408307/transformed/navigation-runtime-2.8.5/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-common-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a3e19041c01411b125dc5a9c0eaeb82e/transformed/navigation-common-ktx-2.8.5/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-ui:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/64eddafd54cccfee05faf6b6b6392b95/transformed/navigation-ui-2.8.5/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-fragment:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d7aff9948af62962542bc174f96b9eec/transformed/navigation-fragment-2.8.5/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7980a5da7546e813d18435b70d9e0ab4/transformed/navigation-runtime-ktx-2.8.5/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-ui-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/707d6fd6cc3426bc37cced0096308251/transformed/navigation-ui-ktx-2.8.5/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-fragment-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cf92a0ae82f9f89a4f10e3a52dddc93d/transformed/navigation-fragment-ktx-2.8.5/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-compose:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/3df3dbce04f9356c041367d9a6bc439b/transformed/navigation-compose-2.8.5/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material3:material3-android:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0db359253b5ac8ac6a6ca5d752cd4512/transformed/material3-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.preference:preference-ktx:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/84a81337cc6297bc367f7b692b3972ac/transformed/preference-ktx-1.2.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.preference:preference:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/106cdc7c46ed32cd9e808edacd1cb952/transformed/preference-1.2.1/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.material:material:1.13.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cf3863779648392ff9c77375ca530529/transformed/material-1.13.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/8377fa571f3166864cb2326f70152afb/transformed/appcompat-resources-1.7.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c596fafd680c75027dc6c8f2536ce467/transformed/constraintlayout-2.1.0/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.appcompat:appcompat:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/bd0d7081e496b5ebd8238141c8afa8fb/transformed/appcompat-1.7.1/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.dagger:hilt-android:2.51.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80ccc9acc5cd596dd88b2d1b208fc2e4/transformed/hilt-android-2.51.1/AndroidManifest.xml:16:1-19:12
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/8167778039ff3cb0d10e4ca1f008f9de/transformed/lifecycle-extensions-2.2.0/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.recyclerview:recyclerview:1.3.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6fe68e264eb15dcbf8abc2b782f01985/transformed/recyclerview-1.3.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager2:viewpager2:1.1.0-beta02] /home/olafkfreund/.gradle/caches/8.14.1/transforms/caf7c40c328b36e71188fbd76fa4da5a/transformed/viewpager2-1.1.0-beta02/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.fragment:fragment-ktx:1.6.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a1b90390fd3e50a406c89c52b808533e/transformed/fragment-ktx-1.6.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.fragment:fragment:1.6.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6b239bbf0f68d80ee7afbf1156f6b108/transformed/fragment-1.6.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/595dc6427baff799d4694f507e8968e2/transformed/activity-1.9.3/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity-ktx:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/3f06e2bdec7f5bdb4472ebeac99af7ea/transformed/activity-ktx-1.9.3/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.activity:activity-compose:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/bda2eac72e2e7397b5543fe65eea51ee/transformed/activity-compose-1.9.3/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/8606ba71d67f4b0629597042d6e862ea/transformed/material-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/30e28bdbb510160344f2c20f684d3327/transformed/material-icons-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.constraintlayout:constraintlayout-compose-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/188ab058cc30c77ef8f3257e6c380633/transformed/constraintlayout-compose-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ac1830af98b5b94311d9c3d3d7ad521d/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-ripple-android:1.7.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/2dde99f7e841d0f781438c8588050503/transformed/material-ripple-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/27e71e53eaca8eb4959023a522c62ec8/transformed/foundation-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d685f31ee29329254e553ffa62b1478e/transformed/foundation-layout-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.animation:animation-core-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/84889dfba9c2e315037d75ae1b7637e4/transformed/animation-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.animation:animation-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/583b516dbec64870e66665f0c53f9dbc/transformed/animation-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-graphics-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ba7105ac11bde268a98f3fedb736cb56/transformed/ui-graphics-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-geometry-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/66b364f170c779bbb5fc95784e19aea5/transformed/ui-geometry-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-unit-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e2e24888a53a19fd3bf97a99cf4df601/transformed/ui-unit-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-util-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b574b07aac54ad1c0e6177c317a929de/transformed/ui-util-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/81daad9560bdd2f15a3d9a541bec6194/transformed/ui-tooling-data-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-text-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/dd3c88774bba38b601444272cdeac761/transformed/ui-text-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/68b65cc9bd4efe72483e00e1385e50f0/transformed/emoji2-1.3.0/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/1f38052f51359a9cd2ca3c48c7f56989/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b68d5338cfef2299144102c5f4105fbe/transformed/savedstate-1.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media:media:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/dc04f1ae57ba50f4110e9cbe31217c86/transformed/media-1.7.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7f766438a7335e6295a92e17a4917848/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.graphics:graphics-shapes-android:1.0.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a9fa77e5d2de4e08fc82b6e6d613f38b/transformed/graphics-shapes-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.core:core-ktx:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9d0b7cd381e93b4b40d66f724ea0376f/transformed/core-ktx-1.13.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/64af4ecb50d37c5d2d0a549f851d06a6/transformed/swiperefreshlayout-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.documentfile:documentfile:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f4423b189c2ad7e97779dd665f40c882/transformed/documentfile-1.1.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.gridlayout:gridlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/fa3757dd3e265d17fbe8e089cd4b4f7f/transformed/gridlayout-1.1.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0a9c7587a94c7fadef15ef86cf1ba911/transformed/drawerlayout-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/64cf716baf04ea6df2c1ee602bf84ad3/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/8a86ee9bcfa634948818dd764fc4cae7/transformed/slidingpanelayout-1.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.transition:transition:1.5.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/edafaa06ef977a826d83c45c9d1b7634/transformed/transition-1.5.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/21c1297dce96ff2437d82c28873f6136/transformed/dynamicanimation-1.1.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0d2931d7fcf6e18626d0ea7437e04ce5/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d7bb4c03bdc0b952fd70b14d8183ae2d/transformed/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/abc60ccd1de03a60adea76e95bc155d1/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/1a4de35c5dfd828d365f1ba3716785eb/transformed/customview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9102abe34a4a3e15d65bc18187ab2563/transformed/window-1.0.0/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.autofill:autofill:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/886164d7b2d94c4b89b1cb602ac4e762/transformed/autofill-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.loader:loader:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d5b388635da82559383f434074ee5a29/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.graphics:graphics-path:1.0.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/af2a0d036897ff953aae7de927cb3437/transformed/graphics-path-1.0.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/967ad2616d004196db91b1101090cb35/transformed/core-1.13.1/AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c161bb0dd7b98f714273ca0e331c84f4/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/af0ec4ea83d8a47930a29d15279dbb39/transformed/lifecycle-livedata-core-ktx-2.8.7/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e88ccd04f7ac05c78683a7d654443283/transformed/lifecycle-livedata-core-2.8.7/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/677f0135e9277f0a2b367b29165481eb/transformed/lifecycle-runtime-2.8.7/AndroidManifest.xml:2:1-5:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/812a75e634c3c68bc6174e2ad0b99424/transformed/lifecycle-runtime-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/131bb1522323b1a8d4fe35e7b3b5e684/transformed/lifecycle-viewmodel-2.8.7/AndroidManifest.xml:2:1-5:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cf2da5565c43bdf6e8c58f1cef6b6060/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-service:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/1fa308a664ef7c761ee97ccb31b706d9/transformed/lifecycle-service-2.8.7/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f812127f334fb36c4ad34e919d714ab0/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ae4f17dd3496b1416fabe40adadcc522/transformed/lifecycle-livedata-2.8.7/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5c0cfd88b18137ab256445410aa5a72f/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ecc8c1d8253d6f1e0a3c9106000b5628/transformed/lifecycle-viewmodel-savedstate-2.8.7/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/864b1ec07cad482af7de87d76bc953fb/transformed/lifecycle-viewmodel-ktx-2.8.7/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/dc90f5f2c93046dbc94845b6dc93e101/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/384e0379bf4f653d6da1075bcb26e3d8/transformed/ui-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a60cea232aaa4053c8fa2971853b7ec7/transformed/ui-tooling-preview-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.datastore:datastore-preferences-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7198f1f3895908164d7f9d0c2dda84bf/transformed/datastore-preferences-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.datastore:datastore-core-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a9377756026edba3f45337b97ea0e95a/transformed/datastore-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.datastore:datastore-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a931b329d1e2b5007c84850aabd64a5c/transformed/datastore-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/865941b4d9c135306e67f10582c21172/transformed/runtime-saveable-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.runtime:runtime-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/3b0f83298f6ae5cc7f72370c0ef70d6d/transformed/runtime-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5bd0c72ad80d62feb97f06ebff887da7/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/8578b28751ac433aa87aca5c05492a53/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:17:1-55:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/4af4bd7cedb5e9fbc854e2c739fafd9d/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.cardview:cardview:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/20d93f428d4de25e52d1adbf096abfcb/transformed/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/fc62f6e3181eb640784531ac8c4f6684/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/fc9edf1ae7e9eeca83c7569df6feb731/transformed/startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ee19c1ad9f73481c4eb5a83db10876ab/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.tracing:tracing:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e2e4f5304a7be9dcec0cb9638ab79e7e/transformed/tracing-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.dagger:dagger-lint-aar:2.51.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c5751dd982a9a4781dc35b2a928ddf85/transformed/dagger-lint-aar-2.51.1/AndroidManifest.xml:16:1-19:12
 	package
 		INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml
 	android:versionName
@@ -315,28 +317,28 @@ ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidMan
 application
 ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:68:5-473:19
 INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:68:5-473:19
-MERGED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/551b0cc91b2f3afba7beefd538db9dd3/transformed/ui-tooling-release/AndroidManifest.xml:22:5-26:19
-MERGED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/551b0cc91b2f3afba7beefd538db9dd3/transformed/ui-tooling-release/AndroidManifest.xml:22:5-26:19
-MERGED from [com.google.android.material:material:1.13.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/4284dfee7a9883dca715f68895ad1f7b/transformed/material-1.13.0/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.material:material:1.13.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/4284dfee7a9883dca715f68895ad1f7b/transformed/material-1.13.0/AndroidManifest.xml:22:5-20
-MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5754b18925d568652f9e3158c06a5740/transformed/constraintlayout-2.1.0/AndroidManifest.xml:9:5-20
-MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5754b18925d568652f9e3158c06a5740/transformed/constraintlayout-2.1.0/AndroidManifest.xml:9:5-20
-MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6c077af4a0856283d3ecdb25dbab1d04/transformed/lifecycle-extensions-2.2.0/AndroidManifest.xml:24:5-25:19
-MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6c077af4a0856283d3ecdb25dbab1d04/transformed/lifecycle-extensions-2.2.0/AndroidManifest.xml:24:5-25:19
-MERGED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
-MERGED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
-MERGED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:24:5-31:19
-MERGED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:24:5-31:19
-MERGED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
-MERGED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
-MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/88dd3032fd166e36de575f015b3432c6/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:23:5-33:19
-MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/88dd3032fd166e36de575f015b3432c6/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:23:5-33:19
-MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
-MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b4f62998614e890e42679adfeefc829a/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b4f62998614e890e42679adfeefc829a/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
-MERGED from [androidx.startup:startup-runtime:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/95052b65cf5b8bf89d8f0fa8fa8547f6/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
-MERGED from [androidx.startup:startup-runtime:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/95052b65cf5b8bf89d8f0fa8fa8547f6/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e9c29556c12ac2c97d73b07c7ce90a62/transformed/ui-tooling-release/AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e9c29556c12ac2c97d73b07c7ce90a62/transformed/ui-tooling-release/AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.material:material:1.13.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cf3863779648392ff9c77375ca530529/transformed/material-1.13.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.13.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cf3863779648392ff9c77375ca530529/transformed/material-1.13.0/AndroidManifest.xml:22:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c596fafd680c75027dc6c8f2536ce467/transformed/constraintlayout-2.1.0/AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c596fafd680c75027dc6c8f2536ce467/transformed/constraintlayout-2.1.0/AndroidManifest.xml:9:5-20
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/8167778039ff3cb0d10e4ca1f008f9de/transformed/lifecycle-extensions-2.2.0/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/8167778039ff3cb0d10e4ca1f008f9de/transformed/lifecycle-extensions-2.2.0/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/68b65cc9bd4efe72483e00e1385e50f0/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/68b65cc9bd4efe72483e00e1385e50f0/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9102abe34a4a3e15d65bc18187ab2563/transformed/window-1.0.0/AndroidManifest.xml:24:5-31:19
+MERGED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9102abe34a4a3e15d65bc18187ab2563/transformed/window-1.0.0/AndroidManifest.xml:24:5-31:19
+MERGED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/967ad2616d004196db91b1101090cb35/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
+MERGED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/967ad2616d004196db91b1101090cb35/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f812127f334fb36c4ad34e919d714ab0/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f812127f334fb36c4ad34e919d714ab0/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/fc62f6e3181eb640784531ac8c4f6684/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/fc62f6e3181eb640784531ac8c4f6684/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/fc9edf1ae7e9eeca83c7569df6feb731/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/fc9edf1ae7e9eeca83c7569df6feb731/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
 	android:extractNativeLibs
 		INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml
 	android:requestLegacyExternalStorage
@@ -350,7 +352,7 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] /home/olafkfreund/.gradle/c
 	android:networkSecurityConfig
 		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:76:9-69
 	android:appComponentFactory
-		ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
+		ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/967ad2616d004196db91b1101090cb35/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
 	android:supportsRtl
 		ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:73:9-35
 	android:label
@@ -907,309 +909,313 @@ uses-sdk
 INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml
 INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml
-MERGED from [androidx.databinding:viewbinding:8.7.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9bcc2040d2855df18149ca2eced45e14/transformed/viewbinding-8.7.3/AndroidManifest.xml:5:5-44
-MERGED from [androidx.databinding:viewbinding:8.7.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9bcc2040d2855df18149ca2eced45e14/transformed/viewbinding-8.7.3/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/551b0cc91b2f3afba7beefd538db9dd3/transformed/ui-tooling-release/AndroidManifest.xml:20:5-44
-MERGED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/551b0cc91b2f3afba7beefd538db9dd3/transformed/ui-tooling-release/AndroidManifest.xml:20:5-44
-MERGED from [androidx.navigation:navigation-common:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/92572e37df014d6afe9c839e4066d9eb/transformed/navigation-common-2.8.5/AndroidManifest.xml:20:5-44
-MERGED from [androidx.navigation:navigation-common:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/92572e37df014d6afe9c839e4066d9eb/transformed/navigation-common-2.8.5/AndroidManifest.xml:20:5-44
-MERGED from [androidx.navigation:navigation-runtime:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6d8f7c9deba0015a3b8f6912a3127b85/transformed/navigation-runtime-2.8.5/AndroidManifest.xml:20:5-44
-MERGED from [androidx.navigation:navigation-runtime:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6d8f7c9deba0015a3b8f6912a3127b85/transformed/navigation-runtime-2.8.5/AndroidManifest.xml:20:5-44
-MERGED from [androidx.navigation:navigation-common-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/07b74954c8e4cfc7b97b84f5cbff8598/transformed/navigation-common-ktx-2.8.5/AndroidManifest.xml:5:5-44
-MERGED from [androidx.navigation:navigation-common-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/07b74954c8e4cfc7b97b84f5cbff8598/transformed/navigation-common-ktx-2.8.5/AndroidManifest.xml:5:5-44
-MERGED from [androidx.navigation:navigation-ui:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/33bef52a7836a6ea67bd30ab5f64f9b7/transformed/navigation-ui-2.8.5/AndroidManifest.xml:20:5-44
-MERGED from [androidx.navigation:navigation-ui:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/33bef52a7836a6ea67bd30ab5f64f9b7/transformed/navigation-ui-2.8.5/AndroidManifest.xml:20:5-44
-MERGED from [androidx.navigation:navigation-fragment:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/24331ff865b82fae3dfcc20d23c172ac/transformed/navigation-fragment-2.8.5/AndroidManifest.xml:20:5-44
-MERGED from [androidx.navigation:navigation-fragment:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/24331ff865b82fae3dfcc20d23c172ac/transformed/navigation-fragment-2.8.5/AndroidManifest.xml:20:5-44
-MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f8c4b6c90797e421c4f42a480f1f87d5/transformed/navigation-runtime-ktx-2.8.5/AndroidManifest.xml:5:5-44
-MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f8c4b6c90797e421c4f42a480f1f87d5/transformed/navigation-runtime-ktx-2.8.5/AndroidManifest.xml:5:5-44
-MERGED from [androidx.navigation:navigation-ui-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b6ad89780f39a0125df6fa0093bf7342/transformed/navigation-ui-ktx-2.8.5/AndroidManifest.xml:5:5-44
-MERGED from [androidx.navigation:navigation-ui-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b6ad89780f39a0125df6fa0093bf7342/transformed/navigation-ui-ktx-2.8.5/AndroidManifest.xml:5:5-44
-MERGED from [androidx.navigation:navigation-fragment-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ab0741982abb2bfbee1cb2e13a5a0f99/transformed/navigation-fragment-ktx-2.8.5/AndroidManifest.xml:5:5-44
-MERGED from [androidx.navigation:navigation-fragment-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ab0741982abb2bfbee1cb2e13a5a0f99/transformed/navigation-fragment-ktx-2.8.5/AndroidManifest.xml:5:5-44
-MERGED from [androidx.navigation:navigation-compose:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/044d2276ce541e887915c365813e7981/transformed/navigation-compose-2.8.5/AndroidManifest.xml:5:5-44
-MERGED from [androidx.navigation:navigation-compose:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/044d2276ce541e887915c365813e7981/transformed/navigation-compose-2.8.5/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.material3:material3-android:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b3790d01d1a3091b0fb13b91ba634393/transformed/material3-release/AndroidManifest.xml:20:5-44
-MERGED from [androidx.compose.material3:material3-android:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b3790d01d1a3091b0fb13b91ba634393/transformed/material3-release/AndroidManifest.xml:20:5-44
-MERGED from [androidx.preference:preference-ktx:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f517082342b43aad08ffb16cd69307a4/transformed/preference-ktx-1.2.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.preference:preference-ktx:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f517082342b43aad08ffb16cd69307a4/transformed/preference-ktx-1.2.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.preference:preference:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d855a21a11ac300fafd3479cc79b2cf6/transformed/preference-1.2.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.preference:preference:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d855a21a11ac300fafd3479cc79b2cf6/transformed/preference-1.2.1/AndroidManifest.xml:20:5-22:41
-MERGED from [com.google.android.material:material:1.13.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/4284dfee7a9883dca715f68895ad1f7b/transformed/material-1.13.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.material:material:1.13.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/4284dfee7a9883dca715f68895ad1f7b/transformed/material-1.13.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.appcompat:appcompat-resources:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/afe134f33f4b8937f3daf833cd02f11b/transformed/appcompat-resources-1.7.1/AndroidManifest.xml:5:5-44
-MERGED from [androidx.appcompat:appcompat-resources:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/afe134f33f4b8937f3daf833cd02f11b/transformed/appcompat-resources-1.7.1/AndroidManifest.xml:5:5-44
-MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5754b18925d568652f9e3158c06a5740/transformed/constraintlayout-2.1.0/AndroidManifest.xml:5:5-7:41
-MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5754b18925d568652f9e3158c06a5740/transformed/constraintlayout-2.1.0/AndroidManifest.xml:5:5-7:41
-MERGED from [androidx.appcompat:appcompat:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cc14f700b33d22af268947268e3a2605/transformed/appcompat-1.7.1/AndroidManifest.xml:5:5-44
-MERGED from [androidx.appcompat:appcompat:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cc14f700b33d22af268947268e3a2605/transformed/appcompat-1.7.1/AndroidManifest.xml:5:5-44
-MERGED from [com.google.dagger:hilt-android:2.51.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/707831528e8cd8bea7b2fd00245c908d/transformed/hilt-android-2.51.1/AndroidManifest.xml:18:3-42
-MERGED from [com.google.dagger:hilt-android:2.51.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/707831528e8cd8bea7b2fd00245c908d/transformed/hilt-android-2.51.1/AndroidManifest.xml:18:3-42
-MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6c077af4a0856283d3ecdb25dbab1d04/transformed/lifecycle-extensions-2.2.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6c077af4a0856283d3ecdb25dbab1d04/transformed/lifecycle-extensions-2.2.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.recyclerview:recyclerview:1.3.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7f3ac69755a4c6e89ce544501e49f180/transformed/recyclerview-1.3.2/AndroidManifest.xml:20:5-44
-MERGED from [androidx.recyclerview:recyclerview:1.3.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7f3ac69755a4c6e89ce544501e49f180/transformed/recyclerview-1.3.2/AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager2:viewpager2:1.1.0-beta02] /home/olafkfreund/.gradle/caches/8.14.1/transforms/1214d5d63923d392d78fe19d0dea61c9/transformed/viewpager2-1.1.0-beta02/AndroidManifest.xml:5:5-44
-MERGED from [androidx.viewpager2:viewpager2:1.1.0-beta02] /home/olafkfreund/.gradle/caches/8.14.1/transforms/1214d5d63923d392d78fe19d0dea61c9/transformed/viewpager2-1.1.0-beta02/AndroidManifest.xml:5:5-44
-MERGED from [androidx.fragment:fragment-ktx:1.6.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/12a38b26a1264ff627bccbac238b02d8/transformed/fragment-ktx-1.6.2/AndroidManifest.xml:20:5-44
-MERGED from [androidx.fragment:fragment-ktx:1.6.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/12a38b26a1264ff627bccbac238b02d8/transformed/fragment-ktx-1.6.2/AndroidManifest.xml:20:5-44
-MERGED from [androidx.fragment:fragment:1.6.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/2345985999dcb7a3d1b38ecc96cfd51c/transformed/fragment-1.6.2/AndroidManifest.xml:20:5-44
-MERGED from [androidx.fragment:fragment:1.6.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/2345985999dcb7a3d1b38ecc96cfd51c/transformed/fragment-1.6.2/AndroidManifest.xml:20:5-44
-MERGED from [androidx.activity:activity:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6669ec5d099b9730c10f7a2b66fbb712/transformed/activity-1.9.3/AndroidManifest.xml:20:5-44
-MERGED from [androidx.activity:activity:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6669ec5d099b9730c10f7a2b66fbb712/transformed/activity-1.9.3/AndroidManifest.xml:20:5-44
-MERGED from [androidx.activity:activity-ktx:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ffb41f05e796386277dcf6e862594b95/transformed/activity-ktx-1.9.3/AndroidManifest.xml:5:5-44
-MERGED from [androidx.activity:activity-ktx:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ffb41f05e796386277dcf6e862594b95/transformed/activity-ktx-1.9.3/AndroidManifest.xml:5:5-44
-MERGED from [androidx.activity:activity-compose:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/073a2b645d3364bf7aa855540af35894/transformed/activity-compose-1.9.3/AndroidManifest.xml:5:5-44
-MERGED from [androidx.activity:activity-compose:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/073a2b645d3364bf7aa855540af35894/transformed/activity-compose-1.9.3/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.material:material:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cbc6d90008240cd5a5127ff331fb631f/transformed/material-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.compose.material:material:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cbc6d90008240cd5a5127ff331fb631f/transformed/material-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.compose.material:material-icons-core-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ac78faeb8dd3ea9f6781e2b933866e50/transformed/material-icons-core-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.material:material-icons-core-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ac78faeb8dd3ea9f6781e2b933866e50/transformed/material-icons-core-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.constraintlayout:constraintlayout-compose-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/26776ff4c9b257067b24029fa929021b/transformed/constraintlayout-compose-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.constraintlayout:constraintlayout-compose-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/26776ff4c9b257067b24029fa929021b/transformed/constraintlayout-compose-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/dbb32b8cdf185b6a29012bc99cff8e6c/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/dbb32b8cdf185b6a29012bc99cff8e6c/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.material:material-ripple-android:1.7.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/3b73692245d2645384009df13c7e70a1/transformed/material-ripple-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.material:material-ripple-android:1.7.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/3b73692245d2645384009df13c7e70a1/transformed/material-ripple-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.foundation:foundation-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/51a7269b6e96ffb2e287dccde86c58d5/transformed/foundation-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.foundation:foundation-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/51a7269b6e96ffb2e287dccde86c58d5/transformed/foundation-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.foundation:foundation-layout-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/1d923375af87ded13a4ef06a70a13d98/transformed/foundation-layout-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.foundation:foundation-layout-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/1d923375af87ded13a4ef06a70a13d98/transformed/foundation-layout-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.animation:animation-core-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6ea94a3311766ecebd6cb17b737e6eb4/transformed/animation-core-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.animation:animation-core-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6ea94a3311766ecebd6cb17b737e6eb4/transformed/animation-core-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.animation:animation-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9580dca498a6d3db1c093e85726e60cf/transformed/animation-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.animation:animation-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9580dca498a6d3db1c093e85726e60cf/transformed/animation-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-graphics-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/970349134402ce5fc7e0c1199999a7ef/transformed/ui-graphics-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-graphics-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/970349134402ce5fc7e0c1199999a7ef/transformed/ui-graphics-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-geometry-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c0df80c6310c962c33a5efb1aea127de/transformed/ui-geometry-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-geometry-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c0df80c6310c962c33a5efb1aea127de/transformed/ui-geometry-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-unit-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/56ebe2bd9c13a2b58670594c0189f58d/transformed/ui-unit-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-unit-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/56ebe2bd9c13a2b58670594c0189f58d/transformed/ui-unit-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-util-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b3763cd2cf0390a7b29c0b387da3793a/transformed/ui-util-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-util-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b3763cd2cf0390a7b29c0b387da3793a/transformed/ui-util-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-tooling-data-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9cd30cc1e3fc739c9c3db96ee06eb4c1/transformed/ui-tooling-data-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-tooling-data-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9cd30cc1e3fc739c9c3db96ee06eb4c1/transformed/ui-tooling-data-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-text-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/61ef9a2df9bebdcd55db67bc61d573f8/transformed/ui-text-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-text-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/61ef9a2df9bebdcd55db67bc61d573f8/transformed/ui-text-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
-MERGED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
-MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cc7b1cfaaf4ff8d72a6892059823f3a2/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cc7b1cfaaf4ff8d72a6892059823f3a2/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.savedstate:savedstate:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/185b1d60d64ddcd60f80a6dc08d7c324/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.savedstate:savedstate:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/185b1d60d64ddcd60f80a6dc08d7c324/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.media:media:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a83aefd7ec687f4a5e00a2313253e506/transformed/media-1.7.1/AndroidManifest.xml:5:5-44
-MERGED from [androidx.media:media:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a83aefd7ec687f4a5e00a2313253e506/transformed/media-1.7.1/AndroidManifest.xml:5:5-44
-MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0eaedc7bde8b6db5be8843db8125f4a7/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
-MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0eaedc7bde8b6db5be8843db8125f4a7/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
-MERGED from [androidx.graphics:graphics-shapes-android:1.0.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/181fd34a8aba90a5e1cd2d214ff4cfb7/transformed/graphics-shapes-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.graphics:graphics-shapes-android:1.0.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/181fd34a8aba90a5e1cd2d214ff4cfb7/transformed/graphics-shapes-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.core:core-ktx:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e506bca584737b39a9f467555ebad038/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
-MERGED from [androidx.core:core-ktx:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e506bca584737b39a9f467555ebad038/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c481461bef7997aa6832e19634c73a10/transformed/swiperefreshlayout-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c481461bef7997aa6832e19634c73a10/transformed/swiperefreshlayout-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.documentfile:documentfile:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5188b224400092fa11b5bf67484fe187/transformed/documentfile-1.1.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.documentfile:documentfile:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5188b224400092fa11b5bf67484fe187/transformed/documentfile-1.1.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.gridlayout:gridlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d9728802f634177b27e37d8076dfeb85/transformed/gridlayout-1.1.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.gridlayout:gridlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d9728802f634177b27e37d8076dfeb85/transformed/gridlayout-1.1.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/994efa7c065deb2ae181791f4533aeea/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/994efa7c065deb2ae181791f4533aeea/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e563553bbdea0a9b5040e7325739a714/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e563553bbdea0a9b5040e7325739a714/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6bad0ace4ff15ac0556a85b06b2200c3/transformed/slidingpanelayout-1.2.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6bad0ace4ff15ac0556a85b06b2200c3/transformed/slidingpanelayout-1.2.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.transition:transition:1.5.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/43e2e217de96449449cd803b812a9a91/transformed/transition-1.5.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.transition:transition:1.5.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/43e2e217de96449449cd803b812a9a91/transformed/transition-1.5.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.dynamicanimation:dynamicanimation:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6039c4c41c87847e0b6198f08297d5ca/transformed/dynamicanimation-1.1.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.dynamicanimation:dynamicanimation:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6039c4c41c87847e0b6198f08297d5ca/transformed/dynamicanimation-1.1.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/775a73a2016ecc46d0097e2afd46e995/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/775a73a2016ecc46d0097e2afd46e995/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e60de6216d89696557b8c3f426f7fc44/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e60de6216d89696557b8c3f426f7fc44/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.viewpager:viewpager:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/aa82e6e1c75468c80f05b4a07ff64a30/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager:viewpager:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/aa82e6e1c75468c80f05b4a07ff64a30/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.customview:customview:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/25f69159145b0bd75dc0e431a0c592db/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.customview:customview:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/25f69159145b0bd75dc0e431a0c592db/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.autofill:autofill:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/405f28e867e6de79d617b862f8046e1e/transformed/autofill-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.autofill:autofill:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/405f28e867e6de79d617b862f8046e1e/transformed/autofill-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.loader:loader:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9291e7d58b277720097aa29c4d3f5a21/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9291e7d58b277720097aa29c4d3f5a21/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.graphics:graphics-path:1.0.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/472f0580c2d604b5ebb46a0fc0767f4e/transformed/graphics-path-1.0.1/AndroidManifest.xml:5:5-44
-MERGED from [androidx.graphics:graphics-path:1.0.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/472f0580c2d604b5ebb46a0fc0767f4e/transformed/graphics-path-1.0.1/AndroidManifest.xml:5:5-44
-MERGED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/79272955262de1dc2debff6e54755bc4/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/79272955262de1dc2debff6e54755bc4/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b6e0772c121de43a598b24fa826ec2d3/transformed/lifecycle-livedata-core-ktx-2.8.7/AndroidManifest.xml:5:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b6e0772c121de43a598b24fa826ec2d3/transformed/lifecycle-livedata-core-ktx-2.8.7/AndroidManifest.xml:5:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/2e81786835638b590b5ef67a043e760c/transformed/lifecycle-livedata-core-2.8.7/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/2e81786835638b590b5ef67a043e760c/transformed/lifecycle-livedata-core-2.8.7/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/94b63a291858558a5c93212419a2cb6a/transformed/lifecycle-runtime-2.8.7/AndroidManifest.xml:4:5-43
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/94b63a291858558a5c93212419a2cb6a/transformed/lifecycle-runtime-2.8.7/AndroidManifest.xml:4:5-43
-MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/53c425bf32c9b243098ac7a89a9a3428/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/53c425bf32c9b243098ac7a89a9a3428/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e5523dc485ef16c7c2465bcdc09c4288/transformed/lifecycle-viewmodel-2.8.7/AndroidManifest.xml:4:5-43
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e5523dc485ef16c7c2465bcdc09c4288/transformed/lifecycle-viewmodel-2.8.7/AndroidManifest.xml:4:5-43
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/2957e1e1c05602ed5a8dd3b6474947fc/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/2957e1e1c05602ed5a8dd3b6474947fc/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-service:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0534da399560dbabaaceee0512f6e457/transformed/lifecycle-service-2.8.7/AndroidManifest.xml:5:5-44
-MERGED from [androidx.lifecycle:lifecycle-service:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0534da399560dbabaaceee0512f6e457/transformed/lifecycle-service-2.8.7/AndroidManifest.xml:5:5-44
-MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/88dd3032fd166e36de575f015b3432c6/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:21:5-44
-MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/88dd3032fd166e36de575f015b3432c6/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:21:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cbb1bacd251cae8eee839c6477d5d64a/transformed/lifecycle-livedata-2.8.7/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cbb1bacd251cae8eee839c6477d5d64a/transformed/lifecycle-livedata-2.8.7/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/af3d29d84e11717d792cdbd6e04c0e2c/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/af3d29d84e11717d792cdbd6e04c0e2c/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/8617c5eee6a324259e19776f6fe60da5/transformed/lifecycle-viewmodel-savedstate-2.8.7/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/8617c5eee6a324259e19776f6fe60da5/transformed/lifecycle-viewmodel-savedstate-2.8.7/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/4f577929b43acdeb4fc8be2655ebc756/transformed/lifecycle-viewmodel-ktx-2.8.7/AndroidManifest.xml:5:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/4f577929b43acdeb4fc8be2655ebc756/transformed/lifecycle-viewmodel-ktx-2.8.7/AndroidManifest.xml:5:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/69ee49bd139ebc6163ca53e8d4c4eb82/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/69ee49bd139ebc6163ca53e8d4c4eb82/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7f13eea197c83a537b5fde1d7faf2d52/transformed/ui-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7f13eea197c83a537b5fde1d7faf2d52/transformed/ui-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5453ad70df5738200aea669961609950/transformed/ui-tooling-preview-release/AndroidManifest.xml:20:5-44
-MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5453ad70df5738200aea669961609950/transformed/ui-tooling-preview-release/AndroidManifest.xml:20:5-44
-MERGED from [androidx.datastore:datastore-preferences-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d497bfa4d1bf163e77b5081d4239730d/transformed/datastore-preferences-release/AndroidManifest.xml:20:5-44
-MERGED from [androidx.datastore:datastore-preferences-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d497bfa4d1bf163e77b5081d4239730d/transformed/datastore-preferences-release/AndroidManifest.xml:20:5-44
-MERGED from [androidx.datastore:datastore-core-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e03c0e406c3702e242f1f8b2f17fed38/transformed/datastore-core-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.datastore:datastore-core-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e03c0e406c3702e242f1f8b2f17fed38/transformed/datastore-core-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.datastore:datastore-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c5f94fa19824f67efe70841e5b1c6f62/transformed/datastore-release/AndroidManifest.xml:20:5-44
-MERGED from [androidx.datastore:datastore-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c5f94fa19824f67efe70841e5b1c6f62/transformed/datastore-release/AndroidManifest.xml:20:5-44
-MERGED from [androidx.compose.runtime:runtime-saveable-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/00e4035ecd6eee48cf99d49107060aef/transformed/runtime-saveable-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.runtime:runtime-saveable-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/00e4035ecd6eee48cf99d49107060aef/transformed/runtime-saveable-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.runtime:runtime-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5e382c38fee04589067762d525041335/transformed/runtime-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.runtime:runtime-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5e382c38fee04589067762d525041335/transformed/runtime-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.annotation:annotation-experimental:1.4.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e78c46349924bafbce5927eb45aa9592/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
-MERGED from [androidx.annotation:annotation-experimental:1.4.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e78c46349924bafbce5927eb45aa9592/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e446b45ecf7b08e0332fe85257f92b12/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e446b45ecf7b08e0332fe85257f92b12/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
-MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
-MERGED from [androidx.interpolator:interpolator:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b41de720c599643b189fcbe4ce1fa115/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.interpolator:interpolator:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b41de720c599643b189fcbe4ce1fa115/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.cardview:cardview:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/267d0292cec91d4822fd970c7ead30a8/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.cardview:cardview:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/267d0292cec91d4822fd970c7ead30a8/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b4f62998614e890e42679adfeefc829a/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b4f62998614e890e42679adfeefc829a/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.startup:startup-runtime:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/95052b65cf5b8bf89d8f0fa8fa8547f6/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
-MERGED from [androidx.startup:startup-runtime:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/95052b65cf5b8bf89d8f0fa8fa8547f6/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
-MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/51251db8cec3264e688e04da4facca81/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/51251db8cec3264e688e04da4facca81/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.tracing:tracing:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0609d412bb6417206fe16ec78fe6d9ee/transformed/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.tracing:tracing:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0609d412bb6417206fe16ec78fe6d9ee/transformed/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [com.google.dagger:dagger-lint-aar:2.51.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7490bc4666e313692ad312357f3c6dea/transformed/dagger-lint-aar-2.51.1/AndroidManifest.xml:18:3-42
-MERGED from [com.google.dagger:dagger-lint-aar:2.51.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7490bc4666e313692ad312357f3c6dea/transformed/dagger-lint-aar-2.51.1/AndroidManifest.xml:18:3-42
+MERGED from [androidx.databinding:viewbinding:8.7.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f135f7f7eb8d58485993e5476d818a1f/transformed/viewbinding-8.7.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.databinding:viewbinding:8.7.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f135f7f7eb8d58485993e5476d818a1f/transformed/viewbinding-8.7.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e9c29556c12ac2c97d73b07c7ce90a62/transformed/ui-tooling-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e9c29556c12ac2c97d73b07c7ce90a62/transformed/ui-tooling-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.hilt:hilt-navigation-compose:1.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f571652b40b188c6a697f711d7ecc8e3/transformed/hilt-navigation-compose-1.2.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.hilt:hilt-navigation-compose:1.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f571652b40b188c6a697f711d7ecc8e3/transformed/hilt-navigation-compose-1.2.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.hilt:hilt-navigation:1.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a8633478fb00c89a217e3416e1257b1f/transformed/hilt-navigation-1.2.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.hilt:hilt-navigation:1.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a8633478fb00c89a217e3416e1257b1f/transformed/hilt-navigation-1.2.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-common:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5896260db426449251bf62657b97c72e/transformed/navigation-common-2.8.5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-common:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5896260db426449251bf62657b97c72e/transformed/navigation-common-2.8.5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-runtime:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/75bb29f0fe7f87b64274055ab3408307/transformed/navigation-runtime-2.8.5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-runtime:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/75bb29f0fe7f87b64274055ab3408307/transformed/navigation-runtime-2.8.5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-common-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a3e19041c01411b125dc5a9c0eaeb82e/transformed/navigation-common-ktx-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-common-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a3e19041c01411b125dc5a9c0eaeb82e/transformed/navigation-common-ktx-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-ui:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/64eddafd54cccfee05faf6b6b6392b95/transformed/navigation-ui-2.8.5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-ui:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/64eddafd54cccfee05faf6b6b6392b95/transformed/navigation-ui-2.8.5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-fragment:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d7aff9948af62962542bc174f96b9eec/transformed/navigation-fragment-2.8.5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-fragment:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d7aff9948af62962542bc174f96b9eec/transformed/navigation-fragment-2.8.5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7980a5da7546e813d18435b70d9e0ab4/transformed/navigation-runtime-ktx-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7980a5da7546e813d18435b70d9e0ab4/transformed/navigation-runtime-ktx-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-ui-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/707d6fd6cc3426bc37cced0096308251/transformed/navigation-ui-ktx-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-ui-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/707d6fd6cc3426bc37cced0096308251/transformed/navigation-ui-ktx-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-fragment-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cf92a0ae82f9f89a4f10e3a52dddc93d/transformed/navigation-fragment-ktx-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-fragment-ktx:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cf92a0ae82f9f89a4f10e3a52dddc93d/transformed/navigation-fragment-ktx-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-compose:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/3df3dbce04f9356c041367d9a6bc439b/transformed/navigation-compose-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-compose:2.8.5] /home/olafkfreund/.gradle/caches/8.14.1/transforms/3df3dbce04f9356c041367d9a6bc439b/transformed/navigation-compose-2.8.5/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material3:material3-android:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0db359253b5ac8ac6a6ca5d752cd4512/transformed/material3-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material3:material3-android:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0db359253b5ac8ac6a6ca5d752cd4512/transformed/material3-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.preference:preference-ktx:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/84a81337cc6297bc367f7b692b3972ac/transformed/preference-ktx-1.2.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.preference:preference-ktx:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/84a81337cc6297bc367f7b692b3972ac/transformed/preference-ktx-1.2.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.preference:preference:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/106cdc7c46ed32cd9e808edacd1cb952/transformed/preference-1.2.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.preference:preference:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/106cdc7c46ed32cd9e808edacd1cb952/transformed/preference-1.2.1/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.material:material:1.13.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cf3863779648392ff9c77375ca530529/transformed/material-1.13.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.13.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cf3863779648392ff9c77375ca530529/transformed/material-1.13.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/8377fa571f3166864cb2326f70152afb/transformed/appcompat-resources-1.7.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/8377fa571f3166864cb2326f70152afb/transformed/appcompat-resources-1.7.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c596fafd680c75027dc6c8f2536ce467/transformed/constraintlayout-2.1.0/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c596fafd680c75027dc6c8f2536ce467/transformed/constraintlayout-2.1.0/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.appcompat:appcompat:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/bd0d7081e496b5ebd8238141c8afa8fb/transformed/appcompat-1.7.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/bd0d7081e496b5ebd8238141c8afa8fb/transformed/appcompat-1.7.1/AndroidManifest.xml:5:5-44
+MERGED from [com.google.dagger:hilt-android:2.51.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80ccc9acc5cd596dd88b2d1b208fc2e4/transformed/hilt-android-2.51.1/AndroidManifest.xml:18:3-42
+MERGED from [com.google.dagger:hilt-android:2.51.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80ccc9acc5cd596dd88b2d1b208fc2e4/transformed/hilt-android-2.51.1/AndroidManifest.xml:18:3-42
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/8167778039ff3cb0d10e4ca1f008f9de/transformed/lifecycle-extensions-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/8167778039ff3cb0d10e4ca1f008f9de/transformed/lifecycle-extensions-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.3.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6fe68e264eb15dcbf8abc2b782f01985/transformed/recyclerview-1.3.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.3.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6fe68e264eb15dcbf8abc2b782f01985/transformed/recyclerview-1.3.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager2:viewpager2:1.1.0-beta02] /home/olafkfreund/.gradle/caches/8.14.1/transforms/caf7c40c328b36e71188fbd76fa4da5a/transformed/viewpager2-1.1.0-beta02/AndroidManifest.xml:5:5-44
+MERGED from [androidx.viewpager2:viewpager2:1.1.0-beta02] /home/olafkfreund/.gradle/caches/8.14.1/transforms/caf7c40c328b36e71188fbd76fa4da5a/transformed/viewpager2-1.1.0-beta02/AndroidManifest.xml:5:5-44
+MERGED from [androidx.fragment:fragment-ktx:1.6.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a1b90390fd3e50a406c89c52b808533e/transformed/fragment-ktx-1.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment-ktx:1.6.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a1b90390fd3e50a406c89c52b808533e/transformed/fragment-ktx-1.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.6.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6b239bbf0f68d80ee7afbf1156f6b108/transformed/fragment-1.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.6.2] /home/olafkfreund/.gradle/caches/8.14.1/transforms/6b239bbf0f68d80ee7afbf1156f6b108/transformed/fragment-1.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/595dc6427baff799d4694f507e8968e2/transformed/activity-1.9.3/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/595dc6427baff799d4694f507e8968e2/transformed/activity-1.9.3/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity-ktx:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/3f06e2bdec7f5bdb4472ebeac99af7ea/transformed/activity-ktx-1.9.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-ktx:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/3f06e2bdec7f5bdb4472ebeac99af7ea/transformed/activity-ktx-1.9.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-compose:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/bda2eac72e2e7397b5543fe65eea51ee/transformed/activity-compose-1.9.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-compose:1.9.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/bda2eac72e2e7397b5543fe65eea51ee/transformed/activity-compose-1.9.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/8606ba71d67f4b0629597042d6e862ea/transformed/material-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/8606ba71d67f4b0629597042d6e862ea/transformed/material-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/30e28bdbb510160344f2c20f684d3327/transformed/material-icons-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/30e28bdbb510160344f2c20f684d3327/transformed/material-icons-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.constraintlayout:constraintlayout-compose-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/188ab058cc30c77ef8f3257e6c380633/transformed/constraintlayout-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.constraintlayout:constraintlayout-compose-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/188ab058cc30c77ef8f3257e6c380633/transformed/constraintlayout-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ac1830af98b5b94311d9c3d3d7ad521d/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ac1830af98b5b94311d9c3d3d7ad521d/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-ripple-android:1.7.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/2dde99f7e841d0f781438c8588050503/transformed/material-ripple-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-ripple-android:1.7.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/2dde99f7e841d0f781438c8588050503/transformed/material-ripple-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/27e71e53eaca8eb4959023a522c62ec8/transformed/foundation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/27e71e53eaca8eb4959023a522c62ec8/transformed/foundation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d685f31ee29329254e553ffa62b1478e/transformed/foundation-layout-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d685f31ee29329254e553ffa62b1478e/transformed/foundation-layout-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-core-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/84889dfba9c2e315037d75ae1b7637e4/transformed/animation-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-core-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/84889dfba9c2e315037d75ae1b7637e4/transformed/animation-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/583b516dbec64870e66665f0c53f9dbc/transformed/animation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/583b516dbec64870e66665f0c53f9dbc/transformed/animation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-graphics-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ba7105ac11bde268a98f3fedb736cb56/transformed/ui-graphics-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-graphics-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ba7105ac11bde268a98f3fedb736cb56/transformed/ui-graphics-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-geometry-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/66b364f170c779bbb5fc95784e19aea5/transformed/ui-geometry-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-geometry-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/66b364f170c779bbb5fc95784e19aea5/transformed/ui-geometry-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-unit-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e2e24888a53a19fd3bf97a99cf4df601/transformed/ui-unit-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-unit-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e2e24888a53a19fd3bf97a99cf4df601/transformed/ui-unit-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-util-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b574b07aac54ad1c0e6177c317a929de/transformed/ui-util-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-util-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b574b07aac54ad1c0e6177c317a929de/transformed/ui-util-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/81daad9560bdd2f15a3d9a541bec6194/transformed/ui-tooling-data-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/81daad9560bdd2f15a3d9a541bec6194/transformed/ui-tooling-data-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-text-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/dd3c88774bba38b601444272cdeac761/transformed/ui-text-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-text-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/dd3c88774bba38b601444272cdeac761/transformed/ui-text-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/68b65cc9bd4efe72483e00e1385e50f0/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/68b65cc9bd4efe72483e00e1385e50f0/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/1f38052f51359a9cd2ca3c48c7f56989/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/1f38052f51359a9cd2ca3c48c7f56989/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b68d5338cfef2299144102c5f4105fbe/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/b68d5338cfef2299144102c5f4105fbe/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/dc04f1ae57ba50f4110e9cbe31217c86/transformed/media-1.7.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.media:media:1.7.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/dc04f1ae57ba50f4110e9cbe31217c86/transformed/media-1.7.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7f766438a7335e6295a92e17a4917848/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7f766438a7335e6295a92e17a4917848/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.graphics:graphics-shapes-android:1.0.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a9fa77e5d2de4e08fc82b6e6d613f38b/transformed/graphics-shapes-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.graphics:graphics-shapes-android:1.0.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a9fa77e5d2de4e08fc82b6e6d613f38b/transformed/graphics-shapes-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9d0b7cd381e93b4b40d66f724ea0376f/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9d0b7cd381e93b4b40d66f724ea0376f/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/64af4ecb50d37c5d2d0a549f851d06a6/transformed/swiperefreshlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/64af4ecb50d37c5d2d0a549f851d06a6/transformed/swiperefreshlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.documentfile:documentfile:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f4423b189c2ad7e97779dd665f40c882/transformed/documentfile-1.1.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.documentfile:documentfile:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f4423b189c2ad7e97779dd665f40c882/transformed/documentfile-1.1.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.gridlayout:gridlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/fa3757dd3e265d17fbe8e089cd4b4f7f/transformed/gridlayout-1.1.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.gridlayout:gridlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/fa3757dd3e265d17fbe8e089cd4b4f7f/transformed/gridlayout-1.1.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0a9c7587a94c7fadef15ef86cf1ba911/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0a9c7587a94c7fadef15ef86cf1ba911/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/64cf716baf04ea6df2c1ee602bf84ad3/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/64cf716baf04ea6df2c1ee602bf84ad3/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/8a86ee9bcfa634948818dd764fc4cae7/transformed/slidingpanelayout-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/8a86ee9bcfa634948818dd764fc4cae7/transformed/slidingpanelayout-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.5.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/edafaa06ef977a826d83c45c9d1b7634/transformed/transition-1.5.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.transition:transition:1.5.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/edafaa06ef977a826d83c45c9d1b7634/transformed/transition-1.5.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/21c1297dce96ff2437d82c28873f6136/transformed/dynamicanimation-1.1.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/21c1297dce96ff2437d82c28873f6136/transformed/dynamicanimation-1.1.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0d2931d7fcf6e18626d0ea7437e04ce5/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/0d2931d7fcf6e18626d0ea7437e04ce5/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d7bb4c03bdc0b952fd70b14d8183ae2d/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d7bb4c03bdc0b952fd70b14d8183ae2d/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/abc60ccd1de03a60adea76e95bc155d1/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/abc60ccd1de03a60adea76e95bc155d1/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/1a4de35c5dfd828d365f1ba3716785eb/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.1.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/1a4de35c5dfd828d365f1ba3716785eb/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9102abe34a4a3e15d65bc18187ab2563/transformed/window-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9102abe34a4a3e15d65bc18187ab2563/transformed/window-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.autofill:autofill:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/886164d7b2d94c4b89b1cb602ac4e762/transformed/autofill-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.autofill:autofill:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/886164d7b2d94c4b89b1cb602ac4e762/transformed/autofill-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.loader:loader:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d5b388635da82559383f434074ee5a29/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/d5b388635da82559383f434074ee5a29/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.graphics:graphics-path:1.0.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/af2a0d036897ff953aae7de927cb3437/transformed/graphics-path-1.0.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.graphics:graphics-path:1.0.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/af2a0d036897ff953aae7de927cb3437/transformed/graphics-path-1.0.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/967ad2616d004196db91b1101090cb35/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/967ad2616d004196db91b1101090cb35/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c161bb0dd7b98f714273ca0e331c84f4/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c161bb0dd7b98f714273ca0e331c84f4/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/af0ec4ea83d8a47930a29d15279dbb39/transformed/lifecycle-livedata-core-ktx-2.8.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/af0ec4ea83d8a47930a29d15279dbb39/transformed/lifecycle-livedata-core-ktx-2.8.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e88ccd04f7ac05c78683a7d654443283/transformed/lifecycle-livedata-core-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e88ccd04f7ac05c78683a7d654443283/transformed/lifecycle-livedata-core-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/677f0135e9277f0a2b367b29165481eb/transformed/lifecycle-runtime-2.8.7/AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/677f0135e9277f0a2b367b29165481eb/transformed/lifecycle-runtime-2.8.7/AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/812a75e634c3c68bc6174e2ad0b99424/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/812a75e634c3c68bc6174e2ad0b99424/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/131bb1522323b1a8d4fe35e7b3b5e684/transformed/lifecycle-viewmodel-2.8.7/AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/131bb1522323b1a8d4fe35e7b3b5e684/transformed/lifecycle-viewmodel-2.8.7/AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cf2da5565c43bdf6e8c58f1cef6b6060/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/cf2da5565c43bdf6e8c58f1cef6b6060/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-service:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/1fa308a664ef7c761ee97ccb31b706d9/transformed/lifecycle-service-2.8.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-service:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/1fa308a664ef7c761ee97ccb31b706d9/transformed/lifecycle-service-2.8.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f812127f334fb36c4ad34e919d714ab0/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f812127f334fb36c4ad34e919d714ab0/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ae4f17dd3496b1416fabe40adadcc522/transformed/lifecycle-livedata-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ae4f17dd3496b1416fabe40adadcc522/transformed/lifecycle-livedata-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5c0cfd88b18137ab256445410aa5a72f/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5c0cfd88b18137ab256445410aa5a72f/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ecc8c1d8253d6f1e0a3c9106000b5628/transformed/lifecycle-viewmodel-savedstate-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ecc8c1d8253d6f1e0a3c9106000b5628/transformed/lifecycle-viewmodel-savedstate-2.8.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/864b1ec07cad482af7de87d76bc953fb/transformed/lifecycle-viewmodel-ktx-2.8.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/864b1ec07cad482af7de87d76bc953fb/transformed/lifecycle-viewmodel-ktx-2.8.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/dc90f5f2c93046dbc94845b6dc93e101/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/dc90f5f2c93046dbc94845b6dc93e101/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/384e0379bf4f653d6da1075bcb26e3d8/transformed/ui-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/384e0379bf4f653d6da1075bcb26e3d8/transformed/ui-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a60cea232aaa4053c8fa2971853b7ec7/transformed/ui-tooling-preview-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a60cea232aaa4053c8fa2971853b7ec7/transformed/ui-tooling-preview-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.datastore:datastore-preferences-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7198f1f3895908164d7f9d0c2dda84bf/transformed/datastore-preferences-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.datastore:datastore-preferences-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/7198f1f3895908164d7f9d0c2dda84bf/transformed/datastore-preferences-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.datastore:datastore-core-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a9377756026edba3f45337b97ea0e95a/transformed/datastore-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.datastore:datastore-core-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a9377756026edba3f45337b97ea0e95a/transformed/datastore-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.datastore:datastore-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a931b329d1e2b5007c84850aabd64a5c/transformed/datastore-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.datastore:datastore-android:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a931b329d1e2b5007c84850aabd64a5c/transformed/datastore-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/865941b4d9c135306e67f10582c21172/transformed/runtime-saveable-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/865941b4d9c135306e67f10582c21172/transformed/runtime-saveable-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/3b0f83298f6ae5cc7f72370c0ef70d6d/transformed/runtime-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/3b0f83298f6ae5cc7f72370c0ef70d6d/transformed/runtime-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5bd0c72ad80d62feb97f06ebff887da7/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/5bd0c72ad80d62feb97f06ebff887da7/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/8578b28751ac433aa87aca5c05492a53/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/8578b28751ac433aa87aca5c05492a53/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/4af4bd7cedb5e9fbc854e2c739fafd9d/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/4af4bd7cedb5e9fbc854e2c739fafd9d/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/20d93f428d4de25e52d1adbf096abfcb/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/20d93f428d4de25e52d1adbf096abfcb/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/fc62f6e3181eb640784531ac8c4f6684/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/fc62f6e3181eb640784531ac8c4f6684/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/fc9edf1ae7e9eeca83c7569df6feb731/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/fc9edf1ae7e9eeca83c7569df6feb731/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ee19c1ad9f73481c4eb5a83db10876ab/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/ee19c1ad9f73481c4eb5a83db10876ab/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.tracing:tracing:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e2e4f5304a7be9dcec0cb9638ab79e7e/transformed/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e2e4f5304a7be9dcec0cb9638ab79e7e/transformed/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.dagger:dagger-lint-aar:2.51.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c5751dd982a9a4781dc35b2a928ddf85/transformed/dagger-lint-aar-2.51.1/AndroidManifest.xml:18:3-42
+MERGED from [com.google.dagger:dagger-lint-aar:2.51.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/c5751dd982a9a4781dc35b2a928ddf85/transformed/dagger-lint-aar-2.51.1/AndroidManifest.xml:18:3-42
 	android:targetSdkVersion
 		INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml
 	android:minSdkVersion
 		INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml
 activity#androidx.compose.ui.tooling.PreviewActivity
-ADDED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/551b0cc91b2f3afba7beefd538db9dd3/transformed/ui-tooling-release/AndroidManifest.xml:23:9-25:39
+ADDED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e9c29556c12ac2c97d73b07c7ce90a62/transformed/ui-tooling-release/AndroidManifest.xml:23:9-25:39
 	android:exported
-		ADDED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/551b0cc91b2f3afba7beefd538db9dd3/transformed/ui-tooling-release/AndroidManifest.xml:25:13-36
+		ADDED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e9c29556c12ac2c97d73b07c7ce90a62/transformed/ui-tooling-release/AndroidManifest.xml:25:13-36
 	android:name
-		ADDED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/551b0cc91b2f3afba7beefd538db9dd3/transformed/ui-tooling-release/AndroidManifest.xml:24:13-71
+		ADDED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e9c29556c12ac2c97d73b07c7ce90a62/transformed/ui-tooling-release/AndroidManifest.xml:24:13-71
 provider#androidx.startup.InitializationProvider
-ADDED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
-MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/88dd3032fd166e36de575f015b3432c6/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:24:9-32:20
-MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/88dd3032fd166e36de575f015b3432c6/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:24:9-32:20
-MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:24:9-32:20
-MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:24:9-32:20
-MERGED from [androidx.startup:startup-runtime:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/95052b65cf5b8bf89d8f0fa8fa8547f6/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
-MERGED from [androidx.startup:startup-runtime:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/95052b65cf5b8bf89d8f0fa8fa8547f6/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+ADDED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/68b65cc9bd4efe72483e00e1385e50f0/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f812127f334fb36c4ad34e919d714ab0/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f812127f334fb36c4ad34e919d714ab0/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/fc9edf1ae7e9eeca83c7569df6feb731/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/fc9edf1ae7e9eeca83c7569df6feb731/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
 	tools:node
-		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:28:13-31
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/68b65cc9bd4efe72483e00e1385e50f0/transformed/emoji2-1.3.0/AndroidManifest.xml:28:13-31
 	android:authorities
-		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/68b65cc9bd4efe72483e00e1385e50f0/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
 	android:exported
-		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/68b65cc9bd4efe72483e00e1385e50f0/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
 	android:name
-		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/68b65cc9bd4efe72483e00e1385e50f0/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
 meta-data#androidx.emoji2.text.EmojiCompatInitializer
-ADDED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+ADDED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/68b65cc9bd4efe72483e00e1385e50f0/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
 	android:value
-		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/68b65cc9bd4efe72483e00e1385e50f0/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
 	android:name
-		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/68b65cc9bd4efe72483e00e1385e50f0/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
 uses-library#androidx.window.extensions
-ADDED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:25:9-27:40
+ADDED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9102abe34a4a3e15d65bc18187ab2563/transformed/window-1.0.0/AndroidManifest.xml:25:9-27:40
 	android:required
-		ADDED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:27:13-37
+		ADDED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9102abe34a4a3e15d65bc18187ab2563/transformed/window-1.0.0/AndroidManifest.xml:27:13-37
 	android:name
-		ADDED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:26:13-54
+		ADDED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9102abe34a4a3e15d65bc18187ab2563/transformed/window-1.0.0/AndroidManifest.xml:26:13-54
 uses-library#androidx.window.sidecar
-ADDED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:28:9-30:40
+ADDED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9102abe34a4a3e15d65bc18187ab2563/transformed/window-1.0.0/AndroidManifest.xml:28:9-30:40
 	android:required
-		ADDED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:30:13-37
+		ADDED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9102abe34a4a3e15d65bc18187ab2563/transformed/window-1.0.0/AndroidManifest.xml:30:13-37
 	android:name
-		ADDED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:29:13-51
+		ADDED from [androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9102abe34a4a3e15d65bc18187ab2563/transformed/window-1.0.0/AndroidManifest.xml:29:13-51
 permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
-ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/967ad2616d004196db91b1101090cb35/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
 	android:protectionLevel
-		ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+		ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/967ad2616d004196db91b1101090cb35/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
 	android:name
-		ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+		ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/967ad2616d004196db91b1101090cb35/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
 permission#org.cosmic.cosmicconnect.debug.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
-ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/967ad2616d004196db91b1101090cb35/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
 	android:protectionLevel
-		ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+		ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/967ad2616d004196db91b1101090cb35/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
 	android:name
-		ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+		ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/967ad2616d004196db91b1101090cb35/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
 uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
-ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/967ad2616d004196db91b1101090cb35/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
 	android:name
-		ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+		ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/967ad2616d004196db91b1101090cb35/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
 uses-permission#org.cosmic.cosmicconnect.debug.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
-ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/967ad2616d004196db91b1101090cb35/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
 	android:name
-		ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+		ADDED from [androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/967ad2616d004196db91b1101090cb35/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
 meta-data#androidx.lifecycle.ProcessLifecycleInitializer
-ADDED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/88dd3032fd166e36de575f015b3432c6/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:29:13-31:52
+ADDED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f812127f334fb36c4ad34e919d714ab0/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:29:13-31:52
 	android:value
-		ADDED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/88dd3032fd166e36de575f015b3432c6/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:31:17-49
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f812127f334fb36c4ad34e919d714ab0/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:31:17-49
 	android:name
-		ADDED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/88dd3032fd166e36de575f015b3432c6/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:30:17-78
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f812127f334fb36c4ad34e919d714ab0/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:30:17-78
 meta-data#androidx.profileinstaller.ProfileInstallerInitializer
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
 	android:value
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
 	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
 receiver#androidx.profileinstaller.ProfileInstallReceiver
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
 	android:enabled
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
 	android:exported
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
 	android:permission
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
 	android:directBootAware
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
 	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
 intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
 action#androidx.profileinstaller.action.INSTALL_PROFILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
 	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
 intent-filter#action:name:androidx.profileinstaller.action.SKIP_FILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
 action#androidx.profileinstaller.action.SKIP_FILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
 	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
 intent-filter#action:name:androidx.profileinstaller.action.SAVE_PROFILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
 action#androidx.profileinstaller.action.SAVE_PROFILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
 	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
 intent-filter#action:name:androidx.profileinstaller.action.BENCHMARK_OPERATION
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
 action#androidx.profileinstaller.action.BENCHMARK_OPERATION
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
 	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92

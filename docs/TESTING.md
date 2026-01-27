@@ -42,19 +42,19 @@ COSMIC Connect Android has a comprehensive test suite with **~204 tests** coveri
 **Integration Tests:**
 ```bash
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.package=org.cosmic.cosmicconnect.integration
+  -Pandroid.testInstrumentationRunnerArguments.package=org.cosmic.cconnect.integration
 ```
 
 **E2E Tests:**
 ```bash
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.package=org.cosmic.cosmicconnect.e2e
+  -Pandroid.testInstrumentationRunnerArguments.package=org.cosmic.cconnect.e2e
 ```
 
 **Performance Tests:**
 ```bash
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.performance.PerformanceBenchmarkTest
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.performance.PerformanceBenchmarkTest
 ```
 
 ### Running Individual Test Files
@@ -62,15 +62,15 @@ COSMIC Connect Android has a comprehensive test suite with **~204 tests** coveri
 ```bash
 # Discovery and pairing integration tests
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.integration.DiscoveryIntegrationTest
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.integration.DiscoveryIntegrationTest
 
 # File transfer integration tests
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.integration.FileTransferIntegrationTest
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.integration.FileTransferIntegrationTest
 
 # Android → COSMIC E2E tests
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.e2e.AndroidToCosmicE2ETest
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.e2e.AndroidToCosmicE2ETest
 ```
 
 ---
@@ -197,15 +197,15 @@ COSMIC Connect Android has a comprehensive test suite with **~204 tests** coveri
 ```bash
 # All integration tests
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.package=org.cosmic.cosmicconnect.integration
+  -Pandroid.testInstrumentationRunnerArguments.package=org.cosmic.cconnect.integration
 
 # Specific test file
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.integration.DiscoveryIntegrationTest
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.integration.DiscoveryIntegrationTest
 
 # Specific test method
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.integration.DiscoveryIntegrationTest \
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.integration.DiscoveryIntegrationTest \
   -Pandroid.testInstrumentationRunnerArguments.tests_regex='.*testDeviceDiscoveredFromIdentityPacket'
 ```
 
@@ -301,22 +301,22 @@ COSMIC Connect Android has a comprehensive test suite with **~204 tests** coveri
 ```bash
 # All E2E tests
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.package=org.cosmic.cosmicconnect.e2e
+  -Pandroid.testInstrumentationRunnerArguments.package=org.cosmic.cconnect.e2e
 
 # Android → COSMIC direction
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.e2e.AndroidToCosmicE2ETest
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.e2e.AndroidToCosmicE2ETest
 
 # COSMIC → Android direction
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.e2e.CosmicToAndroidE2ETest
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.e2e.CosmicToAndroidE2ETest
 
 # With real COSMIC Desktop (manual testing)
 # 1. Start COSMIC Desktop instance
 # 2. Configure test with real desktop IP
 # 3. Run tests
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.e2e.AndroidToCosmicE2ETest \
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.e2e.AndroidToCosmicE2ETest \
   -Pandroid.testInstrumentationRunnerArguments.useMockServer=false
 ```
 
@@ -376,7 +376,7 @@ COSMIC Connect Android has a comprehensive test suite with **~204 tests** coveri
 ```bash
 # All performance tests
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.performance.PerformanceBenchmarkTest
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.performance.PerformanceBenchmarkTest
 
 # Specific benchmark categories
 ./gradlew connectedAndroidTest \
@@ -502,7 +502,7 @@ testDevice.setPaired(true)
 ./gradlew connectedAndroidTest
 
 # Specific device
-adb -s <device-id> shell am instrument -w org.cosmic.cosmicconnect.test/androidx.test.runner.AndroidJUnitRunner
+adb -s <device-id> shell am instrument -w org.cosmic.cconnect.test/androidx.test.runner.AndroidJUnitRunner
 ```
 
 ### 3. Waydroid (NixOS)
@@ -587,7 +587,7 @@ jobs:
           api-level: 34
           script: |
             ./gradlew connectedAndroidTest \
-              -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.performance.PerformanceBenchmarkTest
+              -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.performance.PerformanceBenchmarkTest
 ```
 
 ---

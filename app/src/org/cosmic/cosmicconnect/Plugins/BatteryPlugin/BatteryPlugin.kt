@@ -179,8 +179,8 @@ class BatteryPlugin : Plugin() {
     }
 
     companion object {
-        const val PACKET_TYPE_BATTERY = "kdeconnect.battery"
-        const val PACKET_TYPE_BATTERY_REQUEST = "kdeconnect.battery.request"
+        const val PACKET_TYPE_BATTERY = "cconnect.battery"
+        const val PACKET_TYPE_BATTERY_REQUEST = "cconnect.battery.request"
 
         // keep these fields in sync with cosmicconnect-kded:BatteryPlugin.h:ThresholdBatteryEvent
         private const val THRESHOLD_EVENT_NONE = 0

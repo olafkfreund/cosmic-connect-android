@@ -44,12 +44,12 @@ Successfully migrated ClipboardPlugin from Java to Kotlin with FFI (Foreign Func
 
 1. **`create_clipboard_packet(content: String)`**
    - Location: ffi/mod.rs:371-380
-   - Creates: `kdeconnect.clipboard` packet
+   - Creates: `cconnect.clipboard` packet
    - Body: `{"content": content}`
 
 2. **`create_clipboard_connect_packet(content: String, timestamp: i64)`**
    - Location: ffi/mod.rs:402-412
-   - Creates: `kdeconnect.clipboard.connect` packet
+   - Creates: `cconnect.clipboard.connect` packet
    - Body: `{"content": content, "timestamp": timestamp}`
 
 **UDL Definitions:** cosmic_connect_core.udl:167-191 ✅
@@ -317,7 +317,7 @@ Kotlin Plugin → ClipboardPacketsFFI → FFI Functions → Rust Core
 ### Standard Update Packet
 ```json
 {
-  "type": "kdeconnect.clipboard",
+  "type": "cconnect.clipboard",
   "id": 1234567890,
   "body": {
     "content": "Hello World"
@@ -330,7 +330,7 @@ Kotlin Plugin → ClipboardPacketsFFI → FFI Functions → Rust Core
 ### Connect Packet
 ```json
 {
-  "type": "kdeconnect.clipboard.connect",
+  "type": "cconnect.clipboard.connect",
   "id": 1234567891,
   "body": {
     "content": "Hello World",

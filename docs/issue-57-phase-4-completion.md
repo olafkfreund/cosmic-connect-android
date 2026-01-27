@@ -197,8 +197,8 @@ if (replyId != null && message != null) {
 - Simplified packet flow
 
 **Simplified packet type constants:**
-- Changed from `PACKET_TYPE_NOTIFICATION = "cosmicconnect.notification"`
-- To using string literals `"kdeconnect.notification"` (protocol standard)
+- Changed from `PACKET_TYPE_NOTIFICATION = "cconnect.notification"`
+- To using string literals `"cconnect.notification"` (protocol standard)
 
 ---
 
@@ -323,7 +323,7 @@ All original features preserved:
 **Current Implementation:**
 ```kotlin
 // Uses reflection temporarily
-val payloadClass = Class.forName("org.cosmic.cosmicconnect.NetworkPacket\$Payload")
+val payloadClass = Class.forName("org.cosmic.cconnect.NetworkPacket\$Payload")
 val payload = payloadClass.getConstructor(ByteArray::class.java).newInstance(bitmapData)
 val setPayloadMethod = NetworkPacket::class.java.getMethod("setPayload", payloadClass)
 setPayloadMethod.invoke(packet, payload)
@@ -337,7 +337,7 @@ setPayloadMethod.invoke(packet, payload)
 
 ### 2. Packet Type Strings
 
-**Current:** Hardcoded "kdeconnect.notification" strings
+**Current:** Hardcoded "cconnect.notification" strings
 **Better:** Constants or enum from FFI layer
 **Impact:** Minor; protocol unlikely to change
 

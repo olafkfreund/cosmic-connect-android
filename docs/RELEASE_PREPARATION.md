@@ -322,7 +322,7 @@ Based on KDE Connect Android, modernized for COSMIC Desktop.
 - [ ] Specify dependencies
 - [ ] Anti-features (if any)
 
-**File:** `metadata/org.cosmic.cosmicconnect.yml`
+**File:** `metadata/org.cosmic.cconnect.yml`
 ```yaml
 Categories:
   - Internet

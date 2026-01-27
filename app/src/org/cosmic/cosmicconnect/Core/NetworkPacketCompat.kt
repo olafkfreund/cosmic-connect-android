@@ -280,7 +280,7 @@ fun NetworkPacket.toBuilder(): NetworkPacketBuilder {
  *
  * Usage:
  * ```
- * val packet = NetworkPacket.create("kdeconnect.ping")
+ * val packet = NetworkPacket.create("cconnect.ping")
  *     .toBuilder()
  *     .set("message", "Hello")
  *     .set("count", 42)
@@ -355,20 +355,20 @@ fun NetworkPacket.serializeToString(): String {
  * **Migration**: Use NetworkPacketBuilder instead:
  * ```kotlin
  * // OLD (inefficient)
- * val packet = MutableNetworkPacket("kdeconnect.battery")
+ * val packet = MutableNetworkPacket("cconnect.battery")
  * packet["currentCharge"] = 85
  * packet["isCharging"] = true
  * device.sendPacket(packet.toNetworkPacket())
  *
  * // NEW (efficient - single FFI call)
- * val packet = NetworkPacket.create("kdeconnect.battery", mapOf(
+ * val packet = NetworkPacket.create("cconnect.battery", mapOf(
  *     "currentCharge" to 85,
  *     "isCharging" to true
  * ))
  * device.sendPacket(packet)
  *
  * // OR use builder for incremental construction
- * val packet = NetworkPacketBuilder("kdeconnect.battery")
+ * val packet = NetworkPacketBuilder("cconnect.battery")
  *     .set("currentCharge", 85)
  *     .set("isCharging", true)
  *     .build()

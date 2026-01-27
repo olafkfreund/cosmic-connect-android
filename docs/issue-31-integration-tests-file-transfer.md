@@ -132,7 +132,7 @@ val largeContent = "Y".repeat(10 * 1024 * 1024) // 10 MB for cancellation window
 **Purpose:** Verify share packet format (implicit in other tests)
 
 **Validates:**
-- Packet type: `kdeconnect.share.request`
+- Packet type: `cconnect.share.request`
 - Packet body contains: filename, totalPayloadSize, numberOfFiles
 - Proper serialization via FFI
 - COSMIC Connect protocol compliance

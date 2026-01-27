@@ -7,7 +7,7 @@
 7<manifest xmlns:android="http://schemas.android.com/apk/res/android"
 8    package="org.cosmic.cosmicconnect.debug"
 9    android:versionCode="13404"
-10    android:versionName="1.34.4-debug" >
+10    android:versionName="1.0.0-beta-debug" >
 11
 12    <uses-sdk
 13        android:minSdkVersion="23"
@@ -166,15 +166,15 @@
 74-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:66:22-74
 75
 76    <permission
-76-->[androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+76-->[androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/967ad2616d004196db91b1101090cb35/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
 77        android:name="org.cosmic.cosmicconnect.debug.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-77-->[androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+77-->[androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/967ad2616d004196db91b1101090cb35/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
 78        android:protectionLevel="signature" />
-78-->[androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+78-->[androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/967ad2616d004196db91b1101090cb35/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
 79
 80    <uses-permission android:name="org.cosmic.cosmicconnect.debug.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-80-->[androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
-80-->[androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+80-->[androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/967ad2616d004196db91b1101090cb35/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+80-->[androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/967ad2616d004196db91b1101090cb35/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
 81
 82    <application
 82-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:68:5-473:19
@@ -183,7 +183,7 @@
 84        android:allowBackup="false"
 84-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:74:9-36
 85        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-85-->[androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/adf02edbdd9aec28ceef995c153dc60f/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
+85-->[androidx.core:core:1.13.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/967ad2616d004196db91b1101090cb35/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
 86        android:banner="@mipmap/ic_launcher_banner"
 86-->/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:72:9-52
 87        android:dataExtractionRules="@xml/data_extraction_rules"
@@ -937,88 +937,88 @@
 491        </service>
 492
 493        <activity
-493-->[androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/551b0cc91b2f3afba7beefd538db9dd3/transformed/ui-tooling-release/AndroidManifest.xml:23:9-25:39
+493-->[androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e9c29556c12ac2c97d73b07c7ce90a62/transformed/ui-tooling-release/AndroidManifest.xml:23:9-25:39
 494            android:name="androidx.compose.ui.tooling.PreviewActivity"
-494-->[androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/551b0cc91b2f3afba7beefd538db9dd3/transformed/ui-tooling-release/AndroidManifest.xml:24:13-71
+494-->[androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e9c29556c12ac2c97d73b07c7ce90a62/transformed/ui-tooling-release/AndroidManifest.xml:24:13-71
 495            android:exported="true" />
-495-->[androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/551b0cc91b2f3afba7beefd538db9dd3/transformed/ui-tooling-release/AndroidManifest.xml:25:13-36
+495-->[androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e9c29556c12ac2c97d73b07c7ce90a62/transformed/ui-tooling-release/AndroidManifest.xml:25:13-36
 496
 497        <provider
-497-->[androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+497-->[androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/68b65cc9bd4efe72483e00e1385e50f0/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
 498            android:name="androidx.startup.InitializationProvider"
-498-->[androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
+498-->[androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/68b65cc9bd4efe72483e00e1385e50f0/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
 499            android:authorities="org.cosmic.cosmicconnect.debug.androidx-startup"
-499-->[androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
+499-->[androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/68b65cc9bd4efe72483e00e1385e50f0/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
 500            android:exported="false" >
-500-->[androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
+500-->[androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/68b65cc9bd4efe72483e00e1385e50f0/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
 501            <meta-data
-501-->[androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+501-->[androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/68b65cc9bd4efe72483e00e1385e50f0/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
 502                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-502-->[androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
+502-->[androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/68b65cc9bd4efe72483e00e1385e50f0/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
 503                android:value="androidx.startup" />
-503-->[androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/80b4b104bd510c8f2ee8438aacb1a33a/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+503-->[androidx.emoji2:emoji2:1.3.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/68b65cc9bd4efe72483e00e1385e50f0/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
 504            <meta-data
-504-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/88dd3032fd166e36de575f015b3432c6/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:29:13-31:52
+504-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f812127f334fb36c4ad34e919d714ab0/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:29:13-31:52
 505                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-505-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/88dd3032fd166e36de575f015b3432c6/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:30:17-78
+505-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f812127f334fb36c4ad34e919d714ab0/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:30:17-78
 506                android:value="androidx.startup" />
-506-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/88dd3032fd166e36de575f015b3432c6/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:31:17-49
+506-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f812127f334fb36c4ad34e919d714ab0/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:31:17-49
 507            <meta-data
-507-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+507-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
 508                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-508-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+508-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
 509                android:value="androidx.startup" />
-509-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+509-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
 510        </provider>
 511
 512        <uses-library
-512-->[androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:25:9-27:40
+512-->[androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9102abe34a4a3e15d65bc18187ab2563/transformed/window-1.0.0/AndroidManifest.xml:25:9-27:40
 513            android:name="androidx.window.extensions"
-513-->[androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:26:13-54
+513-->[androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9102abe34a4a3e15d65bc18187ab2563/transformed/window-1.0.0/AndroidManifest.xml:26:13-54
 514            android:required="false" />
-514-->[androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:27:13-37
+514-->[androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9102abe34a4a3e15d65bc18187ab2563/transformed/window-1.0.0/AndroidManifest.xml:27:13-37
 515        <uses-library
-515-->[androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:28:9-30:40
+515-->[androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9102abe34a4a3e15d65bc18187ab2563/transformed/window-1.0.0/AndroidManifest.xml:28:9-30:40
 516            android:name="androidx.window.sidecar"
-516-->[androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:29:13-51
+516-->[androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9102abe34a4a3e15d65bc18187ab2563/transformed/window-1.0.0/AndroidManifest.xml:29:13-51
 517            android:required="false" />
-517-->[androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/05d3189087de283d5cc9f3a24e9b519a/transformed/window-1.0.0/AndroidManifest.xml:30:13-37
+517-->[androidx.window:window:1.0.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9102abe34a4a3e15d65bc18187ab2563/transformed/window-1.0.0/AndroidManifest.xml:30:13-37
 518
 519        <receiver
-519-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+519-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
 520            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-520-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+520-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
 521            android:directBootAware="false"
-521-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+521-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
 522            android:enabled="true"
-522-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+522-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
 523            android:exported="true"
-523-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+523-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
 524            android:permission="android.permission.DUMP" >
-524-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+524-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
 525            <intent-filter>
-525-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+525-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
 526                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-526-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
-526-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+526-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+526-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
 527            </intent-filter>
 528            <intent-filter>
-528-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+528-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
 529                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-529-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
-529-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+529-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+529-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
 530            </intent-filter>
 531            <intent-filter>
-531-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+531-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
 532                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-532-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
-532-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+532-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+532-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
 533            </intent-filter>
 534            <intent-filter>
-534-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+534-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
 535                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-535-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
-535-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/095fa61f23196dbd09dce790634b46aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
+535-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+535-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/olafkfreund/.gradle/caches/8.14.1/transforms/9e04d2da25f15c86e6c32e27686acacc/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
 536            </intent-filter>
 537        </receiver>
 538    </application>

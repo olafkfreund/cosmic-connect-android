@@ -23,6 +23,7 @@ import android.provider.Settings
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+import dagger.hilt.EntryPoints
 import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.DeviceType
 import org.cosmic.cosmicconnect.Helpers.DeviceHelper
@@ -32,6 +33,7 @@ import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment
 import org.cosmic.cosmicconnect.R
+import org.cosmic.cosmicconnect.di.HiltBridges
 import java.io.IOException
 
 /**
@@ -43,7 +45,7 @@ import java.io.IOException
  * ## Protocol
  *
  * **Packet Type:**
- * - `kdeconnect.findmyphone.request` - Ring request (empty body)
+ * - `cconnect.findmyphone.request` - Ring request (empty body)
  *
  * **Direction:**
  * - Desktop → Android: Send ring request
@@ -94,7 +96,7 @@ class FindMyPhonePlugin : Plugin() {
         /**
          * Packet type for find my phone requests
          */
-        const val PACKET_TYPE_FINDMYPHONE_REQUEST = "kdeconnect.findmyphone.request"
+        const val PACKET_TYPE_FINDMYPHONE_REQUEST = "cconnect.findmyphone.request"
     }
 
     // ========================================================================
@@ -114,7 +116,8 @@ class FindMyPhonePlugin : Plugin() {
 
     override val displayName: String
         get() {
-            return when (DeviceHelper.deviceType) {
+            val deviceHelper = EntryPoints.get(context.applicationContext, HiltBridges::class.java).deviceHelper()
+            return when (deviceHelper.deviceType) {
                 DeviceType.TV -> context.getString(R.string.findmyphone_title_tv)
                 DeviceType.TABLET -> context.getString(R.string.findmyphone_title_tablet)
                 DeviceType.PHONE -> context.getString(R.string.findmyphone_title)
@@ -136,51 +139,56 @@ class FindMyPhonePlugin : Plugin() {
     // ========================================================================
 
     override fun onCreate(): Boolean {
-        // Initialize managers
-        notificationManager = ContextCompat.getSystemService(context, NotificationManager::class.java)
-        notificationId = System.currentTimeMillis().toInt()
-        audioManager = ContextCompat.getSystemService(context, AudioManager::class.java)
-        powerManager = ContextCompat.getSystemService(context, PowerManager::class.java)
+        val deviceHelper = EntryPoints.get(context.applicationContext, HiltBridges::class.java).deviceHelper()
+        val deviceType = deviceHelper.deviceType
+        if (deviceType == DeviceType.PHONE || deviceType == DeviceType.TABLET) {
+            // Initialize managers
+            notificationManager = ContextCompat.getSystemService(context, NotificationManager::class.java)
+            notificationId = System.currentTimeMillis().toInt()
+            audioManager = ContextCompat.getSystemService(context, AudioManager::class.java)
+            powerManager = ContextCompat.getSystemService(context, PowerManager::class.java)
 
-        // Load ringtone preference
-        val prefs: SharedPreferences = context.getSharedPreferences("${context.packageName}_preferences", android.content.Context.MODE_PRIVATE)
-        val ringtoneString = prefs.getString(
-            context.getString(R.string.findmyphone_preference_key_ringtone),
-            ""
-        ) ?: ""
+            // Load ringtone preference
+            val prefs: SharedPreferences = context.getSharedPreferences("${context.packageName}_preferences", android.content.Context.MODE_PRIVATE)
+            val ringtoneString = prefs.getString(
+                context.getString(R.string.findmyphone_preference_key_ringtone),
+                ""
+            ) ?: ""
 
-        val ringtone = if (ringtoneString.isEmpty()) {
-            Settings.System.DEFAULT_RINGTONE_URI
-        } else {
-            Uri.parse(ringtoneString)
-        }
-
-        // Initialize MediaPlayer
-        return try {
-            mediaPlayer = MediaPlayer().apply {
-                setDataSource(context, ringtone)
-
-                // Configure audio attributes
-                setAudioAttributes(
-                    AudioAttributes.Builder()
-                        .setUsage(AudioAttributes.USAGE_ALARM)
-                        .setContentType(AudioAttributes.CONTENT_TYPE_UNKNOWN)
-                        .setFlags(AudioAttributes.FLAG_AUDIBILITY_ENFORCED)
-                        .build()
-                )
-
-                // Prevent screen from turning off (requires WAKE_LOCK permission)
-                @Suppress("DEPRECATION")
-                setWakeMode(context, PowerManager.SCREEN_DIM_WAKE_LOCK)
-
-                isLooping = true
-                prepare()
+            val ringtone = if (ringtoneString.isEmpty()) {
+                Settings.System.DEFAULT_RINGTONE_URI
+            } else {
+                Uri.parse(ringtoneString)
             }
-            true
-        } catch (e: Exception) {
-            Log.e(TAG, "Failed to initialize MediaPlayer", e)
-            false
+
+            // Initialize MediaPlayer
+            return try {
+                mediaPlayer = MediaPlayer().apply {
+                    setDataSource(context, ringtone)
+
+                    // Configure audio attributes
+                    setAudioAttributes(
+                        AudioAttributes.Builder()
+                            .setUsage(AudioAttributes.USAGE_ALARM)
+                            .setContentType(AudioAttributes.CONTENT_TYPE_UNKNOWN)
+                            .setFlags(AudioAttributes.FLAG_AUDIBILITY_ENFORCED)
+                            .build()
+                    )
+
+                    // Prevent screen from turning off (requires WAKE_LOCK permission)
+                    @Suppress("DEPRECATION")
+                    setWakeMode(context, PowerManager.SCREEN_DIM_WAKE_LOCK)
+
+                    isLooping = true
+                    prepare()
+                }
+                true
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to initialize MediaPlayer", e)
+                false
+            }
         }
+        return true
     }
 
     override fun onDestroy() {
@@ -260,7 +268,7 @@ class FindMyPhonePlugin : Plugin() {
      * Used when screen is ON. The notification includes a broadcast receiver
      * action that stops ringing when tapped.
      */
-    private fun showBroadcastNotification() {
+    fun showBroadcastNotification() {
         val intent = Intent(context, FindMyPhoneReceiver::class.java).apply {
             addFlags(Intent.FLAG_RECEIVER_FOREGROUND)
             action = FindMyPhoneReceiver.ACTION_FOUND_IT
@@ -283,7 +291,7 @@ class FindMyPhonePlugin : Plugin() {
      * Used when screen is OFF. The notification launches FindMyPhoneActivity
      * when tapped, which then handles ringing.
      */
-    private fun showActivityNotification() {
+    fun showActivityNotification() {
         val intent = Intent(context, FindMyPhoneActivity::class.java).apply {
             putExtra(FindMyPhoneActivity.EXTRA_DEVICE_ID, device.deviceId)
         }

@@ -5,17 +5,23 @@
  */
 package org.cosmic.cosmicconnect.UserInterface
 
-import android.content.Context
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
+import dagger.hilt.android.AndroidEntryPoint
+import org.cosmic.cosmicconnect.Core.DeviceRegistry
 import org.cosmic.cosmicconnect.Device
-import org.cosmic.cosmicconnect.CosmicConnect.Companion.getInstance
 import org.cosmic.cosmicconnect.Helpers.DataStorePreferenceAdapter
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory
 import org.cosmic.cosmicconnect.R
+import javax.inject.Inject
 
+@AndroidEntryPoint
 open class PluginSettingsFragment : PreferenceFragmentCompat() {
+
+    @Inject open lateinit var deviceRegistry: DeviceRegistry
+    @Inject lateinit var pluginFactory: PluginFactory
+
     private var pluginKey: String? = null
     private var layouts: IntArray? = null
 
@@ -39,7 +45,7 @@ open class PluginSettingsFragment : PreferenceFragmentCompat() {
         }
         this.pluginKey = arguments.getString(ARG_PLUGIN_KEY)
         this.layouts = arguments.getIntArray(ARG_LAYOUT)
-        this.device = getInstance().getDevice(this.deviceId)
+        this.device = deviceRegistry.getDevice(this.deviceId)
         this.plugin = device!!.getPluginIncludingWithoutPermissions(pluginKey!!)
         super.onCreate(savedInstanceState)
     }
@@ -63,12 +69,12 @@ open class PluginSettingsFragment : PreferenceFragmentCompat() {
     override fun onResume() {
         super.onResume()
 
-        val info = PluginFactory.getPluginInfo(pluginKey!!)
+        val info = pluginFactory.getPluginInfo(pluginKey!!)
         requireActivity().title = getString(R.string.plugin_settings_with_name, info.displayName)
     }
 
     val deviceId: String?
-        get() = (requireActivity() as PluginSettingsActivity).getSettingsDeviceId()
+        get() = (activity as? PluginSettingsActivity)?.settingsDeviceId
 
     companion object {
         private const val ARG_PLUGIN_KEY = "plugin_key"

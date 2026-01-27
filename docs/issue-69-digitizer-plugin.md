@@ -35,8 +35,8 @@ Migrate the Digitizer Plugin to use dedicated Rust FFI functions for packet crea
 - Create DIGITIZER packets (pen/stylus events with coordinates, pressure, tool type)
 
 **Packet Types**:
-- `cosmicconnect.digitizer.session`
-- `cosmicconnect.digitizer`
+- `cconnect.digitizer.session`
+- `cconnect.digitizer`
 
 ## Android Status
 
@@ -95,7 +95,7 @@ pub fn create_digitizer_session(body_json: String) -> Result<FfiPacket> {
     // Parse the request body JSON
     let body_data: serde_json::Value = serde_json::from_str(&body_json)?;
 
-    let packet = Packet::new("cosmicconnect.digitizer.session", body_data);
+    let packet = Packet::new("cconnect.digitizer.session", body_data);
     Ok(packet.into())
 }
 
@@ -104,7 +104,7 @@ pub fn create_digitizer_event(body_json: String) -> Result<FfiPacket> {
     // Parse the request body JSON
     let body_data: serde_json::Value = serde_json::from_str(&body_json)?;
 
-    let packet = Packet::new("cosmicconnect.digitizer", body_data);
+    let packet = Packet::new("cconnect.digitizer", body_data);
     Ok(packet.into())
 }
 ```
@@ -154,9 +154,9 @@ pub use ffi::{
 **File**: `src/org/cosmic/cosmicconnect/Plugins/DigitizerPlugin/DigitizerPacketsFFI.kt`
 
 ```kotlin
-package org.cosmic.cosmicconnect.Plugins.DigitizerPlugin
+package org.cosmic.cconnect.Plugins.DigitizerPlugin
 
-import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cconnect.Core.NetworkPacket
 import uniffi.cosmic_connect_core.createDigitizerSession
 import uniffi.cosmic_connect_core.createDigitizerEvent
 
@@ -313,7 +313,7 @@ mod tests {
         }).to_string();
 
         let packet = create_digitizer_session(body_json).unwrap();
-        assert_eq!(packet.packet_type, "cosmicconnect.digitizer.session");
+        assert_eq!(packet.packet_type, "cconnect.digitizer.session");
 
         let body: serde_json::Value = serde_json::from_str(&packet.body).unwrap();
         assert_eq!(body["action"], "start");
@@ -332,7 +332,7 @@ mod tests {
         }).to_string();
 
         let packet = create_digitizer_event(body_json).unwrap();
-        assert_eq!(packet.packet_type, "cosmicconnect.digitizer");
+        assert_eq!(packet.packet_type, "cconnect.digitizer");
 
         let body: serde_json::Value = serde_json::from_str(&packet.body).unwrap();
         assert_eq!(body["tool"], "Pen");
@@ -409,7 +409,7 @@ mod tests {
 **Session Start Packet Format**:
 ```json
 {
-  "type": "cosmicconnect.digitizer.session",
+  "type": "cconnect.digitizer.session",
   "body": {
     "action": "start",
     "width": 1920,
@@ -423,7 +423,7 @@ mod tests {
 **Session End Packet Format**:
 ```json
 {
-  "type": "cosmicconnect.digitizer.session",
+  "type": "cconnect.digitizer.session",
   "body": {
     "action": "end"
   }
@@ -433,7 +433,7 @@ mod tests {
 **Pen/Stylus Event Packet Format**:
 ```json
 {
-  "type": "cosmicconnect.digitizer",
+  "type": "cconnect.digitizer",
   "body": {
     "active": true,
     "touching": true,

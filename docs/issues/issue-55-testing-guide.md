@@ -69,7 +69,7 @@ fn test_create_telephony_event() {
     );
     assert!(packet.is_ok());
     let p = packet.unwrap();
-    assert_eq!(p.packet_type, "kdeconnect.telephony");
+    assert_eq!(p.packet_type, "cconnect.telephony");
 
     // Verify body contains expected fields
     let body_str = p.body;
@@ -88,7 +88,7 @@ fn test_create_telephony_event_minimal() {
     );
     assert!(packet.is_ok());
     let p = packet.unwrap();
-    assert_eq!(p.packet_type, "kdeconnect.telephony");
+    assert_eq!(p.packet_type, "cconnect.telephony");
 }
 
 #[test]
@@ -112,7 +112,7 @@ fn test_create_mute_request() {
     let packet = create_mute_request();
     assert!(packet.is_ok());
     let p = packet.unwrap();
-    assert_eq!(p.packet_type, "kdeconnect.telephony.request_mute");
+    assert_eq!(p.packet_type, "cconnect.telephony.request_mute");
 
     // Verify empty body
     assert_eq!(p.body, "{}");
@@ -128,7 +128,7 @@ fn test_create_sms_messages() {
     let packet = create_sms_messages(json.to_string());
     assert!(packet.is_ok());
     let p = packet.unwrap();
-    assert_eq!(p.packet_type, "kdeconnect.sms.messages");
+    assert_eq!(p.packet_type, "cconnect.sms.messages");
 }
 
 #[test]
@@ -145,7 +145,7 @@ fn test_create_sms_messages_invalid_json() {
 fn test_create_conversations_request() {
     let packet = create_conversations_request();
     assert!(packet.is_ok());
-    assert_eq!(packet.unwrap().packet_type, "kdeconnect.sms.request_conversations");
+    assert_eq!(packet.unwrap().packet_type, "cconnect.sms.request_conversations");
 }
 
 #[test]
@@ -153,14 +153,14 @@ fn test_create_conversation_request() {
     let packet = create_conversation_request(123, Some(1705507200000), Some(50));
     assert!(packet.is_ok());
     let p = packet.unwrap();
-    assert_eq!(p.packet_type, "kdeconnect.sms.request_conversation");
+    assert_eq!(p.packet_type, "cconnect.sms.request_conversation");
 }
 
 #[test]
 fn test_create_attachment_request() {
     let packet = create_attachment_request(789, "abc123".to_string());
     assert!(packet.is_ok());
-    assert_eq!(packet.unwrap().packet_type, "kdeconnect.sms.request_attachment");
+    assert_eq!(packet.unwrap().packet_type, "cconnect.sms.request_attachment");
 }
 
 #[test]
@@ -170,7 +170,7 @@ fn test_create_send_sms_request() {
         "Hello from desktop!".to_string()
     );
     assert!(packet.is_ok());
-    assert_eq!(packet.unwrap().packet_type, "kdeconnect.sms.request");
+    assert_eq!(packet.unwrap().packet_type, "cconnect.sms.request");
 }
 ```
 
@@ -198,7 +198,7 @@ fun testCreateTelephonyEvent_ringing() {
         contactName = "John Doe"
     )
 
-    assertEquals("kdeconnect.telephony", packet.type)
+    assertEquals("cconnect.telephony", packet.type)
     assertEquals("ringing", packet.body["event"])
     assertEquals("+1234567890", packet.body["phoneNumber"])
     assertEquals("John Doe", packet.body["contactName"])
@@ -223,7 +223,7 @@ fun testCreateTelephonyEvent_nullParameters() {
         contactName = null
     )
 
-    assertEquals("kdeconnect.telephony", packet.type)
+    assertEquals("cconnect.telephony", packet.type)
     assertEquals("talking", packet.body["event"])
     assertFalse(packet.body.containsKey("phoneNumber"))
     assertFalse(packet.body.containsKey("contactName"))

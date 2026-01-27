@@ -151,7 +151,7 @@ adb logcat | grep "NotificationsPlugin"
 adb logcat | grep "isCancel"
 
 # Expected log:
-# NetworkPacket: {"type":"kdeconnect.notification","body":{"id":"notif-123","isCancel":true}}
+# NetworkPacket: {"type":"cconnect.notification","body":{"id":"notif-123","isCancel":true}}
 ```
 
 **Pass Criteria:**
@@ -650,7 +650,7 @@ adb install -r build/outputs/apk/debug/cosmic-connect-android-debug.apk
 
 # 5. Grant notification permission
 echo "Granting notification permission..."
-adb shell cmd notification allow_listener org.cosmic.cosmicconnect/org.cosmic.cosmicconnect.Plugins.NotificationsPlugin.NotificationReceiver
+adb shell cmd notification allow_listener org.cosmic.cosmicconnect/org.cosmic.cconnect.Plugins.NotificationsPlugin.NotificationReceiver
 
 # 6. Launch app
 echo "Launching app..."

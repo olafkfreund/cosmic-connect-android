@@ -5,6 +5,9 @@
 */
 package org.cosmic.cosmicconnect.Helpers
 
+import android.content.Context
+import dagger.hilt.EntryPoints
+import org.cosmic.cosmicconnect.di.HiltBridges
 import java.net.MalformedURLException
 import java.net.URL
 
@@ -74,9 +77,10 @@ object VideoUrlsHelper {
         return if (fragment != null) "$newUrlWithoutFragment#$fragment" else newUrlWithoutFragment
     }
 
-    fun convertToAndFromYoutubeTvLinks(url : String): String {
+    fun convertToAndFromYoutubeTvLinks(url : String, context: Context): String {
         if (url.contains("youtube.com/watch") || url.contains("youtube.com/tv")) {
-            val wantTvLinks = DeviceHelper.isTv
+            val deviceHelper = EntryPoints.get(context.applicationContext, HiltBridges::class.java).deviceHelper()
+            val wantTvLinks = deviceHelper.isTv
             val isTvLink = url.contains("youtube\\.com/tv.*#/watch".toRegex())
             if (wantTvLinks && !isTvLink) {
                 return url.replace("youtube.com/watch", "youtube.com/tv#/watch")

@@ -32,7 +32,7 @@ Migrate the ConnectivityReport Plugin to use dedicated Rust FFI functions for pa
 - Create connectivity report packets with signal strengths
 - Single packet type for reporting state
 
-**Packet Type**: `kdeconnect.connectivity_report`
+**Packet Type**: `cconnect.connectivity_report`
 
 ## Android Status
 
@@ -78,7 +78,7 @@ pub fn create_connectivity_report(signal_strengths_json: String) -> Result<FfiPa
         "signalStrengths": signal_strengths
     });
 
-    let packet = Packet::new("kdeconnect.connectivity_report", body);
+    let packet = Packet::new("cconnect.connectivity_report", body);
     Ok(packet.into())
 }
 ```
@@ -117,9 +117,9 @@ pub use ffi::{
 **File**: `src/org/cosmic/cosmicconnect/Plugins/ConnectivityReportPlugin/ConnectivityPacketsFFI.kt`
 
 ```kotlin
-package org.cosmic.cosmicconnect.Plugins.ConnectivityReportPlugin
+package org.cosmic.cconnect.Plugins.ConnectivityReportPlugin
 
-import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cconnect.Core.NetworkPacket
 import uniffi.cosmic_connect_core.createConnectivityReport
 
 object ConnectivityPacketsFFI {
@@ -168,7 +168,7 @@ mod tests {
         }).to_string();
 
         let packet = create_connectivity_report(signal_json).unwrap();
-        assert_eq!(packet.packet_type, "kdeconnect.connectivity_report");
+        assert_eq!(packet.packet_type, "cconnect.connectivity_report");
 
         let body: serde_json::Value = serde_json::from_str(&packet.body).unwrap();
         assert!(body["signalStrengths"].is_object());
@@ -238,7 +238,7 @@ mod tests {
 **Packet Format**:
 ```json
 {
-  "type": "kdeconnect.connectivity_report",
+  "type": "cconnect.connectivity_report",
   "body": {
     "signalStrengths": {
       "6": {

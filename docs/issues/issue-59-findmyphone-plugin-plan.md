@@ -21,7 +21,7 @@ Convert FindMyPhonePlugin from Java to Kotlin and integrate with FFI (Foreign Fu
 
 The FindMyPhonePlugin allows COSMIC Desktop users to make their Android device ring to locate it. This is a unidirectional plugin:
 
-- **Desktop (Rust):** SENDS `kdeconnect.findmyphone.request` packets
+- **Desktop (Rust):** SENDS `cconnect.findmyphone.request` packets
 - **Android (Java/Kotlin):** RECEIVES requests and makes phone ring
 
 ### Current Status
@@ -151,7 +151,7 @@ The FindMyPhonePlugin allows COSMIC Desktop users to make their Android device r
 pub fn create_findmyphone_request() -> Result<FfiPacket> {
     use serde_json::json;
 
-    let packet = Packet::new("kdeconnect.findmyphone.request".to_string(), json!({}));
+    let packet = Packet::new("cconnect.findmyphone.request".to_string(), json!({}));
     Ok(packet.into())
 }
 ```
@@ -216,9 +216,9 @@ pub use ffi::{
 
 **Implementation:**
 ```kotlin
-package org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin
+package org.cosmic.cconnect.Plugins.FindMyPhonePlugin
 
-import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cconnect.Core.NetworkPacket
 import uniffi.cosmic_connect_core.createFindmyphoneRequest
 
 /**
@@ -229,7 +229,7 @@ import uniffi.cosmic_connect_core.createFindmyphoneRequest
  *
  * ## Packet Type
  *
- * - `kdeconnect.findmyphone.request` - Request to make phone ring
+ * - `cconnect.findmyphone.request` - Request to make phone ring
  *
  * ## Usage
  *
@@ -266,7 +266,7 @@ object FindMyPhonePacketsFFI {
  * Check if packet is a find my phone request
  */
 val NetworkPacket.isFindMyPhoneRequest: Boolean
-    get() = type == "kdeconnect.findmyphone.request"
+    get() = type == "cconnect.findmyphone.request"
 ```
 
 **Tasks:**
@@ -296,7 +296,7 @@ val NetworkPacket.isFindMyPhoneRequest: Boolean
 
 **Current Features (Java):**
 1. **Packet Reception:**
-   - Receives `kdeconnect.findmyphone.request`
+   - Receives `cconnect.findmyphone.request`
    - Triggers phone ringing
 
 2. **MediaPlayer Management:**
@@ -379,7 +379,7 @@ val NetworkPacket.isFindMyPhoneRequest: Boolean
 **Tasks:**
 - [ ] Add Test 3.7: FindMyPhone Plugin FFI to FFIValidationTest.kt
 - [ ] Test `createRingRequest()` packet creation
-- [ ] Verify packet type: `kdeconnect.findmyphone.request`
+- [ ] Verify packet type: `cconnect.findmyphone.request`
 - [ ] Verify empty body
 - [ ] Test extension property `isFindMyPhoneRequest`
 - [ ] Run tests and verify all pass
@@ -393,7 +393,7 @@ fun testFindMyPhonePlugin() {
     // Test 1: Create ring request packet
     val ringPacket = createFindmyphoneRequest()
     assertNotNull(ringPacket)
-    assertEquals("kdeconnect.findmyphone.request", ringPacket.packetType)
+    assertEquals("cconnect.findmyphone.request", ringPacket.packetType)
     assertTrue("Body should be empty", ringPacket.body.isEmpty())
 
     // Test 2: Extension property
@@ -455,7 +455,7 @@ fun testFindMyPhonePlugin() {
 #### Ring Request Packet
 ```json
 {
-  "type": "kdeconnect.findmyphone.request",
+  "type": "cconnect.findmyphone.request",
   "id": 1234567890,
   "body": {}
 }
@@ -471,7 +471,7 @@ fun testFindMyPhonePlugin() {
 
 ### Desktop → Android
 1. User clicks "Find My Phone" in COSMIC applet
-2. Desktop creates `kdeconnect.findmyphone.request` packet (empty body)
+2. Desktop creates `cconnect.findmyphone.request` packet (empty body)
 3. Packet sent to Android device
 4. Android receives packet
 5. Android plays ringtone at max volume

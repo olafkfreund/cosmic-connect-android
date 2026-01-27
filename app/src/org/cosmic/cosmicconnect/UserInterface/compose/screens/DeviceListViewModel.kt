@@ -1,29 +1,41 @@
+/*
+ * SPDX-FileCopyrightText: 2026 COSMIC Connect Contributors
+ *
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+ */
+
 package org.cosmic.cosmicconnect.UserInterface.compose.screens
 
-import android.app.Application
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.cosmic.cosmicconnect.BackgroundService
+import org.cosmic.cosmicconnect.Core.DeviceRegistry
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Helpers.TrustedNetworkHelper
-import org.cosmic.cosmicconnect.CosmicConnect
+import javax.inject.Inject
 
 /**
  * Device List ViewModel
  *
  * Manages the state and business logic for the Device List screen.
- * Observes device list changes from CosmicConnect and provides UI state.
+ * Observes device list changes from DeviceRegistry and provides UI state.
  */
-class DeviceListViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class DeviceListViewModel @Inject constructor(
+    @ApplicationContext private val context: Context,
+    private val deviceRegistry: DeviceRegistry
+) : ViewModel() {
 
   private val _uiState = MutableStateFlow(DeviceListUiState())
   val uiState: StateFlow<DeviceListUiState> = _uiState.asStateFlow()
@@ -31,12 +43,9 @@ class DeviceListViewModel(application: Application) : AndroidViewModel(applicati
   private val _isRefreshing = MutableStateFlow(false)
   val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
 
-  private val context: Context
-    get() = getApplication<Application>()
-
   init {
     // Start observing device list changes
-    CosmicConnect.getInstance().addDeviceListChangedCallback("DeviceListViewModel") {
+    deviceRegistry.addDeviceListChangedCallback("DeviceListViewModel") {
       viewModelScope.launch {
         updateDeviceList()
       }
@@ -57,7 +66,7 @@ class DeviceListViewModel(application: Application) : AndroidViewModel(applicati
 
   override fun onCleared() {
     super.onCleared()
-    CosmicConnect.getInstance().removeDeviceListChangedCallback("DeviceListViewModel")
+    deviceRegistry.removeDeviceListChangedCallback("DeviceListViewModel")
   }
 
   /**
@@ -83,10 +92,10 @@ class DeviceListViewModel(application: Application) : AndroidViewModel(applicati
   }
 
   /**
-   * Update the device list from CosmicConnect.
+   * Update the device list from DeviceRegistry.
    */
   private fun updateDeviceList() {
-    val allDevices = CosmicConnect.getInstance().devices.values.filter {
+    val allDevices = deviceRegistry.devices.values.filter {
       // Filter out unpaired devices that are not reachable
       it.isReachable || it.isPaired
     }
@@ -121,7 +130,7 @@ class DeviceListViewModel(application: Application) : AndroidViewModel(applicati
       true
     }
 
-    val devices = CosmicConnect.getInstance().devices.values
+    val devices = deviceRegistry.devices.values
     val someDevicesReachable = devices.any { it.isReachable }
 
     val connectivityState = when {

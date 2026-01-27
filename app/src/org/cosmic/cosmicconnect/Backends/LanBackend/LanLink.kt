@@ -34,7 +34,8 @@ class LanLink @WorkerThread constructor(
     context: Context,
     deviceInfo: DeviceInfo,
     linkProvider: BaseLinkProvider,
-    socket: SSLSocket
+    socket: SSLSocket,
+    private val sslHelper: SslHelper
 ) : BaseLink(context, linkProvider) {
 
     enum class ConnectionStarted {
@@ -203,7 +204,7 @@ class LanLink @WorkerThread constructor(
 
                 //Convert to SSL if needed
                 payloadSocket =
-                    SslHelper.convertToSslSocket(context, payloadSocket, deviceId, true, false)
+                    sslHelper.convertToSslSocket(payloadSocket, deviceId, true, false)
 
                 outputStream = payloadSocket.outputStream
                 val inputStream = np.payload?.inputStream
@@ -264,7 +265,7 @@ class LanLink @WorkerThread constructor(
                 val deviceAddress = socket!!.remoteSocketAddress as InetSocketAddress
                 payloadSocket.connect(InetSocketAddress(deviceAddress.address, tcpPort))
                 payloadSocket =
-                    SslHelper.convertToSslSocket(context, payloadSocket, deviceId, true, true)
+                    sslHelper.convertToSslSocket(payloadSocket, deviceId, true, true)
                 np.payload = NetworkPacket.Payload(payloadSocket, np.payloadSize)
             } catch (e: Exception) {
                 try {

@@ -35,8 +35,8 @@ Migrate the Contacts Plugin to use dedicated Rust FFI functions for packet creat
 - Two packet types for bidirectional sync
 
 **Packet Types**:
-- `cosmicconnect.contacts.response_uids_timestamps`
-- `cosmicconnect.contacts.response_vcards`
+- `cconnect.contacts.response_uids_timestamps`
+- `cconnect.contacts.response_vcards`
 
 ## Android Status
 
@@ -97,7 +97,7 @@ pub fn create_contacts_response_uids(uids_json: String) -> Result<FfiPacket> {
     let uids_data: serde_json::Value = serde_json::from_str(&uids_json)?;
 
     let packet = Packet::new(
-        "cosmicconnect.contacts.response_uids_timestamps",
+        "cconnect.contacts.response_uids_timestamps",
         uids_data
     );
     Ok(packet.into())
@@ -111,7 +111,7 @@ pub fn create_contacts_response_vcards(vcards_json: String) -> Result<FfiPacket>
     let vcards_data: serde_json::Value = serde_json::from_str(&vcards_json)?;
 
     let packet = Packet::new(
-        "cosmicconnect.contacts.response_vcards",
+        "cconnect.contacts.response_vcards",
         vcards_data
     );
     Ok(packet.into())
@@ -163,9 +163,9 @@ pub use ffi::{
 **File**: `src/org/cosmic/cosmicconnect/Plugins/ContactsPlugin/ContactsPacketsFFI.kt`
 
 ```kotlin
-package org.cosmic.cosmicconnect.Plugins.ContactsPlugin
+package org.cosmic.cconnect.Plugins.ContactsPlugin
 
-import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cconnect.Core.NetworkPacket
 import uniffi.cosmic_connect_core.createContactsResponseUids
 import uniffi.cosmic_connect_core.createContactsResponseVcards
 
@@ -241,7 +241,7 @@ mod tests {
         }).to_string();
 
         let packet = create_contacts_response_uids(uids_json).unwrap();
-        assert_eq!(packet.packet_type, "cosmicconnect.contacts.response_uids_timestamps");
+        assert_eq!(packet.packet_type, "cconnect.contacts.response_uids_timestamps");
     }
 
     #[test]
@@ -252,7 +252,7 @@ mod tests {
         }).to_string();
 
         let packet = create_contacts_response_vcards(vcards_json).unwrap();
-        assert_eq!(packet.packet_type, "cosmicconnect.contacts.response_vcards");
+        assert_eq!(packet.packet_type, "cconnect.contacts.response_vcards");
     }
 }
 ```
@@ -323,7 +323,7 @@ mod tests {
 ```json
 // UIDs/timestamps response
 {
-  "type": "cosmicconnect.contacts.response_uids_timestamps",
+  "type": "cconnect.contacts.response_uids_timestamps",
   "body": {
     "uids": ["1", "3", "15"],
     "1": "1234567890",
@@ -334,7 +334,7 @@ mod tests {
 
 // vCards response
 {
-  "type": "cosmicconnect.contacts.response_vcards",
+  "type": "cconnect.contacts.response_vcards",
   "body": {
     "uids": ["1", "3"],
     "1": "BEGIN:VCARD\nFN:John Smith\nEND:VCARD",

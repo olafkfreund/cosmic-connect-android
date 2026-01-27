@@ -104,7 +104,7 @@ cargo build --release
 pub fn create_findmyphone_request() -> Result<FfiPacket> {
     use serde_json::json;
 
-    let packet = Packet::new("kdeconnect.findmyphone.request".to_string(), json!({}));
+    let packet = Packet::new("cconnect.findmyphone.request".to_string(), json!({}));
     Ok(packet.into())
 }
 ```
@@ -176,7 +176,7 @@ object FindMyPhonePacketsFFI {
  * Check if packet is a find my phone request
  */
 val NetworkPacket.isFindMyPhoneRequest: Boolean
-    get() = type == "kdeconnect.findmyphone.request"
+    get() = type == "cconnect.findmyphone.request"
 ```
 
 **Features:**
@@ -210,7 +210,7 @@ val NetworkPacket.isFindMyPhoneRequest: Boolean
 
 **1. Packet Reception (Modern Kotlin):**
 ```kotlin
-override fun onPacketReceived(legacyNp: org.cosmic.cosmicconnect.NetworkPacket): Boolean {
+override fun onPacketReceived(legacyNp: org.cosmic.cconnect.NetworkPacket): Boolean {
     // Convert legacy packet to immutable for type-safe inspection
     val np = NetworkPacket.fromLegacy(legacyNp)
 
@@ -464,7 +464,7 @@ override fun getDisplayName(): String {
 ```rust
 pub fn create_findmyphone_request() -> Result<FfiPacket> {
     use serde_json::json;
-    let packet = Packet::new("kdeconnect.findmyphone.request".to_string(), json!({}));
+    let packet = Packet::new("cconnect.findmyphone.request".to_string(), json!({}));
     Ok(packet.into())
 }
 ```
@@ -495,7 +495,7 @@ object FindMyPhonePacketsFFI {
 **Extension Property:**
 ```kotlin
 val NetworkPacket.isFindMyPhoneRequest: Boolean
-    get() = type == "kdeconnect.findmyphone.request"
+    get() = type == "cconnect.findmyphone.request"
 ```
 
 **Key Points:**
@@ -507,7 +507,7 @@ val NetworkPacket.isFindMyPhoneRequest: Boolean
 
 **Packet Reception:**
 ```kotlin
-override fun onPacketReceived(legacyNp: org.cosmic.cosmicconnect.NetworkPacket): Boolean {
+override fun onPacketReceived(legacyNp: org.cosmic.cconnect.NetworkPacket): Boolean {
     val np = NetworkPacket.fromLegacy(legacyNp)
 
     if (!np.isFindMyPhoneRequest) {  // Extension property
@@ -533,7 +533,7 @@ fun testFindMyPhonePlugin() {
     val ringPacket = createFindmyphoneRequest()
 
     assertNotNull("Packet should not be null", ringPacket)
-    assertEquals("Type should match", "kdeconnect.findmyphone.request", ringPacket.packetType)
+    assertEquals("Type should match", "cconnect.findmyphone.request", ringPacket.packetType)
     assertTrue("Body should be empty", ringPacket.body.isEmpty())
 
     // Test serialization/deserialization...

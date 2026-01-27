@@ -49,7 +49,7 @@ Migrate the Battery Plugin to use the **packet-based FFI approach** established 
 
 ### Packet Types
 
-#### 1. kdeconnect.battery (Incoming & Outgoing)
+#### 1. cconnect.battery (Incoming & Outgoing)
 **Direction**: Bi-directional
 **Purpose**: Share battery state between devices
 
@@ -69,7 +69,7 @@ Migrate the Battery Plugin to use the **packet-based FFI approach** established 
   - `0`: No event
   - `1`: Battery low (< 15%)
 
-#### 2. kdeconnect.battery.request (Incoming)
+#### 2. cconnect.battery.request (Incoming)
 **Direction**: Desktop → Android
 **Purpose**: Request current battery status
 
@@ -181,7 +181,7 @@ pub fn create_battery_packet(
     use serde_json::json;
 
     let packet = Packet::new(
-        "kdeconnect.battery".to_string(),
+        "cconnect.battery".to_string(),
         json!({
             "isCharging": is_charging,
             "currentCharge": current_charge.clamp(0, 100),
@@ -206,7 +206,7 @@ pub fn create_battery_packet(
 pub fn create_battery_request() -> Result<FfiPacket> {
     use serde_json::json;
 
-    let packet = Packet::new("kdeconnect.battery.request".to_string(), json!({}));
+    let packet = Packet::new("cconnect.battery.request".to_string(), json!({}));
     Ok(packet.into())
 }
 ```
@@ -591,7 +591,7 @@ val packet = BatteryPacketsFFI.createBatteryPacket(
 ### Example 2: Inspecting Battery Packet (Kotlin)
 ```kotlin
 // Before (manual checking)
-if (packet.type == "kdeconnect.battery") {
+if (packet.type == "cconnect.battery") {
     val charge = packet.getInt("currentCharge")
     val isCharging = packet.getBoolean("isCharging")
     // ...
@@ -615,7 +615,7 @@ pub fn create_battery_packet(
     threshold_event: i32,
 ) -> Result<FfiPacket> {
     let packet = Packet::new(
-        "kdeconnect.battery".to_string(),
+        "cconnect.battery".to_string(),
         json!({
             "isCharging": is_charging,
             "currentCharge": current_charge.clamp(0, 100),

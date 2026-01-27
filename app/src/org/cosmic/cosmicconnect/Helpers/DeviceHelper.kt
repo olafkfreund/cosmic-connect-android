@@ -9,12 +9,11 @@ import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Build
-import android.preference.PreferenceManager
 import android.util.Log
-import androidx.core.content.edit
 import com.univocity.parsers.common.TextParsingException
 import com.univocity.parsers.csv.CsvParser
 import com.univocity.parsers.csv.CsvParserSettings
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.runBlocking
 import org.cosmic.cosmicconnect.DeviceInfo
 import org.cosmic.cosmicconnect.DeviceType
@@ -26,22 +25,39 @@ import java.io.InputStreamReader
 import java.net.URL
 import java.nio.charset.StandardCharsets
 import java.util.UUID
+import javax.inject.Inject
+import javax.inject.Singleton
 
-object DeviceHelper {
-    const val PROTOCOL_VERSION = 8
+@Singleton
+class DeviceHelper @Inject constructor(
+    @ApplicationContext private val context: Context,
+    private val sslHelper: SslHelper,
+    private val pluginFactory: PluginFactory
+) {
+    companion object {
+        const val PROTOCOL_VERSION = 8
+        const val KEY_DEVICE_NAME_PREFERENCE = "device_name_preference"
+        private const val DEVICE_DATABASE = "https://storage.googleapis.com/play_public/supported_devices.csv"
+        private val NAME_INVALID_CHARACTERS_REGEX = "[\\\"',;:.!?()\\[\\]<>]".toRegex()
+        const val MAX_DEVICE_NAME_LENGTH = 32
 
-    const val KEY_DEVICE_NAME_PREFERENCE = "device_name_preference"
+        @JvmStatic
+        fun getDeviceId(context: Context): String = runBlocking {
+            PreferenceDataStore.getDeviceIdSync(context) ?: ""
+        }
+
+        @JvmStatic
+        fun filterInvalidCharactersFromDeviceName(input: String): String = input.replace(NAME_INVALID_CHARACTERS_REGEX, "")
+
+        @JvmStatic
+        fun filterInvalidCharactersFromDeviceNameAndLimitLength(input: String): String = 
+            filterInvalidCharactersFromDeviceName(input).trim().take(MAX_DEVICE_NAME_LENGTH)
+    }
 
     private var fetchingName = false
 
-    private const val DEVICE_DATABASE = "https://storage.googleapis.com/play_public/supported_devices.csv"
-
-    private val NAME_INVALID_CHARACTERS_REGEX = "[\"',;:.!?()\\[\\]<>]".toRegex()
-    const val MAX_DEVICE_NAME_LENGTH = 32
-
     val isTablet: Boolean by lazy {
         val config = Resources.getSystem().configuration
-        //This assumes that the values for the screen sizes are consecutive, so XXLARGE > XLARGE > LARGE
         ((config.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE)
     }
 
@@ -50,7 +66,6 @@ object DeviceHelper {
         (uiMode and Configuration.UI_MODE_TYPE_MASK) == Configuration.UI_MODE_TYPE_TELEVISION
     }
 
-    @JvmStatic
     val deviceType: DeviceType by lazy {
         if (isTv) {
             DeviceType.TV
@@ -61,22 +76,20 @@ object DeviceHelper {
         }
     }
 
-    @JvmStatic
-    fun getDeviceName(context: Context): String = runBlocking {
+    fun getDeviceName(): String = runBlocking {
         if (!fetchingName && !PreferenceDataStore.isDeviceNameDownloadedSync(context)) {
             fetchingName = true
-            backgroundFetchDeviceName(context)
+            backgroundFetchDeviceName()
         }
         PreferenceDataStore.getDeviceNameSync(context)
     }
 
-    private fun backgroundFetchDeviceName(context: Context) {
+    private fun backgroundFetchDeviceName() {
         ThreadHelper.execute {
             try {
                 val url = URL(DEVICE_DATABASE)
                 val connection = url.openConnection()
 
-                // If we get here we managed to download the file. Mark that as done so we don't try again even if we don't end up finding a name.
                 runBlocking {
                     PreferenceDataStore.setDeviceNameDownloaded(context, true)
                 }
@@ -96,8 +109,7 @@ object DeviceHelper {
                         if (Build.MODEL.equals(buildModel, ignoreCase = true)) {
                             val deviceName = records[1]
                             Log.i("DeviceHelper", "Got device name: $deviceName")
-                            // Update the shared preference. Places that display the name should be listening to this change and update it
-                            setDeviceName(context, deviceName)
+                            setDeviceName(deviceName)
                             found = true
                             break
                         }
@@ -115,46 +127,37 @@ object DeviceHelper {
         }
     }
 
-    fun setDeviceName(context: Context, name: String) {
+    fun setDeviceName(name: String) {
         val filteredName = filterInvalidCharactersFromDeviceNameAndLimitLength(name)
         runBlocking {
             PreferenceDataStore.setDeviceName(context, filteredName)
         }
     }
 
-    fun initializeDeviceId(context: Context) {
+    fun initializeDeviceId() {
         runBlocking {
             val deviceId = PreferenceDataStore.getDeviceIdSync(context) ?: ""
             if (DeviceInfo.isValidDeviceId(deviceId)) {
-                return@runBlocking // We already have an ID
+                return@runBlocking
             }
             val newDeviceId = UUID.randomUUID().toString().replace("-", "")
             PreferenceDataStore.setDeviceId(context, newDeviceId)
         }
     }
 
-    @JvmStatic
-    fun getDeviceId(context: Context): String = runBlocking {
+    fun getDeviceId(): String = runBlocking {
         PreferenceDataStore.getDeviceIdSync(context) ?: ""
     }
 
-    @JvmStatic
-    fun getDeviceInfo(context: Context): DeviceInfo {
+    fun getDeviceInfo(): DeviceInfo {
         return DeviceInfo(
-            getDeviceId(context),
-            SslHelper.certificate,
-            getDeviceName(context),
+            getDeviceId(),
+            sslHelper.certificate,
+            getDeviceName(),
             deviceType,
             PROTOCOL_VERSION,
-            PluginFactory.incomingCapabilities,
-            PluginFactory.outgoingCapabilities
+            pluginFactory.incomingCapabilities,
+            pluginFactory.outgoingCapabilities
         )
     }
-
-    @JvmStatic
-    fun filterInvalidCharactersFromDeviceNameAndLimitLength(input: String): String = filterInvalidCharactersFromDeviceName(input).trim().take(MAX_DEVICE_NAME_LENGTH)
-
-    @JvmStatic
-    fun filterInvalidCharactersFromDeviceName(input: String): String = input.replace(NAME_INVALID_CHARACTERS_REGEX, "")
-
 }

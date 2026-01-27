@@ -17,8 +17,8 @@ import uniffi.cosmic_connect_core.*
  *
  * ## Packet Types
  *
- * - **Standard Update** (`kdeconnect.clipboard`): Sent when clipboard changes
- * - **Connection Sync** (`kdeconnect.clipboard.connect`): Sent on device connection with timestamp
+ * - **Standard Update** (`cconnect.clipboard`): Sent when clipboard changes
+ * - **Connection Sync** (`cconnect.clipboard.connect`): Sent on device connection with timestamp
  *
  * ## Sync Loop Prevention
  *
@@ -53,7 +53,7 @@ object ClipboardPacketsFFI {
     /**
      * Create a standard clipboard update packet.
      *
-     * Creates a `kdeconnect.clipboard` packet for syncing clipboard changes
+     * Creates a `cconnect.clipboard` packet for syncing clipboard changes
      * between devices. Does not include a timestamp.
      *
      * ## Validation
@@ -79,7 +79,7 @@ object ClipboardPacketsFFI {
     /**
      * Create a clipboard connect packet with timestamp.
      *
-     * Creates a `kdeconnect.clipboard.connect` packet for syncing clipboard
+     * Creates a `cconnect.clipboard.connect` packet for syncing clipboard
      * state when devices connect. Includes timestamp for sync loop prevention.
      *
      * ## Validation
@@ -120,7 +120,7 @@ object ClipboardPacketsFFI {
 /**
  * Check if packet is a standard clipboard update.
  *
- * Returns true if the packet is a `kdeconnect.clipboard` packet with content field.
+ * Returns true if the packet is a `cconnect.clipboard` packet with content field.
  *
  * ## Example
  * ```kotlin
@@ -133,12 +133,12 @@ object ClipboardPacketsFFI {
  * @return true if packet is a standard clipboard update, false otherwise
  */
 val NetworkPacket.isClipboardUpdate: Boolean
-    get() = type == "kdeconnect.clipboard" && body.containsKey("content")
+    get() = type == "cconnect.clipboard" && body.containsKey("content")
 
 /**
  * Check if packet is a clipboard connection sync packet.
  *
- * Returns true if the packet is a `kdeconnect.clipboard.connect` packet
+ * Returns true if the packet is a `cconnect.clipboard.connect` packet
  * with both content and timestamp fields.
  *
  * ## Example
@@ -153,7 +153,7 @@ val NetworkPacket.isClipboardUpdate: Boolean
  * @return true if packet is a clipboard connect packet, false otherwise
  */
 val NetworkPacket.isClipboardConnect: Boolean
-    get() = type == "kdeconnect.clipboard.connect" &&
+    get() = type == "cconnect.clipboard.connect" &&
             body.containsKey("content") &&
             body.containsKey("timestamp")
 

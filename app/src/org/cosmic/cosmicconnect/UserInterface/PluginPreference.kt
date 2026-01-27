@@ -12,7 +12,7 @@ import androidx.preference.PreferenceViewHolder
 import androidx.preference.SwitchPreference
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Plugins.Plugin
-import org.cosmic.cosmicconnect.Plugins.PluginFactory.getPluginInfo
+import org.cosmic.cosmicconnect.Plugins.PluginFactory
 import org.cosmic.cosmicconnect.R
 
 class PluginPreference : SwitchPreference {
@@ -20,12 +20,12 @@ class PluginPreference : SwitchPreference {
     private val pluginKey: String
     private val listener: View.OnClickListener?
 
-    constructor(context: Context, pluginKey: String, device: Device, callback: PluginPreferenceCallback) : super(context) {
+    constructor(context: Context, pluginKey: String, device: Device, callback: PluginPreferenceCallback, pluginFactory: PluginFactory) : super(context) {
         layoutResource = R.layout.preference_with_button
         this.device = device
         this.pluginKey = pluginKey
 
-        val info = getPluginInfo(pluginKey)
+        val info = pluginFactory.getPluginInfo(pluginKey)
         title = info.displayName
         summary = info.description
         isChecked = device.isPluginEnabled(pluginKey)

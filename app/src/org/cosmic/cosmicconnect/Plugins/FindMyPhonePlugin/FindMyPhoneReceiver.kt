@@ -9,9 +9,15 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import org.cosmic.cosmicconnect.CosmicConnect
+import dagger.hilt.android.AndroidEntryPoint
+import org.cosmic.cosmicconnect.Core.DeviceRegistry
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class FindMyPhoneReceiver : BroadcastReceiver() {
+
+    @Inject lateinit var deviceRegistry: DeviceRegistry
+
     companion object {
         const val ACTION_FOUND_IT: String = "org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.foundIt"
         const val EXTRA_DEVICE_ID: String = "deviceId"
@@ -20,7 +26,7 @@ class FindMyPhoneReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         when (intent.action) {
             ACTION_FOUND_IT -> foundIt(context, intent)
-            else -> Log.d("ShareBroadcastReceiver", "Unhandled Action received: ${intent.action}")
+            else -> Log.d("FindMyPhoneReceiver", "Unhandled Action received: ${intent.action}")
         }
     }
 
@@ -30,7 +36,7 @@ class FindMyPhoneReceiver : BroadcastReceiver() {
             return
         }
         val deviceId = intent.getStringExtra(EXTRA_DEVICE_ID)
-        val plugin = CosmicConnect.getInstance().getDevicePlugin(deviceId, FindMyPhonePlugin::class.java) ?: return
+        val plugin = deviceRegistry.getDevicePlugin(deviceId, FindMyPhonePlugin::class.java) ?: return
         plugin.stopPlaying()
     }
 }

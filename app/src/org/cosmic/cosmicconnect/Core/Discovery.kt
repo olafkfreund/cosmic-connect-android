@@ -145,8 +145,8 @@ interface DiscoveryListener {
  *     deviceId = "12345...",
  *     deviceName = "My Phone",
  *     deviceType = DeviceType.PHONE,
- *     incomingCapabilities = listOf("kdeconnect.battery", "kdeconnect.ping"),
- *     outgoingCapabilities = listOf("kdeconnect.battery", "kdeconnect.ping")
+ *     incomingCapabilities = listOf("cconnect.battery", "cconnect.ping"),
+ *     outgoingCapabilities = listOf("cconnect.battery", "cconnect.ping")
  * )
  *
  * val discovery = Discovery.start(localDevice) { event ->

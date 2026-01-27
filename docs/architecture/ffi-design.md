@@ -354,7 +354,7 @@ pub enum CosmicConnectError {
 
 ```kotlin
 try {
-    val packet = NetworkPacket.create("kdeconnect.ping", 123, "{}")
+    val packet = NetworkPacket.create("cconnect.ping", 123, "{}")
     packet.serialize()
 } catch (e: CosmicConnectError.SerializationError) {
     Log.e(TAG, "Failed to serialize packet", e)
@@ -482,7 +482,7 @@ fn create_and_send_packet(device_id: String, packet_type: String) -> Result<(), 
 
 ```kotlin
 // Kotlin: No need to hold reference
-CosmicConnectCore.createAndSendPacket(deviceId, "kdeconnect.ping")
+CosmicConnectCore.createAndSendPacket(deviceId, "cconnect.ping")
 // Rust handles packet lifecycle internally
 ```
 
@@ -799,7 +799,7 @@ use criterion::{criterion_group, criterion_main, Criterion};
 fn benchmark_ffi_packet_create(c: &mut Criterion) {
     c.bench_function("ffi packet create", |b| {
         b.iter(|| {
-            create_packet("kdeconnect.ping".to_string(), 123, "{}".to_string())
+            create_packet("cconnect.ping".to_string(), 123, "{}".to_string())
         });
     });
 }
@@ -847,12 +847,12 @@ mod tests {
     #[test]
     fn test_packet_creation() {
         let packet = create_packet(
-            "kdeconnect.ping".to_string(),
+            "cconnect.ping".to_string(),
             123,
             "{}".to_string()
         ).unwrap();
 
-        assert_eq!(packet.get_type(), "kdeconnect.ping");
+        assert_eq!(packet.get_type(), "cconnect.ping");
         assert_eq!(packet.get_id(), 123);
     }
 }
@@ -863,14 +863,14 @@ mod tests {
 ```kotlin
 @Test
 fun testPacketSerializationRoundtrip() {
-    val packet = NetworkPacket.create("kdeconnect.ping", 123, "{}")
+    val packet = NetworkPacket.create("cconnect.ping", 123, "{}")
     val bytes = packet.serialize()
 
     // Verify newline terminator
     assertEquals('\n'.code.toByte(), bytes.last())
 
     val deserialized = NetworkPacket.deserialize(bytes)
-    assertEquals("kdeconnect.ping", deserialized.getType())
+    assertEquals("cconnect.ping", deserialized.getType())
     assertEquals(123, deserialized.getId())
 }
 ```

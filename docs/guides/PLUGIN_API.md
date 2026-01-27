@@ -92,7 +92,7 @@ Plugins are the core functionality units in COSMIC Connect. Each plugin handles 
 ```rust
 // cosmic-connect-core/src/plugins/my_plugin.rs
 
-pub const PLUGIN_KEY: &str = "kdeconnect.my_plugin";
+pub const PLUGIN_KEY: &str = "cconnect.my_plugin";
 pub const PLUGIN_NAME: &str = "My Plugin";
 pub const PLUGIN_DESCRIPTION: &str = "Does something cool";
 
@@ -178,7 +178,7 @@ pub fn create_my_plugin_packet(
 ```kotlin
 // src/org/cosmic/cosmicconnect/Core/MyPluginPacketsFFI.kt
 
-package org.cosmic.cosmicconnect.Core
+package org.cosmic.cconnect.Core
 
 import uniffi.cosmic_connect_core.Core
 
@@ -218,7 +218,7 @@ val NetworkPacket.myPluginTimestamp: Long?
  * Check if packet is a My Plugin packet.
  */
 val NetworkPacket.isMyPluginPacket: Boolean
-    get() = type == "kdeconnect.my_plugin"
+    get() = type == "cconnect.my_plugin"
 ```
 
 ### Step 5: Implement Plugin Class (Kotlin)
@@ -226,21 +226,21 @@ val NetworkPacket.isMyPluginPacket: Boolean
 ```kotlin
 // src/org/cosmic/cosmicconnect/Plugins/MyPlugin/MyPlugin.kt
 
-package org.cosmic.cosmicconnect.Plugins.MyPlugin
+package org.cosmic.cconnect.Plugins.MyPlugin
 
 import android.content.Context
-import org.cosmic.cosmicconnect.Device
-import org.cosmic.cosmicconnect.Plugins.Plugin
-import org.cosmic.cosmicconnect.NetworkPacket
-import org.cosmic.cosmicconnect.Core.MyPluginPacketsFFI
-import org.cosmic.cosmicconnect.Core.isMyPluginPacket
-import org.cosmic.cosmicconnect.Core.myPluginData
-import org.cosmic.cosmicconnect.Core.myPluginTimestamp
+import org.cosmic.cconnect.Device
+import org.cosmic.cconnect.Plugins.Plugin
+import org.cosmic.cconnect.NetworkPacket
+import org.cosmic.cconnect.Core.MyPluginPacketsFFI
+import org.cosmic.cconnect.Core.isMyPluginPacket
+import org.cosmic.cconnect.Core.myPluginData
+import org.cosmic.cconnect.Core.myPluginTimestamp
 
 @LoadablePlugin
 class MyPlugin : Plugin() {
 
-    override val pluginKey: String = "kdeconnect.my_plugin"
+    override val pluginKey: String = "cconnect.my_plugin"
     override val displayName: String = "My Plugin"
     override val description: String = "Does something cool"
 
@@ -299,23 +299,23 @@ class MyPlugin : Plugin() {
 ```kotlin
 // src/org/cosmic/cosmicconnect/Plugins/MyPlugin/MyPluginFactory.kt
 
-package org.cosmic.cosmicconnect.Plugins.MyPlugin
+package org.cosmic.cconnect.Plugins.MyPlugin
 
 import android.content.Context
-import org.cosmic.cosmicconnect.Device
-import org.cosmic.cosmicconnect.Plugins.Plugin
-import org.cosmic.cosmicconnect.Plugins.PluginFactory
+import org.cosmic.cconnect.Device
+import org.cosmic.cconnect.Plugins.Plugin
+import org.cosmic.cconnect.Plugins.PluginFactory
 
 @LoadablePlugin
 class MyPluginFactory : PluginFactory() {
-    override val pluginKey: String = "kdeconnect.my_plugin"
+    override val pluginKey: String = "cconnect.my_plugin"
 
     override fun create(context: Context, device: Device): Plugin {
         return MyPlugin()
     }
 
     override fun getSupportedPacketTypes(): Array<String> {
-        return arrayOf("kdeconnect.my_plugin")
+        return arrayOf("cconnect.my_plugin")
     }
 }
 ```
@@ -610,7 +610,7 @@ fun testPacketCreation() {
         timestamp = timestamp
     )
 
-    assertEquals("kdeconnect.my_plugin", packet.type)
+    assertEquals("cconnect.my_plugin", packet.type)
     assertEquals(data, packet.myPluginData)
     assertEquals(timestamp, packet.myPluginTimestamp)
 }
@@ -668,7 +668,7 @@ fun testPluginCommunication() = runTest {
 
 **❌ Don't:**
 ```kotlin
-val packet = NetworkPacket("kdeconnect.my_plugin")
+val packet = NetworkPacket("cconnect.my_plugin")
 packet.set("data", "test")  // Mutable packet
 ```
 
@@ -786,7 +786,7 @@ override fun checkRequiredPermissions(): Boolean {
 **Rust:**
 ```rust
 pub fn create_status_packet(status: String) -> Result<NetworkPacket, ProtocolError> {
-    let mut packet = NetworkPacket::new("kdeconnect.status".to_string());
+    let mut packet = NetworkPacket::new("cconnect.status".to_string());
     packet.set_body("status", status);
     Ok(packet)
 }
@@ -817,7 +817,7 @@ val NetworkPacket.status: String?
 **Plugin:**
 ```kotlin
 class StatusPlugin : Plugin() {
-    override val pluginKey = "kdeconnect.status"
+    override val pluginKey = "cconnect.status"
 
     fun sendStatus(status: String) {
         val packet = StatusPacketsFFI.createStatusPacket(status)

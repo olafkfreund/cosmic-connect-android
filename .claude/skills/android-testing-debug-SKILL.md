@@ -177,7 +177,7 @@ class NetworkPacketTest {
         // Setup before each test
         testPacket = NetworkPacket(
             id = 123456789,
-            type = "kdeconnect.ping",
+            type = "cconnect.ping",
             body = mapOf("message" to "test")
         )
     }
@@ -190,7 +190,7 @@ class NetworkPacketTest {
     @Test
     fun `packet serialization produces valid JSON`() {
         // Arrange
-        val expectedJson = """{"id":123456789,"type":"kdeconnect.ping","body":{"message":"test"}}"""
+        val expectedJson = """{"id":123456789,"type":"cconnect.ping","body":{"message":"test"}}"""
 
         // Act
         val actualJson = testPacket.serialize()
@@ -202,14 +202,14 @@ class NetworkPacketTest {
     @Test
     fun `packet deserialization handles valid JSON`() {
         // Arrange
-        val json = """{"id":123456789,"type":"kdeconnect.ping","body":{"message":"test"}}"""
+        val json = """{"id":123456789,"type":"cconnect.ping","body":{"message":"test"}}"""
 
         // Act
         val packet = NetworkPacket.deserialize(json)
 
         // Assert
         assertNotNull(packet)
-        assertEquals("kdeconnect.ping", packet?.type)
+        assertEquals("cconnect.ping", packet?.type)
         assertEquals("test", packet?.body?.get("message"))
     }
 
@@ -252,7 +252,7 @@ class FFIValidationTest {
         )
 
         assertNotNull(packet)
-        assertEquals("kdeconnect.battery", packet.type)
+        assertEquals("cconnect.battery", packet.type)
         assertTrue(packet.body["isCharging"] as Boolean)
         assertEquals(85, packet.body["currentCharge"])
     }
@@ -264,7 +264,7 @@ class FFIValidationTest {
         val afterTime = System.currentTimeMillis()
 
         assertNotNull(packet)
-        assertEquals("kdeconnect.ping", packet.type)
+        assertEquals("cconnect.ping", packet.type)
 
         val packetId = packet.id
         assertTrue(packetId >= beforeTime)
@@ -678,7 +678,7 @@ class BatteryPluginIntegrationTest {
 
         // Assert
         assertNotNull(packetSent)
-        assertEquals("kdeconnect.battery", packetSent?.type)
+        assertEquals("cconnect.battery", packetSent?.type)
         assertEquals(85, packetSent?.body?.get("currentCharge"))
         assertTrue(packetSent?.body?.get("isCharging") as Boolean)
     }
@@ -688,13 +688,13 @@ class BatteryPluginIntegrationTest {
         // Arrange
         val requestPacket = NetworkPacket(
             id = 123,
-            type = "kdeconnect.battery.request",
+            type = "cconnect.battery.request",
             body = emptyMap()
         )
 
         var responseSent = false
         device.setPacketListener { packet ->
-            if (packet.type == "kdeconnect.battery") {
+            if (packet.type == "cconnect.battery") {
                 responseSent = true
             }
         }
@@ -1322,7 +1322,7 @@ object TestFixtures {
     fun createPingPacket(id: Long = 123456789): NetworkPacket {
         return NetworkPacket(
             id = id,
-            type = "kdeconnect.ping",
+            type = "cconnect.ping",
             body = emptyMap()
         )
     }
@@ -1333,7 +1333,7 @@ object TestFixtures {
     ): NetworkPacket {
         return NetworkPacket(
             id = System.currentTimeMillis(),
-            type = "kdeconnect.battery",
+            type = "cconnect.battery",
             body = mapOf(
                 "currentCharge" to level,
                 "isCharging" to isCharging,
@@ -1376,9 +1376,9 @@ class PacketSerializationTest(
         @JvmStatic
         @Parameters(name = "{index}: packetType={0}")
         fun data(): Collection<Array<Any>> = listOf(
-            arrayOf("kdeconnect.ping", emptyMap<String, Any>()),
-            arrayOf("kdeconnect.battery", mapOf("currentCharge" to 85)),
-            arrayOf("kdeconnect.clipboard", mapOf("content" to "test")),
+            arrayOf("cconnect.ping", emptyMap<String, Any>()),
+            arrayOf("cconnect.battery", mapOf("currentCharge" to 85)),
+            arrayOf("cconnect.clipboard", mapOf("content" to "test")),
         )
     }
 

@@ -18,7 +18,7 @@ import uniffi.cosmic_connect_core.createFindmyphoneRequest
  * ## Protocol
  *
  * **Packet Type:**
- * - `kdeconnect.findmyphone.request` - Request to make phone ring
+ * - `cconnect.findmyphone.request` - Request to make phone ring
  *
  * **Direction:**
  * - Desktop → Android: Send ring request
@@ -67,7 +67,7 @@ object FindMyPhonePacketsFFI {
      * ## Packet Structure
      * ```json
      * {
-     *   "type": "kdeconnect.findmyphone.request",
+     *   "type": "cconnect.findmyphone.request",
      *   "id": 1234567890,
      *   "body": {}
      * }
@@ -96,7 +96,7 @@ object FindMyPhonePacketsFFI {
 /**
  * Check if packet is a find my phone request
  *
- * Returns true if the packet is a `kdeconnect.findmyphone.request` packet,
+ * Returns true if the packet is a `cconnect.findmyphone.request` packet,
  * which instructs the device to ring at maximum volume.
  *
  * ## Usage
@@ -109,4 +109,4 @@ object FindMyPhonePacketsFFI {
  * @return true if packet is a findmyphone request, false otherwise
  */
 val NetworkPacket.isFindMyPhoneRequest: Boolean
-    get() = type == "kdeconnect.findmyphone.request"
+    get() = type == "cconnect.findmyphone.request"

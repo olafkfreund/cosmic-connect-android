@@ -45,8 +45,8 @@ import org.json.JSONObject
  * ## Protocol
  *
  * **Packet Types:**
- * - `kdeconnect.runcommand` (receive) - Command list from desktop
- * - `kdeconnect.runcommand.request` (send) - Command execution requests
+ * - `cconnect.runcommand` (receive) - Command list from desktop
+ * - `cconnect.runcommand.request` (send) - Command execution requests
  *
  * **Direction:**
  * - Desktop → Android: Send command list
@@ -82,8 +82,8 @@ class RunCommandPlugin : Plugin() {
 
     companion object {
         private const val TAG = "RunCommandPlugin"
-        private const val PACKET_TYPE_RUNCOMMAND = "kdeconnect.runcommand"
-        private const val PACKET_TYPE_RUNCOMMAND_REQUEST = "kdeconnect.runcommand.request"
+        private const val PACKET_TYPE_RUNCOMMAND = "cconnect.runcommand"
+        private const val PACKET_TYPE_RUNCOMMAND_REQUEST = "cconnect.runcommand.request"
         const val KEY_COMMANDS_PREFERENCE = "commands_preference_"
     }
 
@@ -276,7 +276,7 @@ class RunCommandPlugin : Plugin() {
      * Request the command list from the desktop
      *
      * Sends a request packet to the desktop asking for its configured commands.
-     * The desktop responds with a `kdeconnect.runcommand` packet containing
+     * The desktop responds with a `cconnect.runcommand` packet containing
      * the command list as a JSON string.
      */
     private fun requestCommandList() {

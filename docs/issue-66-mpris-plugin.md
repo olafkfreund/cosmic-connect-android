@@ -34,7 +34,7 @@ Migrate the MPRIS Plugin to use dedicated Rust FFI functions for packet creation
 - Single packet type for all control commands
 - Variable body based on command type
 
-**Packet Type**: `cosmicconnect.mpris.request`
+**Packet Type**: `cconnect.mpris.request`
 
 ## Android Status
 
@@ -74,7 +74,7 @@ pub fn create_mpris_request(body_json: String) -> Result<FfiPacket> {
     // Parse the request body JSON
     let body_data: serde_json::Value = serde_json::from_str(&body_json)?;
 
-    let packet = Packet::new("cosmicconnect.mpris.request", body_data);
+    let packet = Packet::new("cconnect.mpris.request", body_data);
     Ok(packet.into())
 }
 ```
@@ -113,9 +113,9 @@ pub use ffi::{
 **File**: `src/org/cosmic/cosmicconnect/Plugins/MprisPlugin/MprisPacketsFFI.kt`
 
 ```kotlin
-package org.cosmic.cosmicconnect.Plugins.MprisPlugin
+package org.cosmic.cconnect.Plugins.MprisPlugin
 
-import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cconnect.Core.NetworkPacket
 import uniffi.cosmic_connect_core.createMprisRequest
 
 object MprisPacketsFFI {
@@ -168,7 +168,7 @@ mod tests {
         }).to_string();
 
         let packet = create_mpris_request(body_json).unwrap();
-        assert_eq!(packet.packet_type, "cosmicconnect.mpris.request");
+        assert_eq!(packet.packet_type, "cconnect.mpris.request");
 
         let body: serde_json::Value = serde_json::from_str(&packet.body).unwrap();
         assert_eq!(body["player"], "spotify");
@@ -183,7 +183,7 @@ mod tests {
         }).to_string();
 
         let packet = create_mpris_request(body_json).unwrap();
-        assert_eq!(packet.packet_type, "cosmicconnect.mpris.request");
+        assert_eq!(packet.packet_type, "cconnect.mpris.request");
     }
 }
 ```
@@ -253,7 +253,7 @@ mod tests {
 **Packet Format**:
 ```json
 {
-  "type": "cosmicconnect.mpris.request",
+  "type": "cconnect.mpris.request",
   "body": {
     "player": "spotify",
     "action": "PlayPause"

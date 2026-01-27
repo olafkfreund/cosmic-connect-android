@@ -38,7 +38,7 @@ Migrate the MprisReceiver Plugin to use dedicated Rust FFI functions for packet 
 - Create MPRIS packets with metadata
 - Create MPRIS packets with album art transfer info
 
-**Packet Type**: `cosmicconnect.mpris`
+**Packet Type**: `cconnect.mpris`
 
 ## Android Status
 
@@ -102,7 +102,7 @@ pub fn create_mpris_request(body_json: String) -> Result<FfiPacket> {
     // Parse the request body JSON
     let body_data: serde_json::Value = serde_json::from_str(&body_json)?;
 
-    let packet = Packet::new("cosmicconnect.mpris", body_data);
+    let packet = Packet::new("cconnect.mpris", body_data);
     Ok(packet.into())
 }
 ```
@@ -141,9 +141,9 @@ pub use ffi::{
 **File**: `src/org/cosmic/cosmicconnect/Plugins/MprisReceiverPlugin/MprisReceiverPacketsFFI.kt`
 
 ```kotlin
-package org.cosmic.cosmicconnect.Plugins.MprisReceiverPlugin
+package org.cosmic.cconnect.Plugins.MprisReceiverPlugin
 
-import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cconnect.Core.NetworkPacket
 import uniffi.cosmic_connect_core.createMprisRequest
 
 /**
@@ -195,7 +195,7 @@ Map<String, Object> body = new HashMap<>();
 body.put("playerList", new ArrayList<>(players.keySet()));
 body.put("supportAlbumArtPayload", true);
 String json = new JSONObject(body).toString();
-org.cosmic.cosmicconnect.Core.NetworkPacket packet = MprisReceiverPacketsFFI.INSTANCE.createMprisPacket(json);
+org.cosmic.cconnect.Core.NetworkPacket packet = MprisReceiverPacketsFFI.INSTANCE.createMprisPacket(json);
 getDevice().sendPacket(packet.toLegacyPacket());
 ```
 
@@ -215,9 +215,9 @@ body.put("player", playerName);
 body.put("transferringAlbumArt", true);
 body.put("albumArtUrl", artUrl);
 String json = new JSONObject(body).toString();
-org.cosmic.cosmicconnect.Core.NetworkPacket packet = MprisReceiverPacketsFFI.INSTANCE.createMprisPacket(json);
-org.cosmic.cosmicconnect.NetworkPacket legacyPacket = packet.toLegacyPacket();
-legacyPacket.setPayload(new org.cosmic.cosmicconnect.NetworkPacket.Payload(p));
+org.cosmic.cconnect.Core.NetworkPacket packet = MprisReceiverPacketsFFI.INSTANCE.createMprisPacket(json);
+org.cosmic.cconnect.NetworkPacket legacyPacket = packet.toLegacyPacket();
+legacyPacket.setPayload(new org.cosmic.cconnect.NetworkPacket.Payload(p));
 getDevice().sendPacket(legacyPacket);
 ```
 
@@ -248,7 +248,7 @@ body.put("canSeek", player.canSeek());
 body.put("volume", player.getVolume());
 body.put("albumArtUrl", artUrl);
 String json = new JSONObject(body).toString();
-org.cosmic.cosmicconnect.Core.NetworkPacket packet = MprisReceiverPacketsFFI.INSTANCE.createMprisPacket(json);
+org.cosmic.cconnect.Core.NetworkPacket packet = MprisReceiverPacketsFFI.INSTANCE.createMprisPacket(json);
 getDevice().sendPacket(packet.toLegacyPacket());
 ```
 
@@ -270,7 +270,7 @@ mod tests {
         }).to_string();
 
         let packet = create_mpris_request(body_json).unwrap();
-        assert_eq!(packet.packet_type, "cosmicconnect.mpris");
+        assert_eq!(packet.packet_type, "cconnect.mpris");
 
         let body: serde_json::Value = serde_json::from_str(&packet.body).unwrap();
         assert_eq!(body["supportAlbumArtPayload"], true);
@@ -288,7 +288,7 @@ mod tests {
         }).to_string();
 
         let packet = create_mpris_request(body_json).unwrap();
-        assert_eq!(packet.packet_type, "cosmicconnect.mpris");
+        assert_eq!(packet.packet_type, "cconnect.mpris");
 
         let body: serde_json::Value = serde_json::from_str(&packet.body).unwrap();
         assert_eq!(body["player"], "Spotify");
@@ -343,7 +343,7 @@ mod tests {
 **Rust Core Changes:**
 - No new FFI function needed
 - Reuses existing `create_mpris_request()` function from Issue #66 (MPRIS plugin)
-- Both MPRIS and MprisReceiver plugins use the same packet type (`cosmicconnect.mpris`)
+- Both MPRIS and MprisReceiver plugins use the same packet type (`cconnect.mpris`)
 - No changes committed to Rust core
 
 **Android Changes:**
@@ -370,12 +370,12 @@ pub fn create_mpris_request(body_json: String) -> Result<FfiPacket>
 Map<String, Object> body = new HashMap<>();
 body.put("key", value);
 String json = new JSONObject(body).toString();
-org.cosmic.cosmicconnect.Core.NetworkPacket packet = MprisReceiverPacketsFFI.INSTANCE.createMprisPacket(json);
+org.cosmic.cconnect.Core.NetworkPacket packet = MprisReceiverPacketsFFI.INSTANCE.createMprisPacket(json);
 getDevice().sendPacket(packet.toLegacyPacket());
 
 // With payload
-org.cosmic.cosmicconnect.NetworkPacket legacyPacket = packet.toLegacyPacket();
-legacyPacket.setPayload(new org.cosmic.cosmicconnect.NetworkPacket.Payload(bytes));
+org.cosmic.cconnect.NetworkPacket legacyPacket = packet.toLegacyPacket();
+legacyPacket.setPayload(new org.cosmic.cconnect.NetworkPacket.Payload(bytes));
 getDevice().sendPacket(legacyPacket);
 ```
 

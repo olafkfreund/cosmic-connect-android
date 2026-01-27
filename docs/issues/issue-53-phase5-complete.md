@@ -112,7 +112,7 @@
 
 #### Test Suite 5: Protocol Compliance (2 tests)
 1. **Packet Type Verification**
-   - Verify "kdeconnect.share.request" (not cosmicconnect)
+   - Verify "cconnect.share.request" (not cosmicconnect)
    - Test packet structure compliance
    - Verify field names match spec
 

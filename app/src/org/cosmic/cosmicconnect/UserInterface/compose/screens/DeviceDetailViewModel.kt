@@ -1,16 +1,23 @@
+/*
+ * SPDX-FileCopyrightText: 2026 COSMIC Connect Contributors
+ *
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+ */
+
 package org.cosmic.cosmicconnect.UserInterface.compose.screens
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import org.cosmic.cosmicconnect.Core.DeviceRegistry
 import org.cosmic.cosmicconnect.Device
-import org.cosmic.cosmicconnect.CosmicConnect
-import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.PairingHandler
+import javax.inject.Inject
 
 /**
  * Device Detail ViewModel
@@ -18,10 +25,13 @@ import org.cosmic.cosmicconnect.PairingHandler
  * Manages the state and business logic for the Device Detail screen.
  * Observes device state changes and plugin updates.
  */
-class DeviceDetailViewModel(
-  application: Application,
-  private val deviceId: String
-) : AndroidViewModel(application) {
+@HiltViewModel
+class DeviceDetailViewModel @Inject constructor(
+    private val deviceRegistry: DeviceRegistry,
+    savedStateHandle: SavedStateHandle
+) : ViewModel() {
+
+  private val deviceId: String = checkNotNull(savedStateHandle["deviceId"])
 
   private val _uiState = MutableStateFlow<DeviceDetailUiState>(DeviceDetailUiState.Loading)
   val uiState: StateFlow<DeviceDetailUiState> = _uiState.asStateFlow()
@@ -31,14 +41,20 @@ class DeviceDetailViewModel(
   private var pluginsChangedListener: Device.PluginsChangedListener? = null
 
   init {
-    loadDevice()
+    savedStateHandle.get<String>("deviceId")?.let { loadDevice(it) }
   }
 
   /**
    * Load device and start observing changes.
    */
-  private fun loadDevice() {
-    device = CosmicConnect.getInstance().getDevice(deviceId)
+  fun loadDevice(deviceId: String) {
+    if (this.device?.deviceId == deviceId) return
+    
+    // Cleanup previous device
+    pairingCallback?.let { device?.removePairingCallback(it) }
+    pluginsChangedListener?.let { device?.removePluginsChangedListener(it) }
+
+    device = deviceRegistry.getDevice(deviceId)
 
     if (device == null) {
       _uiState.value = DeviceDetailUiState.Error("Device not found")
@@ -78,8 +94,7 @@ class DeviceDetailViewModel(
         updateDeviceState()
       }
     }
-    // Note: addPluginsChangedListener method needs to be implemented on Device class
-    // For now, this will compile but may need runtime implementation
+    pluginsChangedListener?.let { device?.addPluginsChangedListener(it) }
 
     // Initial state
     updateDeviceState()
@@ -88,7 +103,7 @@ class DeviceDetailViewModel(
   override fun onCleared() {
     super.onCleared()
     pairingCallback?.let { device?.removePairingCallback(it) }
-    // Note: removePluginsChangedListener method needs to be implemented on Device class
+    pluginsChangedListener?.let { device?.removePluginsChangedListener(it) }
   }
 
   /**
@@ -116,7 +131,7 @@ class DeviceDetailViewModel(
             key = plugin.pluginKey,
             name = plugin.displayName,
             description = plugin.description,
-            icon = 0, // TODO: Plugin icon needs to be added to Plugin class
+            icon = org.cosmic.cosmicconnect.UserInterface.compose.getPluginIcon(plugin.pluginKey),
             isEnabled = dev.isPluginEnabled(plugin.pluginKey),
             isAvailable = plugin.checkRequiredPermissions(),
             hasSettings = plugin.hasSettings(),

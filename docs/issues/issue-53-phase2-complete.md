@@ -49,11 +49,11 @@ pub fn create_file_share_packet(
 ) -> Result<FfiPacket>
 ```
 
-**Creates**: `kdeconnect.share.request` packet with file metadata
+**Creates**: `cconnect.share.request` packet with file metadata
 **Packet Structure**:
 ```json
 {
-  "type": "kdeconnect.share.request",
+  "type": "cconnect.share.request",
   "body": {
     "filename": "image.png",
     "creationTime": 1640000000000,
@@ -69,11 +69,11 @@ pub fn create_file_share_packet(
 pub fn create_text_share_packet(text: String) -> Result<FfiPacket>
 ```
 
-**Creates**: `kdeconnect.share.request` packet with text content
+**Creates**: `cconnect.share.request` packet with text content
 **Packet Structure**:
 ```json
 {
-  "type": "kdeconnect.share.request",
+  "type": "cconnect.share.request",
   "body": {
     "text": "Some text to share"
   }
@@ -86,11 +86,11 @@ pub fn create_text_share_packet(text: String) -> Result<FfiPacket>
 pub fn create_url_share_packet(url: String) -> Result<FfiPacket>
 ```
 
-**Creates**: `kdeconnect.share.request` packet with URL
+**Creates**: `cconnect.share.request` packet with URL
 **Packet Structure**:
 ```json
 {
-  "type": "kdeconnect.share.request",
+  "type": "cconnect.share.request",
   "body": {
     "url": "https://example.com"
   }
@@ -106,11 +106,11 @@ pub fn create_multifile_update_packet(
 ) -> Result<FfiPacket>
 ```
 
-**Creates**: `kdeconnect.share.request.update` packet
+**Creates**: `cconnect.share.request.update` packet
 **Packet Structure**:
 ```json
 {
-  "type": "kdeconnect.share.request.update",
+  "type": "cconnect.share.request.update",
   "body": {
     "numberOfFiles": 5,
     "totalPayloadSize": 10485760

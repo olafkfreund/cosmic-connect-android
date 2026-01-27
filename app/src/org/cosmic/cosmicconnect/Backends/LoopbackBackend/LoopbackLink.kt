@@ -11,15 +11,18 @@ import org.cosmic.cosmicconnect.Backends.BaseLink
 import org.cosmic.cosmicconnect.Backends.BaseLinkProvider
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.DeviceInfo
-import org.cosmic.cosmicconnect.Helpers.DeviceHelper.getDeviceInfo
+import org.cosmic.cosmicconnect.Helpers.DeviceHelper
 import org.cosmic.cosmicconnect.NetworkPacket
 
-class LoopbackLink : BaseLink {
-    constructor(context: Context, linkProvider: BaseLinkProvider) : super(context, linkProvider)
+class LoopbackLink(
+    context: Context,
+    linkProvider: BaseLinkProvider,
+    private val deviceHelper: DeviceHelper
+) : BaseLink(context, linkProvider) {
 
     override val name: String = "LoopbackLink"
     override val deviceInfo: DeviceInfo
-        get() = getDeviceInfo(context)
+        get() = deviceHelper.getDeviceInfo()
 
     @WorkerThread
     override fun sendPacket(np: NetworkPacket, callback: Device.SendPacketStatusCallback, sendPayloadFromSameThread: Boolean): Boolean {

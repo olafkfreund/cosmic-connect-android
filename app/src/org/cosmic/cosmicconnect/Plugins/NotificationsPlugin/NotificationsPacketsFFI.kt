@@ -19,10 +19,10 @@ import uniffi.cosmic_connect_core.*
  *
  * ## Packet Types
  *
- * - **Notification** (`kdeconnect.notification`): Send or cancel notification
- * - **Request** (`kdeconnect.notification.request`): Request all or dismiss one
- * - **Action** (`kdeconnect.notification.action`): Trigger action button
- * - **Reply** (`kdeconnect.notification.reply`): Send inline reply
+ * - **Notification** (`cconnect.notification`): Send or cancel notification
+ * - **Request** (`cconnect.notification.request`): Request all or dismiss one
+ * - **Action** (`cconnect.notification.action`): Trigger action button
+ * - **Reply** (`cconnect.notification.reply`): Send inline reply
  *
  * ## Notification Fields
  *
@@ -205,7 +205,7 @@ object NotificationsPacketsFFI {
     /**
      * Create a full notification packet.
      *
-     * Creates a `kdeconnect.notification` packet for displaying a notification
+     * Creates a `cconnect.notification` packet for displaying a notification
      * on the remote device. The notification will appear in the system notification
      * area and can optionally support actions and inline replies.
      *
@@ -272,7 +272,7 @@ object NotificationsPacketsFFI {
     /**
      * Create a cancel notification packet.
      *
-     * Creates a `kdeconnect.notification` packet with `isCancel: true` to
+     * Creates a `cconnect.notification` packet with `isCancel: true` to
      * inform the desktop that a notification has been dismissed on Android.
      * The desktop should remove the notification from its display.
      *
@@ -299,7 +299,7 @@ object NotificationsPacketsFFI {
     /**
      * Create a notification request packet.
      *
-     * Creates a `kdeconnect.notification.request` packet requesting all
+     * Creates a `cconnect.notification.request` packet requesting all
      * current notifications from the remote device. The remote should respond
      * by sending all active notifications.
      *
@@ -324,7 +324,7 @@ object NotificationsPacketsFFI {
     /**
      * Create a dismiss notification packet.
      *
-     * Creates a `kdeconnect.notification.request` packet with `cancel` field
+     * Creates a `cconnect.notification.request` packet with `cancel` field
      * to request the remote device to dismiss a specific notification.
      * The remote should dismiss the notification and send a cancel packet back.
      *
@@ -355,7 +355,7 @@ object NotificationsPacketsFFI {
     /**
      * Create a notification action packet.
      *
-     * Creates a `kdeconnect.notification.action` packet to trigger an action
+     * Creates a `cconnect.notification.action` packet to trigger an action
      * button on a notification displayed on the remote device.
      *
      * Action names must match one of the strings from the notification's `actions`
@@ -394,7 +394,7 @@ object NotificationsPacketsFFI {
     /**
      * Create a notification reply packet.
      *
-     * Creates a `kdeconnect.notification.reply` packet to send an inline reply
+     * Creates a `cconnect.notification.reply` packet to send an inline reply
      * to a notification on the remote device. This is typically used for messaging
      * apps that support quick replies.
      *
@@ -440,7 +440,7 @@ object NotificationsPacketsFFI {
 /**
  * Check if packet is a notification packet.
  *
- * Returns true if the packet is a `kdeconnect.notification` packet.
+ * Returns true if the packet is a `cconnect.notification` packet.
  * This includes both regular notifications and cancellation packets.
  *
  * ## Example
@@ -457,12 +457,12 @@ object NotificationsPacketsFFI {
  * @return true if packet is a notification, false otherwise
  */
 val NetworkPacket.isNotification: Boolean
-    get() = type == "kdeconnect.notification"
+    get() = type == "cconnect.notification"
 
 /**
  * Check if packet is a notification request.
  *
- * Returns true if the packet is a `kdeconnect.notification.request` packet.
+ * Returns true if the packet is a `cconnect.notification.request` packet.
  * This can be either a request for all notifications or a dismiss request.
  *
  * ## Example
@@ -481,12 +481,12 @@ val NetworkPacket.isNotification: Boolean
  * @return true if packet is a notification request, false otherwise
  */
 val NetworkPacket.isNotificationRequest: Boolean
-    get() = type == "kdeconnect.notification.request"
+    get() = type == "cconnect.notification.request"
 
 /**
  * Check if packet is a notification action.
  *
- * Returns true if the packet is a `kdeconnect.notification.action` packet
+ * Returns true if the packet is a `cconnect.notification.action` packet
  * for triggering an action button.
  *
  * ## Example
@@ -501,12 +501,12 @@ val NetworkPacket.isNotificationRequest: Boolean
  * @return true if packet is a notification action, false otherwise
  */
 val NetworkPacket.isNotificationAction: Boolean
-    get() = type == "kdeconnect.notification.action"
+    get() = type == "cconnect.notification.action"
 
 /**
  * Check if packet is a notification reply.
  *
- * Returns true if the packet is a `kdeconnect.notification.reply` packet
+ * Returns true if the packet is a `cconnect.notification.reply` packet
  * for sending an inline reply.
  *
  * ## Example
@@ -521,7 +521,7 @@ val NetworkPacket.isNotificationAction: Boolean
  * @return true if packet is a notification reply, false otherwise
  */
 val NetworkPacket.isNotificationReply: Boolean
-    get() = type == "kdeconnect.notification.reply"
+    get() = type == "cconnect.notification.reply"
 
 /**
  * Check if notification packet is a cancellation.

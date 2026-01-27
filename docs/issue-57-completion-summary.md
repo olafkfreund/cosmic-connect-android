@@ -515,7 +515,7 @@ cargo build --release
 **Impact:** Functional but not ideal
 
 ### 5. Packet Type Constants
-**Problem:** Hardcoded "kdeconnect.notification" strings
+**Problem:** Hardcoded "cconnect.notification" strings
 **Trade-off:** Simple and protocol-stable
 **Future:** Could use constants from FFI layer
 **Impact:** Minor, acceptable

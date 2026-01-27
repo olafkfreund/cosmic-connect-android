@@ -107,7 +107,7 @@ class ReceiveNotificationsPlugin : Plugin() {
     override val permissionExplanation: Int = R.string.receive_notifications_permission_explanation
 
     companion object {
-        private const val PACKET_TYPE_NOTIFICATION = "cosmicconnect.notification"
-        private const val PACKET_TYPE_NOTIFICATION_REQUEST = "cosmicconnect.notification.request"
+        private const val PACKET_TYPE_NOTIFICATION = "cconnect.notification"
+        private const val PACKET_TYPE_NOTIFICATION_REQUEST = "cconnect.notification.request"
     }
 }

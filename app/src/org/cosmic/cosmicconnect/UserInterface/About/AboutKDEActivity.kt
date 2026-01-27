@@ -7,51 +7,21 @@
 package org.cosmic.cosmicconnect.UserInterface.About
 
 import android.os.Bundle
-import android.text.Html
-import android.text.Spanned
-import android.text.method.LinkMovementMethod
-import org.cosmic.cosmicconnect.base.BaseActivity
-import org.cosmic.cosmicconnect.extensions.setupBottomPadding
-import org.cosmic.cosmicconnect.extensions.viewBinding
-import org.cosmic.cosmicconnect.R
-import org.cosmic.cosmicconnect.databinding.ActivityAboutKdeBinding
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import org.cosmic.cosmicconnect.UserInterface.compose.CosmicTheme
+import org.cosmic.cosmicconnect.UserInterface.compose.screens.about.AboutKdeScreen
 
-class AboutKDEActivity : BaseActivity<ActivityAboutKdeBinding>() {
-
-    override val binding: ActivityAboutKdeBinding by viewBinding(ActivityAboutKdeBinding::inflate)
-
-    override val isScrollable: Boolean = true
+class AboutKDEActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        setSupportActionBar(binding.toolbarLayout.toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setDisplayShowHomeEnabled(true)
-
-        binding.aboutTextView.text = fromHtml(resources.getString(R.string.about_kde_about))
-        binding.reportBugsOrWishesTextView.text = fromHtml(resources.getString(R.string.about_kde_report_bugs_or_wishes))
-        binding.joinKdeTextView.text = fromHtml(resources.getString(R.string.about_kde_join_kde))
-        binding.supportKdeTextView.text = fromHtml(resources.getString(R.string.about_kde_support_kde))
-
-        binding.aboutTextView.movementMethod = LinkMovementMethod.getInstance()
-        binding.reportBugsOrWishesTextView.movementMethod = LinkMovementMethod.getInstance()
-        binding.joinKdeTextView.movementMethod = LinkMovementMethod.getInstance()
-        binding.supportKdeTextView.movementMethod = LinkMovementMethod.getInstance()
-
-        binding.scrollView.setupBottomPadding()
-    }
-
-    private fun fromHtml(html: String): Spanned {
-        return if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY)
-        } else {
-            @Suppress("DEPRECATION") Html.fromHtml(html)
+        setContent {
+            CosmicTheme(context = this) {
+                AboutKdeScreen(
+                    onNavigateBack = { finish() }
+                )
+            }
         }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressedDispatcher.onBackPressed()
-        return true
     }
 }

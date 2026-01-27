@@ -197,7 +197,7 @@ Android: onFileReceived() callback
 
 **Packet:**
 ```
-Type: kdeconnect.battery
+Type: cconnect.battery
 Body: { currentCharge: 65, isCharging: true }
 ```
 
@@ -221,7 +221,7 @@ Body: { currentCharge: 65, isCharging: true }
 
 **Packet:**
 ```
-Type: kdeconnect.clipboard
+Type: cconnect.clipboard
 Body: { content: "clipboard text" }
 ```
 
@@ -245,7 +245,7 @@ Body: { content: "clipboard text" }
 
 **Packet:**
 ```
-Type: kdeconnect.ping
+Type: cconnect.ping
 Body: { message: "Ping from COSMIC" }
 ```
 
@@ -269,7 +269,7 @@ Body: { message: "Ping from COSMIC" }
 
 **Packet:**
 ```
-Type: kdeconnect.runcommand
+Type: cconnect.runcommand
 Body: {
   commands: {
     "lock_screen": "loginctl lock-session",
@@ -298,7 +298,7 @@ Body: {
 
 **Packet:**
 ```
-Type: kdeconnect.mpris
+Type: cconnect.mpris
 Body: {
   isPlaying: true,
   title: "Song Title",
@@ -596,7 +596,7 @@ app/build/reports/androidTests/connected/index.html
 **Network:**
 ```
 COSMIC: Pair Request Packet → Android:1764 (TLS)
-  Packet Type: kdeconnect.pair
+  Packet Type: cconnect.pair
   Body: { pair: true, certificate: <TLS_CERT> }
 
 Android: Process request
@@ -604,7 +604,7 @@ Android: Display notification "COSMIC Desktop wants to pair"
 User: Accepts on Android
 
 Android: Pair Response → COSMIC
-  Packet Type: kdeconnect.pair
+  Packet Type: cconnect.pair
   Body: { pair: true, certificate: <TLS_CERT> }
 
 COSMIC: Store Android's certificate
@@ -618,7 +618,7 @@ COSMIC: Mark as paired
 **Network:**
 ```
 COSMIC: Share Request → Android (TLS)
-  Packet Type: kdeconnect.share.request
+  Packet Type: cconnect.share.request
   Body: { filename: "file.txt", size: 1024 }
 
 Android: Show notification "COSMIC wants to send file.txt"
@@ -639,7 +639,7 @@ Android: Notify completion
 **Battery:**
 ```
 COSMIC: Battery Packet → Android (TLS)
-  Type: kdeconnect.battery
+  Type: cconnect.battery
   Body: { currentCharge: 65, isCharging: true }
 
 Android: Update remote battery status
@@ -649,7 +649,7 @@ Android: Show in notification/UI
 **Clipboard:**
 ```
 COSMIC: Clipboard Packet → Android (TLS)
-  Type: kdeconnect.clipboard
+  Type: cconnect.clipboard
   Body: { content: "clipboard text" }
 
 Android: Update clipboard listener
@@ -659,7 +659,7 @@ Android: (Optional) Update Android system clipboard
 **Ping:**
 ```
 COSMIC: Ping Packet → Android (TLS)
-  Type: kdeconnect.ping
+  Type: cconnect.ping
   Body: { message: "Find my phone" }
 
 Android: Show notification

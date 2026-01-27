@@ -23,14 +23,14 @@
 
 **Before**:
 ```java
-private final static String PACKET_TYPE_SHARE_REQUEST = "cosmicconnect.share.request";
-final static String PACKET_TYPE_SHARE_REQUEST_UPDATE = "cosmicconnect.share.request.update";
+private final static String PACKET_TYPE_SHARE_REQUEST = "cconnect.share.request";
+final static String PACKET_TYPE_SHARE_REQUEST_UPDATE = "cconnect.share.request.update";
 ```
 
 **After**:
 ```java
-private final static String PACKET_TYPE_SHARE_REQUEST = "kdeconnect.share.request";
-final static String PACKET_TYPE_SHARE_REQUEST_UPDATE = "kdeconnect.share.request.update";
+private final static String PACKET_TYPE_SHARE_REQUEST = "cconnect.share.request";
+final static String PACKET_TYPE_SHARE_REQUEST_UPDATE = "cconnect.share.request.update";
 ```
 
 **Impact**: Fixes protocol compatibility with KDE Connect specification
@@ -169,8 +169,8 @@ private void receiveText(NetworkPacket np) {
 **Location**: `SharePlugin.java:42-43`
 
 ```java
-import org.cosmic.cosmicconnect.Plugins.SharePlugin.SharePacketsFFI;
-import static org.cosmic.cosmicconnect.Plugins.SharePlugin.SharePacketsFFIKt.*;
+import org.cosmic.cconnect.Plugins.SharePlugin.SharePacketsFFI;
+import static org.cosmic.cconnect.Plugins.SharePlugin.SharePacketsFFIKt.*;
 ```
 
 **Purpose**:
@@ -306,7 +306,7 @@ $ ./gradlew compileDebugKotlin --continue
 // Old way (before Phase 4)
 Map<String, Object> body = new HashMap<>();
 body.put("text", "Hello World");
-NetworkPacket packet = NetworkPacket.create("kdeconnect.share.request", body);
+NetworkPacket packet = NetworkPacket.create("cconnect.share.request", body);
 device.sendPacket(convertToLegacyPacket(packet));
 
 // New way (after Phase 4)
@@ -320,7 +320,7 @@ device.sendPacket(convertToLegacyPacket(packet));
 // Old way
 Map<String, Object> body = new HashMap<>();
 body.put("url", "https://example.com");
-NetworkPacket packet = NetworkPacket.create("kdeconnect.share.request", body);
+NetworkPacket packet = NetworkPacket.create("cconnect.share.request", body);
 device.sendPacket(convertToLegacyPacket(packet));
 
 // New way

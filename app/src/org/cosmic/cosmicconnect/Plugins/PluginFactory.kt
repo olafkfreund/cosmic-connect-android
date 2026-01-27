@@ -7,14 +7,18 @@ package org.cosmic.cosmicconnect.Plugins
 
 import android.content.Context
 import android.util.Log
+import dagger.hilt.android.qualifiers.ApplicationContext
 import org.cosmic.cosmicconnect.Device
+import javax.inject.Inject
+import javax.inject.Singleton
 
-object PluginFactory {
+@Singleton
+class PluginFactory @Inject constructor(@ApplicationContext private val context: Context) {
     annotation class LoadablePlugin  //Annotate plugins with this so PluginFactory finds them
 
     private var pluginInfo: Map<String, PluginInfo> = mapOf()
 
-    fun initPluginInfo(context: Context) {
+    fun initPluginInfo() {
         try {
             pluginInfo = com.albertvaka.classindexksp.LoadablePlugin
                 .asSequence()
@@ -34,10 +38,8 @@ object PluginFactory {
     val outgoingCapabilities: Set<String>
         get() = pluginInfo.values.flatMap { plugin -> plugin.outgoingPacketTypes }.toSet()
 
-    @JvmStatic
     fun getPluginInfo(pluginKey: String): PluginInfo = pluginInfo[pluginKey]!!
 
-    @JvmStatic
     fun sortPluginList(plugins: List<String>): List<String> {
         return plugins.sortedBy { pluginInfo[it]?.displayName }
     }
@@ -82,5 +84,12 @@ object PluginFactory {
 
         val supportedPacketTypes: Set<String> = supportedPacketTypes.toSet()
         val outgoingPacketTypes: Set<String> = outgoingPacketTypes.toSet()
+    }
+
+    companion object {
+        @JvmStatic
+        fun getPluginKey(p: Class<out Plugin>): String {
+            return p.simpleName
+        }
     }
 }

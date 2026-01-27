@@ -1,5 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2014 Albert Vaca Cintora <albertvaka@gmail.com>
+ * SPDX-FileCopyrightText: 2026 COSMIC Connect Contributors
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
@@ -7,34 +8,26 @@ package org.cosmic.cosmicconnect.Plugins.MprisPlugin
 
 import android.os.Bundle
 import android.view.KeyEvent
-import androidx.annotation.StringRes
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import com.google.android.material.tabs.TabLayoutMediator
-import org.cosmic.cosmicconnect.Plugins.SystemVolumePlugin.SystemVolumeFragment
-import org.cosmic.cosmicconnect.base.BaseActivity
-import org.cosmic.cosmicconnect.extensions.viewBinding
-import org.cosmic.cosmicconnect.R
-import org.cosmic.cosmicconnect.databinding.ActivityMprisBinding
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.viewModels
+import dagger.hilt.android.AndroidEntryPoint
+import org.cosmic.cosmicconnect.UserInterface.compose.CosmicTheme
+import org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.MprisScreen
+import org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.MprisViewModel
 
-class MprisActivity : BaseActivity<ActivityMprisBinding>() {
+@AndroidEntryPoint
+class MprisActivity : ComponentActivity() {
 
-    override val binding: ActivityMprisBinding by viewBinding(ActivityMprisBinding::inflate)
-    
-    private lateinit var mprisPagerAdapter: MprisPagerAdapter
+    private val viewModel: MprisViewModel by viewModels()
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         return when (keyCode) {
             KeyEvent.KEYCODE_VOLUME_UP, KeyEvent.KEYCODE_VOLUME_DOWN -> {
-                val pagePosition = binding.mprisTabs.selectedTabPosition
-                if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
-                    mprisPagerAdapter.onVolumeUp(pagePosition)
-                } else {
-                    mprisPagerAdapter.onVolumeDown(pagePosition)
-                }
+                // TODO: Implement volume control logic in ViewModel if needed
+                // For now, let the system handle it or implement in VM
                 true
             }
-
             else -> super.onKeyDown(keyCode, event)
         }
     }
@@ -51,59 +44,14 @@ class MprisActivity : BaseActivity<ActivityMprisBinding>() {
 
         val deviceId = intent.getStringExtra(MprisPlugin.DEVICE_ID_KEY)
 
-        mprisPagerAdapter = MprisPagerAdapter(this, deviceId)
-        binding.mprisPager.adapter = mprisPagerAdapter
-
-        val tabLayoutMediator = TabLayoutMediator(
-            binding.mprisTabs, binding.mprisPager
-        ) { tab, position ->
-            tab.setText(
-                mprisPagerAdapter.getTitle(position)
-            )
-        }
-
-        tabLayoutMediator.attach()
-
-        setSupportActionBar(binding.toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-    }
-
-    internal class MprisPagerAdapter(fragmentActivity: FragmentActivity, private val deviceId: String?) :
-        ExtendedFragmentAdapter(fragmentActivity) {
-        override fun createFragment(position: Int): Fragment = if (position == 1) {
-            SystemVolumeFragment.newInstance(deviceId)
-        } else {
-            MprisNowPlayingFragment.newInstance(deviceId)
-        }
-
-        override fun getItemCount(): Int = 2
-
-        @StringRes
-        fun getTitle(position: Int): Int = if (position == 1) {
-            R.string.devices
-        } else {
-            R.string.mpris_play
-        }
-
-        fun onVolumeUp(page: Int) {
-            val requestedFragment = getFragment(page) ?: return
-
-            if (requestedFragment is VolumeKeyListener) {
-                requestedFragment.onVolumeUp()
+        setContent {
+            CosmicTheme(context = this) {
+                MprisScreen(
+                    viewModel = viewModel,
+                    deviceId = deviceId,
+                    onNavigateBack = { finish() }
+                )
             }
         }
-
-        fun onVolumeDown(page: Int) {
-            val requestedFragment = getFragment(page) ?: return
-
-            if (requestedFragment is VolumeKeyListener) {
-                requestedFragment.onVolumeDown()
-            }
-        }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        super.onBackPressedDispatcher.onBackPressed()
-        return true
     }
 }

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "org.cosmic.cosmicconnect.app-mergeDebugResources-85:/values-v30/values-v30.xml",
+            "outputFile": "org.cosmic.cosmicconnect.app-mergeDebugResources-87:/values-v30/values-v30.xml",
             "map": [
                 {
-                    "source": "/home/olafkfreund/.gradle/caches/8.14.1/transforms/b3790d01d1a3091b0fb13b91ba634393/transformed/material3-release/res/values-v30/values-v30.xml",
+                    "source": "/home/olafkfreund/.gradle/caches/8.14.1/transforms/0db359253b5ac8ac6a6ca5d752cd4512/transformed/material3-release/res/values-v30/values-v30.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

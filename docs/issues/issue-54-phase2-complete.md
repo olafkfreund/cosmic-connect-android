@@ -26,7 +26,7 @@
 ```rust
 /// Create a standard clipboard update packet.
 ///
-/// Creates a `kdeconnect.clipboard` packet for syncing clipboard changes
+/// Creates a `cconnect.clipboard` packet for syncing clipboard changes
 /// between devices. Does not include a timestamp.
 ///
 /// # Arguments
@@ -49,7 +49,7 @@
 ///
 /// - Validation (non-blank content) is performed at the Kotlin layer
 /// - This function accepts any string, including empty strings
-/// - Packet type: `kdeconnect.clipboard`
+/// - Packet type: `cconnect.clipboard`
 /// - Body fields: `content`
 pub fn create_clipboard_packet(content: String) -> Result<FfiPacket> {
     use serde_json::json;
@@ -58,7 +58,7 @@ pub fn create_clipboard_packet(content: String) -> Result<FfiPacket> {
         "content": content,
     });
 
-    let packet = Packet::new("kdeconnect.clipboard".to_string(), body);
+    let packet = Packet::new("cconnect.clipboard".to_string(), body);
     Ok(packet.into())
 }
 ```
@@ -66,7 +66,7 @@ pub fn create_clipboard_packet(content: String) -> Result<FfiPacket> {
 **Features**:
 - ✅ Comprehensive documentation with examples
 - ✅ Proper error handling (returns Result<FfiPacket>)
-- ✅ Correct packet type: "kdeconnect.clipboard"
+- ✅ Correct packet type: "cconnect.clipboard"
 - ✅ Single body field: "content"
 - ✅ No timestamp field (standard update)
 
@@ -78,7 +78,7 @@ pub fn create_clipboard_packet(content: String) -> Result<FfiPacket> {
 ```rust
 /// Create a clipboard connect packet with timestamp.
 ///
-/// Creates a `kdeconnect.clipboard.connect` packet for syncing clipboard
+/// Creates a `cconnect.clipboard.connect` packet for syncing clipboard
 /// state when devices connect. Includes timestamp for sync loop prevention.
 ///
 /// # Arguments
@@ -104,7 +104,7 @@ pub fn create_clipboard_packet(content: String) -> Result<FfiPacket> {
 ///
 /// - Validation (non-blank content, non-negative timestamp) is performed at the Kotlin layer
 /// - This function accepts any string and any i64 timestamp
-/// - Packet type: `kdeconnect.clipboard.connect`
+/// - Packet type: `cconnect.clipboard.connect`
 /// - Body fields: `content`, `timestamp`
 /// - Timestamp 0 indicates no content (will be ignored by receiver)
 pub fn create_clipboard_connect_packet(content: String, timestamp: i64) -> Result<FfiPacket> {
@@ -115,7 +115,7 @@ pub fn create_clipboard_connect_packet(content: String, timestamp: i64) -> Resul
         "timestamp": timestamp,
     });
 
-    let packet = Packet::new("kdeconnect.clipboard.connect".to_string(), body);
+    let packet = Packet::new("cconnect.clipboard.connect".to_string(), body);
     Ok(packet.into())
 }
 ```
@@ -123,7 +123,7 @@ pub fn create_clipboard_connect_packet(content: String, timestamp: i64) -> Resul
 **Features**:
 - ✅ Comprehensive documentation with examples
 - ✅ Proper error handling (returns Result<FfiPacket>)
-- ✅ Correct packet type: "kdeconnect.clipboard.connect"
+- ✅ Correct packet type: "cconnect.clipboard.connect"
 - ✅ Two body fields: "content", "timestamp"
 - ✅ Timestamp type: i64 (UNIX epoch milliseconds)
 - ✅ Documentation of timestamp semantics
@@ -299,14 +299,14 @@ Phase 2 Complete: FFI interface implemented ✅
 #[test]
 fn test_ffi_clipboard_packet() {
     let packet = create_clipboard_packet("Test".to_string()).unwrap();
-    assert_eq!(packet.packet_type, "kdeconnect.clipboard");
+    assert_eq!(packet.packet_type, "cconnect.clipboard");
     assert!(packet.body.contains("\"content\":\"Test\""));
 }
 
 #[test]
 fn test_ffi_clipboard_connect_packet() {
     let packet = create_clipboard_connect_packet("Test".to_string(), 1000).unwrap();
-    assert_eq!(packet.packet_type, "kdeconnect.clipboard.connect");
+    assert_eq!(packet.packet_type, "cconnect.clipboard.connect");
     assert!(packet.body.contains("\"content\":\"Test\""));
     assert!(packet.body.contains("\"timestamp\":1000"));
 }

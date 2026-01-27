@@ -294,7 +294,7 @@ hasMainActivity = false // TODO: hasMainActivity needs to be implemented
 
 **Import Added**:
 ```kotlin
-import org.cosmic.cosmicconnect.PairingHandler
+import org.cosmic.cconnect.PairingHandler
 ```
 
 ### 11. Build Configuration Issues

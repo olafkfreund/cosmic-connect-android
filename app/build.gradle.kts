@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.dependencyLicenseReport)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.rust.android)
-    // alias(libs.plugins.hilt.android)
+    alias(libs.plugins.hilt.android)
 }
 
 import com.android.build.api.instrumentation.AsmClassVisitorFactory
@@ -75,7 +75,7 @@ android {
         minSdk = 23
         targetSdk = 34
         versionCode = 13404
-        versionName = "1.34.4"
+        versionName = "1.0.0-beta"
         proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
     }
     buildFeatures {
@@ -185,7 +185,7 @@ android {
  *
  * It fixed the class cast exception when lib desugar enabled and minSdk < 26.
  */
-abstract class FixPosixFilePermissionClassVisitorFactory :
+abstract class FixPosixFilePermissionClassVisitorFactory : 
     AsmClassVisitorFactory<FixPosixFilePermissionClassVisitorFactory.Params> {
 
     override fun createClassVisitor(
@@ -240,7 +240,7 @@ abstract class FixPosixFilePermissionClassVisitorFactory :
  * Collections.unmodifiableXXX is not exist when Android API level is lower than 26.
  * So we replace the call to Collections.unmodifiableXXX with the original collection by removing the call.
  */
-abstract class FixCollectionsClassVisitorFactory :
+abstract class FixCollectionsClassVisitorFactory : 
     AsmClassVisitorFactory<FixCollectionsClassVisitorFactory.Params> {
     override fun createClassVisitor(
         classContext: ClassContext,
@@ -336,6 +336,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.constraintlayout.compose)
@@ -344,7 +345,7 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(libs.hilt.android)
-    // ksp(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
     implementation(libs.androidx.media)
     implementation(libs.androidx.appcompat)
@@ -416,13 +417,13 @@ licenseReport {
 
 tasks.named("generateLicenseReport") {
     doLast {
-        val target = File(licenseResDir, "raw/license")
+        val target = file("res/raw/license")
         target.parentFile.mkdirs()
         target.writeText(
             files(
                 layout.projectDirectory.file("../COPYING"),
                 layout.buildDirectory.file("reports/dependency-license/THIRD-PARTY-NOTICES.txt")
-            ).joinToString(separator = "\n") {
+            ).filter { it.exists() }.joinToString(separator = "\n") {
                 it.readText()
             }
         )

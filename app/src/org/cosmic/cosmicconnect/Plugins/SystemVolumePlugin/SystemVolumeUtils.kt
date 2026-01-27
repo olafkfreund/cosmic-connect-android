@@ -6,6 +6,6 @@
 
 package org.cosmic.cosmicconnect.Plugins.SystemVolumePlugin
 
-internal fun getDefaultSink(plugin: SystemVolumePlugin): Sink? {
-    return plugin.sinks.firstOrNull { it.isDefault }
+fun getDefaultSink(plugin: SystemVolumePlugin): Sink? {
+    return plugin.sinks.values.firstOrNull { it.isDefault }
 }

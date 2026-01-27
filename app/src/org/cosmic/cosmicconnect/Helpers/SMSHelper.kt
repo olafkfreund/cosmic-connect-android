@@ -839,10 +839,10 @@ object SMSHelper {
             /**
              * Attachment object field names
              */
-            const val PART_ID = "part_id"
-            const val MIME_TYPE = "mime_type"
-            const val ENCODED_THUMBNAIL = "encoded_thumbnail"
-            const val UNIQUE_IDENTIFIER = "unique_identifier"
+            const val PART_ID = "partId"
+            const val MIME_TYPE = "mimeType"
+            const val ENCODED_THUMBNAIL = "encodedThumbnail"
+            const val UNIQUE_IDENTIFIER = "uniqueIdentifier"
         }
     }
 
@@ -921,21 +921,21 @@ object SMSHelper {
             for (address in addresses) {
                 jsonAddresses.put(address.toJson())
             }
-            json.put(ADDRESSES, jsonAddresses)
-            json.put(BODY, body)
-            json.put(DATE, date)
-            json.put(TYPE, type)
-            json.put(READ, read)
-            json.put(THREAD_ID, threadID.threadID)
-            json.put(U_ID, uID)
-            json.put(SUBSCRIPTION_ID, subscriptionID)
-            json.put(EVENT, event)
+            json.put("addresses", jsonAddresses)
+            json.put("body", body)
+            json.put("date", date)
+            json.put("type", type)
+            json.put("read", read)
+            json.put("threadId", threadID.threadID)
+            json.put("uID", uID)
+            json.put("subId", subscriptionID)
+            json.put("event", event)
             if (attachments != null) {
                 val jsonAttachments = JSONArray()
                 for (attachment in attachments) {
                     jsonAttachments.put(attachment.toJson())
                 }
-                json.put(ATTACHMENTS, jsonAttachments)
+                json.put("attachments", jsonAttachments)
             }
             return json
         }

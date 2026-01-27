@@ -34,8 +34,8 @@ Migrate the RemoteKeyboard Plugin to use dedicated Rust FFI functions for packet
 - Create MOUSEPAD_KEYBOARDSTATE packets (keyboard visibility state)
 
 **Packet Types**:
-- `cosmicconnect.mousepad.echo`
-- `cosmicconnect.mousepad.keyboardstate`
+- `cconnect.mousepad.echo`
+- `cconnect.mousepad.keyboardstate`
 
 ## Android Status
 
@@ -82,7 +82,7 @@ pub fn create_mousepad_echo(body_json: String) -> Result<FfiPacket> {
     // Parse the request body JSON
     let body_data: serde_json::Value = serde_json::from_str(&body_json)?;
 
-    let packet = Packet::new("cosmicconnect.mousepad.echo", body_data);
+    let packet = Packet::new("cconnect.mousepad.echo", body_data);
     Ok(packet.into())
 }
 
@@ -94,7 +94,7 @@ pub fn create_mousepad_keyboardstate(state: bool) -> Result<FfiPacket> {
         "state": state
     });
 
-    let packet = Packet::new("cosmicconnect.mousepad.keyboardstate", body);
+    let packet = Packet::new("cconnect.mousepad.keyboardstate", body);
     Ok(packet.into())
 }
 ```
@@ -144,9 +144,9 @@ pub use ffi::{
 **File**: `src/org/cosmic/cosmicconnect/Plugins/RemoteKeyboardPlugin/RemoteKeyboardPacketsFFI.kt`
 
 ```kotlin
-package org.cosmic.cosmicconnect.Plugins.RemoteKeyboardPlugin
+package org.cosmic.cconnect.Plugins.RemoteKeyboardPlugin
 
-import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cconnect.Core.NetworkPacket
 import uniffi.cosmic_connect_core.createMousepadEcho
 import uniffi.cosmic_connect_core.createMousepadKeyboardstate
 
@@ -274,7 +274,7 @@ mod tests {
         }).to_string();
 
         let packet = create_mousepad_echo(body_json).unwrap();
-        assert_eq!(packet.packet_type, "cosmicconnect.mousepad.echo");
+        assert_eq!(packet.packet_type, "cconnect.mousepad.echo");
 
         let body: serde_json::Value = serde_json::from_str(&packet.body).unwrap();
         assert_eq!(body["key"], "a");
@@ -284,7 +284,7 @@ mod tests {
     #[test]
     fn test_create_mousepad_keyboardstate() {
         let packet = create_mousepad_keyboardstate(true).unwrap();
-        assert_eq!(packet.packet_type, "cosmicconnect.mousepad.keyboardstate");
+        assert_eq!(packet.packet_type, "cconnect.mousepad.keyboardstate");
 
         let body: serde_json::Value = serde_json::from_str(&packet.body).unwrap();
         assert_eq!(body["state"], true);
@@ -358,7 +358,7 @@ mod tests {
 **Echo Packet Format**:
 ```json
 {
-  "type": "cosmicconnect.mousepad.echo",
+  "type": "cconnect.mousepad.echo",
   "body": {
     "key": "a",
     "shift": false,
@@ -372,7 +372,7 @@ mod tests {
 **Keyboard State Packet Format**:
 ```json
 {
-  "type": "cosmicconnect.mousepad.keyboardstate",
+  "type": "cconnect.mousepad.keyboardstate",
   "body": {
     "state": true
   }

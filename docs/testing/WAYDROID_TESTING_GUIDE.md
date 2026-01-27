@@ -394,7 +394,7 @@ waydroid app launch org.cosmic.cosmicconnect
 
 # Specific test class
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.integration.DiscoveryPairingTest
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.integration.DiscoveryPairingTest
 ```
 
 ---
@@ -882,7 +882,7 @@ adb connect 192.168.240.112:5555
 
 # Install and test
 adb install -r app.apk
-adb shell am instrument -w org.cosmic.cosmicconnect.test/androidx.test.runner.AndroidJUnitRunner
+adb shell am instrument -w org.cosmic.cconnect.test/androidx.test.runner.AndroidJUnitRunner
 
 # Get logcat
 adb logcat -d > test-logs.txt
@@ -906,15 +906,15 @@ adb install -r app.apk
 
 # Run test suites in parallel
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.integration.DiscoveryPairingTest &
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.integration.DiscoveryPairingTest &
 PID1=$!
 
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.integration.FileTransferTest &
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.integration.FileTransferTest &
 PID2=$!
 
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.integration.PluginTest &
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.integration.PluginTest &
 PID3=$!
 
 # Wait for all tests to complete
@@ -1224,7 +1224,7 @@ adb shell pm grant org.cosmic.cosmicconnect android.permission.READ_EXTERNAL_STO
 
 # Run clipboard tests only
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.integration.ClipboardTest
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.integration.ClipboardTest
 
 # View results
 xdg-open build/reports/androidTests/connected/index.html
@@ -1281,7 +1281,7 @@ echo "Running instrumented tests..."
 # 9. Performance tests
 echo "Running performance tests..."
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.performance.PerformanceBenchmarkTest
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.performance.PerformanceBenchmarkTest
 
 # 10. Generate reports
 echo "Generating test reports..."

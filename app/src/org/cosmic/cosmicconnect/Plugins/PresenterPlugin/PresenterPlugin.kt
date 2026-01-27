@@ -117,7 +117,7 @@ class PresenterPlugin : Plugin() {
     }
 
     companion object {
-        private const val PACKET_TYPE_PRESENTER = "cosmicconnect.presenter"
-        private const val PACKET_TYPE_MOUSEPAD_REQUEST = "cosmicconnect.mousepad.request"
+        private const val PACKET_TYPE_PRESENTER = "cconnect.presenter"
+        private const val PACKET_TYPE_MOUSEPAD_REQUEST = "cconnect.mousepad.request"
     }
 }

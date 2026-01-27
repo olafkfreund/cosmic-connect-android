@@ -34,7 +34,7 @@ Migrate the SystemVolume Plugin to use the Rust FFI core for packet creation. Th
 - Only sends request packets to remote device
 - Receives sink list and updates from remote
 
-**Packet Type**: `kdeconnect.systemvolume.request`
+**Packet Type**: `cconnect.systemvolume.request`
 
 ## Android Status
 
@@ -90,7 +90,7 @@ pub fn create_systemvolume_volume(sink_name: String, volume: i32) -> Result<FfiP
         "volume": volume,
     });
 
-    let packet = Packet::new("kdeconnect.systemvolume.request", body);
+    let packet = Packet::new("cconnect.systemvolume.request", body);
     Ok(packet.into())
 }
 
@@ -103,7 +103,7 @@ pub fn create_systemvolume_mute(sink_name: String, muted: bool) -> Result<FfiPac
         "muted": muted,
     });
 
-    let packet = Packet::new("kdeconnect.systemvolume.request", body);
+    let packet = Packet::new("cconnect.systemvolume.request", body);
     Ok(packet.into())
 }
 
@@ -116,7 +116,7 @@ pub fn create_systemvolume_enable(sink_name: String) -> Result<FfiPacket> {
         "enabled": true,
     });
 
-    let packet = Packet::new("kdeconnect.systemvolume.request", body);
+    let packet = Packet::new("cconnect.systemvolume.request", body);
     Ok(packet.into())
 }
 
@@ -128,7 +128,7 @@ pub fn create_systemvolume_request_sinks() -> Result<FfiPacket> {
         "requestSinks": true
     });
 
-    let packet = Packet::new("kdeconnect.systemvolume.request", body);
+    let packet = Packet::new("cconnect.systemvolume.request", body);
     Ok(packet.into())
 }
 ```
@@ -174,9 +174,9 @@ pub use ffi::{
 **File**: `src/org/cosmic/cosmicconnect/Plugins/SystemVolumePlugin/SystemVolumePacketsFFI.kt`
 
 ```kotlin
-package org.cosmic.cosmicconnect.Plugins.SystemVolumePlugin
+package org.cosmic.cconnect.Plugins.SystemVolumePlugin
 
-import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cconnect.Core.NetworkPacket
 import uniffi.cosmic_connect_core.*
 
 object SystemVolumePacketsFFI {
@@ -238,7 +238,7 @@ mod tests {
     #[test]
     fn test_create_systemvolume_volume() {
         let packet = create_systemvolume_volume("Speaker".to_string(), 75).unwrap();
-        assert_eq!(packet.packet_type, "kdeconnect.systemvolume.request");
+        assert_eq!(packet.packet_type, "cconnect.systemvolume.request");
 
         let body: serde_json::Value = serde_json::from_str(&packet.body).unwrap();
         assert_eq!(body["name"], "Speaker");
@@ -248,7 +248,7 @@ mod tests {
     #[test]
     fn test_create_systemvolume_mute() {
         let packet = create_systemvolume_mute("Headphones".to_string(), true).unwrap();
-        assert_eq!(packet.packet_type, "kdeconnect.systemvolume.request");
+        assert_eq!(packet.packet_type, "cconnect.systemvolume.request");
 
         let body: serde_json::Value = serde_json::from_str(&packet.body).unwrap();
         assert_eq!(body["name"], "Headphones");
@@ -258,7 +258,7 @@ mod tests {
     #[test]
     fn test_create_systemvolume_enable() {
         let packet = create_systemvolume_enable("HDMI Output".to_string()).unwrap();
-        assert_eq!(packet.packet_type, "kdeconnect.systemvolume.request");
+        assert_eq!(packet.packet_type, "cconnect.systemvolume.request");
 
         let body: serde_json::Value = serde_json::from_str(&packet.body).unwrap();
         assert_eq!(body["name"], "HDMI Output");
@@ -268,7 +268,7 @@ mod tests {
     #[test]
     fn test_create_systemvolume_request_sinks() {
         let packet = create_systemvolume_request_sinks().unwrap();
-        assert_eq!(packet.packet_type, "kdeconnect.systemvolume.request");
+        assert_eq!(packet.packet_type, "cconnect.systemvolume.request");
 
         let body: serde_json::Value = serde_json::from_str(&packet.body).unwrap();
         assert_eq!(body["requestSinks"], true);

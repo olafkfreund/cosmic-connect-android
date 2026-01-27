@@ -6,13 +6,12 @@
 package org.cosmic.cosmicconnect.Helpers.SecurityHelpers
 
 import android.content.Context
-import android.os.Build
 import android.security.keystore.KeyProperties
 import android.util.Base64
 import android.util.Log
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.runBlocking
 import org.cosmic.cosmicconnect.Helpers.PreferenceDataStore
-import java.security.GeneralSecurityException
 import java.security.KeyFactory
 import java.security.KeyPair
 import java.security.KeyPairGenerator
@@ -21,12 +20,14 @@ import java.security.PublicKey
 import java.security.spec.ECGenParameterSpec
 import java.security.spec.PKCS8EncodedKeySpec
 import java.security.spec.X509EncodedKeySpec
+import javax.inject.Inject
+import javax.inject.Singleton
 
-object RsaHelper {
-    private const val RSA = "RSA" // KeyProperties.KEY_ALGORITHM_RSA isn't available until API 23+
+@Singleton
+class RsaHelper @Inject constructor(@ApplicationContext private val context: Context) {
+    private val RSA = "RSA"
 
-    @JvmStatic
-    fun initialiseRsaKeys(context: Context) {
+    fun initialiseRsaKeys() {
         val publicKeyStored = PreferenceDataStore.getPublicKeySync(context)
         val privateKeyStored = PreferenceDataStore.getPrivateKeySync(context)
 
@@ -56,16 +57,14 @@ object RsaHelper {
         }
     }
 
-    @JvmStatic
-    fun getPublicKey(context: Context): PublicKey {
+    fun getPublicKey(): PublicKey {
         val publicKeyStr = PreferenceDataStore.getPublicKeySync(context)
         val publicKeyBytes = Base64.decode(publicKeyStr, 0)
         val algorithm = PreferenceDataStore.getAlgorithmSync(context, RSA)
         return KeyFactory.getInstance(algorithm).generatePublic(X509EncodedKeySpec(publicKeyBytes))
     }
 
-    @JvmStatic
-    fun getPrivateKey(context: Context): PrivateKey {
+    fun getPrivateKey(): PrivateKey {
         val privateKeyStr = PreferenceDataStore.getPrivateKeySync(context)
         val privateKeyBytes = Base64.decode(privateKeyStr, 0)
         val algorithm = PreferenceDataStore.getAlgorithmSync(context, RSA)

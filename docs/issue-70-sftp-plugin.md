@@ -35,7 +35,7 @@ Migrate the SFTP Plugin to use dedicated Rust FFI functions for packet creation.
 - Create SFTP packets with server connection details or error messages
 - Single packet type with variable body
 
-**Packet Type**: `cosmicconnect.sftp`
+**Packet Type**: `cconnect.sftp`
 
 ## Android Status
 
@@ -88,7 +88,7 @@ pub fn create_sftp_packet(body_json: String) -> Result<FfiPacket> {
     // Parse the request body JSON
     let body_data: serde_json::Value = serde_json::from_str(&body_json)?;
 
-    let packet = Packet::new("cosmicconnect.sftp", body_data);
+    let packet = Packet::new("cconnect.sftp", body_data);
     Ok(packet.into())
 }
 ```
@@ -127,9 +127,9 @@ pub use ffi::{
 **File**: `src/org/cosmic/cosmicconnect/Plugins/SftpPlugin/SftpPacketsFFI.kt`
 
 ```kotlin
-package org.cosmic.cosmicconnect.Plugins.SftpPlugin
+package org.cosmic.cconnect.Plugins.SftpPlugin
 
-import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cconnect.Core.NetworkPacket
 import uniffi.cosmic_connect_core.createSftpPacket
 
 /**
@@ -231,7 +231,7 @@ mod tests {
         }).to_string();
 
         let packet = create_sftp_packet(body_json).unwrap();
-        assert_eq!(packet.packet_type, "cosmicconnect.sftp");
+        assert_eq!(packet.packet_type, "cconnect.sftp");
 
         let body: serde_json::Value = serde_json::from_str(&packet.body).unwrap();
         assert_eq!(body["ip"], "192.168.1.100");
@@ -245,7 +245,7 @@ mod tests {
         }).to_string();
 
         let packet = create_sftp_packet(body_json).unwrap();
-        assert_eq!(packet.packet_type, "cosmicconnect.sftp");
+        assert_eq!(packet.packet_type, "cconnect.sftp");
 
         let body: serde_json::Value = serde_json::from_str(&packet.body).unwrap();
         assert_eq!(body["errorMessage"], "Permission denied");

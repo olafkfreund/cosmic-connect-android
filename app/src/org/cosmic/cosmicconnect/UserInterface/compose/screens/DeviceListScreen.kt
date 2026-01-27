@@ -16,6 +16,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.UserInterface.compose.*
+import org.cosmic.cosmicconnect.ui.components.status.LoadingIndicator
+import org.cosmic.cosmicconnect.ui.components.status.SyncStatus
+import org.cosmic.cosmicconnect.ui.components.status.SyncStatusIndicator
 import org.cosmic.cosmicconnect.R
 
 /**

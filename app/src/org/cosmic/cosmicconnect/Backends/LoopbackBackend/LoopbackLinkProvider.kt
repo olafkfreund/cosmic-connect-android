@@ -7,14 +7,17 @@ package org.cosmic.cosmicconnect.Backends.LoopbackBackend
 
 import android.content.Context
 import android.net.Network
+import dagger.hilt.android.qualifiers.ApplicationContext
 import org.cosmic.cosmicconnect.Backends.BaseLinkProvider
+import org.cosmic.cosmicconnect.Helpers.DeviceHelper
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class LoopbackLinkProvider : BaseLinkProvider {
-    private val context: Context
-
-    constructor(context: Context) : super() {
-        this.context = context
-    }
+@Singleton
+class LoopbackLinkProvider @Inject constructor(
+    @ApplicationContext private val context: Context,
+    private val deviceHelper: DeviceHelper
+) : BaseLinkProvider() {
 
     override val name: String = "LoopbackLinkProvider"
     override val priority: Int = 0
@@ -26,7 +29,7 @@ class LoopbackLinkProvider : BaseLinkProvider {
     override fun onStop() { }
 
     override fun onNetworkChange(network: Network?) {
-        val link = LoopbackLink(context, this)
+        val link = LoopbackLink(context, this, deviceHelper)
         onConnectionReceived(link)
     }
 }

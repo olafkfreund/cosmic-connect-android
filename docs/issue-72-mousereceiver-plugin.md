@@ -14,7 +14,7 @@ Analysis of the MouseReceiver Plugin for potential FFI migration. This plugin re
 ## Analysis Results
 
 **MouseReceiver Plugin is a pure receiver:**
-- ✅ Only receives packets (`cosmicconnect.mousepad.request`)
+- ✅ Only receives packets (`cconnect.mousepad.request`)
 - ✅ Does NOT create or send any packets
 - ✅ `getOutgoingPacketTypes()` returns empty array (line 140-142)
 - ✅ No packet creation logic exists
@@ -34,7 +34,7 @@ Analysis of the MouseReceiver Plugin for potential FFI migration. This plugin re
 **File**: `MouseReceiverPlugin.java` (144 lines)
 
 **Key findings:**
-- Line 28: Only supports incoming packet type `cosmicconnect.mousepad.request`
+- Line 28: Only supports incoming packet type `cconnect.mousepad.request`
 - Line 49-117: `onPacketReceived()` processes incoming packets only
 - Line 140-142: No outgoing packet types defined
 - No NetworkPacket construction anywhere in the file

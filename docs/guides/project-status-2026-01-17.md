@@ -70,14 +70,14 @@
 - **Type-safe packet creation**: ClipboardPacketsFFI.createClipboardUpdate/Connect()
 - **Extension properties**: isClipboardUpdate, clipboardContent, clipboardTimestamp
 - **Java-compatible helpers**: getIsClipboardUpdate(), getClipboardContent(), etc.
-- **Protocol compliance**: Fixed cosmicconnect.* → kdeconnect.* packet types
+- **Protocol compliance**: Fixed cconnect.* → cconnect.* packet types
 - **Sync loop prevention**: Timestamp-based comparison prevents infinite loops
 - **Input validation**: Non-blank content, non-negative timestamp
 - **Null safety**: Explicit nullable types with proper checks
 
 **Protocol Compliance**:
-- Standard clipboard update: `kdeconnect.clipboard` (content only)
-- Connection sync: `kdeconnect.clipboard.connect` (content + timestamp)
+- Standard clipboard update: `cconnect.clipboard` (content only)
+- Connection sync: `cconnect.clipboard.connect` (content + timestamp)
 - KDE Connect v7 compliant
 
 **Documentation**:
@@ -259,10 +259,10 @@ Based on Issue #54 completion and established patterns:
 - Medium complexity (similar to Clipboard)
 
 **Packet Types**:
-- `kdeconnect.telephony` (incoming call notification)
-- `kdeconnect.telephony.request` (request call list)
-- `kdeconnect.sms.messages` (SMS messages)
-- `kdeconnect.sms.request` (request conversation)
+- `cconnect.telephony` (incoming call notification)
+- `cconnect.telephony.request` (request call list)
+- `cconnect.sms.messages` (SMS messages)
+- `cconnect.sms.request` (request conversation)
 
 ---
 
@@ -337,7 +337,7 @@ Based on Issue #54 success:
 | Metric | Value | Notes |
 |--------|-------|-------|
 | Compilation errors | 0 | ✅ All phases |
-| Protocol compliance | 100% | ✅ kdeconnect.* packet types |
+| Protocol compliance | 100% | ✅ cconnect.* packet types |
 | Type safety | 100% | ✅ Extension properties |
 | Null safety | 100% | ✅ Explicit nullable types |
 | Input validation | 100% | ✅ Kotlin layer validation |

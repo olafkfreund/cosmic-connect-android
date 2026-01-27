@@ -13,25 +13,18 @@ import java.util.LinkedList
 class NsdResolveQueue {
     val LOG_TAG: String = "NsdResolveQueue"
 
-    private val nsdManager: NsdManager
-    private val lock: Any
+    private val lock: Any = Any()
 
-    private data class PendingResolve(val serviceInfo: NsdServiceInfo, val listener: NsdManager.ResolveListener)
-    private val resolveRequests: LinkedList<PendingResolve>
+    private data class PendingResolve(val nsdManager: NsdManager, val serviceInfo: NsdServiceInfo, val listener: NsdManager.ResolveListener)
+    private val resolveRequests: LinkedList<PendingResolve> = LinkedList<PendingResolve>()
 
-    constructor(nsdManager: NsdManager) {
-        this.nsdManager = nsdManager
-        this.lock = Any()
-        this.resolveRequests = LinkedList<PendingResolve>()
-    }
-
-    fun resolveOrEnqueue(serviceInfo: NsdServiceInfo, listener: NsdManager.ResolveListener) {
+    fun resolveOrEnqueue(nsdManager: NsdManager, serviceInfo: NsdServiceInfo, listener: NsdManager.ResolveListener) {
         synchronized(lock) {
             if (resolveRequests.any { r -> serviceInfo.serviceName == r.serviceInfo.serviceName }) {
                 Log.i(LOG_TAG, "Not enqueuing a new resolve request for the same service: " + serviceInfo.serviceName)
                 return
             }
-            resolveRequests.addLast(PendingResolve(serviceInfo, ListenerWrapper(listener)))
+            resolveRequests.addLast(PendingResolve(nsdManager, serviceInfo, ListenerWrapper(listener)))
             if (resolveRequests.size == 1) {
                 resolveNextRequest()
             }
@@ -51,7 +44,9 @@ class NsdResolveQueue {
 
         private fun postResolve() {
             synchronized(lock) {
-                resolveRequests.pop()
+                if (resolveRequests.isNotEmpty()) {
+                    resolveRequests.pop()
+                }
                 resolveNextRequest()
             }
         }
@@ -60,7 +55,7 @@ class NsdResolveQueue {
     private fun resolveNextRequest() {
         if (resolveRequests.isNotEmpty()) {
             val request = resolveRequests.first
-            nsdManager.resolveService(request.serviceInfo, request.listener)
+            request.nsdManager.resolveService(request.serviceInfo, request.listener)
         }
     }
 }

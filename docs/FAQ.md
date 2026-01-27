@@ -398,7 +398,7 @@ Yes! COSMIC Connect uses the same protocol (v8) as KDE Connect, so it can commun
 
 ### Can I use COSMIC Connect with KDE Plasma?
 
-While COSMIC Connect is designed for COSMIC Desktop, it should work with KDE Plasma since they use the same protocol. However, the desktop side would need KDE Connect, not cosmic-applet-kdeconnect.
+While COSMIC Connect is designed for COSMIC Desktop, it should work with KDE Plasma since they use the same protocol. However, the desktop side would need KDE Connect, not cosmic-applet-cconnect.
 
 ### What's the difference between cosmic-applet-kdeconnect and KDE Connect?
 
@@ -483,7 +483,7 @@ Should work on Fire tablets with Google Play Services installed. Not officially 
 
 ### Can I use it on a desktop that's not COSMIC?
 
-COSMIC Connect is designed for COSMIC Desktop, but since it uses the KDE Connect protocol, it could theoretically work with KDE Connect on other desktops. However, you'd need to install KDE Connect on that desktop, not cosmic-applet-kdeconnect.
+COSMIC Connect is designed for COSMIC Desktop, but since it uses the KDE Connect protocol, it could theoretically work with KDE Connect on other desktops. However, you'd need to install KDE Connect on that desktop, not cosmic-applet-cconnect.
 
 ### Does it work with Pop!_OS?
 

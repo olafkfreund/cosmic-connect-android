@@ -82,7 +82,7 @@ internal class SimpleSftpServer {
         safFileSystemFactory!!.initRoots(storageInfoList)
     }
 
-    fun initialize(context: Context, device: Device) {
+    fun initialize(context: Context, device: Device, rsaHelper: RsaHelper) {
         val sshd = ServerBuilder.builder().apply {
             fileSystemFactory(
                 if (SUPPORTS_NATIVEFS) {
@@ -96,8 +96,8 @@ internal class SimpleSftpServer {
 
         // Reuse this device keys for the ssh connection as well
         val keyPair = KeyPair(
-            RsaHelper.getPublicKey(context),
-            RsaHelper.getPrivateKey(context)
+            rsaHelper.getPublicKey(),
+            rsaHelper.getPrivateKey()
         )
         sshd.keyPairProvider = object : AbstractKeyPairProvider() {
             override fun loadKeys(session: SessionContext): Iterable<KeyPair> = listOf(keyPair)

@@ -58,7 +58,7 @@ Migrate the Telephony Plugin from manual packet construction to FFI-based archit
 ### Packet Types (7 total)
 
 #### 1. Telephony Event (Incoming)
-**Type**: `kdeconnect.telephony`
+**Type**: `cconnect.telephony`
 **Direction**: Android → Desktop
 **Fields**:
 - `event`: String - "ringing", "talking", "missedCall", "sms" (deprecated)
@@ -70,7 +70,7 @@ Migrate the Telephony Plugin from manual packet construction to FFI-based archit
 ```json
 {
   "id": 1234567890,
-  "type": "kdeconnect.telephony",
+  "type": "cconnect.telephony",
   "body": {
     "event": "ringing",
     "phoneNumber": "+1234567890",
@@ -82,7 +82,7 @@ Migrate the Telephony Plugin from manual packet construction to FFI-based archit
 ---
 
 #### 2. Mute Ringer Request (Outgoing)
-**Type**: `kdeconnect.telephony.request_mute`
+**Type**: `cconnect.telephony.request_mute`
 **Direction**: Desktop → Android
 **Fields**: None (empty body)
 
@@ -90,7 +90,7 @@ Migrate the Telephony Plugin from manual packet construction to FFI-based archit
 ```json
 {
   "id": 1234567891,
-  "type": "kdeconnect.telephony.request_mute",
+  "type": "cconnect.telephony.request_mute",
   "body": {}
 }
 ```
@@ -98,7 +98,7 @@ Migrate the Telephony Plugin from manual packet construction to FFI-based archit
 ---
 
 #### 3. SMS Messages (Incoming)
-**Type**: `kdeconnect.sms.messages`
+**Type**: `cconnect.sms.messages`
 **Direction**: Android → Desktop
 **Fields**:
 - `conversations`: Array of conversation objects
@@ -116,7 +116,7 @@ Migrate the Telephony Plugin from manual packet construction to FFI-based archit
 ```json
 {
   "id": 1234567892,
-  "type": "kdeconnect.sms.messages",
+  "type": "cconnect.sms.messages",
   "body": {
     "conversations": [
       {
@@ -141,7 +141,7 @@ Migrate the Telephony Plugin from manual packet construction to FFI-based archit
 ---
 
 #### 4. Request Conversations List (Outgoing)
-**Type**: `kdeconnect.sms.request_conversations`
+**Type**: `cconnect.sms.request_conversations`
 **Direction**: Desktop → Android
 **Fields**: None (empty body)
 
@@ -149,7 +149,7 @@ Migrate the Telephony Plugin from manual packet construction to FFI-based archit
 ```json
 {
   "id": 1234567893,
-  "type": "kdeconnect.sms.request_conversations",
+  "type": "cconnect.sms.request_conversations",
   "body": {}
 }
 ```
@@ -157,7 +157,7 @@ Migrate the Telephony Plugin from manual packet construction to FFI-based archit
 ---
 
 #### 5. Request Conversation Messages (Outgoing)
-**Type**: `kdeconnect.sms.request_conversation`
+**Type**: `cconnect.sms.request_conversation`
 **Direction**: Desktop → Android
 **Fields**:
 - `threadID`: i64 - Conversation thread ID
@@ -168,7 +168,7 @@ Migrate the Telephony Plugin from manual packet construction to FFI-based archit
 ```json
 {
   "id": 1234567894,
-  "type": "kdeconnect.sms.request_conversation",
+  "type": "cconnect.sms.request_conversation",
   "body": {
     "threadID": 123,
     "rangeStartTimestamp": 1705507200000,
@@ -180,7 +180,7 @@ Migrate the Telephony Plugin from manual packet construction to FFI-based archit
 ---
 
 #### 6. Request Message Attachment (Outgoing)
-**Type**: `kdeconnect.sms.request_attachment`
+**Type**: `cconnect.sms.request_attachment`
 **Direction**: Desktop → Android
 **Fields**:
 - `part_id`: i64 - Attachment part ID
@@ -190,7 +190,7 @@ Migrate the Telephony Plugin from manual packet construction to FFI-based archit
 ```json
 {
   "id": 1234567895,
-  "type": "kdeconnect.sms.request_attachment",
+  "type": "cconnect.sms.request_attachment",
   "body": {
     "part_id": 789,
     "unique_identifier": "abc123"
@@ -201,7 +201,7 @@ Migrate the Telephony Plugin from manual packet construction to FFI-based archit
 ---
 
 #### 7. Send SMS (Outgoing)
-**Type**: `kdeconnect.sms.request`
+**Type**: `cconnect.sms.request`
 **Direction**: Desktop → Android
 **Fields**:
 - `phoneNumber`: String - Recipient phone number
@@ -211,7 +211,7 @@ Migrate the Telephony Plugin from manual packet construction to FFI-based archit
 ```json
 {
   "id": 1234567896,
-  "type": "kdeconnect.sms.request",
+  "type": "cconnect.sms.request",
   "body": {
     "phoneNumber": "+1234567890",
     "messageBody": "Hello from desktop!"

@@ -7,67 +7,28 @@
 package org.cosmic.cosmicconnect.UserInterface.About
 
 import android.os.Bundle
-import android.util.DisplayMetrics
-import android.view.Menu
-import android.view.MenuItem
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSmoothScroller
-import org.apache.commons.io.IOUtils
-import org.cosmic.cosmicconnect.base.BaseActivity
-import org.cosmic.cosmicconnect.extensions.setupBottomPadding
-import org.cosmic.cosmicconnect.extensions.viewBinding
-import org.cosmic.cosmicconnect.R
-import org.cosmic.cosmicconnect.databinding.ActivityLicensesBinding
-import java.nio.charset.Charset
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.viewModels
+import dagger.hilt.android.AndroidEntryPoint
+import org.cosmic.cosmicconnect.UserInterface.compose.CosmicTheme
+import org.cosmic.cosmicconnect.UserInterface.compose.screens.about.LicensesScreen
+import org.cosmic.cosmicconnect.UserInterface.compose.screens.about.LicensesViewModel
 
-class LicensesActivity : BaseActivity<ActivityLicensesBinding>() {
+@AndroidEntryPoint
+class LicensesActivity : ComponentActivity() {
 
-    override val binding: ActivityLicensesBinding by viewBinding(ActivityLicensesBinding::inflate)
-
-    override val isScrollable: Boolean = true
+    private val viewModel: LicensesViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding.licensesText.setupBottomPadding()
-        setSupportActionBar(binding.toolbarLayout.toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setDisplayShowHomeEnabled(true)
-
-        binding.licensesText.layoutManager = LinearLayoutManager(this)
-        binding.licensesText.adapter = StringListAdapter(getLicenses().split("\n\n"))
-    }
-
-    private fun getLicenses(): String = resources.openRawResource(R.raw.license).use { inputStream -> IOUtils.toString(inputStream, Charset.defaultCharset()) }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_licenses, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    private fun smoothScrollToPosition(position: Int) {
-        val linearSmoothScroller: LinearSmoothScroller = object : LinearSmoothScroller(this) {
-            override fun calculateSpeedPerPixel(displayMetrics: DisplayMetrics): Float = 2.5F / displayMetrics.densityDpi
+        setContent {
+            CosmicTheme(context = this) {
+                LicensesScreen(
+                    viewModel = viewModel,
+                    onNavigateBack = { finish() }
+                )
+            }
         }
-
-        linearSmoothScroller.targetPosition = position
-        binding.licensesText.layoutManager?.startSmoothScroll(linearSmoothScroller)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.menu_rise_up -> {
-            smoothScrollToPosition(0)
-            true
-        }
-        R.id.menu_rise_down -> {
-            smoothScrollToPosition(binding.licensesText.adapter!!.itemCount - 1)
-            true
-        }
-        else -> super.onOptionsItemSelected(item)
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressedDispatcher.onBackPressed()
-        return true
     }
 }

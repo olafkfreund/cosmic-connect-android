@@ -17,8 +17,8 @@ import uniffi.cosmic_connect_core.*
  *
  * ## Packet Types
  *
- * - **Battery Status** (`kdeconnect.battery`): Battery state information (bi-directional)
- * - **Battery Request** (`kdeconnect.battery.request`): Request battery status (incoming)
+ * - **Battery Status** (`cconnect.battery`): Battery state information (bi-directional)
+ * - **Battery Request** (`cconnect.battery.request`): Request battery status (incoming)
  *
  * ## Battery State Fields
  *
@@ -63,7 +63,7 @@ object BatteryPacketsFFI {
     /**
      * Create a battery status packet.
      *
-     * Creates a `kdeconnect.battery` packet for sharing battery state between
+     * Creates a `cconnect.battery` packet for sharing battery state between
      * devices. This packet is sent bi-directionally whenever battery state changes.
      *
      * ## Validation
@@ -115,7 +115,7 @@ object BatteryPacketsFFI {
     /**
      * Create a battery status request packet.
      *
-     * Creates a `kdeconnect.battery.request` packet requesting the remote
+     * Creates a `cconnect.battery.request` packet requesting the remote
      * device's current battery status. When received, the remote device should
      * respond with a battery status packet.
      *
@@ -143,7 +143,7 @@ object BatteryPacketsFFI {
 /**
  * Check if packet is a battery status packet.
  *
- * Returns true if the packet is a `kdeconnect.battery` packet with battery
+ * Returns true if the packet is a `cconnect.battery` packet with battery
  * state fields.
  *
  * ## Example
@@ -158,14 +158,14 @@ object BatteryPacketsFFI {
  * @return true if packet is a battery status packet, false otherwise
  */
 val NetworkPacket.isBatteryPacket: Boolean
-    get() = type == "kdeconnect.battery" &&
+    get() = type == "cconnect.battery" &&
             body.containsKey("isCharging") &&
             body.containsKey("currentCharge")
 
 /**
  * Check if packet is a battery status request.
  *
- * Returns true if the packet is a `kdeconnect.battery.request` packet.
+ * Returns true if the packet is a `cconnect.battery.request` packet.
  *
  * ## Example
  * ```kotlin
@@ -183,7 +183,7 @@ val NetworkPacket.isBatteryPacket: Boolean
  * @return true if packet is a battery request, false otherwise
  */
 val NetworkPacket.isBatteryRequest: Boolean
-    get() = type == "kdeconnect.battery.request"
+    get() = type == "cconnect.battery.request"
 
 /**
  * Extract charging status from battery packet.

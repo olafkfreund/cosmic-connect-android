@@ -271,7 +271,7 @@ mod tests {
     fn test_create_ping_without_message() {
         let manager = PluginManager::new();
         let packet = manager.create_ping(None).unwrap();
-        assert_eq!(packet.packet_type, "kdeconnect.ping");
+        assert_eq!(packet.packet_type, "cconnect.ping");
     }
 
     #[test]

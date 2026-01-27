@@ -78,13 +78,13 @@ Phase 3 completed the FFI migration for all remaining Android plugins that creat
 **Commit**:
 - Android only: `5c3d5bf0`
 
-**Key Insight**: Both MPRIS and MprisReceiver plugins use the same packet type (`cosmicconnect.mpris`), demonstrating excellent code reuse!
+**Key Insight**: Both MPRIS and MprisReceiver plugins use the same packet type (`cconnect.mpris`), demonstrating excellent code reuse!
 
 ### Issue #72: MouseReceiver Plugin ✅
 **Status**: Complete (No Migration Needed)
 **Plugin**: MouseReceiverPlugin.java (144 lines, Java)
 **Analysis**:
-- Pure receiver plugin (only receives `cosmicconnect.mousepad.request`)
+- Pure receiver plugin (only receives `cconnect.mousepad.request`)
 - No outgoing packets (outgoingPacketTypes returns empty array)
 - Only processes incoming packets and performs local touch actions
 - No packet creation logic exists

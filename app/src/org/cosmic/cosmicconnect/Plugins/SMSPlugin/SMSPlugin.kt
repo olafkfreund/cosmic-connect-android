@@ -281,7 +281,7 @@ class SMSPlugin : Plugin() {
         }
         PACKET_TYPE_SMS_REQUEST -> {
             val textMessage: String = np.getString("messageBody")
-            val subID = np.getLong("subID", -1)
+            val subId = np.getLong("subId", -1)
 
             val jsonAddressList = np.getJSONArray("addresses")
             val addressList = if (jsonAddressList == null) {
@@ -292,15 +292,15 @@ class SMSPlugin : Plugin() {
             }
             val attachedFiles: List<SMSHelper.Attachment> = jsonArrayToAttachmentsList(np.getJSONArray("attachments"))
 
-            sendMessage(context, textMessage, attachedFiles, addressList.toMutableList(), subID.toInt())
+            sendMessage(context, textMessage, attachedFiles, addressList.toMutableList(), subId.toInt())
 
             true
         }
         PACKET_TYPE_SMS_REQUEST_ATTACHMENT -> {
-            val partID: Long = np.getLong("part_id")
-            val uniqueIdentifier: String = np.getString("unique_identifier")
+            val partId: Long = np.getLong("partId")
+            val uniqueIdentifier: String = np.getString("uniqueIdentifier")
 
-            val networkPacket: LegacyNetworkPacket? = partIdToMessageAttachmentPacket(context, partID, uniqueIdentifier, PACKET_TYPE_SMS_ATTACHMENT_FILE)
+            val networkPacket: LegacyNetworkPacket? = partIdToMessageAttachmentPacket(context, partId, uniqueIdentifier, PACKET_TYPE_SMS_ATTACHMENT_FILE)
 
             if (networkPacket != null) {
                 device.sendPacket(networkPacket)
@@ -333,7 +333,7 @@ class SMSPlugin : Plugin() {
     @WorkerThread
     private fun handleRequestSingleConversation(packet: NetworkPacket): Boolean {
         haveMessagesBeenRequested = true
-        val threadID = ThreadID(packet.getLong("threadID"))
+        val threadId = ThreadID(packet.getLong("threadId"))
 
         val rangeStartTimestamp: Long = packet.getLong("rangeStartTimestamp", -1)
         var numberToGet: Long? = packet.getLong("numberToRequest", -1)
@@ -343,9 +343,9 @@ class SMSPlugin : Plugin() {
         }
 
         val conversation = if (rangeStartTimestamp < 0) {
-            getMessagesInThread(this.context, threadID, numberToGet)
+            getMessagesInThread(this.context, threadId, numberToGet)
         } else {
-            getMessagesInRange(this.context, threadID, rangeStartTimestamp, numberToGet, true)
+            getMessagesInRange(this.context, threadId, rangeStartTimestamp, numberToGet, true)
         }
 
         val reply: LegacyNetworkPacket = constructBulkMessagePacket(conversation)
@@ -414,7 +414,7 @@ class SMSPlugin : Plugin() {
          *                                            // (the user's phone number) and all Addresses are recipients
          *             "date"      : "1518846484880", // Timestamp of the message
          *             "type"      : "2",             // Compare with Android's Telephony.TextBasedSmsColumns.MESSAGE_TYPE_*
-         *             "thread_id" : 132              // Thread to which the message belongs
+         *             "threadId" : 132              // Thread to which the message belongs
          *             "read"      : true             // Boolean representing whether a message is read or unread
          *         },
          *         ...
@@ -423,7 +423,7 @@ class SMSPlugin : Plugin() {
          * ```
          *
          * The following optional fields of a message object may be defined
-         * "sub_id": <int> // Android's subscriber ID, which is basically used to determine which SIM card the message
+         * "subId": <int> // Android's subscriber ID, which is basically used to determine which SIM card the message
          *                 // belongs to. This is mostly useful when attempting to reply to an SMS with the correct
          *                 // SIM card using [PACKET_TYPE_SMS_REQUEST].
          *                 // If this value is not defined or if it does not match a valid subscriber_id known by
@@ -433,10 +433,10 @@ class SMSPlugin : Plugin() {
          *
          * An Attachment object looks like:
          * {
-         *     "part_id": <long>                // part_id of the attachment used to read the file from MMS database
-         *     "mime_type": <String>            // contains the mime type of the file (eg: image/jpg, video/mp4 etc.)
-         *     "encoded_thumbnail": <String>    // Optional base64-encoded thumbnail preview of the content for types which support it
-         *     "unique_identifier": <String>    // Unique name of the file
+         *     "partId": <long>                // partId of the attachment used to read the file from MMS database
+         *     "mimeType": <String>            // contains the mime type of the file (eg: image/jpg, video/mp4 etc.)
+         *     "encodedThumbnail": <String>    // Optional base64-encoded thumbnail preview of the content for types which support it
+         *     "uniqueIdentifier": <String>    // Unique name of the file
          * }
          *
          * An Address object looks like:
@@ -444,7 +444,7 @@ class SMSPlugin : Plugin() {
          *     "address": <String> // Address (phone number, email address, etc.) of this object
          * }
          */
-        private const val PACKET_TYPE_SMS_MESSAGE: String = "cosmicconnect.sms.messages"
+        private const val PACKET_TYPE_SMS_MESSAGE: String = "cconnect.sms.messages"
         private const val SMS_MESSAGE_PACKET_VERSION: Int = 2 // We *send* packets of this version
 
         /**
@@ -458,7 +458,7 @@ class SMSPlugin : Plugin() {
          *     "addresses": <List of Addresses>  // The one or many targets of this message
          *     "messageBody": "Hi mom!",         // Plain-text string to be sent as the body of the message (Optional if sending an attachment)
          *     "attachments": <List of Attached files>,
-         *     "sub_id": 3859358340534           // Some magic number which tells Android which SIM card to use (Optional, if omitted, sends with the default SIM card)
+         *     "subId": 3859358340534           // Some magic number which tells Android which SIM card to use (Optional, if omitted, sends with the default SIM card)
          * }
          *
          * An AttachmentContainer object looks like:
@@ -468,36 +468,36 @@ class SMSPlugin : Plugin() {
          *     "mimeType": <String>             // File type (eg: image/jpg, video/mp4 etc.)
          * }
          */
-        private const val PACKET_TYPE_SMS_REQUEST: String = "cosmicconnect.sms.request"
+        private const val PACKET_TYPE_SMS_REQUEST: String = "cconnect.sms.request"
 
         /**
          * Packet sent to request the most-recent message in each conversations on the device
          *
          * The request packet shall contain no body
          */
-        private const val PACKET_TYPE_SMS_REQUEST_CONVERSATIONS: String = "cosmicconnect.sms.request_conversations"
+        private const val PACKET_TYPE_SMS_REQUEST_CONVERSATIONS: String = "cconnect.sms.request_conversations"
 
         /**
          * Packet sent to request all the messages in a particular conversation
          *
          * The following fields are available:
-         * "threadID": <long>            // (Required) ThreadID to request
+         * "threadId": <long>            // (Required) ThreadId to request
          * "rangeStartTimestamp": <long> // (Optional) Millisecond epoch timestamp indicating the start of the range from which to return messages
          * "numberToRequest": <long>     // (Optional) Number of messages to return, starting from rangeStartTimestamp.
          *                               // May return fewer than expected if there are not enough or more than expected if many
          *                               // messages have the same timestamp.
          */
-        private const val PACKET_TYPE_SMS_REQUEST_CONVERSATION: String = "cosmicconnect.sms.request_conversation"
+        private const val PACKET_TYPE_SMS_REQUEST_CONVERSATION: String = "cconnect.sms.request_conversation"
 
         /**
          * Packet sent to request an attachment file in a particular message of a conversation
          *
          *
          * The body should look like so:
-         * "part_id": <long>                // Part id of the attachment
-         * "unique_identifier": <String>    // This unique_identifier should come from a previous message packet's attachment field
+         * "partId": <long>                // Part id of the attachment
+         * "uniqueIdentifier": <String>    // This uniqueIdentifier should come from a previous message packet's attachment field
          */
-        private const val PACKET_TYPE_SMS_REQUEST_ATTACHMENT: String = "cosmicconnect.sms.request_attachment"
+        private const val PACKET_TYPE_SMS_REQUEST_ATTACHMENT: String = "cconnect.sms.request_attachment"
 
         /**
          * Packet used to send original attachment file from mms database to desktop
@@ -507,7 +507,7 @@ class SMSPlugin : Plugin() {
          * "filename": <String>     // Name of the attachment file in the database
          * "payload":               // Actual attachment file to be transferred
          */
-        private const val PACKET_TYPE_SMS_ATTACHMENT_FILE: String = "cosmicconnect.sms.attachment_file"
+        private const val PACKET_TYPE_SMS_ATTACHMENT_FILE: String = "cconnect.sms.attachment_file"
 
         private const val KEY_PREF_BLOCKED_NUMBERS: String = "telephony_blocked_numbers"
 

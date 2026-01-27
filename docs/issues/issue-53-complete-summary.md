@@ -190,18 +190,18 @@ class ProgressThrottler(private val intervalMs: Long = 500) {
 #### 1. Fixed Packet Type Constants (Line 76-77)
 ```java
 // Before
-private final static String PACKET_TYPE_SHARE_REQUEST = "cosmicconnect.share.request";
+private final static String PACKET_TYPE_SHARE_REQUEST = "cconnect.share.request";
 
 // After
-private final static String PACKET_TYPE_SHARE_REQUEST = "kdeconnect.share.request";
+private final static String PACKET_TYPE_SHARE_REQUEST = "cconnect.share.request";
 ```
 
 **Impact**: ✅ Protocol compliance with KDE Connect specification
 
 #### 2. Added FFI Imports (Line 42-43)
 ```java
-import org.cosmic.cosmicconnect.Plugins.SharePlugin.SharePacketsFFI;
-import static org.cosmic.cosmicconnect.Plugins.SharePlugin.SharePacketsFFIKt.*;
+import org.cosmic.cconnect.Plugins.SharePlugin.SharePacketsFFI;
+import static org.cosmic.cconnect.Plugins.SharePlugin.SharePacketsFFIKt.*;
 ```
 
 #### 3. Updated Packet Creation (Line 355-361)
@@ -485,7 +485,7 @@ Type-safe, validated packets
 // Manual packet construction
 Map<String, Object> body = new HashMap<>();
 body.put("text", "Hello");
-NetworkPacket packet = NetworkPacket.create("kdeconnect.share.request", body);
+NetworkPacket packet = NetworkPacket.create("cconnect.share.request", body);
 
 // String-based checking
 if (np.has("text")) {
@@ -581,8 +581,8 @@ val NetworkPacket.pluginData: String?
 
 ### Pattern 4: Java Integration
 ```java
-import org.cosmic.cosmicconnect.Plugins.Plugin.PluginPacketsFFI;
-import static org.cosmic.cosmicconnect.Plugins.Plugin.PluginPacketsFFIKt.*;
+import org.cosmic.cconnect.Plugins.Plugin.PluginPacketsFFI;
+import static org.cosmic.cconnect.Plugins.Plugin.PluginPacketsFFIKt.*;
 
 // Packet creation
 NetworkPacket packet = PluginPacketsFFI.INSTANCE.createPacket(args);

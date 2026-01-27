@@ -23,7 +23,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.preference.PreferenceManager
-import org.cosmic.cosmicconnect.CosmicConnect
+import dagger.hilt.android.AndroidEntryPoint
+import org.cosmic.cosmicconnect.Core.DeviceRegistry
 import org.cosmic.cosmicconnect.UserInterface.compose.KdeTextButton
 import org.cosmic.cosmicconnect.UserInterface.compose.KdeTextField
 import org.cosmic.cosmicconnect.UserInterface.compose.CosmicTheme
@@ -31,10 +32,15 @@ import org.cosmic.cosmicconnect.UserInterface.compose.KdeTopAppBar
 import org.cosmic.cosmicconnect.extensions.safeDrawPadding
 import org.cosmic.cosmicconnect.R
 import androidx.core.content.edit
+import javax.inject.Inject
 
 private const val INPUT_CACHE_KEY = "compose_send_input_cache"
 
+@AndroidEntryPoint
 class ComposeSendActivity : AppCompatActivity() {
+
+    @Inject lateinit var deviceRegistry: DeviceRegistry
+
     private var deviceId: String? = null
     private val userInput = mutableStateOf(String())
     private val prefs by lazy { PreferenceManager.getDefaultSharedPreferences(this) }
@@ -59,7 +65,7 @@ class ComposeSendActivity : AppCompatActivity() {
     }
 
     private fun sendComposed() {
-        val plugin = CosmicConnect.getInstance().getDevicePlugin(deviceId, MousePadPlugin::class.java)
+        val plugin = deviceRegistry.getDevicePlugin(deviceId, MousePadPlugin::class.java)
         if (plugin == null) {
             finish()
             return

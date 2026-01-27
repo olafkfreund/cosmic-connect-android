@@ -27,14 +27,14 @@ import org.cosmic.cosmicconnect.R
  *
  * ## Packet Types
  *
- * 1. **kdeconnect.clipboard** - Standard clipboard update (no timestamp)
+ * 1. **cconnect.clipboard** - Standard clipboard update (no timestamp)
  *    ```json
  *    {
  *      "content": "clipboard text"
  *    }
  *    ```
  *
- * 2. **kdeconnect.clipboard.connect** - Connection sync with timestamp
+ * 2. **cconnect.clipboard.connect** - Connection sync with timestamp
  *    ```json
  *    {
  *      "content": "clipboard text",
@@ -67,12 +67,12 @@ class ClipboardPlugin : Plugin() {
         /**
          * Standard clipboard update packet type (no timestamp)
          */
-        private const val PACKET_TYPE_CLIPBOARD = "kdeconnect.clipboard"
+        private const val PACKET_TYPE_CLIPBOARD = "cconnect.clipboard"
 
         /**
          * Clipboard connect packet type (with timestamp for sync loop prevention)
          */
-        private const val PACKET_TYPE_CLIPBOARD_CONNECT = "kdeconnect.clipboard.connect"
+        private const val PACKET_TYPE_CLIPBOARD_CONNECT = "cconnect.clipboard.connect"
     }
 
     // ========================================================================
@@ -141,8 +141,10 @@ class ClipboardPlugin : Plugin() {
     /**
      * Observer callback for clipboard changes
      */
-    private val observer: ClipboardListener.ClipboardObserver = { content ->
-        propagateClipboard(content)
+    private val observer: ClipboardListener.ClipboardObserver = object : ClipboardListener.ClipboardObserver {
+        override fun clipboardChanged(content: String) {
+            propagateClipboard(content)
+        }
     }
 
     /**

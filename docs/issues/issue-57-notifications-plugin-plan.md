@@ -38,7 +38,7 @@ Migrate the Notifications Plugin from manual Java packet construction to FFI-bas
 
 The Notifications Plugin handles 4 distinct packet types:
 
-#### 1. `kdeconnect.notification` (Outgoing - Send Notification)
+#### 1. `cconnect.notification` (Outgoing - Send Notification)
 
 **Purpose:** Send a notification from Android to desktop
 
@@ -77,7 +77,7 @@ The Notifications Plugin handles 4 distinct packet types:
 }
 ```
 
-#### 2. `kdeconnect.notification` (Outgoing - Cancel Notification)
+#### 2. `cconnect.notification` (Outgoing - Cancel Notification)
 
 **Purpose:** Cancel a previously sent notification
 
@@ -93,7 +93,7 @@ The Notifications Plugin handles 4 distinct packet types:
 }
 ```
 
-#### 3. `kdeconnect.notification.request` (Incoming - Request Current Notifications)
+#### 3. `cconnect.notification.request` (Incoming - Request Current Notifications)
 
 **Purpose:** Desktop requests all current Android notifications
 
@@ -107,7 +107,7 @@ The Notifications Plugin handles 4 distinct packet types:
 }
 ```
 
-#### 4. `kdeconnect.notification.request` (Incoming - Dismiss Notification)
+#### 4. `cconnect.notification.request` (Incoming - Dismiss Notification)
 
 **Purpose:** Desktop requests to dismiss an Android notification
 
@@ -121,7 +121,7 @@ The Notifications Plugin handles 4 distinct packet types:
 }
 ```
 
-#### 5. `kdeconnect.notification.action` (Incoming - Trigger Action)
+#### 5. `cconnect.notification.action` (Incoming - Trigger Action)
 
 **Purpose:** Desktop triggers a notification action button
 
@@ -137,7 +137,7 @@ The Notifications Plugin handles 4 distinct packet types:
 }
 ```
 
-#### 6. `kdeconnect.notification.reply` (Incoming - Send Reply)
+#### 6. `cconnect.notification.reply` (Incoming - Send Reply)
 
 **Purpose:** Desktop sends inline reply to notification
 
@@ -377,7 +377,7 @@ pub fn create_notification_action_packet(
         "action": action_name,
     });
 
-    let packet = Packet::new("kdeconnect.notification.action", body);
+    let packet = Packet::new("cconnect.notification.action", body);
     Ok(packet.into())
 }
 ```
@@ -394,7 +394,7 @@ pub fn create_notification_reply_packet(
         "message": message,
     });
 
-    let packet = Packet::new("kdeconnect.notification.reply", body);
+    let packet = Packet::new("cconnect.notification.reply", body);
     Ok(packet.into())
 }
 ```
@@ -480,9 +480,9 @@ cargo test
 **Structure:**
 
 ```kotlin
-package org.cosmic.cosmicconnect.Plugins.NotificationsPlugin
+package org.cosmic.cconnect.Plugins.NotificationsPlugin
 
-import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cconnect.Core.NetworkPacket
 import uniffi.cosmic_connect_core.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -495,10 +495,10 @@ import org.json.JSONObject
  *
  * ## Packet Types
  *
- * - **Notification** (`kdeconnect.notification`): Send or cancel notification
- * - **Request** (`kdeconnect.notification.request`): Request all or dismiss one
- * - **Action** (`kdeconnect.notification.action`): Trigger action button
- * - **Reply** (`kdeconnect.notification.reply`): Send inline reply
+ * - **Notification** (`cconnect.notification`): Send or cancel notification
+ * - **Request** (`cconnect.notification.request`): Request all or dismiss one
+ * - **Action** (`cconnect.notification.action`): Trigger action button
+ * - **Reply** (`cconnect.notification.reply`): Send inline reply
  *
  * [Comprehensive KDoc documentation with examples]
  */
@@ -633,7 +633,7 @@ object NotificationsPacketsFFI {
  * Check if packet is a notification packet.
  */
 val NetworkPacket.isNotificationPacket: Boolean
-    get() = type == "kdeconnect.notification" && body.containsKey("id")
+    get() = type == "cconnect.notification" && body.containsKey("id")
 
 /**
  * Check if notification packet is a cancellation.
@@ -645,28 +645,28 @@ val NetworkPacket.isNotificationCancel: Boolean
  * Check if packet is a notification request.
  */
 val NetworkPacket.isNotificationRequest: Boolean
-    get() = type == "kdeconnect.notification.request" &&
+    get() = type == "cconnect.notification.request" &&
             (body["request"] as? Boolean) == true
 
 /**
  * Check if packet is a dismiss request.
  */
 val NetworkPacket.isNotificationDismiss: Boolean
-    get() = type == "kdeconnect.notification.request" &&
+    get() = type == "cconnect.notification.request" &&
             body.containsKey("cancel")
 
 /**
  * Check if packet is a notification action.
  */
 val NetworkPacket.isNotificationAction: Boolean
-    get() = type == "kdeconnect.notification.action" &&
+    get() = type == "cconnect.notification.action" &&
             body.containsKey("key") && body.containsKey("action")
 
 /**
  * Check if packet is a notification reply.
  */
 val NetworkPacket.isNotificationReply: Boolean
-    get() = type == "kdeconnect.notification.reply" &&
+    get() = type == "cconnect.notification.reply" &&
             body.containsKey("requestReplyId") && body.containsKey("message")
 
 // Field extraction extension properties (15-20 more)
@@ -1303,8 +1303,8 @@ The Notifications Plugin FFI migration is successful when:
 
 **Important:** The Android implementation uses "cosmicconnect" prefix, but the Rust implementation uses "kdeconnect" prefix. This is intentional:
 
-- **Android packets:** `cosmicconnect.notification` (Lines 67-70)
-- **Rust packets:** `kdeconnect.notification` (Line 406)
+- **Android packets:** `cconnect.notification` (Lines 67-70)
+- **Rust packets:** `cconnect.notification` (Line 406)
 
 **Action:** Verify packet type compatibility during Phase 1. May need to update Rust to use "cosmicconnect" prefix for consistency.
 

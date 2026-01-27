@@ -25,20 +25,16 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.provider.Settings
 import android.service.notification.StatusBarNotification
-import android.text.SpannableString
 import android.text.TextUtils
 import android.util.Log
 import android.util.Pair
 import org.cosmic.cosmicconnect.messaging.MessagingNotificationHandler
-import org.cosmic.cosmicconnect.messaging.MessagingNotificationData
-import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.os.BundleCompat
 import androidx.fragment.app.DialogFragment
 import org.apache.commons.collections4.MultiValuedMap
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap
 import org.apache.commons.lang3.ArrayUtils
-import org.apache.commons.lang3.StringUtils
 import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Helpers.AppsHelper
@@ -64,10 +60,10 @@ import java.security.NoSuchAlgorithmException
  * - Icon transfer via payload
  *
  * ## Packet Types
- * - kdeconnect.notification - Send/cancel notification
- * - kdeconnect.notification.request - Request all or dismiss one
- * - kdeconnect.notification.action - Trigger action button
- * - kdeconnect.notification.reply - Send inline reply
+ * - cconnect.notification - Send/cancel notification
+ * - cconnect.notification.request - Request all or dismiss one
+ * - cconnect.notification.action - Trigger action button
+ * - cconnect.notification.reply - Send inline reply
  *
  * ## Architecture
  * Uses NotificationsPacketsFFI for packet creation, which wraps the
@@ -79,7 +75,7 @@ class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener 
     companion object {
         private const val TAG = "KDE/NotificationsPlugin"
         private const val PREF_KEY = "prefKey"
-        const val PREF_NOTIFICATION_SCREEN_OFF = R.string.screen_off_notification_state
+        private const val PREF_NOTIFICATION_SCREEN_OFF_KEY = "screen_off_notification_state"
 
         /**
          * Extract notification key for identification.
@@ -172,14 +168,14 @@ class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener 
     // Packet types
     override val supportedPacketTypes: Array<String>
         get() = arrayOf(
-            "kdeconnect.notification.request",
-            "kdeconnect.notification.reply",
-            "kdeconnect.notification.action"
+            "cconnect.notification.request",
+            "cconnect.notification.reply",
+            "cconnect.notification.action"
         )
 
     override val outgoingPacketTypes: Array<String>
         get() = arrayOf(
-            "kdeconnect.notification"
+            "cconnect.notification"
         )
 
     // Lifecycle
@@ -191,7 +187,7 @@ class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener 
 
         NotificationReceiver.RunCommand(context) { service ->
             service.addListener(this@NotificationsPlugin)
-            serviceReady = service.isConnected
+            serviceReady = service.isConnected()
         }
 
         return true
@@ -230,7 +226,7 @@ class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener 
 
     override fun onNotificationPosted(statusBarNotification: StatusBarNotification) {
         val screenOffPref = sharedPreferences.getBoolean(
-            context.getString(PREF_NOTIFICATION_SCREEN_OFF),
+            PREF_NOTIFICATION_SCREEN_OFF_KEY,
             false
         )
 
@@ -591,13 +587,13 @@ class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener 
             // Reflection to set payload since it may not be in the immutable interface yet
             val payloadClass = Class.forName("org.cosmic.cosmicconnect.NetworkPacket\$Payload")
             val payload = payloadClass.getConstructor(ByteArray::class.java).newInstance(bitmapData)
-            val setPayloadMethod = NetworkPacket::class.java.getMethod("setPayload", payloadClass)
-            setPayloadMethod.invoke(packet, payload)
+            val setPayloadMethod = LegacyNetworkPacket::class.java.getMethod("setPayload", payloadClass)
+            setPayloadMethod.invoke(packet.toLegacyPacket(), payload)
 
             // Set payload hash
             val hash = getChecksum(bitmapData)
-            val setMethod = NetworkPacket::class.java.getMethod("set", String::class.java, Any::class.java)
-            setMethod.invoke(packet, "payloadHash", hash)
+            val setMethod = LegacyNetworkPacket::class.java.getMethod("set", String::class.java, Any::class.java)
+            setMethod.invoke(packet.toLegacyPacket(), "payloadHash", hash)
         } catch (e: Exception) {
             Log.e(TAG, "Error attaching icon payload", e)
         }

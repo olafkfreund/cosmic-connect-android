@@ -70,7 +70,7 @@ object SharePacketsFFI {
      * ## Packet Structure
      * ```json
      * {
-     *   "type": "kdeconnect.share.request",
+     *   "type": "cconnect.share.request",
      *   "body": {
      *     "filename": "photo.jpg",
      *     "creationTime": 1640000000000,
@@ -119,7 +119,7 @@ object SharePacketsFFI {
      * ## Packet Structure
      * ```json
      * {
-     *   "type": "kdeconnect.share.request",
+     *   "type": "cconnect.share.request",
      *   "body": {
      *     "text": "Some text to share"
      *   }
@@ -151,7 +151,7 @@ object SharePacketsFFI {
      * ## Packet Structure
      * ```json
      * {
-     *   "type": "kdeconnect.share.request",
+     *   "type": "cconnect.share.request",
      *   "body": {
      *     "url": "https://example.com"
      *   }
@@ -188,7 +188,7 @@ object SharePacketsFFI {
      * ## Packet Structure
      * ```json
      * {
-     *   "type": "kdeconnect.share.request.update",
+     *   "type": "cconnect.share.request.update",
      *   "body": {
      *     "numberOfFiles": 5,
      *     "totalPayloadSize": 10485760
@@ -227,25 +227,25 @@ object SharePacketsFFI {
  * Check if this packet is a file share request
  */
 val NetworkPacket.isFileShare: Boolean
-    get() = type == "kdeconnect.share.request" && body.containsKey("filename")
+    get() = type == "cconnect.share.request" && body.containsKey("filename")
 
 /**
  * Check if this packet is a text share request
  */
 val NetworkPacket.isTextShare: Boolean
-    get() = type == "kdeconnect.share.request" && body.containsKey("text")
+    get() = type == "cconnect.share.request" && body.containsKey("text")
 
 /**
  * Check if this packet is a URL share request
  */
 val NetworkPacket.isUrlShare: Boolean
-    get() = type == "kdeconnect.share.request" && body.containsKey("url")
+    get() = type == "cconnect.share.request" && body.containsKey("url")
 
 /**
  * Check if this packet is a multi-file update
  */
 val NetworkPacket.isMultiFileUpdate: Boolean
-    get() = type == "kdeconnect.share.request.update"
+    get() = type == "cconnect.share.request.update"
 
 /**
  * Extract filename from file share packet

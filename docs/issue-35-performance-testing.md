@@ -920,7 +920,7 @@ Stress test completed:
 
 ```bash
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.performance.PerformanceBenchmarkTest
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.performance.PerformanceBenchmarkTest
 ```
 
 ### Run Specific Test Category
@@ -928,35 +928,35 @@ Stress test completed:
 **FFI Benchmarks:**
 ```bash
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.performance.PerformanceBenchmarkTest \
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.performance.PerformanceBenchmarkTest \
   -Pandroid.testInstrumentationRunnerArguments.tests_regex='.*benchmark_Ffi.*'
 ```
 
 **File Transfer Benchmarks:**
 ```bash
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.performance.PerformanceBenchmarkTest \
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.performance.PerformanceBenchmarkTest \
   -Pandroid.testInstrumentationRunnerArguments.tests_regex='.*benchmark_.*FileTransfer.*'
 ```
 
 **Network Benchmarks:**
 ```bash
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.performance.PerformanceBenchmarkTest \
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.performance.PerformanceBenchmarkTest \
   -Pandroid.testInstrumentationRunnerArguments.tests_regex='.*benchmark_Discovery.*|.*benchmark_Pairing.*|.*benchmark_Packet.*'
 ```
 
 **Memory Benchmarks:**
 ```bash
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.performance.PerformanceBenchmarkTest \
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.performance.PerformanceBenchmarkTest \
   -Pandroid.testInstrumentationRunnerArguments.tests_regex='.*benchmark_Memory.*|.*benchmark_GarbageCollection.*'
 ```
 
 **Stress Tests:**
 ```bash
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.performance.PerformanceBenchmarkTest \
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.performance.PerformanceBenchmarkTest \
   -Pandroid.testInstrumentationRunnerArguments.tests_regex='.*stress_.*'
 ```
 
@@ -964,7 +964,7 @@ Stress test completed:
 
 ```bash
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.performance.PerformanceBenchmarkTest \
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.performance.PerformanceBenchmarkTest \
   -Pandroid.testInstrumentationRunnerArguments.tests_regex='.*benchmark_FfiCallOverhead'
 ```
 
@@ -1136,7 +1136,7 @@ jobs:
       - name: Run Performance Tests
         run: |
           ./gradlew connectedAndroidTest \
-            -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.performance.PerformanceBenchmarkTest
+            -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cconnect.performance.PerformanceBenchmarkTest
 
       - name: Upload Performance Results
         uses: actions/upload-artifact@v3

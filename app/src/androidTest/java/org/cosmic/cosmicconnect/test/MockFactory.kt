@@ -1,7 +1,7 @@
-package org.cosmic.cosmicconnect.test
+package org.cosmic.cconnect.test
 
-import org.cosmic.cosmicconnect.Device
-import org.cosmic.cosmicconnect.NetworkPacket
+import org.cosmic.cconnect.Device
+import org.cosmic.cconnect.NetworkPacket
 
 /**
  * Mock Factory
@@ -49,14 +49,14 @@ object MockFactory {
         "protocolVersion" to protocolVersion,
         "tcpPort" to 1716,
         "incomingCapabilities" to listOf(
-          "kdeconnect.battery",
-          "kdeconnect.clipboard",
-          "kdeconnect.share"
+          "cconnect.battery",
+          "cconnect.clipboard",
+          "cconnect.share"
         ),
         "outgoingCapabilities" to listOf(
-          "kdeconnect.battery",
-          "kdeconnect.clipboard",
-          "kdeconnect.share"
+          "cconnect.battery",
+          "cconnect.clipboard",
+          "cconnect.share"
         )
       )
     )
@@ -96,7 +96,7 @@ object MockFactory {
     isCharging: Boolean = false
   ): NetworkPacket {
     return createMockPacket(
-      type = "kdeconnect.battery",
+      type = "cconnect.battery",
       deviceId = deviceId,
       body = mapOf(
         "currentCharge" to batteryLevel,
@@ -114,7 +114,7 @@ object MockFactory {
     content: String = "Test clipboard content"
   ): NetworkPacket {
     return createMockPacket(
-      type = "kdeconnect.clipboard",
+      type = "cconnect.clipboard",
       deviceId = deviceId,
       body = mapOf("content" to content)
     )
@@ -130,7 +130,7 @@ object MockFactory {
     totalPayloadSize: Long = 1024
   ): NetworkPacket {
     return createMockPacket(
-      type = "kdeconnect.share.request",
+      type = "cconnect.share.request",
       deviceId = deviceId,
       body = mapOf(
         "filename" to filename,
@@ -151,7 +151,7 @@ object MockFactory {
     message?.let { body["message"] = it }
 
     return createMockPacket(
-      type = "kdeconnect.ping",
+      type = "cconnect.ping",
       deviceId = deviceId,
       body = body
     )
@@ -166,7 +166,7 @@ object MockFactory {
     command: String = "echo test"
   ): NetworkPacket {
     return createMockPacket(
-      type = "kdeconnect.runcommand",
+      type = "cconnect.runcommand",
       deviceId = deviceId,
       body = mapOf(
         "key" to key,

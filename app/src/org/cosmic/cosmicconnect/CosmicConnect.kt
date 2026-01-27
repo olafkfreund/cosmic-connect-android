@@ -11,28 +11,17 @@ import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
 import android.os.StrictMode.VmPolicy
 import android.util.Log
-import androidx.annotation.WorkerThread
-import org.cosmic.cosmicconnect.Backends.BaseLink
-import org.cosmic.cosmicconnect.Backends.BaseLinkProvider.ConnectionReceiver
+import org.cosmic.cosmicconnect.Core.DeviceRegistry
 import org.cosmic.cosmicconnect.Helpers.DeviceHelper
 import org.cosmic.cosmicconnect.Helpers.LifecycleHelper
 import org.cosmic.cosmicconnect.Helpers.NotificationHelper
 import org.cosmic.cosmicconnect.Helpers.SecurityHelpers.RsaHelper
 import org.cosmic.cosmicconnect.Helpers.SecurityHelpers.SslHelper
-import org.cosmic.cosmicconnect.Helpers.TrustedDevices
-import kotlinx.coroutines.*
-import org.cosmic.cosmicconnect.PairingHandler.PairingCallback
-import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory
 import org.cosmic.cosmicconnect.UserInterface.ThemeUtil
-import org.cosmic.cosmicconnect.BuildConfig
 import org.slf4j.impl.HandroidLoggerAdapter
-import java.security.cert.CertificateException
-import java.security.cert.X509Certificate
-import java.util.Date
-import java.util.concurrent.ConcurrentHashMap
 import dagger.hilt.android.HiltAndroidApp
-
+import javax.inject.Inject
 
 /*
  * This class holds all the active devices and makes them accessible from every other class.
@@ -41,15 +30,12 @@ import dagger.hilt.android.HiltAndroidApp
  */
 @HiltAndroidApp
 class CosmicConnect : Application() {
-    fun interface DeviceListChangedCallback {
-        fun onDeviceListChanged()
-    }
 
-    val devices: ConcurrentHashMap<String, Device> = ConcurrentHashMap()
-
-    private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
-
-    private val deviceListChangedCallbacks = ConcurrentHashMap<String, DeviceListChangedCallback>()
+    @Inject lateinit var deviceRegistry: DeviceRegistry
+    @Inject lateinit var deviceHelper: DeviceHelper
+    @Inject lateinit var rsaHelper: RsaHelper
+    @Inject lateinit var sslHelper: SslHelper
+    @Inject lateinit var pluginFactory: PluginFactory
 
     override fun onCreate() {
         super.onCreate()
@@ -57,13 +43,14 @@ class CosmicConnect : Application() {
         setupSL4JLogging()
         Log.d("CosmicConnect/Application", "onCreate")
         ThemeUtil.setUserPreferredTheme(this)
-        DeviceHelper.initializeDeviceId(this)
-        RsaHelper.initialiseRsaKeys(this)
-        SslHelper.initialiseCertificate(this)
-        PluginFactory.initPluginInfo(this)
+        
+        deviceHelper.initializeDeviceId()
+        rsaHelper.initialiseRsaKeys()
+        sslHelper.initialiseCertificate()
+        pluginFactory.initPluginInfo()
+        
         NotificationHelper.initializeChannels(this)
         LifecycleHelper.initializeObserver()
-        loadRememberedDevicesFromSettings()
 
         if (BuildConfig.DEBUG && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             StrictMode.setVmPolicy(
@@ -76,7 +63,6 @@ class CosmicConnect : Application() {
                     .detectCredentialProtectedWhileLocked()
                     .detectIncorrectContextUse()
                     .detectUnsafeIntentLaunch()
-                    //.detectBlockedBackgroundActivityLaunch()
                     .penaltyLog()
                     .build()
             )
@@ -101,148 +87,16 @@ class CosmicConnect : Application() {
         super.onTerminate()
     }
 
-    fun addDeviceListChangedCallback(key: String, callback: DeviceListChangedCallback) {
-        deviceListChangedCallbacks[key] = callback
-    }
-
-    fun removeDeviceListChangedCallback(key: String) {
-        deviceListChangedCallbacks.remove(key)
-    }
-
-    private fun onDeviceListChanged() {
-        Log.i("MainActivity", "Device list changed, notifying ${deviceListChangedCallbacks.size} observers.")
-        deviceListChangedCallbacks.values.forEach(DeviceListChangedCallback::onDeviceListChanged)
-    }
-
-    fun getDevice(id: String?): Device? {
-        if (id == null) {
-            return null
-        }
-        return devices[id]
-    }
-
-    fun <T : Plugin> getDevicePlugin(deviceId: String?, pluginClass: Class<T>): T? {
-        val device = getDevice(deviceId)
-        return device?.getPlugin(pluginClass)
-    }
-
-    private fun loadRememberedDevicesFromSettings() {
-        // Log.e("BackgroundService", "Loading remembered trusted devices")
-        val trustedDevices = TrustedDevices.getAllTrustedDevices(this)
-        trustedDevices.asSequence()
-            .onEach { Log.d("CosmicConnect", "Loading device $it") }
-            .forEach {
-                try {
-                    val device = Device(applicationContext, it)
-                    val now = Date()
-                    val x509Cert = device.certificate as X509Certificate
-                    if(now < x509Cert.notBefore) {
-                        throw CertificateException("Certificate not effective yet: "+x509Cert.notBefore)
-                    }
-                    else if(now > x509Cert.notAfter) {
-                        throw CertificateException("Certificate already expired: "+x509Cert.notAfter)
-                    }
-                    devices[it] = device
-                    device.addPairingCallback(devicePairingCallback)
-                } catch (e: CertificateException) {
-                    Log.w(
-                        "CosmicConnect",
-                        "Couldn't load the certificate for a remembered device. Removing from trusted list.", e
-                    )
-                    TrustedDevices.removeTrustedDevice(this, it)
-                }
-            }
-    }
-
-    private val devicePairingCallback: PairingCallback = object : PairingCallback {
-        override fun incomingPairRequest() {
-            onDeviceListChanged()
-        }
-
-        override fun pairingSuccessful() {
-            onDeviceListChanged()
-        }
-
-        override fun pairingFailed(error: String) {
-            onDeviceListChanged()
-        }
-
-        override fun unpaired(device: Device) {
-            onDeviceListChanged()
-            if (!device.isReachable) {
-                scheduleForDeletion(device)
-            }
-        }
-    }
-
-    val connectionListener: ConnectionReceiver = object : ConnectionReceiver {
-        @WorkerThread
-        override fun onConnectionReceived(link: BaseLink) {
-            var device = devices[link.deviceId]
-            if (device != null) {
-                device.addLink(link)
-            } else {
-                device = Device(this@CosmicConnect, link)
-                devices[link.deviceId] = device
-                device.addPairingCallback(devicePairingCallback)
-            }
-            onDeviceListChanged()
-        }
-
-        @WorkerThread
-        override fun onConnectionLost(link: BaseLink) {
-            val device = devices[link.deviceId]
-            Log.i("Cosmic/onConnectionLost", "removeLink, deviceId: ${link.deviceId}")
-            if (device != null) {
-                device.removeLink(link)
-                if (!device.isReachable && !device.isPaired) {
-                    scheduleForDeletion(device)
-                }
-            } else {
-                Log.d("Cosmic/onConnectionLost", "Removing connection to unknown device")
-            }
-            onDeviceListChanged()
-        }
-
-        @WorkerThread
-        override fun onDeviceInfoUpdated(deviceInfo: DeviceInfo) {
-            val device = devices[deviceInfo.id]
-            if (device == null) {
-                Log.e("CosmicConnect", "onDeviceInfoUpdated for an unknown device")
-                return
-            }
-            val hasChanges = device.updateDeviceInfo(deviceInfo)
-            if (hasChanges) {
-                onDeviceListChanged()
-            }
-        }
-    }
-
-    fun scheduleForDeletion(device: Device) {
-        // Note: By this point the `devices` map should be the only reference to `device`, so it
-        //       should get garbage collected after removing it here. However, it's easy to leak
-        //       references to Device from views, preventing them from being freed. You can use the
-        //       debugger to check for alive instances of `Device` after a device is supposed to be
-        //       destroyed to make sure we don't have leaks. Note that you might need to trigger
-        //       `Runtime.getRuntime().gc()` to actually make them disappear. If we have leaks,
-        //       deleting devices from the map is actually counterproductive because each time we
-        //       detect the same device, a new Device object will be created (and leaked again).
-        Log.i("CosmicConnect", "Scheduled for deletion: $device, paired: ${device.isPaired}, reachable: ${device.isReachable}")
-        scope.launch {
-            delay(1000)
-            if (device.isReachable) {
-                Log.i("CosmicConnect", "Not deleting device since it's reachable again: $device")
-                return@launch
-            }
-            if (device.isPaired) {
-                Log.i("CosmicConnect", "Not deleting device since it's still paired: $device")
-                return@launch
-            }
-            Log.i("CosmicConnect", "Deleting unpaired and unreachable device: $device")
-            device.removePairingCallback(devicePairingCallback)
-            devices.remove(device.deviceId)
-        }
-    }
+    // Temporary bridges for components not yet refactored to use Hilt injection
+    val devices get() = deviceRegistry.devices
+    val connectionListener get() = deviceRegistry.connectionListener
+    fun getDevice(id: String?) = deviceRegistry.getDevice(id)
+    fun <T : org.cosmic.cosmicconnect.Plugins.Plugin> getDevicePlugin(deviceId: String?, pluginClass: Class<T>) = 
+        deviceRegistry.getDevicePlugin(deviceId, pluginClass)
+    fun addDeviceListChangedCallback(key: String, callback: DeviceRegistry.DeviceListChangedCallback) = 
+        deviceRegistry.addDeviceListChangedCallback(key, callback)
+    fun removeDeviceListChangedCallback(key: String) = 
+        deviceRegistry.removeDeviceListChangedCallback(key)
 
     companion object {
         @JvmStatic

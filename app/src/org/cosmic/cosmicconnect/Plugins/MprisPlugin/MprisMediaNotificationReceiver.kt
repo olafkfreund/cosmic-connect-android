@@ -9,25 +9,32 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import org.cosmic.cosmicconnect.CosmicConnect
+import dagger.hilt.android.AndroidEntryPoint
+import org.cosmic.cosmicconnect.Core.DeviceRegistry
 import org.cosmic.cosmicconnect.extensions.getParcelableCompat
+import javax.inject.Inject
 
 /**
  * Called when the mpris media notification's buttons are pressed
  */
+@AndroidEntryPoint
 class MprisMediaNotificationReceiver : BroadcastReceiver() {
+
+    @Inject lateinit var deviceRegistry: DeviceRegistry
+    @Inject lateinit var mprisMediaSession: MprisMediaSession
+
     override fun onReceive(context: Context, intent: Intent) {
         // First case: buttons send by other applications via the media session APIs. They don't target a specific device.
         if (Intent.ACTION_MEDIA_BUTTON == intent.action) {
             // Route these buttons to the media session, which will handle them
-            val mediaSession = MprisMediaSession.getMediaSession() ?: return
+            val mediaSession = MprisMediaSession.getMediaSession(context) ?: return
             mediaSession.controller.dispatchMediaButtonEvent(intent.getParcelableCompat(Intent.EXTRA_KEY_EVENT))
         } else {
             // Second case: buttons on the notification, which we created ourselves
             // Get the correct device, the mpris plugin and the mpris player
 
             val deviceId = intent.getStringExtra(EXTRA_DEVICE_ID)
-            val plugin = CosmicConnect.getInstance().getDevicePlugin(deviceId, MprisPlugin::class.java) ?: return
+            val plugin = deviceRegistry.getDevicePlugin(deviceId, MprisPlugin::class.java) ?: return
             val player = plugin.getPlayerStatus(intent.getStringExtra(EXTRA_MPRIS_PLAYER))
                 ?: return
 
@@ -37,7 +44,7 @@ class MprisMediaNotificationReceiver : BroadcastReceiver() {
                 ACTION_PREVIOUS -> player.sendPrevious()
                 ACTION_NEXT -> player.sendNext()
                 ACTION_CLOSE_NOTIFICATION ->                     //The user dismissed the notification: actually handle its removal correctly
-                    MprisMediaSession.instance.closeMediaNotification()
+                    mprisMediaSession.closeMediaNotification()
                 else -> {
                     Log.w(TAG, "Unknown action: ${intent.action}, ignore.")
                 }
@@ -54,7 +61,7 @@ class MprisMediaNotificationReceiver : BroadcastReceiver() {
         const val ACTION_NEXT: String = "ACTION_NEXT"
         const val ACTION_CLOSE_NOTIFICATION: String = "ACTION_CLOSE_NOTIFICATION"
 
-        const val EXTRA_DEVICE_ID: String = "deviceId"
-        const val EXTRA_MPRIS_PLAYER: String = "player"
+        const val EXTRA_DEVICE_ID = "deviceId"
+        const val EXTRA_MPRIS_PLAYER = "player"
     }
 }

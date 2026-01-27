@@ -67,7 +67,7 @@ class SystemVolumeProvider :
     override fun sinksChanged() {
         val systemVolumePlugin = systemVolumePlugin ?: return
 
-        for (sink in systemVolumePlugin.sinks) {
+        for (sink in systemVolumePlugin.sinks.values) {
             sink.addListener(this)
         }
 
@@ -167,7 +167,7 @@ class SystemVolumeProvider :
 
     private fun stopListeningForSinks() {
         val systemVolumePlugin = systemVolumePlugin ?: return
-        for (sink in systemVolumePlugin.sinks) {
+        for (sink in systemVolumePlugin.sinks.values) {
             sink.removeListener(this)
         }
         systemVolumePlugin.removeSinkListener(this)

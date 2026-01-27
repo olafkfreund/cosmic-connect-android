@@ -735,7 +735,7 @@ app/build/reports/androidTests/connected/index.html
 
 ### Battery Plugin
 
-**Packet Type:** `kdeconnect.battery`
+**Packet Type:** `cconnect.battery`
 
 **Packet Body:**
 ```kotlin
@@ -753,7 +753,7 @@ app/build/reports/androidTests/connected/index.html
 
 ### Clipboard Plugin
 
-**Packet Type:** `kdeconnect.clipboard`
+**Packet Type:** `cconnect.clipboard`
 
 **Packet Body:**
 ```kotlin
@@ -769,7 +769,7 @@ app/build/reports/androidTests/connected/index.html
 
 ### Ping Plugin
 
-**Packet Type:** `kdeconnect.ping`
+**Packet Type:** `cconnect.ping`
 
 **Packet Body:**
 ```kotlin
@@ -785,7 +785,7 @@ app/build/reports/androidTests/connected/index.html
 
 ### RunCommand Plugin
 
-**Packet Type:** `kdeconnect.runcommand`
+**Packet Type:** `cconnect.runcommand`
 
 **Packet Body:**
 ```kotlin
@@ -802,7 +802,7 @@ app/build/reports/androidTests/connected/index.html
 
 ### MPRIS Plugin
 
-**Packet Type:** `kdeconnect.mpris`
+**Packet Type:** `cconnect.mpris`
 
 **Packet Body:**
 ```kotlin
@@ -823,7 +823,7 @@ app/build/reports/androidTests/connected/index.html
 
 ### Telephony Plugin
 
-**Packet Type:** `kdeconnect.telephony`
+**Packet Type:** `cconnect.telephony`
 
 **Packet Body:**
 ```kotlin

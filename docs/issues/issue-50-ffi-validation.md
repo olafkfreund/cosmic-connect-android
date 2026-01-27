@@ -106,11 +106,11 @@ Comprehensive validation of uniffi-rs bindings between Android (Kotlin/JNI) and 
 
 **Test Code**:
 ```kotlin
-import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cconnect.Core.NetworkPacket
 
 fun testPacketCreation() {
     val packet = NetworkPacket.create(
-        "kdeconnect.identity",
+        "cconnect.identity",
         mapOf(
             "deviceId" to "test-device-123",
             "deviceName" to "Test Device",
@@ -119,7 +119,7 @@ fun testPacketCreation() {
         )
     )
 
-    assert(packet.type == "kdeconnect.identity")
+    assert(packet.type == "cconnect.identity")
     assert(packet.body["deviceId"] == "test-device-123")
 }
 ```
@@ -137,7 +137,7 @@ fun testPacketCreation() {
 ```kotlin
 fun testPacketSerialization() {
     val packet = NetworkPacket.create(
-        "kdeconnect.pair",
+        "cconnect.pair",
         mapOf("pair" to true)
     )
 
@@ -146,7 +146,7 @@ fun testPacketSerialization() {
     // Should be JSON + newline
     val str = bytes.decodeToString()
     assert(str.endsWith("\n"))
-    assert(str.contains("\"type\":\"kdeconnect.pair\""))
+    assert(str.contains("\"type\":\"cconnect.pair\""))
     assert(str.contains("\"pair\":true"))
 }
 ```
@@ -165,7 +165,7 @@ fun testPacketSerialization() {
 fun testPacketDeserialization() {
     val json = """
     {
-        "type": "kdeconnect.ping",
+        "type": "cconnect.ping",
         "id": 1234567890,
         "body": {
             "message": "Hello World"
@@ -175,7 +175,7 @@ fun testPacketDeserialization() {
 
     val packet = NetworkPacket.deserialize(json.encodeToByteArray())
 
-    assert(packet.type == "kdeconnect.ping")
+    assert(packet.type == "cconnect.ping")
     assert(packet.id == 1234567890L)
     assert(packet.body["message"] == "Hello World")
 }
@@ -192,7 +192,7 @@ fun testPacketDeserialization() {
 
 **Test Code**:
 ```kotlin
-import org.cosmic.cosmicconnect.Core.Certificate
+import org.cosmic.cconnect.Core.Certificate
 
 fun testCertificateGeneration() {
     val deviceId = "test-device-${System.currentTimeMillis()}"
@@ -221,7 +221,7 @@ fun testCertificateGeneration() {
 
 **Test Code**:
 ```kotlin
-import org.cosmic.cosmicconnect.Core.Discovery
+import org.cosmic.cconnect.Core.Discovery
 
 fun testDiscoveryLifecycle() {
     val discovery = Discovery.create(
@@ -258,8 +258,8 @@ fun testDiscoveryLifecycle() {
 
 **Test Code**:
 ```kotlin
-import org.cosmic.cosmicconnect.Core.Discovery
-import org.cosmic.cosmicconnect.Core.DiscoveryCallback
+import org.cosmic.cconnect.Core.Discovery
+import org.cosmic.cconnect.Core.DiscoveryCallback
 
 fun testDiscoveryCallback() {
     val devicesFound = mutableListOf<String>()
@@ -306,8 +306,8 @@ fun testDiscoveryCallback() {
 
 **Test Code**:
 ```kotlin
-import org.cosmic.cosmicconnect.Core.PluginManager
-import org.cosmic.cosmicconnect.Core.PluginCallback
+import org.cosmic.cconnect.Core.PluginManager
+import org.cosmic.cconnect.Core.PluginCallback
 
 fun testPluginCallback() {
     val packetsReceived = mutableListOf<String>()
@@ -331,7 +331,7 @@ fun testPluginCallback() {
 
     // Simulate incoming packet
     val packet = NetworkPacket.create(
-        "kdeconnect.battery",
+        "cconnect.battery",
         mapOf(
             "currentCharge" to 85,
             "isCharging" to true
@@ -340,7 +340,7 @@ fun testPluginCallback() {
 
     pluginManager.handlePacket(packet)
 
-    assert(packetsReceived.contains("kdeconnect.battery"))
+    assert(packetsReceived.contains("cconnect.battery"))
 }
 ```
 
@@ -363,13 +363,13 @@ fun benchmarkFFICalls() {
     // Benchmark 1: Packet creation
     val start1 = System.nanoTime()
     repeat(iterations) {
-        NetworkPacket.create("kdeconnect.ping", mapOf("seq" to it))
+        NetworkPacket.create("cconnect.ping", mapOf("seq" to it))
     }
     val end1 = System.nanoTime()
     val avgCreate = (end1 - start1) / iterations / 1000.0 // microseconds
 
     // Benchmark 2: Packet serialization
-    val packet = NetworkPacket.create("kdeconnect.ping", mapOf("msg" to "test"))
+    val packet = NetworkPacket.create("cconnect.ping", mapOf("msg" to "test"))
     val start2 = System.nanoTime()
     repeat(iterations) {
         packet.serialize()
@@ -415,7 +415,7 @@ fun benchmarkMemoryUsage() {
     val packets = mutableListOf<NetworkPacket>()
     repeat(1000) {
         packets.add(NetworkPacket.create(
-            "kdeconnect.ping",
+            "cconnect.ping",
             mapOf("seq" to it, "msg" to "Test message $it")
         ))
     }
@@ -486,7 +486,7 @@ fun benchmarkCallbackLatency() {
 fun testEndToEndPacketFlow() {
     // 1. Create packet on Android
     val packet = NetworkPacket.create(
-        "kdeconnect.share.request",
+        "cconnect.share.request",
         mapOf(
             "filename" to "test.txt",
             "text" to "Hello from Android via FFI"
@@ -530,7 +530,7 @@ fun testConcurrentFFICalls() = runBlocking {
         launch(Dispatchers.Default) {
             repeat(100) { iteration ->
                 val packet = NetworkPacket.create(
-                    "kdeconnect.ping",
+                    "cconnect.ping",
                     mapOf(
                         "thread" to threadId,
                         "iteration" to iteration

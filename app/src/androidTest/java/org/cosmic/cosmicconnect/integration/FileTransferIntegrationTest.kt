@@ -1,14 +1,14 @@
-package org.cosmic.cosmicconnect.integration
+package org.cosmic.cconnect.integration
 
 import android.net.Uri
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.cosmic.cosmicconnect.CosmicConnect
-import org.cosmic.cosmicconnect.Device
-import org.cosmic.cosmicconnect.NetworkPacket
-import org.cosmic.cosmicconnect.plugins.share.SharePlugin
-import org.cosmic.cosmicconnect.test.FfiTestUtils
-import org.cosmic.cosmicconnect.test.MockFactory
-import org.cosmic.cosmicconnect.test.TestUtils
+import org.cosmic.cconnect.CosmicConnect
+import org.cosmic.cconnect.Device
+import org.cosmic.cconnect.NetworkPacket
+import org.cosmic.cconnect.plugins.share.SharePlugin
+import org.cosmic.cconnect.test.FfiTestUtils
+import org.cosmic.cconnect.test.MockFactory
+import org.cosmic.cconnect.test.TestUtils
 import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before

@@ -176,11 +176,11 @@ wasLowBattery = when (batteryIntent.action) {
 
 ### Battery Status Packet
 
-Type: `kdeconnect.battery`
+Type: `cconnect.battery`
 
 ```json
 {
-  "type": "kdeconnect.battery",
+  "type": "cconnect.battery",
   "id": 123456789,
   "body": {
     "currentCharge": 75,         // 0-100 percentage

@@ -123,37 +123,37 @@ Issue #55 Phase 1: Telephony Plugin Rust Refactoring (-59 lines)
 
 1. **create_telephony_event()** - Call notifications
    - Parameters: event, phone_number?, contact_name?
-   - Packet type: `kdeconnect.telephony`
+   - Packet type: `cconnect.telephony`
    - Direction: Android → Desktop
 
 2. **create_mute_request()** - Mute ringer
    - Parameters: none
-   - Packet type: `kdeconnect.telephony.request_mute`
+   - Packet type: `cconnect.telephony.request_mute`
    - Direction: Desktop → Android
 
 3. **create_sms_messages()** - SMS conversations
    - Parameters: conversations_json (validated)
-   - Packet type: `kdeconnect.sms.messages`
+   - Packet type: `cconnect.sms.messages`
    - Direction: Android → Desktop
 
 4. **create_conversations_request()** - List conversations
    - Parameters: none
-   - Packet type: `kdeconnect.sms.request_conversations`
+   - Packet type: `cconnect.sms.request_conversations`
    - Direction: Desktop → Android
 
 5. **create_conversation_request()** - Request messages
    - Parameters: thread_id, start_timestamp?, count?
-   - Packet type: `kdeconnect.sms.request_conversation`
+   - Packet type: `cconnect.sms.request_conversation`
    - Direction: Desktop → Android
 
 6. **create_attachment_request()** - Request MMS attachment
    - Parameters: part_id, unique_identifier
-   - Packet type: `kdeconnect.sms.request_attachment`
+   - Packet type: `cconnect.sms.request_attachment`
    - Direction: Desktop → Android
 
 7. **create_send_sms_request()** - Send SMS
    - Parameters: phone_number, message_body
-   - Packet type: `kdeconnect.sms.request`
+   - Packet type: `cconnect.sms.request`
    - Direction: Desktop → Android
 
 **Metrics**:
@@ -236,8 +236,8 @@ Issue #55 Phase 3: TelephonyPacketsFFI.kt Android Wrapper (850 lines)
 
 **3. Protocol Updates**:
 - Updated constants to use "kdeconnect" prefix (was "cosmicconnect")
-- `PACKET_TYPE_TELEPHONY`: `kdeconnect.telephony`
-- `PACKET_TYPE_TELEPHONY_REQUEST_MUTE`: `kdeconnect.telephony.request_mute`
+- `PACKET_TYPE_TELEPHONY`: `cconnect.telephony`
+- `PACKET_TYPE_TELEPHONY_REQUEST_MUTE`: `cconnect.telephony.request_mute`
 
 **Simplified Functions**:
 - `callBroadcastReceived()`: Removed HashMap building logic

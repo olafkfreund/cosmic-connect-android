@@ -28,7 +28,9 @@ import org.cosmic.cosmicconnect.UserInterface.MainActivity
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment
 import org.cosmic.cosmicconnect.UserInterface.StartActivityAlertDialogFragment
 import org.cosmic.cosmicconnect.BuildConfig
+import org.cosmic.cosmicconnect.di.HiltBridges
 import org.cosmic.cosmicconnect.R
+import dagger.hilt.EntryPoints
 import java.security.GeneralSecurityException
 
 @LoadablePlugin
@@ -90,7 +92,8 @@ class SftpPlugin : Plugin(), OnSharedPreferenceChangeListener {
         }
 
         if (!server.isInitialized || server.isClosed) {
-            server.initialize(context, device)
+            val rsaHelper = EntryPoints.get(context.applicationContext, HiltBridges::class.java).rsaHelper()
+            server.initialize(context, device, rsaHelper)
         }
 
         val paths = mutableListOf<String>()
@@ -105,8 +108,8 @@ class SftpPlugin : Plugin(), OnSharedPreferenceChangeListener {
                 paths.add(sv.directory!!.path)
             }
         } else {
-            val storageInfoList = SftpSettingsFragment.getStorageInfoList(context, this)
-            storageInfoList.sortBy { it.uri }
+            val storageInfoList = SftpSettingsFragment.getStorageInfoList(context, this).toMutableList()
+            storageInfoList.sortBy { it.uri.toString() }
             if (storageInfoList.isEmpty()) {
                 val json = JSONObject(mapOf(
                     "errorMessage" to context.getString(R.string.sftp_no_storage_locations_configured)
@@ -116,7 +119,6 @@ class SftpPlugin : Plugin(), OnSharedPreferenceChangeListener {
                 return true
             }
             getPathsAndNamesForStorageInfoList(paths, pathNames, storageInfoList)
-            storageInfoList.removeChildren()
             server.setSafRoots(storageInfoList)
         }
 
@@ -264,8 +266,8 @@ class SftpPlugin : Plugin(), OnSharedPreferenceChangeListener {
     }
 
     companion object {
-        private const val PACKET_TYPE_SFTP = "cosmicconnect.sftp"
-        private const val PACKET_TYPE_SFTP_REQUEST = "cosmicconnect.sftp.request"
+        private const val PACKET_TYPE_SFTP = "cconnect.sftp"
+        private const val PACKET_TYPE_SFTP_REQUEST = "cconnect.sftp.request"
 
         @JvmField
         val PREFERENCE_KEY_STORAGE_INFO_LIST: Int = R.string.sftp_preference_key_storage_info_list

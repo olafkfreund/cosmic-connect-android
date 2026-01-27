@@ -2,7 +2,7 @@
 
 **Quick answers to common questions about COSMIC Connect.**
 
-**Last Updated:** 2026-01-17
+**Last Updated:** January 27, 2026
 
 ---
 
@@ -31,7 +31,10 @@ Yes! COSMIC Connect is completely free and open source (GPL-3.0 license). No ads
 
 ### Is it the same as KDE Connect?
 
-COSMIC Connect is based on KDE Connect Android but modernized specifically for COSMIC Desktop. It uses the same protocol (v8) so it's compatible, but has a modern UI and architecture optimized for COSMIC Desktop.
+COSMIC Connect is based on the KDE Connect protocol (v8) but is a **complete modernization** specifically for COSMIC Desktop.
+- **Modern UI:** Built entirely with **Jetpack Compose** and **Material Design 3**.
+- **Architecture:** Uses a **hybrid Rust + Kotlin** core for shared logic and reliability.
+- **Experience:** Designed to feel native to the COSMIC ecosystem.
 
 ### Does COSMIC Connect require internet?
 
@@ -630,7 +633,7 @@ COSMIC Connect is an independent project built for COSMIC Desktop (developed by 
 
 ---
 
-**Last Updated:** 2026-01-17
+**Last Updated:** January 27, 2026
 **Version:** 1.0.0-beta
 
 For more detailed information, see the [User Guide](USER_GUIDE.md).

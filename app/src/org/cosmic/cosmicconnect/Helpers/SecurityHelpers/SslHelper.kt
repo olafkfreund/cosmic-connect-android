@@ -110,7 +110,7 @@ class SslHelper @Inject constructor(
             val nameBuilder = X500NameBuilder(BCStyle.INSTANCE)
             nameBuilder.addRDN(BCStyle.CN, deviceId)
             nameBuilder.addRDN(BCStyle.OU, "COSMIC Connect")
-            nameBuilder.addRDN(BCStyle.O, "KDE")
+            nameBuilder.addRDN(BCStyle.O, "COSMIC")
             val localDate = LocalDate.now()
             val notBefore = localDate.minusYears(1).atStartOfDay(ZoneId.systemDefault()).toInstant()
             val notAfter = localDate.plusYears(10).atStartOfDay(ZoneId.systemDefault()).toInstant()
@@ -219,6 +219,6 @@ class SslHelper @Inject constructor(
     }
 
     companion object {
-        private const val LOG_TAG = "KDE/SslHelper"
+        private const val LOG_TAG = "COSMIC/SslHelper"
     }
 }

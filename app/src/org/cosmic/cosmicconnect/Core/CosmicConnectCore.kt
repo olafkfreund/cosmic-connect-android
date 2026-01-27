@@ -10,7 +10,7 @@ import uniffi.cosmic_connect_core.*
  * and provides idiomatic Kotlin wrappers around the raw FFI bindings.
  *
  * ## Features
- * - Network packet handling (KDE Connect protocol v7)
+ * - Network packet handling (COSMIC Connect protocol v7)
  * - TLS/Certificate management (self-signed RSA 2048-bit)
  * - Plugin system (Battery, Ping, Share, etc.)
  * - Device discovery (UDP broadcast on port 1716)
@@ -59,7 +59,7 @@ object CosmicConnectCore {
         }
 
     /**
-     * Get the KDE Connect protocol version (always 7)
+     * Get the COSMIC Connect protocol version (always 7)
      */
     val protocolVersion: Int
         get() {

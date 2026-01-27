@@ -353,10 +353,10 @@
   <string name="email_contributor">Odoslať email prispievateľovi\n%s</string>
   <string name="visit_contributors_homepage">Navštíviť domovskú stránku prispievateľa\n%s</string>
   <string name="version">Verzia %s</string>
-  <string name="about_kde">O prostredí KDE</string>
-  <string name="kde_be_free">KDE - Buďte voľní!</string>
-  <string name="kde">KDE</string>
-  <string name="konqi">Konqi</string>
+  <string name="about_kde">O prostredí COSMIC</string>
+  <string name="kde_be_free">COSMIC - Buďte voľní!</string>
+  <string name="kde">COSMIC</string>
+  <string name="cosmo">Cosmo</string>
   <string name="clear_compose">Vyčistiť</string>
   <string name="send_compose">Poslať</string>
   <string name="maintainer_and_developer">Správca a vývojár</string>

@@ -372,7 +372,7 @@ class SharePlugin : Plugin() {
     }
 
     override fun onDeviceUnpaired(context: Context, deviceId: String) {
-        Log.i("KDE/SharePlugin", "onDeviceUnpaired deviceId = $deviceId")
+        Log.i("COSMIC/SharePlugin", "onDeviceUnpaired deviceId = $deviceId")
         if (mSharedPrefs == null) {
             mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
         }

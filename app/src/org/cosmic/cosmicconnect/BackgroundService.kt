@@ -262,7 +262,7 @@ class BackgroundService : Service() {
     }
 
     companion object {
-        const val LOG_TAG = "KDE/BackgroundService"
+        const val LOG_TAG = "COSMIC/BackgroundService"
 
         const val UPDATE_IMMUTABLE_FLAGS = PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         private const val FOREGROUND_NOTIFICATION_ID = 1

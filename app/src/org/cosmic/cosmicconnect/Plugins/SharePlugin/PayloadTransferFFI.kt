@@ -82,7 +82,7 @@ class PayloadTransferFFI(
         private const val TAG = "PayloadTransferFFI"
 
         /**
-         * Default port for KDE Connect payload transfers
+         * Default port for COSMIC Connect payload transfers
          */
         const val DEFAULT_PAYLOAD_PORT = 1739
 

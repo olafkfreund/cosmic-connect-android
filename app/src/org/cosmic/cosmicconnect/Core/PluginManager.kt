@@ -128,7 +128,7 @@ data class PluginCapabilities(
 }
 
 /**
- * PluginManager - Manages KDE Connect plugins
+ * PluginManager - Manages COSMIC Connect plugins
  *
  * Provides a clean Kotlin API for the Rust plugin system.
  *

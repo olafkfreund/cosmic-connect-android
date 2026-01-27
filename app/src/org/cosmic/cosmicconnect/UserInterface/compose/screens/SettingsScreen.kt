@@ -387,7 +387,7 @@ private fun AboutDialog(
         HorizontalDivider()
 
         Text(
-          text = "Based on KDE Connect",
+          text = "Based on COSMIC Connect",
           style = MaterialTheme.typography.bodySmall,
           color = MaterialTheme.colorScheme.onSurfaceVariant
         )

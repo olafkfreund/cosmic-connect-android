@@ -44,7 +44,7 @@
   <string name="open_settings">Opna stillingar</string>
   <string name="no_permissions">Þú verður að gefa heimild til að fá aðgang að tilkynningum</string>
   <string name="no_permission_mprisreceiver">Til að geta stýrt margmiðlunarspilurunum þínum þarftu að gefa heimild fyrir aðgang að tilkynningum</string>
-  <string name="no_permissions_remotekeyboard">Til að taka við lyklaáslætti þarftu að virkja fjartengt lyklaborð KDE-tenginga</string>
+  <string name="no_permissions_remotekeyboard">Til að taka við lyklaáslætti þarftu að virkja fjartengt lyklaborð COSMIC-tenginga</string>
   <string name="send_ping">"Senda ping-beiðni "</string>
   <string name="open_mpris_controls">Margmiðlunarstýring</string>
   <string name="remotekeyboard_editing_only_title">Aðeins meðhöndla fjartengda lykla við breytingar/ritun</string>
@@ -191,7 +191,7 @@
     <item>2 mínútur</item>
   </string-array>
   <string name="mpris_notification_settings_title">Birta tilkynningar fyrir margmiðlunarstýringar</string>
-  <string name="mpris_notification_settings_summary">Gerir kleift að stýra margmiðlunarspilurunum þínum án þess að opna KDE-tengingar</string>
+  <string name="mpris_notification_settings_summary">Gerir kleift að stýra margmiðlunarspilurunum þínum án þess að opna COSMIC-tengingar</string>
   <string name="share_to">Deila með…</string>
   <string name="unreachable_device_dynamic_shortcut">%s (✕)</string>
   <string name="protocol_version">Útgáfa samskiptamáta:</string>
@@ -241,7 +241,7 @@
   <string name="block_notification_contents">Loka á efni í tilkynningum</string>
   <string name="block_notification_images">Loka á myndir í tilkynningum</string>
   <string name="pairing_title">COSMIC Connect tæki</string>
-  <string name="pairing_description">Önnur tæki sem keyra KDE-tengingar á sama netkerfi ættu að birtast hér.</string>
+  <string name="pairing_description">Önnur tæki sem keyra COSMIC-tengingar á sama netkerfi ættu að birtast hér.</string>
   <string name="device_rename_title">Endurnefna tæki</string>
   <string name="device_rename_confirm">Endurnefna</string>
   <string name="refresh">Endurlesa</string>
@@ -376,10 +376,10 @@
   <string name="email_contributor">Senda þátttakanda tölvupóst\n%s</string>
   <string name="visit_contributors_homepage">Fara á heimasíðu þátttakandans\n%s</string>
   <string name="version">Útgáfa %s</string>
-  <string name="about_kde">Um KDE</string>
-  <string name="kde_be_free">KDE - Vertu frjáls!</string>
-  <string name="kde">KDE</string>
-  <string name="konqi">Konqi</string>
+  <string name="about_kde">Um COSMIC</string>
+  <string name="kde_be_free">COSMIC - Vertu frjáls!</string>
+  <string name="kde">COSMIC</string>
+  <string name="cosmo">Cosmo</string>
   <string name="rise_up">Ris upp</string>
   <string name="rise_down">Ris niður</string>
   <string name="click_here_to_type">Ýttu hér til að skrifa</string>

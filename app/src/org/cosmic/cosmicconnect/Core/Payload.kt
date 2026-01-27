@@ -8,7 +8,7 @@ import java.net.Socket
 /**
  * Payload - Represents file/stream data attached to a NetworkPacket
  *
- * Used for file transfers and large data transmission in KDE Connect protocol.
+ * Used for file transfers and large data transmission in COSMIC Connect protocol.
  * Payloads are sent separately from the packet metadata.
  *
  * ## Important Note

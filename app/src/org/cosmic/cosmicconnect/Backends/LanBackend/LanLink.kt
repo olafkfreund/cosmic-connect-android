@@ -120,7 +120,7 @@ class LanLink @WorkerThread constructor(
     ): Boolean {
         val currentSocket = socket
         if (currentSocket == null) {
-            Log.e("KDE/sendPacket", "Not yet connected")
+            Log.e("COSMIC/sendPacket", "Not yet connected")
             callback.onFailure(NotYetConnectedException())
             return false
         }
@@ -209,7 +209,7 @@ class LanLink @WorkerThread constructor(
                 outputStream = payloadSocket.outputStream
                 val inputStream = np.payload?.inputStream
 
-                Log.i("KDE/LanLink", "Beginning to send payload for " + np.type)
+                Log.i("COSMIC/LanLink", "Beginning to send payload for " + np.type)
                 val buffer = ByteArray(4096)
                 var bytesRead: Int = -1
                 val size = np.payloadSize
@@ -228,7 +228,7 @@ class LanLink @WorkerThread constructor(
                     }
                 }
                 outputStream.flush()
-                Log.i("KDE/LanLink", "Finished sending payload ($progress bytes written)")
+                Log.i("COSMIC/LanLink", "Finished sending payload ($progress bytes written)")
             }
         } catch (e: SocketTimeoutException) {
             Log.e(
@@ -272,7 +272,7 @@ class LanLink @WorkerThread constructor(
                     payloadSocket.close()
                 } catch (ignored: Exception) {
                 }
-                Log.e("KDE/LanLink", "Exception connecting to payload remote socket", e)
+                Log.e("COSMIC/LanLink", "Exception connecting to payload remote socket", e)
             }
         }
 

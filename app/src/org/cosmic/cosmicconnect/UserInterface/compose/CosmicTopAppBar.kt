@@ -21,7 +21,7 @@ import org.cosmic.cosmicconnect.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun KdeTopAppBar(
+fun CosmicTopAppBar(
     title: String = stringResource(R.string.kde_connect),
     navIcon: ImageVector = Icons.AutoMirrored.Filled.ArrowBack,
     navIconDescription: String = "",

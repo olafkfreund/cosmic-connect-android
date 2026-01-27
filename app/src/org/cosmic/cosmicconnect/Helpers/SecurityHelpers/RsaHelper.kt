@@ -42,7 +42,7 @@ class RsaHelper @Inject constructor(@ApplicationContext private val context: Con
                 keyPair = generator.generateKeyPair()
             }
             catch (e: Exception) {
-                Log.e("KDE/initializeRsaKeys", "Exception", e)
+                Log.e("COSMIC/initializeRsaKeys", "Exception", e)
                 return
             }
 

@@ -12,7 +12,7 @@ import uniffi.cosmic_connect_core.createRuncommandSetup
  *
  * This object provides factory methods to create RunCommand plugin packets using the
  * Rust cosmic-connect-core FFI layer. All packets are created through UniFFI bindings
- * and follow the KDE Connect protocol specification.
+ * and follow the COSMIC Connect protocol specification.
  *
  * ## Packet Types
  *

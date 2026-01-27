@@ -44,26 +44,26 @@ cargo {
     targetDirectory = "../../cosmic-connect-core/target"
 }
 
-// Fix Python 3.13 compatibility: Replace pipes module with shlex in linker wrapper
-tasks.register("patchLinkerWrapper") {
-    doLast {
-        val linkerWrapper = file("build/linker-wrapper/linker-wrapper.py")
-        if (linkerWrapper.exists()) {
-            val content = linkerWrapper.readText()
-            if (content.contains("import pipes")) {
-                val fixed = content
-                    .replace("import pipes", "import shlex  # pipes removed in Python 3.13")
-                    .replace("pipes.quote", "shlex.quote")
-                linkerWrapper.writeText(fixed)
-                println("✅ Fixed linker wrapper for Python 3.13 compatibility")
-            }
+// Function to patch the linker wrapper
+fun patchLinkerWrapper(rootDir: File) {
+    val linkerWrapper = File(rootDir, "build/linker-wrapper/linker-wrapper.py")
+    if (linkerWrapper.exists()) {
+        val content = linkerWrapper.readText()
+        if (content.contains("import pipes")) {
+            val fixed = content
+                .replace("import pipes", "import shlex  # pipes removed in Python 3.13")
+                .replace("pipes.quote", "shlex.quote")
+            linkerWrapper.writeText(fixed)
+            println("✅ Fixed linker wrapper for Python 3.13 compatibility")
         }
     }
 }
 
-// Apply the patch before any cargo build tasks
+// Apply the patch immediately before any cargo build task executes
 tasks.matching { it.name.startsWith("cargoBuild") }.configureEach {
-    dependsOn("patchLinkerWrapper")
+    doFirst {
+        patchLinkerWrapper(rootDir)
+    }
 }
 
 android {
@@ -372,7 +372,8 @@ dependencies {
     implementation(libs.bcpkix.jdk15on) //For SSL certificate generation
 
     // JNA for Rust FFI bindings (UniFFI-generated)
-    implementation(libs.jna)
+    // Force AAR to ensure native libs are included
+    implementation("net.java.dev.jna:jna:5.15.0@aar")
 
     ksp(libs.classindexksp)
 

@@ -371,10 +371,10 @@
   <string name="email_contributor">貢献者にメールを送る\n%s</string>
   <string name="visit_contributors_homepage">貢献者のホームページを訪れる\n%s</string>
   <string name="version">バージョン %s</string>
-  <string name="about_kde">KDE について</string>
-  <string name="kde_be_free">KDE - Be Free!</string>
-  <string name="kde">KDE</string>
-  <string name="konqi">Konqi</string>
+  <string name="about_kde">COSMIC について</string>
+  <string name="kde_be_free">COSMIC - Be Free!</string>
+  <string name="kde">COSMIC</string>
+  <string name="cosmo">Cosmo</string>
   <string name="rise_up">上へ</string>
   <string name="rise_down">下へ</string>
   <string name="click_here_to_type">タップしてタイプ</string>

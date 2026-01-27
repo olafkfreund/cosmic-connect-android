@@ -57,7 +57,7 @@ class BatteryPluginFFI : Plugin() {
         private const val TAG = "BatteryPluginFFI"
         const val PACKET_TYPE_BATTERY = "cconnect.battery"
 
-        // Threshold events (keep in sync with KDE Connect protocol)
+        // Threshold events (keep in sync with COSMIC Connect protocol)
         private const val THRESHOLD_EVENT_NONE = 0
         private const val THRESHOLD_EVENT_BATTERY_LOW = 1
 

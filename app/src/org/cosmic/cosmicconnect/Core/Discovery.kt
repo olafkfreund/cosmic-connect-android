@@ -6,7 +6,7 @@ import uniffi.cosmic_connect_core.*
 /**
  * DeviceInfo - Information about a device (local or remote)
  *
- * Represents a KDE Connect device with its identity and capabilities.
+ * Represents a COSMIC Connect device with its identity and capabilities.
  */
 data class DeviceInfo(
     val deviceId: String,
@@ -56,7 +56,7 @@ data class DeviceInfo(
 }
 
 /**
- * DeviceType - Type of KDE Connect device
+ * DeviceType - Type of COSMIC Connect device
  */
 enum class DeviceType {
     DESKTOP,
@@ -132,7 +132,7 @@ interface DiscoveryListener {
 /**
  * Discovery - Device discovery service wrapper
  *
- * Manages UDP broadcast discovery on port 1716 to find nearby KDE Connect devices.
+ * Manages UDP broadcast discovery on port 1716 to find nearby COSMIC Connect devices.
  *
  * ## How it works
  * 1. Broadcasts identity packets via UDP multicast

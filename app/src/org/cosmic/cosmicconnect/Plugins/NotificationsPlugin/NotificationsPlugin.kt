@@ -73,7 +73,7 @@ import java.security.NoSuchAlgorithmException
 class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener {
 
     companion object {
-        private const val TAG = "KDE/NotificationsPlugin"
+        private const val TAG = "COSMIC/NotificationsPlugin"
         private const val PREF_KEY = "prefKey"
         private const val PREF_NOTIFICATION_SCREEN_OFF_KEY = "screen_off_notification_state"
 

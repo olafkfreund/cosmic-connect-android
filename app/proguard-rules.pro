@@ -19,6 +19,8 @@
 -dontobfuscate
 -keepattributes SourceFile,LineNumberTable,Signature,*Annotation*
 -keep class org.cosmic.cosmicconnect.** {*;}
+-keep class uniffi.** {*;}
+-keep class com.sun.jna.** {*;}
 
 # SSHd requires mina, and mina uses reflection so some classes would get deleted
 -keep class org.apache.sshd.** {*;}

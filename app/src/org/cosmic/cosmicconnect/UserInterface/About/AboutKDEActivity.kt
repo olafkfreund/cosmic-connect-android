@@ -10,7 +10,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import org.cosmic.cosmicconnect.UserInterface.compose.CosmicTheme
-import org.cosmic.cosmicconnect.UserInterface.compose.screens.about.AboutKdeScreen
+import org.cosmic.cosmicconnect.UserInterface.compose.screens.about.AboutCosmicScreen
 
 class AboutKDEActivity : ComponentActivity() {
 
@@ -18,7 +18,7 @@ class AboutKDEActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             CosmicTheme(context = this) {
-                AboutKdeScreen(
+                AboutCosmicScreen(
                     onNavigateBack = { finish() }
                 )
             }

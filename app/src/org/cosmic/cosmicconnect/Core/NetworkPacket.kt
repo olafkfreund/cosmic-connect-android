@@ -3,11 +3,11 @@ package org.cosmic.cosmicconnect.Core
 import uniffi.cosmic_connect_core.*
 
 /**
- * NetworkPacket - Idiomatic Kotlin wrapper for KDE Connect protocol packets
+ * NetworkPacket - Idiomatic Kotlin wrapper for COSMIC Connect protocol packets
  *
  * Wraps the Rust FFI NetworkPacket with a clean Kotlin API.
  *
- * ## KDE Connect Protocol v7
+ * ## COSMIC Connect Protocol v7
  * Packets are JSON-formatted with newline termination:
  * ```json
  * {
@@ -39,7 +39,7 @@ data class NetworkPacket(
     /**
      * Serialize packet to bytes for network transmission
      *
-     * Format: JSON with newline terminator (KDE Connect requirement)
+     * Format: JSON with newline terminator (COSMIC Connect requirement)
      *
      * @return Byte array ready for network transmission
      * @throws CosmicConnectException if serialization fails

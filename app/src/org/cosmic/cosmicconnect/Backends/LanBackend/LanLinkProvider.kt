@@ -80,12 +80,12 @@ class LanLinkProvider @Inject constructor(
         try {
             identityPacket = NetworkPacket.unserialize(message)
         } catch (e: JSONException) {
-            Log.w("KDE/LanLinkProvider", "Invalid identity packet received: " + e.message)
+            Log.w("COSMIC/LanLinkProvider", "Invalid identity packet received: " + e.message)
             return null
         }
 
         if (!DeviceInfo.isValidIdentityPacket(identityPacket)) {
-            Log.w("KDE/LanLinkProvider", "Invalid identity packet received.")
+            Log.w("COSMIC/LanLinkProvider", "Invalid identity packet received.")
             return null
         }
 
@@ -107,7 +107,7 @@ class LanLinkProvider @Inject constructor(
         val deviceTrusted = TrustedDevices.isTrustedDevice(context, deviceId)
         if (!deviceTrusted && !TrustedNetworkHelper.isTrustedNetwork(context)) {
             Log.i(
-                "KDE/LanLinkProvider",
+                "COSMIC/LanLinkProvider",
                 "Ignoring identity packet because the device is not trusted and I'm not on a trusted network."
             )
             return null
@@ -133,7 +133,7 @@ class LanLinkProvider @Inject constructor(
             message = readSingleLine(socket)
             //Log.e("TcpListener", "Received TCP packet: " + identityPacket.serialize());
         } catch (e: Exception) {
-            Log.e("KDE/LanLinkProvider", "Exception while receiving TCP packet", e)
+            Log.e("COSMIC/LanLinkProvider", "Exception while receiving TCP packet", e)
             return
         }
 
@@ -142,7 +142,7 @@ class LanLinkProvider @Inject constructor(
         val deviceTrusted = pair.second
 
         Log.i(
-            "KDE/LanLinkProvider",
+            "COSMIC/LanLinkProvider",
             "identity packet received from a TCP connection from " + identityPacket.getString("deviceName")
         )
 
@@ -150,14 +150,14 @@ class LanLinkProvider @Inject constructor(
         val targetProtocolVersion = identityPacket.getIntOrNull("targetProtocolVersion")
         if (targetDeviceId != null && targetDeviceId != deviceHelper.getDeviceId()) {
             Log.e(
-                "KDE/LanLinkProvider",
+                "COSMIC/LanLinkProvider",
                 "Received a connection request for a device that isn't me: $targetDeviceId"
             )
             return
         }
         if (targetProtocolVersion != null && targetProtocolVersion != DeviceHelper.PROTOCOL_VERSION) {
             Log.e(
-                "KDE/LanLinkProvider",
+                "COSMIC/LanLinkProvider",
                 "Received a connection request for a protocol version that isn't mine: $targetProtocolVersion"
             )
             return
@@ -237,7 +237,7 @@ class LanLinkProvider @Inject constructor(
         val deviceTrusted = pair.second
 
         Log.i(
-            "KDE/LanLinkProvider",
+            "COSMIC/LanLinkProvider",
             "Broadcast identity packet received from " + identityPacket.getString("deviceName")
         )
 
@@ -298,19 +298,19 @@ class LanLinkProvider @Inject constructor(
 
         if (deviceTrusted && isProtocolDowngrade(deviceId, protocolVersion)) {
             Log.w(
-                "KDE/LanLinkProvider",
+                "COSMIC/LanLinkProvider",
                 "Refusing to connect to a device using an older protocol version:$protocolVersion"
             )
             return
         }
 
         if (deviceTrusted && !TrustedDevices.isCertificateStored(context, deviceId)) {
-            Log.e("KDE/LanLinkProvider", "Device trusted but no cert stored. This should not happen.")
+            Log.e("COSMIC/LanLinkProvider", "Device trusted but no cert stored. This should not happen.")
             return
         }
 
         Log.i(
-            "KDE/LanLinkProvider",
+            "COSMIC/LanLinkProvider",
             "Starting SSL handshake with $deviceId trusted:$deviceTrusted"
         )
 
@@ -333,14 +333,14 @@ class LanLinkProvider @Inject constructor(
                         // Do not trust the identity packet we received unencrypted
                         secureIdentityPacket = NetworkPacket.unserialize(line)
                         if (!DeviceInfo.isValidIdentityPacket(secureIdentityPacket)) {
-                            Log.e("KDE/LanLinkProvider", "Identity packet isn't valid")
+                            Log.e("COSMIC/LanLinkProvider", "Identity packet isn't valid")
                             socket.close()
                             return@execute
                         }
                         val newProtocolVersion = secureIdentityPacket.getInt("protocolVersion")
                         if (newProtocolVersion != protocolVersion) {
                             Log.e(
-                                "KDE/LanLinkProvider",
+                                "COSMIC/LanLinkProvider",
                                 "Protocol version changed half-way through the handshake: $protocolVersion -> $newProtocolVersion"
                             )
                             socket.close()
@@ -349,7 +349,7 @@ class LanLinkProvider @Inject constructor(
                         val newDeviceId = secureIdentityPacket.getString("deviceId")
                         if (newDeviceId != deviceId) {
                             Log.e(
-                                "KDE/LanLinkProvider",
+                                "COSMIC/LanLinkProvider",
                                 "Device ID changed half-way through the handshake: $deviceId -> $newDeviceId"
                             )
                             socket.close()
@@ -364,18 +364,18 @@ class LanLinkProvider @Inject constructor(
                         certificate
                     )
                     Log.i(
-                        "KDE/LanLinkProvider",
+                        "COSMIC/LanLinkProvider",
                         "Handshake as " + mode + " successful with " + deviceInfo.name + " secured with " + event.cipherSuite
                     )
                     addOrUpdateLink(sslSocket, deviceInfo)
                 } catch (e: JSONException) {
                     Log.e(
-                        "KDE/LanLinkProvider",
+                        "COSMIC/LanLinkProvider",
                         "Remote device doesn't correctly implement protocol version 8",
                         e
                     )
                 } catch (e: IOException) {
-                    Log.e("KDE/LanLinkProvider", "Handshake as $mode failed with $deviceId", e)
+                    Log.e("COSMIC/LanLinkProvider", "Handshake as $mode failed with $deviceId", e)
                 }
             }
         }
@@ -406,18 +406,18 @@ class LanLinkProvider @Inject constructor(
         if (link != null) {
             if (link.deviceInfo.certificate != deviceInfo.certificate) {
                 Log.e(
-                    "KDE/LanLinkProvider",
+                    "COSMIC/LanLinkProvider",
                     "LanLink was asked to replace a socket but the certificate doesn't match, aborting"
                 )
                 return
             }
             // Update existing link
-            Log.d("KDE/LanLinkProvider", "Reusing same link for device " + deviceInfo.id)
+            Log.d("COSMIC/LanLinkProvider", "Reusing same link for device " + deviceInfo.id)
             link.reset(socket, deviceInfo)
             onDeviceInfoUpdated(deviceInfo)
         } else {
             // Create a new link
-            Log.d("KDE/LanLinkProvider", "Creating a new link for device " + deviceInfo.id)
+            Log.d("COSMIC/LanLinkProvider", "Creating a new link for device " + deviceInfo.id)
             link = LanLink(context, deviceInfo, this, socket, sslHelper)
             visibleDevices[deviceInfo.id] = link
             onConnectionReceived(link)
@@ -542,7 +542,7 @@ class LanLinkProvider @Inject constructor(
         try {
             bytes = identity.serialize().toByteArray(Charsets.UTF_8)
         } catch (e: JSONException) {
-            Log.e("KDE/LanLinkProvider", "Failed to serialize identity packet", e)
+            Log.e("COSMIC/LanLinkProvider", "Failed to serialize identity packet", e)
             return
         }
 
@@ -560,17 +560,17 @@ class LanLinkProvider @Inject constructor(
             socket.reuseAddress = true
             socket.broadcast = true
         } catch (e: SocketException) {
-            Log.e("KDE/LanLinkProvider", "Failed to create DatagramSocket", e)
+            Log.e("COSMIC/LanLinkProvider", "Failed to create DatagramSocket", e)
             return
         }
 
         for (ip in ipList) {
             try {
                 socket.send(DatagramPacket(bytes, bytes.size, ip, MIN_PORT))
-                //Log.i("KDE/LanLinkProvider","Udp identity packet sent to address "+client);
+                //Log.i("COSMIC/LanLinkProvider","Udp identity packet sent to address "+client);
             } catch (e: IOException) {
                 Log.e(
-                    "KDE/LanLinkProvider",
+                    "COSMIC/LanLinkProvider",
                     "Sending udp identity packet failed. Invalid address? ($ip)",
                     e
                 )
@@ -581,7 +581,7 @@ class LanLinkProvider @Inject constructor(
     }
 
     override fun onStart() {
-        //Log.i("KDE/LanLinkProvider", "onStart");
+        //Log.i("COSMIC/LanLinkProvider", "onStart");
         if (!listening) {
             listening = true
 
@@ -625,7 +625,7 @@ class LanLinkProvider @Inject constructor(
     }
 
     override fun onStop() {
-        //Log.i("KDE/LanLinkProvider", "onStop");
+        //Log.i("COSMIC/LanLinkProvider", "onStop");
         listening = false
 
         // Stop FFI Discovery
@@ -679,12 +679,12 @@ class LanLinkProvider @Inject constructor(
             while (tcpPort <= MAX_PORT) {
                 try {
                     val candidateServer = ServerSocket(tcpPort)
-                    Log.i("KDE/LanLink", "Using port $tcpPort")
+                    Log.i("COSMIC/LanLink", "Using port $tcpPort")
                     return candidateServer
                 } catch (e: IOException) {
                     tcpPort++
                     if (tcpPort == MAX_PORT) {
-                        Log.e("KDE/LanLink", "No ports available")
+                        Log.e("COSMIC/LanLink", "No ports available")
                         throw e //Propagate exception
                     }
                 }

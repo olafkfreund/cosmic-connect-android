@@ -26,9 +26,9 @@ import androidx.preference.PreferenceManager
 import dagger.hilt.android.AndroidEntryPoint
 import org.cosmic.cosmicconnect.Core.DeviceRegistry
 import org.cosmic.cosmicconnect.UserInterface.compose.KdeTextButton
-import org.cosmic.cosmicconnect.UserInterface.compose.KdeTextField
+import org.cosmic.cosmicconnect.UserInterface.compose.CosmicTextField
 import org.cosmic.cosmicconnect.UserInterface.compose.CosmicTheme
-import org.cosmic.cosmicconnect.UserInterface.compose.KdeTopAppBar
+import org.cosmic.cosmicconnect.UserInterface.compose.CosmicTopAppBar
 import org.cosmic.cosmicconnect.extensions.safeDrawPadding
 import org.cosmic.cosmicconnect.R
 import androidx.core.content.edit
@@ -84,7 +84,7 @@ class ComposeSendActivity : AppCompatActivity() {
             Scaffold(
                 modifier = Modifier.safeDrawPadding(),
                 topBar = {
-                    KdeTopAppBar(
+                    CosmicTopAppBar(
                         title = stringResource(R.string.compose_send_title),
                         navIconOnClick = { onBackPressedDispatcher.onBackPressed() },
                         navIconDescription = getString(androidx.appcompat.R.string.abc_action_bar_up_description),
@@ -99,7 +99,7 @@ class ComposeSendActivity : AppCompatActivity() {
                 },
             ) { scaffoldPadding ->
                 Box(modifier = Modifier.padding(scaffoldPadding).fillMaxSize()) {
-                    KdeTextField(
+                    CosmicTextField(
                         modifier = Modifier
                             .padding(horizontal = 16.dp)
                             .padding(bottom = 80.dp)

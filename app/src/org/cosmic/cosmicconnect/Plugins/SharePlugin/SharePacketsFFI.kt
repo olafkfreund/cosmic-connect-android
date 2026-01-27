@@ -10,7 +10,7 @@ import uniffi.cosmic_connect_core.*
  * Provides idiomatic Kotlin API for creating share-related packets
  * using the Rust FFI core library.
  *
- * ## Share Plugin Protocol (KDE Connect v7)
+ * ## Share Plugin Protocol (COSMIC Connect v7)
  *
  * The Share plugin supports three types of content:
  * 1. **Files**: Requires payload transfer via TCP

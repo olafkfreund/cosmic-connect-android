@@ -199,9 +199,9 @@ object CosmicIcons {
    * Branding icons
    */
   object Brand {
-    @DrawableRes val kde24: Int = R.drawable.ic_kde_24dp
-    @DrawableRes val kde48: Int = R.drawable.ic_kde_48dp
-    @DrawableRes val konqi: Int = R.drawable.konqi  // PNG image
+    @DrawableRes val cosmic24: Int = R.drawable.icon
+    @DrawableRes val cosmic48: Int = R.drawable.icon
+    @DrawableRes val appIcon: Int = R.drawable.icon
   }
 
   /**

@@ -22,7 +22,7 @@ import org.cosmic.cosmicconnect.R
 /**
  * ClipboardPlugin - Sync clipboard between Android and COSMIC Desktop
  *
- * This plugin enables automatic clipboard synchronization using the KDE Connect protocol v7.
+ * This plugin enables automatic clipboard synchronization using the COSMIC Connect protocol v7.
  * It uses FFI (Foreign Function Interface) for type-safe packet creation via cosmic-connect-core.
  *
  * ## Packet Types

@@ -3,14 +3,14 @@
 <!--
 SPDX-FileCopyrightText: 2023 Albert Vaca Cintora <albertvaka@gmail.com>
 
-SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-COSMIC-Accepted-GPL
 -->
 
 <resources>
   <!--  # Dear potential translators:
 
         Thank you for your interest in COSMIC Connect! We do not actually handle our own translations.
-        All translations for all KDE apps are handled by the [localization team](https://l10n.kde.org).
+        All translations for all COSMIC apps are handled by the [localization team](https://l10n.kde.org).
         We really appreciate your translations, but make sure to submit them by working with the proper team!
   -->
     <string name="kde_connect">COSMIC Connect</string>
@@ -551,10 +551,10 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
     <string name="email_contributor">Email contributor\n%s</string>
     <string name="visit_contributors_homepage">Visit contributor\'s homepage\n%s</string>
     <string name="version">Version %s</string>
-    <string name="about_kde">About KDE</string>
-    <string name="kde_be_free">KDE - Be Free!</string>
-    <string name="kde">KDE</string>
-    <string name="konqi">Konqi</string>
+    <string name="about_kde">About COSMIC Connect</string>
+    <string name="kde_be_free">COSMIC - Be Free!</string>
+    <string name="kde">COSMIC</string>
+    <string name="cosmo">Cosmo</string>
     <string name="rise_up">Rise Up</string>
     <string name="rise_down">Rise Down</string>
 
@@ -568,31 +568,30 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
 
     <string name="about_kde_about"><![CDATA[
       <h1>About</h1>
-      <p>KDE is a world-wide community of software engineers, artists, writers, translators and creators who are committed to <a href="https://www.gnu.org/philosophy/free-sw.html">Free Software</a> development. KDE produces the Plasma desktop environment, hundreds of applications, and the many software libraries that support them.</p>
-      <p>KDE is a cooperative enterprise: no single entity controls its direction or products. Instead, we work together to achieve the common goal of building the world\'s finest Free Software. Everyone is welcome to <a href="https://community.kde.org/Get_Involved">join and contribute</a> to KDE, including you.</p>
-      Visit <a href="https://www.kde.org/">https://www.kde.org/</a> for more information about the KDE community and the software we produce.
+      <p>COSMIC is a world-wide community of software engineers, artists, writers, translators and creators who are committed to <a href="https://www.gnu.org/philosophy/free-sw.html">Free Software</a> development. COSMIC produces the COSMIC desktop environment, hundreds of applications, and the many software libraries that support them.</p>
+      <p>COSMIC is a cooperative enterprise: no single entity controls its direction or products. Instead, we work together to achieve the common goal of building the world\'s finest Free Software. Everyone is welcome to join and contribute to COSMIC, including you.</p>
+      Visit <a href="https://github.com/pop-os/cosmic-epoch">https://github.com/pop-os/cosmic-epoch</a> for more information about the COSMIC community and the software we produce.
       ]]></string>
 
     <string name="about_kde_report_bugs_or_wishes"><![CDATA[
       <h1>Report Bugs or Wishes</h1>
-      <p>Software can always be improved, and the KDE team is ready to do so. However, you - the user - must tell us when something does not work as expected or could be done better.</p>
-      <p>KDE has a bug tracking system. Visit <a href="https://bugs.kde.org/">https://bugs.kde.org/</a> or use the \"Report Bug\" button from the about screen to report bugs.</p>
-      If you have a suggestion for improvement then you are welcome to use the bug tracking system to register your wish. Make sure you use the severity called \"Wishlist\".
+      <p>Software can always be improved, and the COSMIC team is ready to do so. However, you - the user - must tell us when something does not work as expected or could be done better.</p>
+      <p>COSMIC has a bug tracking system. Visit <a href="https://github.com/olafkfreund/cosmic-connect-android/issues">GitHub Issues</a> or use the \"Report Bug\" button from the about screen to report bugs.</p>
+      If you have a suggestion for improvement then you are welcome to use the bug tracking system to register your wish.
       ]]></string>
 
     <string name="about_kde_join_kde"><![CDATA[
-      <h1>Join KDE</h1>
-      <p>You do not have to be a software developer to be a member of the KDE team. You can join the language teams that translate program interfaces. You can provide graphics, themes, sounds, and improved documentation. You decide!</p>
-      <p>Visit <a href="https://community.kde.org/Get_Involved">https://community.kde.org/Get_Involved</a> for information on some projects in which you can participate.</p>
-      If you need more information or documentation, then a visit to <a href="https://techbase.kde.org/">https://techbase.kde.org/</a> will provide you with what you need.
+      <h1>Join COSMIC</h1>
+      <p>You do not have to be a software developer to be a member of the COSMIC team. You can join the language teams that translate program interfaces. You can provide graphics, themes, sounds, and improved documentation. You decide!</p>
+      <p>Visit <a href="https://github.com/pop-os/cosmic-epoch">https://github.com/pop-os/cosmic-epoch</a> for information on some projects in which you can participate.</p>
       ]]></string>
 
     <string name="about_kde_support_kde"><![CDATA[
-      <h1>Support KDE</h1>
-      <p>KDE software is and will always be available free of charge, however creating it is not free.</p>
-      <p>To support development the KDE community has formed the KDE e.V., a non-profit organization legally founded in Germany. KDE e.V. represents the KDE community in legal and financial matters. See <a href="https://ev.kde.org/">https://ev.kde.org/</a> for information on KDE e.V.</p>
-      <p>KDE benefits from many kinds of contributions, including financial. We use the funds to reimburse members and others for expenses they incur when contributing. Further funds are used for legal support and organizing conferences and meetings.</p>
-      <p>We would like to encourage you to support our efforts with a financial donation, using one of the ways described at <a href="https://www.kde.org/community/donations/">https://www.kde.org/community/donations/</a>.</p>
+      <h1>Support COSMIC</h1>
+      <p>COSMIC software is and will always be available free of charge, however creating it is not free.</p>
+      <p>To support development the COSMIC community is formed by various organizations and individuals. See <a href="https://github.com/pop-os/cosmic-epoch">https://github.com/pop-os/cosmic-epoch</a> for information.</p>
+      <p>COSMIC benefits from many kinds of contributions, including financial. We use the funds to reimburse members and others for expenses they incur when contributing. Further funds are used for legal support and organizing conferences and meetings.</p>
+      <p>We would like to encourage you to support our efforts with a financial donation.</p>
       Thank you very much in advance for your support.
       ]]></string>
 

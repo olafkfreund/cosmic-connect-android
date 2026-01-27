@@ -135,7 +135,7 @@ fun CosmicNavGraph(
         }
 
         composable(Screen.AboutKde) {
-            AboutKdeScreen(
+            AboutCosmicScreen(
                 onNavigateBack = { navController.popBackStack() }
             )
         }

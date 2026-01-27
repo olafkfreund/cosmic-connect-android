@@ -26,7 +26,7 @@ import org.cosmic.cosmicconnect.UserInterface.compose.Spacing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AboutKdeScreen(
+fun AboutCosmicScreen(
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {

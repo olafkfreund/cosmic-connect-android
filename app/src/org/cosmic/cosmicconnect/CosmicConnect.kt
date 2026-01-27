@@ -38,6 +38,9 @@ class CosmicConnect : Application() {
     @Inject lateinit var pluginFactory: PluginFactory
 
     override fun onCreate() {
+        // Override library name for UniFFI generated bindings
+        System.setProperty("uniffi.component.cosmic_connect_core.libraryOverride", "cosmic_connect_core")
+        
         super.onCreate()
         _instance = this
         setupSL4JLogging()

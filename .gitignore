@@ -17,3 +17,5 @@ GPUCache/
 /.kotlin/
 backup-*/
 rename-to-cosmic.sh
+app/build/
+nanobanana-output/

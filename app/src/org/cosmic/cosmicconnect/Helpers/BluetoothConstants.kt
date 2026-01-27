@@ -8,7 +8,7 @@ package org.cosmic.cosmicconnect.Helpers
 import java.util.UUID
 
 /**
- * Bluetooth constants for KDE Connect / COSMIC Connect protocol
+ * Bluetooth constants for COSMIC Connect / COSMIC Connect protocol
  *
  * These constants define the Bluetooth Low Energy (BLE) service and characteristics
  * used for device communication when WiFi is unavailable. All implementations must
@@ -22,7 +22,7 @@ import java.util.UUID
  *
  * ## Usage
  *
- * When advertising or discovering KDE Connect devices over Bluetooth:
+ * When advertising or discovering COSMIC Connect devices over Bluetooth:
  * 1. Advertise/scan for [SERVICE_UUID]
  * 2. Use [CHARACTERISTIC_READ_UUID] for receiving packets
  * 3. Use [CHARACTERISTIC_WRITE_UUID] for sending packets
@@ -46,9 +46,9 @@ import java.util.UUID
  */
 object BluetoothConstants {
     /**
-     * KDE Connect Bluetooth service UUID
+     * COSMIC Connect Bluetooth service UUID
      *
-     * This UUID identifies the KDE Connect / COSMIC Connect service when advertising
+     * This UUID identifies the COSMIC Connect / COSMIC Connect service when advertising
      * or discovering devices over Bluetooth. All implementations must use this UUID.
      *
      * UUID: `185f3df4-3268-4e3f-9fca-d4d5059915bd`

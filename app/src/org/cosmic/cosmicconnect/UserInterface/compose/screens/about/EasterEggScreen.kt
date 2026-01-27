@@ -43,8 +43,8 @@ import org.cosmic.cosmicconnect.UserInterface.compose.CosmicIcons
 import kotlin.math.PI
 import kotlin.math.atan2
 
-private val KDE_ICON_BACKGROUND_COLOR = Color(29, 153, 243)
-private val KONQI_BACKGROUND_COLOR = Color(191, 255, 0)
+private val COSMIC_ICON_BACKGROUND_COLOR = Color(0xFF48B9C7)
+private val COSMIC_ACCENT_COLOR = Color(0xFFF07178)
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -53,8 +53,8 @@ fun EasterEggScreen() {
     val sensorManager = remember { context.getSystemService(Context.SENSOR_SERVICE) as SensorManager }
     
     var rotationAngle by remember { mutableFloatStateOf(0f) }
-    var backgroundColor by remember { mutableStateOf(KDE_ICON_BACKGROUND_COLOR) }
-    var currentIcon by remember { mutableIntStateOf(R.drawable.ic_kde_48dp) } // Default icon
+    var backgroundColor by remember { mutableStateOf(COSMIC_ICON_BACKGROUND_COLOR) }
+    var currentIcon by remember { mutableIntStateOf(CosmicIcons.Brand.appIcon) } // Default icon
     var colorFilter by remember { mutableStateOf<ColorFilter?>(ColorFilter.tint(Color.White)) }
 
     val animatedRotation by animateFloatAsState(targetValue = rotationAngle, label = "rotation")
@@ -104,7 +104,7 @@ fun EasterEggScreen() {
                         CosmicIcons.Action.delete, CosmicIcons.Status.warning,
                         CosmicIcons.Media.volume, CosmicIcons.Pairing.wifi,
                         CosmicIcons.Action.add, CosmicIcons.Plugin.touchpad,
-                        CosmicIcons.Brand.konqi, CosmicIcons.Plugin.runCommand,
+                        CosmicIcons.Brand.appIcon, CosmicIcons.Plugin.runCommand,
                         CosmicIcons.Pairing.connected, CosmicIcons.Pairing.disconnected,
                         CosmicIcons.Status.error, CosmicIcons.Navigation.home,
                         CosmicIcons.Settings.settingsWhite, CosmicIcons.Media.stop,
@@ -114,19 +114,19 @@ fun EasterEggScreen() {
                         CosmicIcons.Media.nextBlack, CosmicIcons.Media.previousBlack,
                         CosmicIcons.Plugin.presenter, CosmicIcons.Pairing.key,
                         CosmicIcons.Action.keyboardReturn, CosmicIcons.Action.keyboardHide,
-                        CosmicIcons.Brand.kde24, CosmicIcons.Media.albumArtPlaceholder,
+                        CosmicIcons.Brand.cosmic24, CosmicIcons.Media.albumArtPlaceholder,
                         CosmicIcons.Navigation.back, CosmicIcons.Plugin.share
                     )
                     
                     val newIcon = icons.random()
                     currentIcon = newIcon
 
-                    if (newIcon == CosmicIcons.Brand.konqi) {
+                    if (newIcon == CosmicIcons.Brand.appIcon) {
                         colorFilter = null
-                        backgroundColor = KONQI_BACKGROUND_COLOR
+                        backgroundColor = COSMIC_ACCENT_COLOR
                     } else {
                         colorFilter = ColorFilter.tint(Color.White)
-                        backgroundColor = KDE_ICON_BACKGROUND_COLOR
+                        backgroundColor = COSMIC_ICON_BACKGROUND_COLOR
                     }
                 }
             ),

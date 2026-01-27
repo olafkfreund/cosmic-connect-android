@@ -44,7 +44,7 @@ data class Certificate(
          * Generate a new self-signed certificate
          *
          * Creates an RSA 2048-bit certificate valid for 10 years.
-         * The certificate is self-signed and suitable for KDE Connect's
+         * The certificate is self-signed and suitable for COSMIC Connect's
          * Trust-On-First-Use (TOFU) security model.
          *
          * @param deviceId Unique device identifier (UUID format recommended)

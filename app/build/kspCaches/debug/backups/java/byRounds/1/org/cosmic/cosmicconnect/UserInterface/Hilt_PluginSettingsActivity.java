@@ -4,8 +4,8 @@ import android.content.Context;
 import android.os.Bundle;
 import androidx.activity.contextaware.OnContextAvailableListener;
 import androidx.annotation.CallSuper;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.viewbinding.ViewBinding;
 import dagger.hilt.android.internal.lifecycle.DefaultViewModelFactories;
 import dagger.hilt.android.internal.managers.ActivityComponentManager;
 import dagger.hilt.android.internal.managers.SavedStateHandleHolder;
@@ -15,13 +15,12 @@ import dagger.hilt.internal.UnsafeCasts;
 import java.lang.Object;
 import java.lang.Override;
 import javax.annotation.processing.Generated;
-import org.cosmic.cosmicconnect.base.BaseActivity;
 
 /**
  * A generated base class to be extended by the @dagger.hilt.android.AndroidEntryPoint annotated class. If using the Gradle plugin, this is swapped as the base class via bytecode transformation.
  */
 @Generated("dagger.hilt.android.processor.internal.androidentrypoint.ActivityGenerator")
-public abstract class Hilt_PluginSettingsActivity<VB extends ViewBinding> extends BaseActivity<VB> implements GeneratedComponentManagerHolder {
+public abstract class Hilt_PluginSettingsActivity extends AppCompatActivity implements GeneratedComponentManagerHolder {
   private SavedStateHandleHolder savedStateHandleHolder;
 
   private volatile ActivityComponentManager componentManager;
@@ -32,6 +31,11 @@ public abstract class Hilt_PluginSettingsActivity<VB extends ViewBinding> extend
 
   Hilt_PluginSettingsActivity() {
     super();
+    _initHiltInternal();
+  }
+
+  Hilt_PluginSettingsActivity(int p0) {
+    super(p0);
     _initHiltInternal();
   }
 

@@ -42,24 +42,7 @@ class MousePadPlugin : Plugin() {
             intent.putExtra("deviceId", device.deviceId)
             parentActivity.startActivity(intent)
         }
-        return if (device.deviceType == DeviceType.TV) {
-            val tvInput = PluginUiButton(
-                context.getString(R.string.open_mousepad_tv),
-                R.drawable.tv_remote_24px
-            ) { parentActivity ->
-                val intent = Intent(parentActivity, BigscreenActivity::class.java)
-                intent.putExtra("deviceId", device.deviceId)
-                parentActivity.startActivity(intent)
-            }
-            val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-            if (prefs.getBoolean(context.getString(R.string.pref_bigscreen_hide_mouse_input), false)) {
-                listOf(tvInput)
-            } else {
-                listOf(mouseAndKeyboardInput, tvInput)
-            }
-        } else {
-            listOf(mouseAndKeyboardInput)
-        }
+        return listOf(mouseAndKeyboardInput)
     }
 
 

@@ -27,17 +27,18 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.widget.TextViewCompat
 import androidx.preference.PreferenceDialogFragmentCompat
+import com.google.android.material.textfield.TextInputEditText
 import org.json.JSONException
 import org.json.JSONObject
 import org.cosmic.cosmicconnect.Helpers.StorageHelper
 import org.cosmic.cosmicconnect.Plugins.SftpPlugin.SftpPlugin.StorageInfo.Companion.fromJSON
 import org.cosmic.cosmicconnect.R
-import org.cosmic.cosmicconnect.databinding.FragmentStoragePreferenceDialogBinding
 
 import androidx.activity.result.contract.ActivityResultContracts
 
 class StoragePreferenceDialogFragment : PreferenceDialogFragmentCompat(), TextWatcher {
-    private var binding: FragmentStoragePreferenceDialogBinding? = null
+    private var storageLocationInput: TextInputEditText? = null
+    private var storageDisplayNameInput: TextInputEditText? = null
 
     var callback: Callback? = null
     private var arrowDropDownDrawable: Drawable? = null
@@ -65,22 +66,24 @@ class StoragePreferenceDialogFragment : PreferenceDialogFragmentCompat(), TextWa
 
                 storageInfo = SftpPlugin.StorageInfo(displayName, uri)
 
-                binding!!.storageLocation.setText(documentId)
-                TextViewCompat.setCompoundDrawablesRelative(
-                    binding!!.storageLocation,
-                    null,
-                    null,
-                    null,
-                    null
-                )
-                binding!!.storageLocation.error = null
-                binding!!.storageLocation.isEnabled = false
+                storageLocationInput?.setText(documentId)
+                storageLocationInput?.let {
+                    TextViewCompat.setCompoundDrawablesRelative(
+                        it,
+                        null,
+                        null,
+                        null,
+                        null
+                    )
+                    it.error = null
+                    it.isEnabled = false
+                }
 
                 // TODO: Show name as used in android's picker app but I don't think it's possible to get that, everything I tried throws PermissionDeniedException
-                binding!!.storageDisplayName.setText(displayName)
-                binding!!.storageDisplayName.isEnabled = true
+                storageDisplayNameInput?.setText(displayName)
+                storageDisplayNameInput?.isEnabled = true
             } else {
-                binding!!.storageLocation.error = callbackResult.errorMessage
+                storageLocationInput?.error = callbackResult.errorMessage
                 setPositiveButtonEnabled(false)
             }
         }
@@ -132,39 +135,40 @@ class StoragePreferenceDialogFragment : PreferenceDialogFragmentCompat(), TextWa
     override fun onBindDialogView(view: View) {
         super.onBindDialogView(view)
 
-        val binding = FragmentStoragePreferenceDialogBinding.bind(view).also {
-            this.binding = it
-        }
+        storageLocationInput = view.findViewById(R.id.storageLocation)
+        storageDisplayNameInput = view.findViewById(R.id.storageDisplayName)
 
-        binding.storageLocation.setOnClickListener { v: View? ->
+        storageLocationInput?.setOnClickListener { v: View? ->
             val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
             // For API >= 26 we can also set Extra: DocumentsContract.EXTRA_INITIAL_URI
             documentTreeLauncher.launch(intent)
         }
 
-        binding.storageDisplayName.filters = arrayOf<InputFilter>(FileSeparatorCharFilter())
-        binding.storageDisplayName.addTextChangedListener(this)
+        storageDisplayNameInput?.filters = arrayOf<InputFilter>(FileSeparatorCharFilter())
+        storageDisplayNameInput?.addTextChangedListener(this)
 
         if (preference.key == getString(R.string.sftp_preference_key_add_storage)) {
             if (!stateRestored) {
                 enablePositiveButton = false
-                binding.storageLocation.setText(requireContext().getString(R.string.sftp_storage_preference_click_to_select))
+                storageLocationInput?.setText(requireContext().getString(R.string.sftp_storage_preference_click_to_select))
             }
 
             val isClickToSelect = TextUtils.equals(
-                binding.storageLocation.text,
+                storageLocationInput?.text,
                 getString(R.string.sftp_storage_preference_click_to_select)
             )
 
-            TextViewCompat.setCompoundDrawablesRelative(
-                binding.storageLocation, null, null,
-                if (isClickToSelect) arrowDropDownDrawable else null, null
-            )
-            binding.storageLocation.isEnabled = isClickToSelect
-            binding.storageLocation.isFocusable = false
-            binding.storageLocation.isFocusableInTouchMode = false
+            storageLocationInput?.let {
+                TextViewCompat.setCompoundDrawablesRelative(
+                    it, null, null,
+                    if (isClickToSelect) arrowDropDownDrawable else null, null
+                )
+                it.isEnabled = isClickToSelect
+                it.isFocusable = false
+                it.isFocusableInTouchMode = false
+            }
 
-            binding.storageDisplayName.isEnabled = !isClickToSelect
+            storageDisplayNameInput?.isEnabled = !isClickToSelect
         } else {
             if (!stateRestored) {
                 val preference = preference as StoragePreference
@@ -173,30 +177,32 @@ class StoragePreferenceDialogFragment : PreferenceDialogFragmentCompat(), TextWa
 
                 storageInfo = info.copy()
 
-                binding.storageLocation.setText(DocumentsContract.getTreeDocumentId(storageInfo!!.uri))
+                storageLocationInput?.setText(DocumentsContract.getTreeDocumentId(storageInfo!!.uri))
 
-                binding.storageDisplayName.setText(storageInfo!!.displayName)
+                storageDisplayNameInput?.setText(storageInfo!!.displayName)
             }
 
-            TextViewCompat.setCompoundDrawablesRelative(
-                binding.storageLocation,
-                null,
-                null,
-                null,
-                null
-            )
-            binding.storageLocation.isEnabled = false
-            binding.storageLocation.isFocusable = false
-            binding.storageLocation.isFocusableInTouchMode = false
+            storageLocationInput?.let {
+                TextViewCompat.setCompoundDrawablesRelative(
+                    it,
+                    null,
+                    null,
+                    null,
+                    null
+                )
+                it.isEnabled = false
+                it.isFocusable = false
+                it.isFocusableInTouchMode = false
+            }
 
-            binding.storageDisplayName.isEnabled = true
+            storageDisplayNameInput?.isEnabled = true
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-
-        binding = null
+        storageLocationInput = null
+        storageDisplayNameInput = null
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -216,7 +222,7 @@ class StoragePreferenceDialogFragment : PreferenceDialogFragmentCompat(), TextWa
     override fun onDialogClosed(positiveResult: Boolean) {
         if (!positiveResult) return
 
-        storageInfo!!.displayName = binding!!.storageDisplayName.text.toString()
+        storageInfo!!.displayName = storageDisplayNameInput?.text.toString()
 
         if (preference.key == getString(R.string.sftp_preference_key_add_storage)) {
             callback!!.addNewStoragePreference(storageInfo!!, takeFlags)
@@ -247,7 +253,7 @@ class StoragePreferenceDialogFragment : PreferenceDialogFragmentCompat(), TextWa
             setPositiveButtonEnabled(true)
         } else {
             setPositiveButtonEnabled(false)
-            binding!!.storageDisplayName.error = result.errorMessage
+            storageDisplayNameInput?.error = result.errorMessage
         }
     }
 

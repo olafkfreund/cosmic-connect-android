@@ -15,7 +15,6 @@ ADDED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidMan
 INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:9:1-475:12
 INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:9:1-475:12
 INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml:9:1-475:12
-MERGED from [androidx.databinding:viewbinding:8.7.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f135f7f7eb8d58485993e5476d818a1f/transformed/viewbinding-8.7.3/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e9c29556c12ac2c97d73b07c7ce90a62/transformed/ui-tooling-release/AndroidManifest.xml:17:1-28:12
 MERGED from [androidx.hilt:hilt-navigation-compose:1.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f571652b40b188c6a697f711d7ecc8e3/transformed/hilt-navigation-compose-1.2.0/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.hilt:hilt-navigation:1.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/a8633478fb00c89a217e3416e1257b1f/transformed/hilt-navigation-1.2.0/AndroidManifest.xml:2:1-7:12
@@ -909,8 +908,6 @@ uses-sdk
 INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml
 INJECTED from /home/olafkfreund/Source/GitHub/cosmic-connect-android/app/AndroidManifest.xml
-MERGED from [androidx.databinding:viewbinding:8.7.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f135f7f7eb8d58485993e5476d818a1f/transformed/viewbinding-8.7.3/AndroidManifest.xml:5:5-44
-MERGED from [androidx.databinding:viewbinding:8.7.3] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f135f7f7eb8d58485993e5476d818a1f/transformed/viewbinding-8.7.3/AndroidManifest.xml:5:5-44
 MERGED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e9c29556c12ac2c97d73b07c7ce90a62/transformed/ui-tooling-release/AndroidManifest.xml:20:5-44
 MERGED from [androidx.compose.ui:ui-tooling-android:1.7.8] /home/olafkfreund/.gradle/caches/8.14.1/transforms/e9c29556c12ac2c97d73b07c7ce90a62/transformed/ui-tooling-release/AndroidManifest.xml:20:5-44
 MERGED from [androidx.hilt:hilt-navigation-compose:1.2.0] /home/olafkfreund/.gradle/caches/8.14.1/transforms/f571652b40b188c6a697f711d7ecc8e3/transformed/hilt-navigation-compose-1.2.0/AndroidManifest.xml:5:5-44

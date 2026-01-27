@@ -3918,9 +3918,6 @@ id SHOW_PROGRESS
 id SYM
 id TOP_END
 id TOP_START
-id about_person_list_item_entry_name
-id about_person_list_item_entry_task
-id about_person_list_item_entry_visit_homepage_button
 id accelerate
 id accessibility_action_clickable_span
 id accessibility_custom_action_0
@@ -4003,7 +4000,6 @@ id autoCompleteToStart
 id autoHide
 id autoLimit
 id availableSpace
-id back_button
 id barrier
 id baseline
 id beginOnFirstDraw
@@ -4031,8 +4027,6 @@ id center_vertical
 id chain
 id chains
 id checkbox
-id checkbox_contents
-id checkbox_images
 id checked
 id chronometer
 id circle_center
@@ -4054,7 +4048,6 @@ id contiguous
 id continuousVelocity
 id convert_to_mms_after_preference
 id coordinator
-id coordinatorLayout
 id copy_url_to_clipboard
 id cos
 id counterclockwise
@@ -4086,8 +4079,6 @@ id disableIntraAutoTransition
 id disablePostScroll
 id disableScroll
 id disjoint
-id divider
-id down_button
 id dragAnticlockwise
 id dragClockwise
 id dragDown
@@ -4116,7 +4107,6 @@ id escape
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
-id extra_options_list
 id fade
 id fill
 id fill_horizontal
@@ -4130,7 +4120,6 @@ id fitXY
 id fixed
 id flip
 id floating
-id floating_button
 id forever
 id fragmentPlaceHolder
 id fragment_container_view_tag
@@ -4154,7 +4143,6 @@ id hide_in_inspector_tag
 id hideable
 id home
 id homeAsUp
-id home_button
 id honorRequest
 id horizontal
 id horizontal_only
@@ -4181,7 +4169,6 @@ id labeled
 id layout
 id left
 id leftToRight
-id left_button
 id legacy
 id line1
 id line3
@@ -4236,7 +4223,6 @@ id menu_show_keyboard
 id menu_trusted_networks
 id menu_use_mouse_and_keyboard
 id message
-id mic_button
 id middle
 id mini
 id month_grid
@@ -4293,7 +4279,6 @@ id navigation_bar_item_inner_content_container
 id navigation_bar_item_labels_group
 id navigation_bar_item_large_label_view
 id navigation_bar_item_small_label_view
-id navigation_drawer
 id navigation_header_container
 id navigation_menu_subheader_label
 id never
@@ -4301,7 +4286,6 @@ id neverCompleteToEnd
 id neverCompleteToStart
 id noScroll
 id noState
-id no_devices
 id none
 id normal
 id north
@@ -4363,13 +4347,11 @@ id retreat
 id reverseSawtooth
 id right
 id rightToLeft
-id right_button
 id right_icon
 id right_side
 id rounded
 id row_index_key
 id rtl
-id run_commands_device_list
 id runcommand_name_as_title_preference
 id save_non_transition_alpha
 id save_overlay_view
@@ -4393,7 +4375,6 @@ id search_src_text
 id search_voice_btn
 id seekbar
 id seekbar_value
-id select_button
 id select_dialog_listview
 id selected
 id selection_type
@@ -4464,8 +4445,6 @@ id tag_window_insets_animation_callback
 id text
 id text2
 id textEnd
-id textInputEditText
-id textInputLayout
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
@@ -4501,14 +4480,10 @@ id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
 id triangle
-id trust_all_networks_checkBox
-id trusted_network_list_empty
-id trusted_networks_list
 id unchecked
 id uniform
 id unlabeled
 id up
-id up_button
 id useLogo
 id vertical
 id vertical_only
@@ -4662,10 +4637,6 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
-layout about_person_list_item_entry
-layout activity_bigscreen
-layout activity_clipboard_floating
-layout activity_main
 layout activity_plugin_settings
 layout custom_dialog
 layout design_bottom_navigation_item
@@ -4683,7 +4654,6 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
-layout edit_text_alert_dialog_view
 layout expand_button
 layout fragment_storage_preference_dialog
 layout image_frame
@@ -4744,7 +4714,6 @@ layout mtrl_picker_text_input_date
 layout mtrl_picker_text_input_date_range
 layout mtrl_search_bar
 layout mtrl_search_view
-layout nav_header
 layout notification_action
 layout notification_action_tombstone
 layout notification_media_action
@@ -4760,11 +4729,6 @@ layout notification_template_media
 layout notification_template_media_custom
 layout notification_template_part_chronometer
 layout notification_template_part_time
-layout pairing_explanation_duplicate_names
-layout pairing_explanation_not_trusted
-layout pairing_explanation_text_no_notifications
-layout pairing_explanation_text_no_wifi
-layout popup_notificationsfilter
 layout preference
 layout preference_category
 layout preference_category_material
@@ -4778,20 +4742,15 @@ layout preference_list_fragment
 layout preference_material
 layout preference_recyclerview
 layout preference_widget_checkbox
-layout preference_widget_material_switch
 layout preference_widget_seekbar
 layout preference_widget_seekbar_material
 layout preference_widget_switch
 layout preference_widget_switch_compat
-layout preference_with_button
-layout privacy_options
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
 layout toolbar
-layout trusted_network_list
-layout widget_remote_command_plugin_dialog
 layout widget_remotecommandplugin
 menu menu_bigscreen
 menu menu_digitizer
@@ -5871,7 +5830,6 @@ style Preference_SwitchPreference
 style Preference_SwitchPreference_Material
 style Preference_SwitchPreferenceCompat
 style Preference_SwitchPreferenceCompat_Material
-style Preference_SwitchPreferenceMaterial
 style PreferenceCategoryTitleTextStyle
 style PreferenceFragment
 style PreferenceFragment_Material

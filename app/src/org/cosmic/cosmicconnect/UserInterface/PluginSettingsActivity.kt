@@ -17,20 +17,18 @@ import org.cosmic.cosmicconnect.Core.DeviceRegistry
 import org.cosmic.cosmicconnect.DeviceStats
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.R
-import org.cosmic.cosmicconnect.base.BaseActivity
-import org.cosmic.cosmicconnect.databinding.ActivityPluginSettingsBinding
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class PluginSettingsActivity : BaseActivity<ActivityPluginSettingsBinding>(),
-    PluginPreference.PluginPreferenceCallback {
-
-    override val binding by lazy { ActivityPluginSettingsBinding.inflate(layoutInflater) }
+class PluginSettingsActivity : AppCompatActivity() {
 
     @Inject lateinit var deviceRegistry: DeviceRegistry
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_plugin_settings)
 
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.apply {
@@ -48,7 +46,8 @@ class PluginSettingsActivity : BaseActivity<ActivityPluginSettingsBinding>(),
                 pluginKey = intent.getStringExtra(EXTRA_PLUGIN_KEY)
             }
         } else if (mDeviceId == null) {
-            throw RuntimeException("You must start DeviceSettingActivity using an intent that has a $EXTRA_DEVICE_ID extra")
+            finish()
+            return
         }
 
         val currentDeviceId = mDeviceId ?: return
@@ -64,14 +63,16 @@ class PluginSettingsActivity : BaseActivity<ActivityPluginSettingsBinding>(),
                     }
                 }
             }
-            if (fragment == null) {
-                fragment = PluginSettingsListFragment.newInstance(currentDeviceId)
+            
+            if (fragment != null) {
+                supportFragmentManager
+                    .beginTransaction()
+                    .add(R.id.fragmentPlaceHolder, fragment)
+                    .commit()
+            } else {
+                // No plugin settings to show
+                finish()
             }
-
-            supportFragmentManager
-                .beginTransaction()
-                .add(R.id.fragmentPlaceHolder, fragment!!)
-                .commit()
         }
     }
 
@@ -109,27 +110,9 @@ class PluginSettingsActivity : BaseActivity<ActivityPluginSettingsBinding>(),
         return true
     }
 
-    override fun onStartPluginSettingsFragment(plugin: Plugin?) {
-        if (plugin == null) return
-        title = getString(R.string.plugin_settings_with_name, plugin.displayName)
-
-        val fragment = plugin.getSettingsFragment(this) ?: return
-
-        supportFragmentManager
-            .beginTransaction()
-            .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right)
-            .replace(R.id.fragmentPlaceHolder, fragment)
-            .addToBackStack(null)
-            .commit()
-    }
-
     override fun onSupportNavigateUp(): Boolean {
         onBackPressedDispatcher.onBackPressed()
         return true
-    }
-
-    override fun onFinish() {
-        finish()
     }
 
     val settingsDeviceId: String?

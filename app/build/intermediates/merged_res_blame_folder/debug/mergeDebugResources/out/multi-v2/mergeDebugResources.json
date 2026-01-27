@@ -550,6 +550,21 @@
             ]
         },
         {
+            "outputFile": "/home/olafkfreund/.gradle/daemon/8.14.1/org.cosmic.cosmicconnect.app-debug-89:/values-sw360dp-v13_values-sw360dp-v13.arsc.flat",
+            "map": [
+                {
+                    "source": "/home/olafkfreund/.gradle/caches/8.14.1/transforms/106cdc7c46ed32cd9e808edacd1cb952/transformed/preference-1.2.1/res/values-sw360dp-v13/values-sw360dp-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "71",
+                        "endOffsets": "122"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "/home/olafkfreund/.gradle/daemon/8.14.1/org.cosmic.cosmicconnect.app-debug-89:/values-pa_values-pa.arsc.flat",
             "map": [
                 {
@@ -688,21 +703,6 @@
                         "startOffsets": "4337,4430,4585,4677,4776,5230,5308,16880,16968,17355,17434,17756,17901,17976,18051,18396,18476,18542",
                         "endColumns": "92,82,91,98,87,77,97,87,83,78,80,71,74,74,74,79,65,117",
                         "endOffsets": "4425,4508,4672,4771,4859,5303,5401,16963,17047,17429,17510,17823,17971,18046,18121,18471,18537,18655"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "/home/olafkfreund/.gradle/daemon/8.14.1/org.cosmic.cosmicconnect.app-debug-89:/values-sw360dp-v13_values-sw360dp-v13.arsc.flat",
-            "map": [
-                {
-                    "source": "/home/olafkfreund/.gradle/caches/8.14.1/transforms/106cdc7c46ed32cd9e808edacd1cb952/transformed/preference-1.2.1/res/values-sw360dp-v13/values-sw360dp-v13.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "71",
-                        "endOffsets": "122"
                     }
                 }
             ]
@@ -1890,16 +1890,17 @@
             ]
         },
         {
-            "outputFile": "/home/olafkfreund/.gradle/daemon/8.14.1/org.cosmic.cosmicconnect.app-debug-89:/values-h320dp-port-v13_values-h320dp-port-v13.arsc.flat",
+            "outputFile": "/home/olafkfreund/.gradle/daemon/8.14.1/org.cosmic.cosmicconnect.app-debug-89:/values-v22_values-v22.arsc.flat",
             "map": [
                 {
-                    "source": "/home/olafkfreund/.gradle/caches/8.14.1/transforms/cf3863779648392ff9c77375ca530529/transformed/material-1.13.0/res/values-h320dp-port-v13/values-h320dp-port-v13.xml",
+                    "source": "/home/olafkfreund/.gradle/caches/8.14.1/transforms/bd0d7081e496b5ebd8238141c8afa8fb/transformed/appcompat-1.7.1/res/values-v22/values-v22.xml",
                     "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "63",
-                        "endOffsets": "114"
+                        "startLines": "2,3,4,9",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,130,217,487",
+                        "endLines": "2,3,8,13",
+                        "endColumns": "74,86,12,12",
+                        "endOffsets": "125,212,482,764"
                     }
                 }
             ]
@@ -2048,17 +2049,16 @@
             ]
         },
         {
-            "outputFile": "/home/olafkfreund/.gradle/daemon/8.14.1/org.cosmic.cosmicconnect.app-debug-89:/values-v22_values-v22.arsc.flat",
+            "outputFile": "/home/olafkfreund/.gradle/daemon/8.14.1/org.cosmic.cosmicconnect.app-debug-89:/values-h320dp-port-v13_values-h320dp-port-v13.arsc.flat",
             "map": [
                 {
-                    "source": "/home/olafkfreund/.gradle/caches/8.14.1/transforms/bd0d7081e496b5ebd8238141c8afa8fb/transformed/appcompat-1.7.1/res/values-v22/values-v22.xml",
+                    "source": "/home/olafkfreund/.gradle/caches/8.14.1/transforms/cf3863779648392ff9c77375ca530529/transformed/material-1.13.0/res/values-h320dp-port-v13/values-h320dp-port-v13.xml",
                     "from": {
-                        "startLines": "2,3,4,9",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,130,217,487",
-                        "endLines": "2,3,8,13",
-                        "endColumns": "74,86,12,12",
-                        "endOffsets": "125,212,482,764"
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "63",
+                        "endOffsets": "114"
                     }
                 }
             ]
@@ -14591,6 +14591,30 @@
                         "startOffsets": "19142,19260,19376,19487,19601,19700,19795,19907,20043,20159,20295,20379,20478,20569,20666,20785,20910,21014,21141,21264,21392,21553,21674,21790,21913,22038,22130,22228,22345,22469,22566,22668,22770,22900,23039,23145,23244,23322,23418,23512,23617,23704,23791,23893,23975,24059,24160,24261,24361,24460,24548,24654,24755,24859,24979,25061,25161",
                         "endColumns": "117,115,110,113,98,94,111,135,115,135,83,98,90,96,118,124,103,126,122,127,160,120,115,122,124,91,97,116,123,96,101,101,129,138,105,98,77,95,93,104,86,86,101,81,83,100,100,99,98,87,105,100,103,119,81,99,94",
                         "endOffsets": "19255,19371,19482,19596,19695,19790,19902,20038,20154,20290,20374,20473,20564,20661,20780,20905,21009,21136,21259,21387,21548,21669,21785,21908,22033,22125,22223,22340,22464,22561,22663,22765,22895,23034,23140,23239,23317,23413,23507,23612,23699,23786,23888,23970,24054,24155,24256,24356,24455,24543,24649,24750,24854,24974,25056,25156,25251"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "org.cosmic.cosmicconnect.app-debug-89:/values-v27_values-v27.arsc.flat",
+            "map": [
+                {
+                    "source": "/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/res/values-v27/styles.xml",
+                    "from": {
+                        "startLines": "-1,-1,17",
+                        "startColumns": "-1,-1,4",
+                        "startOffsets": "-1,-1,618",
+                        "endLines": "-1,-1,19",
+                        "endColumns": "-1,-1,12",
+                        "endOffsets": "-1,-1,791"
+                    },
+                    "to": {
+                        "startLines": "2,3,8",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,130,456",
+                        "endLines": "2,7,10",
+                        "endColumns": "74,12,12",
+                        "endOffsets": "125,451,629"
                     }
                 }
             ]

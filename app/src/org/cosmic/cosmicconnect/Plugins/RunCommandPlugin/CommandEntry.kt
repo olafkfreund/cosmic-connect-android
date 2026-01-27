@@ -8,9 +8,8 @@ package org.cosmic.cosmicconnect.Plugins.RunCommandPlugin
 
 import org.json.JSONException
 import org.json.JSONObject
-import org.cosmic.cosmicconnect.UserInterface.List.EntryItem
 
-open class CommandEntry(name: String, cmd: String, val key: String) : EntryItem(name, cmd) {
+open class CommandEntry(val name: String, val command: String, val key: String) {
 
     @Throws(JSONException::class)
     constructor(o: JSONObject) : this(
@@ -18,10 +17,4 @@ open class CommandEntry(name: String, cmd: String, val key: String) : EntryItem(
         o.getString("command"),
         o.getString("key")
     )
-
-    val name: String
-        get() = title ?: ""
-
-    val command: String
-        get() = subtitle ?: ""
 }

@@ -13,6 +13,11 @@ import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import org.cosmic.cosmicconnect.R
 
 /*
@@ -51,7 +56,12 @@ class ClipboardFloatingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_clipboard_floating)
+        
+        // This activity is transparent/invisible
+        setContent {
+            Box(modifier = Modifier.size(0.dp))
+        }
+        
         val wlp = window.attributes
         wlp.dimAmount = 0f
         wlp.flags = WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS or

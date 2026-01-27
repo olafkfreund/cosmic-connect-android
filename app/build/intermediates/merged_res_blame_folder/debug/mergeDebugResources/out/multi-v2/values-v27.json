@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "org.cosmic.cosmicconnect.app-mergeDebugResources-87:/values-v27/values-v27.xml",
+            "outputFile": "/home/olafkfreund/.gradle/daemon/8.14.1/org.cosmic.cosmicconnect.app-mergeDebugResources-87:/values-v27/values-v27.xml",
             "map": [
                 {
                     "source": "/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/res/values-v27/styles.xml",
@@ -20,6 +20,30 @@
                         "endLines": "2,7,10,15",
                         "endColumns": "74,12,12,12",
                         "endOffsets": "125,451,656,936"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "org.cosmic.cosmicconnect.app-mergeDebugResources-87:/values-v27/values-v27.xml",
+            "map": [
+                {
+                    "source": "/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/res/values-v27/styles.xml",
+                    "from": {
+                        "startLines": "-1,-1,17",
+                        "startColumns": "-1,-1,4",
+                        "startOffsets": "-1,-1,618",
+                        "endLines": "-1,-1,19",
+                        "endColumns": "-1,-1,12",
+                        "endOffsets": "-1,-1,791"
+                    },
+                    "to": {
+                        "startLines": "2,3,8",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,130,456",
+                        "endLines": "2,7,10",
+                        "endColumns": "74,12,12",
+                        "endOffsets": "125,451,629"
                     }
                 }
             ]

@@ -386,7 +386,9 @@ private fun PairedDeviceContent(
           isEnabled = plugin.isEnabled,
           isAvailable = plugin.isAvailable,
           onToggle = { enabled -> onPluginToggle(plugin.key, enabled) },
-          onClick = if (plugin.hasMainActivity) {
+          onClick = if (plugin.hasSettings) {
+            { onPluginSettings(plugin.key) }
+          } else if (plugin.hasMainActivity) {
             { onPluginActivity(plugin.key) }
           } else null,
           modifier = Modifier.padding(

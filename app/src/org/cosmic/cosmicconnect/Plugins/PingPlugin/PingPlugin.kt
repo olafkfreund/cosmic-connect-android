@@ -163,6 +163,13 @@ class PingPlugin : Plugin() {
             return false
         }
 
+        // Check if this is a keepalive ping (should be handled silently)
+        val isKeepalive = networkPacket.body["keepalive"] as? Boolean ?: false
+        if (isKeepalive) {
+            Log.d(TAG, "Received keepalive ping from ${device.name}")
+            return true // Acknowledge but don't show notification
+        }
+
         // Extract message from packet body
         val message = networkPacket.body["message"] as? String ?: "Ping!"
 

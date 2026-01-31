@@ -15,6 +15,11 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-COSMIC-Accep
   -->
     <string name="kde_connect">COSMIC Connect</string>
     <string name="manifest_label_share">Send to Device</string>
+    <string name="open_on_desktop">Open on Desktop</string>
+    <string name="open_on_desktop_no_devices">No COSMIC Desktop devices available. Please pair a device first.</string>
+    <string name="open_on_desktop_sharing_to">Opening on %s</string>
+    <string name="open_on_desktop_error">Failed to open on desktop</string>
+    <string name="share_error_no_mime_type">Cannot share: unknown content type</string>
     <string name="foreground_notification_no_devices">Not connected to any device</string>
     <string name="foreground_notification_devices">Connected to: %s</string>
     <string name="foreground_notification_send_clipboard">Send Clipboard</string>
@@ -31,6 +36,20 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-COSMIC-Accep
     <string name="pref_plugin_clipboard">Clipboard sync</string>
     <string name="pref_plugin_clipboard_desc">Share the clipboard content</string>
     <string name="pref_plugin_clipboard_sent">Clipboard Sent</string>
+    <string name="pref_plugin_open_on_desktop">Open on Desktop</string>
+    <string name="pref_plugin_open_on_desktop_desc">Send URLs, files, and text to open on COSMIC Desktop</string>
+    <string name="open_plugin_invalid_url">Invalid URL or disallowed scheme</string>
+    <string name="open_plugin_sent_url">Sent URL to desktop</string>
+    <string name="open_plugin_sent_file">Sent file to desktop</string>
+    <string name="open_plugin_sent_text">Sent text to desktop</string>
+    <string name="open_plugin_success">Opened on desktop successfully</string>
+    <string name="open_plugin_error">Failed to open on desktop</string>
+    <string name="pref_plugin_open">Open on Phone</string>
+    <string name="pref_plugin_open_desc">Receive URLs and content from COSMIC Desktop to open on Android</string>
+    <string name="open_plugin_notification_title">%s wants to open</string>
+    <string name="open_plugin_action_open">Open</string>
+    <string name="open_plugin_action_reject">Reject</string>
+    <string name="open_plugin_permission_explanation">Notifications are required to show confirmation when COSMIC Desktop wants to open content on your device</string>
     <string name="pref_plugin_mousepad">Remote input</string>
     <string name="pref_plugin_mousepad_desc_nontv">Use your phone or tablet as a touchpad and keyboard</string>
     <string name="pref_plugin_mousepad_desc_tv">Use your phone or tablet as a TV remote</string>

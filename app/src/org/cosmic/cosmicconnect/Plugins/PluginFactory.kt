@@ -36,6 +36,8 @@ class PluginFactory @Inject constructor(@ApplicationContext private val context:
                 org.cosmic.cosmicconnect.Plugins.ConnectivityReportPlugin.ConnectivityReportPlugin::class,
                 org.cosmic.cosmicconnect.Plugins.SMSPlugin.SMSPlugin::class,
                 org.cosmic.cosmicconnect.Plugins.TelephonyPlugin.TelephonyPlugin::class
+                // TODO: Re-enable once OpenPlugin is fully implemented (Issue #115)
+                // org.cosmic.cosmicconnect.Plugins.OpenPlugin.OpenOnDesktopPlugin::class
             )
 
             pluginInfo = plugins

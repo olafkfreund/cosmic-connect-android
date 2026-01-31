@@ -64,8 +64,11 @@ Execute predefined commands on your desktop remotely.
 ### 🎮 Remote Input
 Use your phone as a touchpad or keyboard for your desktop.
 
-### 📷 Camera Webcam (NEW!)
+### 📷 Camera Webcam
 Use your phone's camera as a wireless webcam for video calls and streaming.
+
+### 🔗 App Continuity (NEW!)
+Open URLs, links, and files seamlessly across devices - share a link on your phone and open it on your desktop, or vice versa.
 
 ---
 
@@ -255,6 +258,39 @@ Use your phone's high-quality camera as a wireless webcam for video calls.
 For detailed setup and troubleshooting, see:
 *   [Camera Webcam Setup Guide](CAMERA_WEBCAM.md)
 *   [Camera Troubleshooting](CAMERA_TROUBLESHOOTING.md)
+
+### 🔗 App Continuity
+
+Share URLs, links, and files to open them on your other devices.
+
+**From Android to Desktop:**
+1.  In any app (browser, social media, etc.), tap **Share**
+2.  Select **"Open on Desktop"** or **"COSMIC Connect"**
+3.  Choose your desktop computer from the list
+4.  The URL opens in your desktop's default browser
+
+**From Desktop to Android:**
+1.  Right-click any link in your browser
+2.  Select **"Open on Phone"**
+3.  Approve on your phone when the notification appears
+4.  Opens in your phone's default browser or matching app
+
+**Supported Content:**
+*   Web URLs (https://, http://)
+*   Email links (mailto:)
+*   Phone numbers (tel:)
+*   SMS links (sms:)
+*   Maps locations (geo:)
+*   Files (transfer and open with matching app)
+
+**Security:**
+*   All content requires user confirmation by default
+*   Only safe URL schemes are allowed
+*   Internal/localhost URLs are blocked for security
+
+For detailed information and troubleshooting, see:
+*   [App Continuity Guide](APP_CONTINUITY.md)
+*   [App Continuity Troubleshooting](APP_CONTINUITY_TROUBLESHOOTING.md)
 
 ---
 

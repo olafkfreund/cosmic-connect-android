@@ -61,6 +61,19 @@ End-user documentation for features and troubleshooting.
   - v4l2loopback module issues
   - Application-specific solutions
 
+### App Continuity Feature
+- [App Continuity Guide](APP_CONTINUITY.md) - Open content across devices
+  - Share URLs from Android to desktop browser
+  - Send links from desktop to Android
+  - File transfer and automatic opening
+  - Supported URL schemes and content types
+  - Security and privacy settings
+- [App Continuity Troubleshooting](APP_CONTINUITY_TROUBLESHOOTING.md) - Solve sharing issues
+  - URL not opening troubleshooting
+  - File transfer problems
+  - Notification and security prompt issues
+  - Platform-specific solutions
+
 ---
 
 ## Architecture

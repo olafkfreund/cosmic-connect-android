@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "org.cosmic.cosmicconnect.app-mergeDebugResources-87:/values-w820dp-v13/values-w820dp-v13.xml",
+            "outputFile": "org.cosmic.cosmicconnect.app-mergeDebugResources-89:/values-w820dp-v13/values-w820dp-v13.xml",
             "map": [
                 {
                     "source": "/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/res/values-w820dp/dimens.xml",

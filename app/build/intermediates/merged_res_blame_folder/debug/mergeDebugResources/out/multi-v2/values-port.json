@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "org.cosmic.cosmicconnect.app-mergeDebugResources-87:/values-port/values-port.xml",
+            "outputFile": "org.cosmic.cosmicconnect.app-mergeDebugResources-89:/values-port/values-port.xml",
             "map": [
                 {
-                    "source": "/home/olafkfreund/.gradle/caches/8.14.1/transforms/bd0d7081e496b5ebd8238141c8afa8fb/transformed/appcompat-1.7.1/res/values-port/values-port.xml",
+                    "source": "/home/olafkfreund/.gradle/caches/8.14.1/transforms/0e68b49d9c8c82ec7545d3218deca4b2/transformed/appcompat-1.7.1/res/values-port/values-port.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

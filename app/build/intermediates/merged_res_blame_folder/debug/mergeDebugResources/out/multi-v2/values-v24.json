@@ -1,20 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "org.cosmic.cosmicconnect.app-mergeDebugResources-87:/values-v24/values-v24.xml",
+            "outputFile": "org.cosmic.cosmicconnect.app-mergeDebugResources-89:/values-v24/values-v24.xml",
             "map": [
                 {
-                    "source": "/home/olafkfreund/.gradle/caches/8.14.1/transforms/bd0d7081e496b5ebd8238141c8afa8fb/transformed/appcompat-1.7.1/res/values-v24/values-v24.xml",
-                    "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,212",
-                        "endColumns": "156,134",
-                        "endOffsets": "207,342"
-                    }
-                },
-                {
-                    "source": "/home/olafkfreund/.gradle/caches/8.14.1/transforms/dc04f1ae57ba50f4110e9cbe31217c86/transformed/media-1.7.1/res/values-v24/values-v24.xml",
+                    "source": "/home/olafkfreund/.gradle/caches/8.14.1/transforms/9b3274930b061eac257ce9e2ee25da60/transformed/media-1.7.1/res/values-v24/values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
@@ -31,7 +21,17 @@
                     }
                 },
                 {
-                    "source": "/home/olafkfreund/.gradle/caches/8.14.1/transforms/cf3863779648392ff9c77375ca530529/transformed/material-1.13.0/res/values-v24/values-v24.xml",
+                    "source": "/home/olafkfreund/.gradle/caches/8.14.1/transforms/0e68b49d9c8c82ec7545d3218deca4b2/transformed/appcompat-1.7.1/res/values-v24/values-v24.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,212",
+                        "endColumns": "156,134",
+                        "endOffsets": "207,342"
+                    }
+                },
+                {
+                    "source": "/home/olafkfreund/.gradle/caches/8.14.1/transforms/626dc1ece176b9bc5ff5118551a8a9fd/transformed/material-1.13.0/res/values-v24/values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,9,12,15",
                         "startColumns": "4,4,4,4,4,4,4,4",

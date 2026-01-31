@@ -1,41 +1,17 @@
 {
     "logs": [
         {
-            "outputFile": "/home/olafkfreund/.gradle/daemon/8.14.1/org.cosmic.cosmicconnect.app-mergeDebugResources-87:/values-v27/values-v27.xml",
+            "outputFile": "org.cosmic.cosmicconnect.app-mergeDebugResources-89:/values-v27/values-v27.xml",
             "map": [
                 {
                     "source": "/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/res/values-v27/styles.xml",
                     "from": {
-                        "startLines": "15,9,23,17",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "541,214,930,618",
-                        "endLines": "15,13,25,21",
-                        "endColumns": "75,12,12,12",
-                        "endOffsets": "612,535,1130,924"
-                    },
-                    "to": {
-                        "startLines": "2,3,8,11",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,130,456,661",
-                        "endLines": "2,7,10,15",
-                        "endColumns": "74,12,12,12",
-                        "endOffsets": "125,451,656,936"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "org.cosmic.cosmicconnect.app-mergeDebugResources-87:/values-v27/values-v27.xml",
-            "map": [
-                {
-                    "source": "/home/olafkfreund/Source/GitHub/cosmic-connect-android/app/res/values-v27/styles.xml",
-                    "from": {
-                        "startLines": "-1,-1,17",
-                        "startColumns": "-1,-1,4",
-                        "startOffsets": "-1,-1,618",
-                        "endLines": "-1,-1,19",
-                        "endColumns": "-1,-1,12",
-                        "endOffsets": "-1,-1,791"
+                        "startLines": "15,9,17",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "541,214,618",
+                        "endLines": "15,13,19",
+                        "endColumns": "75,12,12",
+                        "endOffsets": "612,535,791"
                     },
                     "to": {
                         "startLines": "2,3,8",

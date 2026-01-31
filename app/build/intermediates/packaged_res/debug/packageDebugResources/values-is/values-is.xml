@@ -84,7 +84,7 @@
     <item quantity="other">Sendi %2$d skrár til %1$s</item>
   </plurals>
     <string name="about">Um hugbúnaðinn</string>
-    <string name="about_kde">Um KDE</string>
+    <string name="about_kde">Um COSMIC</string>
     <string name="add_command">Bæta við skipun</string>
     <string name="add_command_description">Þú getur bætt við skipunum á skjáborðinu</string>
     <string name="add_device_dialog_title">Bæta við tæki</string>
@@ -133,6 +133,7 @@
     <string name="compose_send_title">Semja og senda</string>
     <string name="convert_to_mms_after_title">Umbreyta í MMS</string>
     <string name="copy_url_to_clipboard">Afrita slóð á klippispjaldið</string>
+    <string name="cosmo">Cosmo</string>
     <string name="custom_device_deleted">Sérsniðnu tæki eytt</string>
     <string name="custom_device_fab_hint">Bæta við tæki</string>
     <string name="custom_device_list">Bæta við tækjum eftir auðkennum</string>
@@ -178,10 +179,9 @@
     <string name="hold_to_drag">Halda til að draga</string>
     <string name="holger_kaelberer_task">Viðbót fyrir fjartengt lyklaborð og lagfæringar á villum</string>
     <string name="invalid_device_name">Ógilt heiti tækis</string>
-    <string name="kde">KDE</string>
-    <string name="kde_be_free">KDE - Vertu frjáls!</string>
+    <string name="kde">COSMIC</string>
+    <string name="kde_be_free">COSMIC - Vertu frjáls!</string>
     <string name="kde_connect">COSMIC Connect</string>
-    <string name="konqi">Konqi</string>
     <string name="left_click">Senda vinstri músarsmell</string>
     <string name="licenses">Notkunarleyfi</string>
     <string name="location_permission_needed_title">Krafist er heimildar</string>
@@ -210,7 +210,7 @@
     <string name="mpris_keepwatching_settings_title">Halda áfram spilun</string>
     <string name="mpris_loop">Endurtaka</string>
     <string name="mpris_next">Næsta</string>
-    <string name="mpris_notification_settings_summary">Gerir kleift að stýra margmiðlunarspilurunum þínum án þess að opna KDE-tengingar</string>
+    <string name="mpris_notification_settings_summary">Gerir kleift að stýra margmiðlunarspilurunum þínum án þess að opna COSMIC-tengingar</string>
     <string name="mpris_notification_settings_title">Birta tilkynningar fyrir margmiðlunarstýringar</string>
     <string name="mpris_open_url">Halda áfram spilun hér</string>
     <string name="mpris_pause">Í bið</string>
@@ -228,7 +228,7 @@
     <string name="no_file_browser">Það eru engir skráavafrar uppsettir.</string>
     <string name="no_permission_mprisreceiver">Til að geta stýrt margmiðlunarspilurunum þínum þarftu að gefa heimild fyrir aðgang að tilkynningum</string>
     <string name="no_permissions">Þú verður að gefa heimild til að fá aðgang að tilkynningum</string>
-    <string name="no_permissions_remotekeyboard">Til að taka við lyklaáslætti þarftu að virkja fjartengt lyklaborð KDE-tenginga</string>
+    <string name="no_permissions_remotekeyboard">Til að taka við lyklaáslætti þarftu að virkja fjartengt lyklaborð COSMIC-tenginga</string>
     <string name="no_players_connected">Engir spilarar fundust</string>
     <string name="notification_channel_default">Aðrar tilkynningar</string>
     <string name="notification_channel_filetransfer">Skráaflutningur inn</string>
@@ -251,7 +251,7 @@
     <string name="pair_requested">Beðið um pörun</string>
     <string name="pair_succeeded">Pörun tókst</string>
     <string name="pairing_accept">Samþykkja</string>
-    <string name="pairing_description">Önnur tæki sem keyra KDE-tengingar á sama netkerfi ættu að birtast hér.</string>
+    <string name="pairing_description">Önnur tæki sem keyra COSMIC-tengingar á sama netkerfi ættu að birtast hér.</string>
     <string name="pairing_duplicate_names">Varúð: Það eru mörg tæki með sama heiti</string>
     <string name="pairing_reject">Hafna</string>
     <string name="pairing_request_from">Beiðni um pörun frá \'%1s\'</string>

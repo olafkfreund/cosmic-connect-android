@@ -55,6 +55,7 @@ import org.cosmic.cosmicconnect.Plugins.MousePadPlugin.SendKeystrokesToHostActiv
 import org.cosmic.cosmicconnect.Plugins.MprisPlugin.MprisActivity_GeneratedInjector;
 import org.cosmic.cosmicconnect.Plugins.MprisPlugin.MprisMediaNotificationReceiver_GeneratedInjector;
 import org.cosmic.cosmicconnect.Plugins.NotificationsPlugin.NotificationFilterActivity_GeneratedInjector;
+import org.cosmic.cosmicconnect.Plugins.OpenOnPhonePlugin.OpenOnPhoneReceiver_GeneratedInjector;
 import org.cosmic.cosmicconnect.Plugins.PresenterPlugin.PresenterActivity_GeneratedInjector;
 import org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandActivity_GeneratedInjector;
 import org.cosmic.cosmicconnect.Plugins.SftpPlugin.SftpSettingsFragment_GeneratedInjector;
@@ -68,10 +69,10 @@ import org.cosmic.cosmicconnect.UserInterface.CustomDevicesActivity_GeneratedInj
 import org.cosmic.cosmicconnect.UserInterface.DeviceFragment_GeneratedInjector;
 import org.cosmic.cosmicconnect.UserInterface.MainActivity_GeneratedInjector;
 import org.cosmic.cosmicconnect.UserInterface.MainViewModel_HiltModules;
+import org.cosmic.cosmicconnect.UserInterface.OpenOnDesktopActivity_GeneratedInjector;
 import org.cosmic.cosmicconnect.UserInterface.PairingFragment_GeneratedInjector;
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsActivity_GeneratedInjector;
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment_GeneratedInjector;
-import org.cosmic.cosmicconnect.UserInterface.PluginSettingsListFragment_GeneratedInjector;
 import org.cosmic.cosmicconnect.UserInterface.SettingsFragment_GeneratedInjector;
 import org.cosmic.cosmicconnect.UserInterface.TrustedNetworksActivity_GeneratedInjector;
 import org.cosmic.cosmicconnect.UserInterface.compose.screens.DeviceDetailViewModel_HiltModules;
@@ -186,6 +187,7 @@ public final class CosmicConnect_HiltComponents {
       CosmicConnect_GeneratedInjector,
       FindMyPhoneReceiver_GeneratedInjector,
       MprisMediaNotificationReceiver_GeneratedInjector,
+      OpenOnPhoneReceiver_GeneratedInjector,
       ShareBroadcastReceiver_GeneratedInjector,
       HiltBridges {
   }
@@ -265,6 +267,7 @@ public final class CosmicConnect_HiltComponents {
       LicensesActivity_GeneratedInjector,
       CustomDevicesActivity_GeneratedInjector,
       MainActivity_GeneratedInjector,
+      OpenOnDesktopActivity_GeneratedInjector,
       PluginSettingsActivity_GeneratedInjector,
       TrustedNetworksActivity_GeneratedInjector {
     @Subcomponent.Builder
@@ -325,7 +328,6 @@ public final class CosmicConnect_HiltComponents {
       DeviceFragment_GeneratedInjector,
       PairingFragment_GeneratedInjector,
       PluginSettingsFragment_GeneratedInjector,
-      PluginSettingsListFragment_GeneratedInjector,
       SettingsFragment_GeneratedInjector {
     @Subcomponent.Builder
     abstract interface Builder extends FragmentComponentBuilder {

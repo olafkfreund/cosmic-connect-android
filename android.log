@@ -1,0 +1,2 @@
+--------- beginning of main
+01-28 13:17:35.545 11707 11707 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.libs.gmscorelogger.service.START dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentDirectBootAwareApiService }

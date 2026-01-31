@@ -84,18 +84,18 @@
     <item quantity="other">Sende %2$d filer til %1$s</item>
   </plurals>
     <string name="about">Om</string>
-    <string name="about_kde">Om KDE</string>
-    <string name="about_kde_about">&lt;h1>Om&lt;/h1> &lt;p>KDE er eit verdsfemnande fellesskap av eldsjeler som programmerer, teiknar, komponerer, dokumenterer, set om eller hjelper til på andre måtar med utvikling av &lt;a href=https://www.gnu.org/philosophy/free-sw.html>fri programvare&lt;/a>. Me har laga brukarflata Plasma, hundrevis av program og dei mange programbiblioteka desse byggjer på.&lt;/p> &lt;p>KDE er eit fellesskap der inga einskild gruppe, firma eller organisasjon har eigarskap til produkta eller styrer retninga den vidare utviklinga skal gå i. Derimot arbeider me saman om å oppnå vårt felles mål om å laga fri programvare i verdsklasse. Alle er &lt;a href=https://community.kde.org/Get_Involved>velkomne til å bidra&lt;/a> – du òg.&lt;/p>Du finn meir informasjon om KDE og programma me utviklar på &lt;a href=https://www.kde.org/>https://www.kde.org/&lt;/a>.</string>
-    <string name="about_kde_join_kde">&lt;h1>Vert med i KDE&lt;/h1> &lt;p>Du treng ikkje vera programutviklar for å hjelpa til med KDE. Du kan arbeida med omsetjingar, laga grafikk, tema, lydar eller betre hjelpetekstar. Her er noko for alle!&lt;/p> &lt;p>På &lt;a href=https://community.kde.org/Get_Involved>https://community.kde.org/Get_Involved&lt;/a> finn du informasjon om nokre prosjekt du kan delta i.&lt;/p> Om du vil ha meir informasjon eller dokumentasjon, finn du det du treng på &lt;a href=https://techbase.kde.org/>https://techbase.kde.org/&lt;/a>.</string>
-    <string name="about_kde_report_bugs_or_wishes">&lt;h1>Meld frå om feil eller ønskje&lt;/h1> &lt;p>Ein kan alltid forbetra programvare, og KDE-gruppa arbeider heile tida for det. Men du, som brukar, må melda frå til oss når noko ikkje verkar slik du forventar, eller når noko kunne vore gjort betre.&lt;/p> &lt;p>KDE har eit feilsporingssystem. Gå til &lt;a href=https://bugs.kde.org/>https://bugs.kde.org/&lt;/a> eller vel «Meld frå om feil» på «Om»-sida for å melda frå om feil.&lt;/p> Om du har framlegg til forbetringar, kan du gjerne registrera òg desse i feilsporingssystemet. Sjå då til at du har markert feilrapporten med «Wishlist».</string>
-    <string name="about_kde_support_kde">&lt;h1>Støtt KDE&lt;/h1> &lt;p>KDE-programma er, og vil alltid vera, gratis, men det er slett ikkje gratis å laga eller vedlikehalda dei.&lt;/p> &lt;p>For å støtta utviklingsarbeidet har KDE-fellesskapet derfor oppretta KDE e.V., ein ideell organisasjon registrert i Tyskland. KDE e.V. representerer KDE-fellesskapet i juridiske og finansielle saker. På &lt;a href=https://ev.kde.org/>https://ev.kde.org/&lt;/a> finn du meir informasjon om organisasjonen.&lt;/p> &lt;p>Både økonomisk og annan type støtte er til stor hjelp. Pengane går med til å dekkja utgifter medlemmane våre har ved utviklinga av KDE-programma, samt til juridisk bistand og til organisering av konferansar og møte.&lt;/p> &lt;p>På &lt;a href=https://www.kde.org/community/donations/>https://www.kde.org/community/donations/&lt;/a>.&lt;/p> kan du lesa om korleis du kan bidra.&lt;/p> &lt;p>På førehand tusen takk for støtta di.</string>
+    <string name="about_kde">Om COSMIC</string>
+    <string name="about_kde_about">&lt;h1>Om&lt;/h1> &lt;p>COSMIC er eit verdsfemnande fellesskap av eldsjeler som programmerer, teiknar, komponerer, dokumenterer, set om eller hjelper til på andre måtar med utvikling av &lt;a href=https://www.gnu.org/philosophy/free-sw.html>fri programvare&lt;/a>. Me har laga brukarflata Plasma, hundrevis av program og dei mange programbiblioteka desse byggjer på.&lt;/p> &lt;p>COSMIC er eit fellesskap der inga einskild gruppe, firma eller organisasjon har eigarskap til produkta eller styrer retninga den vidare utviklinga skal gå i. Derimot arbeider me saman om å oppnå vårt felles mål om å laga fri programvare i verdsklasse. Alle er &lt;a href=https://community.kde.org/Get_Involved>velkomne til å bidra&lt;/a> – du òg.&lt;/p>Du finn meir informasjon om COSMIC og programma me utviklar på &lt;a href=https://www.kde.org/>https://www.kde.org/&lt;/a>.</string>
+    <string name="about_kde_join_kde">&lt;h1>Vert med i COSMIC&lt;/h1> &lt;p>Du treng ikkje vera programutviklar for å hjelpa til med COSMIC. Du kan arbeida med omsetjingar, laga grafikk, tema, lydar eller betre hjelpetekstar. Her er noko for alle!&lt;/p> &lt;p>På &lt;a href=https://community.kde.org/Get_Involved>https://community.kde.org/Get_Involved&lt;/a> finn du informasjon om nokre prosjekt du kan delta i.&lt;/p> Om du vil ha meir informasjon eller dokumentasjon, finn du det du treng på &lt;a href=https://techbase.kde.org/>https://techbase.kde.org/&lt;/a>.</string>
+    <string name="about_kde_report_bugs_or_wishes">&lt;h1>Meld frå om feil eller ønskje&lt;/h1> &lt;p>Ein kan alltid forbetra programvare, og COSMIC-gruppa arbeider heile tida for det. Men du, som brukar, må melda frå til oss når noko ikkje verkar slik du forventar, eller når noko kunne vore gjort betre.&lt;/p> &lt;p>COSMIC har eit feilsporingssystem. Gå til &lt;a href=https://bugs.kde.org/>https://bugs.kde.org/&lt;/a> eller vel «Meld frå om feil» på «Om»-sida for å melda frå om feil.&lt;/p> Om du har framlegg til forbetringar, kan du gjerne registrera òg desse i feilsporingssystemet. Sjå då til at du har markert feilrapporten med «Wishlist».</string>
+    <string name="about_kde_support_kde">&lt;h1>Støtt COSMIC&lt;/h1> &lt;p>COSMIC-programma er, og vil alltid vera, gratis, men det er slett ikkje gratis å laga eller vedlikehalda dei.&lt;/p> &lt;p>For å støtta utviklingsarbeidet har COSMIC-fellesskapet derfor oppretta COSMIC e.V., ein ideell organisasjon registrert i Tyskland. COSMIC e.V. representerer COSMIC-fellesskapet i juridiske og finansielle saker. På &lt;a href=https://ev.kde.org/>https://ev.kde.org/&lt;/a> finn du meir informasjon om organisasjonen.&lt;/p> &lt;p>Både økonomisk og annan type støtte er til stor hjelp. Pengane går med til å dekkja utgifter medlemmane våre har ved utviklinga av COSMIC-programma, samt til juridisk bistand og til organisering av konferansar og møte.&lt;/p> &lt;p>På &lt;a href=https://www.kde.org/community/donations/>https://www.kde.org/community/donations/&lt;/a>.&lt;/p> kan du lesa om korleis du kan bidra.&lt;/p> &lt;p>På førehand tusen takk for støtta di.</string>
     <string name="add_command">Legg til kommando</string>
     <string name="add_command_description">Du kan leggja til kommandoar på skrivebordet</string>
     <string name="add_device_dialog_title">Legg til eining</string>
     <string name="add_device_hint">Vertsnamn/IP-adresse</string>
     <string name="add_trusted_network">Legg til %1s</string>
     <string name="addcommand_explanation">Ingen kommandoar er registrerte</string>
-    <string name="addcommand_explanation2">Du kan leggja til nye kommandoar i systeminnstillingane til KDE Connect</string>
+    <string name="addcommand_explanation2">Du kan leggja til nye kommandoar i systeminnstillingane til COSMIC Connect</string>
     <string name="alex_fiestas_task">Forbetringar i kontakt-tillegget</string>
     <string name="all">Alle</string>
     <string name="all_permissions_granted">Alle tilgangsløyva er gjevne 🎉</string>
@@ -133,10 +133,11 @@
     <string name="clipboard_toast">Kopiert til utklippstavla</string>
     <string name="close">Lukk</string>
     <string name="compose_send_title">Send tekst</string>
-    <string name="contacts_per_device_confirmation">Telefonkontaktane dine vert kopiert over til denne eininga, slik at dei kan brukast av KDE Connect SMS-appen og andre appar.</string>
+    <string name="contacts_per_device_confirmation">Telefonkontaktane dine vert kopiert over til denne eininga, slik at dei kan brukast av COSMIC Connect SMS-appen og andre appar.</string>
     <string name="contacts_permission_explanation">For å kunna dela adresseboka di med datamaskina må du gje appen lese- og skriveløyve til adresseboka</string>
     <string name="convert_to_mms_after_title">Gjer om til MMS</string>
     <string name="copy_url_to_clipboard">Kopier adresse til utklippstavla</string>
+    <string name="cosmo">Cosmo</string>
     <string name="custom_device_deleted">Tilpassa eining er sletta</string>
     <string name="custom_device_fab_hint">Legg til eining</string>
     <string name="custom_device_list">Legg til eining basert på IP</string>
@@ -166,7 +167,7 @@
     <string name="error_clocks_not_match">Einingsklokkene er ikkje synkroniserte</string>
     <string name="error_not_reachable">Får ikkje kontakt med eininga</string>
     <string name="error_timed_out">Tidsavbrot</string>
-    <string name="everyone_else">Alle andre som har hjelpt til med utviklinga av KDE Connect opp gjennom åra</string>
+    <string name="everyone_else">Alle andre som har hjelpt til med utviklinga av COSMIC Connect opp gjennom åra</string>
     <string name="extra_options">Tilleggsval</string>
     <string name="filter_apps_info">Varslingar vert synkroniserte for dei valde appane.</string>
     <string name="findmyphone_description">Spel av lydsignal på eininga, slik at du lett kan finna ho</string>
@@ -183,13 +184,12 @@
     <string name="hold_to_drag">Hald for å dra</string>
     <string name="holger_kaelberer_task">Fjerntastatur-tillegget og feilrettingar</string>
     <string name="invalid_device_name">Ugyldig einingsnamn</string>
-    <string name="kde">KDE</string>
-    <string name="kde_be_free">KDE – ver fri!</string>
+    <string name="kde">COSMIC</string>
+    <string name="kde_be_free">COSMIC – ver fri!</string>
     <string name="kde_connect">COSMIC Connect</string>
-    <string name="konqi">Konqi</string>
     <string name="left_click">Send venstreklikk</string>
     <string name="licenses">Lisensar</string>
-    <string name="location_permission_needed_desc">COSMIC Connect treng bakgrunns­løyve til sjå den geografiske posisjonen din. Det er for å kunna veta kva Wi-Fi-nettverk du er kopla til sjølv når appen er i bakgrunnen. Ein treng dette løyvet fordi namna på Wi-Fi-nettverk rundt deg òg kan brukast til å finna posisjonen din, sjølv om dette ikkje er det KDE Connect gjer.</string>
+    <string name="location_permission_needed_desc">COSMIC Connect treng bakgrunns­løyve til sjå den geografiske posisjonen din. Det er for å kunna veta kva Wi-Fi-nettverk du er kopla til sjølv når appen er i bakgrunnen. Ein treng dette løyvet fordi namna på Wi-Fi-nettverk rundt deg òg kan brukast til å finna posisjonen din, sjølv om dette ikkje er det COSMIC Connect gjer.</string>
     <string name="location_permission_needed_title">Krev utvida løyve</string>
     <string name="maintainer_and_developer">Vedlikehaldar og utviklar</string>
     <string name="manifest_label_share">Send til eining</string>
@@ -218,7 +218,7 @@
     <string name="mpris_keepwatching_settings_title">Hald fram avspeling</string>
     <string name="mpris_loop">Repeter</string>
     <string name="mpris_next">Neste</string>
-    <string name="mpris_notification_settings_summary">Tillat å kontrollera mediespelarar utan å opna KDE Connect</string>
+    <string name="mpris_notification_settings_summary">Tillat å kontrollera mediespelarar utan å opna COSMIC Connect</string>
     <string name="mpris_notification_settings_title">Vis varsling med avspelingskontrollar</string>
     <string name="mpris_notifications_explanation">Varslingsløyvet trengst for å visa medieavspeling i varslingssenteret</string>
     <string name="mpris_open_url">Hald fram avspeling her</string>
@@ -237,7 +237,7 @@
     <string name="no_file_browser">Ingen filhandsamarar er installerte.</string>
     <string name="no_permission_mprisreceiver">Du må gje tilgang til varslingar for å kunne kontrollera mediespelarar</string>
     <string name="no_permissions">Du må gje tilgang til lesing av varslingar</string>
-    <string name="no_permissions_remotekeyboard">For å ta imot tastetrykk må du slå på fjerntastaturet i KDE Connect</string>
+    <string name="no_permissions_remotekeyboard">For å ta imot tastetrykk må du slå på fjerntastaturet i COSMIC Connect</string>
     <string name="no_players_connected">Fann ingen spelarar</string>
     <string name="no_wifi">Du er ikkje kopla til eit Wi-Fi-nettverk, så du vil ikkje kunna sjå nokon einingar. Trykk her for å slå på Wi-Fi.</string>
     <string name="notification_channel_default">Andre varslingar</string>
@@ -313,7 +313,7 @@
     <string name="pref_plugin_telepathy">Send SMS</string>
     <string name="pref_plugin_telepathy_desc">Send tekstmeldingar frå datamaskina</string>
     <string name="pref_plugin_telepathy_mms">Send MMS</string>
-    <string name="pref_plugin_telepathy_mms_desc">Du må velja KDE Connect som standard­app for å kunna senda MMS.</string>
+    <string name="pref_plugin_telepathy_mms_desc">Du må velja COSMIC Connect som standard­app for å kunna senda MMS.</string>
     <string name="pref_plugin_telephony">Telefonvarsling</string>
     <string name="pref_plugin_telephony_desc">Send varsling ved oppringing</string>
     <string name="presenter_exit">Avslutt presentasjon</string>
@@ -331,7 +331,7 @@
     <string name="remotekeyboard_connected">Eksternt tastatursamband er verksamt</string>
     <string name="remotekeyboard_editing_only_title">Handter eksterne tastetrykk berre ved redigering</string>
     <string name="remotekeyboard_multiple_connections">Det finst meir enn eitt eksternt tastatursamband (vel eining å setja opp)</string>
-    <string name="remotekeyboard_not_connected">Det finst ikkje noko verksamt tastatursamband (må setjast opp i KDE Connect)</string>
+    <string name="remotekeyboard_not_connected">Det finst ikkje noko verksamt tastatursamband (må setjast opp i COSMIC Connect)</string>
     <string name="report_bug">Meld frå om feil</string>
     <string name="request_pairing">Be om paring</string>
     <string name="right_click">Send høgreklikk</string>
@@ -380,7 +380,7 @@
     <string name="settings_more_settings_title">Fleire innstillingar</string>
     <string name="settings_rename">Einingsnamn</string>
     <string name="sftp_action_mode_menu_delete">Slett</string>
-    <string name="sftp_manage_storage_permission_explanation">For fjerntilgang til filer på denne eininga må du gje KDE Connect tilgangsløyve til lagringsområdet.</string>
+    <string name="sftp_manage_storage_permission_explanation">For fjerntilgang til filer på denne eininga må du gje COSMIC Connect tilgangsløyve til lagringsområdet.</string>
     <string name="sftp_no_storage_locations_configured">Ingen lagringsområde er sette opp</string>
     <string name="sftp_preference_add_storage_location_title">Legg til lagringsområde</string>
     <string name="sftp_preference_configured_storage_locations">Oppsette lagringsområde</string>

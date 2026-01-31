@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "org.cosmic.cosmicconnect.app-mergeDebugResources-87:/values-h550dp-port-v13/values-h550dp-port-v13.xml",
+            "outputFile": "org.cosmic.cosmicconnect.app-mergeDebugResources-89:/values-h550dp-port-v13/values-h550dp-port-v13.xml",
             "map": [
                 {
-                    "source": "/home/olafkfreund/.gradle/caches/8.14.1/transforms/cf3863779648392ff9c77375ca530529/transformed/material-1.13.0/res/values-h550dp-port-v13/values-h550dp-port-v13.xml",
+                    "source": "/home/olafkfreund/.gradle/caches/8.14.1/transforms/626dc1ece176b9bc5ff5118551a8a9fd/transformed/material-1.13.0/res/values-h550dp-port-v13/values-h550dp-port-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

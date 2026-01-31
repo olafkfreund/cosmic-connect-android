@@ -1,0 +1,130 @@
+[2m2026-01-28T17:08:51.447428Z[0m [32m INFO[0m [2mcosmic_connect_daemon::diagnostics[0m[2m:[0m [2mcosmic-connect-daemon/src/diagnostics.rs[0m[2m:[0m[2m136:[0m Logging initialized: level=INFO, json=false, timestamps=true
+[2m2026-01-28T17:08:51.447483Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m2150:[0m Starting CConnect daemon...
+[2m2026-01-28T17:08:51.447599Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m2155:[0m Configuration loaded
+[2m2026-01-28T17:08:51.447602Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m2156:[0m Device name: Test COSMIC Desktop
+[2m2026-01-28T17:08:51.447610Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m2157:[0m Device type: desktop
+[2m2026-01-28T17:08:51.447612Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m2158:[0m Discovery port: 1816
+[2m2026-01-28T17:08:51.447642Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m262:[0m Loading existing certificate from "/tmp/cosmic-connect-test/certs/device.crt"
+[2m2026-01-28T17:08:51.447723Z[0m [32m INFO[0m [2mcosmic_connect_core::crypto::certificate[0m[2m:[0m [2m/build/cargo-vendor-dir/cosmic-connect-core-0.1.0/src/crypto/certificate.rs[0m[2m:[0m[2m280:[0m Loaded certificate for device cconnect-device with fingerprint: 5C:3E:7F:AF:3E:92:D8:A9:64:26:2B:37:D9:2A:C8:96:CC:C0:7A:51:26:BF:DB:F5:A8:6B:94:1F:28:7B:7D:A4
+[2m2026-01-28T17:08:51.449184Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m205:[0m COSMIC notifications client initialized
+[2m2026-01-28T17:08:51.449791Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m220:[0m MPRIS manager initialized
+[2m2026-01-28T17:08:51.449825Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m290:[0m Registering plugin factories...
+[2m2026-01-28T17:08:51.449828Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m294:[0m Registering ping plugin factory
+[2m2026-01-28T17:08:51.449838Z[0m [32m INFO[0m [2mcosmic_connect_protocol::plugins[0m[2m:[0m [2mcosmic-connect-protocol/src/plugins/mod.rs[0m[2m:[0m[2m382:[0m Registered plugin factory: ping
+[2m2026-01-28T17:08:51.449847Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m301:[0m Registering battery plugin factory
+[2m2026-01-28T17:08:51.449856Z[0m [32m INFO[0m [2mcosmic_connect_protocol::plugins[0m[2m:[0m [2mcosmic-connect-protocol/src/plugins/mod.rs[0m[2m:[0m[2m382:[0m Registered plugin factory: battery
+[2m2026-01-28T17:08:51.449859Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m308:[0m Registering notification plugin factory
+[2m2026-01-28T17:08:51.449868Z[0m [32m INFO[0m [2mcosmic_connect_protocol::plugins[0m[2m:[0m [2mcosmic-connect-protocol/src/plugins/mod.rs[0m[2m:[0m[2m382:[0m Registered plugin factory: notification
+[2m2026-01-28T17:08:51.449871Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m315:[0m Registering share plugin factory
+[2m2026-01-28T17:08:51.449880Z[0m [32m INFO[0m [2mcosmic_connect_protocol::plugins[0m[2m:[0m [2mcosmic-connect-protocol/src/plugins/mod.rs[0m[2m:[0m[2m382:[0m Registered plugin factory: share
+[2m2026-01-28T17:08:51.449884Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m322:[0m Registering clipboard plugin factory
+[2m2026-01-28T17:08:51.449887Z[0m [32m INFO[0m [2mcosmic_connect_protocol::plugins[0m[2m:[0m [2mcosmic-connect-protocol/src/plugins/mod.rs[0m[2m:[0m[2m382:[0m Registered plugin factory: clipboard
+[2m2026-01-28T17:08:51.449902Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m329:[0m Registering MPRIS plugin factory
+[2m2026-01-28T17:08:51.449905Z[0m [32m INFO[0m [2mcosmic_connect_protocol::plugins[0m[2m:[0m [2mcosmic-connect-protocol/src/plugins/mod.rs[0m[2m:[0m[2m382:[0m Registered plugin factory: mpris
+[2m2026-01-28T17:08:51.449908Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m357:[0m Registering Lock plugin factory
+[2m2026-01-28T17:08:51.449913Z[0m [32m INFO[0m [2mcosmic_connect_protocol::plugins[0m[2m:[0m [2mcosmic-connect-protocol/src/plugins/mod.rs[0m[2m:[0m[2m382:[0m Registered plugin factory: lock
+[2m2026-01-28T17:08:51.449916Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m378:[0m Registering Contacts plugin factory
+[2m2026-01-28T17:08:51.449920Z[0m [32m INFO[0m [2mcosmic_connect_protocol::plugins[0m[2m:[0m [2mcosmic-connect-protocol/src/plugins/mod.rs[0m[2m:[0m[2m382:[0m Registered plugin factory: contacts
+[2m2026-01-28T17:08:51.449924Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m420:[0m Registering ClipboardHistory plugin factory
+[2m2026-01-28T17:08:51.449928Z[0m [32m INFO[0m [2mcosmic_connect_protocol::plugins[0m[2m:[0m [2mcosmic-connect-protocol/src/plugins/mod.rs[0m[2m:[0m[2m382:[0m Registered plugin factory: clipboardhistory
+[2m2026-01-28T17:08:51.449931Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m434:[0m Registering Chat plugin factory
+[2m2026-01-28T17:08:51.449935Z[0m [32m INFO[0m [2mcosmic_connect_protocol::plugins[0m[2m:[0m [2mcosmic-connect-protocol/src/plugins/mod.rs[0m[2m:[0m[2m382:[0m Registered plugin factory: chat
+[2m2026-01-28T17:08:51.449938Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m468:[0m All plugin factories registered (10 total)
+[2m2026-01-28T17:08:51.449942Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m540:[0m Starting pairing service...
+[2m2026-01-28T17:08:51.449962Z[0m [32m INFO[0m [2mcosmic_connect_protocol::pairing::handler[0m[2m:[0m [2mcosmic-connect-protocol/src/pairing/handler.rs[0m[2m:[0m[2m390:[0m Loading existing certificate for device 4dc6f1cb_ef38_4ce3_a9c6_e469cc6ba147
+[2m2026-01-28T17:08:51.452717Z[0m [32m INFO[0m [2mcosmic_connect_protocol::pairing::handler[0m[2m:[0m [2mcosmic-connect-protocol/src/pairing/handler.rs[0m[2m:[0m[2m264:[0m Loaded certificate for device fb21b93c_dcaf_4e2e_b177_895cd063bb1f with fingerprint: D5:2F:F4:78:41:8A:6A:9A:6E:23:D6:C0:40:E2:F8:62:C5:17:B2:97:3A:36:D4:FF:53:02:53:41:DD:FB:0C:FA
+[2m2026-01-28T17:08:51.452747Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m554:[0m Pairing service created (fingerprint: D5:2F:F4:78:41:8A:6A:9A:6E:23:D6:C0:40:E2:F8:62:C5:17:B2:97:3A:36:D4:FF:53:02:53:41:DD:FB:0C:FA)
+[2m2026-01-28T17:08:51.452764Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m601:[0m Pairing service started
+[2m2026-01-28T17:08:51.452767Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m949:[0m Starting DBus server...
+[2m2026-01-28T17:08:51.452776Z[0m [32m INFO[0m [2mcosmic_connect_daemon::dbus[0m[2m:[0m [2mcosmic-connect-daemon/src/dbus.rs[0m[2m:[0m[2m2099:[0m Starting DBus server on com.system76.CosmicConnect
+[2m2026-01-28T17:08:51.454343Z[0m [32m INFO[0m [2mcosmic_connect_daemon::dbus[0m[2m:[0m [2mcosmic-connect-daemon/src/dbus.rs[0m[2m:[0m[2m2134:[0m DBus server started successfully
+[2m2026-01-28T17:08:51.454368Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m965:[0m DBus server started on com.system76.CosmicConnect
+[2m2026-01-28T17:08:51.454373Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m478:[0m Starting device discovery...
+[2m2026-01-28T17:08:51.454406Z[0m [32m INFO[0m [2mcosmic_connect_protocol::discovery::service[0m[2m:[0m [2mcosmic-connect-protocol/src/discovery/service.rs[0m[2m:[0m[2m116:[0m Bound to UDP port 1816
+[2m2026-01-28T17:08:51.454425Z[0m [32m INFO[0m [2mcosmic_connect_protocol::discovery::service[0m[2m:[0m [2mcosmic-connect-protocol/src/discovery/service.rs[0m[2m:[0m[2m181:[0m Starting discovery service on port 1816
+[2m2026-01-28T17:08:51.454441Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m513:[0m Discovery service started on port 1816
+[2m2026-01-28T17:08:51.454447Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m788:[0m Starting connection manager...
+[2m2026-01-28T17:08:51.454450Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m890:[0m Using ConnectionManager directly (Bluetooth disabled)
+[2m2026-01-28T17:08:51.454458Z[0m [32m INFO[0m [2mcosmic_connect_protocol::connection::manager[0m[2m:[0m [2mcosmic-connect-protocol/src/connection/manager.rs[0m[2m:[0m[2m178:[0m Starting connection manager on 0.0.0.0:1816
+[2m2026-01-28T17:08:51.454462Z[0m [32m INFO[0m [2mcosmic_connect_protocol::connection::manager[0m[2m:[0m [2mcosmic-connect-protocol/src/connection/manager.rs[0m[2m:[0m[2m183:[0m Starting TLS server with rustls (TLS 1.2+, TOFU security model)
+[2m2026-01-28T17:08:51.454465Z[0m [32m INFO[0m [2mcosmic_connect_core::crypto::tls[0m[2m:[0m [2m/build/cargo-vendor-dir/cosmic-connect-core-0.1.0/src/crypto/tls.rs[0m[2m:[0m[2m456:[0m Starting TLS server on 0.0.0.0:1816
+[2m2026-01-28T17:08:51.454466Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1844:[0m Discovery service started successfully on port 1816
+[2m2026-01-28T17:08:51.454542Z[0m [32m INFO[0m [2mcosmic_connect_core::crypto::tls[0m[2m:[0m [2m/build/cargo-vendor-dir/cosmic-connect-core-0.1.0/src/crypto/tls.rs[0m[2m:[0m[2m465:[0m TLS server listening on 0.0.0.0:1816
+[2m2026-01-28T17:08:51.454550Z[0m [32m INFO[0m [2mcosmic_connect_protocol::connection::manager[0m[2m:[0m [2mcosmic-connect-protocol/src/connection/manager.rs[0m[2m:[0m[2m243:[0m Connection manager started on port 1816
+[2m2026-01-28T17:08:51.454553Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m901:[0m Connection manager started on port 1816
+[2m2026-01-28T17:08:51.454561Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m942:[0m Connection manager started successfully
+[2m2026-01-28T17:08:51.454565Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1008:[0m Starting clipboard monitor...
+[2m2026-01-28T17:08:51.454568Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1084:[0m Clipboard monitor started successfully
+[2m2026-01-28T17:08:51.454571Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1088:[0m Starting notification action listener...
+[2m2026-01-28T17:08:51.454577Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m978:[0m Starting MPRIS player discovery and monitoring...
+[2m2026-01-28T17:08:51.454587Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1588:[0m Connection manager started on port 1816
+[2m2026-01-28T17:08:51.454892Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1100:[0m Notification action listener started
+[2m2026-01-28T17:08:51.454901Z[0m [32m INFO[0m [2mcosmic_connect_daemon::mpris_manager[0m[2m:[0m [2mcosmic-connect-daemon/src/mpris_manager.rs[0m[2m:[0m[2m168:[0m Discovered 2 MPRIS players
+[2m2026-01-28T17:08:51.454907Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m988:[0m Discovered 2 MPRIS players: ["spotify", "chromium.instance14951"]
+[2m2026-01-28T17:08:51.454917Z[0m [32m INFO[0m [2mcosmic_connect_daemon::mpris_manager[0m[2m:[0m [2mcosmic-connect-daemon/src/mpris_manager.rs[0m[2m:[0m[2m442:[0m Starting MPRIS monitoring for player: spotify
+[2m2026-01-28T17:08:51.455079Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1031:[0m Clipboard monitor started (polling every 500ms)
+[2m2026-01-28T17:08:51.456260Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m994:[0m Started monitoring player: spotify
+[2m2026-01-28T17:08:51.456274Z[0m [32m INFO[0m [2mcosmic_connect_daemon::mpris_manager[0m[2m:[0m [2mcosmic-connect-daemon/src/mpris_manager.rs[0m[2m:[0m[2m442:[0m Starting MPRIS monitoring for player: chromium.instance14951
+[2m2026-01-28T17:08:51.456263Z[0m [32m INFO[0m [2mcosmic_connect_daemon::mpris_manager[0m[2m:[0m [2mcosmic-connect-daemon/src/mpris_manager.rs[0m[2m:[0m[2m472:[0m Signal monitoring task started for player: spotify
+[2m2026-01-28T17:08:51.457748Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m994:[0m Started monitoring player: chromium.instance14951
+[2m2026-01-28T17:08:51.457752Z[0m [32m INFO[0m [2mcosmic_connect_daemon::mpris_manager[0m[2m:[0m [2mcosmic-connect-daemon/src/mpris_manager.rs[0m[2m:[0m[2m472:[0m Signal monitoring task started for player: chromium.instance14951
+[2m2026-01-28T17:08:51.457759Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1858:[0m CConnect daemon running
+[2m2026-01-28T17:08:51.457771Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1859:[0m Device: Test COSMIC Desktop (4dc6f1cb_ef38_4ce3_a9c6_e469cc6ba147)
+[2m2026-01-28T17:08:51.457774Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1863:[0m Type: Desktop
+[2m2026-01-28T17:08:51.457777Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1864:[0m Protocol version: 8
+[2m2026-01-28T17:08:51.457788Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1871:[0m Incoming capabilities: 26
+[2m2026-01-28T17:08:51.457790Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1873:[0m   - cconnect.clipboard
+[2m2026-01-28T17:08:51.457793Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1873:[0m   - cconnect.mpris
+[2m2026-01-28T17:08:51.457795Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1873:[0m   - cconnect.mpris.request
+[2m2026-01-28T17:08:51.457798Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1873:[0m   - cconnect.cliphistory.delete
+[2m2026-01-28T17:08:51.457800Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1873:[0m   - cconnect.contacts.response_vcards
+[2m2026-01-28T17:08:51.457808Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1873:[0m   - cconnect.battery.request
+[2m2026-01-28T17:08:51.457810Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1873:[0m   - cconnect.notification
+[2m2026-01-28T17:08:51.457813Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1873:[0m   - cconnect.lock.request
+[2m2026-01-28T17:08:51.457815Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1873:[0m   - cconnect.share.request.update
+[2m2026-01-28T17:08:51.457817Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1873:[0m   - cconnect.cliphistory.add
+[2m2026-01-28T17:08:51.457819Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1873:[0m   - cconnect.cliphistory.search
+[2m2026-01-28T17:08:51.457822Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1873:[0m   - cconnect.chat.typing
+[2m2026-01-28T17:08:51.457824Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1873:[0m   - cconnect.lock
+[2m2026-01-28T17:08:51.457826Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1873:[0m   - cconnect.clipboard.connect
+[2m2026-01-28T17:08:51.457828Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1873:[0m   - cconnect.share.request
+[2m2026-01-28T17:08:51.457831Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1873:[0m   - cconnect.ping
+[2m2026-01-28T17:08:51.457833Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1873:[0m   - cconnect.cliphistory.pin
+[2m2026-01-28T17:08:51.457835Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1873:[0m   - cconnect.notification.reply
+[2m2026-01-28T17:08:51.457837Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1873:[0m   - cconnect.notification.action
+[2m2026-01-28T17:08:51.457840Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1873:[0m   - cconnect.notification.request
+[2m2026-01-28T17:08:51.457842Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1873:[0m   - cconnect.chat.message
+[2m2026-01-28T17:08:51.457844Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1873:[0m   - cconnect.chat.history
+[2m2026-01-28T17:08:51.457847Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1873:[0m   - cconnect.battery
+[2m2026-01-28T17:08:51.457849Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1873:[0m   - cconnect.contacts.response_uids_timestamps
+[2m2026-01-28T17:08:51.457851Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1873:[0m   - cconnect.cliphistory.sync
+[2m2026-01-28T17:08:51.457853Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1873:[0m   - cconnect.chat.read
+[2m2026-01-28T17:08:51.457856Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1876:[0m Outgoing capabilities: 23
+[2m2026-01-28T17:08:51.457859Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1878:[0m   - cconnect.battery
+[2m2026-01-28T17:08:51.457869Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1878:[0m   - cconnect.battery.request
+[2m2026-01-28T17:08:51.457872Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1878:[0m   - cconnect.chat.history_response
+[2m2026-01-28T17:08:51.457874Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1878:[0m   - cconnect.chat.message
+[2m2026-01-28T17:08:51.457876Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1878:[0m   - cconnect.chat.typing
+[2m2026-01-28T17:08:51.457879Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1878:[0m   - cconnect.clipboard
+[2m2026-01-28T17:08:51.457881Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1878:[0m   - cconnect.clipboard.connect
+[2m2026-01-28T17:08:51.457883Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1878:[0m   - cconnect.cliphistory.add
+[2m2026-01-28T17:08:51.457885Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1878:[0m   - cconnect.cliphistory.result
+[2m2026-01-28T17:08:51.457888Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1878:[0m   - cconnect.cliphistory.sync
+[2m2026-01-28T17:08:51.457890Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1878:[0m   - cconnect.contacts.request_all_uids_timestamps
+[2m2026-01-28T17:08:51.457892Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1878:[0m   - cconnect.contacts.request_vcards_by_uid
+[2m2026-01-28T17:08:51.457895Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1878:[0m   - cconnect.lock
+[2m2026-01-28T17:08:51.457897Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1878:[0m   - cconnect.lock.request
+[2m2026-01-28T17:08:51.457899Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1878:[0m   - cconnect.mpris
+[2m2026-01-28T17:08:51.457901Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1878:[0m   - cconnect.mpris.request
+[2m2026-01-28T17:08:51.457904Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1878:[0m   - cconnect.notification
+[2m2026-01-28T17:08:51.457906Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1878:[0m   - cconnect.notification.action
+[2m2026-01-28T17:08:51.457908Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1878:[0m   - cconnect.notification.reply
+[2m2026-01-28T17:08:51.457911Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1878:[0m   - cconnect.notification.request
+[2m2026-01-28T17:08:51.457913Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1878:[0m   - cconnect.ping
+[2m2026-01-28T17:08:51.457915Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1878:[0m   - cconnect.share.request
+[2m2026-01-28T17:08:51.457917Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1878:[0m   - cconnect.share.request.update
+[2m2026-01-28T17:08:51.457923Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1885:[0m Device registry: 0 devices loaded
+[2m2026-01-28T17:08:51.457926Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1889:[0m   - Paired devices: 0
+[2m2026-01-28T17:08:51.457929Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1890:[0m   - Connected devices: 0
+[2m2026-01-28T17:08:51.457931Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1896:[0m Daemon initialized successfully
+[2m2026-01-28T17:08:51.457934Z[0m [32m INFO[0m [2mcosmic_connect_daemon[0m[2m:[0m [2mcosmic-connect-daemon/src/main.rs[0m[2m:[0m[2m1897:[0m Press Ctrl+C to stop

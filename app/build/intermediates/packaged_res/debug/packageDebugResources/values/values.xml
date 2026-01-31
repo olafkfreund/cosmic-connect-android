@@ -1,5 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="http://schemas.android.com/tools">
+    <string-array name="camera_facing_entries">
+        <item>Back Camera</item>
+        <item>Front Camera</item>
+    </string-array>
+    <string-array name="camera_facing_values" translatable="false">
+        <item>back</item>
+        <item>front</item>
+    </string-array>
+    <string-array name="camera_quality_entries">
+        <item>Low (1 Mbps)</item>
+        <item>Medium (2 Mbps)</item>
+        <item>High (4 Mbps)</item>
+    </string-array>
+    <string-array name="camera_quality_values" translatable="false">
+        <item>low</item>
+        <item>medium</item>
+        <item>high</item>
+    </string-array>
+    <string-array name="camera_resolution_entries">
+        <item>480p (SD)</item>
+        <item>720p (HD)</item>
+        <item>1080p (Full HD)</item>
+    </string-array>
+    <string-array name="camera_resolution_values" translatable="false">
+        <item>480p</item>
+        <item>720p</item>
+        <item>1080p</item>
+    </string-array>
     <string-array name="convert_to_mms_after_entries">
         <item>After one message</item>
         <item>After two messages</item>
@@ -97,7 +125,7 @@
       <item>light</item>
       <item>dark</item>
     </string-array>
-    <color name="launcher_background">#3daee9</color>
+    <color name="launcher_background">#FFFFFF</color>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_elevation">6dp</dimen>
@@ -152,31 +180,30 @@
         <item quantity="other">Sent %2$d files to %1$s"</item>
     </plurals>
     <string name="about">About</string>
-    <string name="about_kde">About KDE</string>
+    <string name="about_kde">About COSMIC Connect</string>
     <string name="about_kde_about"><![CDATA[
       <h1>About</h1>
-      <p>KDE is a world-wide community of software engineers, artists, writers, translators and creators who are committed to <a href="https://www.gnu.org/philosophy/free-sw.html">Free Software</a> development. KDE produces the Plasma desktop environment, hundreds of applications, and the many software libraries that support them.</p>
-      <p>KDE is a cooperative enterprise: no single entity controls its direction or products. Instead, we work together to achieve the common goal of building the world\'s finest Free Software. Everyone is welcome to <a href="https://community.kde.org/Get_Involved">join and contribute</a> to KDE, including you.</p>
-      Visit <a href="https://www.kde.org/">https://www.kde.org/</a> for more information about the KDE community and the software we produce.
+      <p>COSMIC is a world-wide community of software engineers, artists, writers, translators and creators who are committed to <a href="https://www.gnu.org/philosophy/free-sw.html">Free Software</a> development. COSMIC produces the COSMIC desktop environment, hundreds of applications, and the many software libraries that support them.</p>
+      <p>COSMIC is a cooperative enterprise: no single entity controls its direction or products. Instead, we work together to achieve the common goal of building the world\'s finest Free Software. Everyone is welcome to join and contribute to COSMIC, including you.</p>
+      Visit <a href="https://github.com/pop-os/cosmic-epoch">https://github.com/pop-os/cosmic-epoch</a> for more information about the COSMIC community and the software we produce.
       ]]></string>
     <string name="about_kde_join_kde"><![CDATA[
-      <h1>Join KDE</h1>
-      <p>You do not have to be a software developer to be a member of the KDE team. You can join the language teams that translate program interfaces. You can provide graphics, themes, sounds, and improved documentation. You decide!</p>
-      <p>Visit <a href="https://community.kde.org/Get_Involved">https://community.kde.org/Get_Involved</a> for information on some projects in which you can participate.</p>
-      If you need more information or documentation, then a visit to <a href="https://techbase.kde.org/">https://techbase.kde.org/</a> will provide you with what you need.
+      <h1>Join COSMIC</h1>
+      <p>You do not have to be a software developer to be a member of the COSMIC team. You can join the language teams that translate program interfaces. You can provide graphics, themes, sounds, and improved documentation. You decide!</p>
+      <p>Visit <a href="https://github.com/pop-os/cosmic-epoch">https://github.com/pop-os/cosmic-epoch</a> for information on some projects in which you can participate.</p>
       ]]></string>
     <string name="about_kde_report_bugs_or_wishes"><![CDATA[
       <h1>Report Bugs or Wishes</h1>
-      <p>Software can always be improved, and the KDE team is ready to do so. However, you - the user - must tell us when something does not work as expected or could be done better.</p>
-      <p>KDE has a bug tracking system. Visit <a href="https://bugs.kde.org/">https://bugs.kde.org/</a> or use the \"Report Bug\" button from the about screen to report bugs.</p>
-      If you have a suggestion for improvement then you are welcome to use the bug tracking system to register your wish. Make sure you use the severity called \"Wishlist\".
+      <p>Software can always be improved, and the COSMIC team is ready to do so. However, you - the user - must tell us when something does not work as expected or could be done better.</p>
+      <p>COSMIC has a bug tracking system. Visit <a href="https://github.com/olafkfreund/cosmic-connect-android/issues">GitHub Issues</a> or use the \"Report Bug\" button from the about screen to report bugs.</p>
+      If you have a suggestion for improvement then you are welcome to use the bug tracking system to register your wish.
       ]]></string>
     <string name="about_kde_support_kde"><![CDATA[
-      <h1>Support KDE</h1>
-      <p>KDE software is and will always be available free of charge, however creating it is not free.</p>
-      <p>To support development the KDE community has formed the KDE e.V., a non-profit organization legally founded in Germany. KDE e.V. represents the KDE community in legal and financial matters. See <a href="https://ev.kde.org/">https://ev.kde.org/</a> for information on KDE e.V.</p>
-      <p>KDE benefits from many kinds of contributions, including financial. We use the funds to reimburse members and others for expenses they incur when contributing. Further funds are used for legal support and organizing conferences and meetings.</p>
-      <p>We would like to encourage you to support our efforts with a financial donation, using one of the ways described at <a href="https://www.kde.org/community/donations/">https://www.kde.org/community/donations/</a>.</p>
+      <h1>Support COSMIC</h1>
+      <p>COSMIC software is and will always be available free of charge, however creating it is not free.</p>
+      <p>To support development the COSMIC community is formed by various organizations and individuals. See <a href="https://github.com/pop-os/cosmic-epoch">https://github.com/pop-os/cosmic-epoch</a> for information.</p>
+      <p>COSMIC benefits from many kinds of contributions, including financial. We use the funds to reimburse members and others for expenses they incur when contributing. Further funds are used for legal support and organizing conferences and meetings.</p>
+      <p>We would like to encourage you to support our efforts with a financial donation.</p>
       Thank you very much in advance for your support.
       ]]></string>
     <string name="add_command">Add a command</string>
@@ -215,6 +242,27 @@
     <string name="block_notification_images">Block notification images</string>
     <string name="bluetooth_permission_needed_desc">COSMIC Connect needs permission to connect to nearby devices to make devices paired using Bluetooth available in COSMIC Connect.</string>
     <string name="bug_fixes_and_general_improvements">Bug fixes and general improvements</string>
+    <string name="camera_autostart_summary">Automatically start streaming when desktop requests</string>
+    <string name="camera_autostart_title">Auto-start Streaming</string>
+    <string name="camera_back">Back Camera</string>
+    <string name="camera_default_camera_title">Default Camera</string>
+    <string name="camera_external">External Camera</string>
+    <string name="camera_front">Front Camera</string>
+    <string name="camera_permission_explanation">Camera permission is required to stream video to your desktop</string>
+    <string name="camera_plugin_description">Use your phone\'s camera as a virtual webcam on COSMIC Desktop</string>
+    <string name="camera_plugin_title">Camera Webcam</string>
+    <string name="camera_preference_key_autostart" translatable="false">camera_autostart</string>
+    <string name="camera_preference_key_default_camera" translatable="false">camera_default_camera</string>
+    <string name="camera_preference_key_quality" translatable="false">camera_quality</string>
+    <string name="camera_preference_key_resolution" translatable="false">camera_resolution</string>
+    <string name="camera_quality_high">High (4 Mbps)</string>
+    <string name="camera_quality_low">Low (1 Mbps)</string>
+    <string name="camera_quality_medium">Medium (2 Mbps)</string>
+    <string name="camera_quality_title">Quality Preset</string>
+    <string name="camera_resolution_title">Default Resolution</string>
+    <string name="camera_streaming_notification_text">Streaming to %s</string>
+    <string name="camera_streaming_notification_title">Camera Streaming</string>
+    <string name="camera_streaming_stop">Stop Streaming</string>
     <string name="cancel">Cancel</string>
     <string name="cancel_pairing">Cancel pairing</string>
     <string name="cannot_create_file">Cannot create file %s</string>
@@ -234,6 +282,7 @@
     <string name="convert_to_mms_after_default" translatable="false">3</string>
     <string name="convert_to_mms_after_title">Convert to MMS</string>
     <string name="copy_url_to_clipboard">Copy URL to clipboard</string>
+    <string name="cosmo">Cosmo</string>
     <string name="custom_device_deleted">Custom device deleted</string>
     <string name="custom_device_fab_hint">Add a device</string>
     <string name="custom_device_list">Add devices by IP</string>
@@ -296,10 +345,9 @@
     <string name="hold_to_drag">Hold to drag</string>
     <string name="holger_kaelberer_task">Remote keyboard plugin and bug fixes</string>
     <string name="invalid_device_name">Invalid device name</string>
-    <string name="kde">KDE</string>
-    <string name="kde_be_free">KDE - Be Free!</string>
+    <string name="kde">COSMIC</string>
+    <string name="kde_be_free">COSMIC - Be Free!</string>
     <string name="kde_connect">Debug COSMIC Connect</string>
-    <string name="konqi">Konqi</string>
     <string name="left_click">Send Left Click</string>
     <string name="licenses">Licenses</string>
     <string name="location_permission_needed_desc">COSMIC Connect needs the background location permission to know the WiFi network you are connected to even when the app is in the background. This is because the name of the WiFi networks around you could be used to find your location, even when this is not what COSMIC Connect does.</string>
@@ -389,6 +437,20 @@
     <string name="open_mousepad">Remote input</string>
     <string name="open_mousepad_tv">TV remote</string>
     <string name="open_mpris_controls">Multimedia control</string>
+    <string name="open_on_desktop">Open on Desktop</string>
+    <string name="open_on_desktop_error">Failed to open on desktop</string>
+    <string name="open_on_desktop_no_devices">No COSMIC Desktop devices available. Please pair a device first.</string>
+    <string name="open_on_desktop_sharing_to">Opening on %s</string>
+    <string name="open_plugin_action_open">Open</string>
+    <string name="open_plugin_action_reject">Reject</string>
+    <string name="open_plugin_error">Failed to open on desktop</string>
+    <string name="open_plugin_invalid_url">Invalid URL or disallowed scheme</string>
+    <string name="open_plugin_notification_title">%s wants to open</string>
+    <string name="open_plugin_permission_explanation">Notifications are required to show confirmation when COSMIC Desktop wants to open content on your device</string>
+    <string name="open_plugin_sent_file">Sent file to desktop</string>
+    <string name="open_plugin_sent_text">Sent text to desktop</string>
+    <string name="open_plugin_sent_url">Sent URL to desktop</string>
+    <string name="open_plugin_success">Opened on desktop successfully</string>
     <string name="open_settings">Open settings</string>
     <string name="optional_permission_explanation">You need to grant extra permissions to enable all functions</string>
     <string name="pair_new_device">Pair new device</string>
@@ -438,6 +500,10 @@
     <string name="pref_plugin_mprisreceiver_desc">Control your phone\'s media players from another device</string>
     <string name="pref_plugin_notifications">Notification sync</string>
     <string name="pref_plugin_notifications_desc">Access your notifications from other devices</string>
+    <string name="pref_plugin_open">Open on Phone</string>
+    <string name="pref_plugin_open_desc">Receive URLs and content from COSMIC Desktop to open on Android</string>
+    <string name="pref_plugin_open_on_desktop">Open on Desktop</string>
+    <string name="pref_plugin_open_on_desktop_desc">Send URLs, files, and text to open on COSMIC Desktop</string>
     <string name="pref_plugin_ping">Ping</string>
     <string name="pref_plugin_ping_desc">Send and receive pings</string>
     <string name="pref_plugin_presenter">Presentation remote</string>
@@ -556,6 +622,7 @@
     <string name="share_destination_customize_summary_disabled">Received files will appear in Downloads</string>
     <string name="share_destination_customize_summary_enabled">Files will be stored in the directory below</string>
     <string name="share_destination_folder_preference">Destination directory</string>
+    <string name="share_error_no_mime_type">Cannot share: unknown content type</string>
     <string name="share_notification_preference">Noisy notifications</string>
     <string name="share_notification_preference_summary">Vibrate and play a sound when receiving a file</string>
     <string name="share_notifications_explanation">To see the progress when sending and receiving files you need to allow notifications</string>

@@ -10,8 +10,9 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import org.cosmic.cosmicconnect.BackgroundService
-import org.cosmic.cosmicconnect.Device
+import dagger.hilt.android.AndroidEntryPoint
+import org.cosmic.cosmicconnect.Core.DeviceRegistry
+import javax.inject.Inject
 
 /**
  * OpenOnPhoneReceiver - Handle notification actions for open requests
@@ -28,13 +29,16 @@ import org.cosmic.cosmicconnect.Device
  *
  * 1. User taps notification action
  * 2. Receiver extracts requestId, url, deviceId from intent
- * 3. Gets device and plugin instances from BackgroundService
+ * 3. Gets device and plugin instances from DeviceRegistry
  * 4. Calls plugin methods to open URL and send response
  * 5. Hides notification
  *
  * @see OpenOnPhonePlugin
  */
+@AndroidEntryPoint
 class OpenOnPhoneReceiver : BroadcastReceiver() {
+
+    @Inject lateinit var deviceRegistry: DeviceRegistry
 
     companion object {
         private const val TAG = "OpenOnPhoneReceiver"
@@ -45,17 +49,9 @@ class OpenOnPhoneReceiver : BroadcastReceiver() {
         val requestId = intent.getStringExtra(OpenOnPhonePlugin.EXTRA_REQUEST_ID) ?: return
         val deviceId = intent.getStringExtra(OpenOnPhonePlugin.EXTRA_DEVICE_ID) ?: return
 
-        // Get device from BackgroundService
-        val device = BackgroundService.RunCommand(context, { service ->
-            service.getDevice(deviceId)
-        }) ?: run {
-            Log.e(TAG, "Device not found: $deviceId")
-            return
-        }
-
-        // Get plugin instance
-        val plugin = device.getPlugin(OpenOnPhonePlugin::class.java)
-        if (plugin == null || !plugin.isDeviceInitialized) {
+        // Get plugin from DeviceRegistry
+        val plugin = deviceRegistry.getDevicePlugin(deviceId, OpenOnPhonePlugin::class.java)
+        if (plugin == null) {
             Log.e(TAG, "Plugin not available for device: $deviceId")
             return
         }

@@ -84,18 +84,18 @@
     <item quantity="other">Skickade %2$d filer till %1$s</item>
   </plurals>
     <string name="about">Om</string>
-    <string name="about_kde">Om KDE</string>
-    <string name="about_kde_about">&lt;h1>Om&lt;/h1> &lt;p>KDE är ett världsomspännande nätverk av programvaruingenjörer, grafiker, författare, översättare och kreatörer som är engagerade i utveckling av &lt;a href=https://www.gnu.org/philosophy/free-sw.html>fri programvara&lt;/a>. KDE producerar skrivbordsmiljön Plasma, hundratals program, och de talrika programvarubibliotek som stöder dem.&lt;/p> &lt;p>KDE är ett kooperativ, där ingen enskild person styr inriktningen eller produkterna. Istället arbetar vi tillsammans för att uppnå det gemensamma målet att skapa värdens finaste fria programvara. Alla är välkomna att &lt;a href=https://community.kde.org/Get_Involved>gå med och bidra&lt;/a> till KDE, inklusive du själv.&lt;/p> Besök &lt;a href=https://www.kde.org/>https://www.kde.org/&lt;/a> för ytterligare information om KDE-gemenskapen och programvaran vi skapar.</string>
-    <string name="about_kde_join_kde">&lt;h1>Gå med i KDE&lt;/h1> &lt;p>Du behöver inte vara en programutvecklare för att bli medlem i KDE-gruppen. Du kan gå med i de nationella grupperna som översätter programmens gränssnitt. Du kan bidra med grafik, teman, ljud och förbättrad dokumentation. Det är upp till dig!&lt;/p> &lt;p>Besök &lt;a href=https://community.kde.org/Get_Involved>https://community.kde.org/Get_Involved&lt;/a> för information om några projekt som du kan delta i.&lt;/p>Om du behöver mer information eller dokumentation kommer ett besök på &lt;a href=https://techbase.kde.org/>https://techbase.kde.org/&lt;/a> att ge dig det du behöver.</string>
-    <string name="about_kde_report_bugs_or_wishes">&lt;h1>Rapportera fel eller önskemål&lt;/h1> &lt;p>Programvara kan alltid förbättras, och KDE-gruppen är beredd att göra det. Men du - användaren - måste berätta för oss om något inte fungerar som förväntat eller kunde ha gjorts bättre.&lt;/p> &lt;p>KDE har ett felrapporteringssystem. Besök &lt;a href=https://bugs.kde.org/>https://bugs.kde.org/&lt;/a> eller använd dialogrutan \"Rapportera fel...\" från om-skärmen för att rapportera fel.&lt;/p> Om du har ett förslag på en förbättring kan du använda felrapporteringssystemet för att registrera din önskan. Se då till att du använder allvarlighetsgraden \"Önskan\".</string>
-    <string name="about_kde_support_kde">&lt;h1>Stöd KDE&lt;/h1> &lt;p>KDE är och kommer alltid att vara tillgängligt utan avgift, dock är det inte gratis att ta fram det.&lt;/p> &lt;p>För att stödja utvecklingen upprättade KDE-gruppen KDE e.V., en ideell organisation som juridiskt grundats i Tyskland. KDE e.V. representerar KDE-gemenskapen i juridiska och ekonomiska angelägenheter. Se &lt;a href=https://ev.kde.org/>https://ev.kde.org/&lt;/a> för information om KDE e.V.&lt;/p> &lt;p>KDE gagnas av många olika typer av bidrag, inklusive ekonomiska. Medlen används för att ersätta medlemmar och andra för utgifter som de åsamkas när de bidrar till KDE. Ytterligare medel används för juridiskt stöd och för att organisera konferenser och möten.&lt;/p> &lt;p>Vi vill gärna uppmuntra dig att stödja vårt arbete med en donation, på något av sätten som beskrivs på &lt;a href=https://www.kde.org/community/donations/>https://www.kde.org/community/donations/&lt;/a>.&lt;/p>Tack på förhand för ditt stöd.</string>
+    <string name="about_kde">Om COSMIC</string>
+    <string name="about_kde_about">&lt;h1>Om&lt;/h1> &lt;p>COSMIC är ett världsomspännande nätverk av programvaruingenjörer, grafiker, författare, översättare och kreatörer som är engagerade i utveckling av &lt;a href=https://www.gnu.org/philosophy/free-sw.html>fri programvara&lt;/a>. COSMIC producerar skrivbordsmiljön Plasma, hundratals program, och de talrika programvarubibliotek som stöder dem.&lt;/p> &lt;p>COSMIC är ett kooperativ, där ingen enskild person styr inriktningen eller produkterna. Istället arbetar vi tillsammans för att uppnå det gemensamma målet att skapa värdens finaste fria programvara. Alla är välkomna att &lt;a href=https://community.kde.org/Get_Involved>gå med och bidra&lt;/a> till COSMIC, inklusive du själv.&lt;/p> Besök &lt;a href=https://www.kde.org/>https://www.kde.org/&lt;/a> för ytterligare information om COSMIC-gemenskapen och programvaran vi skapar.</string>
+    <string name="about_kde_join_kde">&lt;h1>Gå med i COSMIC&lt;/h1> &lt;p>Du behöver inte vara en programutvecklare för att bli medlem i COSMIC-gruppen. Du kan gå med i de nationella grupperna som översätter programmens gränssnitt. Du kan bidra med grafik, teman, ljud och förbättrad dokumentation. Det är upp till dig!&lt;/p> &lt;p>Besök &lt;a href=https://community.kde.org/Get_Involved>https://community.kde.org/Get_Involved&lt;/a> för information om några projekt som du kan delta i.&lt;/p>Om du behöver mer information eller dokumentation kommer ett besök på &lt;a href=https://techbase.kde.org/>https://techbase.kde.org/&lt;/a> att ge dig det du behöver.</string>
+    <string name="about_kde_report_bugs_or_wishes">&lt;h1>Rapportera fel eller önskemål&lt;/h1> &lt;p>Programvara kan alltid förbättras, och COSMIC-gruppen är beredd att göra det. Men du - användaren - måste berätta för oss om något inte fungerar som förväntat eller kunde ha gjorts bättre.&lt;/p> &lt;p>COSMIC har ett felrapporteringssystem. Besök &lt;a href=https://bugs.kde.org/>https://bugs.kde.org/&lt;/a> eller använd dialogrutan \"Rapportera fel...\" från om-skärmen för att rapportera fel.&lt;/p> Om du har ett förslag på en förbättring kan du använda felrapporteringssystemet för att registrera din önskan. Se då till att du använder allvarlighetsgraden \"Önskan\".</string>
+    <string name="about_kde_support_kde">&lt;h1>Stöd COSMIC&lt;/h1> &lt;p>COSMIC är och kommer alltid att vara tillgängligt utan avgift, dock är det inte gratis att ta fram det.&lt;/p> &lt;p>För att stödja utvecklingen upprättade COSMIC-gruppen COSMIC e.V., en ideell organisation som juridiskt grundats i Tyskland. COSMIC e.V. representerar COSMIC-gemenskapen i juridiska och ekonomiska angelägenheter. Se &lt;a href=https://ev.kde.org/>https://ev.kde.org/&lt;/a> för information om COSMIC e.V.&lt;/p> &lt;p>COSMIC gagnas av många olika typer av bidrag, inklusive ekonomiska. Medlen används för att ersätta medlemmar och andra för utgifter som de åsamkas när de bidrar till COSMIC. Ytterligare medel används för juridiskt stöd och för att organisera konferenser och möten.&lt;/p> &lt;p>Vi vill gärna uppmuntra dig att stödja vårt arbete med en donation, på något av sätten som beskrivs på &lt;a href=https://www.kde.org/community/donations/>https://www.kde.org/community/donations/&lt;/a>.&lt;/p>Tack på förhand för ditt stöd.</string>
     <string name="add_command">Lägg till ett kommando</string>
     <string name="add_command_description">Du kan lägga till kommandon på skrivbordet</string>
     <string name="add_device_dialog_title">Lägg till apparat</string>
     <string name="add_device_hint">Värddatornamn eller IP-adress</string>
     <string name="add_trusted_network">Lägg till %1s</string>
     <string name="addcommand_explanation">Det finns inga kommandon registrerade</string>
-    <string name="addcommand_explanation2">Du kan lägga till nya kommandon i KDE-ansluts systeminställningar</string>
+    <string name="addcommand_explanation2">Du kan lägga till nya kommandon i COSMIC-ansluts systeminställningar</string>
     <string name="alex_fiestas_task">Förbättringar av kontaktinsticksprogram</string>
     <string name="all">Alla</string>
     <string name="all_permissions_granted">Alla rättigheter beviljade 🎉</string>
@@ -122,7 +122,7 @@
     <string name="block_images">Blockera bilder i underrättelser</string>
     <string name="block_notification_contents">Blockera underrättelseinnehåll</string>
     <string name="block_notification_images">Blockera underrättelsebilder</string>
-    <string name="bluetooth_permission_needed_desc">KDE-anslut behöver behörighet för att ansluta till närliggande apparater för att göra apparater som är parkopplade med Blåtand tillgängliga i KDE-anslut.</string>
+    <string name="bluetooth_permission_needed_desc">COSMIC-anslut behöver behörighet för att ansluta till närliggande apparater för att göra apparater som är parkopplade med Blåtand tillgängliga i COSMIC-anslut.</string>
     <string name="bug_fixes_and_general_improvements">Felrättningar och allmänna förbättringar</string>
     <string name="cancel">Avbryt</string>
     <string name="cancel_pairing">Avbryt parkoppling</string>
@@ -137,10 +137,11 @@
     <string name="clipboard_toast">Kopierad till klippbordet</string>
     <string name="close">Stäng</string>
     <string name="compose_send_title">Skriv och skicka</string>
-    <string name="contacts_per_device_confirmation">Dina telefonkontakter kopieras över till den här apparaten, så att de kan användas av SMS-programmet i KDE-anslut och andra program.</string>
+    <string name="contacts_per_device_confirmation">Dina telefonkontakter kopieras över till den här apparaten, så att de kan användas av SMS-programmet i COSMIC-anslut och andra program.</string>
     <string name="contacts_permission_explanation">För att dela kontaktlistan med skrivbordet måste du ge rättigheter för kontakter</string>
     <string name="convert_to_mms_after_title">Konvertera till MMS</string>
     <string name="copy_url_to_clipboard">Kopiera webbadress till klippbordet</string>
+    <string name="cosmo">Cosmo</string>
     <string name="custom_device_deleted">Egen apparat borttagen</string>
     <string name="custom_device_fab_hint">Lägg till en apparat</string>
     <string name="custom_device_list">Lägg till apparater enligt IP-adress</string>
@@ -171,7 +172,7 @@
     <string name="error_clocks_not_match">Apparaternas klockor är inte synkroniserade</string>
     <string name="error_not_reachable">Apparaten kan inte nås</string>
     <string name="error_timed_out">Tidsgräns överskriden</string>
-    <string name="everyone_else">Alla andra som har bidragit till KDE-anslut under alla år</string>
+    <string name="everyone_else">Alla andra som har bidragit till COSMIC-anslut under alla år</string>
     <string name="extra_options">Extra alternativ</string>
     <string name="filter_apps_info">Underrättelser synkroniseras för markerade applikationer.</string>
     <string name="findmyphone_description">Ringer till apparaten så att du kan hitta den</string>
@@ -188,13 +189,12 @@
     <string name="hold_to_drag">Håll för att dra</string>
     <string name="holger_kaelberer_task">Insticksprogram för fjärrtangentbord och felrättningar</string>
     <string name="invalid_device_name">Ogiltigt apparatnamn</string>
-    <string name="kde">KDE</string>
-    <string name="kde_be_free">KDE - Lev fri!</string>
-    <string name="kde_connect">KDE-anslut</string>
-    <string name="konqi">Konqi</string>
+    <string name="kde">COSMIC</string>
+    <string name="kde_be_free">COSMIC - Lev fri!</string>
+    <string name="kde_connect">COSMIC-anslut</string>
     <string name="left_click">Skicka vänsterklick</string>
     <string name="licenses">Licenser</string>
-    <string name="location_permission_needed_desc">KDE-anslut behöver rättigheter för bakgrundsplats för att känna till WIFI-nätverket du är ansluten med även när programmet är i bakgrunden. Det beror på att namnen på WIFI-nätverk omkring dig skulle kunna användas för att ta reda på var du befinner dig, även om det inte är vad KDE-anslut gör.</string>
+    <string name="location_permission_needed_desc">COSMIC-anslut behöver rättigheter för bakgrundsplats för att känna till WIFI-nätverket du är ansluten med även när programmet är i bakgrunden. Det beror på att namnen på WIFI-nätverk omkring dig skulle kunna användas för att ta reda på var du befinner dig, även om det inte är vad COSMIC-anslut gör.</string>
     <string name="location_permission_needed_title">Rättighet krävs</string>
     <string name="maintainer_and_developer">Underhåll och utvecklare</string>
     <string name="manifest_label_share">Skicka till apparat</string>
@@ -223,7 +223,7 @@
     <string name="mpris_keepwatching_settings_title">Fortsätt spela</string>
     <string name="mpris_loop">Upprepa</string>
     <string name="mpris_next">Nästa</string>
-    <string name="mpris_notification_settings_summary">Tillåt att styra mediaspelare utan att KDE-anslut öppnas</string>
+    <string name="mpris_notification_settings_summary">Tillåt att styra mediaspelare utan att COSMIC-anslut öppnas</string>
     <string name="mpris_notification_settings_title">Visa underrättelser om mediastyrning</string>
     <string name="mpris_notifications_explanation">Underrättelserättigheter krävs för att visa fjärrmedia i underrättelselådan</string>
     <string name="mpris_open_url">Fortsätt spela här</string>
@@ -242,7 +242,7 @@
     <string name="no_file_browser">Det finns inga filbläddrare installerade.</string>
     <string name="no_permission_mprisreceiver">För att kunna styra mediaspelare måste du ge tillgång till underrättelser</string>
     <string name="no_permissions">Du måste ge rättighet att komma åt underrättelser</string>
-    <string name="no_permissions_remotekeyboard">KDE-ansluts fjärrtangentbord måste aktiveras för att ta emot tangentnedtryckningar</string>
+    <string name="no_permissions_remotekeyboard">COSMIC-ansluts fjärrtangentbord måste aktiveras för att ta emot tangentnedtryckningar</string>
     <string name="no_players_connected">Inga spelare hittades</string>
     <string name="no_wifi">Du är inte ansluten till ett WIFI-nätverk, så du kanske inte kan se alla apparater. Klicka här för att aktivera WIFI.</string>
     <string name="notification_channel_default">Andra underrättelser</string>
@@ -266,12 +266,12 @@
     <string name="pair_requested">Parkoppling begärd</string>
     <string name="pair_succeeded">Parkoppling lyckades</string>
     <string name="pairing_accept">Acceptera</string>
-    <string name="pairing_description">Andra apparater som kör KDE-anslut i samma nätverk ska synas här.</string>
+    <string name="pairing_description">Andra apparater som kör COSMIC-anslut i samma nätverk ska synas här.</string>
     <string name="pairing_duplicate_names">Varning: Det finns flera enheter med samma namn.</string>
     <string name="pairing_explanation">Parkoppling av två enheter ger dem tillgång till varandra. Parkoppla bara dina egna enheter.</string>
     <string name="pairing_reject">Avslå</string>
     <string name="pairing_request_from">Parkopplingsförfrågan från \'%1s\'</string>
-    <string name="pairing_title">KDE-anslut apparater</string>
+    <string name="pairing_title">COSMIC-anslut apparater</string>
     <string name="permission_explanation">Insticksprogrammet behöver rättigheter för att fungera</string>
     <string name="ping_failed">Kunde inte skicka paket till apparaten</string>
     <string name="ping_in_progress">Skickar paket…</string>
@@ -321,7 +321,7 @@
     <string name="pref_plugin_telepathy">Skicka SMS</string>
     <string name="pref_plugin_telepathy_desc">Skicka textmeddelanden från skrivbordet</string>
     <string name="pref_plugin_telepathy_mms">Skicka MMS</string>
-    <string name="pref_plugin_telepathy_mms_desc">För att kunna skicka MMS från KDE-anslut måste det anges som standardprogram för SMS.</string>
+    <string name="pref_plugin_telepathy_mms_desc">För att kunna skicka MMS från COSMIC-anslut måste det anges som standardprogram för SMS.</string>
     <string name="pref_plugin_telephony">Telefonunderrättelser</string>
     <string name="pref_plugin_telephony_desc">Skicka underrättelser för inkommande samtal</string>
     <string name="presenter_exit">Avsluta presentation</string>
@@ -335,11 +335,11 @@
     <string name="received_file_text">Rör för att öppna \'%1s\'</string>
     <string name="refresh">Uppdatera</string>
     <string name="remote_device_fingerprint">SHA256-fingeravtryck för den andra apparatens certifikat är:</string>
-    <string name="remote_keyboard_service">KDE-anslut fjärrtangentbord</string>
+    <string name="remote_keyboard_service">COSMIC-anslut fjärrtangentbord</string>
     <string name="remotekeyboard_connected">Anslutning till externt tangentbord är aktiv</string>
     <string name="remotekeyboard_editing_only_title">Hantera bara externa tangenter vid redigering</string>
     <string name="remotekeyboard_multiple_connections">Det finns mer än en anslutning till externt tangentbord, välj apparat att anpassa</string>
-    <string name="remotekeyboard_not_connected">Det finns ingen aktiv anslutning till externt tangentbord, upprätta en i KDE-anslut</string>
+    <string name="remotekeyboard_not_connected">Det finns ingen aktiv anslutning till externt tangentbord, upprätta en i COSMIC-anslut</string>
     <string name="report_bug">Rapportera fel</string>
     <string name="request_pairing">Begär parkoppling</string>
     <string name="right_click">Skicka högerklick</string>
@@ -382,14 +382,14 @@
     <string name="setting_persistent_notification_oreo">Permanent underrättelse</string>
     <string name="settings">Inställningar</string>
     <string name="settings_dark_mode">Mörkt tema</string>
-    <string name="settings_export_logs">Exportera loggar från KDE anslut</string>
+    <string name="settings_export_logs">Exportera loggar från COSMIC anslut</string>
     <string name="settings_export_logs_text">Generera en fil med körinformation som kan hjälpa till att felsöka problem.</string>
     <string name="settings_icon_description">Inställningsikon</string>
     <string name="settings_more_settings_text">Inställningar per apparat hittas i \'Insticksprograminställningar\' på apparaten.</string>
     <string name="settings_more_settings_title">Fler inställningar</string>
     <string name="settings_rename">Apparatnamn</string>
     <string name="sftp_action_mode_menu_delete">Ta bort</string>
-    <string name="sftp_manage_storage_permission_explanation">För att tillåta åtkomst av filer på den här apparaten från en annan apparat måste du låta KDE-anslut hantera lagringsenheten.</string>
+    <string name="sftp_manage_storage_permission_explanation">För att tillåta åtkomst av filer på den här apparaten från en annan apparat måste du låta COSMIC-anslut hantera lagringsenheten.</string>
     <string name="sftp_missing_permission_error">Rättigheter saknas: filsystemåtkomst</string>
     <string name="sftp_no_storage_locations_configured">Inga lagringsplatser inställda</string>
     <string name="sftp_preference_add_storage_location_title">Lägg till lagringsplats</string>

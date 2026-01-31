@@ -100,11 +100,11 @@
     <item quantity="other"/>
   </plurals>
     <string name="about">על אודות</string>
-    <string name="about_kde">על KDE</string>
-    <string name="about_kde_about">&lt;h1>על אודות&lt;/h1> &lt;p>KDE היא קהילה בינלאומית של מהנדסי תוכנה, כותבים, מתרגמים ויוצרים שמחויבים לפיתוח &lt;a href=https://www.gnu.org/philosophy/free-sw.html>תוכנה חופשית&lt;/a>. מיזם KDE מפיק את סביבת שולחן העבודה פלזמה, מאות יישומים ומגוון רחב של ספריות תוכנה כדי לתמוך בהם.&lt;/p> &lt;p>KDE הוא תאגיד חברתי: אף ישות יחידה לא שולטת בכיוון או במוצרים. במקום, אנו פעולים יחד כדי להגיע ליעדנו המשותף: לבנות את התוכנה החופשית הטובה בעולם. כולם מוזמנים &lt;a href=https://community.kde.org/Get_Involved>להצטרף ולתרום&lt;/a> ל־KDE, כולל אותך.&lt;/p> כדאי לבקר באתר &lt;a href=https://www.kde.org/>https://www.kde.org/&lt;/a> למידע נוסף על קהילת KDE ועל התוכנה שאנו מפיקים.</string>
-    <string name="about_kde_join_kde">&lt;h1>הצטרפות ל־KDE&lt;/h1> &lt;p>לא צריך להיות מפתחי תוכנה כדי להצטרף לחברות ב־KDE. אפשר להצטרף לצוותים המקומיים שמתרגמים את ממשקי התוכנות. אפשר לספק גרפיקה, ערכות עיצוב, צלילי ושיפור התיעוד. הבחירה היא רק שלך!&lt;/p> &lt;p>יש לבקר ב־&lt;a href=https://community.kde.org/Get_Involved>https://community.kde.org/Get_Involved&lt;/a> למידע על חלק מהמיזמים בהם ניתן לקחת חלק.&lt;/p> כדי לקבל מידע או תיעוד נוספים, ביקור ב־&lt;a href=https://techbase.kde.org/>https://techbase.kde.org/&lt;/a> יספק לך את מה שדרוש לך.</string>
-    <string name="about_kde_report_bugs_or_wishes">&lt;h1>דיווח על תקלות או משאלות&lt;/h1> &lt;p>תוכנות תמיד יכולות להשתפר וצוות KDE ערוך לכך. עם זאת, אנו זקוקים לך - המשתמש או המשתמשת - כדי לספר לנו מתי משהו לא עובד כצפוי או עשוי לעבוד טוב יותר.&lt;/p> &lt;p>ל־KDE יש מערכת מעקב אחר תקלות. יש לבקר ב־&lt;a href=https://bugs.kde.org/>https://bugs.kde.org/&lt;/a> או להשתמש בכפתור „דיווח על תקלה” ממסך על אודות כדי לדווח על תקלות.&lt;/p> אם יש לך הצעה לשיפור, אנו מזמינים אותך להשתמש במערכת מעקב התקלות כדי לתעד את המשאלה שלך, חשוב לזכור לסמן אותה בדרגת חומרה (severity) בשם „Wishlist” (רשימת משאלות).</string>
-    <string name="about_kde_support_kde">&lt;h1>תמיכה ב־KDE&lt;/h1> &lt;p>התוכנות של KDE הן ותמיד תהיינה ללא עלות, למרות שליצור אותן זה לא בחינם.&lt;/p> &lt;p>כדי לתמוך בפיתוח, הקימה קהילת KDE את KDE e.V.‎, ארגון ללא מטרות רווח שנוסד משפטית בגרמניה. KDE e.V.‎ מייצגת את KDE בנושאים משפטיים וכלכליים. אפשר לפנות אל &lt;a href=https://ev.kde.org/>https://ev.kde.org/&lt;/a> למידעי על KDE e.V.‎&lt;/p> &lt;p>KDE זוכה לסוגים רבים של תרומות, לרובת כלכליות. אנו משתמשים במימון כדי לשפות חברים ואחרים על הוצאות שחלות עליהם כדי לתרום. שאר הכסף משמש לתמיכה משפטית ולארגון כנסים ומפגשים.&lt;/p> &lt;p>אנו מעודדים אותך לתמוך במאמצים שלנו בעזרת תרומה כספים, באמצעות אחת מהדרכים שמתוארות בכתובת &lt;a href=https://www.kde.org/community/donations/>https://www.kde.org/community/donations/&lt;/a>.&lt;/p> אנו מודים לך מראש על תמיכתך.</string>
+    <string name="about_kde">על COSMIC</string>
+    <string name="about_kde_about">&lt;h1>על אודות&lt;/h1> &lt;p>COSMIC היא קהילה בינלאומית של מהנדסי תוכנה, כותבים, מתרגמים ויוצרים שמחויבים לפיתוח &lt;a href=https://www.gnu.org/philosophy/free-sw.html>תוכנה חופשית&lt;/a>. מיזם COSMIC מפיק את סביבת שולחן העבודה פלזמה, מאות יישומים ומגוון רחב של ספריות תוכנה כדי לתמוך בהם.&lt;/p> &lt;p>COSMIC הוא תאגיד חברתי: אף ישות יחידה לא שולטת בכיוון או במוצרים. במקום, אנו פעולים יחד כדי להגיע ליעדנו המשותף: לבנות את התוכנה החופשית הטובה בעולם. כולם מוזמנים &lt;a href=https://community.kde.org/Get_Involved>להצטרף ולתרום&lt;/a> ל־COSMIC, כולל אותך.&lt;/p> כדאי לבקר באתר &lt;a href=https://www.kde.org/>https://www.kde.org/&lt;/a> למידע נוסף על קהילת COSMIC ועל התוכנה שאנו מפיקים.</string>
+    <string name="about_kde_join_kde">&lt;h1>הצטרפות ל־COSMIC&lt;/h1> &lt;p>לא צריך להיות מפתחי תוכנה כדי להצטרף לחברות ב־COSMIC. אפשר להצטרף לצוותים המקומיים שמתרגמים את ממשקי התוכנות. אפשר לספק גרפיקה, ערכות עיצוב, צלילי ושיפור התיעוד. הבחירה היא רק שלך!&lt;/p> &lt;p>יש לבקר ב־&lt;a href=https://community.kde.org/Get_Involved>https://community.kde.org/Get_Involved&lt;/a> למידע על חלק מהמיזמים בהם ניתן לקחת חלק.&lt;/p> כדי לקבל מידע או תיעוד נוספים, ביקור ב־&lt;a href=https://techbase.kde.org/>https://techbase.kde.org/&lt;/a> יספק לך את מה שדרוש לך.</string>
+    <string name="about_kde_report_bugs_or_wishes">&lt;h1>דיווח על תקלות או משאלות&lt;/h1> &lt;p>תוכנות תמיד יכולות להשתפר וצוות COSMIC ערוך לכך. עם זאת, אנו זקוקים לך - המשתמש או המשתמשת - כדי לספר לנו מתי משהו לא עובד כצפוי או עשוי לעבוד טוב יותר.&lt;/p> &lt;p>ל־COSMIC יש מערכת מעקב אחר תקלות. יש לבקר ב־&lt;a href=https://bugs.kde.org/>https://bugs.kde.org/&lt;/a> או להשתמש בכפתור „דיווח על תקלה” ממסך על אודות כדי לדווח על תקלות.&lt;/p> אם יש לך הצעה לשיפור, אנו מזמינים אותך להשתמש במערכת מעקב התקלות כדי לתעד את המשאלה שלך, חשוב לזכור לסמן אותה בדרגת חומרה (severity) בשם „Wishlist” (רשימת משאלות).</string>
+    <string name="about_kde_support_kde">&lt;h1>תמיכה ב־COSMIC&lt;/h1> &lt;p>התוכנות של COSMIC הן ותמיד תהיינה ללא עלות, למרות שליצור אותן זה לא בחינם.&lt;/p> &lt;p>כדי לתמוך בפיתוח, הקימה קהילת COSMIC את COSMIC e.V.‎, ארגון ללא מטרות רווח שנוסד משפטית בגרמניה. COSMIC e.V.‎ מייצגת את COSMIC בנושאים משפטיים וכלכליים. אפשר לפנות אל &lt;a href=https://ev.kde.org/>https://ev.kde.org/&lt;/a> למידעי על COSMIC e.V.‎&lt;/p> &lt;p>COSMIC זוכה לסוגים רבים של תרומות, לרובת כלכליות. אנו משתמשים במימון כדי לשפות חברים ואחרים על הוצאות שחלות עליהם כדי לתרום. שאר הכסף משמש לתמיכה משפטית ולארגון כנסים ומפגשים.&lt;/p> &lt;p>אנו מעודדים אותך לתמוך במאמצים שלנו בעזרת תרומה כספים, באמצעות אחת מהדרכים שמתוארות בכתובת &lt;a href=https://www.kde.org/community/donations/>https://www.kde.org/community/donations/&lt;/a>.&lt;/p> אנו מודים לך מראש על תמיכתך.</string>
     <string name="add_command">הוספת פקודה</string>
     <string name="add_command_description">אפשר להוסיף פקודות בשולחן העבודה</string>
     <string name="add_device_dialog_title">הוספת מכשיר</string>
@@ -158,6 +158,7 @@
     <string name="contacts_permission_explanation">כדי לשתף את ספר הכתובות שלך עם שולחן העבודה, צריך להעניק הרשאה לאנשי הקשר</string>
     <string name="convert_to_mms_after_title">המרה ל־MMS</string>
     <string name="copy_url_to_clipboard">העתקת כתובת ללוח הגזירים</string>
+    <string name="cosmo">Cosmo</string>
     <string name="custom_device_deleted">מכשיר מותאם אישית נמחק</string>
     <string name="custom_device_fab_hint">הוספת מכשיר</string>
     <string name="custom_device_list">הוספת מכשירים לפי IP</string>
@@ -212,10 +213,9 @@
     <string name="hold_to_drag">החזקה לגרירה</string>
     <string name="holger_kaelberer_task">תוסף מקלדת מרוחקת ותיקוני תקלות</string>
     <string name="invalid_device_name">שם המכשיר שגוי</string>
-    <string name="kde">KDE</string>
-    <string name="kde_be_free">KDE - להרגיש את החופש!</string>
+    <string name="kde">COSMIC</string>
+    <string name="kde_be_free">COSMIC - להרגיש את החופש!</string>
     <string name="kde_connect">COSMIC Connect</string>
-    <string name="konqi">Konqi</string>
     <string name="left_click">שליחת לחיצה ימנית</string>
     <string name="licenses">רישיונות</string>
     <string name="location_permission_needed_desc">COSMIC Connect צריך הרשאת איתור מקום ברקע כדי לדעת לאיזו רשת אלחוטית התחברת, אפילו אם היישום ברקע. מצב זה נחוץ כיוון ששם הרשתות האלחוטיות מסביבך יכולים לשמש לאיתור המקום שלך, אפילו אם זה לא מה ש־COSMIC Connect תוכנן לעשות.</string>

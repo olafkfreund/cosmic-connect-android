@@ -84,18 +84,18 @@
     <item quantity="other">Gönder %2$d şuraya %1$s</item>
   </plurals>
     <string name="about">Hakkında</string>
-    <string name="about_kde">KDE Hakkında</string>
-    <string name="about_kde_about">&lt;h1>Hakkında&lt;/h1> &lt;p>KDE, &lt;a href=https://www.gnu.org/philosophy/free-sw.html>Özgür Yazılım&lt;/a> hareketine destek veren yazılım mühendislerinin, sanatçıların, yazarların, çevirmenlerin ve yaratıcıların bir araya geldiği dünya çapında bir topluluktur KDE, Plasma masaüstü ortamını, yüzlerce uygulamayı ve onları destekleyen sayısız yazılım kitaplığını üretir.&lt;/p> &lt;p>KDE, işbirliğine dayalı bir kuruluştur: yönünü veya ürünlerini tek başına denetleyen bir kuruluş yoktur. Bunun yerine, dünyanın en iyi Özgür Yazılımını oluşturma ortak hedefine ulaşmak için birlikte çalışıyoruz. Siz de dahil olmak üzere herkes &lt;a href=https://community.kde.org/Get_Involved>katılabilir&lt;/a> ve katkıda bulunabilir.&lt;/p> KDE topluluğu ve ürettiğimiz yazılımlar hakkında daha fazla bilgi için &lt;a href=https://www.kde.org/>https://www.kde.org/&lt;/a> adresini ziyaret edin.</string>
-    <string name="about_kde_join_kde">"&lt;h1>KDE’ye Katılın&lt;/h1> &lt;p>KDE takımının bir üyesi olmak için yazılım geliştirici olmanıza gerek yoktur. Program arayüzlerini çeviren dil takımlarına katılabilirsiniz. Grafikler, temalar, sesler ve iyileştirilmiş belgelendirme sağlayabilirsiniz. Karar sizin!&lt;/p> &lt;p>Katılabileceğiniz bazı projeler hakkında bilgi almak için  &lt;a href=https://community.kde.org/Get_Involved>https://community.kde.org/Get_Involved&lt;/a> sayfasını ziyaret edin.&lt;/p> Daha fazla bilgiye veya belgeye gereksiniminiz varsa &lt;a href=https://techbase.kde.org/>https://techbase.kde.org/&lt;/a> sayfasında aradığınızı bulabilirsiniz."</string>
-    <string name="about_kde_report_bugs_or_wishes">&lt;h1>Hataları veya İsteklerinizi Bildirin&lt;/h1> &lt;p>Yazılımlar her zaman iyileştirilebilir ve KDE takımın bunu yapmaya hazırdır. Ancak siz de bir şey beklendiği gibi gitmezse veya hata verirse bize bildirin.&lt;/p> &lt;p>KDE’nin bir hata takip sistemi vardır. &lt;a href=https://bugs.kde.org/>https://bugs.kde.org/&lt;/a> adresini ziyaret edin veya hakkında ekranının ‘Hata Bildir’ düğmesini kullanarak hataları bildirin.&lt;/p> Bir iyileştirme için öneriniz varsa bunu bildirmek için hata takip sistemini kullanabilirsiniz; yalnızca “Wishlist” önceliğini kullandığınızdan emin olun.</string>
-    <string name="about_kde_support_kde">"&lt;h1>KDE’yi Destekleyin&lt;/h1> &lt;p>KDE yazılımları her zaman ücretsiz kalmayı sürdürecektir; ancak bunu oluşturmak bedava değildir. &lt;/p> &lt;p>Geliştirmeyi desteklemek için KDE topluluğu, kar amacı gütmeyen bir kuruluş olan KDE e.V.’yi kurmuştur, bu topluluk KDE topluğunu yasal ve finansal konularda temsil eder. KDE e.V. hakkında daha fazla bilgi için  &lt;a href=https://ev.kde.org/>https://ev.kde.org/&lt;/a> adresini ziyaret edin.&lt;/p> &lt;p>KDE, finansal da dahil olmak üzere her türlü katkıdan yarar sağlar. Maddi kaynaklarımızla, geliştiricilerimizin ve diğerlerinin katkıda bulunurken oluşan masraflarını karşılıyoruz. Ayrıca yasal destek ve konferanslar ve toplantılar için de kullanılmaktadır.&lt;/p> &lt;p>Emeklerimizi, finansal destekle desteklemeniz için &lt;a href=https://www.kde.org/community/donations/>https://www.kde.org/community/donations/&lt;/a> adresinde bulunan yollardan birini kullanabilirsiniz.&lt;/p> Desteğiniz için şimdiden teşekkürler."</string>
+    <string name="about_kde">COSMIC Hakkında</string>
+    <string name="about_kde_about">&lt;h1>Hakkında&lt;/h1> &lt;p>COSMIC, &lt;a href=https://www.gnu.org/philosophy/free-sw.html>Özgür Yazılım&lt;/a> hareketine destek veren yazılım mühendislerinin, sanatçıların, yazarların, çevirmenlerin ve yaratıcıların bir araya geldiği dünya çapında bir topluluktur COSMIC, Plasma masaüstü ortamını, yüzlerce uygulamayı ve onları destekleyen sayısız yazılım kitaplığını üretir.&lt;/p> &lt;p>COSMIC, işbirliğine dayalı bir kuruluştur: yönünü veya ürünlerini tek başına denetleyen bir kuruluş yoktur. Bunun yerine, dünyanın en iyi Özgür Yazılımını oluşturma ortak hedefine ulaşmak için birlikte çalışıyoruz. Siz de dahil olmak üzere herkes &lt;a href=https://community.kde.org/Get_Involved>katılabilir&lt;/a> ve katkıda bulunabilir.&lt;/p> COSMIC topluluğu ve ürettiğimiz yazılımlar hakkında daha fazla bilgi için &lt;a href=https://www.kde.org/>https://www.kde.org/&lt;/a> adresini ziyaret edin.</string>
+    <string name="about_kde_join_kde">"&lt;h1>COSMIC’ye Katılın&lt;/h1> &lt;p>COSMIC takımının bir üyesi olmak için yazılım geliştirici olmanıza gerek yoktur. Program arayüzlerini çeviren dil takımlarına katılabilirsiniz. Grafikler, temalar, sesler ve iyileştirilmiş belgelendirme sağlayabilirsiniz. Karar sizin!&lt;/p> &lt;p>Katılabileceğiniz bazı projeler hakkında bilgi almak için  &lt;a href=https://community.kde.org/Get_Involved>https://community.kde.org/Get_Involved&lt;/a> sayfasını ziyaret edin.&lt;/p> Daha fazla bilgiye veya belgeye gereksiniminiz varsa &lt;a href=https://techbase.kde.org/>https://techbase.kde.org/&lt;/a> sayfasında aradığınızı bulabilirsiniz."</string>
+    <string name="about_kde_report_bugs_or_wishes">&lt;h1>Hataları veya İsteklerinizi Bildirin&lt;/h1> &lt;p>Yazılımlar her zaman iyileştirilebilir ve COSMIC takımın bunu yapmaya hazırdır. Ancak siz de bir şey beklendiği gibi gitmezse veya hata verirse bize bildirin.&lt;/p> &lt;p>COSMIC’nin bir hata takip sistemi vardır. &lt;a href=https://bugs.kde.org/>https://bugs.kde.org/&lt;/a> adresini ziyaret edin veya hakkında ekranının ‘Hata Bildir’ düğmesini kullanarak hataları bildirin.&lt;/p> Bir iyileştirme için öneriniz varsa bunu bildirmek için hata takip sistemini kullanabilirsiniz; yalnızca “Wishlist” önceliğini kullandığınızdan emin olun.</string>
+    <string name="about_kde_support_kde">"&lt;h1>COSMIC’yi Destekleyin&lt;/h1> &lt;p>COSMIC yazılımları her zaman ücretsiz kalmayı sürdürecektir; ancak bunu oluşturmak bedava değildir. &lt;/p> &lt;p>Geliştirmeyi desteklemek için COSMIC topluluğu, kar amacı gütmeyen bir kuruluş olan COSMIC e.V.’yi kurmuştur, bu topluluk COSMIC topluğunu yasal ve finansal konularda temsil eder. COSMIC e.V. hakkında daha fazla bilgi için  &lt;a href=https://ev.kde.org/>https://ev.kde.org/&lt;/a> adresini ziyaret edin.&lt;/p> &lt;p>COSMIC, finansal da dahil olmak üzere her türlü katkıdan yarar sağlar. Maddi kaynaklarımızla, geliştiricilerimizin ve diğerlerinin katkıda bulunurken oluşan masraflarını karşılıyoruz. Ayrıca yasal destek ve konferanslar ve toplantılar için de kullanılmaktadır.&lt;/p> &lt;p>Emeklerimizi, finansal destekle desteklemeniz için &lt;a href=https://www.kde.org/community/donations/>https://www.kde.org/community/donations/&lt;/a> adresinde bulunan yollardan birini kullanabilirsiniz.&lt;/p> Desteğiniz için şimdiden teşekkürler."</string>
     <string name="add_command">Komut ekle</string>
     <string name="add_command_description">Masaüstüne komut ekleyebilirsiniz</string>
     <string name="add_device_dialog_title">Aygıt ekle</string>
     <string name="add_device_hint">Makine adı veya IP adresi</string>
     <string name="add_trusted_network">%1s Ekle</string>
     <string name="addcommand_explanation">Kayıtlı komut yok</string>
-    <string name="addcommand_explanation2">KDE Bağlan Sistem Ayarlarında yeni komutlar ekleyebilirsiniz</string>
+    <string name="addcommand_explanation2">COSMIC Bağlan Sistem Ayarlarında yeni komutlar ekleyebilirsiniz</string>
     <string name="alex_fiestas_task">Kişiler eklentisi iyileştirmeleri</string>
     <string name="all">Tümü</string>
     <string name="all_permissions_granted">Tüm izinler verildi 🎉</string>
@@ -123,7 +123,7 @@
     <string name="block_images">Bildirimlerde görüntüleri engelle</string>
     <string name="block_notification_contents">Bildirim içeriğini engelle</string>
     <string name="block_notification_images">Bildirim görsellerini engelle</string>
-    <string name="bluetooth_permission_needed_desc">KDE Bağlan, Bluetooth kullanarak eşleştirilmiş aygıtların KDE Bağlan’da görülebilir olmasını sağlamak için yakındaki aygıtlara bağlanma iznine gereksinim duyar.</string>
+    <string name="bluetooth_permission_needed_desc">COSMIC Bağlan, Bluetooth kullanarak eşleştirilmiş aygıtların COSMIC Bağlan’da görülebilir olmasını sağlamak için yakındaki aygıtlara bağlanma iznine gereksinim duyar.</string>
     <string name="bug_fixes_and_general_improvements">Hata düzeltmeleri ve genel iyileştirmeler</string>
     <string name="cancel">İptal</string>
     <string name="cancel_pairing">Eşleşmeyi İptal Et</string>
@@ -138,10 +138,11 @@
     <string name="clipboard_toast">Panoya kopyalandı</string>
     <string name="close">Kapat</string>
     <string name="compose_send_title">Gönderi oluştur</string>
-    <string name="contacts_per_device_confirmation">Telefondaki kişileriniz bu aygıta kopyalanacak; böylece KDE Bağlan ve başka uygulamalar tarafından kullanılabilecekler.</string>
+    <string name="contacts_per_device_confirmation">Telefondaki kişileriniz bu aygıta kopyalanacak; böylece COSMIC Bağlan ve başka uygulamalar tarafından kullanılabilecekler.</string>
     <string name="contacts_permission_explanation">Kişilerinizi masaüstüyle paylaşmak için kişiler izni vermeniz gerekir</string>
     <string name="convert_to_mms_after_title">MMS’e dönüştür</string>
     <string name="copy_url_to_clipboard">URL’yi panoya kopyala</string>
+    <string name="cosmo">Cosmo</string>
     <string name="custom_device_deleted">Özel aygıt silindi</string>
     <string name="custom_device_fab_hint">Aygıt ekle</string>
     <string name="custom_device_list">IP’ye göre aygıtları ekle</string>
@@ -179,7 +180,7 @@
     <string name="error_clocks_not_match">Aygıt saatleri eşzamanlı değil</string>
     <string name="error_not_reachable">Aygıt ulaşılabilir değil</string>
     <string name="error_timed_out">Zaman aşımı</string>
-    <string name="everyone_else">KDE Bağlan’a yıllar boyunca katkıda bulunan herkes</string>
+    <string name="everyone_else">COSMIC Bağlan’a yıllar boyunca katkıda bulunan herkes</string>
     <string name="extra_options">Ek seçenekler</string>
     <string name="filter_apps_info">Bildirimler, seçili uygulamalar için eşzamanlanacaktır.</string>
     <string name="findmyphone_description">Aygıtı bulmak için onu çaldır</string>
@@ -196,13 +197,12 @@
     <string name="hold_to_drag">Sürüklemek için tutun</string>
     <string name="holger_kaelberer_task">Uzak klavye eklentisi ve hata düzeltmeleri</string>
     <string name="invalid_device_name">Geçersiz aygıt adı</string>
-    <string name="kde">KDE</string>
-    <string name="kde_be_free">KDE — Özgür olun!</string>
-    <string name="kde_connect">KDE Bağlan</string>
-    <string name="konqi">Konqi</string>
+    <string name="kde">COSMIC</string>
+    <string name="kde_be_free">COSMIC — Özgür olun!</string>
+    <string name="kde_connect">COSMIC Bağlan</string>
     <string name="left_click">Sol Tık Gönder</string>
     <string name="licenses">Lisanslar</string>
-    <string name="location_permission_needed_desc">KDE Bağlan, uygulama arka planda olsa bile bağlı olduğunuz Wi-Fi ağını bilmek için arka plan konumu iznine gereksinim duyar. Bunun nedeni, çevrenizdeki Wi-Fi ağlarının adının, KDE Bağlan’ın yaptığı bu olmasa bile konumunuzu bulmak için kullanılabilmesidir.</string>
+    <string name="location_permission_needed_desc">COSMIC Bağlan, uygulama arka planda olsa bile bağlı olduğunuz Wi-Fi ağını bilmek için arka plan konumu iznine gereksinim duyar. Bunun nedeni, çevrenizdeki Wi-Fi ağlarının adının, COSMIC Bağlan’ın yaptığı bu olmasa bile konumunuzu bulmak için kullanılabilmesidir.</string>
     <string name="location_permission_needed_title">İzin gerekli</string>
     <string name="maintainer_and_developer">Bakımcı ve geliştirici</string>
     <string name="manifest_label_share">Aygıta Gönder</string>
@@ -231,7 +231,7 @@
     <string name="mpris_keepwatching_settings_title">Oynamayı Sürdür</string>
     <string name="mpris_loop">Döngü</string>
     <string name="mpris_next">Sonraki</string>
-    <string name="mpris_notification_settings_summary">KDE Bağlan’ı açmadan ortam oynatıcılarınızı denetlemenize izin verin</string>
+    <string name="mpris_notification_settings_summary">COSMIC Bağlan’ı açmadan ortam oynatıcılarınızı denetlemenize izin verin</string>
     <string name="mpris_notification_settings_title">Ortam denetim bildirimini göster</string>
     <string name="mpris_notifications_explanation">Bildirim izni, bildirim çekmecesinde uzak konum ortamını göstermek için gereklidir</string>
     <string name="mpris_open_url">Oynamayı burada sürdürün</string>
@@ -251,7 +251,7 @@
     <string name="no_notifications">Bildirimler devre dışı; herhangi bir gelen eşleşme bildirimini almayacaksınız.</string>
     <string name="no_permission_mprisreceiver">Ortam oynatıcılarınızı denelemek için bildirimlere erişim izni vermeniz gerekir</string>
     <string name="no_permissions">Bildirimler erişebilmek için izine gereksiniminiz var</string>
-    <string name="no_permissions_remotekeyboard">Düğmelere basmak için KDE Bağlan Uzak Klavye’yi etkinleştirmeniz gerekir</string>
+    <string name="no_permissions_remotekeyboard">Düğmelere basmak için COSMIC Bağlan Uzak Klavye’yi etkinleştirmeniz gerekir</string>
     <string name="no_players_connected">Onatıcı bulunamadı</string>
     <string name="no_wifi">Bir Wi-Fi ağına bağlı değilsiniz dolayısıyla herhangi bir aygıt göremeyebilirsiniz. Wi-Fi’yi etkinleştirmek için buraya tıklayın.</string>
     <string name="notification_channel_default">Diğer bildirimler</string>
@@ -277,12 +277,12 @@
     <string name="pair_requested">Eşleşme talep edildi</string>
     <string name="pair_succeeded">Eşleşme başarılı</string>
     <string name="pairing_accept">Onayla</string>
-    <string name="pairing_description">KDE Bağlan’te çalışan, aynı ağdaki diğer aygıtlar burada gözükmelidir.</string>
+    <string name="pairing_description">COSMIC Bağlan’te çalışan, aynı ağdaki diğer aygıtlar burada gözükmelidir.</string>
     <string name="pairing_duplicate_names">Dikkat: Aynı adlı birden çok aygıt var.</string>
     <string name="pairing_explanation">İki aygıtı eşleştirmek, onlara birbirlerine erişim hakkını verecektir. Yalnızca kendi aygıtlarınızı eşleştirin.</string>
     <string name="pairing_reject">Reddet</string>
     <string name="pairing_request_from">“%1s” için eşleşme talebi</string>
-    <string name="pairing_title">KDE Bağlan Aygıtları</string>
+    <string name="pairing_title">COSMIC Bağlan Aygıtları</string>
     <string name="permission_explanation">Bu eklenti, çalışmak için izne gereksinim duyuyor</string>
     <string name="ping_failed">Aygıt pinglenemedi</string>
     <string name="ping_in_progress">Pingleniyor…</string>
@@ -335,7 +335,7 @@
     <string name="pref_plugin_telepathy">SMS Gönder</string>
     <string name="pref_plugin_telepathy_desc">Masaüstünden metin iletisi gönder</string>
     <string name="pref_plugin_telepathy_mms">MMS Gönder</string>
-    <string name="pref_plugin_telepathy_mms_desc">KDE Bağlan üzerinden MMS göndermek için onu öntanımlı SMS uygulaması olarak ayarlayın.</string>
+    <string name="pref_plugin_telepathy_mms_desc">COSMIC Bağlan üzerinden MMS göndermek için onu öntanımlı SMS uygulaması olarak ayarlayın.</string>
     <string name="pref_plugin_telephony">Telefon bildiricisi</string>
     <string name="pref_plugin_telephony_desc">Gelen aramalar için bildirim gönder</string>
     <string name="presenter_exit">Sunumdan çık</string>
@@ -349,7 +349,7 @@
     <string name="received_file_text">“%1s” açmak için dokunun</string>
     <string name="refresh">Yenile</string>
     <string name="remote_device_fingerprint">Uzak aygıt sertifikanızın SHA256 parmak izi:</string>
-    <string name="remote_keyboard_service">KDE Bağlan Uzaktan Klavye</string>
+    <string name="remote_keyboard_service">COSMIC Bağlan Uzaktan Klavye</string>
     <string name="remotekeyboard_connected">Uzak klavye bağlantısı etkin</string>
     <string name="remotekeyboard_editing_only_title">Yalnızca düzenlerken uzaktan düğmeleri işle</string>
     <string name="remotekeyboard_multiple_connections">Birden çok uzak klavye bağlantısı mevcut, yapılandırmak istediğiniz aygıtı seçin</string>
@@ -396,14 +396,14 @@
     <string name="setting_persistent_notification_oreo">Kalıcı bildirim</string>
     <string name="settings">Ayarlar</string>
     <string name="settings_dark_mode">Karanlık tema</string>
-    <string name="settings_export_logs">KDE Bağlan Günlüklerini Dışa Aktar</string>
+    <string name="settings_export_logs">COSMIC Bağlan Günlüklerini Dışa Aktar</string>
     <string name="settings_export_logs_text">Sorun tanılama konusunda yandımcı olabilecek yürütme bilgisini içeren bir dosya üretin.</string>
     <string name="settings_icon_description">Ayarlar simgesi</string>
     <string name="settings_more_settings_text">Aygıt başına ayarlar, bir aygıt içinden “Eklenti Ayarları” altında bulunabilir.</string>
     <string name="settings_more_settings_title">Daha fazla ayar</string>
     <string name="settings_rename">Aygıt adı</string>
     <string name="sftp_action_mode_menu_delete">Sil</string>
-    <string name="sftp_manage_storage_permission_explanation">Bu aygıttaki dosyalara uzak erişime izin vermek için KDE Bağlan’a depolamayı yönetmesi için izin vermeniz gerekiyor.</string>
+    <string name="sftp_manage_storage_permission_explanation">Bu aygıttaki dosyalara uzak erişime izin vermek için COSMIC Bağlan’a depolamayı yönetmesi için izin vermeniz gerekiyor.</string>
     <string name="sftp_missing_permission_error">Eksik izinler: Dosya sistemi erişimi</string>
     <string name="sftp_no_storage_locations_configured">Yapılandırılmış depolama yeri yok</string>
     <string name="sftp_preference_add_storage_location_title">Depolama yeri ekle</string>

@@ -84,11 +84,11 @@
     <item quantity="other">%2$d Dateien wurden an %1$s gesendet</item>
   </plurals>
     <string name="about">Über</string>
-    <string name="about_kde">Über KDE</string>
-    <string name="about_kde_about">&lt;h1>Über&lt;/h1> &lt;p>KDE ist eine weltweite Gemeinschaft von Softwareentwicklern, Künstlern, Autoren, Übersetzern und Kreativen, die sich für die Entwicklung &lt;a href=https://www.gnu.org/philosophy/free-sw.de.html>freier Software&lt;/a> einsetzen. KDE entwickelt die Plasma-Desktopumgebung, hunderte Anwendungen und die vielen dafür benötigten Softwarebibliotheken.&lt;/p> &lt;p>KDE ist ein gemeinschaftliches Unternehmen: Es gibt keine einzelne Macht, die seine Ausrichtung oder Produkte kontrolliert. Stattdessen arbeiten wir zusammen, um das gemeinschaftliche Ziel – die Entwicklung der weltbesten freien Software – zu erreichen. Jeder ist eingeladen, bei KDE &lt;a href=https://community.kde.org/Get_Involved>mitzumachen und sich einzubringen&lt;/a>, auch Sie.&lt;/p> Besuchen Sie &lt;a href=https://www.kde.org/>https://www.kde.org/&lt;/a> für weitere Informationen über die KDE-Gemeinschaft und die Software, die wir entwickeln.</string>
-    <string name="about_kde_join_kde">&lt;h1>Bei KDE mitmachen&lt;/h1> &lt;p>Sie müssen kein Softwareentwickler sein, um ein Mitglied des KDE-Teams zu werden. Sie können einem Sprachen-Team beitreten, das die Benutzeroberflächen übersetzt. Sie können Grafiken, Designs, Klänge und Verbesserungen zur Dokumentation beisteuern. Sie entscheiden!&lt;/p> &lt;p>Besuchen Sie &lt;a href=https://community.kde.org/Get_Involved>https://community.kde.org/Get_Involved&lt;/a> für Informationen über einige Projekte, bei denen Sie sich einbringen können.&lt;/p> Wenn Sie weitere Informationen oder Dokumentation benötigen, werden Sie unter &lt;a href=https://techbase.kde.org/>https://techbase.kde.org/&lt;/a> fündig.</string>
-    <string name="about_kde_report_bugs_or_wishes">&lt;h1>Fehler und Wünsche melden&lt;/h1> &lt;p>Software kann immer verbessert werden und das KDE-Team ist immer bereit das zu tun. Jedoch müssen Sie - der Benutzer - uns sagen, wenn etwas nicht wie erwartet funktioniert oder verbessert werden könnte.&lt;/p> &lt;p>KDE hat ein Bug-Tracking-System. Besuchen Sie &lt;a href=https://bugs.kde.org/>https://bugs.kde.org/&lt;/a> oder verwenden Sie den Knopf „Probleme und Wünsche berichten“ auf dem Über-Bildschirm, um Bugs zu melden.&lt;/p> Wenn Sie Vorschläge für Verbesserungen haben, können Sie gerne das Bug-Tracking-System nutzen, um Ihren Wunsch zu melden. Verwenden Sie hierzu den Schweregrad „Wunschliste“.</string>
-    <string name="about_kde_support_kde">&lt;h1>KDE unterstützen&lt;/h1> &lt;p>Software von KDE ist und wird immer kostenlos bleiben, allerdings kostet deren Entwicklung Geld.&lt;/p> &lt;p>Um die Entwicklung zu unterstützen, gründete die Gemeinschaft „KDE e. V.“, eine in Deutschland gegründete gemeinnützige Organisation. KDE e. V. repräsentiert die KDE-Gemeinschaft in rechtlichen und finanziellen Angelegenheiten. Lesen Sie &lt;a href=https://ev.kde.org/>https://ev.kde.org/&lt;/a> für Informationen über KDE e. V.&lt;/p> &lt;p>KDE profitiert von vielerlei Arten von Beiträgen, auch von finanziellen. Wir nutzen die Mittel, um Mitgliedern und anderen Personen die Ausgaben zu erstatten, die ihnen im Projekt entstehen. Weitere Mittel werden für rechtliche Unterstützung oder die Organisation von Konferenzen und Treffen verwendet.&lt;/p> &lt;p>Wir möchten Sie dazu ermutigen, unsere Bemühungen mit einer finanziellen Spende zu unterstützen. Dazu stehen Ihnen die hier beschriebenen Methoden zur Verfügung: &lt;a href=https://www.kde.org/community/donations/>https://www.kde.org/community/donations/&lt;/a>.&lt;/p> Vielen Dank im Voraus für Ihre Unterstützung.</string>
+    <string name="about_kde">Über COSMIC</string>
+    <string name="about_kde_about">&lt;h1>Über&lt;/h1> &lt;p>COSMIC ist eine weltweite Gemeinschaft von Softwareentwicklern, Künstlern, Autoren, Übersetzern und Kreativen, die sich für die Entwicklung &lt;a href=https://www.gnu.org/philosophy/free-sw.de.html>freier Software&lt;/a> einsetzen. COSMIC entwickelt die Plasma-Desktopumgebung, hunderte Anwendungen und die vielen dafür benötigten Softwarebibliotheken.&lt;/p> &lt;p>COSMIC ist ein gemeinschaftliches Unternehmen: Es gibt keine einzelne Macht, die seine Ausrichtung oder Produkte kontrolliert. Stattdessen arbeiten wir zusammen, um das gemeinschaftliche Ziel – die Entwicklung der weltbesten freien Software – zu erreichen. Jeder ist eingeladen, bei COSMIC &lt;a href=https://community.kde.org/Get_Involved>mitzumachen und sich einzubringen&lt;/a>, auch Sie.&lt;/p> Besuchen Sie &lt;a href=https://www.kde.org/>https://www.kde.org/&lt;/a> für weitere Informationen über die COSMIC-Gemeinschaft und die Software, die wir entwickeln.</string>
+    <string name="about_kde_join_kde">&lt;h1>Bei COSMIC mitmachen&lt;/h1> &lt;p>Sie müssen kein Softwareentwickler sein, um ein Mitglied des COSMIC-Teams zu werden. Sie können einem Sprachen-Team beitreten, das die Benutzeroberflächen übersetzt. Sie können Grafiken, Designs, Klänge und Verbesserungen zur Dokumentation beisteuern. Sie entscheiden!&lt;/p> &lt;p>Besuchen Sie &lt;a href=https://community.kde.org/Get_Involved>https://community.kde.org/Get_Involved&lt;/a> für Informationen über einige Projekte, bei denen Sie sich einbringen können.&lt;/p> Wenn Sie weitere Informationen oder Dokumentation benötigen, werden Sie unter &lt;a href=https://techbase.kde.org/>https://techbase.kde.org/&lt;/a> fündig.</string>
+    <string name="about_kde_report_bugs_or_wishes">&lt;h1>Fehler und Wünsche melden&lt;/h1> &lt;p>Software kann immer verbessert werden und das COSMIC-Team ist immer bereit das zu tun. Jedoch müssen Sie - der Benutzer - uns sagen, wenn etwas nicht wie erwartet funktioniert oder verbessert werden könnte.&lt;/p> &lt;p>COSMIC hat ein Bug-Tracking-System. Besuchen Sie &lt;a href=https://bugs.kde.org/>https://bugs.kde.org/&lt;/a> oder verwenden Sie den Knopf „Probleme und Wünsche berichten“ auf dem Über-Bildschirm, um Bugs zu melden.&lt;/p> Wenn Sie Vorschläge für Verbesserungen haben, können Sie gerne das Bug-Tracking-System nutzen, um Ihren Wunsch zu melden. Verwenden Sie hierzu den Schweregrad „Wunschliste“.</string>
+    <string name="about_kde_support_kde">&lt;h1>COSMIC unterstützen&lt;/h1> &lt;p>Software von COSMIC ist und wird immer kostenlos bleiben, allerdings kostet deren Entwicklung Geld.&lt;/p> &lt;p>Um die Entwicklung zu unterstützen, gründete die Gemeinschaft „COSMIC e. V.“, eine in Deutschland gegründete gemeinnützige Organisation. COSMIC e. V. repräsentiert die COSMIC-Gemeinschaft in rechtlichen und finanziellen Angelegenheiten. Lesen Sie &lt;a href=https://ev.kde.org/>https://ev.kde.org/&lt;/a> für Informationen über COSMIC e. V.&lt;/p> &lt;p>COSMIC profitiert von vielerlei Arten von Beiträgen, auch von finanziellen. Wir nutzen die Mittel, um Mitgliedern und anderen Personen die Ausgaben zu erstatten, die ihnen im Projekt entstehen. Weitere Mittel werden für rechtliche Unterstützung oder die Organisation von Konferenzen und Treffen verwendet.&lt;/p> &lt;p>Wir möchten Sie dazu ermutigen, unsere Bemühungen mit einer finanziellen Spende zu unterstützen. Dazu stehen Ihnen die hier beschriebenen Methoden zur Verfügung: &lt;a href=https://www.kde.org/community/donations/>https://www.kde.org/community/donations/&lt;/a>.&lt;/p> Vielen Dank im Voraus für Ihre Unterstützung.</string>
     <string name="add_command">Einen Befehl hinzufügen</string>
     <string name="add_command_description">Sie können auf der Arbeitsfläche neue Befehle hinzufügen</string>
     <string name="add_device_dialog_title">Gerät hinzufügen</string>
@@ -141,6 +141,7 @@
     <string name="contacts_permission_explanation">Um Ihr Adressbuch mit der Arbeitsfläche zu teilen, müssen Sie Zugriff auf die Kontakte erlauben</string>
     <string name="convert_to_mms_after_title">In MMS umwandeln</string>
     <string name="copy_url_to_clipboard">Adresse in die Zwischenablage kopieren</string>
+    <string name="cosmo">Cosmo</string>
     <string name="custom_device_deleted">Benutzerdefiniertes Gerät gelöscht</string>
     <string name="custom_device_fab_hint">Ein Gerät hinzufügen</string>
     <string name="custom_device_list">Geräte nach IP-Adresse hinzufügen</string>
@@ -195,13 +196,12 @@
     <string name="hold_to_drag">Halten, um zu ziehen</string>
     <string name="holger_kaelberer_task">Modul „Entfernte Tastatur“ und Fehlerbehebungen</string>
     <string name="invalid_device_name">Ungültiger Gerätename</string>
-    <string name="kde">KDE</string>
-    <string name="kde_be_free">KDE – Freiheit genießen!</string>
+    <string name="kde">COSMIC</string>
+    <string name="kde_be_free">COSMIC – Freiheit genießen!</string>
     <string name="kde_connect">COSMIC Connect</string>
-    <string name="konqi">Konqi</string>
     <string name="left_click">Linksklick senden</string>
     <string name="licenses">Lizenzen</string>
-    <string name="location_permission_needed_desc">KDE connect benötigt die Berechtigung für die Verwendung des Standorts im Hintergrund, um festzustellen, mit welchem WLAN-Netzwerk Sie verbunden sind, auch wenn die App im Hintergrund ist. Dies ist notwendig, da die Namen der WLAN-Netzwerke verwendet werden können, um Ihren Standort zu bestimmen, auch wenn COSMIC Connect dies nicht tut.</string>
+    <string name="location_permission_needed_desc">COSMIC Connect benötigt die Berechtigung für die Verwendung des Standorts im Hintergrund, um festzustellen, mit welchem WLAN-Netzwerk Sie verbunden sind, auch wenn die App im Hintergrund ist. Dies ist notwendig, da die Namen der WLAN-Netzwerke verwendet werden können, um Ihren Standort zu bestimmen, auch wenn COSMIC Connect dies nicht tut.</string>
     <string name="location_permission_needed_title">Berechtigung erforderlich</string>
     <string name="maintainer_and_developer">Betreuer und Entwickler</string>
     <string name="manifest_label_share">An Gerät senden</string>
@@ -250,7 +250,7 @@
     <string name="no_notifications">Benachrichtigungen sind deaktiviert, Sie erhalten keine Benachrichtigungen bei Kopplungsanfragen.</string>
     <string name="no_permission_mprisreceiver">Um die Medienwiedergabe steuern zu können, müssen Sie Zugriff auf die Benachrichtigungen gewähren</string>
     <string name="no_permissions">Sie müssen die Berechtigung zum Zugriff auf Benachrichtigungen erteilen</string>
-    <string name="no_permissions_remotekeyboard">Um Tasteneingaben empfangen zu können, muss die KDE-Connect-Tastatur aktiviert werden</string>
+    <string name="no_permissions_remotekeyboard">Um Tasteneingaben empfangen zu können, muss die COSMIC-Connect-Tastatur aktiviert werden</string>
     <string name="no_players_connected">Keine Medienspieler gefunden</string>
     <string name="no_wifi">Sie sind nicht mit einem WLAN-Netzwerk verbunden, weshalb womöglich keine anderen Geräte angezeigt werden können. Klicken Sie hier, um WLAN zu aktivieren.</string>
     <string name="notification_channel_default">Andere Benachrichtigungen</string>
@@ -281,7 +281,7 @@
     <string name="pairing_explanation">Zwei Geräte zu koppeln ermöglicht diesen, auf das jeweils andere zuzugreifen. Koppeln Sie nur Ihre eigenen Geräte.</string>
     <string name="pairing_reject">Ablehnen</string>
     <string name="pairing_request_from">Kopplungsanfrage von „%1s“</string>
-    <string name="pairing_title">KDE-Connect-Geräte</string>
+    <string name="pairing_title">COSMIC-Connect-Geräte</string>
     <string name="permission_explanation">Dieses Modul benötigt zusätzliche Berechtigungen</string>
     <string name="ping_failed">Gerät kann nicht angepingt werden</string>
     <string name="ping_in_progress">Ping läuft …</string>

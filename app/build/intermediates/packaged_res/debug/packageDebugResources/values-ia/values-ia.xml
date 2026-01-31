@@ -60,7 +60,7 @@
     <item quantity="other">"Inviate %2$d  files a %1$s"</item>
   </plurals>
     <string name="about">A proposito</string>
-    <string name="about_kde">A proposito de KDE</string>
+    <string name="about_kde">A proposito de COSMIC</string>
     <string name="add_device_dialog_title">Adde dispositivo</string>
     <string name="add_device_hint">Nomine de hospite o adresse IP</string>
     <string name="add_trusted_network">Adde %1s</string>
@@ -88,6 +88,7 @@
     <string name="compose_send_title">Compone invia</string>
     <string name="convert_to_mms_after_title">"Converte  a MMS"</string>
     <string name="copy_url_to_clipboard">Copia URL a area de transferentia</string>
+    <string name="cosmo">Cosmo</string>
     <string name="custom_device_fab_hint">Adde un dispositivo</string>
     <string name="developer">Disveloppator</string>
     <string name="device_menu_plugins">"Preferentias de plugin "</string>
@@ -106,10 +107,9 @@
     <string name="foreground_notification_no_devices">Non connectite a ulle dispositivo</string>
     <string name="foreground_notification_send_clipboard">Invia Area de transferentia</string>
     <string name="holger_kaelberer_task">Plugin de claviero remote e correctiones de falta</string>
-    <string name="kde">KDE</string>
-    <string name="kde_be_free">KDE- Vos Sia Libere!</string>
+    <string name="kde">COSMIC</string>
+    <string name="kde_be_free">COSMIC- Vos Sia Libere!</string>
     <string name="kde_connect">COSMIC Connect</string>
-    <string name="konqi">Konqi</string>
     <string name="left_click">Invia Click sinistre</string>
     <string name="licenses">Licentias</string>
     <string name="location_permission_needed_title">Permission requirite</string>

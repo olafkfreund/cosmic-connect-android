@@ -84,10 +84,10 @@
     <item quantity="other">%2$d fájl küldve ide: %1$s</item>
   </plurals>
     <string name="about">Névjegy</string>
-    <string name="about_kde">A KDE névjegye</string>
-    <string name="about_kde_about">&lt;h1>Névjegy&lt;/h1> &lt;p>A KDE fejlesztését és karbantartását egy nemzetközi közösség végzi, melynek tagjai mélyen elkötelezettek &lt;a href=https://www.gnu.org/philosophy/free-sw.html>szabad szoftverek&lt;/a> iránt. A KDE készíti a Plasma asztali környezetet, alkalmazások százait és az azokat támogató programkönyvtárakat.&lt;/p> &lt;p>Nem egyetlen csoport, vállalat vagy szervezet határozza meg a KDE fejlődési irányát, akár Ön is &lt;a href=https://community.kde.org/Get_Involved >bekapcsolódhat a fejlesztésbe&lt;/a>!&lt;/p> Ha többet szeretne megtudni a KDE közösségről és az általunk készített szoftverekről, látogassa meg a &lt;a href=https://www.kde.org/>https://www.kde.org/&lt;/a> honlapot.</string>
-    <string name="about_kde_report_bugs_or_wishes">"&lt;h1>Hibabejelentés és kérések&lt;/h1> &lt;p>Fejlesztőink folyamatosan próbálják tökéletesíteni a KDE-t, könnyebbé tenni annak kezelését. Ebben a folyamatban hatalmas segítséget jelent, ha Ön, a felhasználó is jelzi, ha valami nem úgy működik, ahogy szeretné.&lt;/p> &lt;p>A KDE rendelkezik egy internetes hibabejelentő rendszerrel. Hiba vagy továbbfejlesztési kívánság bejelentéséhez kérjük látogasson el a &lt;a href=https://bugs.kde.org/>https://bugs.kde.org/&lt;/a>  címre, vagy használja a „Hibabejelentés” menüpontot a névjegy képernyőn.&lt;/p> A hibabejelentő rendszerben nem csak hibákat, hanem továbbfejlesztési ötleteket és javaslatokat is rögzíteni lehet (ebben az esetben kérjük, hogy a bejelentés típusát „Wishlist”-nek - kívánságnak - állítsa be)."</string>
-    <string name="about_kde_support_kde">&lt;h1>A KDE támogatása&lt;/h1> &lt;p>A KDE ingyenesen használható, elkészítése azonban nincs ingyen.&lt;/p> &lt;p>Ezért a KDE projekt vezetői létrehoztak egy KDE e.V. nevű nonprofit szervezetet Németországban. A KDE e.V. képviseli a KDE projektet jogi és pénzügyi kérdésekben. Részletes információ itt található: &lt;a href=https://ev.kde.org/>https://ev.kde.org/&lt;/a>&lt;/p> &lt;p>A KDE projektnek szüksége van pénzügyi támogatásra a megfelelő működéshez. A pénz elsősorban új tagok toborzásához és a forráskód kezeléséhez szükséges eszközökhöz kell. A további támogatásokat jogi támogatásra, konferenciák és találkozók szervezésére használjuk fel. Ha módjában áll, kérjük járuljon hozzá a projekt finanszírozásához az alább felsorolt módok egyikével: &lt;a href=https://www.kde.org/community/donations/>https://www.kde.org/community/donations/&lt;/a>.&lt;/p> Előre is köszönjük a támogatását!</string>
+    <string name="about_kde">A COSMIC névjegye</string>
+    <string name="about_kde_about">&lt;h1>Névjegy&lt;/h1> &lt;p>A COSMIC fejlesztését és karbantartását egy nemzetközi közösség végzi, melynek tagjai mélyen elkötelezettek &lt;a href=https://www.gnu.org/philosophy/free-sw.html>szabad szoftverek&lt;/a> iránt. A COSMIC készíti a Plasma asztali környezetet, alkalmazások százait és az azokat támogató programkönyvtárakat.&lt;/p> &lt;p>Nem egyetlen csoport, vállalat vagy szervezet határozza meg a COSMIC fejlődési irányát, akár Ön is &lt;a href=https://community.kde.org/Get_Involved >bekapcsolódhat a fejlesztésbe&lt;/a>!&lt;/p> Ha többet szeretne megtudni a COSMIC közösségről és az általunk készített szoftverekről, látogassa meg a &lt;a href=https://www.kde.org/>https://www.kde.org/&lt;/a> honlapot.</string>
+    <string name="about_kde_report_bugs_or_wishes">"&lt;h1>Hibabejelentés és kérések&lt;/h1> &lt;p>Fejlesztőink folyamatosan próbálják tökéletesíteni a COSMIC-t, könnyebbé tenni annak kezelését. Ebben a folyamatban hatalmas segítséget jelent, ha Ön, a felhasználó is jelzi, ha valami nem úgy működik, ahogy szeretné.&lt;/p> &lt;p>A COSMIC rendelkezik egy internetes hibabejelentő rendszerrel. Hiba vagy továbbfejlesztési kívánság bejelentéséhez kérjük látogasson el a &lt;a href=https://bugs.kde.org/>https://bugs.kde.org/&lt;/a>  címre, vagy használja a „Hibabejelentés” menüpontot a névjegy képernyőn.&lt;/p> A hibabejelentő rendszerben nem csak hibákat, hanem továbbfejlesztési ötleteket és javaslatokat is rögzíteni lehet (ebben az esetben kérjük, hogy a bejelentés típusát „Wishlist”-nek - kívánságnak - állítsa be)."</string>
+    <string name="about_kde_support_kde">&lt;h1>A COSMIC támogatása&lt;/h1> &lt;p>A COSMIC ingyenesen használható, elkészítése azonban nincs ingyen.&lt;/p> &lt;p>Ezért a COSMIC projekt vezetői létrehoztak egy COSMIC e.V. nevű nonprofit szervezetet Németországban. A COSMIC e.V. képviseli a COSMIC projektet jogi és pénzügyi kérdésekben. Részletes információ itt található: &lt;a href=https://ev.kde.org/>https://ev.kde.org/&lt;/a>&lt;/p> &lt;p>A COSMIC projektnek szüksége van pénzügyi támogatásra a megfelelő működéshez. A pénz elsősorban új tagok toborzásához és a forráskód kezeléséhez szükséges eszközökhöz kell. A további támogatásokat jogi támogatásra, konferenciák és találkozók szervezésére használjuk fel. Ha módjában áll, kérjük járuljon hozzá a projekt finanszírozásához az alább felsorolt módok egyikével: &lt;a href=https://www.kde.org/community/donations/>https://www.kde.org/community/donations/&lt;/a>.&lt;/p> Előre is köszönjük a támogatását!</string>
     <string name="add_command">Parancs hozzáadása</string>
     <string name="add_command_description">A számítógépén adhat hozzá új parancsokat</string>
     <string name="add_device_dialog_title">Eszköz hozzáadása</string>
@@ -130,6 +130,7 @@
     <string name="contacts_permission_explanation">Ahhoz, hogy megoszthassa a névjegyzékét az asztali számítógépével, meg kell adnia a névjegyek engedélyt</string>
     <string name="convert_to_mms_after_title">Konvertálás MMS-sé</string>
     <string name="copy_url_to_clipboard">URL másolása a vágólapra</string>
+    <string name="cosmo">Cosmo</string>
     <string name="custom_device_deleted">Saját eszköz észlelve</string>
     <string name="custom_device_fab_hint">Eszköz hozzáadása</string>
     <string name="custom_device_list">Eszközök hozzáadása IP-cím alapján</string>
@@ -165,10 +166,9 @@
     <string name="foreground_notification_send_clipboard">Vágólap küldése</string>
     <string name="holger_kaelberer_task">Távoli billentyűzet bővítmény és hibajavítások</string>
     <string name="invalid_device_name">Érvénytelen eszköznév</string>
-    <string name="kde">KDE</string>
-    <string name="kde_be_free">KDE - Légy szabad!</string>
+    <string name="kde">COSMIC</string>
+    <string name="kde_be_free">COSMIC - Légy szabad!</string>
     <string name="kde_connect">COSMIC Connect</string>
-    <string name="konqi">Konqi</string>
     <string name="licenses">Licencek</string>
     <string name="location_permission_needed_title">Engedély szükséges</string>
     <string name="maintainer_and_developer">Karbantartó és fejlesztő</string>

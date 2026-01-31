@@ -55,6 +55,8 @@ import org.cosmic.cosmicconnect.Plugins.MprisPlugin.MprisMediaNotificationReceiv
 import org.cosmic.cosmicconnect.Plugins.MprisPlugin.MprisMediaNotificationReceiver_MembersInjector;
 import org.cosmic.cosmicconnect.Plugins.MprisPlugin.MprisMediaSession;
 import org.cosmic.cosmicconnect.Plugins.NotificationsPlugin.NotificationFilterActivity;
+import org.cosmic.cosmicconnect.Plugins.OpenOnPhonePlugin.OpenOnPhoneReceiver;
+import org.cosmic.cosmicconnect.Plugins.OpenOnPhonePlugin.OpenOnPhoneReceiver_MembersInjector;
 import org.cosmic.cosmicconnect.Plugins.PluginFactory;
 import org.cosmic.cosmicconnect.Plugins.PresenterPlugin.PresenterActivity;
 import org.cosmic.cosmicconnect.Plugins.PresenterPlugin.PresenterActivity_MembersInjector;
@@ -77,13 +79,13 @@ import org.cosmic.cosmicconnect.UserInterface.MainActivity;
 import org.cosmic.cosmicconnect.UserInterface.MainActivity_MembersInjector;
 import org.cosmic.cosmicconnect.UserInterface.MainViewModel;
 import org.cosmic.cosmicconnect.UserInterface.MainViewModel_HiltModules;
+import org.cosmic.cosmicconnect.UserInterface.OpenOnDesktopActivity;
+import org.cosmic.cosmicconnect.UserInterface.OpenOnDesktopActivity_MembersInjector;
 import org.cosmic.cosmicconnect.UserInterface.PairingFragment;
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsActivity;
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsActivity_MembersInjector;
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment;
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment_MembersInjector;
-import org.cosmic.cosmicconnect.UserInterface.PluginSettingsListFragment;
-import org.cosmic.cosmicconnect.UserInterface.PluginSettingsListFragment_MembersInjector;
 import org.cosmic.cosmicconnect.UserInterface.SettingsFragment;
 import org.cosmic.cosmicconnect.UserInterface.TrustedNetworksActivity;
 import org.cosmic.cosmicconnect.UserInterface.compose.screens.DeviceDetailViewModel;
@@ -428,11 +430,6 @@ public final class DaggerCosmicConnect_HiltComponents_SingletonC {
     }
 
     @Override
-    public void injectPluginSettingsListFragment(PluginSettingsListFragment arg0) {
-      injectPluginSettingsListFragment2(arg0);
-    }
-
-    @Override
     public void injectSettingsFragment(SettingsFragment arg0) {
     }
 
@@ -448,13 +445,6 @@ public final class DaggerCosmicConnect_HiltComponents_SingletonC {
     private PluginSettingsFragment injectPluginSettingsFragment2(PluginSettingsFragment instance) {
       PluginSettingsFragment_MembersInjector.injectDeviceRegistry(instance, singletonCImpl.deviceRegistryProvider.get());
       PluginSettingsFragment_MembersInjector.injectPluginFactory(instance, singletonCImpl.pluginFactoryProvider.get());
-      return instance;
-    }
-
-    @CanIgnoreReturnValue
-    private PluginSettingsListFragment injectPluginSettingsListFragment2(
-        PluginSettingsListFragment instance) {
-      PluginSettingsListFragment_MembersInjector.injectDeviceRegistry(instance, singletonCImpl.deviceRegistryProvider.get());
       return instance;
     }
   }
@@ -581,6 +571,11 @@ public final class DaggerCosmicConnect_HiltComponents_SingletonC {
     }
 
     @Override
+    public void injectOpenOnDesktopActivity(OpenOnDesktopActivity arg0) {
+      injectOpenOnDesktopActivity2(arg0);
+    }
+
+    @Override
     public void injectPluginSettingsActivity(PluginSettingsActivity arg0) {
       injectPluginSettingsActivity2(arg0);
     }
@@ -627,6 +622,12 @@ public final class DaggerCosmicConnect_HiltComponents_SingletonC {
     }
 
     @CanIgnoreReturnValue
+    private OpenOnDesktopActivity injectOpenOnDesktopActivity2(OpenOnDesktopActivity instance) {
+      OpenOnDesktopActivity_MembersInjector.injectDeviceRegistry(instance, singletonCImpl.deviceRegistryProvider.get());
+      return instance;
+    }
+
+    @CanIgnoreReturnValue
     private PluginSettingsActivity injectPluginSettingsActivity2(PluginSettingsActivity instance) {
       PluginSettingsActivity_MembersInjector.injectDeviceRegistry(instance, singletonCImpl.deviceRegistryProvider.get());
       return instance;
@@ -634,63 +635,48 @@ public final class DaggerCosmicConnect_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
-      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_DeviceListViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.DeviceListViewModel";
-
-      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_SendKeystrokesViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.SendKeystrokesViewModel";
-
       static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_MprisViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.MprisViewModel";
 
-      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_ShareViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.ShareViewModel";
-
-      static String org_cosmic_cosmicconnect_UserInterface_MainViewModel = "org.cosmic.cosmicconnect.UserInterface.MainViewModel";
-
-      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_about_AboutViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.about.AboutViewModel";
+      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_DeviceDetailViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.DeviceDetailViewModel";
 
       static String org_cosmic_cosmicconnect_UserInterface_compose_screens_config_CustomDevicesViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.config.CustomDevicesViewModel";
-
-      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_SettingsViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.SettingsViewModel";
 
       static String org_cosmic_cosmicconnect_UserInterface_compose_screens_config_PluginSettingsViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.config.PluginSettingsViewModel";
 
       static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_FindMyPhoneViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.FindMyPhoneViewModel";
 
-      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_MousePadViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.MousePadViewModel";
+      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_DigitizerViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.DigitizerViewModel";
 
-      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_RunCommandViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.RunCommandViewModel";
+      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_SettingsViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.SettingsViewModel";
 
       static String org_cosmic_cosmicconnect_UserInterface_compose_screens_config_TrustedNetworksViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.config.TrustedNetworksViewModel";
 
-      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_DeviceDetailViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.DeviceDetailViewModel";
+      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_about_AboutViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.about.AboutViewModel";
 
       static String org_cosmic_cosmicconnect_UserInterface_compose_screens_about_LicensesViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.about.LicensesViewModel";
 
-      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_DigitizerViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.DigitizerViewModel";
+      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_MousePadViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.MousePadViewModel";
+
+      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_SendKeystrokesViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.SendKeystrokesViewModel";
+
+      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_RunCommandViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.RunCommandViewModel";
 
       static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_NotificationFilterViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.NotificationFilterViewModel";
 
-      @KeepFieldType
-      DeviceListViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_DeviceListViewModel2;
+      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_ShareViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.ShareViewModel";
 
-      @KeepFieldType
-      SendKeystrokesViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_SendKeystrokesViewModel2;
+      static String org_cosmic_cosmicconnect_UserInterface_MainViewModel = "org.cosmic.cosmicconnect.UserInterface.MainViewModel";
+
+      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_DeviceListViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.DeviceListViewModel";
 
       @KeepFieldType
       MprisViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_MprisViewModel2;
 
       @KeepFieldType
-      ShareViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_ShareViewModel2;
-
-      @KeepFieldType
-      MainViewModel org_cosmic_cosmicconnect_UserInterface_MainViewModel2;
-
-      @KeepFieldType
-      AboutViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_about_AboutViewModel2;
+      DeviceDetailViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_DeviceDetailViewModel2;
 
       @KeepFieldType
       CustomDevicesViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_config_CustomDevicesViewModel2;
-
-      @KeepFieldType
-      SettingsViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_SettingsViewModel2;
 
       @KeepFieldType
       PluginSettingsViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_config_PluginSettingsViewModel2;
@@ -699,25 +685,40 @@ public final class DaggerCosmicConnect_HiltComponents_SingletonC {
       FindMyPhoneViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_FindMyPhoneViewModel2;
 
       @KeepFieldType
-      MousePadViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_MousePadViewModel2;
+      DigitizerViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_DigitizerViewModel2;
 
       @KeepFieldType
-      RunCommandViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_RunCommandViewModel2;
+      SettingsViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_SettingsViewModel2;
 
       @KeepFieldType
       TrustedNetworksViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_config_TrustedNetworksViewModel2;
 
       @KeepFieldType
-      DeviceDetailViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_DeviceDetailViewModel2;
+      AboutViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_about_AboutViewModel2;
 
       @KeepFieldType
       LicensesViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_about_LicensesViewModel2;
 
       @KeepFieldType
-      DigitizerViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_DigitizerViewModel2;
+      MousePadViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_MousePadViewModel2;
+
+      @KeepFieldType
+      SendKeystrokesViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_SendKeystrokesViewModel2;
+
+      @KeepFieldType
+      RunCommandViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_RunCommandViewModel2;
 
       @KeepFieldType
       NotificationFilterViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_NotificationFilterViewModel2;
+
+      @KeepFieldType
+      ShareViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_ShareViewModel2;
+
+      @KeepFieldType
+      MainViewModel org_cosmic_cosmicconnect_UserInterface_MainViewModel2;
+
+      @KeepFieldType
+      DeviceListViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_DeviceListViewModel2;
     }
   }
 
@@ -808,39 +809,51 @@ public final class DaggerCosmicConnect_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
+      static String org_cosmic_cosmicconnect_UserInterface_MainViewModel = "org.cosmic.cosmicconnect.UserInterface.MainViewModel";
+
+      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_NotificationFilterViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.NotificationFilterViewModel";
+
+      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_DeviceDetailViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.DeviceDetailViewModel";
+
+      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_config_PluginSettingsViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.config.PluginSettingsViewModel";
+
       static String org_cosmic_cosmicconnect_UserInterface_compose_screens_DeviceListViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.DeviceListViewModel";
 
       static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_MousePadViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.MousePadViewModel";
 
-      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_SendKeystrokesViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.SendKeystrokesViewModel";
-
-      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_NotificationFilterViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.NotificationFilterViewModel";
-
-      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_DigitizerViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.DigitizerViewModel";
-
-      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_config_CustomDevicesViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.config.CustomDevicesViewModel";
-
-      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_FindMyPhoneViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.FindMyPhoneViewModel";
-
-      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_MprisViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.MprisViewModel";
+      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_ShareViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.ShareViewModel";
 
       static String org_cosmic_cosmicconnect_UserInterface_compose_screens_SettingsViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.SettingsViewModel";
 
-      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_DeviceDetailViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.DeviceDetailViewModel";
-
-      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_RunCommandViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.RunCommandViewModel";
-
-      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_about_LicensesViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.about.LicensesViewModel";
-
-      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_config_PluginSettingsViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.config.PluginSettingsViewModel";
-
-      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_about_AboutViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.about.AboutViewModel";
+      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_SendKeystrokesViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.SendKeystrokesViewModel";
 
       static String org_cosmic_cosmicconnect_UserInterface_compose_screens_config_TrustedNetworksViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.config.TrustedNetworksViewModel";
 
-      static String org_cosmic_cosmicconnect_UserInterface_MainViewModel = "org.cosmic.cosmicconnect.UserInterface.MainViewModel";
+      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_RunCommandViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.RunCommandViewModel";
 
-      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_ShareViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.ShareViewModel";
+      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_FindMyPhoneViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.FindMyPhoneViewModel";
+
+      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_about_AboutViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.about.AboutViewModel";
+
+      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_about_LicensesViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.about.LicensesViewModel";
+
+      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_DigitizerViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.DigitizerViewModel";
+
+      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_MprisViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.plugins.MprisViewModel";
+
+      static String org_cosmic_cosmicconnect_UserInterface_compose_screens_config_CustomDevicesViewModel = "org.cosmic.cosmicconnect.UserInterface.compose.screens.config.CustomDevicesViewModel";
+
+      @KeepFieldType
+      MainViewModel org_cosmic_cosmicconnect_UserInterface_MainViewModel2;
+
+      @KeepFieldType
+      NotificationFilterViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_NotificationFilterViewModel2;
+
+      @KeepFieldType
+      DeviceDetailViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_DeviceDetailViewModel2;
+
+      @KeepFieldType
+      PluginSettingsViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_config_PluginSettingsViewModel2;
 
       @KeepFieldType
       DeviceListViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_DeviceListViewModel2;
@@ -849,49 +862,37 @@ public final class DaggerCosmicConnect_HiltComponents_SingletonC {
       MousePadViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_MousePadViewModel2;
 
       @KeepFieldType
-      SendKeystrokesViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_SendKeystrokesViewModel2;
-
-      @KeepFieldType
-      NotificationFilterViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_NotificationFilterViewModel2;
-
-      @KeepFieldType
-      DigitizerViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_DigitizerViewModel2;
-
-      @KeepFieldType
-      CustomDevicesViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_config_CustomDevicesViewModel2;
-
-      @KeepFieldType
-      FindMyPhoneViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_FindMyPhoneViewModel2;
-
-      @KeepFieldType
-      MprisViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_MprisViewModel2;
+      ShareViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_ShareViewModel2;
 
       @KeepFieldType
       SettingsViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_SettingsViewModel2;
 
       @KeepFieldType
-      DeviceDetailViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_DeviceDetailViewModel2;
-
-      @KeepFieldType
-      RunCommandViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_RunCommandViewModel2;
-
-      @KeepFieldType
-      LicensesViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_about_LicensesViewModel2;
-
-      @KeepFieldType
-      PluginSettingsViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_config_PluginSettingsViewModel2;
-
-      @KeepFieldType
-      AboutViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_about_AboutViewModel2;
+      SendKeystrokesViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_SendKeystrokesViewModel2;
 
       @KeepFieldType
       TrustedNetworksViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_config_TrustedNetworksViewModel2;
 
       @KeepFieldType
-      MainViewModel org_cosmic_cosmicconnect_UserInterface_MainViewModel2;
+      RunCommandViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_RunCommandViewModel2;
 
       @KeepFieldType
-      ShareViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_ShareViewModel2;
+      FindMyPhoneViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_FindMyPhoneViewModel2;
+
+      @KeepFieldType
+      AboutViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_about_AboutViewModel2;
+
+      @KeepFieldType
+      LicensesViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_about_LicensesViewModel2;
+
+      @KeepFieldType
+      DigitizerViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_DigitizerViewModel2;
+
+      @KeepFieldType
+      MprisViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_plugins_MprisViewModel2;
+
+      @KeepFieldType
+      CustomDevicesViewModel org_cosmic_cosmicconnect_UserInterface_compose_screens_config_CustomDevicesViewModel2;
     }
 
     private static final class SwitchingProvider<T> implements Provider<T> {
@@ -1124,8 +1125,8 @@ public final class DaggerCosmicConnect_HiltComponents_SingletonC {
     }
 
     @Override
-    public void injectCosmicConnect(CosmicConnect arg0) {
-      injectCosmicConnect2(arg0);
+    public void injectCosmicConnect(CosmicConnect cosmicConnect) {
+      injectCosmicConnect2(cosmicConnect);
     }
 
     @Override
@@ -1136,6 +1137,11 @@ public final class DaggerCosmicConnect_HiltComponents_SingletonC {
     @Override
     public void injectMprisMediaNotificationReceiver(MprisMediaNotificationReceiver arg0) {
       injectMprisMediaNotificationReceiver2(arg0);
+    }
+
+    @Override
+    public void injectOpenOnPhoneReceiver(OpenOnPhoneReceiver arg0) {
+      injectOpenOnPhoneReceiver2(arg0);
     }
 
     @Override
@@ -1199,6 +1205,12 @@ public final class DaggerCosmicConnect_HiltComponents_SingletonC {
         MprisMediaNotificationReceiver instance) {
       MprisMediaNotificationReceiver_MembersInjector.injectDeviceRegistry(instance, deviceRegistryProvider.get());
       MprisMediaNotificationReceiver_MembersInjector.injectMprisMediaSession(instance, mprisMediaSessionProvider.get());
+      return instance;
+    }
+
+    @CanIgnoreReturnValue
+    private OpenOnPhoneReceiver injectOpenOnPhoneReceiver2(OpenOnPhoneReceiver instance) {
+      OpenOnPhoneReceiver_MembersInjector.injectDeviceRegistry(instance, deviceRegistryProvider.get());
       return instance;
     }
 

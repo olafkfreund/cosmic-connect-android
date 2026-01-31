@@ -53,5 +53,5 @@
   </string-array>
     <string name="foreground_notification_devices">Ба %s пайваст шуд</string>
     <string name="foreground_notification_no_devices">Ба ягон дастгоҳ пайваст нашуд</string>
-    <string name="kde_connect">Пайвасти KDE</string>
+    <string name="kde_connect">Пайвасти COSMIC</string>
 </resources>

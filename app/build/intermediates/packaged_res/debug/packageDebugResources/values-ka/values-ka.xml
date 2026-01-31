@@ -56,7 +56,7 @@
     <item quantity="other">(ფაილი %2$d of %3$d) : %1$s</item>
   </plurals>
     <string name="about">შესახებ</string>
-    <string name="about_kde">KDE-ს შესახებ</string>
+    <string name="about_kde">COSMIC-ს შესახებ</string>
     <string name="add_command">ბრძანების დამატება</string>
     <string name="add_command_description">შეგიძლიათ სამუშაო მაგიდაზე ბრძანებები დაამატოთ</string>
     <string name="add_device_dialog_title">მოწყობილობის დამატება</string>
@@ -97,6 +97,7 @@
     <string name="compose_send_title">შედგენის გაგზავნა</string>
     <string name="convert_to_mms_after_title">MMS-ად გარდაქმნა</string>
     <string name="copy_url_to_clipboard">URL-ის ბუფერში კოპირება</string>
+    <string name="cosmo">Cosmo</string>
     <string name="custom_device_deleted">ხელით მითითებული მოწყობილობა წაშლილია</string>
     <string name="custom_device_fab_hint">მოწყობილობის დამატება</string>
     <string name="custom_device_list">მოწყობილობების IP-ით დამატება</string>
@@ -132,10 +133,9 @@
     <string name="gyro_mouse_enabled_title">გიროსკოპის თაგუნას დაჩართვა</string>
     <string name="gyro_mouse_sensitivity_title">გიროსკოპის მგრძნობელობა</string>
     <string name="invalid_device_name">მოწყობილობის არასწორი სახელი</string>
-    <string name="kde">KDE</string>
-    <string name="kde_be_free">KDE - იყავი თავისუფალი!</string>
+    <string name="kde">COSMIC</string>
+    <string name="kde_be_free">COSMIC - იყავი თავისუფალი!</string>
     <string name="kde_connect">COSMIC Connect</string>
-    <string name="konqi">Konqi</string>
     <string name="left_click">მარჯვენა წკაპის გაგზავნა</string>
     <string name="licenses">ლიცენზიები</string>
     <string name="location_permission_needed_title">საჭიროა წვდომა</string>

@@ -100,7 +100,7 @@
     <item quantity="other"/>
   </plurals>
     <string name="about">O aplikácii</string>
-    <string name="about_kde">O prostredí KDE</string>
+    <string name="about_kde">O prostredí COSMIC</string>
     <string name="add_command">Pridať príkaz</string>
     <string name="add_command_description">Môžete pridať príkazy na počítači</string>
     <string name="add_device_dialog_title">Pridanie zariadenia</string>
@@ -139,6 +139,7 @@
     <string name="contacts_permission_explanation">Na zdieľanie vášho adresára kontaktov s počítačom, musíte udeliť oprávnenie ku kontaktom</string>
     <string name="convert_to_mms_after_title">Konvertovať na MMS</string>
     <string name="copy_url_to_clipboard">Kopírovať URL do schránky</string>
+    <string name="cosmo">Cosmo</string>
     <string name="custom_device_deleted">Vlastné zariadenie odstránené</string>
     <string name="custom_device_fab_hint">Pridať zariadenie</string>
     <string name="custom_device_list">Pridať zariadenia podľa adries IP</string>
@@ -172,10 +173,9 @@
     <string name="foreground_notification_send_clipboard">Odoslať schránku</string>
     <string name="holger_kaelberer_task">Zásuvný modul vzdialenej klávesnice a opravy chýb</string>
     <string name="invalid_device_name">Neplatný názov zariadenia</string>
-    <string name="kde">KDE</string>
-    <string name="kde_be_free">KDE - Buďte voľní!</string>
+    <string name="kde">COSMIC</string>
+    <string name="kde_be_free">COSMIC - Buďte voľní!</string>
     <string name="kde_connect">COSMIC Connect</string>
-    <string name="konqi">Konqi</string>
     <string name="licenses">Licencie</string>
     <string name="location_permission_needed_title">Potrebné oprávnenia</string>
     <string name="maintainer_and_developer">Správca a vývojár</string>

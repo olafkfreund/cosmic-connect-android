@@ -1,10 +1,11 @@
 # COSMIC Connect Android - Documentation Index
 
-Last Updated: 2026-01-16
+Last Updated: 2026-01-31
 
 ## Quick Navigation
 
 - [Getting Started](#getting-started)
+- [User Guides](#user-guides)
 - [Architecture](#architecture)
 - [Protocol Implementation](#protocol-implementation)
 - [Issue Tracking](#issue-tracking)
@@ -37,6 +38,28 @@ Essential guides for setting up and understanding the project.
 
 ### FFI Integration
 - [FFI Integration Guide](guides/FFI_INTEGRATION_GUIDE.md) - Complete guide for migrating plugins to FFI (based on PingPluginFFI.kt)
+
+---
+
+## User Guides
+
+End-user documentation for features and troubleshooting.
+
+### General
+- [User Guide](USER_GUIDE.md) - Complete guide for using COSMIC Connect
+- [FAQ](FAQ.md) - Frequently asked questions
+
+### Camera Webcam Feature
+- [Camera Webcam Guide](CAMERA_WEBCAM.md) - Use your phone as a wireless webcam
+  - Desktop setup instructions (NixOS, Arch, Fedora, Ubuntu, openSUSE)
+  - v4l2loopback configuration
+  - Application setup (Firefox, Chrome, OBS, Zoom, Teams, Meet, Discord)
+- [Camera Troubleshooting](CAMERA_TROUBLESHOOTING.md) - Solve camera streaming issues
+  - Camera not detected
+  - Black screen fixes
+  - Latency and performance
+  - v4l2loopback module issues
+  - Application-specific solutions
 
 ---
 

@@ -64,6 +64,9 @@ Execute predefined commands on your desktop remotely.
 ### 🎮 Remote Input
 Use your phone as a touchpad or keyboard for your desktop.
 
+### 📷 Camera Webcam (NEW!)
+Use your phone's camera as a wireless webcam for video calls and streaming.
+
 ---
 
 ## Requirements
@@ -223,6 +226,35 @@ When you first open COSMIC Connect, you'll be greeted by the **Device List** scr
     *   Two-finger tap: Right click
     *   Two-finger slide: Scroll
 3.  **Keyboard:** Tap the keyboard icon (top right) to type on your desktop using your phone's keyboard.
+
+### 📷 Camera Webcam
+
+Use your phone's high-quality camera as a wireless webcam for video calls.
+
+**Prerequisites:**
+*   Your desktop needs the v4l2loopback kernel module installed and loaded
+*   See the [Camera Webcam Guide](CAMERA_WEBCAM.md) for desktop setup instructions
+
+**Starting Camera Streaming:**
+1.  Tap your paired device in the COSMIC Connect app
+2.  Scroll to the **Camera** plugin card
+3.  Tap **Start Camera**
+4.  Your phone camera will begin streaming to your desktop
+
+**Using in Video Calls:**
+1.  In your video application (Zoom, Teams, Meet, etc.), go to camera settings
+2.  Select **"COSMIC Connect Camera"** from the camera list
+3.  Your phone camera feed should now appear
+
+**Switching Cameras:**
+*   Tap the camera flip icon to switch between front and back cameras
+
+**Stopping Streaming:**
+*   Tap **Stop Camera** in the app, or use the notification to stop
+
+For detailed setup and troubleshooting, see:
+*   [Camera Webcam Setup Guide](CAMERA_WEBCAM.md)
+*   [Camera Troubleshooting](CAMERA_TROUBLESHOOTING.md)
 
 ---
 

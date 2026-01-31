@@ -29,6 +29,7 @@ COSMIC Connect enables Android devices to communicate with COSMIC Desktop comput
 - **Find My Phone** - Make phone ring to locate it
 - **Run Commands** - Execute predefined commands remotely
 - **Telephony Integration** - SMS and call notifications on desktop
+- **Camera Webcam** - Use phone camera as wireless webcam for video calls (NEW!)
 
 All features work wirelessly over Wi-Fi or Bluetooth using **secure TLS encryption**.
 

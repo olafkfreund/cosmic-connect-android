@@ -199,6 +199,14 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
             </intent-filter>
         </receiver>
 
+        <receiver android:name="org.cosmic.cosmicconnect.Plugins.OpenOnPhonePlugin.OpenOnPhoneReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="org.cosmic.cosmicconnect.Plugins.OpenOnPhonePlugin.APPROVE" />
+                <action android:name="org.cosmic.cosmicconnect.Plugins.OpenOnPhonePlugin.REJECT" />
+            </intent-filter>
+        </receiver>
+
         <!-- Plugin-related activities and services -->
 
         <activity

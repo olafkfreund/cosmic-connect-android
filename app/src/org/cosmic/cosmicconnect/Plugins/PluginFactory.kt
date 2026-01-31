@@ -20,13 +20,32 @@ class PluginFactory @Inject constructor(@ApplicationContext private val context:
 
     fun initPluginInfo() {
         try {
-            pluginInfo = com.albertvaka.classindexksp.LoadablePlugin
+            val plugins = listOf(
+                org.cosmic.cosmicconnect.Plugins.PingPlugin.PingPlugin::class,
+                org.cosmic.cosmicconnect.Plugins.BatteryPlugin.BatteryPlugin::class,
+                org.cosmic.cosmicconnect.Plugins.BatteryPlugin.BatteryPluginFFI::class,
+                org.cosmic.cosmicconnect.Plugins.MprisPlugin.MprisPlugin::class,
+                org.cosmic.cosmicconnect.Plugins.NotificationsPlugin.NotificationsPlugin::class,
+                org.cosmic.cosmicconnect.Plugins.ReceiveNotificationsPlugin.ReceiveNotificationsPlugin::class,
+                org.cosmic.cosmicconnect.Plugins.SharePlugin.SharePlugin::class,
+                org.cosmic.cosmicconnect.Plugins.SftpPlugin.SftpPlugin::class,
+                org.cosmic.cosmicconnect.Plugins.ContactsPlugin.ContactsPlugin::class,
+                org.cosmic.cosmicconnect.Plugins.FindRemoteDevicePlugin.FindRemoteDevicePlugin::class,
+                org.cosmic.cosmicconnect.Plugins.MousePadPlugin.MousePadPlugin::class,
+                org.cosmic.cosmicconnect.Plugins.PresenterPlugin.PresenterPlugin::class,
+                org.cosmic.cosmicconnect.Plugins.ConnectivityReportPlugin.ConnectivityReportPlugin::class,
+                org.cosmic.cosmicconnect.Plugins.SMSPlugin.SMSPlugin::class,
+                org.cosmic.cosmicconnect.Plugins.TelephonyPlugin.TelephonyPlugin::class
+            )
+
+            pluginInfo = plugins
                 .asSequence()
                 .map { it.java.getDeclaredConstructor().newInstance() as Plugin }
                 .onEach { it.setContext(context, null) }
                 .associate { Pair(it.pluginKey, PluginInfo(it)) }
         } catch (e: Exception) {
-            throw RuntimeException(e)
+            Log.e("PluginFactory", "Error loading plugins", e)
+            // throw RuntimeException(e)
         }
         Log.i("PluginFactory", "Loaded " + pluginInfo.size + " plugins")
     }

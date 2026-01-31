@@ -7,17 +7,15 @@ package org.cosmic.cosmicconnect
 
 import android.app.NotificationManager
 import android.content.Context
+import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import androidx.core.content.ContextCompat
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkStatic
+import io.mockk.spyk
 import io.mockk.unmockkAll
 import io.mockk.verify
-import org.junit.After
-import org.junit.Assert
-import org.junit.Before
-import org.junit.Test
 import org.cosmic.cosmicconnect.Backends.LanBackend.LanLink
 import org.cosmic.cosmicconnect.Backends.LanBackend.LanLinkProvider
 import org.cosmic.cosmicconnect.DeviceInfo.Companion.fromIdentityPacketAndCert
@@ -30,16 +28,35 @@ import org.cosmic.cosmicconnect.Helpers.SecurityHelpers.RsaHelper
 import org.cosmic.cosmicconnect.Helpers.SecurityHelpers.SslHelper
 import org.cosmic.cosmicconnect.Helpers.TrustedDevices
 import org.cosmic.cosmicconnect.PairingHandler.PairingCallback
+import org.cosmic.cosmicconnect.Plugins.PluginFactory
+import org.junit.After
+import org.junit.Assert
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import java.security.cert.Certificate
 import java.security.cert.CertificateException
+import java.security.cert.CertificateFactory
+import java.io.ByteArrayInputStream
 
+@RunWith(RobolectricTestRunner::class)
 class DeviceTest {
-    private val context: Context = mockk()
+    private val context: Context = mockk(relaxed = true)
+    private val deviceHelper: DeviceHelper = mockk(relaxed = true)
+    private val pluginFactory: PluginFactory = mockk(relaxed = true)
+    private val rsaHelper: RsaHelper = mockk(relaxed = true)
+    private lateinit var sslHelper: SslHelper
 
     // Creating a paired device before each test case
     @Before
     fun setUp() {
         val deviceId = "testDevice"
         val name = "Test Device"
+        
+        // Mock SslHelper
+        sslHelper = spyk(SslHelper(context, rsaHelper))
+        
         val encodedCertificate = """
             MIIDVzCCAj+gAwIBAgIBCjANBgkqhkiG9w0BAQUFADBVMS8wLQYDVQQDDCZfZGExNzlhOTFfZjA2
             NF80NzhlX2JlOGNfMTkzNWQ3NTQ0ZDU0XzEMMAoGA1UECgwDS0RFMRQwEgYDVQQLDAtLZGUgY29u
@@ -90,12 +107,16 @@ class DeviceTest {
         val defaultSettings = MockSharedPreference()
         every { PreferenceManager.getDefaultSharedPreferences(any()) } returns defaultSettings
 
-        RsaHelper.initialiseRsaKeys(context)
+        // RsaHelper.initialiseRsaKeys(context) - removed, done in Hilt module or SslHelper init
 
         mockkStatic(ContextCompat::class)
         every { ContextCompat.getSystemService(context, NotificationManager::class.java) } returns mockk(relaxed = true)
 
         mockkStatic(android.util.Log::class)
+        every { android.util.Log.i(any(), any()) } returns 0
+        every { android.util.Log.e(any(), any(), any()) } returns 0
+        every { android.util.Log.w(any(), any<String>()) } returns 0
+        every { android.util.Log.d(any(), any()) } returns 0
     }
 
     @After
@@ -171,7 +192,8 @@ class DeviceTest {
     @Test
     @Throws(CertificateException::class)
     fun testDevice() {
-        val device = Device(context, "testDevice")
+        // Updated constructor usage
+        val device = Device(context, "testDevice", deviceHelper, pluginFactory, sslHelper)
 
         Assert.assertEquals(device.deviceId, "testDevice")
         Assert.assertEquals(device.deviceType, DeviceType.PHONE)
@@ -208,7 +230,9 @@ class DeviceTest {
             7n+KOQ==
             """.trimIndent()
         val certificateBytes = android.util.Base64.decode(certificateString, 0)
-        val certificate = SslHelper.parseCertificate(certificateBytes)
+        
+        // Use sslHelper instance to parse certificate
+        val certificate = sslHelper.parseCertificate(certificateBytes)
         val deviceInfo = fromIdentityPacketAndCert(fakeNetworkPacket, certificate)
 
         val linkProvider = mockk<LanLinkProvider>()
@@ -218,7 +242,9 @@ class DeviceTest {
         every { link.deviceId } returns deviceId
         every { link.deviceInfo } returns deviceInfo
         every { link.addPacketReceiver(any()) } returns Unit
-        val device = Device(context, link)
+        
+        // Updated constructor
+        val device = Device(context, link, deviceHelper, pluginFactory, sslHelper)
 
         Assert.assertNotNull(device)
         Assert.assertEquals(device.deviceId, deviceId)
@@ -246,7 +272,8 @@ class DeviceTest {
     @Throws(CertificateException::class)
     fun testUnpair() {
         val pairingCallback = mockk<PairingCallback>(relaxed = true)
-        val device = Device(context, "testDevice")
+        // Updated constructor
+        val device = Device(context, "testDevice", deviceHelper, pluginFactory, sslHelper)
         device.addPairingCallback(pairingCallback)
 
         device.unpair()

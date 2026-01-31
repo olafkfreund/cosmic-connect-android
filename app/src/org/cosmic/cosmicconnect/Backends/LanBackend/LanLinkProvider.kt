@@ -247,8 +247,14 @@ class LanLinkProvider @Inject constructor(
             return
         }
 
-        val socketFactory = SocketFactory.getDefault()
-        val socket = socketFactory.createSocket(address, tcpPort)
+        val socket = Socket()
+        try {
+            socket.bind(InetSocketAddress(InetAddress.getByName("0.0.0.0"), 0))
+            socket.connect(InetSocketAddress(address, tcpPort), 10000)
+        } catch (e: IOException) {
+            Log.e("LanLinkProvider", "Failed to connect to $address:$tcpPort", e)
+            throw e
+        }
         configureSocket(socket)
 
         val myDeviceInfo = deviceHelper.getDeviceInfo()
@@ -330,6 +336,7 @@ class LanLinkProvider @Inject constructor(
                         writer.write(myIdentity.serialize().toByteArray(Charsets.UTF_8))
                         writer.flush()
                         val line = readSingleLine(sslSocket)
+                        Log.d("COSMIC/LanLinkProvider", "Received secure identity: $line")
                         // Do not trust the identity packet we received unencrypted
                         secureIdentityPacket = NetworkPacket.unserialize(line)
                         if (!DeviceInfo.isValidIdentityPacket(secureIdentityPacket)) {
@@ -502,6 +509,9 @@ class LanLinkProvider @Inject constructor(
             val hostList = CustomDevicesActivity
                 .getCustomDeviceList(context)
 
+            // Add localhost for testing with adb reverse
+            DeviceHost.toDeviceHostOrNull("127.0.0.1")?.let { hostList.add(it) }
+
             if (TrustedNetworkHelper.isTrustedNetwork(context)) {
                 hostList.add(DeviceHost.BROADCAST) //Default: broadcast.
             } else {
@@ -566,7 +576,7 @@ class LanLinkProvider @Inject constructor(
 
         for (ip in ipList) {
             try {
-                socket.send(DatagramPacket(bytes, bytes.size, ip, MIN_PORT))
+                socket.send(DatagramPacket(bytes, bytes.size, ip, UDP_PORT))
                 //Log.i("COSMIC/LanLinkProvider","Udp identity packet sent to address "+client);
             } catch (e: IOException) {
                 Log.e(
@@ -659,10 +669,10 @@ class LanLinkProvider @Inject constructor(
         get() = tcpServer!!.localPort
 
     companion object {
-        const val UDP_PORT = 1716
-        const val MIN_PORT = 1716
-        const val MAX_PORT = 1764
-        const val PAYLOAD_TRANSFER_MIN_PORT = 1739
+        const val UDP_PORT = 1816
+        const val MIN_PORT = 1814
+        const val MAX_PORT = 1864
+        const val PAYLOAD_TRANSFER_MIN_PORT = 1839
 
         const val MAX_IDENTITY_PACKET_SIZE = 1024 * 512
         const val MAX_UDP_PACKET_SIZE = 1024 * 512

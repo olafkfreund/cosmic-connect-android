@@ -317,8 +317,8 @@ private fun DeviceList(
       )
     }
 
-    // Connected devices section
-    val connectedDevices = devices.filter { it.category == DeviceCategory.CONNECTED }
+    // Connected devices section - filter by actual device state for real-time accuracy
+    val connectedDevices = devices.filter { it.device.isReachable && it.device.isPaired }
     if (connectedDevices.isNotEmpty()) {
       item {
         SectionHeader(
@@ -341,8 +341,8 @@ private fun DeviceList(
       }
     }
 
-    // Available devices section
-    val availableDevices = devices.filter { it.category == DeviceCategory.AVAILABLE }
+    // Available devices section - filter by actual device state for real-time accuracy
+    val availableDevices = devices.filter { it.device.isReachable && !it.device.isPaired }
     if (availableDevices.isNotEmpty()) {
       item {
         SectionHeader(
@@ -364,8 +364,8 @@ private fun DeviceList(
       }
     }
 
-    // Remembered devices section
-    val rememberedDevices = devices.filter { it.category == DeviceCategory.REMEMBERED }
+    // Remembered devices section - filter by actual device state for real-time accuracy
+    val rememberedDevices = devices.filter { !it.device.isReachable && it.device.isPaired }
     if (rememberedDevices.isNotEmpty()) {
       item {
         SectionHeader(

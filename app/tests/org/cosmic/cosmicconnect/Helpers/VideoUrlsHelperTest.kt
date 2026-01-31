@@ -5,23 +5,45 @@
 */
 package org.cosmic.cosmicconnect.Helpers
 
+import android.content.Context
+import dagger.hilt.EntryPoints
 import io.mockk.every
-import io.mockk.mockkObject
-import io.mockk.unmockkObject
+import io.mockk.mockk
+import io.mockk.mockkStatic
+import io.mockk.unmockkAll
+import org.junit.After
 import org.junit.Assert
+import org.junit.Before
 import org.junit.Test
+import org.cosmic.cosmicconnect.di.HiltBridges
 
 class VideoUrlsHelperTest {
+
+    @Before
+    fun setup() {
+        mockkStatic(EntryPoints::class)
+    }
+
+    @After
+    fun tearDown() {
+        unmockkAll()
+    }
 
     @Test
     fun checkYoutubeTvLinksConversion() {
         fun check(isTv: Boolean, input: String, expected: String) {
-            mockkObject(DeviceHelper)
-            every { DeviceHelper.isTv } returns isTv
-            val formatted = VideoUrlsHelper.convertToAndFromYoutubeTvLinks(input)
+            val context = mockk<Context>(relaxed = true)
+            val deviceHelper = mockk<DeviceHelper>()
+            val hiltBridges = mockk<HiltBridges>()
+            
+            every { deviceHelper.isTv } returns isTv
+            every { EntryPoints.get(any(), HiltBridges::class.java) } returns hiltBridges
+            every { hiltBridges.deviceHelper() } returns deviceHelper
+
+            val formatted = VideoUrlsHelper.convertToAndFromYoutubeTvLinks(input, context)
             Assert.assertEquals(expected, formatted)
-            unmockkObject(DeviceHelper)
         }
+        
         val complexTvLink = "https://www.youtube.com/tv?is_account_switch=1&hrld=2&fltor=1#/watch?v=ZN471HiQD3o&t=13"
         val tvLink = "https://www.youtube.com/tv#/watch?v=ZN471HiQD3o&t=13"
         val pcLink = "https://www.youtube.com/watch?v=ZN471HiQD3o&t=13"

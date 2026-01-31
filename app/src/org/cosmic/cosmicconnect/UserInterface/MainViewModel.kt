@@ -60,6 +60,10 @@ class MainViewModel @Inject constructor(
 
     private fun updateDeviceList() {
         val devices = deviceRegistry.devices.values.toList()
+        android.util.Log.d("MainViewModel", "updateDeviceList: found ${devices.size} devices")
+        devices.forEach {
+            android.util.Log.d("MainViewModel", "Device: ${it.name} (${it.deviceId}) paired=${it.isPaired}")
+        }
         _uiState.value = _uiState.value.copy(devices = devices)
     }
 

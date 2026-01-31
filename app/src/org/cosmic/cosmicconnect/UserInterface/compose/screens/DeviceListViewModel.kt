@@ -99,6 +99,10 @@ class DeviceListViewModel @Inject constructor(
       // Filter out unpaired devices that are not reachable
       it.isReachable || it.isPaired
     }
+    android.util.Log.d("DeviceListViewModel", "updateDeviceList: found ${allDevices.size} visible devices out of ${deviceRegistry.devices.size} total")
+    deviceRegistry.devices.values.forEach {
+        android.util.Log.d("DeviceListViewModel", "Device: ${it.name} (${it.deviceId}) reachable=${it.isReachable} paired=${it.isPaired}")
+    }
 
     // Categorize devices
     val categorizedDevices = categorizeDevices(allDevices)

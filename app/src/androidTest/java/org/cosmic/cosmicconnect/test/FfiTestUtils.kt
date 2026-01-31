@@ -1,4 +1,6 @@
-package org.cosmic.cconnect.test
+package org.cosmic.cosmicconnect.test
+
+import org.cosmic.cosmicconnect.NetworkPacket
 
 /**
  * FFI Test Utilities
@@ -162,7 +164,7 @@ object FfiTestUtils {
 
         // Let it be garbage collected
         @Suppress("UNUSED_VALUE")
-        var temp = obj
+        var temp: NetworkPacket? = obj
         temp = null
       }
 

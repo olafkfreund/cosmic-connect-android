@@ -1,7 +1,14 @@
-package org.cosmic.cconnect.test
+package org.cosmic.cosmicconnect.test
 
-import org.cosmic.cconnect.Device
-import org.cosmic.cconnect.NetworkPacket
+import android.content.Context
+import org.cosmic.cosmicconnect.Backends.BaseLink
+import org.cosmic.cosmicconnect.Backends.BaseLinkProvider
+import org.cosmic.cosmicconnect.Device
+import org.cosmic.cosmicconnect.DeviceInfo
+import org.cosmic.cosmicconnect.NetworkPacket
+import java.security.cert.Certificate
+
+import java.util.concurrent.CopyOnWriteArrayList
 
 /**
  * Mock Factory
@@ -10,6 +17,67 @@ import org.cosmic.cconnect.NetworkPacket
  * Creates realistic test data for devices, network packets, and FFI interactions.
  */
 object MockFactory {
+
+  class MockLinkProvider : BaseLinkProvider() {
+      override fun onStart() {}
+      override fun onStop() {}
+      override fun onNetworkChange(network: android.net.Network?) {}
+      override val name: String = "MockLinkProvider"
+      override val priority: Int = 0
+  }
+
+  class MockLink(
+      context: Context,
+      linkProvider: BaseLinkProvider,
+      override val deviceInfo: DeviceInfo
+  ) : BaseLink(context, linkProvider) {
+      override val name: String = "MockLink"
+      
+      val sentPackets = CopyOnWriteArrayList<NetworkPacket>()
+
+      override fun sendPacket(
+          np: NetworkPacket,
+          callback: Device.SendPacketStatusCallback,
+          sendPayloadFromSameThread: Boolean
+      ): Boolean {
+          sentPackets.add(np)
+          callback.onSuccess()
+          return true
+      }
+  }
+
+  private fun createDummyCertificate(): Certificate {
+      return object : Certificate("X.509") {
+          override fun getEncoded(): ByteArray = ByteArray(0)
+          override fun verify(key: java.security.PublicKey?) {}
+          override fun verify(key: java.security.PublicKey?, sigProvider: String?) {}
+          override fun toString(): String = "MockCertificate"
+          override fun getPublicKey(): java.security.PublicKey? = null
+      }
+  }
+
+  /**
+   * Create a mock Link for device registration.
+   */
+  fun createMockLink(
+      context: Context,
+      deviceId: String,
+      deviceName: String = "Test Device",
+      deviceType: org.cosmic.cosmicconnect.DeviceType = org.cosmic.cosmicconnect.DeviceType.DESKTOP
+  ): BaseLink {
+      val linkProvider = MockLinkProvider()
+      val cert = createDummyCertificate()
+      val deviceInfo = DeviceInfo(
+          id = deviceId,
+          certificate = cert,
+          name = deviceName,
+          type = deviceType,
+          protocolVersion = 8,
+          incomingCapabilities = setOf("cconnect.battery", "cconnect.clipboard", "cconnect.share", "cconnect.ping", "cconnect.runcommand", "cconnect.mpris", "cconnect.telephony"),
+          outgoingCapabilities = setOf("cconnect.battery", "cconnect.clipboard", "cconnect.share", "cconnect.ping", "cconnect.runcommand", "cconnect.mpris", "cconnect.telephony")
+      )
+      return MockLink(context, linkProvider, deviceInfo)
+  }
 
   /**
    * Create a mock NetworkPacket via FFI.
@@ -24,10 +92,26 @@ object MockFactory {
     deviceId: String = TestUtils.randomDeviceId(),
     body: Map<String, Any> = emptyMap()
   ): NetworkPacket {
-    // This would call into Rust FFI to create a proper NetworkPacket
-    // For now, create via constructor if available
-    // TODO: Use FFI to create NetworkPacket from Rust core
-    return NetworkPacket(type)
+    val packet = NetworkPacket(type)
+    
+    // Populate packet body
+    body.forEach { (key, value) ->
+        when (value) {
+            is String -> packet[key] = value
+            is Int -> packet[key] = value
+            is Long -> packet[key] = value
+            is Boolean -> packet[key] = value
+            is Double -> packet[key] = value
+            is List<*> -> {
+                @Suppress("UNCHECKED_CAST")
+                if (value.isNotEmpty() && value.first() is String) {
+                    packet[key] = value as List<String>
+                }
+            }
+        }
+    }
+    
+    return packet
   }
 
   /**

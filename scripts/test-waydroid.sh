@@ -15,8 +15,8 @@ NC='\033[0m' # No Color
 
 # Configuration
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-BUILD_DIR="${PROJECT_ROOT}/build"
-APK_PATH="${BUILD_DIR}/outputs/apk/debug/cosmicconnect-android-debug.apk"
+BUILD_DIR="${PROJECT_ROOT}/app/build"
+APK_OUTPUT_DIR="${BUILD_DIR}/outputs/apk/debug"
 WAYDROID_IP="192.168.240.112"
 ADB_PORT="5555"
 HEADLESS=false
@@ -150,25 +150,31 @@ connect_adb() {
 
 # Build APK
 build_apk() {
-  if [ "$QUICK" = true ]; then
-    log "Quick mode: Skipping clean build"
-    if [ ! -f "$APK_PATH" ]; then
-      warning "APK not found, building anyway..."
-      QUICK=false
-    fi
-  fi
-
   cd "$PROJECT_ROOT"
 
   if [ "$QUICK" = false ]; then
     log "Building debug APK..."
     ./gradlew assembleDebug || error "Build failed"
     success "APK built successfully"
+  else
+    log "Quick mode: Skipping clean build"
   fi
 
-  if [ ! -f "$APK_PATH" ]; then
-    error "APK not found at $APK_PATH"
+  # Find the APK (renamed with hash or default)
+  # Look for app-debug-*.apk or cosmicconnect-android-debug.apk
+  APK_PATH=$(find "$APK_OUTPUT_DIR" -name "*.apk" -print -quit)
+
+  if [ -z "$APK_PATH" ] || [ ! -f "$APK_PATH" ]; then
+    if [ "$QUICK" = true ]; then
+        warning "APK not found in quick mode, rebuilding..."
+        QUICK=false
+        build_apk
+        return
+    fi
+    error "APK not found in $APK_OUTPUT_DIR"
   fi
+  
+  log "Found APK: $(basename "$APK_PATH")"
 }
 
 # Install APK

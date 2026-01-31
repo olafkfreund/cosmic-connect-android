@@ -8,12 +8,17 @@ package org.cosmic.cosmicconnect.Plugins.CameraPlugin
 
 import android.Manifest
 import android.app.Activity
+import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
+import android.content.ServiceConnection
 import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
 import android.os.Build
+import android.os.IBinder
 import android.util.Log
 import android.util.Size
+import android.view.Surface
 import androidx.core.content.ContextCompat
 import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
@@ -104,6 +109,49 @@ class CameraPlugin : Plugin() {
 
     /** Current streaming bitrate */
     private var currentBitrate: Int = BitratePresets.MEDIUM
+
+    // ========================================================================
+    // Streaming Components
+    // ========================================================================
+
+    /** Capture service for camera access */
+    private var captureService: CameraCaptureService? = null
+
+    /** Service bound state */
+    private var serviceBound: Boolean = false
+
+    /** H.264 encoder */
+    private var encoder: H264Encoder? = null
+
+    /** Network streaming client */
+    private var streamClient: CameraStreamClient? = null
+
+    /** Service connection callback */
+    private val serviceConnection = object : ServiceConnection {
+        override fun onServiceConnected(name: ComponentName?, binder: IBinder?) {
+            val localBinder = binder as? CameraCaptureService.LocalBinder
+            captureService = localBinder?.getService()
+            serviceBound = true
+            Log.d(TAG, "CameraCaptureService bound")
+
+            // If streaming was requested, continue with camera setup
+            if (streamingState == StreamingStatus.STARTING) {
+                initializeStreamingComponents()
+            }
+        }
+
+        override fun onServiceDisconnected(name: ComponentName?) {
+            captureService = null
+            serviceBound = false
+            Log.d(TAG, "CameraCaptureService disconnected")
+
+            // Handle unexpected disconnection during streaming
+            if (streamingState == StreamingStatus.STREAMING) {
+                streamingState = StreamingStatus.ERROR
+                sendStatus(StreamingStatus.ERROR, error = "Camera service disconnected")
+            }
+        }
+    }
 
     // ========================================================================
     // Plugin Metadata
@@ -402,16 +450,80 @@ class CameraPlugin : Plugin() {
         // Send starting status
         sendStatus(StreamingStatus.STARTING)
 
-        // TODO: Issue #103 - Camera2 capture service implementation
-        // TODO: Issue #104 - H.264 MediaCodec encoding
-        // TODO: Issue #105 - TCP streaming client
+        // Bind to capture service (streaming continues in service connection callback)
+        if (!serviceBound) {
+            val intent = Intent(context, CameraCaptureService::class.java)
+            context.bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)
+            // Also start as foreground service
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                context.startForegroundService(intent)
+            } else {
+                context.startService(intent)
+            }
+            Log.d(TAG, "Binding to CameraCaptureService...")
+        } else {
+            // Service already bound, initialize components
+            initializeStreamingComponents()
+        }
 
-        // For now, just update state and log
-        streamingState = StreamingStatus.STREAMING
-        sendStatus(StreamingStatus.STREAMING)
-
-        Log.i(TAG, "Camera streaming started (stub implementation)")
         return true
+    }
+
+    /**
+     * Initialize streaming components after service is bound
+     *
+     * Creates encoder and stream client, then starts capture.
+     */
+    private fun initializeStreamingComponents() {
+        val service = captureService
+        if (service == null) {
+            Log.e(TAG, "Capture service not available")
+            sendStatus(StreamingStatus.ERROR, error = "Camera service not available")
+            return
+        }
+
+        try {
+            // Create stream client
+            streamClient = CameraStreamClient(device, streamClientCallback)
+            streamClient?.setTargetBitrate(currentBitrate)
+            streamClient?.start()
+
+            // Create H.264 encoder
+            encoder = H264Encoder(
+                width = currentResolution.width,
+                height = currentResolution.height,
+                fps = currentFps,
+                bitrateKbps = currentBitrate,
+                callback = encoderCallback
+            )
+
+            // Get encoder input surface
+            val encoderSurface = encoder?.getInputSurface()
+            if (encoderSurface == null) {
+                Log.e(TAG, "Failed to get encoder input surface")
+                cleanupStreamingComponents()
+                sendStatus(StreamingStatus.ERROR, error = "Encoder initialization failed")
+                return
+            }
+
+            // Start capture service with encoder surface
+            service.setCaptureListener(captureListener)
+            service.startCapture(
+                cameraId = activeCameraId,
+                width = currentResolution.width,
+                height = currentResolution.height,
+                fps = currentFps,
+                surface = encoderSurface
+            )
+
+            // Encoder started by capture listener when capture starts
+            Log.i(TAG, "Streaming components initialized")
+
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to initialize streaming components", e)
+            cleanupStreamingComponents()
+            sendStatus(StreamingStatus.ERROR, error = "Initialization failed: ${e.message}")
+        }
     }
 
     /**
@@ -432,15 +544,124 @@ class CameraPlugin : Plugin() {
         // Send stopping status
         sendStatus(StreamingStatus.STOPPING)
 
-        // TODO: Issue #103 - Stop Camera2 capture
-        // TODO: Issue #104 - Stop MediaCodec encoder
-        // TODO: Issue #105 - Close TCP connection
+        // Stop capture service
+        captureService?.stopCapture()
+
+        // Cleanup components
+        cleanupStreamingComponents()
+
+        // Unbind from service
+        if (serviceBound) {
+            context.unbindService(serviceConnection)
+            serviceBound = false
+        }
+
+        // Stop foreground service
+        val intent = Intent(context, CameraCaptureService::class.java)
+        context.stopService(intent)
 
         streamingState = StreamingStatus.STOPPED
         sendStatus(StreamingStatus.STOPPED)
 
         Log.i(TAG, "Camera streaming stopped")
         return true
+    }
+
+    /**
+     * Cleanup streaming components
+     */
+    private fun cleanupStreamingComponents() {
+        // Stop stream client
+        streamClient?.stop()
+        streamClient = null
+
+        // Stop encoder
+        encoder?.stop()
+        encoder?.release()
+        encoder = null
+    }
+
+    // ========================================================================
+    // Component Callbacks
+    // ========================================================================
+
+    /** Capture service listener */
+    private val captureListener = object : CameraCaptureService.CaptureListener {
+        override fun onCaptureStarted(cameraId: String, width: Int, height: Int, fps: Int) {
+            Log.i(TAG, "Capture started: camera=$cameraId, ${width}x${height}@${fps}fps")
+
+            // Start encoder
+            encoder?.start()
+
+            // Update state
+            streamingState = StreamingStatus.STREAMING
+            sendStatus(StreamingStatus.STREAMING)
+        }
+
+        override fun onCaptureStopped() {
+            Log.i(TAG, "Capture stopped")
+        }
+
+        override fun onCaptureError(error: String) {
+            Log.e(TAG, "Capture error: $error")
+            cleanupStreamingComponents()
+            streamingState = StreamingStatus.ERROR
+            sendStatus(StreamingStatus.ERROR, error = error)
+        }
+
+        override fun onFrameCaptured(timestampNanos: Long) {
+            // Frame captured, encoder will output encoded data via callback
+        }
+    }
+
+    /** Encoder callback */
+    private val encoderCallback = object : H264Encoder.EncoderCallback {
+        override fun onSpsPpsAvailable(sps: ByteArray, pps: ByteArray) {
+            Log.d(TAG, "SPS/PPS available: sps=${sps.size}, pps=${pps.size}")
+            streamClient?.sendSpsPps(sps, pps)
+        }
+
+        override fun onEncodedFrame(data: ByteArray, frameType: FrameType, timestampUs: Long) {
+            streamClient?.sendFrame(data, frameType, timestampUs)
+        }
+
+        override fun onError(error: Throwable) {
+            Log.e(TAG, "Encoder error", error)
+            stopStreaming()
+            sendStatus(StreamingStatus.ERROR, error = "Encoder error: ${error.message}")
+        }
+    }
+
+    /** Stream client callback */
+    private val streamClientCallback = object : CameraStreamClient.StreamCallback {
+        override fun onStreamStarted() {
+            Log.d(TAG, "Stream client started")
+        }
+
+        override fun onStreamStopped() {
+            Log.d(TAG, "Stream client stopped")
+        }
+
+        override fun onStreamError(error: Throwable) {
+            Log.e(TAG, "Stream error", error)
+            stopStreaming()
+            sendStatus(StreamingStatus.ERROR, error = "Network error: ${error.message}")
+        }
+
+        override fun onBandwidthUpdate(kbps: Int) {
+            // Could update UI or log bandwidth stats
+        }
+
+        override fun onCongestionDetected() {
+            Log.w(TAG, "Network congestion detected, reducing bitrate")
+            // Reduce bitrate by 25%
+            val newBitrate = (currentBitrate * 0.75).toInt().coerceAtLeast(500)
+            if (newBitrate != currentBitrate) {
+                currentBitrate = newBitrate
+                encoder?.setBitrate(newBitrate)
+                streamClient?.setTargetBitrate(newBitrate)
+            }
+        }
     }
 
     // ========================================================================

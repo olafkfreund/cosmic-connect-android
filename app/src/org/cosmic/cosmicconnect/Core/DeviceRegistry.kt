@@ -45,6 +45,27 @@ class DeviceRegistry @Inject constructor(
 
     private val deviceListChangedCallbacks = ConcurrentHashMap<String, DeviceListChangedCallback>()
 
+    private val devicePairingCallback: PairingCallback = object : PairingCallback {
+        override fun incomingPairRequest() {
+            onDeviceListChanged()
+        }
+
+        override fun pairingSuccessful() {
+            onDeviceListChanged()
+        }
+
+        override fun pairingFailed(error: String) {
+            onDeviceListChanged()
+        }
+
+        override fun unpaired(device: Device) {
+            onDeviceListChanged()
+            if (!device.isReachable) {
+                scheduleForDeletion(device)
+            }
+        }
+    }
+
     init {
         loadRememberedDevicesFromSettings()
     }
@@ -98,27 +119,6 @@ class DeviceRegistry @Inject constructor(
                     TrustedDevices.removeTrustedDevice(context, it)
                 }
             }
-    }
-
-    private val devicePairingCallback: PairingCallback = object : PairingCallback {
-        override fun incomingPairRequest() {
-            onDeviceListChanged()
-        }
-
-        override fun pairingSuccessful() {
-            onDeviceListChanged()
-        }
-
-        override fun pairingFailed(error: String) {
-            onDeviceListChanged()
-        }
-
-        override fun unpaired(device: Device) {
-            onDeviceListChanged()
-            if (!device.isReachable) {
-                scheduleForDeletion(device)
-            }
-        }
     }
 
     val connectionListener: ConnectionReceiver = object : ConnectionReceiver {

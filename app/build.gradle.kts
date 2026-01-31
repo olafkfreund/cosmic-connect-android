@@ -76,6 +76,7 @@ android {
         targetSdk = 34
         versionCode = 13404
         versionName = "1.0.0-beta"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
     }
     buildFeatures {
@@ -101,7 +102,7 @@ android {
             manifest.srcFile("AndroidManifest.xml")
             java.setSrcDirs(listOf("src/org", "src/us", "src/uniffi"))
             res.setSrcDirs(listOf(licenseResDir, "res"))
-            jniLibs.setSrcDirs(listOf("${projectDir}/build/rustJniLibs/android"))
+            // jniLibs.setSrcDirs(listOf("${projectDir}/build/rustJniLibs/android"))
         }
         getByName("debug") {
             res.srcDir("dbg-res")
@@ -404,6 +405,15 @@ dependencies {
     testImplementation(libs.jsonassert)
     testImplementation(libs.robolectric)
     testImplementation(libs.androidx.junit)
+
+    // Instrumented tests
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.test.core)
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.androidx.test.rules)
+    androidTestImplementation(libs.androidx.test.espresso.core)
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 
     // For device controls
     implementation(libs.reactive.streams)

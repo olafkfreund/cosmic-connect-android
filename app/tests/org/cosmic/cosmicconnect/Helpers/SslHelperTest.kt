@@ -9,19 +9,24 @@ import android.content.Context
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkStatic
+import io.mockk.spyk
 import io.mockk.unmockkAll
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import org.cosmic.cosmicconnect.Helpers.SecurityHelpers.RsaHelper
 import org.cosmic.cosmicconnect.Helpers.SecurityHelpers.SslHelper
 import org.cosmic.cosmicconnect.MockSharedPreference
 import java.security.cert.X509Certificate
 import java.util.Base64
 
 class SSLHelperTest {
-    private val context: Context = mockk()
+    private val context: Context = mockk(relaxed = true)
+    private val rsaHelper: RsaHelper = mockk(relaxed = true)
+    private lateinit var sslHelper: SslHelper
     private lateinit var sharedPreferences: MockSharedPreference
+    
     private val certificateBase64 = """
         MIIBkzCCATmgAwIBAgIBATAKBggqhkjOPQQDBDBTMS0wKwYDVQQDDCRlZTA2MWE3NV9lNDAzXzRl
         Y2NfOTI2MV81ZmZlMjcyMmY2OTgxFDASBgNVBAsMC0tERSBDb25uZWN0MQwwCgYDVQQKDANLREUw
@@ -38,6 +43,7 @@ class SSLHelperTest {
 
     @Before
     fun setup() {
+        sslHelper = spyk(SslHelper(context, rsaHelper))
         sharedPreferences = MockSharedPreference()
         every { context.getSharedPreferences(deviceId, Context.MODE_PRIVATE) } returns sharedPreferences
 
@@ -88,15 +94,15 @@ class SSLHelperTest {
     fun getCertificateHash() {
         sharedPreferences.edit().putString(certificateKey, certificateBase64).apply()
         val cert = TrustedDevices.getDeviceCertificate(context, deviceId)
-        val hash = SslHelper.getCertificateHash(cert)
+        val hash = sslHelper.getCertificateHash(cert)
         Assert.assertEquals(certificateHash, hash)
     }
 
     @Test
     fun parseCertificate() {
         val bytes = Base64.getMimeDecoder().decode(certificateBase64)
-        val cert = SslHelper.parseCertificate(bytes)
-        val hash = SslHelper.getCertificateHash(cert)
+        val cert = sslHelper.parseCertificate(bytes)
+        val hash = sslHelper.getCertificateHash(cert)
         Assert.assertEquals(certificateHash, hash)
     }
 
@@ -104,7 +110,7 @@ class SSLHelperTest {
     fun getCommonName() {
         sharedPreferences.edit().putString(certificateKey, certificateBase64).apply()
         val cert = TrustedDevices.getDeviceCertificate(context, deviceId)
-        val commonName = SslHelper.getCommonNameFromCertificate(cert as X509Certificate)
+        val commonName = sslHelper.getCommonNameFromCertificate(cert as X509Certificate)
         Assert.assertEquals("ee061a75_e403_4ecc_9261_5ffe2722f698", commonName)
     }
 

@@ -222,7 +222,9 @@ class NetworkPacket private constructor(
         }
         // QJSon does not escape slashes, but Java JSONObject does. Converting to QJson format.
         try {
-            return jo.toString().replace("\\/", "/") + "\n"
+            val result = jo.toString().replace("\\/", "/") + "\n"
+            android.util.Log.d("COSMIC/NetworkPacket", "Serialized: $result")
+            return result
         } catch (e : OutOfMemoryError) {
             throw RuntimeException("OOM serializing packet of type $type", e)
         }

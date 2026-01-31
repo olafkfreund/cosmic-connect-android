@@ -148,6 +148,12 @@ class CameraCaptureService : Service() {
     /** Device name for notification */
     private var deviceName: String? = null
 
+    /** Low latency mode enabled (Issue #110) */
+    private var lowLatencyMode: Boolean = true
+
+    /** Performance monitor for capture metrics */
+    private var performanceMonitor: CameraPerformanceMonitor? = null
+
     // ========================================================================
     // Capture Listener Interface
     // ========================================================================
@@ -174,6 +180,28 @@ class CameraCaptureService : Service() {
      */
     fun setCaptureListener(listener: CaptureListener?) {
         captureListener = listener
+    }
+
+    /**
+     * Set low latency mode (Issue #110)
+     *
+     * When enabled:
+     * - Disables video stabilization (adds ~30ms latency)
+     * - Uses continuous autofocus
+     * - Optimizes for streaming over quality
+     *
+     * @param enabled True to enable low latency mode
+     */
+    fun setLowLatencyMode(enabled: Boolean) {
+        lowLatencyMode = enabled
+        Log.d(TAG, "Low latency mode: $enabled")
+    }
+
+    /**
+     * Set performance monitor
+     */
+    fun setPerformanceMonitor(monitor: CameraPerformanceMonitor?) {
+        performanceMonitor = monitor
     }
 
     // ========================================================================
@@ -627,6 +655,11 @@ class CameraCaptureService : Service() {
 
     /**
      * Create capture request for recording
+     *
+     * Optimized for low-latency streaming (Issue #110):
+     * - Disables video stabilization (saves ~30ms latency)
+     * - Uses continuous video autofocus
+     * - Fixed FPS range for consistent timing
      */
     private fun createCaptureRequest(): CaptureRequest? {
         val camera = cameraDevice
@@ -641,13 +674,13 @@ class CameraCaptureService : Service() {
                 // Add output surface
                 addTarget(surface)
 
-                // Set FPS range
+                // Set FPS range - fixed for consistent frame timing
                 set(
                     CaptureRequest.CONTROL_AE_TARGET_FPS_RANGE,
                     Range(currentFps, currentFps)
                 )
 
-                // Enable auto-focus
+                // Enable continuous video autofocus (optimized for video)
                 set(
                     CaptureRequest.CONTROL_AF_MODE,
                     CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_VIDEO
@@ -659,11 +692,36 @@ class CameraCaptureService : Service() {
                     CaptureRequest.CONTROL_AE_MODE_ON
                 )
 
-                // Enable video stabilization if available
-                set(
-                    CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE,
-                    CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE_ON
-                )
+                // Video stabilization: DISABLE in low-latency mode (saves ~30ms)
+                // Stabilization adds latency due to frame buffering
+                if (lowLatencyMode) {
+                    set(
+                        CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE,
+                        CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE_OFF
+                    )
+                    Log.d(TAG, "Video stabilization disabled for low latency")
+                } else {
+                    set(
+                        CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE,
+                        CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE_ON
+                    )
+                }
+
+                // Noise reduction: FAST mode in low-latency mode
+                if (lowLatencyMode) {
+                    set(
+                        CaptureRequest.NOISE_REDUCTION_MODE,
+                        CaptureRequest.NOISE_REDUCTION_MODE_FAST
+                    )
+                }
+
+                // Edge enhancement: FAST mode in low-latency mode
+                if (lowLatencyMode) {
+                    set(
+                        CaptureRequest.EDGE_MODE,
+                        CaptureRequest.EDGE_MODE_FAST
+                    )
+                }
             }.build()
         } catch (e: CameraAccessException) {
             Log.e(TAG, "Failed to create capture request", e)
@@ -673,6 +731,8 @@ class CameraCaptureService : Service() {
 
     /**
      * Capture callback for frame timing
+     *
+     * Tracks frame capture events for performance monitoring (Issue #110).
      */
     private val captureCallback = object : CameraCaptureSession.CaptureCallback() {
         override fun onCaptureCompleted(
@@ -680,8 +740,13 @@ class CameraCaptureService : Service() {
             request: CaptureRequest,
             result: TotalCaptureResult
         ) {
-            // Notify listener of frame capture
+            // Get frame timestamp
             val timestamp = result.get(CaptureResult.SENSOR_TIMESTAMP) ?: System.nanoTime()
+
+            // Track frame capture for performance metrics
+            performanceMonitor?.onFrameCaptured(timestamp)
+
+            // Notify listener of frame capture
             captureListener?.onFrameCaptured(timestamp)
         }
 
@@ -691,6 +756,9 @@ class CameraCaptureService : Service() {
             failure: CaptureFailure
         ) {
             Log.w(TAG, "Capture failed: reason=${failure.reason}")
+
+            // Track failed frames
+            performanceMonitor?.onFrameDropped()
         }
     }
 

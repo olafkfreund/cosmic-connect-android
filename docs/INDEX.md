@@ -38,6 +38,7 @@ Essential guides for setting up and understanding the project.
 
 ### FFI Integration
 - [FFI Integration Guide](guides/FFI_INTEGRATION_GUIDE.md) - Complete guide for migrating plugins to FFI (based on PingPluginFFI.kt)
+- [Rich Notifications Development Guide](guides/RICH_NOTIFICATIONS_DEVELOPMENT.md) - Developer guide for Rich Notifications
 
 ---
 
@@ -73,6 +74,21 @@ End-user documentation for features and troubleshooting.
   - File transfer problems
   - Notification and security prompt issues
   - Platform-specific solutions
+
+### Rich Notifications Feature
+- [Rich Notifications Guide](RICH_NOTIFICATIONS.md) - Sync notifications with rich content
+  - Images and notification icons
+  - Rich text and formatting
+  - Clickable links and URLs
+  - Action buttons and inline replies
+  - Privacy settings per app
+  - Messaging app integration
+- [Rich Notifications Troubleshooting](RICH_NOTIFICATIONS_TROUBLESHOOTING.md) - Solve notification issues
+  - Images not showing
+  - Links not clickable
+  - Formatting lost
+  - Actions and replies not working
+  - App-specific problems
 
 ---
 
@@ -111,6 +127,8 @@ KDE Connect protocol and network communication.
 - [Battery FFI Integration](protocol/battery-ffi-integration.md) - Battery status plugin
 - [Ping FFI Integration](protocol/ping-ffi-integration.md) - Ping/pong plugin
 - [Discovery FFI Integration](protocol/discovery-ffi-integration.md) - Device discovery system
+- [Rich Notifications Protocol](protocol/RICH_NOTIFICATIONS_PROTOCOL.md) - Notifications with rich content
+- [App Continuity Protocol](protocol/APP_CONTINUITY_PROTOCOL.md) - Cross-device content sharing
 
 ---
 
@@ -338,6 +356,6 @@ Final phase:
 
 ---
 
-**Last Updated**: 2026-01-16
-**Document Version**: 1.0
+**Last Updated**: 2026-01-31
+**Document Version**: 1.1
 **Maintained By**: Project Team

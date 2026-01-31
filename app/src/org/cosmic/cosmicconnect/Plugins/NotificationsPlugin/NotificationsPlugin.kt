@@ -29,6 +29,7 @@ import android.text.TextUtils
 import android.util.Log
 import android.util.Pair
 import org.cosmic.cosmicconnect.messaging.MessagingNotificationHandler
+import org.cosmic.cosmicconnect.Plugins.NotificationsPlugin.extraction.RichTextExtractor
 import androidx.core.app.NotificationCompat
 import androidx.core.os.BundleCompat
 import androidx.fragment.app.DialogFragment
@@ -116,6 +117,8 @@ class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener 
     // State management
     private lateinit var appDatabase: AppDatabase
     private lateinit var messagingHandler: MessagingNotificationHandler
+    private val richTextExtractor = RichTextExtractor()
+    private val bigPictureExtractor = BigPictureExtractor()
     private val currentNotifications = mutableSetOf<String>()
     private val pendingIntents = mutableMapOf<String, RepliableNotification>()
     private val actions: MultiValuedMap<String, Notification.Action> = ArrayListValuedHashMap()
@@ -294,21 +297,59 @@ class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener 
             isPreexisting = isPreexisting
         )
 
-        // Create packet using FFI wrapper
-        val packet = NotificationsPacketsFFI.createNotificationPacket(notificationInfo)
+        // Check privacy settings
+        val blockImages = appDatabase.getPrivacy(packageName, AppDatabase.PrivacyOptions.BLOCK_IMAGES)
+        val blockContents = appDatabase.getPrivacy(packageName, AppDatabase.PrivacyOptions.BLOCK_CONTENTS)
+
+        // Extract rich content if images are allowed
+        val bigPicture = if (!blockImages && !isPreexisting) {
+            bigPictureExtractor.extract(statusBarNotification)
+        } else null
+
+        // Extract rich text formatting using RichTextExtractor (Phase 2b)
+        val richText = if (!blockContents && richTextExtractor.hasRichContent(statusBarNotification)) {
+            richTextExtractor.extractAsHtml(statusBarNotification)
+        } else null
+
+        val links = bigPictureExtractor.extractLinks(notification)
+        val videoInfo = bigPictureExtractor.extractVideoInfo(notification)
+
+        // Create packet with rich content if available
+        val packet = if (bigPicture != null || richText != null || links != null || videoInfo != null) {
+            // Create rich notification packet
+            RichNotificationPackets.createRichNotificationPacket(
+                notification = notificationInfo,
+                bigPicture = bigPicture,
+                richText = richText,
+                links = links,
+                videoInfo = videoInfo
+            )
+        } else {
+            // Standard notification packet
+            NotificationsPacketsFFI.createNotificationPacket(notificationInfo)
+        }
 
         // Handle icon payload for new notifications
         val isUpdate = currentNotifications.contains(key)
         if (!isUpdate) {
             currentNotifications.add(key)
 
-            val appIcon = extractIcon(statusBarNotification, notification)
-            if (appIcon != null && !appDatabase.getPrivacy(packageName, AppDatabase.PrivacyOptions.BLOCK_IMAGES)) {
-                attachIcon(packet, appIcon)
+            // Attach BigPicture image if present
+            val finalPacket = if (bigPicture != null) {
+                RichNotificationPackets.attachImagePayload(packet, bigPicture)
+            } else {
+                // Fall back to app icon for non-rich notifications
+                val appIcon = extractIcon(statusBarNotification, notification)
+                if (appIcon != null && !blockImages) {
+                    attachIcon(packet, appIcon)
+                }
+                packet
             }
-        }
 
-        device.sendPacket(packet.toLegacyPacket())
+            device.sendPacket(finalPacket.toLegacyPacket())
+        } else {
+            device.sendPacket(packet.toLegacyPacket())
+        }
     }
 
     /**

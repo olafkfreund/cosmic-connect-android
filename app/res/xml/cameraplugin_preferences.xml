@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2026 COSMIC Connect Team
+
+SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+-->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:keep="@xml/cameraplugin_preferences">
+
+    <!-- Default Camera Selection -->
+    <ListPreference
+        android:key="@string/camera_preference_key_default_camera"
+        android:title="@string/camera_default_camera_title"
+        android:summary="@string/camera_back"
+        android:defaultValue="back"
+        android:entries="@array/camera_facing_entries"
+        android:entryValues="@array/camera_facing_values" />
+
+    <!-- Default Resolution -->
+    <ListPreference
+        android:key="@string/camera_preference_key_resolution"
+        android:title="@string/camera_resolution_title"
+        android:summary="1280 × 720 (HD)"
+        android:defaultValue="720p"
+        android:entries="@array/camera_resolution_entries"
+        android:entryValues="@array/camera_resolution_values" />
+
+    <!-- Quality Preset -->
+    <ListPreference
+        android:key="@string/camera_preference_key_quality"
+        android:title="@string/camera_quality_title"
+        android:summary="@string/camera_quality_medium"
+        android:defaultValue="medium"
+        android:entries="@array/camera_quality_entries"
+        android:entryValues="@array/camera_quality_values" />
+
+    <!-- Auto-start Streaming -->
+    <SwitchPreference
+        android:key="@string/camera_preference_key_autostart"
+        android:title="@string/camera_autostart_title"
+        android:summary="@string/camera_autostart_summary"
+        android:defaultValue="false" />
+
+</PreferenceScreen>

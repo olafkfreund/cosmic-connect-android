@@ -637,4 +637,59 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-COSMIC-Accep
 
     <string name="enable_fullscreen">Enable fullscreen</string>
 
+    <!-- Camera Plugin -->
+    <string name="camera_plugin_title">Camera Webcam</string>
+    <string name="camera_plugin_description">Use your phone\'s camera as a virtual webcam on COSMIC Desktop</string>
+    <string name="camera_front">Front Camera</string>
+    <string name="camera_back">Back Camera</string>
+    <string name="camera_external">External Camera</string>
+    <string name="camera_default_camera_title">Default Camera</string>
+    <string name="camera_resolution_title">Default Resolution</string>
+    <string name="camera_quality_title">Quality Preset</string>
+    <string name="camera_quality_low">Low (1 Mbps)</string>
+    <string name="camera_quality_medium">Medium (2 Mbps)</string>
+    <string name="camera_quality_high">High (4 Mbps)</string>
+    <string name="camera_autostart_title">Auto-start Streaming</string>
+    <string name="camera_autostart_summary">Automatically start streaming when desktop requests</string>
+    <string name="camera_permission_explanation">Camera permission is required to stream video to your desktop</string>
+    <string name="camera_streaming_notification_title">Camera Streaming</string>
+    <string name="camera_streaming_notification_text">Streaming to %s</string>
+    <string name="camera_streaming_stop">Stop Streaming</string>
+
+    <!-- Camera Plugin Preference Keys (non-translatable) -->
+    <string name="camera_preference_key_default_camera" translatable="false">camera_default_camera</string>
+    <string name="camera_preference_key_resolution" translatable="false">camera_resolution</string>
+    <string name="camera_preference_key_quality" translatable="false">camera_quality</string>
+    <string name="camera_preference_key_autostart" translatable="false">camera_autostart</string>
+
+    <!-- Camera Plugin Arrays -->
+    <string-array name="camera_facing_entries">
+        <item>Back Camera</item>
+        <item>Front Camera</item>
+    </string-array>
+    <string-array name="camera_facing_values" translatable="false">
+        <item>back</item>
+        <item>front</item>
+    </string-array>
+    <string-array name="camera_resolution_entries">
+        <item>480p (SD)</item>
+        <item>720p (HD)</item>
+        <item>1080p (Full HD)</item>
+    </string-array>
+    <string-array name="camera_resolution_values" translatable="false">
+        <item>480p</item>
+        <item>720p</item>
+        <item>1080p</item>
+    </string-array>
+    <string-array name="camera_quality_entries">
+        <item>Low (1 Mbps)</item>
+        <item>Medium (2 Mbps)</item>
+        <item>High (4 Mbps)</item>
+    </string-array>
+    <string-array name="camera_quality_values" translatable="false">
+        <item>low</item>
+        <item>medium</item>
+        <item>high</item>
+    </string-array>
+
 </resources>

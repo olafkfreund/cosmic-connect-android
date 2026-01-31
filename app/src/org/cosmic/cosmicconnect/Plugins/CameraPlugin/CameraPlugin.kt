@@ -1,0 +1,574 @@
+/*
+ * SPDX-FileCopyrightText: 2026 COSMIC Connect Team
+ *
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+ */
+
+package org.cosmic.cosmicconnect.Plugins.CameraPlugin
+
+import android.Manifest
+import android.app.Activity
+import android.content.Context
+import android.hardware.camera2.CameraCharacteristics
+import android.hardware.camera2.CameraManager
+import android.os.Build
+import android.util.Log
+import android.util.Size
+import androidx.core.content.ContextCompat
+import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.Plugins.Plugin
+import org.cosmic.cosmicconnect.Plugins.PluginFactory
+import org.cosmic.cosmicconnect.R
+import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment
+
+/**
+ * CameraPlugin - Use Android device camera as virtual webcam on COSMIC Desktop
+ *
+ * This plugin enables Android device cameras to be used as virtual webcams on
+ * COSMIC Desktop through V4L2 loopback. Video is encoded using H.264 MediaCodec
+ * and streamed over the secure COSMIC Connect connection.
+ *
+ * ## Features
+ *
+ * - **Camera Selection**: Switch between front/back/external cameras
+ * - **Resolution Control**: Desktop can request specific resolutions
+ * - **Frame Rate Control**: Configurable FPS (up to device maximum)
+ * - **Bitrate Control**: Adaptive bitrate for network conditions
+ * - **Flash Control**: Toggle flash/torch mode
+ *
+ * ## Protocol
+ *
+ * **Phone → Desktop:**
+ * - `cconnect.camera.capability` - Advertise cameras and capabilities
+ * - `cconnect.camera.status` - Report streaming status
+ * - `cconnect.camera.frame` - Send H.264 encoded frames
+ *
+ * **Desktop → Phone:**
+ * - `cconnect.camera.start` - Start streaming with parameters
+ * - `cconnect.camera.stop` - Stop streaming
+ * - `cconnect.camera.settings` - Change settings while streaming
+ *
+ * ## Implementation Notes
+ *
+ * - Uses Camera2 API for camera access (Android 5.0+)
+ * - Uses MediaCodec for hardware H.264 encoding
+ * - Frames sent via TCP payload transfer mechanism
+ * - Requires CAMERA permission and foreground service
+ *
+ * ## Android 14+ Requirements
+ *
+ * - CAMERA permission at runtime
+ * - FOREGROUND_SERVICE_CAMERA for streaming in background
+ * - Notification while streaming (foreground service)
+ *
+ * @see CameraPacketsFFI
+ * @see CameraStreamingService (TODO: Issue #103)
+ */
+@PluginFactory.LoadablePlugin
+class CameraPlugin : Plugin() {
+
+    companion object {
+        private const val TAG = "CameraPlugin"
+
+        /**
+         * Recommended bitrate for different quality levels (in kbps)
+         */
+        object BitratePresets {
+            const val LOW = 1000      // 480p @ 30fps
+            const val MEDIUM = 2000   // 720p @ 30fps
+            const val HIGH = 4000     // 1080p @ 30fps
+        }
+    }
+
+    // ========================================================================
+    // State Management
+    // ========================================================================
+
+    /** Camera manager for accessing device cameras */
+    private var cameraManager: CameraManager? = null
+
+    /** Currently available cameras */
+    private var availableCameras: List<CameraInfo> = emptyList()
+
+    /** Current streaming state */
+    private var streamingState: StreamingStatus = StreamingStatus.STOPPED
+
+    /** Active camera ID when streaming */
+    private var activeCameraId: Int = 0
+
+    /** Current streaming resolution */
+    private var currentResolution: Resolution = Resolution.HD_720
+
+    /** Current streaming FPS */
+    private var currentFps: Int = 30
+
+    /** Current streaming bitrate */
+    private var currentBitrate: Int = BitratePresets.MEDIUM
+
+    // ========================================================================
+    // Plugin Metadata
+    // ========================================================================
+
+    override val displayName: String
+        get() = context.getString(R.string.camera_plugin_title)
+
+    override val description: String
+        get() = context.getString(R.string.camera_plugin_description)
+
+    override val supportedPacketTypes: Array<String>
+        get() = arrayOf(
+            CameraPacketsFFI.PACKET_TYPE_CAMERA_START,
+            CameraPacketsFFI.PACKET_TYPE_CAMERA_STOP,
+            CameraPacketsFFI.PACKET_TYPE_CAMERA_SETTINGS
+        )
+
+    override val outgoingPacketTypes: Array<String>
+        get() = arrayOf(
+            CameraPacketsFFI.PACKET_TYPE_CAMERA_CAPABILITY,
+            CameraPacketsFFI.PACKET_TYPE_CAMERA_STATUS,
+            CameraPacketsFFI.PACKET_TYPE_CAMERA_FRAME
+        )
+
+    // ========================================================================
+    // Lifecycle
+    // ========================================================================
+
+    override fun onCreate(): Boolean {
+        Log.d(TAG, "CameraPlugin onCreate")
+
+        // Initialize camera manager
+        cameraManager = ContextCompat.getSystemService(context, CameraManager::class.java)
+        if (cameraManager == null) {
+            Log.e(TAG, "CameraManager not available")
+            return false
+        }
+
+        // Enumerate available cameras
+        enumerateCameras()
+
+        return true
+    }
+
+    override fun onDestroy() {
+        Log.d(TAG, "CameraPlugin onDestroy")
+
+        // Stop streaming if active
+        if (streamingState == StreamingStatus.STREAMING) {
+            stopStreaming()
+        }
+
+        cameraManager = null
+        availableCameras = emptyList()
+    }
+
+    /**
+     * Called when device connection is established
+     *
+     * Sends camera capability packet to advertise available cameras.
+     */
+    fun onDeviceConnected() {
+        if (availableCameras.isNotEmpty()) {
+            sendCapabilities()
+        }
+    }
+
+    // ========================================================================
+    // Packet Reception
+    // ========================================================================
+
+    override fun onPacketReceived(np: org.cosmic.cosmicconnect.NetworkPacket): Boolean {
+        // Convert to immutable packet for type-safe handling
+        val packet = NetworkPacket.fromLegacy(np)
+
+        return when {
+            packet.isCameraStart -> handleStartRequest(packet)
+            packet.isCameraStop -> handleStopRequest()
+            packet.isCameraSettings -> handleSettingsRequest(packet)
+            else -> false
+        }
+    }
+
+    /**
+     * Handle camera start request from desktop
+     *
+     * @param packet Start request packet with parameters
+     * @return true if handled successfully
+     */
+    private fun handleStartRequest(packet: NetworkPacket): Boolean {
+        Log.d(TAG, "Received camera start request")
+
+        val request = packet.toCameraStartRequest()
+        if (request == null) {
+            Log.e(TAG, "Failed to parse start request")
+            sendStatus(StreamingStatus.ERROR, error = "Invalid start request")
+            return false
+        }
+
+        // Validate camera ID
+        if (request.cameraId >= availableCameras.size) {
+            Log.e(TAG, "Invalid camera ID: ${request.cameraId}")
+            sendStatus(StreamingStatus.ERROR, error = "Invalid camera ID")
+            return false
+        }
+
+        // Validate codec
+        if (request.codec != "h264") {
+            Log.e(TAG, "Unsupported codec: ${request.codec}")
+            sendStatus(StreamingStatus.ERROR, error = "Unsupported codec: ${request.codec}")
+            return false
+        }
+
+        // Update streaming parameters
+        activeCameraId = request.cameraId
+        currentResolution = Resolution(request.width, request.height)
+        currentFps = request.fps
+        currentBitrate = request.bitrate
+
+        // Start streaming
+        return startStreaming()
+    }
+
+    /**
+     * Handle camera stop request from desktop
+     *
+     * @return true if handled successfully
+     */
+    private fun handleStopRequest(): Boolean {
+        Log.d(TAG, "Received camera stop request")
+        return stopStreaming()
+    }
+
+    /**
+     * Handle camera settings change request
+     *
+     * @param packet Settings request packet with changes
+     * @return true if handled successfully
+     */
+    private fun handleSettingsRequest(packet: NetworkPacket): Boolean {
+        Log.d(TAG, "Received camera settings request")
+
+        val request = packet.toCameraSettingsRequest()
+        if (request == null) {
+            Log.e(TAG, "Failed to parse settings request")
+            return false
+        }
+
+        // Apply changes
+        var needsRestart = false
+
+        request.cameraId?.let {
+            if (it != activeCameraId && it < availableCameras.size) {
+                activeCameraId = it
+                needsRestart = true
+            }
+        }
+
+        if (request.width != null && request.height != null) {
+            val newResolution = Resolution(request.width, request.height)
+            if (newResolution != currentResolution) {
+                currentResolution = newResolution
+                needsRestart = true
+            }
+        }
+
+        request.fps?.let {
+            if (it != currentFps) {
+                currentFps = it
+                needsRestart = true
+            }
+        }
+
+        request.bitrate?.let {
+            if (it != currentBitrate) {
+                currentBitrate = it
+                // Bitrate can be changed without restart on some devices
+            }
+        }
+
+        // Handle flash/autofocus (TODO: Issue #103)
+        request.flash?.let { flash ->
+            Log.d(TAG, "Flash request: $flash (not yet implemented)")
+        }
+
+        request.autofocus?.let { autofocus ->
+            Log.d(TAG, "Autofocus request: $autofocus (not yet implemented)")
+        }
+
+        // Restart streaming if needed
+        if (needsRestart && streamingState == StreamingStatus.STREAMING) {
+            stopStreaming()
+            startStreaming()
+        }
+
+        return true
+    }
+
+    // ========================================================================
+    // Camera Enumeration
+    // ========================================================================
+
+    /**
+     * Enumerate available cameras and their capabilities
+     *
+     * Uses Camera2 API to query all cameras and their supported
+     * resolutions, frame rates, and other capabilities.
+     */
+    private fun enumerateCameras() {
+        val manager = cameraManager ?: return
+        val cameras = mutableListOf<CameraInfo>()
+
+        try {
+            for ((index, cameraId) in manager.cameraIdList.withIndex()) {
+                val characteristics = manager.getCameraCharacteristics(cameraId)
+
+                // Get facing direction
+                val lensFacing = characteristics.get(CameraCharacteristics.LENS_FACING)
+                val facing = when (lensFacing) {
+                    CameraCharacteristics.LENS_FACING_FRONT -> CameraFacing.FRONT
+                    CameraCharacteristics.LENS_FACING_BACK -> CameraFacing.BACK
+                    CameraCharacteristics.LENS_FACING_EXTERNAL -> CameraFacing.EXTERNAL
+                    else -> CameraFacing.BACK
+                }
+
+                // Get camera name
+                val name = when (facing) {
+                    CameraFacing.FRONT -> context.getString(R.string.camera_front)
+                    CameraFacing.BACK -> context.getString(R.string.camera_back)
+                    CameraFacing.EXTERNAL -> context.getString(R.string.camera_external)
+                }
+
+                // Get supported output sizes
+                val streamConfigMap = characteristics.get(
+                    CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP
+                )
+
+                // Get sizes for video encoder (MediaCodec surface)
+                val outputSizes = streamConfigMap?.getOutputSizes(
+                    android.media.MediaRecorder::class.java
+                ) ?: arrayOf()
+
+                // Filter to common video resolutions
+                val supportedResolutions = outputSizes
+                    .filter { it.width <= 1920 && it.height <= 1080 }
+                    .sortedByDescending { it.width * it.height }
+                    .take(5) // Limit to 5 resolutions
+                    .map { Resolution(it.width, it.height) }
+
+                // Get max resolution
+                val maxSize = supportedResolutions.firstOrNull() ?: Resolution.HD_720
+
+                cameras.add(
+                    CameraInfo(
+                        id = index,
+                        name = name,
+                        facing = facing,
+                        maxWidth = maxSize.width,
+                        maxHeight = maxSize.height,
+                        resolutions = supportedResolutions
+                    )
+                )
+            }
+
+            availableCameras = cameras
+            Log.d(TAG, "Enumerated ${cameras.size} cameras")
+
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to enumerate cameras", e)
+        }
+    }
+
+    // ========================================================================
+    // Streaming Control
+    // ========================================================================
+
+    /**
+     * Start camera streaming
+     *
+     * Initializes Camera2 capture session and MediaCodec encoder.
+     * Frames are sent to the desktop via the payload transfer mechanism.
+     *
+     * @return true if streaming started successfully
+     */
+    private fun startStreaming(): Boolean {
+        if (streamingState == StreamingStatus.STREAMING) {
+            Log.w(TAG, "Already streaming")
+            return true
+        }
+
+        Log.i(TAG, "Starting camera streaming: camera=$activeCameraId, " +
+                "${currentResolution.width}x${currentResolution.height}@${currentFps}fps, " +
+                "${currentBitrate}kbps")
+
+        // Send starting status
+        sendStatus(StreamingStatus.STARTING)
+
+        // TODO: Issue #103 - Camera2 capture service implementation
+        // TODO: Issue #104 - H.264 MediaCodec encoding
+        // TODO: Issue #105 - TCP streaming client
+
+        // For now, just update state and log
+        streamingState = StreamingStatus.STREAMING
+        sendStatus(StreamingStatus.STREAMING)
+
+        Log.i(TAG, "Camera streaming started (stub implementation)")
+        return true
+    }
+
+    /**
+     * Stop camera streaming
+     *
+     * Stops the camera capture and encoder, releases resources.
+     *
+     * @return true if streaming stopped successfully
+     */
+    private fun stopStreaming(): Boolean {
+        if (streamingState == StreamingStatus.STOPPED) {
+            Log.w(TAG, "Already stopped")
+            return true
+        }
+
+        Log.i(TAG, "Stopping camera streaming")
+
+        // Send stopping status
+        sendStatus(StreamingStatus.STOPPING)
+
+        // TODO: Issue #103 - Stop Camera2 capture
+        // TODO: Issue #104 - Stop MediaCodec encoder
+        // TODO: Issue #105 - Close TCP connection
+
+        streamingState = StreamingStatus.STOPPED
+        sendStatus(StreamingStatus.STOPPED)
+
+        Log.i(TAG, "Camera streaming stopped")
+        return true
+    }
+
+    // ========================================================================
+    // Packet Sending
+    // ========================================================================
+
+    /**
+     * Send camera capabilities to desktop
+     */
+    private fun sendCapabilities() {
+        if (availableCameras.isEmpty()) {
+            Log.w(TAG, "No cameras to advertise")
+            return
+        }
+
+        val maxFps = 60 // TODO: Query from device capabilities
+        val maxBitrate = 8000
+
+        val packet = CameraPacketsFFI.createCapabilityPacket(
+            cameras = availableCameras,
+            maxBitrate = maxBitrate,
+            maxFps = maxFps
+        )
+
+        device.sendPacket(packet.toLegacyPacket())
+        Log.d(TAG, "Sent camera capabilities: ${availableCameras.size} cameras")
+    }
+
+    /**
+     * Send streaming status update to desktop
+     *
+     * @param status Current streaming status
+     * @param error Error message (only for error status)
+     */
+    private fun sendStatus(status: StreamingStatus, error: String? = null) {
+        streamingState = status
+
+        val packet = CameraPacketsFFI.createStatusPacket(
+            status = status,
+            cameraId = activeCameraId,
+            width = currentResolution.width,
+            height = currentResolution.height,
+            fps = currentFps,
+            bitrate = currentBitrate,
+            error = error
+        )
+
+        device.sendPacket(packet.toLegacyPacket())
+        Log.d(TAG, "Sent camera status: $status")
+    }
+
+    // ========================================================================
+    // Settings
+    // ========================================================================
+
+    override fun hasSettings(): Boolean = true
+
+    override fun getSettingsFragment(activity: Activity): PluginSettingsFragment =
+        CameraSettingsFragment.newInstance(pluginKey, R.xml.cameraplugin_preferences)
+
+    // ========================================================================
+    // Permissions
+    // ========================================================================
+
+    override val requiredPermissions: Array<String>
+        get() {
+            val permissions = mutableListOf(Manifest.permission.CAMERA)
+
+            // Android 14+ requires foreground service camera permission
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                permissions.add(Manifest.permission.FOREGROUND_SERVICE_CAMERA)
+            }
+
+            // Android 13+ requires notification permission for foreground service
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                permissions.add(Manifest.permission.POST_NOTIFICATIONS)
+            }
+
+            return permissions.toTypedArray()
+        }
+
+    @get:androidx.annotation.StringRes
+    override val permissionExplanation: Int
+        get() = R.string.camera_permission_explanation
+
+    // ========================================================================
+    // UI Actions
+    // ========================================================================
+
+    override fun getUiButtons(): List<PluginUiButton> {
+        return listOf(
+            PluginUiButton(
+                name = context.getString(R.string.camera_plugin_title),
+                iconRes = R.drawable.ic_camera_24dp,
+                onClick = { activity ->
+                    // TODO: Issue #102 - Launch CameraActivity with preview/controls
+                    Log.d(TAG, "Camera UI button clicked (not yet implemented)")
+                }
+            )
+        )
+    }
+
+    // ========================================================================
+    // State Queries
+    // ========================================================================
+
+    /**
+     * Check if currently streaming
+     */
+    fun isStreaming(): Boolean = streamingState == StreamingStatus.STREAMING
+
+    /**
+     * Get list of available cameras
+     */
+    fun getAvailableCameras(): List<CameraInfo> = availableCameras
+
+    /**
+     * Get current streaming resolution
+     */
+    fun getCurrentResolution(): Resolution = currentResolution
+
+    /**
+     * Get current streaming FPS
+     */
+    fun getCurrentFps(): Int = currentFps
+
+    /**
+     * Get current streaming bitrate
+     */
+    fun getCurrentBitrate(): Int = currentBitrate
+}

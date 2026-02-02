@@ -58,6 +58,9 @@ object CameraPacketsFFI {
     /** Start streaming request packet type */
     const val PACKET_TYPE_CAMERA_START = "cconnect.camera.start"
 
+    /** Start streaming request packet type (alternate name used by some desktop clients) */
+    const val PACKET_TYPE_CAMERA_REQUEST = "cconnect.camera.request"
+
     /** Stop streaming request packet type */
     const val PACKET_TYPE_CAMERA_STOP = "cconnect.camera.stop"
 
@@ -354,9 +357,11 @@ val NetworkPacket.isCameraCapability: Boolean
 
 /**
  * Check if packet is a camera start request
+ * Supports both cconnect.camera.start and cconnect.camera.request packet types
  */
 val NetworkPacket.isCameraStart: Boolean
-    get() = type == CameraPacketsFFI.PACKET_TYPE_CAMERA_START
+    get() = type == CameraPacketsFFI.PACKET_TYPE_CAMERA_START ||
+            type == CameraPacketsFFI.PACKET_TYPE_CAMERA_REQUEST
 
 /**
  * Check if packet is a camera stop request

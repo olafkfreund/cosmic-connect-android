@@ -221,6 +221,7 @@ class CameraPlugin : Plugin() {
     override val supportedPacketTypes: Array<String>
         get() = arrayOf(
             CameraPacketsFFI.PACKET_TYPE_CAMERA_START,
+            CameraPacketsFFI.PACKET_TYPE_CAMERA_REQUEST, // Alternate name used by some desktop clients
             CameraPacketsFFI.PACKET_TYPE_CAMERA_STOP,
             CameraPacketsFFI.PACKET_TYPE_CAMERA_SETTINGS
         )

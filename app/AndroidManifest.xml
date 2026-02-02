@@ -532,6 +532,30 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="camera" />
+
+        <!-- Extended Display Plugin Activities -->
+        <!-- Phase 1: ConnectionSetupActivity - Commented out until Phase 1 is implemented
+        <activity
+            android:name="org.cosmic.cosmicconnect.Plugins.ExtendedDisplayPlugin.ui.ConnectionSetupActivity"
+            android:exported="false"
+            android:label="@string/extended_display_connection_setup_title"
+            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity"
+            android:theme="@style/CosmicConnectTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+        </activity>
+        -->
+
+        <!-- Phase 3: ExtendedDisplayActivity - Full-screen display renderer -->
+        <activity
+            android:name="org.cosmic.cosmicconnect.Plugins.ExtendedDisplayPlugin.ui.ExtendedDisplayActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="false"
+            android:label="@string/pref_plugin_extended_display"
+            android:launchMode="singleTop"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.ExtendedDisplay" />
     </application>
 
 </manifest>

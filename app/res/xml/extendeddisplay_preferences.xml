@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2026 cosmic-connect-android team
+
+SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+-->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:keep="@xml/extendeddisplay_preferences">
+
+    <PreferenceCategory
+        android:title="@string/extendeddisplay_category_connection">
+
+        <EditTextPreference
+            android:key="@string/extendeddisplay_preference_key_server_address"
+            android:title="@string/extendeddisplay_server_address_title"
+            android:dialogTitle="@string/extendeddisplay_server_address_dialog_title"
+            android:dialogMessage="@string/extendeddisplay_server_address_dialog_message"
+            android:inputType="text"
+            android:defaultValue="" />
+
+        <ListPreference
+            android:key="@string/extendeddisplay_preference_key_connection_mode"
+            android:title="@string/extendeddisplay_connection_mode_title"
+            android:entries="@array/extendeddisplay_connection_mode_entries"
+            android:entryValues="@array/extendeddisplay_connection_mode_values"
+            android:defaultValue="wifi" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/extendeddisplay_category_display">
+
+        <ListPreference
+            android:key="@string/extendeddisplay_preference_key_display_mode"
+            android:title="@string/extendeddisplay_display_mode_title"
+            android:entries="@array/extendeddisplay_display_mode_entries"
+            android:entryValues="@array/extendeddisplay_display_mode_values"
+            android:defaultValue="fit" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/extendeddisplay_category_debug">
+
+        <SwitchPreferenceCompat
+            android:key="@string/extendeddisplay_preference_key_show_debug"
+            android:title="@string/extendeddisplay_show_debug_title"
+            android:summary="@string/extendeddisplay_show_debug_summary"
+            android:defaultValue="false" />
+
+        <SwitchPreferenceCompat
+            android:key="@string/extendeddisplay_preference_key_show_latency"
+            android:title="@string/extendeddisplay_show_latency_title"
+            android:summary="@string/extendeddisplay_show_latency_summary"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

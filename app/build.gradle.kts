@@ -398,6 +398,11 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
 
+    // Extended Display (Issue #138) - WebRTC for screen streaming
+    implementation("io.github.webrtc-sdk:android:114.5735.08")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.squareup.moshi:moshi-kotlin:1.15.0")
+
     // Testing
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
@@ -418,6 +423,12 @@ dependencies {
     // For device controls
     implementation(libs.reactive.streams)
     implementation(libs.rxjava)
+
+    // Extended Display Plugin - WebRTC
+    implementation(libs.webrtc.android)
+    implementation(libs.okhttp)
+    implementation(libs.moshi)
+    ksp(libs.moshi.codegen)
 }
 
 licenseReport {

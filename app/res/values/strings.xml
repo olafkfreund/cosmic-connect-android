@@ -718,4 +718,67 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-COSMIC-Accep
         <item>high</item>
     </string-array>
 
+    <!-- Extended Display Plugin -->
+    <string name="extendeddisplay_title">Extended Display</string>
+    <string name="extendeddisplay_description">Use your Android device as a wireless external display for COSMIC Desktop</string>
+    <string name="extendeddisplay_button">Extended Display</string>
+    <string name="extendeddisplay_permissions_explanation">Network access is needed to connect to COSMIC Desktop</string>
+    <string name="extendeddisplay_optional_permissions_explanation">Optional permissions enable service discovery and keep the display active</string>
+
+    <!-- Extended Display Preferences -->
+    <string name="extendeddisplay_preference_key_server_address" translatable="false">extendeddisplay_server_address</string>
+    <string name="extendeddisplay_preference_key_connection_mode" translatable="false">extendeddisplay_connection_mode</string>
+    <string name="extendeddisplay_preference_key_display_mode" translatable="false">extendeddisplay_display_mode</string>
+    <string name="extendeddisplay_preference_key_show_debug" translatable="false">extendeddisplay_show_debug</string>
+    <string name="extendeddisplay_preference_key_show_latency" translatable="false">extendeddisplay_show_latency</string>
+
+    <string name="extendeddisplay_category_connection">Connection</string>
+    <string name="extendeddisplay_category_display">Display</string>
+    <string name="extendeddisplay_category_debug">Debug</string>
+
+    <string name="extendeddisplay_server_address_title">Server Address</string>
+    <string name="extendeddisplay_server_address_dialog_title">Enter Server Address</string>
+    <string name="extendeddisplay_server_address_dialog_message">Enter the IP address or hostname of your COSMIC Desktop server (e.g., 192.168.1.100:5900)</string>
+    <string name="extendeddisplay_server_address_empty">Not configured - will use service discovery</string>
+
+    <string name="extendeddisplay_connection_mode_title">Connection Mode</string>
+    <string name="extendeddisplay_display_mode_title">Display Mode</string>
+
+    <string name="extendeddisplay_show_debug_title">Show Debug Info</string>
+    <string name="extendeddisplay_show_debug_summary">Display FPS, bitrate, and connection statistics</string>
+
+    <string name="extendeddisplay_show_latency_title">Show Latency Overlay</string>
+    <string name="extendeddisplay_show_latency_summary">Display frame latency in milliseconds</string>
+
+    <!-- Extended Display Connection Mode Options -->
+    <string-array name="extendeddisplay_connection_mode_entries">
+        <item>WiFi</item>
+        <item>USB (ADB)</item>
+    </string-array>
+    <string-array name="extendeddisplay_connection_mode_values" translatable="false">
+        <item>wifi</item>
+        <item>usb</item>
+    </string-array>
+
+    <!-- Extended Display Mode Options -->
+    <string-array name="extendeddisplay_display_mode_entries">
+        <item>Fit to Screen</item>
+        <item>Stretch to Fill</item>
+    </string-array>
+    <string-array name="extendeddisplay_display_mode_values" translatable="false">
+        <item>fit</item>
+        <item>stretch</item>
+    </string-array>
+
+    <!-- Extended Display Plugin Names (Phase 1 - Network Client) -->
+    <string name="pref_plugin_extended_display">Extended Display</string>
+    <string name="pref_plugin_extended_display_desc">Use Android device as extended display for COSMIC Desktop</string>
+    <string name="extended_display_connection_setup_title">Extended Display Setup</string>
+
+    <!-- Extended Display Phase 3 - Display Renderer Status Messages -->
+    <string name="extended_display_connecting">Connecting to extended display…</string>
+    <string name="extended_display_disconnecting">Disconnecting…</string>
+    <string name="extended_display_disconnected">Disconnected from extended display</string>
+    <string name="extended_display_error">Connection error. Please try again.</string>
+
 </resources>

@@ -35,9 +35,20 @@ class PluginFactory @Inject constructor(@ApplicationContext private val context:
                 org.cosmic.cosmicconnect.Plugins.PresenterPlugin.PresenterPlugin::class,
                 org.cosmic.cosmicconnect.Plugins.ConnectivityReportPlugin.ConnectivityReportPlugin::class,
                 org.cosmic.cosmicconnect.Plugins.SMSPlugin.SMSPlugin::class,
-                org.cosmic.cosmicconnect.Plugins.TelephonyPlugin.TelephonyPlugin::class
-                // TODO: Re-enable once OpenPlugin is fully implemented (Issue #115)
-                // org.cosmic.cosmicconnect.Plugins.OpenPlugin.OpenOnDesktopPlugin::class
+                org.cosmic.cosmicconnect.Plugins.TelephonyPlugin.TelephonyPlugin::class,
+                // App Continuity plugins (Issues #112-123)
+                org.cosmic.cosmicconnect.Plugins.OpenPlugin.OpenOnDesktopPlugin::class,
+                org.cosmic.cosmicconnect.Plugins.OpenOnPhonePlugin.OpenOnPhonePlugin::class,
+                // Camera Webcam plugin (Issues #102-111)
+                org.cosmic.cosmicconnect.Plugins.CameraPlugin.CameraPlugin::class,
+                // Extended Display plugin (Issue #138) - TODO: Fix integration conflicts between components
+                // org.cosmic.cosmicconnect.Plugins.ExtendedDisplayPlugin.ExtendedDisplayPlugin::class,
+                // Additional plugins
+                org.cosmic.cosmicconnect.Plugins.ClipboardPlugin.ClipboardPlugin::class,
+                org.cosmic.cosmicconnect.Plugins.RemoteKeyboardPlugin.RemoteKeyboardPlugin::class,
+                org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandPlugin::class,
+                org.cosmic.cosmicconnect.Plugins.SystemVolumePlugin.SystemVolumePlugin::class,
+                org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.FindMyPhonePlugin::class
             )
 
             pluginInfo = plugins

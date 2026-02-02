@@ -646,6 +646,8 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-COSMIC-Accep
     <string name="mpris_keepwatching_settings_title">Continue playing</string>
     <string name="mpris_keepwatching_settings_summary">Show a silent notification to continue playing on this device after closing media</string>
     <string name="notification_channel_keepwatching">Continue playing</string>
+    <string name="notification_channel_camera">Camera Streaming</string>
+    <string name="notification_channel_camera_description">Notifications for camera streaming requests from connected devices</string>
 
     <string name="ping_result">Pinged in %1$d milliseconds</string>
     <string name="ping_failed">Could not ping device</string>
@@ -670,10 +672,15 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-COSMIC-Accep
     <string name="camera_quality_high">High (4 Mbps)</string>
     <string name="camera_autostart_title">Auto-start Streaming</string>
     <string name="camera_autostart_summary">Automatically start streaming when desktop requests</string>
+    <string name="camera_permission_title">Camera Permission Required</string>
     <string name="camera_permission_explanation">Camera permission is required to stream video to your desktop</string>
     <string name="camera_streaming_notification_title">Camera Streaming</string>
     <string name="camera_streaming_notification_text">Streaming to %s</string>
     <string name="camera_streaming_stop">Stop Streaming</string>
+    <string name="camera_start_request_title">Camera Request from %s</string>
+    <string name="camera_start_request_text">Tap to start camera streaming</string>
+    <string name="camera_start_request_action">Start Camera</string>
+    <string name="camera_start_request_deny">Deny</string>
 
     <!-- Camera Plugin Preference Keys (non-translatable) -->
     <string name="camera_preference_key_default_camera" translatable="false">camera_default_camera</string>

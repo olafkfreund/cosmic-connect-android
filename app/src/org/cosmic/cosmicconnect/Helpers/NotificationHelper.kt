@@ -54,11 +54,16 @@ object NotificationHelper {
             .setLightsEnabled(false)
             .setSound(null, null)
             .build()
+        /* Camera streaming notification - high priority to prompt user action */
+        val cameraChannel = NotificationChannelCompat.Builder(Channels.CAMERA, NotificationManagerCompat.IMPORTANCE_HIGH)
+            .setName(context.getString(R.string.notification_channel_camera))
+            .setDescription(context.getString(R.string.notification_channel_camera_description))
+            .build()
         val channels = listOf(
             persistentChannel,
             defaultChannel, mediaChannel, fileTransferDownloadChannel, fileTransferDownloadCompleteChannel, fileTransferUploadChannel,
             fileTransferErrorChannel, receiveNotificationChannel, highPriorityChannel,
-            continueWatchingChannel
+            continueWatchingChannel, cameraChannel
         )
 
         val nm = NotificationManagerCompat.from(context)
@@ -96,5 +101,6 @@ object NotificationHelper {
         const val RECEIVENOTIFICATION: String = "receive"
         const val HIGHPRIORITY: String = "highpriority"
         const val CONTINUEWATCHING: String = "continuewatching"
+        const val CAMERA: String = "camera_streaming"
     }
 }

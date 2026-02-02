@@ -8,9 +8,14 @@ package org.cosmic.cosmicconnect.Plugins.CameraPlugin
 
 import android.Manifest
 import android.app.Activity
+import android.app.ActivityManager
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.BroadcastReceiver
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.ServiceConnection
 import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
@@ -19,8 +24,10 @@ import android.os.IBinder
 import android.util.Log
 import android.util.Size
 import android.view.Surface
+import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.Helpers.NotificationHelper
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory
 import org.cosmic.cosmicconnect.R
@@ -75,6 +82,18 @@ class CameraPlugin : Plugin() {
     companion object {
         private const val TAG = "CameraPlugin"
 
+        /** Notification ID for camera start request */
+        private const val NOTIFICATION_ID_CAMERA_REQUEST = 31415
+
+        /** Intent action for starting camera from notification */
+        const val ACTION_START_CAMERA = "org.cosmic.cosmicconnect.camera.START"
+
+        /** Intent action for denying camera request from notification */
+        const val ACTION_DENY_CAMERA = "org.cosmic.cosmicconnect.camera.DENY"
+
+        /** Extra key for device ID in intent */
+        const val EXTRA_DEVICE_ID = "device_id"
+
         /**
          * Recommended bitrate for different quality levels (in kbps)
          */
@@ -109,6 +128,42 @@ class CameraPlugin : Plugin() {
 
     /** Current streaming bitrate */
     private var currentBitrate: Int = BitratePresets.MEDIUM
+
+    /** Pending camera start request (stored when app is in background) */
+    private var pendingStartRequest: CameraStartRequest? = null
+
+    /** Notification manager for camera request notifications */
+    private var notificationManager: NotificationManager? = null
+
+    /** Broadcast receiver for notification actions */
+    private val cameraActionReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            when (intent?.action) {
+                ACTION_START_CAMERA -> {
+                    Log.d(TAG, "Camera start action received from notification")
+                    dismissCameraRequestNotification()
+                    // Start camera with pending request parameters
+                    pendingStartRequest?.let { request ->
+                        activeCameraId = request.cameraId
+                        currentResolution = Resolution(request.width, request.height)
+                        currentFps = request.fps
+                        currentBitrate = request.bitrate
+                        startStreaming()
+                    }
+                    pendingStartRequest = null
+                }
+                ACTION_DENY_CAMERA -> {
+                    Log.d(TAG, "Camera deny action received from notification")
+                    dismissCameraRequestNotification()
+                    pendingStartRequest = null
+                    sendStatus(StreamingStatus.STOPPED, error = "User denied camera request")
+                }
+            }
+        }
+    }
+
+    /** Whether the broadcast receiver is registered */
+    private var receiverRegistered = false
 
     // ========================================================================
     // Streaming Components
@@ -191,6 +246,23 @@ class CameraPlugin : Plugin() {
             return false
         }
 
+        // Initialize notification manager
+        notificationManager = ContextCompat.getSystemService(context, NotificationManager::class.java)
+
+        // Register broadcast receiver for notification actions
+        if (!receiverRegistered) {
+            val filter = IntentFilter().apply {
+                addAction(ACTION_START_CAMERA)
+                addAction(ACTION_DENY_CAMERA)
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                context.registerReceiver(cameraActionReceiver, filter, Context.RECEIVER_NOT_EXPORTED)
+            } else {
+                context.registerReceiver(cameraActionReceiver, filter)
+            }
+            receiverRegistered = true
+        }
+
         // Enumerate available cameras
         enumerateCameras()
 
@@ -200,12 +272,27 @@ class CameraPlugin : Plugin() {
     override fun onDestroy() {
         Log.d(TAG, "CameraPlugin onDestroy")
 
+        // Dismiss any pending camera request notification
+        dismissCameraRequestNotification()
+        pendingStartRequest = null
+
+        // Unregister broadcast receiver
+        if (receiverRegistered) {
+            try {
+                context.unregisterReceiver(cameraActionReceiver)
+            } catch (e: IllegalArgumentException) {
+                Log.w(TAG, "Receiver was not registered")
+            }
+            receiverRegistered = false
+        }
+
         // Stop streaming if active
         if (streamingState == StreamingStatus.STREAMING) {
             stopStreaming()
         }
 
         cameraManager = null
+        notificationManager = null
         availableCameras = emptyList()
     }
 
@@ -264,6 +351,14 @@ class CameraPlugin : Plugin() {
             Log.e(TAG, "Unsupported codec: ${request.codec}")
             sendStatus(StreamingStatus.ERROR, error = "Unsupported codec: ${request.codec}")
             return false
+        }
+
+        // Check if app is in foreground
+        // Android 10+ restricts camera access for background-started services
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && !isAppInForeground()) {
+            Log.w(TAG, "App is in background, showing notification for user to start camera")
+            showCameraRequestNotification(request)
+            return true
         }
 
         // Update streaming parameters
@@ -497,6 +592,9 @@ class CameraPlugin : Plugin() {
                 callback = encoderCallback
             )
 
+            // Configure encoder (must be called before getInputSurface)
+            encoder?.configure()
+
             // Get encoder input surface
             val encoderSurface = encoder?.getInputSurface()
             if (encoderSurface == null) {
@@ -723,6 +821,106 @@ class CameraPlugin : Plugin() {
         CameraSettingsFragment.newInstance(pluginKey, R.xml.cameraplugin_preferences)
 
     // ========================================================================
+    // Background Camera Request Notification
+    // ========================================================================
+
+    /**
+     * Check if the app is currently in the foreground.
+     *
+     * On Android 10+ (API 29), foreground services started from background cannot
+     * access camera, microphone, or location. We need to detect this and show
+     * a notification to prompt user interaction.
+     *
+     * @return true if app is in foreground, false if in background
+     */
+    private fun isAppInForeground(): Boolean {
+        val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as? ActivityManager
+            ?: return false
+
+        val appProcesses = activityManager.runningAppProcesses ?: return false
+
+        for (process in appProcesses) {
+            if (process.processName == context.packageName) {
+                return process.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND
+            }
+        }
+        return false
+    }
+
+    /**
+     * Show a notification to prompt the user to start camera streaming.
+     *
+     * This is used when a camera start request is received while the app is
+     * in the background. Android restricts camera access for background-started
+     * services, so we need user interaction to gain foreground status.
+     *
+     * @param request The camera start request parameters to use when user accepts
+     */
+    private fun showCameraRequestNotification(request: CameraStartRequest) {
+        Log.d(TAG, "Showing camera request notification")
+
+        // Store the request for when user taps the notification
+        pendingStartRequest = request
+
+        // Create pending intent for "Start Camera" action
+        val startIntent = Intent(ACTION_START_CAMERA).apply {
+            setPackage(context.packageName)
+            putExtra(EXTRA_DEVICE_ID, device.deviceId)
+        }
+        val startPendingIntent = PendingIntent.getBroadcast(
+            context,
+            0,
+            startIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        // Create pending intent for "Deny" action
+        val denyIntent = Intent(ACTION_DENY_CAMERA).apply {
+            setPackage(context.packageName)
+            putExtra(EXTRA_DEVICE_ID, device.deviceId)
+        }
+        val denyPendingIntent = PendingIntent.getBroadcast(
+            context,
+            1,
+            denyIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        // Build the notification
+        val notification = NotificationCompat.Builder(context, NotificationHelper.Channels.CAMERA)
+            .setSmallIcon(R.drawable.ic_camera_24dp)
+            .setContentTitle(context.getString(R.string.camera_start_request_title, device.name))
+            .setContentText(context.getString(R.string.camera_start_request_text))
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setCategory(NotificationCompat.CATEGORY_SERVICE)
+            .setAutoCancel(true)
+            .setContentIntent(startPendingIntent)
+            .addAction(
+                R.drawable.ic_camera_24dp,
+                context.getString(R.string.camera_start_request_action),
+                startPendingIntent
+            )
+            .addAction(
+                R.drawable.ic_reject_pairing_24dp,
+                context.getString(R.string.camera_start_request_deny),
+                denyPendingIntent
+            )
+            .build()
+
+        notificationManager?.notify(NOTIFICATION_ID_CAMERA_REQUEST, notification)
+
+        // Send status indicating we're waiting for user
+        sendStatus(StreamingStatus.STARTING, error = "Waiting for user to grant camera access")
+    }
+
+    /**
+     * Dismiss the camera request notification if it's showing.
+     */
+    private fun dismissCameraRequestNotification() {
+        notificationManager?.cancel(NOTIFICATION_ID_CAMERA_REQUEST)
+    }
+
+    // ========================================================================
     // Permissions
     // ========================================================================
 
@@ -746,6 +944,12 @@ class CameraPlugin : Plugin() {
     @get:androidx.annotation.StringRes
     override val permissionExplanation: Int
         get() = R.string.camera_permission_explanation
+
+    /**
+     * Allow plugin to load even without camera permission so it appears in UI.
+     * Users can then grant permission from the plugin settings.
+     */
+    override fun loadPluginWhenRequiredPermissionsMissing(): Boolean = true
 
     // ========================================================================
     // UI Actions

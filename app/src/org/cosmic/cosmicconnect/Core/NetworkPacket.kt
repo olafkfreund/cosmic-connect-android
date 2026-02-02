@@ -202,13 +202,8 @@ data class NetworkPacket(
             val jsonPacket = org.json.JSONObject(serialized)
             val jsonBody = jsonPacket.getJSONObject("body")
 
-            // Convert JSONObject to Map<String, Any>
-            val body = mutableMapOf<String, Any>()
-            val keys = jsonBody.keys()
-            while (keys.hasNext()) {
-                val key = keys.next()
-                body[key] = jsonBody.get(key)
-            }
+            // Convert JSONObject to Map<String, Any> recursively
+            val body = jsonObjectToMap(jsonBody)
 
             // Determine payloadSize from packet if available
             val payloadSize = if (jsonPacket.has("payloadSize")) {
@@ -217,6 +212,51 @@ data class NetworkPacket(
 
             // Create new packet
             return create(type, body).copy(payloadSize = payloadSize)
+        }
+
+        /**
+         * Recursively convert JSONObject to Map<String, Any>
+         *
+         * Handles nested JSONObject and JSONArray to ensure all values
+         * are serializable types (Map, List, String, Number, Boolean)
+         * Note: JSON null values are skipped as Map<String, Any> doesn't allow nulls
+         */
+        private fun jsonObjectToMap(jsonObject: org.json.JSONObject): Map<String, Any> {
+            val map = mutableMapOf<String, Any>()
+            val keys = jsonObject.keys()
+            while (keys.hasNext()) {
+                val key = keys.next()
+                val value = jsonObject.get(key)
+                // Skip null values since Map<String, Any> doesn't allow them
+                if (value != org.json.JSONObject.NULL) {
+                    map[key] = jsonValueToSerializable(value)
+                }
+            }
+            return map
+        }
+
+        /**
+         * Convert a JSON value to a serializable type
+         */
+        private fun jsonValueToSerializable(value: Any): Any = when (value) {
+            is org.json.JSONObject -> jsonObjectToMap(value)
+            is org.json.JSONArray -> jsonArrayToList(value)
+            else -> value // String, Number, Boolean pass through
+        }
+
+        /**
+         * Recursively convert JSONArray to List<Any>
+         */
+        private fun jsonArrayToList(jsonArray: org.json.JSONArray): List<Any> {
+            val list = mutableListOf<Any>()
+            for (i in 0 until jsonArray.length()) {
+                val value = jsonArray.get(i)
+                // Skip null values
+                if (value != org.json.JSONObject.NULL) {
+                    list.add(jsonValueToSerializable(value))
+                }
+            }
+            return list
         }
 
         /**
@@ -254,19 +294,8 @@ data class NetworkPacket(
 
             return try {
                 val jsonObject = org.json.JSONObject(json)
-                val map = mutableMapOf<String, Any>()
-
-                jsonObject.keys().forEach { key ->
-                    val value = jsonObject.get(key)
-                    map[key] = when (value) {
-                        is org.json.JSONObject -> value.toString()
-                        is org.json.JSONArray -> value.toString()
-                        org.json.JSONObject.NULL -> "null"
-                        else -> value
-                    }
-                }
-
-                map
+                // Use recursive conversion to handle nested objects and arrays
+                jsonObjectToMap(jsonObject)
             } catch (e: Exception) {
                 val preview = if (json.length > 100) json.take(100) + "..." else json
                 throw CosmicConnectException("Failed to parse JSON body: $preview", e)

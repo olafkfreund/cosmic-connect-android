@@ -685,10 +685,25 @@ class LanLinkProvider @Inject constructor(
         @JvmStatic
         @Throws(IOException::class)
         fun openServerSocketOnFreePort(minPort: Int): ServerSocket {
+            // First, try to use port 0 which lets the OS pick a free port
+            // This is more efficient for high-frequency transfers like camera frames
+            try {
+                val serverSocket = ServerSocket()
+                serverSocket.reuseAddress = true
+                serverSocket.bind(java.net.InetSocketAddress(0))
+                Log.i("COSMIC/LanLink", "Using OS-assigned port ${serverSocket.localPort}")
+                return serverSocket
+            } catch (e: IOException) {
+                Log.w("COSMIC/LanLink", "Failed to get OS-assigned port, falling back to manual search")
+            }
+
+            // Fallback: manually search for a free port starting from minPort
             var tcpPort = minPort
             while (tcpPort <= MAX_PORT) {
                 try {
-                    val candidateServer = ServerSocket(tcpPort)
+                    val candidateServer = ServerSocket()
+                    candidateServer.reuseAddress = true
+                    candidateServer.bind(java.net.InetSocketAddress(tcpPort))
                     Log.i("COSMIC/LanLink", "Using port $tcpPort")
                     return candidateServer
                 } catch (e: IOException) {

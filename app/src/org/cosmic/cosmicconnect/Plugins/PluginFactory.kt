@@ -41,8 +41,8 @@ class PluginFactory @Inject constructor(@ApplicationContext private val context:
                 org.cosmic.cosmicconnect.Plugins.OpenOnPhonePlugin.OpenOnPhonePlugin::class,
                 // Camera Webcam plugin (Issues #102-111)
                 org.cosmic.cosmicconnect.Plugins.CameraPlugin.CameraPlugin::class,
-                // Extended Display plugin (Issue #138) - TODO: Fix integration conflicts between components
-                // org.cosmic.cosmicconnect.Plugins.ExtendedDisplayPlugin.ExtendedDisplayPlugin::class,
+                // Extended Display plugin (Issue #138)
+                org.cosmic.cosmicconnect.Plugins.ExtendedDisplayPlugin.ExtendedDisplayPlugin::class,
                 // Additional plugins
                 org.cosmic.cosmicconnect.Plugins.ClipboardPlugin.ClipboardPlugin::class,
                 org.cosmic.cosmicconnect.Plugins.RemoteKeyboardPlugin.RemoteKeyboardPlugin::class,

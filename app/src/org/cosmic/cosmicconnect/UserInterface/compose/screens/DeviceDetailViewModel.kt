@@ -17,6 +17,7 @@ import kotlinx.coroutines.launch
 import org.cosmic.cosmicconnect.Core.DeviceRegistry
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.PairingHandler
+import org.cosmic.cosmicconnect.Plugins.PluginFactory
 import javax.inject.Inject
 
 /**
@@ -28,6 +29,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DeviceDetailViewModel @Inject constructor(
     private val deviceRegistry: DeviceRegistry,
+    private val pluginFactory: PluginFactory,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -126,16 +128,21 @@ class DeviceDetailViewModel @Inject constructor(
         )
       }
       else -> {
-        val plugins = dev.loadedPlugins.values.map { plugin ->
+        // Show all supported plugins, not just loaded ones
+        // This ensures disabled plugins can still be re-enabled from settings
+        val plugins = dev.supportedPlugins.mapNotNull { pluginKey ->
+          val loadedPlugin = dev.loadedPlugins[pluginKey]
+          val factoryInfo = pluginFactory.getPluginInfo(pluginKey)
+
           PluginInfo(
-            key = plugin.pluginKey,
-            name = plugin.displayName,
-            description = plugin.description,
-            icon = org.cosmic.cosmicconnect.UserInterface.compose.getPluginIcon(plugin.pluginKey),
-            isEnabled = dev.isPluginEnabled(plugin.pluginKey),
-            isAvailable = plugin.checkRequiredPermissions(),
-            hasSettings = plugin.hasSettings(),
-            hasMainActivity = false // TODO: hasMainActivity needs to be implemented
+            key = pluginKey,
+            name = factoryInfo.displayName,
+            description = factoryInfo.description,
+            icon = org.cosmic.cosmicconnect.UserInterface.compose.getPluginIcon(pluginKey),
+            isEnabled = dev.isPluginEnabled(pluginKey),
+            isAvailable = loadedPlugin?.checkRequiredPermissions() ?: true,
+            hasSettings = factoryInfo.hasSettings,
+            hasMainActivity = loadedPlugin?.getUiButtons()?.isNotEmpty() ?: false
           )
         }.sortedBy { it.name }
 
@@ -177,6 +184,14 @@ class DeviceDetailViewModel @Inject constructor(
    */
   fun unpairDevice() {
     device?.unpair()
+  }
+
+  /**
+   * Refresh plugin state.
+   * Call this when returning from settings to update permission status.
+   */
+  fun refresh() {
+    updateDeviceState()
   }
 
   /**

@@ -29,6 +29,7 @@ import org.apache.commons.collections4.MultiValuedMap
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap
 import org.cosmic.cosmicconnect.Backends.BaseLink
 import org.cosmic.cosmicconnect.Backends.BaseLink.PacketReceiver
+import org.cosmic.cosmicconnect.Backends.BaseLinkProvider
 import org.cosmic.cosmicconnect.DeviceInfo.Companion.loadFromSettings
 import org.cosmic.cosmicconnect.DeviceStats.countReceived
 import org.cosmic.cosmicconnect.DeviceStats.countSent
@@ -314,6 +315,14 @@ class Device : PacketReceiver {
     val isReachable: Boolean
         get() = links.isNotEmpty()
 
+    /**
+     * Check if this device already has an active link from a specific provider.
+     * Used to prevent duplicate connections from the same provider.
+     */
+    fun hasLinkFromProvider(provider: BaseLinkProvider): Boolean {
+        return links.any { it.linkProvider == provider }
+    }
+
     fun addLink(link: BaseLink) {
         synchronized(sendChannel) {
             if (sendCoroutine == null) {
@@ -402,6 +411,9 @@ class Device : PacketReceiver {
                 pluginFactory.pluginsForCapabilities(
                     newIncomingCapabilities,
                     newOutgoingCapabilities
+                ) + setOf(
+                    // Force-load these plugins for testing (desktop support pending)
+                    "CameraPlugin"
                 )
             )
         }

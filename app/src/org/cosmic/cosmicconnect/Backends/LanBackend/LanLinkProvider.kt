@@ -51,7 +51,8 @@ import kotlin.text.Charsets
 class LanLinkProvider @Inject constructor(
     @ApplicationContext private val context: Context,
     private val deviceHelper: DeviceHelper,
-    private val sslHelper: SslHelper
+    private val sslHelper: SslHelper,
+    private val deviceRegistry: org.cosmic.cosmicconnect.Core.DeviceRegistry
 ) : BaseLinkProvider() {
 
     internal val visibleDevices = HashMap<String, LanLink>() // Links by device id
@@ -241,6 +242,14 @@ class LanLinkProvider @Inject constructor(
             "Broadcast identity packet received from " + identityPacket.getString("deviceName")
         )
 
+        // Check if we already have an active link to this device from this provider
+        val deviceId = identityPacket.getString("deviceId")
+        val existingDevice = deviceRegistry.getDevice(deviceId)
+        if (existingDevice != null && existingDevice.hasLinkFromProvider(this)) {
+            Log.d("LanLinkProvider", "Already connected to $deviceId via LAN, skipping new connection")
+            return
+        }
+
         val tcpPort = identityPacket.getInt("tcpPort", MIN_PORT)
         if (tcpPort < MIN_PORT || tcpPort > MAX_PORT) {
             Log.e("LanLinkProvider", "TCP port outside of cosmicconnect's range")
@@ -301,6 +310,14 @@ class LanLinkProvider @Inject constructor(
     ) {
         val deviceId = identityPacket.getString("deviceId")
         val protocolVersion = identityPacket.getInt("protocolVersion")
+
+        // Check if we already have an active link to this device from this provider
+        val existingDevice = deviceRegistry.getDevice(deviceId)
+        if (existingDevice != null && existingDevice.hasLinkFromProvider(this)) {
+            Log.d("LanLinkProvider", "Already have active LAN link to $deviceId, closing duplicate connection")
+            socket.close()
+            return
+        }
 
         if (deviceTrusted && isProtocolDowngrade(deviceId, protocolVersion)) {
             Log.w(

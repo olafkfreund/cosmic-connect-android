@@ -88,6 +88,27 @@ import uniffi.cosmic_connect_core.*
  */
 
 /**
+ * Action button data class for notification actions.
+ *
+ * Represents an action button with a unique ID and display label.
+ * Desktop expects this format in the `actionButtons` array.
+ *
+ * ## Example
+ * ```kotlin
+ * val button = ActionButton(
+ *     id = "action_0_reply",
+ *     label = "Reply"
+ * )
+ * ```
+ */
+data class ActionButton(
+    /** Unique identifier for this action */
+    val id: String,
+    /** Display label for the action button */
+    val label: String
+)
+
+/**
  * Notification information data class.
  *
  * Kotlin representation of the Rust Notification struct.
@@ -104,7 +125,11 @@ import uniffi.cosmic_connect_core.*
  *     time = "1704067200000",
  *     silent = "false",
  *     requestReplyId = "reply-uuid-123",
- *     actions = listOf("Reply", "Mark as Read")
+ *     actions = listOf("Reply", "Mark as Read"),
+ *     actionButtons = listOf(
+ *         ActionButton("action_0_reply", "Reply"),
+ *         ActionButton("action_1_mark_read", "Mark as Read")
+ *     )
  * )
  * ```
  */
@@ -139,8 +164,11 @@ data class NotificationInfo(
     /** UUID for inline reply support */
     val requestReplyId: String? = null,
 
-    /** Available action button names */
+    /** Available action button names (legacy format for backwards compatibility) */
     val actions: List<String>? = null,
+
+    /** Action buttons with IDs and labels (modern format expected by Desktop) */
+    val actionButtons: List<ActionButton>? = null,
 
     /** MD5 hash of notification icon */
     val payloadHash: String? = null,
@@ -153,7 +181,15 @@ data class NotificationInfo(
     val isGroupChat: Boolean = false,
     val groupName: String? = null,
     val hasReplyAction: Boolean = false,
-    val senderAvatar: String? = null
+    val senderAvatar: String? = null,
+
+    // Inline image data for desktop display (Issue #141)
+    /** Base64 encoded app icon (PNG, max 128px) */
+    val appIcon: String? = null,
+    /** Base64 encoded large icon or main image (PNG, max 256px) */
+    val imageData: String? = null,
+    /** MIME type of imageData (typically "image/png") */
+    val imageMimeType: String? = null
 ) {
     /**
      * Convert to JSON string for FFI layer.
@@ -178,11 +214,24 @@ data class NotificationInfo(
             requestReplyId?.let { put("requestReplyId", it) }
             payloadHash?.let { put("payloadHash", it) }
 
-            // Actions array
+            // Actions array (legacy format for backwards compatibility)
             actions?.let { actionsList ->
                 val actionsArray = JSONArray()
                 actionsList.forEach { actionsArray.put(it) }
                 put("actions", actionsArray)
+            }
+
+            // Action buttons array (modern format with id and label)
+            actionButtons?.let { buttonsList ->
+                val buttonsArray = JSONArray()
+                buttonsList.forEach { button ->
+                    val buttonObj = JSONObject().apply {
+                        put("id", button.id)
+                        put("label", button.label)
+                    }
+                    buttonsArray.put(buttonObj)
+                }
+                put("actionButtons", buttonsArray)
             }
 
             // Messaging metadata
@@ -196,6 +245,14 @@ data class NotificationInfo(
                 put("hasReplyAction", hasReplyAction)
                 senderAvatar?.let { put("senderAvatar", it) }
             }
+
+            // Inline image data for desktop display (Issue #141)
+            appIcon?.let { put("appIcon", it) }
+            imageData?.let {
+                put("imageData", it)
+                put("hasImage", true)
+            }
+            imageMimeType?.let { put("imageMimeType", it) }
         }
         return json.toString()
     }

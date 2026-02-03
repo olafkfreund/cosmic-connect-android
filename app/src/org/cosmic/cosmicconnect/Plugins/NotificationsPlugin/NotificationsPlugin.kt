@@ -26,6 +26,7 @@ import android.os.Parcelable
 import android.provider.Settings
 import android.service.notification.StatusBarNotification
 import android.text.TextUtils
+import android.util.Base64
 import android.util.Log
 import android.util.Pair
 import org.cosmic.cosmicconnect.messaging.MessagingNotificationHandler
@@ -334,19 +335,24 @@ class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener 
         if (!isUpdate) {
             currentNotifications.add(key)
 
-            // Attach BigPicture image if present
-            val finalPacket = if (bigPicture != null) {
+            // Attach BigPicture image or app icon and get legacy packet ready for sending
+            // Both attachImagePayload() and attachIcon() return legacy packets with payloads attached
+            val legacyPacketToSend: LegacyNetworkPacket = if (bigPicture != null) {
+                // Rich notification with BigPicture image
                 RichNotificationPackets.attachImagePayload(packet, bigPicture)
             } else {
                 // Fall back to app icon for non-rich notifications
                 val appIcon = extractIcon(statusBarNotification, notification)
                 if (appIcon != null && !blockImages) {
                     attachIcon(packet, appIcon)
+                } else {
+                    // No image/icon to attach - just convert to legacy
+                    packet.toLegacyPacket()
                 }
-                packet
             }
 
-            device.sendPacket(finalPacket.toLegacyPacket())
+            // Send the legacy packet directly (do NOT call toLegacyPacket() again!)
+            device.sendPacket(legacyPacketToSend)
         } else {
             device.sendPacket(packet.toLegacyPacket())
         }
@@ -368,6 +374,7 @@ class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener 
         val messagingData = if (!isPreexisting) messagingHandler.processNotification(statusBarNotification) else null
 
         val blockContents = appDatabase.getPrivacy(packageName, AppDatabase.PrivacyOptions.BLOCK_CONTENTS)
+        val blockImages = appDatabase.getPrivacy(packageName, AppDatabase.PrivacyOptions.BLOCK_IMAGES)
 
         // Extract optional fields based on privacy settings
         var title: String? = null
@@ -375,6 +382,7 @@ class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener 
         var ticker: String? = null
         var requestReplyId: String? = null
         var actions: List<String>? = null
+        var actionButtons: List<ActionButton>? = null
 
         if (!blockContents) {
             // Extract repliable notification
@@ -399,8 +407,33 @@ class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener 
             // Extract text
             text = extractText(notification, conversation)
 
-            // Extract actions
-            actions = extractActions(notification, key)
+            // Extract actions (returns both legacy and modern formats)
+            val extractedActions = extractActions(notification, key)
+            actions = extractedActions.first
+            actionButtons = extractedActions.second
+        }
+
+        // Extract inline images for desktop display (Issue #141)
+        // Only extract for new notifications (not preexisting) and when images are allowed
+        var appIconBase64: String? = null
+        var imageDataBase64: String? = null
+        var senderAvatarBase64: String? = null
+
+        if (!blockImages && !isPreexisting) {
+            // Extract app icon (smaller, always useful)
+            appIconBase64 = extractAppIconBase64(packageName)
+
+            // Extract large icon / main image
+            imageDataBase64 = extractLargeIconBase64(notification, packageName)
+
+            // Extract sender avatar for messaging apps
+            if (messagingData != null) {
+                senderAvatarBase64 = extractSenderAvatarBase64(notification)
+            }
+
+            if (appIconBase64 != null || imageDataBase64 != null || senderAvatarBase64 != null) {
+                Log.d(TAG, "Extracted inline images for $appName: appIcon=${appIconBase64 != null}, imageData=${imageDataBase64 != null}, senderAvatar=${senderAvatarBase64 != null}")
+            }
         }
 
         return NotificationInfo(
@@ -414,13 +447,19 @@ class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener 
             ticker = ticker,
             requestReplyId = requestReplyId,
             actions = actions,
+            actionButtons = actionButtons,
             isMessagingApp = messagingData != null,
             packageName = messagingData?.packageName,
             webUrl = messagingData?.webUrl,
             conversationId = messagingData?.conversationId,
             isGroupChat = messagingData?.isGroupChat ?: false,
             groupName = messagingData?.groupName,
-            hasReplyAction = messagingData?.hasReplyAction ?: false
+            hasReplyAction = messagingData?.hasReplyAction ?: false,
+            senderAvatar = senderAvatarBase64,
+            // Inline images (Issue #141)
+            appIcon = appIconBase64,
+            imageData = imageDataBase64,
+            imageMimeType = if (imageDataBase64 != null) "image/png" else null
         )
     }
 
@@ -479,26 +518,44 @@ class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener 
     /**
      * Extract action buttons from notification.
      *
-     * @return List of action names, or null if none
+     * Returns both legacy format (list of action names) and modern format
+     * (list of ActionButton with id and label) for Desktop compatibility.
+     *
+     * @return Pair of (legacy actions list, actionButtons list), or (null, null) if none
      */
-    private fun extractActions(notification: Notification, key: String): List<String>? {
+    private fun extractActions(notification: Notification, key: String): Pair<List<String>?, List<ActionButton>?> {
         if (ArrayUtils.isEmpty(notification.actions)) {
-            return null
+            return Pair(null, null)
         }
 
         val actionsList = mutableListOf<String>()
+        val actionButtonsList = mutableListOf<ActionButton>()
 
-        for (action in notification.actions) {
+        for ((index, action) in notification.actions.withIndex()) {
             if (action?.title == null) continue
 
             // Skip reply actions (handled separately via requestReplyId)
             if (ArrayUtils.isNotEmpty(action.remoteInputs)) continue
 
-            actionsList.add(action.title.toString())
+            val actionTitle = action.title.toString()
+            actionsList.add(actionTitle)
+
+            // Create action button with unique ID based on notification key and action index
+            // ID format: {notification_key}_{action_index}_{sanitized_action_title}
+            val sanitizedTitle = actionTitle.lowercase()
+                .replace(Regex("[^a-z0-9]"), "_")
+                .take(20) // Limit length
+            val actionId = "${key}_action_${index}_$sanitizedTitle"
+            actionButtonsList.add(ActionButton(id = actionId, label = actionTitle))
+
             actions.put(key, action)
         }
 
-        return if (actionsList.isEmpty()) null else actionsList
+        return if (actionsList.isEmpty()) {
+            Pair(null, null)
+        } else {
+            Pair(actionsList, actionButtonsList)
+        }
     }
 
     /**
@@ -614,30 +671,144 @@ class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener 
     }
 
     /**
-     * Attach icon as payload to packet.
+     * Scale bitmap to fit within maxSize while preserving aspect ratio.
+     * Used for inline image encoding (Issue #141).
      */
-    private fun attachIcon(packet: NetworkPacket, appIcon: Bitmap) {
+    private fun scaleBitmap(bitmap: Bitmap, maxSize: Int): Bitmap {
+        val width = bitmap.width
+        val height = bitmap.height
+        if (width <= maxSize && height <= maxSize) return bitmap
+
+        val ratio = minOf(maxSize.toFloat() / width, maxSize.toFloat() / height)
+        val newWidth = (width * ratio).toInt()
+        val newHeight = (height * ratio).toInt()
+
+        return Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true)
+    }
+
+    /**
+     * Encode bitmap to base64 PNG string.
+     * Used for inline image embedding in notification packets (Issue #141).
+     *
+     * @param bitmap The bitmap to encode
+     * @param maxSize Maximum dimension (width/height) before scaling
+     * @return Base64 encoded PNG string
+     */
+    private fun encodeBitmapToBase64(bitmap: Bitmap, maxSize: Int = 256): String {
+        val scaledBitmap = scaleBitmap(bitmap, maxSize)
+        val stream = ByteArrayOutputStream()
+        scaledBitmap.compress(Bitmap.CompressFormat.PNG, 90, stream)
+        return Base64.encodeToString(stream.toByteArray(), Base64.NO_WRAP)
+    }
+
+    /**
+     * Extract and encode app icon as base64 PNG.
+     * Used for inline display on desktop (Issue #141).
+     */
+    private fun extractAppIconBase64(packageName: String): String? {
+        return try {
+            val appIcon = context.packageManager.getApplicationIcon(packageName)
+            val bitmap = drawableToBitmap(appIcon) ?: return null
+            encodeBitmapToBase64(bitmap, maxSize = 128)
+        } catch (e: Exception) {
+            Log.w(TAG, "Failed to extract app icon for $packageName", e)
+            null
+        }
+    }
+
+    /**
+     * Extract and encode large icon as base64 PNG.
+     * Used for inline display on desktop (Issue #141).
+     */
+    private fun extractLargeIconBase64(notification: Notification, packageName: String): String? {
+        return try {
+            val foreignContext = context.createPackageContext(packageName, 0)
+
+            // Try large icon first (API 23+)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                notification.getLargeIcon()?.let { icon ->
+                    iconToBitmap(foreignContext, icon)?.let { bitmap ->
+                        return encodeBitmapToBase64(bitmap, maxSize = 256)
+                    }
+                }
+            } else {
+                @Suppress("DEPRECATION")
+                notification.largeIcon?.let { bitmap ->
+                    return encodeBitmapToBase64(bitmap, maxSize = 256)
+                }
+            }
+
+            null
+        } catch (e: Exception) {
+            Log.w(TAG, "Failed to extract large icon", e)
+            null
+        }
+    }
+
+    /**
+     * Extract sender avatar from MessagingStyle notification.
+     * Used for messaging app notifications (Issue #141).
+     */
+    private fun extractSenderAvatarBase64(notification: Notification): String? {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
+            return null // Person API requires API 28+
+        }
+
+        return try {
+            val extras = notification.extras
+
+            // Try to get the messaging person (sender)
+            @Suppress("DEPRECATION")
+            val person = extras.getParcelable<android.app.Person>(Notification.EXTRA_MESSAGING_PERSON)
+            val icon = person?.icon ?: return null
+
+            iconToBitmap(context, icon)?.let { bitmap ->
+                return encodeBitmapToBase64(bitmap, maxSize = 128)
+            }
+
+            null
+        } catch (e: Exception) {
+            Log.w(TAG, "Failed to extract sender avatar", e)
+            null
+        }
+    }
+
+    /**
+     * Attach icon as payload to packet.
+     *
+     * IMPORTANT: Returns the legacy packet directly to avoid the bug where
+     * toLegacyPacket() creates a new instance each time, losing the payload.
+     *
+     * @param packet Core NetworkPacket to convert and attach icon to
+     * @param appIcon Bitmap icon to attach
+     * @return Legacy NetworkPacket with payload attached, ready for sending
+     */
+    private fun attachIcon(packet: NetworkPacket, appIcon: Bitmap): LegacyNetworkPacket {
         val outStream = ByteArrayOutputStream()
         appIcon.compress(Bitmap.CompressFormat.PNG, 90, outStream)
         val bitmapData = outStream.toByteArray()
 
-        // Create payload - NetworkPacket should have setPayload method
-        // Note: This assumes NetworkPacket has been updated to support payloads
-        // If not, we'll need to add that functionality
+        // Convert to legacy packet ONCE
+        val legacyPacket = packet.toLegacyPacket()
+
         try {
-            // Reflection to set payload since it may not be in the immutable interface yet
-            val payloadClass = Class.forName("org.cosmic.cosmicconnect.NetworkPacket\$Payload")
-            val payload = payloadClass.getConstructor(ByteArray::class.java).newInstance(bitmapData)
-            val setPayloadMethod = LegacyNetworkPacket::class.java.getMethod("setPayload", payloadClass)
-            setPayloadMethod.invoke(packet.toLegacyPacket(), payload)
+            // Create payload and set directly (no reflection needed)
+            val payload = LegacyNetworkPacket.Payload(bitmapData)
+            legacyPacket.payload = payload
 
             // Set payload hash
             val hash = getChecksum(bitmapData)
-            val setMethod = LegacyNetworkPacket::class.java.getMethod("set", String::class.java, Any::class.java)
-            setMethod.invoke(packet.toLegacyPacket(), "payloadHash", hash)
+            if (hash != null) {
+                legacyPacket["payloadHash"] = hash
+            }
+
+            Log.d(TAG, "Attached ${bitmapData.size} byte icon payload")
         } catch (e: Exception) {
             Log.e(TAG, "Error attaching icon payload", e)
         }
+
+        // Return the SAME legacy packet with payload attached
+        return legacyPacket
     }
 
     /**

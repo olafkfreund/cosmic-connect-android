@@ -77,6 +77,22 @@ class SftpSettingsFragment : PluginSettingsFragment(),
 
         val addStoragePreference = preferenceScreen.findPreference<Preference>(getString(R.string.sftp_preference_key_add_storage))
         addStoragePreference?.icon?.setColorFilter(colorAccent, PorterDuff.Mode.SRC_IN)
+
+        // Request storage permission if not granted
+        checkAndRequestStoragePermission()
+    }
+
+    /**
+     * Check if storage permission is granted, and show permission dialog if not
+     */
+    private fun checkAndRequestStoragePermission() {
+        val currentPlugin = plugin ?: return
+
+        if (!currentPlugin.checkRequiredPermissions()) {
+            // Show the permission explanation dialog
+            currentPlugin.permissionExplanationDialog
+                .show(parentFragmentManager, "sftp_permission_dialog")
+        }
     }
 
     private fun addStoragePreferences(preferenceCategory: PreferenceCategory) {

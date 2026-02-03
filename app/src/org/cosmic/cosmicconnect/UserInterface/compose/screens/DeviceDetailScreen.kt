@@ -10,9 +10,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import org.cosmic.cosmicconnect.UserInterface.compose.*
 import org.cosmic.cosmicconnect.ui.components.status.BatteryStatusIndicator
 import org.cosmic.cosmicconnect.ui.components.status.ConnectionStatus
@@ -51,6 +54,14 @@ fun DeviceDetailScreen(
   modifier: Modifier = Modifier
 ) {
   val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+  val lifecycleOwner = LocalLifecycleOwner.current
+
+  // Refresh plugin state when screen resumes (e.g., after granting permissions in settings)
+  LaunchedEffect(lifecycleOwner) {
+    lifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+      viewModel.refresh()
+    }
+  }
 
   var showUnpairDialog by remember { mutableStateOf(false) }
   var showRenameDialog by remember { mutableStateOf(false) }

@@ -217,7 +217,9 @@ class SftpPlugin : Plugin(), OnSharedPreferenceChangeListener {
 
     override val outgoingPacketTypes: Array<String> = arrayOf(PACKET_TYPE_SFTP)
 
-    override fun hasSettings(): Boolean = !SimpleSftpServer.SUPPORTS_NATIVEFS
+    // Always show settings so users can tap to grant permissions
+    // On Android R+, native FS is used but we still need storage permissions
+    override fun hasSettings(): Boolean = true
 
     override fun supportsDeviceSpecificSettings(): Boolean = true
 

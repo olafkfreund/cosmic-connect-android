@@ -90,6 +90,7 @@ class LanLink @WorkerThread constructor(
                         continue
                     }
                     val np = NetworkPacket.unserialize(packet)
+                    Log.d("LanLink", "Received packet type: ${np.type} from ${deviceInfo?.name}")
                     receivedNetworkPacket(np)
                 }
             } catch (e: Exception) {

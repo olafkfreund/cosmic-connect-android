@@ -21,13 +21,11 @@ import uniffi.cosmic_connect_core.createContactsResponseVcards
  * ```kotlin
  * import org.json.JSONObject
  *
- * val uidsMap = mapOf(
- *     "uids" to listOf("1", "3", "15"),
- *     "1" to "1234567890",
- *     "3" to "1234567891",
- *     "15" to "1234567892"
- * )
- * val json = JSONObject(uidsMap).toString()
+ * // Desktop expects nested "uids" object with UID as key, timestamp as integer
+ * val uidsObject = mapOf("1" to 1234567890L, "3" to 1234567891L, "15" to 1234567892L)
+ * val body = mapOf("uids" to uidsObject)
+ * val json = JSONObject(body).toString()
+ * // Result: {"uids": {"1": 1234567890, "3": 1234567891, "15": 1234567892}}
  * val packet = ContactsPacketsFFI.createUidsTimestampsResponse(json)
  * device.sendPacket(packet.toLegacyPacket())
  * ```
@@ -36,12 +34,14 @@ import uniffi.cosmic_connect_core.createContactsResponseVcards
  * ```kotlin
  * import org.json.JSONObject
  *
- * val vcardsMap = mapOf(
- *     "uids" to listOf("1", "3"),
+ * // Desktop expects nested "vcards" object with UID as key, vCard as value
+ * val vcardsObject = mapOf(
  *     "1" to "BEGIN:VCARD\nFN:John Smith\nEND:VCARD",
  *     "3" to "BEGIN:VCARD\nFN:Jane Doe\nEND:VCARD"
  * )
- * val json = JSONObject(vcardsMap).toString()
+ * val body = mapOf("vcards" to vcardsObject)
+ * val json = JSONObject(body).toString()
+ * // Result: {"vcards": {"1": "BEGIN:VCARD...", "3": "BEGIN:VCARD..."}}
  * val packet = ContactsPacketsFFI.createVCardsResponse(json)
  * device.sendPacket(packet.toLegacyPacket())
  * ```
@@ -59,14 +59,17 @@ object ContactsPacketsFFI {
      * The UIDs JSON should be formatted as:
      * ```json
      * {
-     *   "uids": ["1", "3", "15"],
-     *   "1": "1234567890",
-     *   "3": "1234567891",
-     *   "15": "1234567892"
+     *   "uids": {
+     *     "1": 1234567890,
+     *     "3": 1234567891,
+     *     "15": 1234567892
+     *   }
      * }
      * ```
      *
-     * @param uidsJson JSON string containing UIDs and timestamps
+     * Note: Desktop expects timestamps as integers (i64), not strings.
+     *
+     * @param uidsJson JSON string containing nested "uids" object with UID keys and integer timestamps
      * @return NetworkPacket ready to send
      *
      * @throws CosmicConnectException if packet creation fails
@@ -87,13 +90,14 @@ object ContactsPacketsFFI {
      * The vCards JSON should be formatted as:
      * ```json
      * {
-     *   "uids": ["1", "3"],
-     *   "1": "BEGIN:VCARD\nFN:John Smith\nTEL:555-1234\nEND:VCARD",
-     *   "3": "BEGIN:VCARD\nFN:Jane Doe\nTEL:555-5678\nEND:VCARD"
+     *   "vcards": {
+     *     "1": "BEGIN:VCARD\nFN:John Smith\nTEL:555-1234\nEND:VCARD",
+     *     "3": "BEGIN:VCARD\nFN:Jane Doe\nTEL:555-5678\nEND:VCARD"
+     *   }
      * }
      * ```
      *
-     * @param vcardsJson JSON string containing UIDs and vCard data
+     * @param vcardsJson JSON string containing nested "vcards" object with UID keys and vCard strings
      * @return NetworkPacket ready to send
      *
      * @throws CosmicConnectException if packet creation fails

@@ -38,6 +38,9 @@ object Screen {
     const val RunCommand = "plugin/runcommand/{deviceId}"
     const val Presenter = "plugin/presenter/{deviceId}"
     const val Mpris = "plugin/mpris/{deviceId}"
+    const val MousePad = "plugin/mousepad/{deviceId}"
+    const val Digitizer = "plugin/digitizer/{deviceId}"
+    const val Share = "plugin/share/{deviceId}"
     const val NotificationFilter = "plugin/notifications/filter/{prefKey}"
 
     fun deviceDetail(deviceId: String) = "device/$deviceId"
@@ -45,6 +48,9 @@ object Screen {
     fun runCommand(deviceId: String) = "plugin/runcommand/$deviceId"
     fun presenter(deviceId: String) = "plugin/presenter/$deviceId"
     fun mpris(deviceId: String) = "plugin/mpris/$deviceId"
+    fun mousePad(deviceId: String) = "plugin/mousepad/$deviceId"
+    fun digitizer(deviceId: String) = "plugin/digitizer/$deviceId"
+    fun share(deviceId: String) = "plugin/share/$deviceId"
     fun notificationFilter(prefKey: String) = "plugin/notifications/filter/$prefKey"
 }
 
@@ -95,6 +101,14 @@ fun CosmicNavGraph(
                         "runcommandplugin" -> navController.navigate(Screen.runCommand(deviceId!!))
                         "presenterplugin" -> navController.navigate(Screen.presenter(deviceId!!))
                         "mprisplugin" -> navController.navigate(Screen.mpris(deviceId!!))
+                        "mousepadplugin" -> navController.navigate(Screen.mousePad(deviceId!!))
+                        "digitizerplugin" -> navController.navigate(Screen.digitizer(deviceId!!))
+                        "shareplugin" -> navController.navigate(Screen.share(deviceId!!))
+                        "systemvolumeplugin" -> navController.navigate(Screen.mpris(deviceId!!)) // System Volume is in Mpris screen
+                        "clipboardplugin" -> {
+                            // Clipboard uses the same share UI for sending
+                            navController.navigate(Screen.share(deviceId!!))
+                        }
                         "notificationsplugin" -> {
                             // TODO: Pass correct prefKey
                             navController.navigate(Screen.notificationFilter("todo"))
@@ -205,6 +219,56 @@ fun CosmicNavGraph(
             NotificationFilterScreen(
                 viewModel = hiltViewModel(),
                 prefKey = backStackEntry.arguments?.getString("prefKey"),
+                onNavigateBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(
+            route = Screen.MousePad,
+            arguments = listOf(navArgument("deviceId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val deviceId = backStackEntry.arguments?.getString("deviceId")
+            MousePadScreen(
+                viewModel = hiltViewModel(),
+                deviceId = deviceId,
+                onNavigateBack = { navController.popBackStack() },
+                onOpenSettings = {
+                    val intent = Intent(context, PluginSettingsActivity::class.java).apply {
+                        putExtra(PluginSettingsActivity.EXTRA_DEVICE_ID, deviceId)
+                        putExtra(PluginSettingsActivity.EXTRA_PLUGIN_KEY, "MousePadPlugin")
+                    }
+                    context.startActivity(intent)
+                }
+            )
+        }
+
+        composable(
+            route = Screen.Digitizer,
+            arguments = listOf(navArgument("deviceId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val deviceId = backStackEntry.arguments?.getString("deviceId")
+            DigitizerScreen(
+                viewModel = hiltViewModel(),
+                deviceId = deviceId,
+                onNavigateBack = { navController.popBackStack() },
+                onOpenSettings = {
+                    val intent = Intent(context, PluginSettingsActivity::class.java).apply {
+                        putExtra(PluginSettingsActivity.EXTRA_DEVICE_ID, deviceId)
+                        putExtra(PluginSettingsActivity.EXTRA_PLUGIN_KEY, "DigitizerPlugin")
+                    }
+                    context.startActivity(intent)
+                },
+                onToggleFullscreen = { /* TODO: Handle fullscreen toggle */ }
+            )
+        }
+
+        composable(
+            route = Screen.Share,
+            arguments = listOf(navArgument("deviceId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            ShareScreen(
+                viewModel = hiltViewModel(),
+                shareIntent = null, // No intent when navigating from device detail
                 onNavigateBack = { navController.popBackStack() }
             )
         }

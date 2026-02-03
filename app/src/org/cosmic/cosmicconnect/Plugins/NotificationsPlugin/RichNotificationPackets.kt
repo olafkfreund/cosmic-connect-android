@@ -153,25 +153,26 @@ object RichNotificationPackets {
      * Attaches the image data as a payload to the packet and updates
      * the payloadHash field for integrity verification.
      *
-     * This modifies the legacy packet to include:
+     * This creates a legacy packet with:
      * - Payload with compressed image bytes
      * - payloadHash (MD5) for verification
      * - payloadSize for download progress
      *
-     * Note: This requires conversion to legacy packet format for payload support.
+     * IMPORTANT: Returns the legacy packet directly to avoid the bug where
+     * toLegacyPacket() creates a new instance each time, losing the payload.
      *
      * @param packet NetworkPacket with image metadata
      * @param image ExtractedImage to attach
-     * @return NetworkPacket with updated payload information
+     * @return Legacy NetworkPacket with payload attached, ready for sending
      */
-    fun attachImagePayload(packet: NetworkPacket, image: ExtractedImage): NetworkPacket {
+    fun attachImagePayload(packet: NetworkPacket, image: ExtractedImage): org.cosmic.cosmicconnect.NetworkPacket {
         // Compress image
         val imageBytes = image.toBytes(quality = 85)
 
         // Calculate MD5 hash
         val hash = calculateMd5(imageBytes)
 
-        // Create updated packet with hash
+        // Create updated packet with hash in body
         val updatedBody = packet.body.toMutableMap()
         updatedBody["payloadHash"] = hash
         updatedBody["payloadSize"] = imageBytes.size
@@ -183,41 +184,33 @@ object RichNotificationPackets {
             payloadSize = imageBytes.size.toLong()
         )
 
-        // Attach to legacy packet for actual transmission
-        // The legacy packet supports setPayload()
-        attachToLegacyPacket(updatedPacket.toLegacyPacket(), imageBytes, hash)
+        // Convert to legacy packet ONCE and attach payload to that instance
+        val legacyPacket = updatedPacket.toLegacyPacket()
+        attachPayloadToLegacyPacket(legacyPacket, imageBytes, hash)
 
-        return updatedPacket
+        // Return the SAME legacy packet with payload attached
+        return legacyPacket
     }
 
     /**
-     * Attach payload to legacy NetworkPacket.
+     * Attach payload to legacy NetworkPacket directly.
      *
-     * Uses reflection to attach payload to the legacy mutable packet.
-     * This is needed because the immutable NetworkPacket doesn't support
-     * payload mutation.
+     * Sets the payload property directly without reflection.
      */
-    private fun attachToLegacyPacket(
+    private fun attachPayloadToLegacyPacket(
         legacyPacket: org.cosmic.cosmicconnect.NetworkPacket,
         data: ByteArray,
         hash: String
     ) {
         try {
-            // Create payload using reflection
-            val payloadClass = Class.forName("org.cosmic.cosmicconnect.NetworkPacket\$Payload")
-            val payload = payloadClass.getConstructor(ByteArray::class.java).newInstance(data)
+            // Create payload and set directly (no reflection needed)
+            val payload = org.cosmic.cosmicconnect.NetworkPacket.Payload(data)
+            legacyPacket.payload = payload
 
-            // Set payload
-            val setPayloadMethod = org.cosmic.cosmicconnect.NetworkPacket::class.java
-                .getMethod("setPayload", payloadClass)
-            setPayloadMethod.invoke(legacyPacket, payload)
+            // Set hash in body
+            legacyPacket["payloadHash"] = hash
 
-            // Set hash
-            val setMethod = org.cosmic.cosmicconnect.NetworkPacket::class.java
-                .getMethod("set", String::class.java, Any::class.java)
-            setMethod.invoke(legacyPacket, "payloadHash", hash)
-
-            Log.d(TAG, "Attached ${data.size} byte payload with hash $hash")
+            Log.d(TAG, "Attached ${data.size} byte image payload with hash $hash")
 
         } catch (e: Exception) {
             Log.e(TAG, "Failed to attach image payload", e)
@@ -264,13 +257,13 @@ object RichNotificationPackets {
      * @param statusBarNotification The notification to process
      * @param baseInfo Base notification information (from NotificationsPlugin)
      * @param extractor BigPictureExtractor instance
-     * @return NetworkPacket with all available rich content
+     * @return Legacy NetworkPacket ready for sending (with payload if image present)
      */
     fun createFromStatusBarNotification(
         statusBarNotification: StatusBarNotification,
         baseInfo: NotificationInfo,
         extractor: BigPictureExtractor
-    ): NetworkPacket {
+    ): org.cosmic.cosmicconnect.NetworkPacket {
         val notification = statusBarNotification.notification
 
         // Extract rich content
@@ -288,11 +281,11 @@ object RichNotificationPackets {
             videoInfo = videoInfo
         )
 
-        // Attach image if present
+        // Attach image if present and return legacy packet ready for sending
         return if (bigPicture != null) {
             attachImagePayload(packet, bigPicture)
         } else {
-            packet
+            packet.toLegacyPacket()
         }
     }
 }

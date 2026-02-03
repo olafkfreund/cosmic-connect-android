@@ -190,10 +190,10 @@ fun PluginCard(
     modifier = modifier
       .fillMaxWidth()
       .then(
-        if (onClick != null && isAvailable) {
+        if (onClick != null) {
           Modifier.clickable(
             onClick = onClick,
-            onClickLabel = "Open $pluginName settings"
+            onClickLabel = if (isAvailable) "Open $pluginName settings" else "Grant $pluginName permissions"
           )
         } else {
           Modifier

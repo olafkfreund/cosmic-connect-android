@@ -112,14 +112,13 @@ class ContactsPlugin : Plugin() {
     private fun handleRequestAllUIDsTimestamps(@Suppress("unused") np: LegacyNetworkPacket): Boolean {
         val uIDsToTimestamps: Map<UID, Long> = ContactsHelper.getAllContactTimestamps(context)
 
-        // Build packet body
-        val body = mutableMapOf<String, Any>()
-        val uIDsAsString = mutableListOf<String>()
+        // Build packet body with nested "uids" object
+        // Desktop expects: {"uids": {"1": 12345, "2": 12346}} (UID as key, timestamp as integer)
+        val uidsObject = mutableMapOf<String, Long>()
         for ((contactID: UID, timestamp: Long) in uIDsToTimestamps) {
-            body[contactID.toString()] = timestamp.toString()
-            uIDsAsString.add(contactID.toString())
+            uidsObject[contactID.toString()] = timestamp
         }
-        body[PACKET_UIDS_KEY] = uIDsAsString
+        val body = mapOf(PACKET_UIDS_KEY to uidsObject)
 
         // Create packet using FFI
         val json = JSONObject(body).toString()
@@ -145,22 +144,20 @@ class ContactsPlugin : Plugin() {
 
         val uIDsToVCards: Map<UID, VCardBuilder> = ContactsHelper.getVCardsForContactIDs(context, storedUIDs)
 
-        // Build packet body
-        val body = mutableMapOf<String, Any>()
-        val uIDsAsStrings = mutableListOf<String>()
+        // Build packet body with nested "vcards" object
+        // Desktop expects: {"vcards": {"1": "BEGIN:VCARD...", "2": "BEGIN:VCARD..."}}
+        val vcardsObject = mutableMapOf<String, String>()
         // ContactsHelper.getVCardsForContactIDs(..) is allowed to reply without some of the requested uIDs if they were not in the database, so update our list
         for ((uid: UID, vcard: VCardBuilder) in uIDsToVCards) {
             try {
                 val vcardWithMetadata = addVCardMetadata(vcard, uid)
-                // Store this as a valid uID
-                uIDsAsStrings.add(uid.toString())
-                // Add the uid -> vcard pairing to the packet
-                body[uid.toString()] = vcardWithMetadata.toString()
+                // Add the uid -> vcard pairing to the nested vcards object
+                vcardsObject[uid.toString()] = vcardWithMetadata.toString()
             } catch (e: ContactNotFoundException) {
                 Log.e("ContactsPlugin", "handleRequestVCardsByUIDs failed to find contact with uID $uid")
             }
         }
-        body[PACKET_UIDS_KEY] = uIDsAsStrings
+        val body = mapOf(PACKET_VCARDS_KEY to vcardsObject)
 
         // Create packet using FFI
         val json = JSONObject(body).toString()
@@ -183,6 +180,7 @@ class ContactsPlugin : Plugin() {
 
     companion object {
         private const val PACKET_UIDS_KEY: String = "uids"
+        private const val PACKET_VCARDS_KEY: String = "vcards"
 
         /**
          * Used to request the device send the unique ID of every contact

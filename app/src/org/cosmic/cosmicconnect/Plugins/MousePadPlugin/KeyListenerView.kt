@@ -106,40 +106,44 @@ class KeyListenerView(context: Context, set: AttributeSet?) : View(context, set)
         val SpecialKeysMap = SparseIntArray()
 
         init {
-            var i = 0
-            SpecialKeysMap.put(KeyEvent.KEYCODE_DEL, ++i) // 1
-            SpecialKeysMap.put(KeyEvent.KEYCODE_TAB, ++i) // 2
-            SpecialKeysMap.put(KeyEvent.KEYCODE_ENTER, 12)
-            ++i // 3 is not used, return is 12 instead
-            SpecialKeysMap.put(KeyEvent.KEYCODE_DPAD_LEFT, ++i) // 4
-            SpecialKeysMap.put(KeyEvent.KEYCODE_DPAD_UP, ++i) // 5
-            SpecialKeysMap.put(KeyEvent.KEYCODE_DPAD_RIGHT, ++i) // 6
-            SpecialKeysMap.put(KeyEvent.KEYCODE_DPAD_DOWN, ++i) // 7
-            SpecialKeysMap.put(KeyEvent.KEYCODE_PAGE_UP, ++i) // 8
-            SpecialKeysMap.put(KeyEvent.KEYCODE_PAGE_DOWN, ++i) // 9
-            SpecialKeysMap.put(KeyEvent.KEYCODE_MOVE_HOME, ++i) // 10
-            SpecialKeysMap.put(KeyEvent.KEYCODE_MOVE_END, ++i) // 11
-            SpecialKeysMap.put(KeyEvent.KEYCODE_NUMPAD_ENTER, ++i) // 12
-            SpecialKeysMap.put(KeyEvent.KEYCODE_FORWARD_DEL, ++i) // 13
-            SpecialKeysMap.put(KeyEvent.KEYCODE_ESCAPE, ++i) // 14
-            SpecialKeysMap.put(KeyEvent.KEYCODE_SYSRQ, ++i) // 15
-            SpecialKeysMap.put(KeyEvent.KEYCODE_SCROLL_LOCK, ++i) // 16
-            ++i // 17
-            ++i // 18
-            ++i // 19
-            ++i // 20
-            SpecialKeysMap.put(KeyEvent.KEYCODE_F1, ++i) // 21
-            SpecialKeysMap.put(KeyEvent.KEYCODE_F2, ++i) // 22
-            SpecialKeysMap.put(KeyEvent.KEYCODE_F3, ++i) // 23
-            SpecialKeysMap.put(KeyEvent.KEYCODE_F4, ++i) // 24
-            SpecialKeysMap.put(KeyEvent.KEYCODE_F5, ++i) // 25
-            SpecialKeysMap.put(KeyEvent.KEYCODE_F6, ++i) // 26
-            SpecialKeysMap.put(KeyEvent.KEYCODE_F7, ++i) // 27
-            SpecialKeysMap.put(KeyEvent.KEYCODE_F8, ++i) // 28
-            SpecialKeysMap.put(KeyEvent.KEYCODE_F9, ++i) // 29
-            SpecialKeysMap.put(KeyEvent.KEYCODE_F10, ++i) // 30
-            SpecialKeysMap.put(KeyEvent.KEYCODE_F11, ++i) // 31
-            SpecialKeysMap.put(KeyEvent.KEYCODE_F12, ++i) // 32
+            // Special key codes aligned with Desktop (cosmic-connect-core) values
+            // See: https://github.com/olafkfreund/cosmic-connect-core protocol spec
+            SpecialKeysMap.put(KeyEvent.KEYCODE_DEL, 1)           // Backspace
+            SpecialKeysMap.put(KeyEvent.KEYCODE_TAB, 2)           // Tab
+            SpecialKeysMap.put(KeyEvent.KEYCODE_ENTER, 12)        // Enter/Return
+            SpecialKeysMap.put(KeyEvent.KEYCODE_NUMPAD_ENTER, 12) // Numpad Enter
+
+            // Arrow keys - Desktop values
+            SpecialKeysMap.put(KeyEvent.KEYCODE_DPAD_LEFT, 21)    // Left Arrow
+            SpecialKeysMap.put(KeyEvent.KEYCODE_DPAD_UP, 22)      // Up Arrow
+            SpecialKeysMap.put(KeyEvent.KEYCODE_DPAD_RIGHT, 23)   // Right Arrow
+            SpecialKeysMap.put(KeyEvent.KEYCODE_DPAD_DOWN, 24)    // Down Arrow
+
+            // Navigation keys - Desktop values
+            SpecialKeysMap.put(KeyEvent.KEYCODE_PAGE_UP, 25)      // Page Up
+            SpecialKeysMap.put(KeyEvent.KEYCODE_PAGE_DOWN, 26)    // Page Down
+            SpecialKeysMap.put(KeyEvent.KEYCODE_ESCAPE, 27)       // Escape
+            SpecialKeysMap.put(KeyEvent.KEYCODE_MOVE_HOME, 28)    // Home
+            SpecialKeysMap.put(KeyEvent.KEYCODE_MOVE_END, 29)     // End
+            SpecialKeysMap.put(KeyEvent.KEYCODE_FORWARD_DEL, 30)  // Delete (Forward)
+
+            // Function keys - Desktop values (F1=31 through F12=42)
+            SpecialKeysMap.put(KeyEvent.KEYCODE_F1, 31)
+            SpecialKeysMap.put(KeyEvent.KEYCODE_F2, 32)
+            SpecialKeysMap.put(KeyEvent.KEYCODE_F3, 33)
+            SpecialKeysMap.put(KeyEvent.KEYCODE_F4, 34)
+            SpecialKeysMap.put(KeyEvent.KEYCODE_F5, 35)
+            SpecialKeysMap.put(KeyEvent.KEYCODE_F6, 36)
+            SpecialKeysMap.put(KeyEvent.KEYCODE_F7, 37)
+            SpecialKeysMap.put(KeyEvent.KEYCODE_F8, 38)
+            SpecialKeysMap.put(KeyEvent.KEYCODE_F9, 39)
+            SpecialKeysMap.put(KeyEvent.KEYCODE_F10, 40)
+            SpecialKeysMap.put(KeyEvent.KEYCODE_F11, 41)
+            SpecialKeysMap.put(KeyEvent.KEYCODE_F12, 42)
+
+            // Other special keys
+            SpecialKeysMap.put(KeyEvent.KEYCODE_SYSRQ, 15)        // Print Screen
+            SpecialKeysMap.put(KeyEvent.KEYCODE_SCROLL_LOCK, 16)  // Scroll Lock
         }
     }
 }

@@ -6,12 +6,16 @@
 
 package org.cosmic.cosmicconnect.Plugins.CameraPlugin
 
+import android.Manifest
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceManager
-import androidx.preference.SwitchPreferenceCompat
 import org.cosmic.cosmicconnect.R
+import org.cosmic.cosmicconnect.UserInterface.PermissionsAlertDialogFragment
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment
 
 /**
@@ -38,6 +42,36 @@ class CameraSettingsFragment : PluginSettingsFragment() {
         setupDefaultCameraPreference()
         setupResolutionPreference()
         setupQualityPreference()
+
+        // Request camera permission if not granted
+        checkAndRequestCameraPermission()
+    }
+
+    /**
+     * Check if camera permission is granted, and request if not
+     */
+    private fun checkAndRequestCameraPermission() {
+        val permissions = mutableListOf(Manifest.permission.CAMERA)
+
+        // Android 14+ requires foreground service camera permission
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            permissions.add(Manifest.permission.FOREGROUND_SERVICE_CAMERA)
+        }
+
+        val missingPermissions = permissions.filter { permission ->
+            ContextCompat.checkSelfPermission(requireContext(), permission) != PackageManager.PERMISSION_GRANTED
+        }
+
+        if (missingPermissions.isNotEmpty()) {
+            // Show permission request dialog
+            PermissionsAlertDialogFragment.Builder()
+                .setTitle(R.string.camera_permission_title)
+                .setMessage(R.string.camera_permission_explanation)
+                .setPermissions(missingPermissions.toTypedArray())
+                .setRequestCode(REQUEST_CAMERA_PERMISSION)
+                .create()
+                .show(parentFragmentManager, "camera_permission_dialog")
+        }
     }
 
     /**
@@ -120,6 +154,8 @@ class CameraSettingsFragment : PluginSettingsFragment() {
     }
 
     companion object {
+        private const val REQUEST_CAMERA_PERMISSION = 1001
+
         /**
          * Create new instance with plugin key and layout
          */

@@ -68,12 +68,12 @@ tasks.matching { it.name.startsWith("cargoBuild") }.configureEach {
 
 android {
     namespace = "org.cosmic.cosmicconnect"
-    compileSdk = 34
+    compileSdk = 35
     ndkVersion = "27.0.12077973"
     defaultConfig {
         applicationId = "org.cosmic.cosmicconnect"
         minSdk = 23
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 13500
         versionName = "1.1.0-beta"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -118,6 +118,7 @@ android {
     packaging {
         resources {
             merges += listOf("META-INF/DEPENDENCIES", "META-INF/LICENSE", "META-INF/NOTICE")
+            pickFirsts += listOf("META-INF/versions/9/OSGI-INF/MANIFEST.MF")
         }
         jniLibs {
             // Handle duplicate native libraries from Rust builds
@@ -315,11 +316,10 @@ androidComponents {
 configurations.all {
     resolutionStrategy {
         // Force androidx library versions compatible with SDK 35
-        force("androidx.core:core:1.13.1")
-        force("androidx.core:core-ktx:1.13.1")
+        force("androidx.core:core:1.15.0")
+        force("androidx.core:core-ktx:1.15.0")
         force("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
         force("androidx.recyclerview:recyclerview:1.3.2")
-        // Remove activity-compose force to allow version from libs.versions.toml (1.12.2)
     }
 }
 
@@ -356,7 +356,7 @@ dependencies {
     implementation(libs.androidx.documentfile)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.lifecycle.extensions)
+    implementation(libs.androidx.lifecycle.process)
     implementation(libs.androidx.lifecycle.common.java8)
     implementation(libs.androidx.gridlayout)
     implementation(libs.androidx.datastore.preferences)
@@ -370,7 +370,7 @@ dependencies {
     implementation(libs.apache.sshd.mina)
     implementation(libs.apache.mina.core)
 
-    implementation(libs.bcpkix.jdk15on) //For SSL certificate generation
+    implementation(libs.bcpkix.jdk18on) //For SSL certificate generation
 
     // JNA for Rust FFI bindings (UniFFI-generated)
     // Force AAR to ensure native libs are included
@@ -397,11 +397,6 @@ dependencies {
     implementation(libs.kotlin.stdlib.jdk8)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
-
-    // Extended Display (Issue #138) - WebRTC for screen streaming
-    implementation("io.github.webrtc-sdk:android:114.5735.08")
-    implementation("com.squareup.okhttp3:okhttp:4.12.0")
-    implementation("com.squareup.moshi:moshi-kotlin:1.15.0")
 
     // Testing
     testImplementation(libs.junit)

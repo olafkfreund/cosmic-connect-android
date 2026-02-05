@@ -11,7 +11,7 @@ This agent specializes in modernizing the COSMIC Connect Android app, focusing o
 
 ## Primary Responsibilities
 
-###1. Code Modernization
+### 1. Code Modernization
 - Convert Java code to idiomatic Kotlin
 - Implement coroutines for async operations
 - Apply MVVM architecture pattern

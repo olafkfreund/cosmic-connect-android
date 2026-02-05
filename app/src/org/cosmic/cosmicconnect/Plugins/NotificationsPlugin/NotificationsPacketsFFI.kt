@@ -189,7 +189,13 @@ data class NotificationInfo(
     /** Base64 encoded large icon or main image (PNG, max 256px) */
     val imageData: String? = null,
     /** MIME type of imageData (typically "image/png") */
-    val imageMimeType: String? = null
+    val imageMimeType: String? = null,
+
+    // Desktop sync fields
+    /** Urgency level (0=low, 1=normal, 2=critical) - matches desktop protocol */
+    val urgency: Int? = null,
+    /** Notification category (e.g., "email", "msg", "call") */
+    val category: String? = null
 ) {
     /**
      * Convert to JSON string for FFI layer.
@@ -253,6 +259,10 @@ data class NotificationInfo(
                 put("hasImage", true)
             }
             imageMimeType?.let { put("imageMimeType", it) }
+
+            // Desktop sync fields
+            urgency?.let { put("urgency", it) }
+            category?.let { put("category", it) }
         }
         return json.toString()
     }

@@ -5,13 +5,13 @@ androidGradlePlugin = "8.7.3"
 rustAndroidGradle = "0.9.4"
 androidSmsmms = "cosmicconnect-1-21-0"
 appcompat = "1.7.1"
-bcpkixJdk15on = "1.70"
+bcpkixJdk18on = "1.80"
 classindexksp = "1.2"
 commonsCollections4 = "4.5.0"
 commonsIo = "2.21.0"
 commonsLang3 = "3.20.0"
 constraintlayoutCompose = "1.1.1"
-coreKtx = "1.13.1"
+coreKtx = "1.15.0"
 dependencyLicenseReport = "2.9"
 disklrucache = "2.0.2"
 documentfile = "1.1.0"
@@ -78,14 +78,14 @@ androidx-documentfile = { module = "androidx.documentfile:documentfile", version
 androidx-gridlayout = { module = "androidx.gridlayout:gridlayout", version.ref = "gridlayout" }
 androidx-junit = { module = "androidx.test.ext:junit", version.ref = "junitExt" }
 androidx-lifecycle-common-java8 = { module = "androidx.lifecycle:lifecycle-common-java8", version.ref = "lifecycleRuntimeKtx" }
-androidx-lifecycle-extensions = { module = "androidx.lifecycle:lifecycle-extensions", version.ref = "lifecycleExtensions" }
+androidx-lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "lifecycleRuntimeKtx" }
 androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-media = { module = "androidx.media:media", version.ref = "media" }
 androidx-preference-ktx = { module = "androidx.preference:preference-ktx", version.ref = "preferenceKtx" }
 androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
 androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
-bcpkix-jdk15on = { module = "org.bouncycastle:bcpkix-jdk15on", version.ref = "bcpkixJdk15on" }
+bcpkix-jdk18on = { module = "org.bouncycastle:bcpkix-jdk18on", version.ref = "bcpkixJdk18on" }
 classindexksp = { module = "com.github.albertvaka:classindexksp", version.ref = "classindexksp" }
 commons-collections4 = { module = "org.apache.commons:commons-collections4", version.ref = "commonsCollections4" }
 commons-io = { module = "commons-io:commons-io", version.ref = "commonsIo" }

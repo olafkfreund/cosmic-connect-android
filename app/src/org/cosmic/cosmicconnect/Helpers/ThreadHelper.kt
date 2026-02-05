@@ -14,14 +14,14 @@ import java.util.concurrent.Executors
 
 object ThreadHelper {
 
-    private val executor: ExecutorService = Executors.newCachedThreadPool()
+    private val executor: ExecutorService = Executors.newFixedThreadPool(8)
 
     @JvmStatic
     fun execute(command: Runnable) = executor.execute(command)
 
     fun assertMainThread() {
         if (BuildConfig.DEBUG) {
-            if (Thread.currentThread() == Looper.getMainLooper().thread) {
+            if (Thread.currentThread() != Looper.getMainLooper().thread) {
                 Log.w("ThreadHelper", "This function must be called from the Main thread.", Exception("assertMainThread"))
             }
         }
@@ -29,7 +29,7 @@ object ThreadHelper {
 
     fun assertNotMainThread() {
         if (BuildConfig.DEBUG) {
-            if (Thread.currentThread() != Looper.getMainLooper().thread) {
+            if (Thread.currentThread() == Looper.getMainLooper().thread) {
                 Log.w("ThreadHelper", "This function must NOT be called from the Main thread.", Exception("assertNotMainThread"))
             }
         }

@@ -55,7 +55,7 @@ class LanLinkProvider @Inject constructor(
     private val deviceRegistry: org.cosmic.cosmicconnect.Core.DeviceRegistry
 ) : BaseLinkProvider() {
 
-    internal val visibleDevices = HashMap<String, LanLink>() // Links by device id
+    internal val visibleDevices = ConcurrentHashMap<String, LanLink>() // Links by device id
 
     private val lastConnectionTimeByDeviceId = ConcurrentHashMap<String, Long>()
     private val lastConnectionTimeByIp = ConcurrentHashMap<InetAddress, Long>()
@@ -177,7 +177,7 @@ class LanLinkProvider @Inject constructor(
      */
     @Throws(IOException::class)
     private fun readSingleLine(socket: Socket): String {
-        val stream = socket.getInputStream()
+        val stream = java.io.BufferedInputStream(socket.getInputStream())
         val line = StringBuilder(MAX_IDENTITY_PACKET_SIZE)
         var ch: Int
         while (stream.read().also { ch = it } != -1) {
@@ -692,12 +692,12 @@ class LanLinkProvider @Inject constructor(
         const val PAYLOAD_TRANSFER_MIN_PORT = 1839
 
         const val MAX_IDENTITY_PACKET_SIZE = 1024 * 512
-        const val MAX_UDP_PACKET_SIZE = 1024 * 512
+        const val MAX_UDP_PACKET_SIZE = 1024 * 8
 
         const val MILLIS_DELAY_BETWEEN_CONNECTIONS_TO_SAME_DEVICE = 1000L
 
         const val MAX_RATE_LIMIT_ENTRIES = 255
-        private const val delayBetweenBroadcasts: Long = 200
+        private const val delayBetweenBroadcasts: Long = 2000
 
         @JvmStatic
         @Throws(IOException::class)

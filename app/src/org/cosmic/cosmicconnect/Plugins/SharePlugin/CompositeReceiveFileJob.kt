@@ -300,7 +300,7 @@ class CompositeReceiveFileJob(device: Device, callback: Callback<java.lang.Void?
     }
 
     private fun receiveFile(input: InputStream, output: OutputStream): Long {
-        val data = ByteArray(4096)
+        val data = ByteArray(65536)
         var count: Int
         var received: Long = 0
 

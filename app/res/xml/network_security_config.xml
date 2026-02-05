@@ -8,5 +8,10 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
 
 <network-security-config>
     <!--Set application-wide security config using base-config tag.-->
-    <base-config cleartextTrafficPermitted="true"/>
+    <base-config cleartextTrafficPermitted="false"/>
+    <!--Allow cleartext only for local device discovery (UDP broadcasts)-->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">127.0.0.1</domain>
+    </domain-config>
 </network-security-config>

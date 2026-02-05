@@ -74,6 +74,24 @@ class ReceiveNotificationsPlugin : Plugin() {
 
         val notificationManager = ContextCompat.getSystemService(context, NotificationManager::class.java) ?: return true
 
+        // Map desktop urgency (0=low, 1=normal, 2=critical) to Android priority
+        val priority = when (np.getInt("urgency", 1)) {
+            0 -> NotificationCompat.PRIORITY_LOW
+            2 -> NotificationCompat.PRIORITY_HIGH
+            else -> NotificationCompat.PRIORITY_DEFAULT
+        }
+
+        // Map desktop category to Android notification category
+        val category = np.getStringOrNull("category")
+        val androidCategory = when (category) {
+            "email" -> NotificationCompat.CATEGORY_EMAIL
+            "call" -> NotificationCompat.CATEGORY_CALL
+            "msg", "message" -> NotificationCompat.CATEGORY_MESSAGE
+            "alarm" -> NotificationCompat.CATEGORY_ALARM
+            "reminder" -> NotificationCompat.CATEGORY_REMINDER
+            else -> null
+        }
+
         val noti =
             NotificationCompat.Builder(context, NotificationHelper.Channels.RECEIVENOTIFICATION)
                 .setContentTitle(np.getString("appName"))
@@ -85,6 +103,8 @@ class ReceiveNotificationsPlugin : Plugin() {
                 .setAutoCancel(true)
                 .setLocalOnly(true) // to avoid bouncing the notification back to other cosmicconnect nodes
                 .setDefaults(Notification.DEFAULT_ALL)
+                .setPriority(priority)
+                .apply { androidCategory?.let { setCategory(it) } }
                 .setStyle(NotificationCompat.BigTextStyle().bigText(np.getString("ticker")))
                 .build()
 

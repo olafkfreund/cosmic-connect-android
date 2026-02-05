@@ -65,7 +65,7 @@ internal object AlbumArtCache {
     /**
      * A integer indicating how many fetches are in progress.
      */
-    private var numFetching = 0
+    private var numFetching = java.util.concurrent.atomic.AtomicInteger(0)
 
     /**
      * A list of plugins to notify on fetched album art
@@ -227,7 +227,7 @@ internal object AlbumArtCache {
     private fun initiateFetch() {
         var url : Uri
         synchronized(fetchUrlList) {
-            if (numFetching >= 2 || fetchUrlList.isEmpty()) return
+            if (numFetching.get() >= 2 || fetchUrlList.isEmpty()) return
             //Fetch the last-requested url first, it will probably be needed first
             url = fetchUrlList.last()
             //Remove the url from the to-fetch list
@@ -238,7 +238,7 @@ internal object AlbumArtCache {
         }
 
         //Download the album art ourselves
-        ++numFetching
+        numFetching.incrementAndGet()
         //Add the url to the currently-fetching list
         isFetchingList.add(url)
         try {
@@ -246,7 +246,7 @@ internal object AlbumArtCache {
             if (cacheItem == null) {
                 Log.e("COSMIC/Mpris/AlbumArtCache",
                         "Two disk cache edits happened at the same time, should be impossible!")
-                --numFetching
+                numFetching.decrementAndGet()
                 return
             }
 
@@ -254,7 +254,7 @@ internal object AlbumArtCache {
             cacheScope.launch { fetchURL(url, null, cacheItem) }
         } catch (e: IOException) {
             Log.e("COSMIC/Mpris/AlbumArtCache", "Problems with the disk cache", e)
-            --numFetching
+            numFetching.decrementAndGet()
         }
     }
 
@@ -315,13 +315,13 @@ internal object AlbumArtCache {
 
         //Add it to the currently-fetching list
         isFetchingList.add(url)
-        ++numFetching
+        numFetching.incrementAndGet()
         try {
             val cacheItem = diskCache.edit(urlToDiskCacheKey(url.toString()))
             if (cacheItem == null) {
                 Log.e("COSMIC/Mpris/AlbumArtCache",
                         "Two disk cache edits happened at the same time, should be impossible!")
-                --numFetching
+                numFetching.decrementAndGet()
                 payload.close()
                 return
             }
@@ -330,7 +330,7 @@ internal object AlbumArtCache {
             cacheScope.launch { fetchURL(url, payload, cacheItem) }
         } catch (e: IOException) {
             Log.e("COSMIC/Mpris/AlbumArtCache", "Problems with the disk cache", e)
-            --numFetching
+            numFetching.decrementAndGet()
         }
     }
 
@@ -348,7 +348,7 @@ internal object AlbumArtCache {
         try {
             //See if we need to open a http(s) connection here, or if we use a payload input stream
             val inputStream = payload?.inputStream ?: openHttp(url)
-            val buffer = ByteArray(4096)
+            val buffer = ByteArray(65536)
             var bytesRead: Int
             val output = cacheItem.newOutputStream(0)
             if (inputStream != null) {
@@ -383,7 +383,7 @@ internal object AlbumArtCache {
         //Remove the url from the fetching list
         isFetchingList.remove(url)
         //Fetch the next url (if any)
-        --numFetching
+        numFetching.decrementAndGet()
         initiateFetch()
     }
 

@@ -22,7 +22,6 @@ class PluginFactory @Inject constructor(@ApplicationContext private val context:
         try {
             val plugins = listOf(
                 org.cosmic.cosmicconnect.Plugins.PingPlugin.PingPlugin::class,
-                org.cosmic.cosmicconnect.Plugins.BatteryPlugin.BatteryPlugin::class,
                 org.cosmic.cosmicconnect.Plugins.BatteryPlugin.BatteryPluginFFI::class,
                 org.cosmic.cosmicconnect.Plugins.MprisPlugin.MprisPlugin::class,
                 org.cosmic.cosmicconnect.Plugins.NotificationsPlugin.NotificationsPlugin::class,

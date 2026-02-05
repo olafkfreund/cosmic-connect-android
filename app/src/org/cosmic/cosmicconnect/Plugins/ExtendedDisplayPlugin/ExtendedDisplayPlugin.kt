@@ -33,8 +33,8 @@ import org.webrtc.VideoTrack
  *
  * Protocol: COSMIC Connect Extended Display v1.0
  * Packet types:
- * - "kdeconnect.extendeddisplay" - Control packets
- * - "kdeconnect.extendeddisplay.request" - Client requests
+ * - "cconnect.extendeddisplay" - Control packets
+ * - "cconnect.extendeddisplay.request" - Client requests
  */
 class ExtendedDisplayPlugin : Plugin(), WebRTCEventListener {
 
@@ -42,8 +42,8 @@ class ExtendedDisplayPlugin : Plugin(), WebRTCEventListener {
         private const val TAG = "ExtendedDisplayPlugin"
 
         // Packet types
-        const val PACKET_TYPE_EXTENDED_DISPLAY = "kdeconnect.extendeddisplay"
-        const val PACKET_TYPE_EXTENDED_DISPLAY_REQUEST = "kdeconnect.extendeddisplay.request"
+        const val PACKET_TYPE_EXTENDED_DISPLAY = "cconnect.extendeddisplay"
+        const val PACKET_TYPE_EXTENDED_DISPLAY_REQUEST = "cconnect.extendeddisplay.request"
     }
 
     private var webRtcClient: WebRTCClient? = null

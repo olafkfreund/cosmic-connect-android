@@ -11,6 +11,7 @@ import android.os.Vibrator
 import android.util.Log
 import android.view.Gravity
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import org.cosmic.cosmicconnect.CosmicConnect
 import org.cosmic.cosmicconnect.R
@@ -48,13 +49,29 @@ class RunCommandUrlActivity : AppCompatActivity() {
                     return
                 }
 
-                plugin.runCommand(uri.pathSegments[1])
-                finish()
+                val commandKey = uri.pathSegments[1]
 
-                val vibrator = getSystemService(Vibrator::class.java)
-                if (vibrator != null && vibrator.hasVibrator()) {
-                    vibrator.vibrate(100)
-                }
+                // Show confirmation dialog before executing command from external intent
+                AlertDialog.Builder(this)
+                    .setTitle(R.string.runcommand_confirm_title)
+                    .setMessage(getString(R.string.runcommand_confirm_message, device.name))
+                    .setPositiveButton(android.R.string.ok) { _, _ ->
+                        plugin.runCommand(commandKey)
+
+                        val vibrator = getSystemService(Vibrator::class.java)
+                        if (vibrator != null && vibrator.hasVibrator()) {
+                            vibrator.vibrate(100)
+                        }
+                        finish()
+                    }
+                    .setNegativeButton(android.R.string.cancel) { _, _ ->
+                        finish()
+                    }
+                    .setOnCancelListener {
+                        finish()
+                    }
+                    .show()
+
             } catch (e: Exception) {
                 Log.e("RuncommandPlugin", "Exception", e)
             }

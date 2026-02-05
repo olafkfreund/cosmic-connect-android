@@ -211,7 +211,7 @@ class LanLink @WorkerThread constructor(
                 val inputStream = np.payload?.inputStream
 
                 Log.i("COSMIC/LanLink", "Beginning to send payload for " + np.type)
-                val buffer = ByteArray(4096)
+                val buffer = ByteArray(65536)
                 var bytesRead: Int = -1
                 val size = np.payloadSize
                 var progress: Long = 0

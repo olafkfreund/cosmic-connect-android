@@ -14,6 +14,7 @@ import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.bouncycastle.util.Arrays
+import org.cosmic.cosmicconnect.BuildConfig
 import org.cosmic.cosmicconnect.Helpers.SecurityHelpers.SslHelper
 import org.cosmic.cosmicconnect.R
 import java.security.MessageDigest
@@ -89,7 +90,7 @@ class PairingHandler(
 
                     state = PairState.RequestedByPeer
 
-                    if (device.deviceId == "4dc6f1cb_ef38_4ce3_a9c6_e469cc6ba147") {
+                    if (BuildConfig.DEBUG && device.deviceId == "4dc6f1cb_ef38_4ce3_a9c6_e469cc6ba147") {
                         Log.i("PairingHandler", "Auto-accepting pairing request from test desktop")
                         acceptPairing()
                         return

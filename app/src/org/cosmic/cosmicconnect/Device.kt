@@ -104,7 +104,7 @@ class Device : PacketReceiver {
     private val pairingCallbacks = CopyOnWriteArrayList<PairingCallback>()
     private val pluginsChangedListeners = CopyOnWriteArrayList<PluginsChangedListener>()
 
-    private val sendChannel = Channel<NetworkPacketWithCallback>(Channel.UNLIMITED)
+    private val sendChannel = Channel<NetworkPacketWithCallback>(Channel.BUFFERED)
     private var sendCoroutine : Job? = null
 
     /**

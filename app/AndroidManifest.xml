@@ -102,7 +102,7 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
         <service
             android:name="com.android.mms.transaction.TransactionService"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="false" />
 
         <service
             android:name="org.cosmic.cosmicconnect.BackgroundService"
@@ -193,7 +193,7 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
             android:launchMode="singleInstance" />
 
         <receiver android:name="org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.FindMyPhoneReceiver"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
                 <action android:name="org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.foundIt" />
             </intent-filter>
@@ -405,7 +405,7 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
         </activity>
 
         <receiver android:name="org.cosmic.cosmicconnect.Plugins.SharePlugin.ShareBroadcastReceiver"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
                 <action android:name="org.cosmic.cosmicconnect.Plugins.SharePlugin.CancelShare" />
             </intent-filter>

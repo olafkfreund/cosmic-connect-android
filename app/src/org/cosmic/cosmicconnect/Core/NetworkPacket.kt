@@ -33,7 +33,8 @@ data class NetworkPacket(
     val id: Long,
     val type: String,
     val body: Map<String, Any>,
-    val payloadSize: Long? = null
+    val payloadSize: Long? = null,
+    val payloadTransferInfo: Map<String, Any> = emptyMap()
 ) {
 
     /**
@@ -78,18 +79,84 @@ data class NetworkPacket(
 
         // Copy all body fields
         body.forEach { (key, value) ->
-            when (value) {
-                is String -> legacyPacket[key] = value
-                is Int -> legacyPacket[key] = value
-                is Long -> legacyPacket[key] = value
-                is Boolean -> legacyPacket[key] = value
-                is Double -> legacyPacket[key] = value
-                // Collections and other types will be handled as strings via JSON
-                else -> legacyPacket[key] = value.toString()
-            }
+            setLegacyPacketValue(legacyPacket, key, value)
+        }
+
+        // Copy payloadTransferInfo if present
+        if (payloadTransferInfo.isNotEmpty()) {
+            legacyPacket.payloadTransferInfo = mapToJsonObject(payloadTransferInfo)
         }
 
         return legacyPacket
+    }
+
+    /**
+     * Set a value on legacy packet with proper type handling
+     */
+    private fun setLegacyPacketValue(
+        legacyPacket: org.cosmic.cosmicconnect.NetworkPacket,
+        key: String,
+        value: Any
+    ) {
+        when (value) {
+            is String -> legacyPacket[key] = value
+            is Int -> legacyPacket[key] = value
+            is Long -> legacyPacket[key] = value
+            is Boolean -> legacyPacket[key] = value
+            is Double -> legacyPacket[key] = value
+            is Float -> legacyPacket[key] = value.toDouble()
+            is List<*> -> {
+                // Convert List to JSONArray for proper serialization
+                val jsonArray = org.json.JSONArray()
+                value.forEach { item ->
+                    when (item) {
+                        is String -> jsonArray.put(item)
+                        is Number -> jsonArray.put(item)
+                        is Boolean -> jsonArray.put(item)
+                        is Map<*, *> -> jsonArray.put(mapToJsonObject(item))
+                        else -> item?.let { jsonArray.put(it.toString()) }
+                    }
+                }
+                legacyPacket[key] = jsonArray
+            }
+            is Map<*, *> -> {
+                // Convert Map to JSONObject
+                legacyPacket[key] = mapToJsonObject(value)
+            }
+            else -> legacyPacket[key] = value.toString()
+        }
+    }
+
+    /**
+     * Convert a Map to JSONObject recursively
+     */
+    private fun mapToJsonObject(map: Map<*, *>): org.json.JSONObject {
+        val jsonObject = org.json.JSONObject()
+        map.forEach { (k, v) ->
+            val key = k?.toString() ?: return@forEach
+            when (v) {
+                null -> jsonObject.put(key, org.json.JSONObject.NULL)
+                is String -> jsonObject.put(key, v)
+                is Number -> jsonObject.put(key, v)
+                is Boolean -> jsonObject.put(key, v)
+                is List<*> -> {
+                    val jsonArray = org.json.JSONArray()
+                    v.forEach { item ->
+                        when (item) {
+                            is String -> jsonArray.put(item)
+                            is Number -> jsonArray.put(item)
+                            is Boolean -> jsonArray.put(item)
+                            is Map<*, *> -> jsonArray.put(mapToJsonObject(item))
+                            else -> item?.let { jsonArray.put(it.toString()) }
+                        }
+                    }
+                    jsonObject.put(key, jsonArray)
+                }
+                is Map<*, *> -> jsonObject.put(key, mapToJsonObject(v))
+                else -> jsonObject.put(key, v.toString())
+            }
+        }
+        return jsonObject
     }
 
     companion object {
@@ -210,8 +277,16 @@ data class NetworkPacket(
                 jsonPacket.getLong("payloadSize").takeIf { it > 0 }
             } else null
 
+            // Extract payloadTransferInfo if present
+            val transferInfo = if (jsonPacket.has("payloadTransferInfo")) {
+                jsonObjectToMap(jsonPacket.getJSONObject("payloadTransferInfo"))
+            } else emptyMap()
+
             // Create new packet
-            return create(type, body).copy(payloadSize = payloadSize)
+            return create(type, body).copy(
+                payloadSize = payloadSize,
+                payloadTransferInfo = transferInfo
+            )
         }
 
         /**
@@ -329,7 +404,7 @@ data class NetworkPacket(
  */
 object PacketType {
     private const val CC_PREFIX = "cconnect."
-    private const val KDE_PREFIX = "cconnect."
+    private const val KDE_PREFIX = "kdeconnect."
 
     const val IDENTITY = CC_PREFIX + "identity"
     const val PAIR = CC_PREFIX + "pair"

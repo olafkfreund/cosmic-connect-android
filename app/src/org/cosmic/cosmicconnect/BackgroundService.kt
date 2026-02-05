@@ -271,6 +271,7 @@ class BackgroundService : Service() {
         var instance: BackgroundService? = null
             private set
 
+        @Volatile
         private var initialized = false
 
         private fun createNonCellularNetworkRequestBuilder(): NetworkRequest.Builder {

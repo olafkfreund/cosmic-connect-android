@@ -91,10 +91,6 @@ class MprisReceiverCallback(private val plugin: MprisReceiverPlugin, private val
         plugin.sendMetadata(player)
     }
 
-    override fun onAudioInfoChanged(info: MediaController.PlaybackInfo?) {
-        plugin.sendMetadata(player)
-    }
-
     /**
      * Get the JPG art of the current track as a bytearray.
      *

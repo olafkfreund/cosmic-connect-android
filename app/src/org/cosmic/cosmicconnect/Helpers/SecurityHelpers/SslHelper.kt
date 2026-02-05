@@ -51,7 +51,9 @@ class SslHelper @Inject constructor(
     @ApplicationContext private val context: Context,
     private val rsaHelper: RsaHelper
 ) {
-    lateinit var certificate: Certificate //my device's certificate
+    private lateinit var _certificate: Certificate
+    val certificate: Certificate
+        get() = if (SslHelperFFI.isInitialized) SslHelperFFI.certificate else _certificate
     private val factory: CertificateFactory = CertificateFactory.getInstance("X.509")
 
     @SuppressLint("CustomX509TrustManager", "TrustAllX509TrustManager")
@@ -90,7 +92,7 @@ class SslHelper @Inject constructor(
                     Log.e(LOG_TAG, "The certificate is not effective yet: " + cert.notBefore)
                     needsToGenerateCertificate = true
                 } else {
-                    certificate = cert
+                    _certificate = cert
                 }
             } catch (e: Exception) {
                 Log.e(LOG_TAG, "Exception reading own certificate", e)
@@ -126,7 +128,7 @@ class SslHelper @Inject constructor(
             val signatureAlgorithm = if ("RSA" == keyAlgorithm) "SHA512withRSA" else "SHA512withECDSA"
             val contentSigner = JcaContentSignerBuilder(signatureAlgorithm).build(privateKey)
             val certificateBytes = certificateBuilder.build(contentSigner).encoded
-            certificate = parseCertificate(certificateBytes)
+            _certificate = parseCertificate(certificateBytes)
 
             runBlocking {
                 PreferenceDataStore.setCertificate(context, Base64.encodeToString(certificateBytes, 0))
@@ -192,6 +194,10 @@ class SslHelper @Inject constructor(
     }
 
     fun convertToSslSocket(socket: Socket, deviceId: String, isDeviceTrusted: Boolean, clientMode: Boolean): SSLSocket {
+        // Delegate to Keystore-backed SslHelperFFI when available
+        if (SslHelperFFI.isInitialized) {
+            return SslHelperFFI.convertToSslSocket(context, socket, deviceId, isDeviceTrusted, clientMode)
+        }
         val sslSocketFactory = getSslContextForDevice(deviceId, isDeviceTrusted).socketFactory
         val sslSocket = sslSocketFactory.createSocket(socket, socket.inetAddress.hostAddress, socket.port, true) as SSLSocket
         configureSslSocket(sslSocket, isDeviceTrusted, clientMode)

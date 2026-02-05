@@ -17,6 +17,7 @@ import org.cosmic.cosmicconnect.Helpers.LifecycleHelper
 import org.cosmic.cosmicconnect.Helpers.NotificationHelper
 import org.cosmic.cosmicconnect.Helpers.SecurityHelpers.RsaHelper
 import org.cosmic.cosmicconnect.Helpers.SecurityHelpers.SslHelper
+import org.cosmic.cosmicconnect.Helpers.SecurityHelpers.SslHelperFFI
 import org.cosmic.cosmicconnect.Plugins.PluginFactory
 import org.cosmic.cosmicconnect.UserInterface.ThemeUtil
 import org.slf4j.impl.HandroidLoggerAdapter
@@ -50,6 +51,17 @@ class CosmicConnect : Application() {
         deviceHelper.initializeDeviceId()
         rsaHelper.initialiseRsaKeys()
         sslHelper.initialiseCertificate()
+
+        // Initialize modern Keystore-backed certificate storage
+        // This migrates legacy DataStore keys to AES-GCM encrypted files
+        // backed by Android Keystore, then delegates all TLS operations
+        try {
+            SslHelperFFI.initialize(this)
+            Log.i("CosmicConnect/Application", "Keystore-backed certificate storage initialized")
+        } catch (e: Exception) {
+            Log.e("CosmicConnect/Application", "Failed to initialize Keystore storage, using legacy", e)
+        }
+
         pluginFactory.initPluginInfo()
         
         NotificationHelper.initializeChannels(this)

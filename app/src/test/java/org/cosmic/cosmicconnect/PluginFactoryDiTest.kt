@@ -51,22 +51,6 @@ class PluginFactoryDiTest {
     }
 
     @Test
-    fun `pluginCreators map is used before reflection fallback`() {
-        val mockPlugin = mockk<Plugin>(relaxed = true)
-        val mockCreator = mockk<PluginCreator>()
-        every { mockCreator.create(device) } returns mockPlugin
-
-        // Also add a legacy plugin key to creators to prove it takes priority
-        val creators = mapOf("PingPlugin" to mockCreator)
-        val factory = PluginFactory(context, creators)
-        factory.initPluginInfo()
-
-        val result = factory.instantiatePluginForDevice(context, "PingPlugin", device)
-        assertNotNull("Should return plugin from creator", result)
-        verify(exactly = 1) { mockCreator.create(device) }
-    }
-
-    @Test
     fun `instantiatePluginForDevice returns null for unknown plugin key`() {
         val factory = PluginFactory(context, emptyMap())
         factory.initPluginInfo()

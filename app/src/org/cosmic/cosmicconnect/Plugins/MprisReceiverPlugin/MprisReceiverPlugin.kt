@@ -21,8 +21,9 @@ import org.cosmic.cosmicconnect.Helpers.ThreadHelper
 import org.cosmic.cosmicconnect.NetworkPacket
 import org.cosmic.cosmicconnect.Plugins.NotificationsPlugin.NotificationReceiver
 import org.json.JSONObject
+import android.content.Context
+import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Plugins.Plugin
-import org.cosmic.cosmicconnect.Plugins.PluginFactory
 import org.cosmic.cosmicconnect.UserInterface.MainActivity
 import org.cosmic.cosmicconnect.UserInterface.StartActivityAlertDialogFragment
 import org.cosmic.cosmicconnect.R
@@ -30,8 +31,7 @@ import java.util.*
 import java.util.stream.Collectors
 import java.util.stream.Stream
 
-@PluginFactory.LoadablePlugin
-class MprisReceiverPlugin : Plugin(), NotificationReceiver.NotificationListener {
+class MprisReceiverPlugin(context: Context, device: Device) : Plugin(context, device), NotificationReceiver.NotificationListener {
 
     // TODO: Those two are always accessed together, merge them
     private var players = HashMap<String, MprisReceiverPlayer>()

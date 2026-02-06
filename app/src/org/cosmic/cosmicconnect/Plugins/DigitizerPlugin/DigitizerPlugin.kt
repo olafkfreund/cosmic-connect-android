@@ -15,8 +15,8 @@ import androidx.preference.PreferenceManager
 import org.cosmic.cosmicconnect.Helpers.DeviceHelper
 import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
+import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Plugins.Plugin
-import org.cosmic.cosmicconnect.Plugins.PluginFactory
 import org.cosmic.cosmicconnect.Plugins.PresenterPlugin.PresenterActivity
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment
 import org.cosmic.cosmicconnect.R
@@ -25,8 +25,7 @@ import org.json.JSONObject
 import org.cosmic.cosmicconnect.di.HiltBridges
 import dagger.hilt.EntryPoints
 
-@PluginFactory.LoadablePlugin
-class DigitizerPlugin : Plugin() {
+class DigitizerPlugin(context: Context, device: Device) : Plugin(context, device) {
     override val displayName: String
         get() = context.resources.getString(R.string.pref_plugin_digitizer)
 

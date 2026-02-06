@@ -13,12 +13,11 @@ import android.os.BatteryManager
 import androidx.annotation.VisibleForTesting
 import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
+import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Plugins.Plugin
-import org.cosmic.cosmicconnect.Plugins.PluginFactory.LoadablePlugin
 import org.cosmic.cosmicconnect.R
 
-@LoadablePlugin
-class BatteryPlugin : Plugin() {
+class BatteryPlugin(context: Context, device: Device) : Plugin(context, device) {
     // Track last sent battery state for change detection
     private var lastCharge: Int = -1
     private var lastCharging: Boolean = false

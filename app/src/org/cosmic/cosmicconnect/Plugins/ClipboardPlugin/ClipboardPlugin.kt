@@ -260,10 +260,6 @@ class ClipboardPlugin @AssistedInject constructor(
      * Shows a toast notification to confirm the action.
      */
     private fun userInitiatedSendClipboard() {
-        if (!isDeviceInitialized) {
-            return
-        }
-
         val clipboardManager = ContextCompat.getSystemService(context, ClipboardManager::class.java)
             ?: return
 

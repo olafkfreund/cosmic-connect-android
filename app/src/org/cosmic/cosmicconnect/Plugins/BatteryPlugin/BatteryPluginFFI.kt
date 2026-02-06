@@ -47,8 +47,7 @@ import org.cosmic.cosmicconnect.R
  *
  * Same as old BatteryPlugin (drop-in replacement):
  * ```kotlin
- * val batteryPlugin = BatteryPluginFFI()
- * batteryPlugin.setContext(context, device)
+ * val batteryPlugin = BatteryPluginFFI(context, device)
  * batteryPlugin.onCreate()
  * // ...
  * val remoteBattery = batteryPlugin.remoteBatteryInfo

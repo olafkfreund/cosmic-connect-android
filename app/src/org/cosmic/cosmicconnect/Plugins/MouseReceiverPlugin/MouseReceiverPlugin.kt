@@ -13,16 +13,16 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 import org.apache.commons.lang3.ArrayUtils
 import org.cosmic.cosmicconnect.NetworkPacket
+import android.content.Context
+import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Plugins.Plugin
-import org.cosmic.cosmicconnect.Plugins.PluginFactory
 import org.cosmic.cosmicconnect.Plugins.RemoteKeyboardPlugin.RemoteKeyboardPlugin
 import org.cosmic.cosmicconnect.UserInterface.MainActivity
 import org.cosmic.cosmicconnect.UserInterface.StartActivityAlertDialogFragment
 import org.cosmic.cosmicconnect.R
 
-@PluginFactory.LoadablePlugin
 @RequiresApi(Build.VERSION_CODES.N)
-class MouseReceiverPlugin : Plugin() {
+class MouseReceiverPlugin(context: Context, device: Device) : Plugin(context, device) {
 
     override fun checkRequiredPermissions(): Boolean {
         return MouseReceiverService.instance != null

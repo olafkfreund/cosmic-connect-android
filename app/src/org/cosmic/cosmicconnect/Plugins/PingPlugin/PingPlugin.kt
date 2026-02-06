@@ -86,11 +86,6 @@ class PingPlugin @AssistedInject constructor(
      * Send a ping packet to the remote device
      */
     fun sendPing(message: String? = null) {
-        if (!isDeviceInitialized) {
-            Log.w(TAG, "Device not initialized, cannot send ping")
-            return
-        }
-
         try {
             val packet = PingPacketsFFI.createPing(message)
             device.sendPacket(packet.toLegacyPacket())

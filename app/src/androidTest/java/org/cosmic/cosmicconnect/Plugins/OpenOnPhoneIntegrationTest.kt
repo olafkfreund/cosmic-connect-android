@@ -69,8 +69,7 @@ class OpenOnPhoneIntegrationTest {
         // Clear existing notifications
         notificationManager.cancelAll()
 
-        plugin = OpenOnPhonePlugin()
-        plugin.setContext(context, mockDevice)
+        plugin = OpenOnPhonePlugin(context, mockDevice)
 
         // Mock device properties
         whenever(mockDevice.deviceId).thenReturn("test-device-integration")
@@ -386,8 +385,7 @@ class OpenOnPhoneIntegrationTest {
 
     @Test
     fun testPluginLifecycle_OnCreateInitializesNotificationManager() {
-        val newPlugin = OpenOnPhonePlugin()
-        newPlugin.setContext(context, mockDevice)
+        val newPlugin = OpenOnPhonePlugin(context, mockDevice)
 
         val result = newPlugin.onCreate()
         assertTrue("onCreate should return true", result)

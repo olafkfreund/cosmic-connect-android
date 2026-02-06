@@ -23,38 +23,22 @@ import org.cosmic.cosmicconnect.UserInterface.PermissionsAlertDialogFragment
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment
 import org.cosmic.cosmicconnect.R
 
-abstract class Plugin {
-    protected lateinit var device: Device
-    protected lateinit var context: Context
-
-    protected val isDeviceInitialized: Boolean
-        get() = ::device.isInitialized
-
+abstract class Plugin(
+    protected val context: Context,
+    protected val device: Device,
+) {
     var preferences: SharedPreferences? = null
         protected set
 
-    /** No-arg constructor for legacy reflection-based instantiation. */
-    constructor()
-
     /**
-     * Constructor for Hilt @AssistedInject-migrated plugins.
-     * Sets context, device, and preferences directly — no need to call [setContext].
+     * Return the internal plugin name, that will be used as a
+     * unique key to distinguish it.
+     * Use the class name as `key`.
      */
-    constructor(context: Context, device: Device) {
-        this.context = context
-        this.device = device
-        this.preferences =
-            context.getSharedPreferences(this.sharedPreferencesName, Context.MODE_PRIVATE)
-    }
+    val pluginKey: String = getPluginKey(this.javaClass)
 
-    fun setContext(context: Context, device: Device?) {
-        this.context = context
-
-        if (device != null) {
-            this.device = device
-            this.preferences =
-                this.context.getSharedPreferences(this.sharedPreferencesName, Context.MODE_PRIVATE)
-        }
+    init {
+        preferences = context.getSharedPreferences(sharedPreferencesName, Context.MODE_PRIVATE)
     }
 
     data class PluginUiButton(val name: String, @get:DrawableRes val iconRes: Int, val onClick: (parentActivity: Activity) -> Unit)
@@ -72,9 +56,6 @@ abstract class Plugin {
 
     val sharedPreferencesName: String
         get() {
-            if (isDeviceInitialized.not()) {
-                throw RuntimeException("You have to call setContext() before you can call getSharedPreferencesName()")
-            }
             if (this.supportsDeviceSpecificSettings()) {
                 return device.deviceId + "_" + this.pluginKey + "_preferences"
             }
@@ -96,13 +77,6 @@ abstract class Plugin {
     open fun listensToUnpairedDevices(): Boolean {
         return false
     }
-
-    /**
-     * Return the internal plugin name, that will be used as a
-     * unique key to distinguish it.
-     * Use the class name as `key`.
-     */
-    val pluginKey: String = getPluginKey(this.javaClass)
 
     /**
      * Return the human-readable plugin name. This function can
@@ -153,7 +127,7 @@ abstract class Plugin {
         /**
          * Returns false when we should avoid loading this Plugin for [device].
          *
-         * Called after [setContext] but before [onCreate].
+         * Called before [onCreate].
          *
          * By default, this just checks if [minSdk] is smaller or equal than the
          * [SDK version][Build.VERSION.SDK_INT] of this Android device.

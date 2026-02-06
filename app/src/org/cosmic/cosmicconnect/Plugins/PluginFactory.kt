@@ -19,34 +19,18 @@ class PluginFactory @Inject constructor(
     @ApplicationContext private val context: Context,
     private val pluginCreators: Map<String, @JvmSuppressWildcards PluginCreator>,
 ) {
-    annotation class LoadablePlugin  //Annotate plugins with this so PluginFactory finds them
-
     private var pluginInfo: Map<String, PluginInfo> = mapOf()
 
     fun initPluginInfo() {
         val result = mutableMapOf<String, PluginInfo>()
 
-        // --- Migrated plugins: build PluginInfo from static registry ---
-        for ((pluginClass, metadata) in migratedPlugins) {
+        for ((pluginClass, metadata) in pluginRegistry) {
             result[metadata.pluginKey] = PluginInfo(context, metadata, pluginClass)
-            Log.d("PluginFactory", "Loaded (Hilt): ${metadata.pluginKey}")
-        }
-
-        // --- Legacy plugins: build PluginInfo via reflection instantiation ---
-        try {
-            val legacyInfos = legacyPlugins
-                .asSequence()
-                .map { it.java.getDeclaredConstructor().newInstance() as Plugin }
-                .onEach { it.setContext(context, null) }
-                .associate { Pair(it.pluginKey, PluginInfo(it)) }
-
-            result.putAll(legacyInfos)
-        } catch (e: Exception) {
-            Log.e("PluginFactory", "Error loading legacy plugins", e)
+            Log.d("PluginFactory", "Loaded: ${metadata.pluginKey}")
         }
 
         pluginInfo = result
-        Log.i("PluginFactory", "Loaded ${pluginInfo.size} plugins (${migratedPlugins.size} Hilt, ${legacyPlugins.size} legacy)")
+        Log.i("PluginFactory", "Loaded ${pluginInfo.size} plugins")
     }
 
     val availablePlugins: Set<String>
@@ -64,16 +48,7 @@ class PluginFactory @Inject constructor(
 
     fun instantiatePluginForDevice(context: Context, pluginKey: String, device: Device): Plugin? {
         try {
-            // Hilt path: use PluginCreator if available for this plugin key
-            pluginCreators[pluginKey]?.let { creator ->
-                return creator.create(device)
-            }
-
-            // Legacy path: reflection-based instantiation
-            val plugin = pluginInfo[pluginKey]?.instantiableClass
-                ?.getDeclaredConstructor()?.newInstance()
-                ?.apply { setContext(context, device) }
-            return plugin
+            return pluginCreators[pluginKey]?.create(device)
         } catch (e: Exception) {
             Log.e("PluginFactory", "Could not instantiate plugin: $pluginKey", e)
             return null
@@ -110,7 +85,7 @@ class PluginFactory @Inject constructor(
         val listenToUnpaired: Boolean = false,
     )
 
-    class PluginInfo private constructor(
+    class PluginInfo internal constructor(
         val displayName: String,
         val description: String,
         val isEnabledByDefault: Boolean,
@@ -118,14 +93,7 @@ class PluginFactory @Inject constructor(
         val listenToUnpaired: Boolean,
         supportedPacketTypes: Array<String>,
         outgoingPacketTypes: Array<String>,
-        val instantiableClass: Class<out Plugin>,
     ) {
-        /** Build PluginInfo from a live plugin instance (legacy path). */
-        internal constructor(p: Plugin) : this(p.displayName, p.description,
-            p.isEnabledByDefault, p.hasSettings(), p.listensToUnpairedDevices(),
-            p.supportedPacketTypes, p.outgoingPacketTypes, p.javaClass)
-
-        /** Build PluginInfo from static metadata registry (Hilt path). */
         internal constructor(context: Context, metadata: StaticPluginMetadata, pluginClass: Class<out Plugin>) : this(
             displayName = context.getString(metadata.displayNameRes),
             description = context.getString(metadata.descriptionRes),
@@ -134,7 +102,6 @@ class PluginFactory @Inject constructor(
             listenToUnpaired = metadata.listenToUnpaired,
             supportedPacketTypes = metadata.supportedPacketTypes,
             outgoingPacketTypes = metadata.outgoingPacketTypes,
-            instantiableClass = pluginClass,
         )
 
         val supportedPacketTypes: Set<String> = supportedPacketTypes.toSet()
@@ -148,11 +115,11 @@ class PluginFactory @Inject constructor(
         }
 
         /**
-         * Plugins migrated to @AssistedInject with their static metadata.
+         * Plugin registry with static metadata.
          * No reflection needed — metadata is provided at compile time.
          * Instance creation uses the Hilt PluginCreator map.
          */
-        private val migratedPlugins: Map<Class<out Plugin>, StaticPluginMetadata> = mapOf(
+        private val pluginRegistry: Map<Class<out Plugin>, StaticPluginMetadata> = mapOf(
             org.cosmic.cosmicconnect.Plugins.PingPlugin.PingPlugin::class.java to StaticPluginMetadata(
                 pluginKey = "PingPlugin",
                 supportedPacketTypes = arrayOf("cconnect.ping"),
@@ -333,11 +300,5 @@ class PluginFactory @Inject constructor(
                 hasSettings = true,
             ),
         )
-
-        /**
-         * All plugins have been migrated to @AssistedInject.
-         * This list is kept empty for backward compatibility.
-         */
-        private val legacyPlugins = listOf<kotlin.reflect.KClass<out Plugin>>()
     }
 }

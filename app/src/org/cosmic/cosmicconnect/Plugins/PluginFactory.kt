@@ -189,6 +189,44 @@ class PluginFactory @Inject constructor(
                 descriptionRes = R.string.pref_plugin_mousepad_desc_nontv,
                 hasSettings = true,
             ),
+            // --- Wave 2 ---
+            org.cosmic.cosmicconnect.Plugins.ClipboardPlugin.ClipboardPlugin::class.java to StaticPluginMetadata(
+                pluginKey = "ClipboardPlugin",
+                supportedPacketTypes = arrayOf("cconnect.clipboard", "cconnect.clipboard.connect"),
+                outgoingPacketTypes = arrayOf("cconnect.clipboard", "cconnect.clipboard.connect"),
+                displayNameRes = R.string.pref_plugin_clipboard,
+                descriptionRes = R.string.pref_plugin_clipboard_desc,
+            ),
+            org.cosmic.cosmicconnect.Plugins.SystemVolumePlugin.SystemVolumePlugin::class.java to StaticPluginMetadata(
+                pluginKey = "SystemVolumePlugin",
+                supportedPacketTypes = arrayOf("cconnect.systemvolume"),
+                outgoingPacketTypes = arrayOf("cconnect.systemvolume.request"),
+                displayNameRes = R.string.pref_plugin_systemvolume,
+                descriptionRes = R.string.pref_plugin_systemvolume_desc,
+            ),
+            org.cosmic.cosmicconnect.Plugins.RemoteKeyboardPlugin.RemoteKeyboardPlugin::class.java to StaticPluginMetadata(
+                pluginKey = "RemoteKeyboardPlugin",
+                supportedPacketTypes = arrayOf("cconnect.mousepad.request"),
+                outgoingPacketTypes = arrayOf("cconnect.mousepad.echo", "cconnect.mousepad.keyboardstate"),
+                displayNameRes = R.string.pref_plugin_remotekeyboard,
+                descriptionRes = R.string.pref_plugin_remotekeyboard_desc,
+                hasSettings = true,
+            ),
+            org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandPlugin::class.java to StaticPluginMetadata(
+                pluginKey = "RunCommandPlugin",
+                supportedPacketTypes = arrayOf("cconnect.runcommand"),
+                outgoingPacketTypes = arrayOf("cconnect.runcommand.request"),
+                displayNameRes = R.string.pref_plugin_runcommand,
+                descriptionRes = R.string.pref_plugin_runcommand_desc,
+                hasSettings = true,
+            ),
+            org.cosmic.cosmicconnect.Plugins.OpenPlugin.OpenOnDesktopPlugin::class.java to StaticPluginMetadata(
+                pluginKey = "OpenOnDesktopPlugin",
+                supportedPacketTypes = arrayOf("cconnect.open.response", "cconnect.open.capability"),
+                outgoingPacketTypes = arrayOf("cconnect.open.request", "cconnect.open.capability"),
+                displayNameRes = R.string.pref_plugin_open_on_desktop,
+                descriptionRes = R.string.pref_plugin_open_on_desktop_desc,
+            ),
         )
 
         /**
@@ -206,17 +244,12 @@ class PluginFactory @Inject constructor(
             org.cosmic.cosmicconnect.Plugins.SMSPlugin.SMSPlugin::class,
             org.cosmic.cosmicconnect.Plugins.TelephonyPlugin.TelephonyPlugin::class,
             // App Continuity plugins (Issues #112-123)
-            org.cosmic.cosmicconnect.Plugins.OpenPlugin.OpenOnDesktopPlugin::class,
             org.cosmic.cosmicconnect.Plugins.OpenOnPhonePlugin.OpenOnPhonePlugin::class,
             // Camera Webcam plugin (Issues #102-111)
             org.cosmic.cosmicconnect.Plugins.CameraPlugin.CameraPlugin::class,
             // Extended Display plugin (Issue #138)
             org.cosmic.cosmicconnect.Plugins.ExtendedDisplayPlugin.ExtendedDisplayPlugin::class,
             // Additional plugins
-            org.cosmic.cosmicconnect.Plugins.ClipboardPlugin.ClipboardPlugin::class,
-            org.cosmic.cosmicconnect.Plugins.RemoteKeyboardPlugin.RemoteKeyboardPlugin::class,
-            org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandPlugin::class,
-            org.cosmic.cosmicconnect.Plugins.SystemVolumePlugin.SystemVolumePlugin::class,
             org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.FindMyPhonePlugin::class,
         )
     }

@@ -6,17 +6,31 @@
 
 package org.cosmic.cosmicconnect.Plugins.SystemVolumePlugin
 
+import android.content.Context
 import android.util.Log
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import dagger.hilt.android.qualifiers.ApplicationContext
 import org.json.JSONException
+import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.NetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory
+import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.R
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.CopyOnWriteArrayList
 
-@PluginFactory.LoadablePlugin
-class SystemVolumePlugin : Plugin() {
+class SystemVolumePlugin @AssistedInject constructor(
+    @ApplicationContext context: Context,
+    @Assisted device: Device,
+) : Plugin(context, device) {
+
+    @AssistedFactory
+    interface Factory : PluginCreator {
+        override fun create(device: Device): SystemVolumePlugin
+    }
 
     fun interface SinkListener {
         fun sinksChanged()

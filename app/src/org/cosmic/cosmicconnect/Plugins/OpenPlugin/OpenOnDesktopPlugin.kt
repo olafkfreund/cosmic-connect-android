@@ -6,12 +6,19 @@
 
 package org.cosmic.cosmicconnect.Plugins.OpenPlugin
 
+import android.content.Context
 import android.net.Uri
 import android.util.Log
 import android.widget.Toast
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import dagger.hilt.android.qualifiers.ApplicationContext
+import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory
+import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.R
 import java.net.URL
 
@@ -30,8 +37,15 @@ import java.net.URL
  * - geo (maps/location)
  * - sms (messaging)
  */
-@PluginFactory.LoadablePlugin
-class OpenOnDesktopPlugin : Plugin() {
+class OpenOnDesktopPlugin @AssistedInject constructor(
+    @ApplicationContext context: Context,
+    @Assisted device: Device,
+) : Plugin(context, device) {
+
+    @AssistedFactory
+    interface Factory : PluginCreator {
+        override fun create(device: Device): OpenOnDesktopPlugin
+    }
 
     companion object {
         private const val TAG = "OpenOnDesktopPlugin"

@@ -22,9 +22,15 @@ import android.view.inputmethod.InputMethodManager
 import androidx.annotation.NonNull
 import androidx.core.util.Pair
 import androidx.fragment.app.DialogFragment
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import dagger.hilt.android.qualifiers.ApplicationContext
+import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.NetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory
+import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.UserInterface.MainActivity
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment
 import org.cosmic.cosmicconnect.UserInterface.StartActivityAlertDialogFragment
@@ -32,8 +38,15 @@ import org.cosmic.cosmicconnect.R
 import org.json.JSONObject
 import java.util.concurrent.locks.ReentrantLock
 
-@PluginFactory.LoadablePlugin
-class RemoteKeyboardPlugin : Plugin(), SharedPreferences.OnSharedPreferenceChangeListener {
+class RemoteKeyboardPlugin @AssistedInject constructor(
+    @ApplicationContext context: Context,
+    @Assisted device: Device,
+) : Plugin(context, device), SharedPreferences.OnSharedPreferenceChangeListener {
+
+    @AssistedFactory
+    interface Factory : PluginCreator {
+        override fun create(device: Device): RemoteKeyboardPlugin
+    }
 
     override fun onCreate(): Boolean {
         Log.d("RemoteKeyboardPlugin", "Creating for device ${device.name}")

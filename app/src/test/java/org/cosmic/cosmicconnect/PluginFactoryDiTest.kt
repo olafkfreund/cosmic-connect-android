@@ -83,11 +83,18 @@ class PluginFactoryDiTest {
         factory.initPluginInfo()
 
         val available = factory.availablePlugins
+        // Wave 1
         assertTrue("PingPlugin should be available", available.contains("PingPlugin"))
         assertTrue("FindRemoteDevicePlugin should be available", available.contains("FindRemoteDevicePlugin"))
         assertTrue("ConnectivityReportPlugin should be available", available.contains("ConnectivityReportPlugin"))
         assertTrue("PresenterPlugin should be available", available.contains("PresenterPlugin"))
         assertTrue("MousePadPlugin should be available", available.contains("MousePadPlugin"))
+        // Wave 2
+        assertTrue("ClipboardPlugin should be available", available.contains("ClipboardPlugin"))
+        assertTrue("SystemVolumePlugin should be available", available.contains("SystemVolumePlugin"))
+        assertTrue("RemoteKeyboardPlugin should be available", available.contains("RemoteKeyboardPlugin"))
+        assertTrue("RunCommandPlugin should be available", available.contains("RunCommandPlugin"))
+        assertTrue("OpenOnDesktopPlugin should be available", available.contains("OpenOnDesktopPlugin"))
     }
 
     @Test
@@ -105,7 +112,7 @@ class PluginFactoryDiTest {
         val factory = PluginFactory(context, emptyMap())
         factory.initPluginInfo()
 
-        // 5 migrated + 18 legacy = 23 total
+        // 10 migrated + 13 legacy = 23 total
         assertEquals("Should have 23 total plugins", 23, factory.availablePlugins.size)
     }
 

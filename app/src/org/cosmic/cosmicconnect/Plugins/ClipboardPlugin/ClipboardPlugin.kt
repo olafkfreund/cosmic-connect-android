@@ -10,13 +10,20 @@ package org.cosmic.cosmicconnect.Plugins.ClipboardPlugin
 import android.Manifest
 import android.content.ClipData
 import android.content.ClipboardManager
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import dagger.hilt.android.qualifiers.ApplicationContext
+import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory
+import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.R
 
 /**
@@ -60,8 +67,15 @@ import org.cosmic.cosmicconnect.R
  * - `clipboardContent` - Extract clipboard content
  * - `clipboardTimestamp` - Extract timestamp from connect packet
  */
-@PluginFactory.LoadablePlugin
-class ClipboardPlugin : Plugin() {
+class ClipboardPlugin @AssistedInject constructor(
+    @ApplicationContext context: Context,
+    @Assisted device: Device,
+) : Plugin(context, device) {
+
+    @AssistedFactory
+    interface Factory : PluginCreator {
+        override fun create(device: Device): ClipboardPlugin
+    }
 
     companion object {
         /**

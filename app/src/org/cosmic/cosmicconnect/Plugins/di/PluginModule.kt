@@ -9,11 +9,16 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import org.cosmic.cosmicconnect.Plugins.ClipboardPlugin.ClipboardPlugin
 import org.cosmic.cosmicconnect.Plugins.ConnectivityReportPlugin.ConnectivityReportPlugin
 import org.cosmic.cosmicconnect.Plugins.FindRemoteDevicePlugin.FindRemoteDevicePlugin
 import org.cosmic.cosmicconnect.Plugins.MousePadPlugin.MousePadPlugin
+import org.cosmic.cosmicconnect.Plugins.OpenPlugin.OpenOnDesktopPlugin
 import org.cosmic.cosmicconnect.Plugins.PingPlugin.PingPlugin
 import org.cosmic.cosmicconnect.Plugins.PresenterPlugin.PresenterPlugin
+import org.cosmic.cosmicconnect.Plugins.RemoteKeyboardPlugin.RemoteKeyboardPlugin
+import org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandPlugin
+import org.cosmic.cosmicconnect.Plugins.SystemVolumePlugin.SystemVolumePlugin
 
 /**
  * Hilt module that binds migrated plugin factories into a
@@ -52,4 +57,31 @@ object PluginModule {
     @dagger.multibindings.IntoMap
     @PluginKey("MousePadPlugin")
     fun provideMousePadPluginCreator(factory: MousePadPlugin.Factory): PluginCreator = factory
+
+    // ---- Wave 2 plugins ----
+
+    @Provides
+    @dagger.multibindings.IntoMap
+    @PluginKey("ClipboardPlugin")
+    fun provideClipboardPluginCreator(factory: ClipboardPlugin.Factory): PluginCreator = factory
+
+    @Provides
+    @dagger.multibindings.IntoMap
+    @PluginKey("SystemVolumePlugin")
+    fun provideSystemVolumePluginCreator(factory: SystemVolumePlugin.Factory): PluginCreator = factory
+
+    @Provides
+    @dagger.multibindings.IntoMap
+    @PluginKey("RemoteKeyboardPlugin")
+    fun provideRemoteKeyboardPluginCreator(factory: RemoteKeyboardPlugin.Factory): PluginCreator = factory
+
+    @Provides
+    @dagger.multibindings.IntoMap
+    @PluginKey("RunCommandPlugin")
+    fun provideRunCommandPluginCreator(factory: RunCommandPlugin.Factory): PluginCreator = factory
+
+    @Provides
+    @dagger.multibindings.IntoMap
+    @PluginKey("OpenOnDesktopPlugin")
+    fun provideOpenOnDesktopPluginCreator(factory: OpenOnDesktopPlugin.Factory): PluginCreator = factory
 }

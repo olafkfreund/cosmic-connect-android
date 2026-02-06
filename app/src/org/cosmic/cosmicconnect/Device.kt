@@ -99,12 +99,12 @@ class Device : PacketReceiver, PacketSender {
         return ConnectionManager(
             deviceId = deviceInfo.id,
             deviceName = { deviceInfo.name },
-            onPairPacket = { np -> pairingManager.pairingHandler.packetReceived(np) },
-            onDataPacket = { np ->
+            onPairPacket = { tp -> pairingManager.pairingHandler.packetReceived(tp) },
+            onDataPacket = { tp ->
                 if (pluginManager.pluginsByIncomingInterfaceEmpty) {
                     pluginManager.reloadPluginsFromSettings()
                 }
-                pluginManager.notifyPluginPacketReceived(np)
+                pluginManager.notifyPluginPacketReceived(tp)
             },
             isPaired = { isPaired },
             onUnpair = { unpair() },
@@ -209,38 +209,13 @@ class Device : PacketReceiver, PacketSender {
 
     fun disconnect() = connectionManager.disconnect()
 
-    override fun onPacketReceived(np: NetworkPacket) = connectionManager.onPacketReceived(np)
+    override fun onPacketReceived(tp: TransferPacket) = connectionManager.onPacketReceived(tp)
 
     abstract class SendPacketStatusCallback {
         abstract fun onSuccess()
         abstract fun onFailure(e: Throwable)
         open fun onPayloadProgressChanged(percent: Int) {}
     }
-
-    @AnyThread
-    override fun sendPacket(np: NetworkPacket, callback: SendPacketStatusCallback) =
-        connectionManager.sendPacket(np, callback)
-
-    @AnyThread
-    override fun sendPacket(np: NetworkPacket) =
-        connectionManager.sendPacket(np)
-
-    @WorkerThread
-    override fun sendPacketBlocking(np: NetworkPacket, callback: SendPacketStatusCallback): Boolean =
-        connectionManager.sendPacketBlocking(np, callback)
-
-    @WorkerThread
-    override fun sendPacketBlocking(np: NetworkPacket): Boolean =
-        connectionManager.sendPacketBlocking(np)
-
-    @WorkerThread
-    override fun sendPacketBlocking(
-        np: NetworkPacket,
-        callback: SendPacketStatusCallback,
-        sendPayloadFromSameThread: Boolean
-    ): Boolean = connectionManager.sendPacketBlocking(np, callback, sendPayloadFromSameThread)
-
-    // --- TransferPacket overloads ---
 
     @AnyThread
     override fun sendPacket(tp: TransferPacket, callback: SendPacketStatusCallback) =

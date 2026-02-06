@@ -14,6 +14,11 @@ import androidx.annotation.WorkerThread
 import dagger.hilt.android.qualifiers.ApplicationContext
 import org.cosmic.cosmicconnect.Backends.BaseLink
 import org.cosmic.cosmicconnect.Backends.BaseLinkProvider
+import org.cosmic.cosmicconnect.Core.NetworkPacket as CoreNetworkPacket
+import org.cosmic.cosmicconnect.Core.getString
+import org.cosmic.cosmicconnect.Core.getInt
+import org.cosmic.cosmicconnect.Core.getStringOrNull
+import org.cosmic.cosmicconnect.Core.getIntOrNull
 import org.cosmic.cosmicconnect.DeviceHost
 import org.cosmic.cosmicconnect.DeviceInfo
 import org.cosmic.cosmicconnect.Helpers.DeviceHelper
@@ -21,7 +26,6 @@ import org.cosmic.cosmicconnect.Helpers.SecurityHelpers.SslHelper
 import org.cosmic.cosmicconnect.Helpers.ThreadHelper
 import org.cosmic.cosmicconnect.Helpers.TrustedDevices
 import org.cosmic.cosmicconnect.Helpers.TrustedNetworkHelper
-import org.cosmic.cosmicconnect.NetworkPacket
 import org.cosmic.cosmicconnect.UserInterface.CustomDevicesActivity
 import org.json.JSONException
 import java.io.IOException
@@ -76,11 +80,11 @@ class LanLinkProvider @Inject constructor(
         super.onConnectionLost(link)
     }
 
-    private fun unserializeReceivedIdentityPacket(message: String): Pair<NetworkPacket, Boolean>? {
-        val identityPacket: NetworkPacket
+    private fun unserializeReceivedIdentityPacket(message: String): Pair<CoreNetworkPacket, Boolean>? {
+        val identityPacket: CoreNetworkPacket
         try {
-            identityPacket = NetworkPacket.unserialize(message)
-        } catch (e: JSONException) {
+            identityPacket = CoreNetworkPacket.deserializeKotlin(message)
+        } catch (e: Exception) {
             Log.w("COSMIC/LanLinkProvider", "Invalid identity packet received: " + e.message)
             return null
         }
@@ -268,10 +272,13 @@ class LanLinkProvider @Inject constructor(
 
         val myDeviceInfo = deviceHelper.getDeviceInfo()
         val myIdentity = myDeviceInfo.toIdentityPacket()
-        myIdentity.set("targetDeviceId", identityPacket.getString("deviceId"))
-        myIdentity.set("targetProtocolVersion", identityPacket.getString("protocolVersion"))
+        // Add target fields to the body by creating a new packet with extra fields
+        val bodyWithTarget = myIdentity.body.toMutableMap()
+        bodyWithTarget["targetDeviceId"] = identityPacket.getString("deviceId")
+        bodyWithTarget["targetProtocolVersion"] = identityPacket.getString("protocolVersion")
+        val myIdentityWithTarget = CoreNetworkPacket.create(myIdentity.type, bodyWithTarget)
         val out = socket.getOutputStream()
-        out.write(myIdentity.serialize().toByteArray())
+        out.write(myIdentityWithTarget.serializeKotlin().toByteArray())
         out.flush()
 
         identityPacketReceived(
@@ -303,7 +310,7 @@ class LanLinkProvider @Inject constructor(
     @WorkerThread
     @Throws(IOException::class)
     private fun identityPacketReceived(
-        identityPacket: NetworkPacket,
+        identityPacket: CoreNetworkPacket,
         socket: Socket,
         connectionStarted: LanLink.ConnectionStarted,
         deviceTrusted: Boolean
@@ -345,17 +352,17 @@ class LanLinkProvider @Inject constructor(
             ThreadHelper.execute {
                 val mode = if (clientMode) "client" else "server"
                 try {
-                    val secureIdentityPacket: NetworkPacket
+                    val secureIdentityPacket: CoreNetworkPacket
                     if (protocolVersion >= 8) {
                         val myDeviceInfo = deviceHelper.getDeviceInfo()
                         val myIdentity = myDeviceInfo.toIdentityPacket()
                         val writer = sslSocket.outputStream
-                        writer.write(myIdentity.serialize().toByteArray(Charsets.UTF_8))
+                        writer.write(myIdentity.serializeKotlin().toByteArray(Charsets.UTF_8))
                         writer.flush()
                         val line = readSingleLine(sslSocket)
                         Log.d("COSMIC/LanLinkProvider", "Received secure identity: $line")
                         // Do not trust the identity packet we received unencrypted
-                        secureIdentityPacket = NetworkPacket.unserialize(line)
+                        secureIdentityPacket = CoreNetworkPacket.deserializeKotlin(line)
                         if (!DeviceInfo.isValidIdentityPacket(secureIdentityPacket)) {
                             Log.e("COSMIC/LanLinkProvider", "Identity packet isn't valid")
                             socket.close()
@@ -411,7 +418,7 @@ class LanLinkProvider @Inject constructor(
     }
 
     private fun isProtocolDowngrade(deviceId: String, protocolVersion: Int): Boolean {
-        val lastKnownProtocolVersion = 
+        val lastKnownProtocolVersion =
             DeviceInfo.loadProtocolVersionFromSettings(context, deviceId)
         return lastKnownProtocolVersion > protocolVersion
     }
@@ -563,12 +570,15 @@ class LanLinkProvider @Inject constructor(
         //       since it will be exchanged after the socket is encrypted.
         val myDeviceInfo = deviceHelper.getDeviceInfo()
         val identity = myDeviceInfo.toIdentityPacket()
-        identity.set("tcpPort", tcpServer!!.localPort)
+        // Add tcpPort to the identity body
+        val bodyWithPort = identity.body.toMutableMap()
+        bodyWithPort["tcpPort"] = tcpServer!!.localPort
+        val identityWithPort = CoreNetworkPacket.create(identity.type, bodyWithPort)
 
         val bytes: ByteArray
         try {
-            bytes = identity.serialize().toByteArray(Charsets.UTF_8)
-        } catch (e: JSONException) {
+            bytes = identityWithPort.serializeKotlin().toByteArray(Charsets.UTF_8)
+        } catch (e: Exception) {
             Log.e("COSMIC/LanLinkProvider", "Failed to serialize identity packet", e)
             return
         }

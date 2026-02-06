@@ -9,10 +9,10 @@ import android.content.Context
 import androidx.annotation.WorkerThread
 import org.cosmic.cosmicconnect.Backends.BaseLink
 import org.cosmic.cosmicconnect.Backends.BaseLinkProvider
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.DeviceInfo
 import org.cosmic.cosmicconnect.Helpers.DeviceHelper
-import org.cosmic.cosmicconnect.NetworkPacket
 
 class LoopbackLink(
     context: Context,
@@ -25,11 +25,10 @@ class LoopbackLink(
         get() = deviceHelper.getDeviceInfo()
 
     @WorkerThread
-    override fun sendPacket(np: NetworkPacket, callback: Device.SendPacketStatusCallback, sendPayloadFromSameThread: Boolean): Boolean {
-        packetReceived(np)
-        if (np.hasPayload()) {
+    override fun sendTransferPacket(tp: TransferPacket, callback: Device.SendPacketStatusCallback, sendPayloadFromSameThread: Boolean): Boolean {
+        packetReceived(tp)
+        if (tp.hasPayload) {
             callback.onPayloadProgressChanged(0)
-            np.payload = np.payload // this triggers logic in the setter
             callback.onPayloadProgressChanged(100)
         }
         callback.onSuccess()

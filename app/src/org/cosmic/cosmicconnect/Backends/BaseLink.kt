@@ -11,7 +11,6 @@ import androidx.annotation.WorkerThread
 import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.DeviceInfo
-import org.cosmic.cosmicconnect.NetworkPacket
 import java.io.IOException
 import java.util.concurrent.CopyOnWriteArrayList
 
@@ -21,7 +20,7 @@ abstract class BaseLink protected constructor(
 ) {
 
     fun interface PacketReceiver {
-        fun onPacketReceived(np: NetworkPacket)
+        fun onPacketReceived(tp: TransferPacket)
     }
 
     private val receivers = CopyOnWriteArrayList<PacketReceiver>()
@@ -43,9 +42,9 @@ abstract class BaseLink protected constructor(
     }
 
     //Should be called from a background thread listening for packets
-    fun packetReceived(np: NetworkPacket) {
+    fun packetReceived(tp: TransferPacket) {
         for (pr in receivers) {
-            pr.onPacketReceived(np)
+            pr.onPacketReceived(tp)
         }
     }
 
@@ -53,26 +52,18 @@ abstract class BaseLink protected constructor(
         linkProvider.onConnectionLost(this)
     }
 
-    //TO OVERRIDE, should be sync. If sendPayloadFromSameThread is false, it should only block to send the packet but start a separate thread to send the payload.
-    @WorkerThread
-    @Throws(IOException::class)
-    abstract fun sendPacket(
-        np: NetworkPacket,
-        callback: Device.SendPacketStatusCallback,
-        sendPayloadFromSameThread: Boolean
-    ): Boolean
-
     /**
      * Send a TransferPacket (Core.NetworkPacket + payload).
      *
-     * Default implementation converts to legacy and delegates to [sendPacket].
-     * Subclasses (e.g., LanLink) can override for direct Core serialization.
+     * @param tp the transfer packet to send
+     * @param callback status callback for success/failure/progress
+     * @param sendPayloadFromSameThread if false, payload should be sent from a separate thread
      */
     @WorkerThread
     @Throws(IOException::class)
-    open fun sendTransferPacket(
+    abstract fun sendTransferPacket(
         tp: TransferPacket,
         callback: Device.SendPacketStatusCallback,
         sendPayloadFromSameThread: Boolean
-    ): Boolean = sendPacket(tp.toLegacy(), callback, sendPayloadFromSameThread)
+    ): Boolean
 }

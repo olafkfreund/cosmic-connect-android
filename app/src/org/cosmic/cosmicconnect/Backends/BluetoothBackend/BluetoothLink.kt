@@ -11,11 +11,12 @@ import android.content.Context
 import android.util.Log
 import androidx.annotation.WorkerThread
 import org.json.JSONException
-import org.json.JSONObject
 import org.cosmic.cosmicconnect.Backends.BaseLink
+import org.cosmic.cosmicconnect.Core.NetworkPacket as CoreNetworkPacket
+import org.cosmic.cosmicconnect.Core.Payload as CorePayload
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.DeviceInfo
-import org.cosmic.cosmicconnect.NetworkPacket
 import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
@@ -66,22 +67,26 @@ class BluetoothLink(
         }
 
         private fun processMessage(message: String) {
-            val np = try {
-                NetworkPacket.unserialize(message)
+            val corePacket = try {
+                CoreNetworkPacket.deserializeKotlin(message)
             } catch (e: JSONException) {
                 Log.e("BluetoothLink/receiving", "Unable to parse message.", e)
                 return
             }
-            if (np.hasPayloadTransferInfo()) {
+            val transferPacket = if (corePacket.hasPayload) {
                 try {
-                    val transferUuid = UUID.fromString(np.payloadTransferInfo.getString("uuid"))
+                    val transferUuid = UUID.fromString(corePacket.payloadTransferInfo["uuid"] as? String)
                     val payloadInputStream = connection.getChannelInputStream(transferUuid)
-                    np.payload = NetworkPacket.Payload(payloadInputStream, np.payloadSize)
+                    val payload = CorePayload(payloadInputStream, corePacket.payloadSize ?: 0)
+                    TransferPacket(corePacket, payload)
                 } catch (e: Exception) {
                     Log.e("BluetoothLink/receiving", "Unable to get payload", e)
+                    TransferPacket(corePacket)
                 }
+            } else {
+                TransferPacket(corePacket)
             }
-            packetReceived(np)
+            packetReceived(transferPacket)
         }
     })
 
@@ -102,26 +107,24 @@ class BluetoothLink(
         bluetoothLinkProvider.disconnectedLink(this, remoteAddress)
     }
 
-    @Throws(JSONException::class, IOException::class)
-    private fun sendMessage(np: NetworkPacket) {
-        val message = np.serialize().toByteArray(UTF_8)
-        output.write(message)
-    }
-
     @WorkerThread
     @Throws(IOException::class)
-    override fun sendPacket(np: NetworkPacket, callback: Device.SendPacketStatusCallback, sendPayloadFromSameThread: Boolean): Boolean {
+    override fun sendTransferPacket(
+        tp: TransferPacket,
+        callback: Device.SendPacketStatusCallback,
+        sendPayloadFromSameThread: Boolean
+    ): Boolean {
         // sendPayloadFromSameThread is ignored, we always send from the same thread!
 
         return try {
             var transferUuid: UUID? = null
-            if (np.hasPayload()) {
+            if (tp.hasPayload) {
                 transferUuid = connection.newChannel()
-                val payloadTransferInfo = JSONObject()
-                payloadTransferInfo.put("uuid", transferUuid.toString())
-                np.payloadTransferInfo = payloadTransferInfo
+                tp.runtimeTransferInfo = mapOf("uuid" to transferUuid.toString())
             }
-            sendMessage(np)
+            // Serialize and send using Core serialization
+            val message = tp.serializeForWire().toByteArray(UTF_8)
+            output.write(message)
             if (transferUuid != null) {
                 try {
                     connection.getChannelOutputStream(transferUuid).use { payloadStream ->
@@ -129,12 +132,13 @@ class BluetoothLink(
                         val buffer = ByteArray(BUFFER_LENGTH)
                         var bytesRead: Int
                         var progress: Long = 0
-                        val stream = np.payload!!.inputStream!!
+                        val stream = tp.payload?.inputStream
+                            ?: throw IOException("Payload input stream is null")
                         while (stream.read(buffer).also { bytesRead = it } != -1) {
                             progress += bytesRead.toLong()
                             payloadStream.write(buffer, 0, bytesRead)
-                            if (np.payloadSize > 0) {
-                                callback.onPayloadProgressChanged((100 * progress / np.payloadSize).toInt())
+                            if (tp.payloadSize > 0) {
+                                callback.onPayloadProgressChanged((100 * progress / tp.payloadSize).toInt())
                             }
                         }
                         payloadStream.flush()

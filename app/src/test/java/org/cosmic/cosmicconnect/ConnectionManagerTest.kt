@@ -11,6 +11,7 @@ import io.mockk.slot
 import io.mockk.verify
 import org.cosmic.cosmicconnect.Backends.BaseLink
 import org.cosmic.cosmicconnect.Backends.BaseLinkProvider
+import org.cosmic.cosmicconnect.Core.PacketType
 import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -24,8 +25,8 @@ import org.robolectric.RobolectricTestRunner
 class ConnectionManagerTest {
 
     private lateinit var connectionManager: ConnectionManager
-    private val receivedPairPackets = mutableListOf<NetworkPacket>()
-    private val receivedDataPackets = mutableListOf<NetworkPacket>()
+    private val receivedPairPackets = mutableListOf<TransferPacket>()
+    private val receivedDataPackets = mutableListOf<TransferPacket>()
     private var unpairCalled = false
     private var linksChangedLink: BaseLink? = null
     private var linksEmptyCalled = false
@@ -115,16 +116,24 @@ class ConnectionManagerTest {
 
     @Test
     fun `onPacketReceived routes pair packets to onPairPacket`() {
-        val pairPacket = NetworkPacket(NetworkPacket.PACKET_TYPE_PAIR)
+        val pairPacket = TransferPacket(
+            org.cosmic.cosmicconnect.Core.NetworkPacket(
+                id = 1L, type = PacketType.PAIR, body = mapOf("pair" to true)
+            )
+        )
         connectionManager.onPacketReceived(pairPacket)
         assertEquals(1, receivedPairPackets.size)
-        assertEquals(NetworkPacket.PACKET_TYPE_PAIR, receivedPairPackets[0].type)
+        assertEquals(PacketType.PAIR, receivedPairPackets[0].packet.type)
         assertTrue(receivedDataPackets.isEmpty())
     }
 
     @Test
     fun `onPacketReceived routes data packets and calls unpair when not paired`() {
-        val dataPacket = NetworkPacket("kdeconnect.ping")
+        val dataPacket = TransferPacket(
+            org.cosmic.cosmicconnect.Core.NetworkPacket(
+                id = 2L, type = "cconnect.ping", body = emptyMap()
+            )
+        )
         paired = false
         connectionManager.onPacketReceived(dataPacket)
         assertTrue(unpairCalled)
@@ -133,7 +142,11 @@ class ConnectionManagerTest {
 
     @Test
     fun `onPacketReceived routes data packets without unpair when paired`() {
-        val dataPacket = NetworkPacket("kdeconnect.ping")
+        val dataPacket = TransferPacket(
+            org.cosmic.cosmicconnect.Core.NetworkPacket(
+                id = 3L, type = "cconnect.ping", body = emptyMap()
+            )
+        )
         paired = true
         connectionManager.onPacketReceived(dataPacket)
         assertFalse(unpairCalled)

@@ -16,55 +16,21 @@ import org.cosmic.cosmicconnect.Core.TransferPacket
  */
 interface PacketSender {
     @AnyThread
-    fun sendPacket(np: NetworkPacket, callback: Device.SendPacketStatusCallback)
+    fun sendPacket(tp: TransferPacket, callback: Device.SendPacketStatusCallback)
 
     @AnyThread
-    fun sendPacket(np: NetworkPacket)
+    fun sendPacket(tp: TransferPacket)
 
     @WorkerThread
-    fun sendPacketBlocking(np: NetworkPacket, callback: Device.SendPacketStatusCallback): Boolean
+    fun sendPacketBlocking(tp: TransferPacket, callback: Device.SendPacketStatusCallback): Boolean
 
     @WorkerThread
-    fun sendPacketBlocking(np: NetworkPacket): Boolean
+    fun sendPacketBlocking(tp: TransferPacket): Boolean
 
-    @WorkerThread
-    fun sendPacketBlocking(
-        np: NetworkPacket,
-        callback: Device.SendPacketStatusCallback,
-        sendPayloadFromSameThread: Boolean
-    ): Boolean
-
-    /** Send a TransferPacket (Core.NetworkPacket + payload) asynchronously. */
-    @AnyThread
-    fun sendPacket(tp: TransferPacket, callback: Device.SendPacketStatusCallback) {
-        sendPacket(tp.toLegacy(), callback)
-    }
-
-    /** Send a TransferPacket (Core.NetworkPacket + payload) asynchronously with default callback. */
-    @AnyThread
-    fun sendPacket(tp: TransferPacket) {
-        sendPacket(tp.toLegacy())
-    }
-
-    /** Send a TransferPacket blocking. */
-    @WorkerThread
-    fun sendPacketBlocking(tp: TransferPacket, callback: Device.SendPacketStatusCallback): Boolean {
-        return sendPacketBlocking(tp.toLegacy(), callback)
-    }
-
-    /** Send a TransferPacket blocking with default callback. */
-    @WorkerThread
-    fun sendPacketBlocking(tp: TransferPacket): Boolean {
-        return sendPacketBlocking(tp.toLegacy())
-    }
-
-    /** Send a TransferPacket blocking with payload thread control. */
     @WorkerThread
     fun sendPacketBlocking(
         tp: TransferPacket,
         callback: Device.SendPacketStatusCallback,
         sendPayloadFromSameThread: Boolean
-    ): Boolean {
-        return sendPacketBlocking(tp.toLegacy(), callback, sendPayloadFromSameThread)
-    }
+    ): Boolean
 }

@@ -14,6 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.apache.commons.collections4.MultiValuedMap
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Helpers.TrustedDevices
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.Plugin.Companion.getPluginKey
@@ -120,10 +121,10 @@ class PluginManager(
         onPluginsChanged()
     }
 
-    fun notifyPluginPacketReceived(np: NetworkPacket) {
-        val targetPlugins = pluginsByIncomingInterface[np.type]
+    fun notifyPluginPacketReceived(tp: TransferPacket) {
+        val targetPlugins = pluginsByIncomingInterface[tp.packet.type]
         if (targetPlugins.isEmpty()) {
-            Log.w("PluginManager", "Ignoring packet with type ${np.type} because no plugin can handle it")
+            Log.w("PluginManager", "Ignoring packet with type ${tp.packet.type} because no plugin can handle it")
             return
         }
         targetPlugins
@@ -132,9 +133,9 @@ class PluginManager(
             .forEach { plugin ->
                 runCatching {
                     if (isPaired()) {
-                        plugin.onPacketReceived(np)
+                        plugin.onPacketReceived(tp)
                     } else {
-                        plugin.onUnpairedDevicePacketReceived(np)
+                        plugin.onUnpairedDevicePacketReceived(tp)
                     }
                 }.onFailure { e ->
                     Log.e("PluginManager", "Exception in ${plugin.pluginKey}'s onPacketReceived()", e)

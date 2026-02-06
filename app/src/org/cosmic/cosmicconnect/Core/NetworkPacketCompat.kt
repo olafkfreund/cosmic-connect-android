@@ -456,3 +456,28 @@ class MutableNetworkPacket(
 fun NetworkPacket.toMutable(): MutableNetworkPacket {
     return MutableNetworkPacket(type, body)
 }
+
+// ========================================================================
+// TransferPacket convenience delegates
+// ========================================================================
+
+fun TransferPacket.getString(key: String): String = packet.getString(key)
+fun TransferPacket.getString(key: String, defaultValue: String): String = packet.getString(key, defaultValue)
+fun TransferPacket.getStringOrNull(key: String): String? = packet.getStringOrNull(key)
+fun TransferPacket.getInt(key: String): Int = packet.getInt(key)
+fun TransferPacket.getInt(key: String, defaultValue: Int): Int = packet.getInt(key, defaultValue)
+fun TransferPacket.getIntOrNull(key: String): Int? = packet.getIntOrNull(key)
+fun TransferPacket.getLong(key: String): Long = packet.getLong(key)
+fun TransferPacket.getLong(key: String, defaultValue: Long): Long = packet.getLong(key, defaultValue)
+fun TransferPacket.getBoolean(key: String): Boolean = packet.getBoolean(key)
+fun TransferPacket.getBoolean(key: String, defaultValue: Boolean): Boolean = packet.getBoolean(key, defaultValue)
+fun TransferPacket.getDouble(key: String): Double = packet.getDouble(key)
+fun TransferPacket.getDouble(key: String, defaultValue: Double): Double = packet.getDouble(key, defaultValue)
+fun TransferPacket.getStringList(key: String): List<String>? = packet.getStringList(key)
+fun TransferPacket.getStringList(key: String, defaultValue: List<String>?): List<String>? = packet.getStringList(key, defaultValue)
+fun TransferPacket.getStringSet(key: String): Set<String>? = packet.getStringSet(key)
+fun TransferPacket.getStringSet(key: String, defaultValue: Set<String>?): Set<String>? = packet.getStringSet(key, defaultValue)
+fun TransferPacket.getJSONArray(key: String): JSONArray? = packet.getJSONArray(key)
+fun TransferPacket.getJSONObject(key: String): JSONObject? = packet.getJSONObject(key)
+fun TransferPacket.has(key: String): Boolean = packet.has(key)
+operator fun TransferPacket.contains(key: String): Boolean = packet.has(key)

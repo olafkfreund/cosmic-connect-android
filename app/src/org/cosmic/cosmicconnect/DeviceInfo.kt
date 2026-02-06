@@ -7,14 +7,20 @@
 package org.cosmic.cosmicconnect
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.util.Base64
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
+import org.cosmic.cosmicconnect.Core.NetworkPacket as CoreNetworkPacket
+import org.cosmic.cosmicconnect.Core.PacketType
+import org.cosmic.cosmicconnect.Core.getString
+import org.cosmic.cosmicconnect.Core.getInt
+import org.cosmic.cosmicconnect.Core.getStringSet
+import org.cosmic.cosmicconnect.Core.has
 import org.cosmic.cosmicconnect.Helpers.DeviceHelper
 import org.cosmic.cosmicconnect.Helpers.SecurityHelpers.SslHelper
 import org.cosmic.cosmicconnect.Helpers.TrustedDevices
 import org.cosmic.cosmicconnect.R
+import org.json.JSONArray
 import java.security.cert.Certificate
 import java.security.cert.CertificateEncodingException
 import java.security.cert.CertificateException
@@ -53,19 +59,27 @@ class DeviceInfo(
     }
 
     /**
-     * Serializes to a NetworkPacket, which LanLinkProvider uses to send this data over the network.
+     * Serializes to a Core.NetworkPacket, which LanLinkProvider uses to send this data over the network.
      * The serialization doesn't include the certificate, since LanLink can query that from the socket.
      * Can be deserialized using fromIdentityPacketAndCert(), given a certificate.
      */
-    fun toIdentityPacket(): NetworkPacket =
-        NetworkPacket(NetworkPacket.PACKET_TYPE_IDENTITY).also { np ->
-            np["deviceId"] = id
-            np["deviceName"] = name
-            np["protocolVersion"] = protocolVersion
-            np["deviceType"] = type.toString()
-            np["incomingCapabilities"] = incomingCapabilities!!
-            np["outgoingCapabilities"] = outgoingCapabilities!!
-        }
+    fun toIdentityPacket(): CoreNetworkPacket {
+        val inCaps = incomingCapabilities?.toList() ?: emptyList()
+        val outCaps = outgoingCapabilities?.toList() ?: emptyList()
+        val inCapsJson = JSONArray(inCaps).toString()
+        val outCapsJson = JSONArray(outCaps).toString()
+        return CoreNetworkPacket.create(
+            PacketType.IDENTITY,
+            mapOf(
+                "deviceId" to id,
+                "deviceName" to name,
+                "protocolVersion" to protocolVersion,
+                "deviceType" to type.toString(),
+                "incomingCapabilities" to inCapsJson,
+                "outgoingCapabilities" to outCapsJson
+            )
+        )
+    }
 
     companion object {
 
@@ -99,10 +113,10 @@ class DeviceInfo(
          * Since toIdentityPacket() doesn't serialize the certificate, this needs to be passed separately.
          */
         @JvmStatic
-        fun fromIdentityPacketAndCert(identityPacket: NetworkPacket, certificate: Certificate) =
+        fun fromIdentityPacketAndCert(identityPacket: CoreNetworkPacket, certificate: Certificate) =
             with(identityPacket) {
                 DeviceInfo(
-                    id = getString("deviceId"), // Redundant: We could read this from the certificate instead
+                    id = getString("deviceId"),
                     name = DeviceHelper.filterInvalidCharactersFromDeviceNameAndLimitLength(getString("deviceName", "unknown")),
                     type = DeviceType.fromString(getString("deviceType", "desktop")),
                     certificate = certificate,
@@ -113,8 +127,8 @@ class DeviceInfo(
             }
 
         @JvmStatic
-        fun isValidIdentityPacket(identityPacket: NetworkPacket): Boolean = with(identityPacket) {
-            type == NetworkPacket.PACKET_TYPE_IDENTITY &&
+        fun isValidIdentityPacket(identityPacket: CoreNetworkPacket): Boolean = with(identityPacket) {
+            type == PacketType.IDENTITY &&
                     DeviceHelper.filterInvalidCharactersFromDeviceNameAndLimitLength(getString("deviceName", "")).isNotBlank() &&
                     isValidDeviceId(getString("deviceId", ""))
         }

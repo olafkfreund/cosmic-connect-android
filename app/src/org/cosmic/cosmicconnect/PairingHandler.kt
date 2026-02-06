@@ -15,6 +15,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.bouncycastle.util.Arrays
 import org.cosmic.cosmicconnect.BuildConfig
+import org.cosmic.cosmicconnect.Core.PacketType
+import org.cosmic.cosmicconnect.Core.TransferPacket
+import org.cosmic.cosmicconnect.Core.getBoolean
+import org.cosmic.cosmicconnect.Core.getLong
 import org.cosmic.cosmicconnect.Helpers.SecurityHelpers.SslHelper
 import org.cosmic.cosmicconnect.R
 import java.security.MessageDigest
@@ -50,9 +54,9 @@ class PairingHandler(
     private val pairingScope = CoroutineScope(Dispatchers.IO + pairingJob)
     private var pairingTimestamp = 0L
 
-    fun packetReceived(np: NetworkPacket) {
+    fun packetReceived(tp: TransferPacket) {
         cancelTimer()
-        val wantsPair = np.getBoolean("pair")
+        val wantsPair = tp.getBoolean("pair")
         if (wantsPair) {
             when (state) {
                 PairState.Requested -> pairingDone()
@@ -74,7 +78,7 @@ class PairingHandler(
                     }
 
                     if (device.protocolVersion >= 8) {
-                        pairingTimestamp = np.getLong("timestamp", -1L)
+                        pairingTimestamp = tp.getLong("timestamp", -1L)
                         if (pairingTimestamp == -1L) {
                             state = PairState.NotPaired
                             callback.unpaired(device)
@@ -176,11 +180,12 @@ class PairingHandler(
                 callback.pairingFailed(device.context.getString(R.string.runcommand_notreachable))
             }
         }
-        val np = NetworkPacket(NetworkPacket.PACKET_TYPE_PAIR)
-        np["pair"] = true
         pairingTimestamp = System.currentTimeMillis() / 1000L
-        np["timestamp"] = pairingTimestamp
-        device.sendPacket(np, statusCallback)
+        val packet = org.cosmic.cosmicconnect.Core.NetworkPacket.create(
+            PacketType.PAIR,
+            mapOf("pair" to true, "timestamp" to pairingTimestamp)
+        )
+        device.sendPacket(TransferPacket(packet), statusCallback)
     }
 
     fun acceptPairing() {
@@ -196,17 +201,21 @@ class PairingHandler(
                 callback.pairingFailed(device.context.getString(R.string.error_not_reachable))
             }
         }
-        val np = NetworkPacket(NetworkPacket.PACKET_TYPE_PAIR)
-        np["pair"] = true
-        device.sendPacket(np, stateCallback)
+        val packet = org.cosmic.cosmicconnect.Core.NetworkPacket.create(
+            PacketType.PAIR,
+            mapOf("pair" to true)
+        )
+        device.sendPacket(TransferPacket(packet), stateCallback)
     }
 
     fun cancelPairing() {
         cancelTimer()
         state = PairState.NotPaired
-        val np = NetworkPacket(NetworkPacket.PACKET_TYPE_PAIR)
-        np["pair"] = false
-        device.sendPacket(np)
+        val packet = org.cosmic.cosmicconnect.Core.NetworkPacket.create(
+            PacketType.PAIR,
+            mapOf("pair" to false)
+        )
+        device.sendPacket(TransferPacket(packet))
         callback.pairingFailed(device.context.getString(R.string.error_canceled_by_user))
     }
 
@@ -225,9 +234,11 @@ class PairingHandler(
     fun unpair() {
         state = PairState.NotPaired
         if (device.isReachable) {
-            val np = NetworkPacket(NetworkPacket.PACKET_TYPE_PAIR)
-            np["pair"] = false
-            device.sendPacket(np)
+            val packet = org.cosmic.cosmicconnect.Core.NetworkPacket.create(
+                PacketType.PAIR,
+                mapOf("pair" to false)
+            )
+            device.sendPacket(TransferPacket(packet))
         }
         callback.unpaired(device)
     }

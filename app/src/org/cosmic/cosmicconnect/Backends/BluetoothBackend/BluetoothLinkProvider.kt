@@ -25,13 +25,16 @@ import androidx.core.content.edit
 import dagger.hilt.android.qualifiers.ApplicationContext
 import org.apache.commons.io.IOUtils
 import org.cosmic.cosmicconnect.Backends.BaseLinkProvider
+import org.cosmic.cosmicconnect.Core.NetworkPacket as CoreNetworkPacket
+import org.cosmic.cosmicconnect.Core.PacketType
+import org.cosmic.cosmicconnect.Core.TransferPacket
+import org.cosmic.cosmicconnect.Core.getString
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.DeviceInfo
 import org.cosmic.cosmicconnect.DeviceInfo.Companion.fromIdentityPacketAndCert
 import org.cosmic.cosmicconnect.Helpers.DeviceHelper
 import org.cosmic.cosmicconnect.Helpers.SecurityHelpers.SslHelper
 import org.cosmic.cosmicconnect.Helpers.ThreadHelper.execute
-import org.cosmic.cosmicconnect.NetworkPacket
 import org.cosmic.cosmicconnect.UserInterface.SettingsFragment
 import org.cosmic.cosmicconnect.extensions.getParcelableArrayCompat
 import org.cosmic.cosmicconnect.extensions.getParcelableCompat
@@ -57,7 +60,7 @@ class BluetoothLinkProvider @Inject constructor(
     private var clientRunnable: ClientRunnable? = null
 
     @Throws(CertificateException::class)
-    private fun addLink(identityPacket: NetworkPacket, link: BluetoothLink) {
+    private fun addLink(identityPacket: CoreNetworkPacket, link: BluetoothLink) {
         val deviceId = identityPacket.getString("deviceId")
         Log.i("BluetoothLinkProvider", "addLink to $deviceId")
         val oldLink = visibleDevices[deviceId]
@@ -68,7 +71,7 @@ class BluetoothLinkProvider @Inject constructor(
         synchronized(visibleDevices) { visibleDevices.put(deviceId, link) }
         onConnectionReceived(link)
         link.startListening()
-        link.packetReceived(identityPacket)
+        link.packetReceived(TransferPacket(identityPacket))
         if (oldLink != null) {
             Log.i("BluetoothLinkProvider", "Removing old connection to same device")
             oldLink.disconnect()
@@ -190,9 +193,11 @@ class BluetoothLinkProvider @Inject constructor(
                     val outputStream = connection.defaultOutputStream
                     val inputStream = connection.defaultInputStream
                     val myDeviceInfo = deviceHelper.getDeviceInfo()
-                    val np = myDeviceInfo.toIdentityPacket()
-                    np["certificate"] = Base64.encodeToString(sslHelper.certificate.encoded, 0)
-                    val message = np.serialize().toByteArray(UTF_8)
+                    val baseIdentity = myDeviceInfo.toIdentityPacket()
+                    val bodyWithCert = baseIdentity.body.toMutableMap()
+                    bodyWithCert["certificate"] = Base64.encodeToString(sslHelper.certificate.encoded, 0)
+                    val identityWithCert = CoreNetworkPacket.create(PacketType.IDENTITY, bodyWithCert)
+                    val message = identityWithCert.serializeKotlin().toByteArray(UTF_8)
                     outputStream.write(message)
                     outputStream.flush()
                     Log.i("BTLinkProvider/Server", "Sent identity packet")
@@ -206,7 +211,7 @@ class BluetoothLinkProvider @Inject constructor(
                         sb.append(buf, 0, charsRead)
                     }
                     val response = sb.toString()
-                    val identityPacket = NetworkPacket.unserialize(response)
+                    val identityPacket = CoreNetworkPacket.deserializeKotlin(response)
                     if (!DeviceInfo.isValidIdentityPacket(identityPacket)) {
                         Log.w("BTLinkProvider/Server", "Invalid identity packet received.")
                         return
@@ -375,9 +380,9 @@ class BluetoothLinkProvider @Inject constructor(
                 }
                 Log.i("BTLinkProvider/Client", "Device: " + device.address + " Before sb.toString()")
                 val message = sb.toString()
-                Log.i("BTLinkProvider/Client", "Device: " + device.address + " Before unserialize (message: '" + message + "')")
-                val identityPacket = NetworkPacket.unserialize(message)
-                Log.i("BTLinkProvider/Client", "Device: " + device.address + " After unserialize")
+                Log.i("BTLinkProvider/Client", "Device: " + device.address + " Before deserialize (message: '" + message + "')")
+                val identityPacket = CoreNetworkPacket.deserializeKotlin(message)
+                Log.i("BTLinkProvider/Client", "Device: " + device.address + " After deserialize")
 
                 if (!DeviceInfo.isValidIdentityPacket(identityPacket)) {
                     Log.w("BTLinkProvider/Client", "Invalid identity packet received.")
@@ -406,10 +411,12 @@ class BluetoothLinkProvider @Inject constructor(
                 val link = BluetoothLink(context, connection, inputStream, outputStream,
                         socket.remoteDevice, deviceInfo, this@BluetoothLinkProvider)
                 val myDeviceInfo = deviceHelper.getDeviceInfo()
-                val np2 = myDeviceInfo.toIdentityPacket()
-                np2["certificate"] = Base64.encodeToString(sslHelper.certificate.encoded, 0)
-                Log.i("BTLinkProvider/Client", "about to send packet np2")
-                link.sendPacket(np2, object : Device.SendPacketStatusCallback() {
+                val baseIdentity = myDeviceInfo.toIdentityPacket()
+                val bodyWithCert = baseIdentity.body.toMutableMap()
+                bodyWithCert["certificate"] = Base64.encodeToString(sslHelper.certificate.encoded, 0)
+                val identityWithCert = CoreNetworkPacket.create(PacketType.IDENTITY, bodyWithCert)
+                Log.i("BTLinkProvider/Client", "about to send identity packet")
+                link.sendTransferPacket(TransferPacket(identityWithCert), object : Device.SendPacketStatusCallback() {
                     override fun onSuccess() {
                         try {
                             addLink(identityPacket, link)

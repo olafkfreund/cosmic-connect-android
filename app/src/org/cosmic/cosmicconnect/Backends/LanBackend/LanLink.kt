@@ -12,13 +12,13 @@ import androidx.annotation.WorkerThread
 import org.apache.commons.io.IOUtils
 import org.cosmic.cosmicconnect.Backends.BaseLink
 import org.cosmic.cosmicconnect.Backends.BaseLinkProvider
+import org.cosmic.cosmicconnect.Core.NetworkPacket as CoreNetworkPacket
+import org.cosmic.cosmicconnect.Core.Payload as CorePayload
 import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.DeviceInfo
 import org.cosmic.cosmicconnect.Helpers.SecurityHelpers.SslHelper
 import org.cosmic.cosmicconnect.Helpers.ThreadHelper
-import org.cosmic.cosmicconnect.NetworkPacket
-import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -90,9 +90,9 @@ class LanLink @WorkerThread constructor(
                     if (packet.isEmpty()) {
                         continue
                     }
-                    val np = NetworkPacket.unserialize(packet)
-                    Log.d("LanLink", "Received packet type: ${np.type} from ${deviceInfo?.name}")
-                    receivedNetworkPacket(np)
+                    val corePacket = CoreNetworkPacket.deserializeKotlin(packet)
+                    Log.d("LanLink", "Received packet type: ${corePacket.type} from ${deviceInfo?.name}")
+                    receivedCoreNetworkPacket(corePacket)
                 }
             } catch (e: Exception) {
                 Log.i("LanLink", "Socket closed: " + newSocket.hashCode() + ". Reason: " + e.message)
@@ -113,81 +113,6 @@ class LanLink @WorkerThread constructor(
 
     override val name: String
         get() = "LanLink"
-
-    @WorkerThread
-    override fun sendPacket(
-        np: NetworkPacket,
-        callback: Device.SendPacketStatusCallback,
-        sendPayloadFromSameThread: Boolean
-    ): Boolean {
-        val currentSocket = socket
-        if (currentSocket == null) {
-            Log.e("COSMIC/sendPacket", "Not yet connected")
-            callback.onFailure(NotYetConnectedException())
-            return false
-        }
-
-        try {
-            //Prepare socket for the payload
-            val server: ServerSocket?
-            if (np.hasPayload()) {
-                server = LanLinkProvider.openServerSocketOnFreePort(LanLinkProvider.PAYLOAD_TRANSFER_MIN_PORT)
-                val payloadTransferInfo = JSONObject()
-                payloadTransferInfo.put("port", server.localPort)
-                np.payloadTransferInfo = payloadTransferInfo
-            } else {
-                server = null
-            }
-
-            //Log.e("LanLink/sendPacket", np.getType());
-
-            //Send body of the network packet
-            try {
-                val writer = currentSocket.outputStream
-                writer.write(np.serialize().toByteArray(Charsets.UTF_8))
-                writer.flush()
-            } catch (e: Exception) {
-                disconnect() //main socket is broken, disconnect
-                try {
-                    server?.close()
-                } catch (ignored: Exception) {
-                }
-                throw e
-            }
-
-            //Send payload
-            if (server != null) {
-                if (sendPayloadFromSameThread) {
-                    sendPayload(np, callback, server)
-                } else {
-                    ThreadHelper.execute {
-                        try {
-                            sendPayload(np, callback, server)
-                        } catch (e: IOException) {
-                            e.printStackTrace()
-                            Log.e(
-                                "LanLink/sendPacket",
-                                "Async sendPayload failed for packet of type " + np.type + ". The Plugin was NOT notified."
-                            )
-                        }
-                    }
-                }
-            }
-
-            if (!np.isCanceled) {
-                callback.onSuccess()
-            }
-            return true
-        } catch (e: Exception) {
-            callback.onFailure(e)
-            return false
-        } finally {
-            //Make sure we close the payload stream, if any
-            if (np.hasPayload()) {
-                np.payload?.close()
-            }
-        }
-    }
 
     /**
      * Send a TransferPacket using direct Core serialization — no legacy intermediate.
@@ -314,95 +239,30 @@ class LanLink @WorkerThread constructor(
         }
     }
 
-    @Throws(IOException::class)
-    private fun sendPayload(
-        np: NetworkPacket,
-        callback: Device.SendPacketStatusCallback,
-        server: ServerSocket
-    ) {
-        var payloadSocket: Socket? = null
-        var outputStream: java.io.OutputStream? = null
-        try {
-            if (!np.isCanceled) {
-                //Wait a maximum of 10 seconds for the other end to establish a connection with our socket, close it afterwards
-                server.soTimeout = 10 * 1000
-
-                payloadSocket = server.accept()
-
-                //Convert to SSL if needed
-                payloadSocket =
-                    sslHelper.convertToSslSocket(payloadSocket, deviceId, true, false)
-
-                outputStream = payloadSocket.outputStream
-                val inputStream = np.payload?.inputStream
-
-                Log.i("COSMIC/LanLink", "Beginning to send payload for " + np.type)
-                val buffer = ByteArray(65536)
-                var bytesRead: Int = -1
-                val size = np.payloadSize
-                var progress: Long = 0
-                var timeSinceLastUpdate: Long = -1
-                while (!np.isCanceled && inputStream?.read(buffer).also { bytesRead = it ?: -1 } != -1) {
-                    //Log.e("ok",""+bytesRead);
-                    progress += bytesRead.toLong()
-                    outputStream.write(buffer, 0, bytesRead)
-                    if (size > 0) {
-                        if (timeSinceLastUpdate + 500 < System.currentTimeMillis()) { //Report progress every half a second
-                            val percent = 100 * progress / size
-                            callback.onPayloadProgressChanged(percent.toInt())
-                            timeSinceLastUpdate = System.currentTimeMillis()
-                        }
-                    }
-                }
-                outputStream.flush()
-                Log.i("COSMIC/LanLink", "Finished sending payload ($progress bytes written)")
-            }
-        } catch (e: SocketTimeoutException) {
-            Log.e(
-                "LanLink",
-                "Socket for payload in packet " + np.type + " timed out. The other end didn't fetch the payload."
-            )
-        } catch (e: SSLHandshakeException) {
-            // The exception can be due to several causes. "Connection closed by peer" seems to be a common one.
-            // If we could distinguish different cases we could react differently for some of them, but I haven't found how.
-            Log.e("sendPacket", "Payload SSLSocket failed")
-            e.printStackTrace()
-        } finally {
-            try {
-                server.close()
-            } catch (ignored: Exception) {
-            }
-            try {
-                IOUtils.close(payloadSocket)
-            } catch (ignored: Exception) {
-            }
-            np.payload?.close()
-            try {
-                IOUtils.close(outputStream)
-            } catch (ignored: Exception) {
-            }
-        }
-    }
-
-    private fun receivedNetworkPacket(np: NetworkPacket) {
-        if (np.hasPayloadTransferInfo()) {
+    private fun receivedCoreNetworkPacket(corePacket: CoreNetworkPacket) {
+        val transferPacket = if (corePacket.hasPayload) {
             var payloadSocket = Socket()
             try {
-                val tcpPort = np.payloadTransferInfo?.getInt("port") ?: throw Exception("No port")
+                val tcpPort = (corePacket.payloadTransferInfo["port"] as? Number)?.toInt()
+                    ?: throw Exception("No port")
                 val deviceAddress = socket!!.remoteSocketAddress as InetSocketAddress
                 payloadSocket.connect(InetSocketAddress(deviceAddress.address, tcpPort))
                 payloadSocket =
                     sslHelper.convertToSslSocket(payloadSocket, deviceId, true, true)
-                np.payload = NetworkPacket.Payload(payloadSocket, np.payloadSize)
+                val payload = CorePayload(payloadSocket, corePacket.payloadSize ?: 0)
+                TransferPacket(corePacket, payload)
             } catch (e: Exception) {
                 try {
                     payloadSocket.close()
                 } catch (ignored: Exception) {
                 }
                 Log.e("COSMIC/LanLink", "Exception connecting to payload remote socket", e)
+                TransferPacket(corePacket)
             }
+        } else {
+            TransferPacket(corePacket)
         }
 
-        packetReceived(np)
+        packetReceived(transferPacket)
     }
 }

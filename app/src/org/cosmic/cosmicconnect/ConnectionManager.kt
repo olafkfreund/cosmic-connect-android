@@ -32,21 +32,21 @@ import java.util.concurrent.CopyOnWriteArrayList
 class ConnectionManager(
     private val deviceId: String,
     private val deviceName: () -> String,
-    private val onPairPacket: (NetworkPacket) -> Unit,
-    private val onDataPacket: (NetworkPacket) -> Unit,
+    private val onPairPacket: (TransferPacket) -> Unit,
+    private val onDataPacket: (TransferPacket) -> Unit,
     private val isPaired: () -> Boolean,
     private val onUnpair: () -> Unit,
     private val onLinksChanged: (link: BaseLink) -> Unit,
     private val onLinksEmpty: () -> Unit
 ) : PacketReceiver {
 
-    data class NetworkPacketWithCallback(
-        val np: NetworkPacket,
+    data class TransferPacketWithCallback(
+        val tp: TransferPacket,
         val callback: Device.SendPacketStatusCallback
     )
 
     private val links = CopyOnWriteArrayList<BaseLink>()
-    private val sendChannel = Channel<NetworkPacketWithCallback>(Channel.BUFFERED)
+    private val sendChannel = Channel<TransferPacketWithCallback>(Channel.BUFFERED)
     private var sendCoroutine: Job? = null
 
     private val defaultCallback: Device.SendPacketStatusCallback = object : Device.SendPacketStatusCallback() {
@@ -70,8 +70,8 @@ class ConnectionManager(
         synchronized(sendChannel) {
             if (sendCoroutine == null) {
                 sendCoroutine = CoroutineScope(Dispatchers.IO).launch {
-                    for ((np, callback) in sendChannel) {
-                        sendPacketBlocking(np, callback)
+                    for ((tp, callback) in sendChannel) {
+                        sendPacketBlocking(tp, callback)
                     }
                 }
             }
@@ -117,12 +117,12 @@ class ConnectionManager(
         links.forEach(BaseLink::disconnect)
     }
 
-    override fun onPacketReceived(np: NetworkPacket) {
-        countReceived(deviceId, np.type)
+    override fun onPacketReceived(tp: TransferPacket) {
+        countReceived(deviceId, tp.packet.type)
 
-        if (NetworkPacket.PACKET_TYPE_PAIR == np.type) {
+        if (org.cosmic.cosmicconnect.Core.PacketType.PAIR == tp.packet.type) {
             Log.i("Cosmic/ConnectionManager", "Pair packet")
-            onPairPacket(np)
+            onPairPacket(tp)
             return
         }
 
@@ -130,60 +130,12 @@ class ConnectionManager(
             onUnpair()
         }
 
-        onDataPacket(np)
+        onDataPacket(tp)
     }
-
-    @AnyThread
-    fun sendPacket(np: NetworkPacket, callback: Device.SendPacketStatusCallback) {
-        sendChannel.trySend(NetworkPacketWithCallback(np, callback))
-    }
-
-    @AnyThread
-    fun sendPacket(np: NetworkPacket) = sendPacket(np, defaultCallback)
-
-    @WorkerThread
-    fun sendPacketBlocking(np: NetworkPacket, callback: Device.SendPacketStatusCallback): Boolean =
-        sendPacketBlocking(np, callback, false)
-
-    @WorkerThread
-    fun sendPacketBlocking(np: NetworkPacket): Boolean = sendPacketBlocking(np, defaultCallback, false)
-
-    @WorkerThread
-    fun sendPacketBlocking(
-        np: NetworkPacket,
-        callback: Device.SendPacketStatusCallback,
-        sendPayloadFromSameThread: Boolean
-    ): Boolean {
-        val success = links.any { link ->
-            try {
-                link.sendPacket(np, callback, sendPayloadFromSameThread)
-            } catch (e: IOException) {
-                Log.w("Cosmic/sendPacket", "Failed to send packet", e)
-                false
-            }.also { sent ->
-                countSent(deviceId, np.type, sent)
-            }
-        }
-
-        if (!success) {
-            Log.e(
-                "Cosmic/sendPacket",
-                "No device link (of ${links.size} available) could send the packet. Packet ${np.type} to ${deviceName()} lost!"
-            )
-        }
-
-        return success
-    }
-
-    val linkCount: Int
-        get() = links.size
-
-    // --- TransferPacket overloads (Core.NetworkPacket + payload) ---
 
     @AnyThread
     fun sendPacket(tp: TransferPacket, callback: Device.SendPacketStatusCallback) {
-        // Wrap as legacy for the channel; transport layer will use sendTransferPacket if available
-        sendChannel.trySend(NetworkPacketWithCallback(tp.toLegacy(), callback))
+        sendChannel.trySend(TransferPacketWithCallback(tp, callback))
     }
 
     @AnyThread
@@ -217,10 +169,13 @@ class ConnectionManager(
         if (!success) {
             Log.e(
                 "Cosmic/sendPacket",
-                "No device link (of ${links.size} available) could send the TransferPacket. Packet ${tp.type} to ${deviceName()} lost!"
+                "No device link (of ${links.size} available) could send the packet. Packet ${tp.type} to ${deviceName()} lost!"
             )
         }
 
         return success
     }
+
+    val linkCount: Int
+        get() = links.size
 }

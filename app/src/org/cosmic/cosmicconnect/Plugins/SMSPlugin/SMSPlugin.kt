@@ -26,12 +26,17 @@ import android.telephony.SmsMessage
 import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.core.content.ContextCompat
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import dagger.hilt.android.qualifiers.ApplicationContext
 // FIXME: klinker library not available - temporarily commented out
 // import com.klinker.android.logger.Log (using android.util.Log instead)
 // import com.klinker.android.send_message.Transaction
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Helpers.ContactsHelper
 import org.cosmic.cosmicconnect.Helpers.SMSHelper
 import org.cosmic.cosmicconnect.Helpers.SMSHelper.MessageLooper.Companion.getLooper
@@ -47,7 +52,7 @@ import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.Core.*
 import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
-import org.cosmic.cosmicconnect.Plugins.PluginFactory.LoadablePlugin
+import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.Plugins.SMSPlugin.SmsMmsUtils.partIdToMessageAttachmentPacket
 import org.cosmic.cosmicconnect.Plugins.SMSPlugin.SmsMmsUtils.sendMessage
 import org.cosmic.cosmicconnect.Plugins.TelephonyPlugin.TelephonyPlugin
@@ -57,9 +62,16 @@ import org.cosmic.cosmicconnect.R
 import java.util.concurrent.locks.Lock
 import java.util.concurrent.locks.ReentrantLock
 
-@LoadablePlugin
 @SuppressLint("InlinedApi")
-class SMSPlugin : Plugin() {
+class SMSPlugin @AssistedInject constructor(
+    @ApplicationContext context: Context,
+    @Assisted device: Device,
+) : Plugin(context, device) {
+
+    @AssistedFactory
+    interface Factory : PluginCreator {
+        override fun create(device: Device): SMSPlugin
+    }
     private val receiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             val action: String? = intent.action

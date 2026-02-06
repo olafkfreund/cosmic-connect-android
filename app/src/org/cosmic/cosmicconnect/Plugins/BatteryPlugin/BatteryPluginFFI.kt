@@ -7,14 +7,19 @@ import android.content.IntentFilter
 import android.os.BatteryManager
 import android.util.Log
 import androidx.annotation.VisibleForTesting
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import dagger.hilt.android.qualifiers.ApplicationContext
 import org.cosmic.cosmicconnect.Core.BatteryState
 import org.cosmic.cosmicconnect.Core.CosmicConnectCore
 import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.Core.PluginManager
 import org.cosmic.cosmicconnect.Core.PluginManagerProvider
+import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
-import org.cosmic.cosmicconnect.Plugins.PluginFactory.LoadablePlugin
+import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.R
 
 /**
@@ -50,8 +55,15 @@ import org.cosmic.cosmicconnect.R
  * batteryPlugin.onDestroy()
  * ```
  */
-@LoadablePlugin
-class BatteryPluginFFI : Plugin() {
+class BatteryPluginFFI @AssistedInject constructor(
+    @ApplicationContext context: Context,
+    @Assisted device: Device,
+) : Plugin(context, device) {
+
+    @AssistedFactory
+    interface Factory : PluginCreator {
+        override fun create(device: Device): BatteryPluginFFI
+    }
 
     companion object {
         private const val TAG = "BatteryPluginFFI"

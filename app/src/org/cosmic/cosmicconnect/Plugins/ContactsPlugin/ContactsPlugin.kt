@@ -9,9 +9,15 @@
 package org.cosmic.cosmicconnect.Plugins.ContactsPlugin
 
 import android.Manifest
+import android.content.Context
 import android.util.Log
 import androidx.core.content.edit
 import androidx.fragment.app.DialogFragment
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import dagger.hilt.android.qualifiers.ApplicationContext
+import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Helpers.ContactsHelper
 import org.cosmic.cosmicconnect.Helpers.ContactsHelper.ContactNotFoundException
 import org.cosmic.cosmicconnect.Helpers.ContactsHelper.VCardBuilder
@@ -19,13 +25,20 @@ import org.cosmic.cosmicconnect.Helpers.ContactsHelper.UID
 import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
-import org.cosmic.cosmicconnect.Plugins.PluginFactory.LoadablePlugin
+import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.UserInterface.AlertDialogFragment
 import org.cosmic.cosmicconnect.R
 import org.json.JSONObject
 
-@LoadablePlugin
-class ContactsPlugin : Plugin() {
+class ContactsPlugin @AssistedInject constructor(
+    @ApplicationContext context: Context,
+    @Assisted device: Device,
+) : Plugin(context, device) {
+
+    @AssistedFactory
+    interface Factory : PluginCreator {
+        override fun create(device: Device): ContactsPlugin
+    }
     override val displayName: String
         get() = context.resources.getString(R.string.pref_plugin_contacts)
 

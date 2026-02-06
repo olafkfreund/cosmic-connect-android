@@ -95,6 +95,12 @@ class PluginFactoryDiTest {
         assertTrue("RemoteKeyboardPlugin should be available", available.contains("RemoteKeyboardPlugin"))
         assertTrue("RunCommandPlugin should be available", available.contains("RunCommandPlugin"))
         assertTrue("OpenOnDesktopPlugin should be available", available.contains("OpenOnDesktopPlugin"))
+        // Wave 3
+        assertTrue("BatteryPluginFFI should be available", available.contains("BatteryPluginFFI"))
+        assertTrue("FindMyPhonePlugin should be available", available.contains("FindMyPhonePlugin"))
+        assertTrue("ContactsPlugin should be available", available.contains("ContactsPlugin"))
+        assertTrue("TelephonyPlugin should be available", available.contains("TelephonyPlugin"))
+        assertTrue("SMSPlugin should be available", available.contains("SMSPlugin"))
     }
 
     @Test
@@ -103,8 +109,8 @@ class PluginFactoryDiTest {
         factory.initPluginInfo()
 
         val available = factory.availablePlugins
-        assertTrue("BatteryPluginFFI should be available", available.contains("BatteryPluginFFI"))
-        assertTrue("FindMyPhonePlugin should be available", available.contains("FindMyPhonePlugin"))
+        assertTrue("MprisPlugin should be available", available.contains("MprisPlugin"))
+        assertTrue("SharePlugin should be available", available.contains("SharePlugin"))
     }
 
     @Test
@@ -112,7 +118,7 @@ class PluginFactoryDiTest {
         val factory = PluginFactory(context, emptyMap())
         factory.initPluginInfo()
 
-        // 10 migrated + 13 legacy = 23 total
+        // 15 migrated + 8 legacy = 23 total
         assertEquals("Should have 23 total plugins", 23, factory.availablePlugins.size)
     }
 

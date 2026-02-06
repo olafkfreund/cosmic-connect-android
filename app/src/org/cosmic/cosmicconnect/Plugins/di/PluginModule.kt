@@ -9,8 +9,11 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import org.cosmic.cosmicconnect.Plugins.BatteryPlugin.BatteryPluginFFI
 import org.cosmic.cosmicconnect.Plugins.ClipboardPlugin.ClipboardPlugin
 import org.cosmic.cosmicconnect.Plugins.ConnectivityReportPlugin.ConnectivityReportPlugin
+import org.cosmic.cosmicconnect.Plugins.ContactsPlugin.ContactsPlugin
+import org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.FindMyPhonePlugin
 import org.cosmic.cosmicconnect.Plugins.FindRemoteDevicePlugin.FindRemoteDevicePlugin
 import org.cosmic.cosmicconnect.Plugins.MousePadPlugin.MousePadPlugin
 import org.cosmic.cosmicconnect.Plugins.OpenPlugin.OpenOnDesktopPlugin
@@ -18,7 +21,9 @@ import org.cosmic.cosmicconnect.Plugins.PingPlugin.PingPlugin
 import org.cosmic.cosmicconnect.Plugins.PresenterPlugin.PresenterPlugin
 import org.cosmic.cosmicconnect.Plugins.RemoteKeyboardPlugin.RemoteKeyboardPlugin
 import org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandPlugin
+import org.cosmic.cosmicconnect.Plugins.SMSPlugin.SMSPlugin
 import org.cosmic.cosmicconnect.Plugins.SystemVolumePlugin.SystemVolumePlugin
+import org.cosmic.cosmicconnect.Plugins.TelephonyPlugin.TelephonyPlugin
 
 /**
  * Hilt module that binds migrated plugin factories into a
@@ -84,4 +89,31 @@ object PluginModule {
     @dagger.multibindings.IntoMap
     @PluginKey("OpenOnDesktopPlugin")
     fun provideOpenOnDesktopPluginCreator(factory: OpenOnDesktopPlugin.Factory): PluginCreator = factory
+
+    // ---- Wave 3 plugins ----
+
+    @Provides
+    @dagger.multibindings.IntoMap
+    @PluginKey("BatteryPluginFFI")
+    fun provideBatteryPluginCreator(factory: BatteryPluginFFI.Factory): PluginCreator = factory
+
+    @Provides
+    @dagger.multibindings.IntoMap
+    @PluginKey("FindMyPhonePlugin")
+    fun provideFindMyPhonePluginCreator(factory: FindMyPhonePlugin.Factory): PluginCreator = factory
+
+    @Provides
+    @dagger.multibindings.IntoMap
+    @PluginKey("ContactsPlugin")
+    fun provideContactsPluginCreator(factory: ContactsPlugin.Factory): PluginCreator = factory
+
+    @Provides
+    @dagger.multibindings.IntoMap
+    @PluginKey("TelephonyPlugin")
+    fun provideTelephonyPluginCreator(factory: TelephonyPlugin.Factory): PluginCreator = factory
+
+    @Provides
+    @dagger.multibindings.IntoMap
+    @PluginKey("SMSPlugin")
+    fun provideSMSPluginCreator(factory: SMSPlugin.Factory): PluginCreator = factory
 }

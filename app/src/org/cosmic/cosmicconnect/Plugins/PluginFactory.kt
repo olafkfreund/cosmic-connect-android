@@ -227,6 +227,45 @@ class PluginFactory @Inject constructor(
                 displayNameRes = R.string.pref_plugin_open_on_desktop,
                 descriptionRes = R.string.pref_plugin_open_on_desktop_desc,
             ),
+            // --- Wave 3 ---
+            org.cosmic.cosmicconnect.Plugins.BatteryPlugin.BatteryPluginFFI::class.java to StaticPluginMetadata(
+                pluginKey = "BatteryPluginFFI",
+                supportedPacketTypes = arrayOf("cconnect.battery"),
+                outgoingPacketTypes = arrayOf("cconnect.battery"),
+                displayNameRes = R.string.pref_plugin_battery,
+                descriptionRes = R.string.pref_plugin_battery_desc,
+            ),
+            org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.FindMyPhonePlugin::class.java to StaticPluginMetadata(
+                pluginKey = "FindMyPhonePlugin",
+                supportedPacketTypes = arrayOf("cconnect.findmyphone.request"),
+                outgoingPacketTypes = emptyArray(),
+                displayNameRes = R.string.findmyphone_title,
+                descriptionRes = R.string.findmyphone_description,
+                hasSettings = true,
+            ),
+            org.cosmic.cosmicconnect.Plugins.ContactsPlugin.ContactsPlugin::class.java to StaticPluginMetadata(
+                pluginKey = "ContactsPlugin",
+                supportedPacketTypes = arrayOf("cconnect.contacts.request_all_uids_timestamps", "cconnect.contacts.request_vcards_by_uid"),
+                outgoingPacketTypes = arrayOf("cconnect.contacts.response_uids_timestamps", "cconnect.contacts.response_vcards"),
+                displayNameRes = R.string.pref_plugin_contacts,
+                descriptionRes = R.string.pref_plugin_contacts_desc,
+            ),
+            org.cosmic.cosmicconnect.Plugins.TelephonyPlugin.TelephonyPlugin::class.java to StaticPluginMetadata(
+                pluginKey = "TelephonyPlugin",
+                supportedPacketTypes = arrayOf("cconnect.telephony.request_mute"),
+                outgoingPacketTypes = arrayOf("cconnect.telephony"),
+                displayNameRes = R.string.pref_plugin_telephony,
+                descriptionRes = R.string.pref_plugin_telephony_desc,
+                hasSettings = true,
+            ),
+            org.cosmic.cosmicconnect.Plugins.SMSPlugin.SMSPlugin::class.java to StaticPluginMetadata(
+                pluginKey = "SMSPlugin",
+                supportedPacketTypes = arrayOf("cconnect.sms.request", "cconnect.sms.request_conversations", "cconnect.sms.request_conversation", "cconnect.sms.request_attachment"),
+                outgoingPacketTypes = arrayOf("cconnect.sms.messages", "cconnect.sms.attachment_file"),
+                displayNameRes = R.string.pref_plugin_telepathy,
+                descriptionRes = R.string.pref_plugin_telepathy_desc,
+                hasSettings = true,
+            ),
         )
 
         /**
@@ -234,23 +273,17 @@ class PluginFactory @Inject constructor(
          * As plugins are migrated, move them from here to [migratedPlugins].
          */
         private val legacyPlugins = listOf(
-            org.cosmic.cosmicconnect.Plugins.BatteryPlugin.BatteryPluginFFI::class,
             org.cosmic.cosmicconnect.Plugins.MprisPlugin.MprisPlugin::class,
             org.cosmic.cosmicconnect.Plugins.NotificationsPlugin.NotificationsPlugin::class,
             org.cosmic.cosmicconnect.Plugins.ReceiveNotificationsPlugin.ReceiveNotificationsPlugin::class,
             org.cosmic.cosmicconnect.Plugins.SharePlugin.SharePlugin::class,
             org.cosmic.cosmicconnect.Plugins.SftpPlugin.SftpPlugin::class,
-            org.cosmic.cosmicconnect.Plugins.ContactsPlugin.ContactsPlugin::class,
-            org.cosmic.cosmicconnect.Plugins.SMSPlugin.SMSPlugin::class,
-            org.cosmic.cosmicconnect.Plugins.TelephonyPlugin.TelephonyPlugin::class,
             // App Continuity plugins (Issues #112-123)
             org.cosmic.cosmicconnect.Plugins.OpenOnPhonePlugin.OpenOnPhonePlugin::class,
             // Camera Webcam plugin (Issues #102-111)
             org.cosmic.cosmicconnect.Plugins.CameraPlugin.CameraPlugin::class,
             // Extended Display plugin (Issue #138)
             org.cosmic.cosmicconnect.Plugins.ExtendedDisplayPlugin.ExtendedDisplayPlugin::class,
-            // Additional plugins
-            org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.FindMyPhonePlugin::class,
         )
     }
 }

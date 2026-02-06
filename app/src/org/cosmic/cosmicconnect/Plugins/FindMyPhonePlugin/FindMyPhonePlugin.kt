@@ -11,6 +11,7 @@ import android.Manifest
 import android.app.Activity
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.media.AudioAttributes
@@ -23,14 +24,20 @@ import android.provider.Settings
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import dagger.hilt.EntryPoints
+import dagger.hilt.android.qualifiers.ApplicationContext
 import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.DeviceType
 import org.cosmic.cosmicconnect.Helpers.DeviceHelper
 import org.cosmic.cosmicconnect.Helpers.LifecycleHelper
 import org.cosmic.cosmicconnect.Helpers.NotificationHelper
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory
+import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment
 import org.cosmic.cosmicconnect.R
 import org.cosmic.cosmicconnect.di.HiltBridges
@@ -87,8 +94,15 @@ import java.io.IOException
  * @see FindMyPhoneActivity
  * @see FindMyPhoneReceiver
  */
-@PluginFactory.LoadablePlugin
-class FindMyPhonePlugin : Plugin() {
+class FindMyPhonePlugin @AssistedInject constructor(
+    @ApplicationContext context: Context,
+    @Assisted device: Device,
+) : Plugin(context, device) {
+
+    @AssistedFactory
+    interface Factory : PluginCreator {
+        override fun create(device: Device): FindMyPhonePlugin
+    }
 
     companion object {
         private const val TAG = "FindMyPhonePlugin"

@@ -8,14 +8,10 @@ package org.cosmic.cosmicconnect.Core
 import org.json.JSONObject
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
-import org.junit.Assert.assertNotNull
-import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import java.io.ByteArrayInputStream
-
 @RunWith(RobolectricTestRunner::class)
 class TransferPacketTest {
 
@@ -51,53 +47,6 @@ class TransferPacketTest {
         val jo = JSONObject(wire.trimEnd())
         assertEquals(4L, jo.getLong("payloadSize"))
         assertEquals(1739, jo.getJSONObject("payloadTransferInfo").getInt("port"))
-    }
-
-    @Test
-    fun `toLegacy converts Core packet to legacy with body fields`() {
-        val packet = NetworkPacket(
-            id = 300L,
-            type = "cconnect.battery",
-            body = mapOf("currentCharge" to 85, "isCharging" to true)
-        )
-        val tp = TransferPacket(packet)
-        val legacy = tp.toLegacy()
-
-        assertEquals("cconnect.battery", legacy.type)
-        assertEquals(85, legacy.getInt("currentCharge"))
-        assertTrue(legacy.getBoolean("isCharging"))
-    }
-
-    @Test
-    fun `toLegacy attaches payload stream`() {
-        val data = byteArrayOf(10, 20, 30)
-        val packet = NetworkPacket(
-            id = 400L,
-            type = "cconnect.share.request",
-            body = mapOf("filename" to "data.bin")
-        )
-        val payload = Payload(data)
-        val tp = TransferPacket(packet, payload = payload)
-        val legacy = tp.toLegacy()
-
-        assertTrue(legacy.hasPayload())
-        assertEquals(3L, legacy.payloadSize)
-        assertNotNull(legacy.payload?.inputStream)
-    }
-
-    @Test
-    fun `toLegacy attaches runtime transfer info`() {
-        val packet = NetworkPacket(
-            id = 500L,
-            type = "cconnect.share.request",
-            body = mapOf("filename" to "file.txt")
-        )
-        val tp = TransferPacket(packet, payload = Payload(byteArrayOf(1)))
-        tp.runtimeTransferInfo = mapOf("port" to 5000)
-        val legacy = tp.toLegacy()
-
-        assertTrue(legacy.hasPayloadTransferInfo())
-        assertEquals(5000, legacy.payloadTransferInfo.getInt("port"))
     }
 
     @Test

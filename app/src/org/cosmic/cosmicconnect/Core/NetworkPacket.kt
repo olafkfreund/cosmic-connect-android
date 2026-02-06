@@ -70,64 +70,6 @@ data class NetworkPacket(
     }
 
     /**
-     * Convert to legacy NetworkPacket for backward compatibility
-     *
-     * @return Legacy mutable NetworkPacket from org.cosmic.cosmicconnect package
-     */
-    fun toLegacyPacket(): org.cosmic.cosmicconnect.NetworkPacket {
-        val legacyPacket = org.cosmic.cosmicconnect.NetworkPacket(type)
-
-        // Copy all body fields
-        body.forEach { (key, value) ->
-            setLegacyPacketValue(legacyPacket, key, value)
-        }
-
-        // Copy payloadTransferInfo if present
-        if (payloadTransferInfo.isNotEmpty()) {
-            legacyPacket.payloadTransferInfo = mapToJsonObject(payloadTransferInfo)
-        }
-
-        return legacyPacket
-    }
-
-    /**
-     * Set a value on legacy packet with proper type handling
-     */
-    private fun setLegacyPacketValue(
-        legacyPacket: org.cosmic.cosmicconnect.NetworkPacket,
-        key: String,
-        value: Any
-    ) {
-        when (value) {
-            is String -> legacyPacket[key] = value
-            is Int -> legacyPacket[key] = value
-            is Long -> legacyPacket[key] = value
-            is Boolean -> legacyPacket[key] = value
-            is Double -> legacyPacket[key] = value
-            is Float -> legacyPacket[key] = value.toDouble()
-            is List<*> -> {
-                // Convert List to JSONArray for proper serialization
-                val jsonArray = org.json.JSONArray()
-                value.forEach { item ->
-                    when (item) {
-                        is String -> jsonArray.put(item)
-                        is Number -> jsonArray.put(item)
-                        is Boolean -> jsonArray.put(item)
-                        is Map<*, *> -> jsonArray.put(mapToJsonObject(item))
-                        else -> item?.let { jsonArray.put(it.toString()) }
-                    }
-                }
-                legacyPacket[key] = jsonArray
-            }
-            is Map<*, *> -> {
-                // Convert Map to JSONObject
-                legacyPacket[key] = mapToJsonObject(value)
-            }
-            else -> legacyPacket[key] = value.toString()
-        }
-    }
-
-    /**
      * Convert a Map to JSONObject recursively
      */
     private fun mapToJsonObject(map: Map<*, *>): org.json.JSONObject {
@@ -254,33 +196,6 @@ data class NetworkPacket(
         }
 
         /**
-         * Convert legacy NetworkPacket to new immutable NetworkPacket
-         *
-         * @param legacyPacket Old mutable NetworkPacket from org.cosmic.cosmicconnect package
-         * @return New immutable NetworkPacket from org.cosmic.cosmicconnect.Core package
-         */
-        @JvmStatic
-        fun fromLegacyPacket(legacyPacket: org.cosmic.cosmicconnect.NetworkPacket): NetworkPacket {
-            // Direct access to body JSONObject — no serialize/reparse cycle
-            val body = jsonObjectToMap(legacyPacket.body)
-            val type = PacketType.normalize(legacyPacket.type)
-
-            val payloadSize = if (legacyPacket.hasPayload())
-                legacyPacket.payloadSize.takeIf { it > 0 } else null
-
-            val transferInfo = if (legacyPacket.hasPayloadTransferInfo())
-                jsonObjectToMap(legacyPacket.payloadTransferInfo) else emptyMap()
-
-            return NetworkPacket(
-                id = System.currentTimeMillis(),
-                type = type,
-                body = body,
-                payloadSize = payloadSize,
-                payloadTransferInfo = transferInfo
-            )
-        }
-
-        /**
          * Recursively convert JSONObject to Map<String, Any>
          *
          * Handles nested JSONObject and JSONArray to ensure all values
@@ -323,14 +238,6 @@ data class NetworkPacket(
                 }
             }
             return list
-        }
-
-        /**
-         * Alias for fromLegacyPacket for consistency with some plugin code
-         */
-        @JvmStatic
-        fun fromLegacy(legacyPacket: org.cosmic.cosmicconnect.NetworkPacket): NetworkPacket {
-            return fromLegacyPacket(legacyPacket)
         }
 
         /**

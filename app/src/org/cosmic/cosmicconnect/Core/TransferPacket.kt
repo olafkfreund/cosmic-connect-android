@@ -5,8 +5,6 @@
  */
 package org.cosmic.cosmicconnect.Core
 
-import org.json.JSONObject
-
 /**
  * TransferPacket bundles an immutable Core.NetworkPacket with mutable transport state.
  *
@@ -63,32 +61,6 @@ class TransferPacket(
             packet
         }
         return merged.serializeKotlin()
-    }
-
-    /**
-     * Convert to legacy NetworkPacket for backward compatibility with
-     * transport layers that haven't been upgraded yet.
-     */
-    fun toLegacy(): org.cosmic.cosmicconnect.NetworkPacket {
-        val legacy = packet.toLegacyPacket()
-
-        // Attach payload stream
-        payload?.let { p ->
-            legacy.payload = org.cosmic.cosmicconnect.NetworkPacket.Payload(
-                p.inputStream, p.payloadSize
-            )
-        }
-
-        // Attach runtime transfer info
-        if (runtimeTransferInfo.isNotEmpty()) {
-            val jo = JSONObject()
-            runtimeTransferInfo.forEach { (k, v) ->
-                jo.put(k, v)
-            }
-            legacy.payloadTransferInfo = jo
-        }
-
-        return legacy
     }
 
     override fun toString(): String = buildString {

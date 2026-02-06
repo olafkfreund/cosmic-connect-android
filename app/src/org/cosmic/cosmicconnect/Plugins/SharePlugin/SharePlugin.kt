@@ -30,9 +30,14 @@ import androidx.preference.PreferenceManager
 import org.apache.commons.lang3.ArrayUtils
 import org.cosmic.cosmicconnect.Helpers.FilesHelper
 import org.cosmic.cosmicconnect.Helpers.IntentHelper
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import dagger.hilt.android.qualifiers.ApplicationContext
+import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.NetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
-import org.cosmic.cosmicconnect.Plugins.PluginFactory.LoadablePlugin
+import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.R
 import org.cosmic.cosmicconnect.UserInterface.MainActivity
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment
@@ -48,8 +53,15 @@ import java.net.URL
  * All of the associated I/O work is scheduled on background
  * threads by [BackgroundJobHandler].
  */
-@LoadablePlugin
-class SharePlugin : Plugin() {
+class SharePlugin @AssistedInject constructor(
+    @ApplicationContext context: Context,
+    @Assisted device: Device,
+) : Plugin(context, device) {
+
+    @AssistedFactory
+    interface Factory : PluginCreator {
+        override fun create(device: Device): SharePlugin
+    }
 
     private val backgroundJobHandler: BackgroundJobHandler = BackgroundJobHandler.newFixedThreadPoolBackgroundJobHandler(5)
     private val handler: Handler = Handler(Looper.getMainLooper())

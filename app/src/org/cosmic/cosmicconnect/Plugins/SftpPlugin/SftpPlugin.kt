@@ -8,6 +8,7 @@ package org.cosmic.cosmicconnect.Plugins.SftpPlugin
 
 import android.app.Activity
 import android.content.ContentResolver
+import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.net.Uri
@@ -15,13 +16,19 @@ import android.os.Environment
 import android.os.storage.StorageManager
 import android.provider.Settings
 import androidx.core.net.toUri
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import dagger.hilt.EntryPoints
+import dagger.hilt.android.qualifiers.ApplicationContext
 import org.json.JSONException
 import org.json.JSONObject
+import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Helpers.NetworkHelper.localIpAddress
 import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
-import org.cosmic.cosmicconnect.Plugins.PluginFactory.LoadablePlugin
+import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.UserInterface.AlertDialogFragment
 import org.cosmic.cosmicconnect.UserInterface.DeviceSettingsAlertDialogFragment
 import org.cosmic.cosmicconnect.UserInterface.MainActivity
@@ -30,11 +37,17 @@ import org.cosmic.cosmicconnect.UserInterface.StartActivityAlertDialogFragment
 import org.cosmic.cosmicconnect.BuildConfig
 import org.cosmic.cosmicconnect.di.HiltBridges
 import org.cosmic.cosmicconnect.R
-import dagger.hilt.EntryPoints
 import java.security.GeneralSecurityException
 
-@LoadablePlugin
-class SftpPlugin : Plugin(), OnSharedPreferenceChangeListener {
+class SftpPlugin @AssistedInject constructor(
+    @ApplicationContext context: Context,
+    @Assisted device: Device,
+) : Plugin(context, device), OnSharedPreferenceChangeListener {
+
+    @AssistedFactory
+    interface Factory : PluginCreator {
+        override fun create(device: Device): SftpPlugin
+    }
     override val displayName: String
         get() = context.resources.getString(R.string.pref_plugin_sftp)
 

@@ -16,12 +16,17 @@ import org.cosmic.cosmicconnect.Plugins.ContactsPlugin.ContactsPlugin
 import org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.FindMyPhonePlugin
 import org.cosmic.cosmicconnect.Plugins.FindRemoteDevicePlugin.FindRemoteDevicePlugin
 import org.cosmic.cosmicconnect.Plugins.MousePadPlugin.MousePadPlugin
+import org.cosmic.cosmicconnect.Plugins.MprisPlugin.MprisPlugin
+import org.cosmic.cosmicconnect.Plugins.NotificationsPlugin.NotificationsPlugin
 import org.cosmic.cosmicconnect.Plugins.OpenPlugin.OpenOnDesktopPlugin
 import org.cosmic.cosmicconnect.Plugins.PingPlugin.PingPlugin
 import org.cosmic.cosmicconnect.Plugins.PresenterPlugin.PresenterPlugin
+import org.cosmic.cosmicconnect.Plugins.ReceiveNotificationsPlugin.ReceiveNotificationsPlugin
 import org.cosmic.cosmicconnect.Plugins.RemoteKeyboardPlugin.RemoteKeyboardPlugin
 import org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandPlugin
 import org.cosmic.cosmicconnect.Plugins.SMSPlugin.SMSPlugin
+import org.cosmic.cosmicconnect.Plugins.SftpPlugin.SftpPlugin
+import org.cosmic.cosmicconnect.Plugins.SharePlugin.SharePlugin
 import org.cosmic.cosmicconnect.Plugins.SystemVolumePlugin.SystemVolumePlugin
 import org.cosmic.cosmicconnect.Plugins.TelephonyPlugin.TelephonyPlugin
 
@@ -116,4 +121,31 @@ object PluginModule {
     @dagger.multibindings.IntoMap
     @PluginKey("SMSPlugin")
     fun provideSMSPluginCreator(factory: SMSPlugin.Factory): PluginCreator = factory
+
+    // ---- Wave 4 plugins ----
+
+    @Provides
+    @dagger.multibindings.IntoMap
+    @PluginKey("SharePlugin")
+    fun provideSharePluginCreator(factory: SharePlugin.Factory): PluginCreator = factory
+
+    @Provides
+    @dagger.multibindings.IntoMap
+    @PluginKey("SftpPlugin")
+    fun provideSftpPluginCreator(factory: SftpPlugin.Factory): PluginCreator = factory
+
+    @Provides
+    @dagger.multibindings.IntoMap
+    @PluginKey("MprisPlugin")
+    fun provideMprisPluginCreator(factory: MprisPlugin.Factory): PluginCreator = factory
+
+    @Provides
+    @dagger.multibindings.IntoMap
+    @PluginKey("NotificationsPlugin")
+    fun provideNotificationsPluginCreator(factory: NotificationsPlugin.Factory): PluginCreator = factory
+
+    @Provides
+    @dagger.multibindings.IntoMap
+    @PluginKey("ReceiveNotificationsPlugin")
+    fun provideReceiveNotificationsPluginCreator(factory: ReceiveNotificationsPlugin.Factory): PluginCreator = factory
 }

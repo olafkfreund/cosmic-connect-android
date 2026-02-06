@@ -266,6 +266,47 @@ class PluginFactory @Inject constructor(
                 descriptionRes = R.string.pref_plugin_telepathy_desc,
                 hasSettings = true,
             ),
+            // --- Wave 4 ---
+            org.cosmic.cosmicconnect.Plugins.SharePlugin.SharePlugin::class.java to StaticPluginMetadata(
+                pluginKey = "SharePlugin",
+                supportedPacketTypes = arrayOf("cconnect.share.request", "cconnect.share.request.update"),
+                outgoingPacketTypes = arrayOf("cconnect.share.request"),
+                displayNameRes = R.string.pref_plugin_sharereceiver,
+                descriptionRes = R.string.pref_plugin_sharereceiver_desc,
+                hasSettings = true,
+            ),
+            org.cosmic.cosmicconnect.Plugins.SftpPlugin.SftpPlugin::class.java to StaticPluginMetadata(
+                pluginKey = "SftpPlugin",
+                supportedPacketTypes = arrayOf("cconnect.sftp.request"),
+                outgoingPacketTypes = arrayOf("cconnect.sftp"),
+                displayNameRes = R.string.pref_plugin_sftp,
+                descriptionRes = R.string.pref_plugin_sftp_desc,
+                hasSettings = true,
+            ),
+            org.cosmic.cosmicconnect.Plugins.MprisPlugin.MprisPlugin::class.java to StaticPluginMetadata(
+                pluginKey = "MprisPlugin",
+                supportedPacketTypes = arrayOf("cconnect.mpris"),
+                outgoingPacketTypes = arrayOf("cconnect.mpris.request"),
+                displayNameRes = R.string.pref_plugin_mpris,
+                descriptionRes = R.string.pref_plugin_mpris_desc,
+                hasSettings = true,
+            ),
+            org.cosmic.cosmicconnect.Plugins.NotificationsPlugin.NotificationsPlugin::class.java to StaticPluginMetadata(
+                pluginKey = "NotificationsPlugin",
+                supportedPacketTypes = arrayOf("cconnect.notification.request", "cconnect.notification.reply", "cconnect.notification.action"),
+                outgoingPacketTypes = arrayOf("cconnect.notification"),
+                displayNameRes = R.string.pref_plugin_notifications,
+                descriptionRes = R.string.pref_plugin_notifications_desc,
+                hasSettings = true,
+            ),
+            org.cosmic.cosmicconnect.Plugins.ReceiveNotificationsPlugin.ReceiveNotificationsPlugin::class.java to StaticPluginMetadata(
+                pluginKey = "ReceiveNotificationsPlugin",
+                supportedPacketTypes = arrayOf("cconnect.notification"),
+                outgoingPacketTypes = arrayOf("cconnect.notification.request"),
+                displayNameRes = R.string.pref_plugin_receive_notifications,
+                descriptionRes = R.string.pref_plugin_receive_notifications_desc,
+                isEnabledByDefault = false,
+            ),
         )
 
         /**
@@ -273,11 +314,6 @@ class PluginFactory @Inject constructor(
          * As plugins are migrated, move them from here to [migratedPlugins].
          */
         private val legacyPlugins = listOf(
-            org.cosmic.cosmicconnect.Plugins.MprisPlugin.MprisPlugin::class,
-            org.cosmic.cosmicconnect.Plugins.NotificationsPlugin.NotificationsPlugin::class,
-            org.cosmic.cosmicconnect.Plugins.ReceiveNotificationsPlugin.ReceiveNotificationsPlugin::class,
-            org.cosmic.cosmicconnect.Plugins.SharePlugin.SharePlugin::class,
-            org.cosmic.cosmicconnect.Plugins.SftpPlugin.SftpPlugin::class,
             // App Continuity plugins (Issues #112-123)
             org.cosmic.cosmicconnect.Plugins.OpenOnPhonePlugin.OpenOnPhonePlugin::class,
             // Camera Webcam plugin (Issues #102-111)

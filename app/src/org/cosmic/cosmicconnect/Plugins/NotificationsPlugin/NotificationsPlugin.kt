@@ -39,9 +39,14 @@ import org.apache.commons.collections4.multimap.ArrayListValuedHashMap
 import org.apache.commons.lang3.ArrayUtils
 import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import dagger.hilt.android.qualifiers.ApplicationContext
+import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Helpers.AppsHelper
 import org.cosmic.cosmicconnect.Plugins.Plugin
-import org.cosmic.cosmicconnect.Plugins.PluginFactory
+import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.R
 import org.cosmic.cosmicconnect.UserInterface.MainActivity
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment
@@ -71,8 +76,15 @@ import java.security.NoSuchAlgorithmException
  * Uses NotificationsPacketsFFI for packet creation, which wraps the
  * cosmic-connect-core Rust FFI layer for consistent packet formatting.
  */
-@PluginFactory.LoadablePlugin
-class NotificationsPlugin : Plugin(), NotificationReceiver.NotificationListener {
+class NotificationsPlugin @AssistedInject constructor(
+    @ApplicationContext context: Context,
+    @Assisted device: Device,
+) : Plugin(context, device), NotificationReceiver.NotificationListener {
+
+    @AssistedFactory
+    interface Factory : PluginCreator {
+        override fun create(device: Device): NotificationsPlugin
+    }
 
     companion object {
         private const val TAG = "COSMIC/NotificationsPlugin"

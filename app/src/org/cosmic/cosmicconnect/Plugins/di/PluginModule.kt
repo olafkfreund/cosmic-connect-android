@@ -16,6 +16,7 @@ import org.cosmic.cosmicconnect.Plugins.ConnectivityReportPlugin.ConnectivityRep
 import org.cosmic.cosmicconnect.Plugins.ContactsPlugin.ContactsPlugin
 import org.cosmic.cosmicconnect.Plugins.ExtendedDisplayPlugin.ExtendedDisplayPlugin
 import org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.FindMyPhonePlugin
+import org.cosmic.cosmicconnect.Plugins.NetworkInfoPlugin.NetworkInfoPlugin
 import org.cosmic.cosmicconnect.Plugins.FindRemoteDevicePlugin.FindRemoteDevicePlugin
 import org.cosmic.cosmicconnect.Plugins.MousePadPlugin.MousePadPlugin
 import org.cosmic.cosmicconnect.Plugins.MprisPlugin.MprisPlugin
@@ -168,4 +169,11 @@ object PluginModule {
     @dagger.multibindings.IntoMap
     @PluginKey("ExtendedDisplayPlugin")
     fun provideExtendedDisplayPluginCreator(factory: ExtendedDisplayPlugin.Factory): PluginCreator = factory
+
+    // ---- Wave 6 plugins (desktop plugin parity #145) ----
+
+    @Provides
+    @dagger.multibindings.IntoMap
+    @PluginKey("NetworkInfoPlugin")
+    fun provideNetworkInfoPluginCreator(factory: NetworkInfoPlugin.Factory): PluginCreator = factory
 }

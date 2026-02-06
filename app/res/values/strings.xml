@@ -29,6 +29,8 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-COSMIC-Accep
     <string name="pref_plugin_battery_desc">Periodically report battery status</string>
     <string name="pref_plugin_connectivity_report">Connectivity report</string>
     <string name="pref_plugin_connectivity_report_desc">Report network signal strength and status</string>
+    <string name="pref_plugin_networkinfo">Network information</string>
+    <string name="pref_plugin_networkinfo_desc">Share WiFi and network connectivity status with connected devices</string>
     <string name="pref_plugin_digitizer">Drawing tablet</string>
     <string name="pref_plugin_digitizer_desc">Use your device as a pressure sensitive drawing tablet</string>
     <string name="pref_plugin_sftp">Filesystem access</string>

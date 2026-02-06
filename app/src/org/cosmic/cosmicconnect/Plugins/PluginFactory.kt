@@ -299,6 +299,14 @@ class PluginFactory @Inject constructor(
                 isEnabledByDefault = false,
                 hasSettings = true,
             ),
+            // --- Wave 6 (desktop plugin parity #145) ---
+            org.cosmic.cosmicconnect.Plugins.NetworkInfoPlugin.NetworkInfoPlugin::class.java to StaticPluginMetadata(
+                pluginKey = "NetworkInfoPlugin",
+                supportedPacketTypes = arrayOf("cconnect.networkinfo.request"),
+                outgoingPacketTypes = arrayOf("cconnect.networkinfo"),
+                displayNameRes = R.string.pref_plugin_networkinfo,
+                descriptionRes = R.string.pref_plugin_networkinfo_desc,
+            ),
         )
     }
 }

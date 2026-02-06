@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 import org.cosmic.cosmicconnect.Backends.BaseLink
 import org.cosmic.cosmicconnect.Backends.BaseLink.PacketReceiver
 import org.cosmic.cosmicconnect.Backends.BaseLinkProvider
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.DeviceStats.countReceived
 import org.cosmic.cosmicconnect.DeviceStats.countSent
 import java.io.IOException
@@ -176,4 +177,50 @@ class ConnectionManager(
 
     val linkCount: Int
         get() = links.size
+
+    // --- TransferPacket overloads (Core.NetworkPacket + payload) ---
+
+    @AnyThread
+    fun sendPacket(tp: TransferPacket, callback: Device.SendPacketStatusCallback) {
+        // Wrap as legacy for the channel; transport layer will use sendTransferPacket if available
+        sendChannel.trySend(NetworkPacketWithCallback(tp.toLegacy(), callback))
+    }
+
+    @AnyThread
+    fun sendPacket(tp: TransferPacket) = sendPacket(tp, defaultCallback)
+
+    @WorkerThread
+    fun sendPacketBlocking(tp: TransferPacket, callback: Device.SendPacketStatusCallback): Boolean =
+        sendPacketBlocking(tp, callback, false)
+
+    @WorkerThread
+    fun sendPacketBlocking(tp: TransferPacket): Boolean =
+        sendPacketBlocking(tp, defaultCallback, false)
+
+    @WorkerThread
+    fun sendPacketBlocking(
+        tp: TransferPacket,
+        callback: Device.SendPacketStatusCallback,
+        sendPayloadFromSameThread: Boolean
+    ): Boolean {
+        val success = links.any { link ->
+            try {
+                link.sendTransferPacket(tp, callback, sendPayloadFromSameThread)
+            } catch (e: IOException) {
+                Log.w("Cosmic/sendPacket", "Failed to send TransferPacket", e)
+                false
+            }.also { sent ->
+                countSent(deviceId, tp.type, sent)
+            }
+        }
+
+        if (!success) {
+            Log.e(
+                "Cosmic/sendPacket",
+                "No device link (of ${links.size} available) could send the TransferPacket. Packet ${tp.type} to ${deviceName()} lost!"
+            )
+        }
+
+        return success
+    }
 }

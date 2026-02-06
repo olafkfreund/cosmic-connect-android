@@ -7,9 +7,11 @@ package org.cosmic.cosmicconnect
 
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.slot
 import io.mockk.verify
 import org.cosmic.cosmicconnect.Backends.BaseLink
 import org.cosmic.cosmicconnect.Backends.BaseLinkProvider
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -158,6 +160,57 @@ class ConnectionManagerTest {
         connectionManager.disconnect()
         verify { link1.disconnect() }
         verify { link2.disconnect() }
+    }
+
+    // --- TransferPacket tests ---
+
+    @Test
+    fun `sendPacketBlocking with TransferPacket calls sendTransferPacket on link`() {
+        val link = createMockLink()
+        every { link.sendTransferPacket(any(), any(), any()) } returns true
+        connectionManager.addLink(link)
+
+        val corePacket = org.cosmic.cosmicconnect.Core.NetworkPacket(
+            id = 1L, type = "cconnect.ping", body = mapOf("message" to "test")
+        )
+        val tp = TransferPacket(corePacket)
+        val callback = mockk<Device.SendPacketStatusCallback>(relaxed = true)
+
+        val result = connectionManager.sendPacketBlocking(tp, callback, false)
+        assertTrue(result)
+        verify { link.sendTransferPacket(tp, callback, false) }
+    }
+
+    @Test
+    fun `sendPacketBlocking with TransferPacket returns false when no links`() {
+        val corePacket = org.cosmic.cosmicconnect.Core.NetworkPacket(
+            id = 1L, type = "cconnect.ping", body = emptyMap()
+        )
+        val tp = TransferPacket(corePacket)
+        val callback = mockk<Device.SendPacketStatusCallback>(relaxed = true)
+
+        val result = connectionManager.sendPacketBlocking(tp, callback, false)
+        assertFalse(result)
+    }
+
+    @Test
+    fun `sendPacketBlocking with TransferPacket tries next link on failure`() {
+        val link1 = createMockLink("link1")
+        val link2 = createMockLink("link2")
+        every { link1.sendTransferPacket(any(), any(), any()) } throws java.io.IOException("fail")
+        every { link2.sendTransferPacket(any(), any(), any()) } returns true
+        connectionManager.addLink(link1)
+        connectionManager.addLink(link2)
+
+        val tp = TransferPacket(
+            org.cosmic.cosmicconnect.Core.NetworkPacket(
+                id = 1L, type = "cconnect.ping", body = emptyMap()
+            )
+        )
+        val callback = mockk<Device.SendPacketStatusCallback>(relaxed = true)
+
+        val result = connectionManager.sendPacketBlocking(tp, callback, false)
+        assertTrue(result)
     }
 
     private fun createMockLink(

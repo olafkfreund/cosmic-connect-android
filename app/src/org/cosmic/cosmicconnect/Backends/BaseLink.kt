@@ -8,6 +8,7 @@ package org.cosmic.cosmicconnect.Backends
 
 import android.content.Context
 import androidx.annotation.WorkerThread
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.DeviceInfo
 import org.cosmic.cosmicconnect.NetworkPacket
@@ -60,4 +61,18 @@ abstract class BaseLink protected constructor(
         callback: Device.SendPacketStatusCallback,
         sendPayloadFromSameThread: Boolean
     ): Boolean
+
+    /**
+     * Send a TransferPacket (Core.NetworkPacket + payload).
+     *
+     * Default implementation converts to legacy and delegates to [sendPacket].
+     * Subclasses (e.g., LanLink) can override for direct Core serialization.
+     */
+    @WorkerThread
+    @Throws(IOException::class)
+    open fun sendTransferPacket(
+        tp: TransferPacket,
+        callback: Device.SendPacketStatusCallback,
+        sendPayloadFromSameThread: Boolean
+    ): Boolean = sendPacket(tp.toLegacy(), callback, sendPayloadFromSameThread)
 }

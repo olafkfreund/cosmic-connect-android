@@ -12,6 +12,7 @@ import androidx.annotation.WorkerThread
 import org.apache.commons.io.IOUtils
 import org.cosmic.cosmicconnect.Backends.BaseLink
 import org.cosmic.cosmicconnect.Backends.BaseLinkProvider
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.DeviceInfo
 import org.cosmic.cosmicconnect.Helpers.SecurityHelpers.SslHelper
@@ -185,6 +186,131 @@ class LanLink @WorkerThread constructor(
             if (np.hasPayload()) {
                 np.payload?.close()
             }
+        }
+    }
+
+    /**
+     * Send a TransferPacket using direct Core serialization — no legacy intermediate.
+     *
+     * This avoids the Map->JSONObject->String->JSONObject->String double-serialize path.
+     * Instead: Core.NetworkPacket.serializeKotlin() produces wire JSON in one pass.
+     */
+    @WorkerThread
+    override fun sendTransferPacket(
+        tp: TransferPacket,
+        callback: Device.SendPacketStatusCallback,
+        sendPayloadFromSameThread: Boolean
+    ): Boolean {
+        val currentSocket = socket
+        if (currentSocket == null) {
+            Log.e("COSMIC/sendTransferPacket", "Not yet connected")
+            callback.onFailure(NotYetConnectedException())
+            return false
+        }
+
+        try {
+            // Prepare socket for the payload
+            val server: ServerSocket?
+            if (tp.hasPayload) {
+                server = LanLinkProvider.openServerSocketOnFreePort(LanLinkProvider.PAYLOAD_TRANSFER_MIN_PORT)
+                tp.runtimeTransferInfo = mapOf("port" to server.localPort)
+            } else {
+                server = null
+            }
+
+            // Send body — direct Core serialization, one JSON pass
+            try {
+                val writer = currentSocket.outputStream
+                writer.write(tp.serializeForWire().toByteArray(Charsets.UTF_8))
+                writer.flush()
+            } catch (e: Exception) {
+                disconnect()
+                try {
+                    server?.close()
+                } catch (ignored: Exception) {
+                }
+                throw e
+            }
+
+            // Send payload
+            if (server != null) {
+                if (sendPayloadFromSameThread) {
+                    sendTransferPayload(tp, callback, server)
+                } else {
+                    ThreadHelper.execute {
+                        try {
+                            sendTransferPayload(tp, callback, server)
+                        } catch (e: IOException) {
+                            e.printStackTrace()
+                            Log.e(
+                                "LanLink/sendTransferPacket",
+                                "Async sendPayload failed for packet of type ${tp.type}. The Plugin was NOT notified."
+                            )
+                        }
+                    }
+                }
+            }
+
+            if (!tp.isCanceled) {
+                callback.onSuccess()
+            }
+            return true
+        } catch (e: Exception) {
+            callback.onFailure(e)
+            return false
+        } finally {
+            if (tp.hasPayload) {
+                tp.payload?.close()
+            }
+        }
+    }
+
+    @Throws(IOException::class)
+    private fun sendTransferPayload(
+        tp: TransferPacket,
+        callback: Device.SendPacketStatusCallback,
+        server: ServerSocket
+    ) {
+        var payloadSocket: Socket? = null
+        var outputStream: java.io.OutputStream? = null
+        try {
+            if (!tp.isCanceled) {
+                server.soTimeout = 10 * 1000
+                payloadSocket = server.accept()
+                payloadSocket = sslHelper.convertToSslSocket(payloadSocket, deviceId, true, false)
+                outputStream = payloadSocket.outputStream
+                val inputStream = tp.payload?.inputStream
+
+                Log.i("COSMIC/LanLink", "Beginning to send payload for ${tp.type}")
+                val buffer = ByteArray(65536)
+                var bytesRead: Int = -1
+                val size = tp.payloadSize
+                var progress: Long = 0
+                var timeSinceLastUpdate: Long = -1
+                while (!tp.isCanceled && inputStream?.read(buffer).also { bytesRead = it ?: -1 } != -1) {
+                    progress += bytesRead.toLong()
+                    outputStream.write(buffer, 0, bytesRead)
+                    if (size > 0) {
+                        if (timeSinceLastUpdate + 500 < System.currentTimeMillis()) {
+                            val percent = 100 * progress / size
+                            callback.onPayloadProgressChanged(percent.toInt())
+                            timeSinceLastUpdate = System.currentTimeMillis()
+                        }
+                    }
+                }
+                outputStream.flush()
+                Log.i("COSMIC/LanLink", "Finished sending payload ($progress bytes written)")
+            }
+        } catch (e: SocketTimeoutException) {
+            Log.e("LanLink", "Socket for payload in packet ${tp.type} timed out.")
+        } catch (e: SSLHandshakeException) {
+            Log.e("sendTransferPacket", "Payload SSLSocket failed")
+            e.printStackTrace()
+        } finally {
+            try { server.close() } catch (ignored: Exception) {}
+            try { IOUtils.close(payloadSocket) } catch (ignored: Exception) {}
+            tp.payload?.close()
+            try { IOUtils.close(outputStream) } catch (ignored: Exception) {}
         }
     }
 

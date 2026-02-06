@@ -14,6 +14,7 @@ import androidx.annotation.WorkerThread
 import org.cosmic.cosmicconnect.Backends.BaseLink
 import org.cosmic.cosmicconnect.Backends.BaseLink.PacketReceiver
 import org.cosmic.cosmicconnect.Backends.BaseLinkProvider
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.DeviceInfo.Companion.loadFromSettings
 import org.cosmic.cosmicconnect.Helpers.DeviceHelper
 import org.cosmic.cosmicconnect.Helpers.SecurityHelpers.SslHelper
@@ -238,6 +239,31 @@ class Device : PacketReceiver, PacketSender {
         callback: SendPacketStatusCallback,
         sendPayloadFromSameThread: Boolean
     ): Boolean = connectionManager.sendPacketBlocking(np, callback, sendPayloadFromSameThread)
+
+    // --- TransferPacket overloads ---
+
+    @AnyThread
+    override fun sendPacket(tp: TransferPacket, callback: SendPacketStatusCallback) =
+        connectionManager.sendPacket(tp, callback)
+
+    @AnyThread
+    override fun sendPacket(tp: TransferPacket) =
+        connectionManager.sendPacket(tp)
+
+    @WorkerThread
+    override fun sendPacketBlocking(tp: TransferPacket, callback: SendPacketStatusCallback): Boolean =
+        connectionManager.sendPacketBlocking(tp, callback)
+
+    @WorkerThread
+    override fun sendPacketBlocking(tp: TransferPacket): Boolean =
+        connectionManager.sendPacketBlocking(tp)
+
+    @WorkerThread
+    override fun sendPacketBlocking(
+        tp: TransferPacket,
+        callback: SendPacketStatusCallback,
+        sendPayloadFromSameThread: Boolean
+    ): Boolean = connectionManager.sendPacketBlocking(tp, callback, sendPayloadFromSameThread)
 
     //
     // Device info management

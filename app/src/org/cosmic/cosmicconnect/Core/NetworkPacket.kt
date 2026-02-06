@@ -261,29 +261,20 @@ data class NetworkPacket(
          */
         @JvmStatic
         fun fromLegacyPacket(legacyPacket: org.cosmic.cosmicconnect.NetworkPacket): NetworkPacket {
-            // Extract type
-            val type = legacyPacket.type
+            // Direct access to body JSONObject — no serialize/reparse cycle
+            val body = jsonObjectToMap(legacyPacket.body)
+            val type = PacketType.normalize(legacyPacket.type)
 
-            // Parse serialized packet to extract body
-            val serialized = legacyPacket.serialize()
-            val jsonPacket = org.json.JSONObject(serialized)
-            val jsonBody = jsonPacket.getJSONObject("body")
+            val payloadSize = if (legacyPacket.hasPayload())
+                legacyPacket.payloadSize.takeIf { it > 0 } else null
 
-            // Convert JSONObject to Map<String, Any> recursively
-            val body = jsonObjectToMap(jsonBody)
+            val transferInfo = if (legacyPacket.hasPayloadTransferInfo())
+                jsonObjectToMap(legacyPacket.payloadTransferInfo) else emptyMap()
 
-            // Determine payloadSize from packet if available
-            val payloadSize = if (jsonPacket.has("payloadSize")) {
-                jsonPacket.getLong("payloadSize").takeIf { it > 0 }
-            } else null
-
-            // Extract payloadTransferInfo if present
-            val transferInfo = if (jsonPacket.has("payloadTransferInfo")) {
-                jsonObjectToMap(jsonPacket.getJSONObject("payloadTransferInfo"))
-            } else emptyMap()
-
-            // Create new packet
-            return create(type, body).copy(
+            return NetworkPacket(
+                id = System.currentTimeMillis(),
+                type = type,
+                body = body,
                 payloadSize = payloadSize,
                 payloadTransferInfo = transferInfo
             )
@@ -343,6 +334,32 @@ data class NetworkPacket(
         }
 
         /**
+         * Deserialize wire JSON directly to Core.NetworkPacket (no legacy intermediate).
+         *
+         * Parses the same JSON format produced by [serializeKotlin] and legacy serialize().
+         * Use this in the transport layer for zero-copy incoming packet parsing.
+         *
+         * @param s JSON string (with or without trailing newline)
+         * @return Deserialized NetworkPacket
+         */
+        fun deserializeKotlin(s: String): NetworkPacket {
+            val jo = org.json.JSONObject(s)
+            val type = PacketType.normalize(jo.getString("type"))
+            val body = jsonObjectToMap(jo.getJSONObject("body"))
+            val payloadSize = if (jo.has("payloadSize"))
+                jo.getLong("payloadSize").takeIf { it > 0 } else null
+            val transferInfo = if (jo.has("payloadTransferInfo"))
+                jsonObjectToMap(jo.getJSONObject("payloadTransferInfo")) else emptyMap()
+            return NetworkPacket(
+                id = jo.getLong("id"),
+                type = type,
+                body = body,
+                payloadSize = payloadSize,
+                payloadTransferInfo = transferInfo
+            )
+        }
+
+        /**
          * Convert map to JSON string using Android's JSONObject
          *
          * This ensures proper JSON encoding with correct escape sequences
@@ -376,6 +393,30 @@ data class NetworkPacket(
                 throw CosmicConnectException("Failed to parse JSON body: $preview", e)
             }
         }
+    }
+
+    /**
+     * Serialize packet to JSON string for wire transmission (Kotlin-native, no FFI).
+     *
+     * Produces the same QJson-compatible format as legacy NetworkPacket.serialize():
+     * `{"id":123,"type":"...","body":{...}}\n`
+     *
+     * Unlike [serialize] (which goes through FFI and drops payloadTransferInfo),
+     * this method includes payloadTransferInfo in the output.
+     */
+    fun serializeKotlin(): String {
+        val jo = org.json.JSONObject()
+        jo.put("id", id)
+        jo.put("type", type)
+        jo.put("body", mapToJsonObject(body))
+        if (hasPayload) {
+            jo.put("payloadSize", payloadSize)
+            if (payloadTransferInfo.isNotEmpty()) {
+                jo.put("payloadTransferInfo", mapToJsonObject(payloadTransferInfo))
+            }
+        }
+        // QJSon does not escape slashes, but Java JSONObject does. Converting to QJson format.
+        return jo.toString().replace("\\/", "/") + "\n"
     }
 
     /**

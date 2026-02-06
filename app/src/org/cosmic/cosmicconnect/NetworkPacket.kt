@@ -19,6 +19,9 @@ class NetworkPacket private constructor(
     var payload: Payload?,
     var payloadTransferInfo: JSONObject,
 ) {
+    /** Expose body JSONObject for efficient conversion in Core.NetworkPacket.fromLegacyPacket() */
+    internal val body: JSONObject get() = mBody
+
     constructor(type: String) : this(
         type = type,
         mBody = JSONObject(),

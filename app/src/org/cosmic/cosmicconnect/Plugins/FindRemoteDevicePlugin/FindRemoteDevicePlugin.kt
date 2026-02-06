@@ -5,15 +5,29 @@
  */
 package org.cosmic.cosmicconnect.Plugins.FindRemoteDevicePlugin
 
+import android.content.Context
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import dagger.hilt.android.qualifiers.ApplicationContext
 import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.FindMyPhonePlugin
 import org.cosmic.cosmicconnect.Plugins.Plugin
-import org.cosmic.cosmicconnect.Plugins.PluginFactory.LoadablePlugin
+import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.R
 
-@LoadablePlugin
-class FindRemoteDevicePlugin : Plugin() {
+class FindRemoteDevicePlugin @AssistedInject constructor(
+    @ApplicationContext context: Context,
+    @Assisted device: Device,
+) : Plugin(context, device) {
+
+    @AssistedFactory
+    interface Factory : PluginCreator {
+        override fun create(device: Device): FindRemoteDevicePlugin
+    }
+
     override val displayName: String
         get() = context.resources.getString(R.string.pref_plugin_findremotedevice)
 
@@ -24,13 +38,11 @@ class FindRemoteDevicePlugin : Plugin() {
 
     override fun getUiMenuEntries(): List<PluginUiMenuEntry> = listOf(
         PluginUiMenuEntry(context.getString(R.string.ring)) { parentActivity ->
-            // Create immutable NetworkPacket via FFI
             val packet = NetworkPacket.create(
                 FindMyPhonePlugin.PACKET_TYPE_FINDMYPHONE_REQUEST,
                 emptyMap()
             )
 
-            // Convert to legacy packet for Device.sendPacket()
             val legacyPacket = LegacyNetworkPacket(packet.type)
             device.sendPacket(legacyPacket)
         }

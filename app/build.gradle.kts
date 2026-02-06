@@ -146,6 +146,20 @@ android {
             isShrinkResources = true
         }
     }
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+            isReturnDefaultValues = true
+            all {
+                // Exclude Apache SSHD sftp module from unit test classpath to prevent
+                // SftpFileSystemProvider ServiceLoader conflict with Robolectric.
+                it.classpath = it.classpath.filter { file ->
+                    !file.name.contains("sshd-sftp")
+                }
+            }
+        }
+    }
+
     lint {
         abortOnError = false
         checkReleaseBuilds = false

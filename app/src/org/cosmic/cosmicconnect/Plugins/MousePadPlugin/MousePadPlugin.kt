@@ -7,21 +7,34 @@ package org.cosmic.cosmicconnect.Plugins.MousePadPlugin
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.view.KeyEvent
-import androidx.preference.PreferenceManager
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import dagger.hilt.android.qualifiers.ApplicationContext
+import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.DeviceType
 import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
-import org.cosmic.cosmicconnect.Plugins.PluginFactory.LoadablePlugin
+import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment.Companion.newInstance
 import org.cosmic.cosmicconnect.R
 import org.json.JSONObject
 
-@LoadablePlugin
-class MousePadPlugin : Plugin() {
+class MousePadPlugin @AssistedInject constructor(
+    @ApplicationContext context: Context,
+    @Assisted device: Device,
+) : Plugin(context, device) {
+
+    @AssistedFactory
+    interface Factory : PluginCreator {
+        override fun create(device: Device): MousePadPlugin
+    }
+
     var isKeyboardEnabled: Boolean = true
         private set
 
@@ -146,17 +159,11 @@ class MousePadPlugin : Plugin() {
         device.sendPacket(legacyPacket)
     }
 
-    /**
-     * Helper to send special key packets
-     */
     private fun sendSpecialKey(keyCode: Int) {
         val specialKey = KeyListenerView.SpecialKeysMap.get(keyCode)
         sendMousePacket(mapOf("specialKey" to specialKey))
     }
 
-    /**
-     * Helper to send mouse/keyboard packets
-     */
     private fun sendMousePacket(body: Map<String, Any>) {
         val json = JSONObject(body).toString()
         val packet = MousePadPacketsFFI.createMousePadRequest(json)

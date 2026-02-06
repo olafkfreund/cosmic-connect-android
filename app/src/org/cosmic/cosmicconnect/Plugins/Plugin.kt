@@ -33,6 +33,20 @@ abstract class Plugin {
     var preferences: SharedPreferences? = null
         protected set
 
+    /** No-arg constructor for legacy reflection-based instantiation. */
+    constructor()
+
+    /**
+     * Constructor for Hilt @AssistedInject-migrated plugins.
+     * Sets context, device, and preferences directly — no need to call [setContext].
+     */
+    constructor(context: Context, device: Device) {
+        this.context = context
+        this.device = device
+        this.preferences =
+            context.getSharedPreferences(this.sharedPreferencesName, Context.MODE_PRIVATE)
+    }
+
     fun setContext(context: Context, device: Device?) {
         this.context = context
 

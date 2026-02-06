@@ -6,17 +6,30 @@
 package org.cosmic.cosmicconnect.Plugins.ConnectivityReportPlugin
 
 import android.Manifest
+import android.content.Context
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import dagger.hilt.android.qualifiers.ApplicationContext
 import org.json.JSONException
 import org.json.JSONObject
+import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.ConnectivityReportPlugin.ConnectivityListener.Companion.getInstance
 import org.cosmic.cosmicconnect.Plugins.ConnectivityReportPlugin.ConnectivityListener.SubscriptionState
 import org.cosmic.cosmicconnect.Plugins.Plugin
-import org.cosmic.cosmicconnect.Plugins.PluginFactory.LoadablePlugin
+import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.R
 
-@LoadablePlugin
-class ConnectivityReportPlugin : Plugin() {
+class ConnectivityReportPlugin @AssistedInject constructor(
+    @ApplicationContext context: Context,
+    @Assisted device: Device,
+) : Plugin(context, device) {
+
+    @AssistedFactory
+    interface Factory : PluginCreator {
+        override fun create(device: Device): ConnectivityReportPlugin
+    }
 
     override val displayName: String
         get() = context.resources.getString(R.string.pref_plugin_connectivity_report)
@@ -24,36 +37,12 @@ class ConnectivityReportPlugin : Plugin() {
     override val description: String
         get() = context.resources.getString(R.string.pref_plugin_connectivity_report_desc)
 
-    /**
-     * Connectivity state change listener
-     *
-     * Reports the current connectivity state when changed.
-     *
-     * The body should contain a key "signalStrengths" which has a dict that maps
-     * a SubscriptionID (opaque value) to a dict with the connection info (See below)
-     *
-     * For example:
-     * {
-     *     "signalStrengths": {
-     *         "6": {
-     *             "networkType": "4G",
-     *             "signalStrength": 3
-     *         },
-     *         "17": {
-     *             "networkType": "HSPA",
-     *             "signalStrength": 2
-     *         },
-     *         ...
-     *     }
-     * }
-     */
     var listener = object : ConnectivityListener.StateCallback {
         override fun statesChanged(states : Map<Int, SubscriptionState>) {
             if (states.isEmpty()) {
                 return
             }
 
-            // Build signal strengths JSON
             val signalStrengths = JSONObject()
             states.forEach { (subID: Int, subscriptionState: SubscriptionState) ->
                 try {
@@ -66,12 +55,10 @@ class ConnectivityReportPlugin : Plugin() {
                 }
             }
 
-            // Create packet using FFI
             val packet = ConnectivityPacketsFFI.createConnectivityReport(
                 signalStrengths.toString()
             )
 
-            // Convert and send
             device.sendPacket(packet.toLegacyPacket())
         }
     }

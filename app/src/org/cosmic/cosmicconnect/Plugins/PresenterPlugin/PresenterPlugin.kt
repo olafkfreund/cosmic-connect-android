@@ -5,20 +5,32 @@
 */
 package org.cosmic.cosmicconnect.Plugins.PresenterPlugin
 
-import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.view.KeyEvent
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import dagger.hilt.android.qualifiers.ApplicationContext
+import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.DeviceType
 import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.MousePadPlugin.KeyListenerView
 import org.cosmic.cosmicconnect.Plugins.Plugin
-import org.cosmic.cosmicconnect.Plugins.PluginFactory.LoadablePlugin
+import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.R
 
 
-@LoadablePlugin
-class PresenterPlugin : Plugin() {
+class PresenterPlugin @AssistedInject constructor(
+    @ApplicationContext context: Context,
+    @Assisted device: Device,
+) : Plugin(context, device) {
+
+    @AssistedFactory
+    interface Factory : PluginCreator {
+        override fun create(device: Device): PresenterPlugin
+    }
 
     override val displayName: String
         get() = context.getString(R.string.pref_plugin_presenter)
@@ -62,46 +74,33 @@ class PresenterPlugin : Plugin() {
     }
 
     fun sendPointer(xDelta: Float, yDelta: Float) {
-        // Create packet using FFI
         val packet = PresenterPacketsFFI.createPointerMovement(
             xDelta.toDouble(),
             yDelta.toDouble()
         )
 
-        // Convert and send
         device.sendPacket(convertToLegacyPacket(packet))
     }
 
     fun stopPointer() {
-        // Create packet using FFI
         val packet = PresenterPacketsFFI.createStop()
 
-        // Convert and send
         device.sendPacket(convertToLegacyPacket(packet))
     }
 
-    /**
-     * Helper to send special key packets
-     */
     private fun sendKeyPacket(keyCode: Int) {
         val specialKey = KeyListenerView.SpecialKeysMap.get(keyCode)
 
-        // Create immutable packet
         val packet = NetworkPacket.create(PACKET_TYPE_MOUSEPAD_REQUEST, mapOf(
             "specialKey" to specialKey
         ))
 
-        // Convert and send
         device.sendPacket(convertToLegacyPacket(packet))
     }
 
-    /**
-     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
-     */
     private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
         val legacy = LegacyNetworkPacket(ffi.type)
 
-        // Copy all body fields
         ffi.body.forEach { (key, value) ->
             when (value) {
                 is String -> legacy.set(key, value)

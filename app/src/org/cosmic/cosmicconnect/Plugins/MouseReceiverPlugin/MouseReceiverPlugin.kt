@@ -12,8 +12,8 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 import org.apache.commons.lang3.ArrayUtils
-import org.cosmic.cosmicconnect.NetworkPacket
 import android.content.Context
+import org.cosmic.cosmicconnect.Core.*
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.RemoteKeyboardPlugin.RemoteKeyboardPlugin
@@ -41,7 +41,8 @@ class MouseReceiverPlugin(context: Context, device: Device) : Plugin(context, de
                 .create()
         }
 
-    override fun onPacketReceived(np: org.cosmic.cosmicconnect.NetworkPacket): Boolean {
+    override fun onPacketReceived(tp: TransferPacket): Boolean {
+        val np = tp.packet
         if (np.type != PACKET_TYPE_MOUSEPAD_REQUEST) {
             Log.e("MouseReceiverPlugin", "Invalid packet type for MouseReceiverPlugin: ${np.type}")
             return false
@@ -98,7 +99,7 @@ class MouseReceiverPlugin(context: Context, device: Device) : Plugin(context, de
             }
         }
 
-        return super.onPacketReceived(np)
+        return super.onPacketReceived(tp)
     }
 
     override val minSdk: Int

@@ -44,7 +44,9 @@ import org.apache.commons.io.IOUtils
 import org.cosmic.cosmicconnect.Helpers.SMSHelper
 import org.cosmic.cosmicconnect.Helpers.TelephonyHelper
 import org.cosmic.cosmicconnect.Helpers.TelephonyHelper.LocalPhoneNumber
-import org.cosmic.cosmicconnect.NetworkPacket
+import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.Core.Payload as CorePayload
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.R
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
@@ -471,7 +473,7 @@ object SmsMmsUtils {
     /**
      * Create a SMS attachment packet using the partID of the file requested by the device
      */
-    fun partIdToMessageAttachmentPacket(context: Context, partID: Long, filename: String, type: String): NetworkPacket? {
+    fun partIdToMessageAttachmentPacket(context: Context, partID: Long, filename: String, type: String): TransferPacket? {
         val attachment = loadAttachment(context, partID)
         val size = attachment.size.toLong()
         if (size == 0L) {
@@ -481,10 +483,8 @@ object SmsMmsUtils {
         try {
             val inputStream: InputStream = ByteArrayInputStream(attachment)
 
-            val np = NetworkPacket(type)
-            np["filename"] = filename
-            np.payload = NetworkPacket.Payload(inputStream, size)
-            return np
+            val packet = NetworkPacket.create(type, mapOf("filename" to filename))
+            return TransferPacket(packet, payload = CorePayload(inputStream, size))
         } catch (e: Exception) {
             return null
         }

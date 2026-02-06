@@ -30,6 +30,7 @@ import dagger.assisted.AssistedInject
 import dagger.hilt.EntryPoints
 import dagger.hilt.android.qualifiers.ApplicationContext
 import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.DeviceType
 import org.cosmic.cosmicconnect.Helpers.DeviceHelper
@@ -221,12 +222,11 @@ class FindMyPhonePlugin @AssistedInject constructor(
     // Packet Reception
     // ========================================================================
 
-    override fun onPacketReceived(np: org.cosmic.cosmicconnect.NetworkPacket): Boolean {
-        // Convert legacy packet to immutable for type-safe inspection
-        val networkPacket = NetworkPacket.fromLegacy(np)
+    override fun onPacketReceived(tp: TransferPacket): Boolean {
+        val np = tp.packet
 
         // Verify packet type using extension property
-        if (!networkPacket.isFindMyPhoneRequest) {
+        if (!np.isFindMyPhoneRequest) {
             return false
         }
 

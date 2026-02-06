@@ -24,7 +24,6 @@ import org.cosmic.cosmicconnect.Helpers.ContactsHelper.VCardBuilder
 import org.cosmic.cosmicconnect.Helpers.ContactsHelper.UID
 import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.Core.TransferPacket
-import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.UserInterface.AlertDialogFragment
@@ -120,10 +119,10 @@ class ContactsPlugin @AssistedInject constructor(
      *
      * The identifiers returned can be used in future requests to get more information about the contact
      *
-     * @param np The packet containing the request
+     * @param tp The packet containing the request
      * @return true if successfully handled, false otherwise
      */
-    private fun handleRequestAllUIDsTimestamps(@Suppress("unused") np: LegacyNetworkPacket): Boolean {
+    private fun handleRequestAllUIDsTimestamps(@Suppress("unused") tp: TransferPacket): Boolean {
         val uIDsToTimestamps: Map<UID, Long> = ContactsHelper.getAllContactTimestamps(context)
 
         // Build packet body with nested "uids" object
@@ -144,13 +143,17 @@ class ContactsPlugin @AssistedInject constructor(
         return true
     }
 
-    private fun handleRequestVCardsByUIDs(np: LegacyNetworkPacket): Boolean {
-        if (PACKET_UIDS_KEY !in np) {
+    private fun handleRequestVCardsByUIDs(tp: TransferPacket): Boolean {
+        val np = tp.packet
+
+        if (!np.body.containsKey(PACKET_UIDS_KEY)) {
             Log.e("ContactsPlugin", "handleRequestNamesByUIDs received a malformed packet with no uids key")
             return false
         }
 
-        val storedUIDs: List<UID>? = np.getStringList("uids")?.distinct()?.map { UID(it) }
+        @Suppress("UNCHECKED_CAST")
+        val uidsList = np.body[PACKET_UIDS_KEY] as? List<String>
+        val storedUIDs: List<UID>? = uidsList?.distinct()?.map { UID(it) }
         if (storedUIDs == null) {
             Log.e("ContactsPlugin", "handleRequestNamesByUIDs received a malformed packet with no uids")
             return false
@@ -183,12 +186,16 @@ class ContactsPlugin @AssistedInject constructor(
         return true
     }
 
-    override fun onPacketReceived(np: LegacyNetworkPacket): Boolean = when (np.type) {
-        PACKET_TYPE_CONTACTS_REQUEST_ALL_UIDS_TIMESTAMPS -> this.handleRequestAllUIDsTimestamps(np)
-        PACKET_TYPE_CONTACTS_REQUEST_VCARDS_BY_UIDS -> this.handleRequestVCardsByUIDs(np)
-        else -> {
-            Log.e("ContactsPlugin", "Contacts plugin received an unexpected packet!")
-            false
+    override fun onPacketReceived(tp: TransferPacket): Boolean {
+        val np = tp.packet
+
+        return when (np.type) {
+            PACKET_TYPE_CONTACTS_REQUEST_ALL_UIDS_TIMESTAMPS -> this.handleRequestAllUIDsTimestamps(tp)
+            PACKET_TYPE_CONTACTS_REQUEST_VCARDS_BY_UIDS -> this.handleRequestVCardsByUIDs(tp)
+            else -> {
+                Log.e("ContactsPlugin", "Contacts plugin received an unexpected packet!")
+                false
+            }
         }
     }
 

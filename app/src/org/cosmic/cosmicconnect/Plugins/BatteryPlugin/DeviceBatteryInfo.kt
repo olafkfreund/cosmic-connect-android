@@ -6,7 +6,9 @@
 
 package org.cosmic.cosmicconnect.Plugins.BatteryPlugin
 
-import org.cosmic.cosmicconnect.NetworkPacket
+import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.Core.getInt
+import org.cosmic.cosmicconnect.Core.getBoolean
 
 /**
  * Specialised data representation of the packets received by [BatteryPlugin].

@@ -26,9 +26,8 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.qualifiers.ApplicationContext
-import org.cosmic.cosmicconnect.Core.TransferPacket
+import org.cosmic.cosmicconnect.Core.*
 import org.cosmic.cosmicconnect.Device
-import org.cosmic.cosmicconnect.NetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory
 import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
@@ -241,7 +240,7 @@ class RemoteKeyboardPlugin @AssistedInject constructor(
         return true
     }
 
-    private fun handleEvent(np: org.cosmic.cosmicconnect.NetworkPacket): Boolean {
+    private fun handleEvent(np: org.cosmic.cosmicconnect.Core.NetworkPacket): Boolean {
         if (np.has("specialKey") && isValidSpecialKey(np.getInt("specialKey"))) {
             return handleSpecialKey(
                 np.getInt("specialKey"),
@@ -265,7 +264,8 @@ class RemoteKeyboardPlugin @AssistedInject constructor(
         Mouse,
     }
 
-    override fun onPacketReceived(np: org.cosmic.cosmicconnect.NetworkPacket): Boolean {
+    override fun onPacketReceived(tp: TransferPacket): Boolean {
+        val np = tp.packet
         if (np.type != PACKET_TYPE_MOUSEPAD_REQUEST) {
             Log.e("RemoteKeyboardPlugin", "Invalid packet type for RemoteKeyboardPlugin: ${np.type}")
             return false
@@ -380,7 +380,7 @@ class RemoteKeyboardPlugin @AssistedInject constructor(
         }
 
         @JvmStatic
-        fun getMousePadPacketType(np: org.cosmic.cosmicconnect.NetworkPacket): MousePadPacketType {
+        fun getMousePadPacketType(np: org.cosmic.cosmicconnect.Core.NetworkPacket): MousePadPacketType {
             return if (np.has("key") || np.has("specialKey")) {
                 MousePadPacketType.Keyboard
             } else {

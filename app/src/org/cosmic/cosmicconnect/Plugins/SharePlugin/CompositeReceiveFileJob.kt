@@ -17,10 +17,15 @@ import androidx.core.content.FileProvider
 import androidx.documentfile.provider.DocumentFile
 import org.apache.commons.io.FilenameUtils
 import org.apache.commons.io.IOUtils
+import org.cosmic.cosmicconnect.Core.TransferPacket
+import org.cosmic.cosmicconnect.Core.getString
+import org.cosmic.cosmicconnect.Core.getInt
+import org.cosmic.cosmicconnect.Core.getBoolean
+import org.cosmic.cosmicconnect.Core.getLong
+import org.cosmic.cosmicconnect.Core.has
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Helpers.FilesHelper
 import org.cosmic.cosmicconnect.Helpers.MediaStoreHelper
-import org.cosmic.cosmicconnect.NetworkPacket
 import org.cosmic.cosmicconnect.R
 import org.cosmic.cosmicconnect.async.BackgroundJob
 import java.io.*
@@ -31,7 +36,7 @@ import java.nio.file.attribute.FileTime
 /**
  * A type of [BackgroundJob] that reads Files from another device.
  *
- * We receive the requests as [NetworkPacket]s.
+ * We receive the requests as [TransferPacket]s.
  * Each packet should have a 'filename' property and a payload. If the payload is missing,
  * we'll just create an empty file. You can add new packets anytime via
  * [.addNetworkPacket].
@@ -44,7 +49,7 @@ class CompositeReceiveFileJob(device: Device, callback: Callback<java.lang.Void?
     BackgroundJob<Device, java.lang.Void?>(device, callback) {
 
     private val receiveNotification: ReceiveNotification
-    private var currentNetworkPacket: NetworkPacket? = null
+    private var currentNetworkPacket: TransferPacket? = null
     private var currentFileName = ""
     private var currentFileNum = 0
     private var totalReceived: Long = 0
@@ -54,7 +59,7 @@ class CompositeReceiveFileJob(device: Device, callback: Callback<java.lang.Void?
     private val lock = Any() // Use to protect concurrent access to the variables below
 
     @GuardedBy("lock")
-    private val networkPacketList: MutableList<NetworkPacket> = ArrayList()
+    private val networkPacketList: MutableList<TransferPacket> = ArrayList()
 
     @GuardedBy("lock")
     private var totalNumFiles = 0
@@ -94,13 +99,14 @@ class CompositeReceiveFileJob(device: Device, callback: Callback<java.lang.Void?
         }
     }
 
-    fun addNetworkPacket(networkPacket: NetworkPacket) {
+    fun addNetworkPacket(tp: TransferPacket) {
         synchronized(lock) {
-            if (!networkPacketList.contains(networkPacket)) {
-                networkPacketList.add(networkPacket)
+            if (!networkPacketList.contains(tp)) {
+                networkPacketList.add(tp)
 
-                totalNumFiles = networkPacket.getInt(SharePlugin.KEY_NUMBER_OF_FILES, 1)
-                totalPayloadSize = networkPacket.getLong(SharePlugin.KEY_TOTAL_PAYLOAD_SIZE)
+                val np = tp.packet
+                totalNumFiles = np.getInt(SharePlugin.KEY_NUMBER_OF_FILES, 1)
+                totalPayloadSize = np.getLong(SharePlugin.KEY_TOTAL_PAYLOAD_SIZE)
 
                 receiveNotification.setTitle(
                     getDevice().context.resources
@@ -132,29 +138,31 @@ class CompositeReceiveFileJob(device: Device, callback: Callback<java.lang.Void?
                 synchronized(lock) {
                     currentNetworkPacket = networkPacketList[0]
                 }
-                currentNetworkPacket?.let { packet ->
-                    currentFileName = packet.getString("filename", System.currentTimeMillis().toString())
+                currentNetworkPacket?.let { tp ->
+                    val np = tp.packet
+                    currentFileName = np.getString("filename", System.currentTimeMillis().toString())
                     currentFileNum++
 
                     setProgress(prevProgressPercentage.toInt())
 
-                    fileDocument = getDocumentFileFor(currentFileName, packet.getBoolean("open", false))
+                    fileDocument = getDocumentFileFor(currentFileName, np.getBoolean("open", false))
 
                     fileDocument?.let { doc ->
-                        if (packet.hasPayload()) {
+                        val currentPayload = tp.payload
+                        if (currentPayload != null) {
                             outputStream = BufferedOutputStream(getDevice().context.contentResolver.openOutputStream(doc.uri))
-                            val inputStream = packet.payload?.inputStream
+                            val inputStream = currentPayload.inputStream
 
                             inputStream?.let { input ->
                                 val received = receiveFile(input, outputStream!!)
 
-                                packet.payload?.close()
+                                currentPayload.close()
 
-                                if (received != packet.payloadSize) {
+                                if (received != tp.payloadSize) {
                                     doc.delete()
 
                                     if (!isCancelled) {
-                                        throw RuntimeException("Failed to receive: $currentFileName received:$received bytes, expected: ${packet.payloadSize} bytes")
+                                        throw RuntimeException("Failed to receive: $currentFileName received:$received bytes, expected: ${tp.payloadSize} bytes")
                                     }
                                 } else {
                                     publishFile(doc, received)
@@ -167,9 +175,9 @@ class CompositeReceiveFileJob(device: Device, callback: Callback<java.lang.Void?
                         }
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            if (packet.has("lastModified")) {
+                            if (np.has("lastModified")) {
                                 try {
-                                    val lastModified = packet.getLong("lastModified")
+                                    val lastModified = np.getLong("lastModified")
                                     Files.setLastModifiedTime(Paths.get(doc.uri.path!!), FileTime.fromMillis(lastModified))
                                 } catch (e: Exception) {
                                     Log.e("SharePlugin", "Can't set date on file")
@@ -217,7 +225,7 @@ class CompositeReceiveFileJob(device: Device, callback: Callback<java.lang.Void?
                 numFiles = totalNumFiles
             }
 
-            if (numFiles == 1 && currentNetworkPacket?.getBoolean("open", false) == true && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            if (numFiles == 1 && currentNetworkPacket?.packet?.getBoolean("open", false) == true && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
                 receiveNotification.cancel()
                 fileDocument?.let { openFile(it) }
             } else {
@@ -331,8 +339,8 @@ class CompositeReceiveFileJob(device: Device, callback: Callback<java.lang.Void?
     }
 
     private fun closeAllInputStreams() {
-        for (np in networkPacketList) {
-            np.payload?.close()
+        for (tp in networkPacketList) {
+            tp.payload?.close()
         }
     }
 

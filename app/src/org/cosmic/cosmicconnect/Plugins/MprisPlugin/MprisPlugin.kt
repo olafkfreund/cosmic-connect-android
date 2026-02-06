@@ -24,7 +24,13 @@ import org.cosmic.cosmicconnect.Helpers.NotificationHelper
 import org.cosmic.cosmicconnect.Helpers.ThreadHelper
 import org.cosmic.cosmicconnect.Helpers.VideoUrlsHelper
 import org.cosmic.cosmicconnect.Core.NetworkPacket
-import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
+import org.cosmic.cosmicconnect.Core.TransferPacket
+import org.cosmic.cosmicconnect.Core.getString
+import org.cosmic.cosmicconnect.Core.getInt
+import org.cosmic.cosmicconnect.Core.getBoolean
+import org.cosmic.cosmicconnect.Core.getLong
+import org.cosmic.cosmicconnect.Core.has
+import org.cosmic.cosmicconnect.Core.getStringList
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -257,9 +263,10 @@ class MprisPlugin @AssistedInject constructor(
         ))
     }
 
-    override fun onPacketReceived(np: LegacyNetworkPacket): Boolean {
+    override fun onPacketReceived(tp: TransferPacket): Boolean {
+        val np = tp.packet
         if (np.getBoolean("transferringAlbumArt", false)) {
-            payloadToDiskCache(np.getString("albumArtUrl"), np.payload)
+            payloadToDiskCache(np.getString("albumArtUrl"), tp.payload)
             return true
         }
 
@@ -474,6 +481,8 @@ class MprisPlugin @AssistedInject constructor(
      * Helper to send MPRIS packets
      */
     private fun sendMprisPacket(body: Map<String, Any>) {
+        val packet = NetworkPacket.create(PACKET_TYPE_MPRIS_REQUEST, body)
+        device.sendPacket(TransferPacket(packet))
     }
 
     fun fetchedAlbumArt(url: String) {

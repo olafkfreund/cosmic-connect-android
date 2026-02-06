@@ -40,7 +40,6 @@ import org.apache.commons.lang3.ArrayUtils
 import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.Core.Payload as CorePayload
 import org.cosmic.cosmicconnect.Core.TransferPacket
-import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -932,29 +931,28 @@ class NotificationsPlugin @AssistedInject constructor(
     }
 
     // Packet handling
-    override fun onPacketReceived(np: LegacyNetworkPacket): Boolean {
-        // Convert legacy packet to immutable for type-safe inspection
-        val networkPacket = NetworkPacket.fromLegacy(np)
+    override fun onPacketReceived(tp: TransferPacket): Boolean {
+        val np = tp.packet
 
         // Use extension properties from NotificationsPacketsFFI
         when {
-            networkPacket.isNotificationAction -> {
-                val key = networkPacket.notificationId
-                val actionTitle = networkPacket.body["action"] as? String
+            np.isNotificationAction -> {
+                val key = np.notificationId
+                val actionTitle = np.body["action"] as? String
                 if (key != null && actionTitle != null) {
                     triggerNotificationAction(key, actionTitle)
                 }
             }
 
-            networkPacket.isNotificationRequest -> {
-                if (networkPacket.body.containsKey("request")) {
+            np.isNotificationRequest -> {
+                if (np.body.containsKey("request")) {
                     // Request all notifications
                     if (serviceReady) {
                         NotificationReceiver.RunCommand(context, ::sendCurrentNotifications)
                     }
-                } else if (networkPacket.body.containsKey("cancel")) {
+                } else if (np.body.containsKey("cancel")) {
                     // Dismiss specific notification
-                    val dismissedId = networkPacket.body["cancel"] as? String
+                    val dismissedId = np.body["cancel"] as? String
                     if (dismissedId != null) {
                         currentNotifications.remove(dismissedId)
                         NotificationReceiver.RunCommand(context) { service ->
@@ -964,9 +962,9 @@ class NotificationsPlugin @AssistedInject constructor(
                 }
             }
 
-            networkPacket.isNotificationReply -> {
-                val replyId = networkPacket.notificationRequestReplyId
-                val message = networkPacket.body["message"] as? String
+            np.isNotificationReply -> {
+                val replyId = np.notificationRequestReplyId
+                val message = np.body["message"] as? String
                 if (replyId != null && message != null) {
                     replyToNotification(replyId, message)
                 }

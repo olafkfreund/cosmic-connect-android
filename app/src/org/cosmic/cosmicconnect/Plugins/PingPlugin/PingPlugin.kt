@@ -30,7 +30,6 @@ import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Helpers.NotificationHelper
-import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.R
@@ -117,21 +116,21 @@ class PingPlugin @AssistedInject constructor(
     // Packet Handling
     // ========================================================================
 
-    override fun onPacketReceived(np: LegacyNetworkPacket): Boolean {
-        val networkPacket = NetworkPacket.fromLegacy(np)
+    override fun onPacketReceived(tp: TransferPacket): Boolean {
+        val np = tp.packet
 
-        if (networkPacket.type != PACKET_TYPE_PING) {
+        if (np.type != PACKET_TYPE_PING) {
             Log.e(TAG, "Ping plugin should not receive packets other than pings!")
             return false
         }
 
-        val isKeepalive = networkPacket.body["keepalive"] as? Boolean ?: false
+        val isKeepalive = np.body["keepalive"] as? Boolean ?: false
         if (isKeepalive) {
             Log.d(TAG, "Received keepalive ping from ${device.name}")
             return true
         }
 
-        val message = networkPacket.body["message"] as? String ?: "Ping!"
+        val message = np.body["message"] as? String ?: "Ping!"
         displayPingNotification(message)
 
         return true

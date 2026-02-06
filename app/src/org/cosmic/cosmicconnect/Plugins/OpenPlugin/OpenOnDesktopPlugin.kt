@@ -139,12 +139,12 @@ class OpenOnDesktopPlugin @AssistedInject constructor(
         }
     }
 
-    override fun onPacketReceived(np: org.cosmic.cosmicconnect.NetworkPacket): Boolean {
-        val networkPacket = NetworkPacket.fromLegacy(np)
+    override fun onPacketReceived(tp: TransferPacket): Boolean {
+        val np = tp.packet
 
         return when {
-            networkPacket.isOpenResponse -> handleOpenResponse(networkPacket)
-            networkPacket.isOpenCapability -> handleCapabilityAnnouncement(networkPacket)
+            np.isOpenResponse -> handleOpenResponse(np)
+            np.isOpenCapability -> handleCapabilityAnnouncement(np)
             else -> false
         }
     }

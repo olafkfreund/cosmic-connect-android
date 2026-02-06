@@ -26,7 +26,11 @@ import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Helpers.NotificationHelper
 import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.Core.TransferPacket
-import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
+import org.cosmic.cosmicconnect.Core.getString
+import org.cosmic.cosmicconnect.Core.getInt
+import org.cosmic.cosmicconnect.Core.getBoolean
+import org.cosmic.cosmicconnect.Core.getStringOrNull
+import org.cosmic.cosmicconnect.Core.contains
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.UserInterface.MainActivity
@@ -56,7 +60,8 @@ class ReceiveNotificationsPlugin @AssistedInject constructor(
         return true
     }
 
-    override fun onPacketReceived(np: LegacyNetworkPacket): Boolean {
+    override fun onPacketReceived(tp: TransferPacket): Boolean {
+        val np = tp.packet
         if ("ticker" !in np || "appName" !in np || "id" !in np) {
             Log.e("NotificationsPlugin", "Received notification packet lacks properties")
             return true
@@ -69,7 +74,7 @@ class ReceiveNotificationsPlugin @AssistedInject constructor(
         val resultPendingIntent = PendingIntent.getActivity(context, 0, Intent(context, MainActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
 
         var largeIcon: Bitmap? = null
-        val payload = np.payload
+        val payload = tp.payload
         if (payload != null && payload.payloadSize != 0L) {
             val width = context.resources.getDimensionPixelSize(android.R.dimen.notification_large_icon_width)
             val height = context.resources.getDimensionPixelSize(android.R.dimen.notification_large_icon_height)

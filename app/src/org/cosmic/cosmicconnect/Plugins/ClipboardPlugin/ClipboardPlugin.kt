@@ -110,14 +110,13 @@ class ClipboardPlugin @AssistedInject constructor(
     // Packet Reception
     // ========================================================================
 
-    override fun onPacketReceived(np: org.cosmic.cosmicconnect.NetworkPacket): Boolean {
-        // Convert legacy packet to immutable for type-safe inspection
-        val networkPacket = NetworkPacket.fromLegacy(np)
+    override fun onPacketReceived(tp: TransferPacket): Boolean {
+        val np = tp.packet
 
         return when {
             // Handle standard clipboard update (no timestamp)
-            networkPacket.isClipboardUpdate -> {
-                val content = networkPacket.clipboardContent
+            np.isClipboardUpdate -> {
+                val content = np.clipboardContent
                 if (content != null) {
                     ClipboardListener.instance(context).setText(content)
                     true
@@ -127,8 +126,8 @@ class ClipboardPlugin @AssistedInject constructor(
             }
 
             // Handle clipboard connect with timestamp (sync loop prevention)
-            networkPacket.isClipboardConnect -> {
-                val timestamp = networkPacket.clipboardTimestamp
+            np.isClipboardConnect -> {
+                val timestamp = np.clipboardTimestamp
                 val localTimestamp = ClipboardListener.instance(context).updateTimestamp
 
                 // Ignore if timestamp is null, 0 (unknown), or older than local
@@ -136,7 +135,7 @@ class ClipboardPlugin @AssistedInject constructor(
                     return false
                 }
 
-                val content = networkPacket.clipboardContent
+                val content = np.clipboardContent
                 if (content != null) {
                     ClipboardListener.instance(context).setText(content)
                     true

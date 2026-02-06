@@ -15,7 +15,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.DeviceType
 import org.cosmic.cosmicconnect.Core.NetworkPacket
-import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Plugins.MousePadPlugin.KeyListenerView
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
@@ -79,13 +79,13 @@ class PresenterPlugin @AssistedInject constructor(
             yDelta.toDouble()
         )
 
-        device.sendPacket(convertToLegacyPacket(packet))
+        device.sendPacket(TransferPacket(packet))
     }
 
     fun stopPointer() {
         val packet = PresenterPacketsFFI.createStop()
 
-        device.sendPacket(convertToLegacyPacket(packet))
+        device.sendPacket(TransferPacket(packet))
     }
 
     private fun sendKeyPacket(keyCode: Int) {
@@ -95,25 +95,9 @@ class PresenterPlugin @AssistedInject constructor(
             "specialKey" to specialKey
         ))
 
-        device.sendPacket(convertToLegacyPacket(packet))
+        device.sendPacket(TransferPacket(packet))
     }
 
-    private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
-        val legacy = LegacyNetworkPacket(ffi.type)
-
-        ffi.body.forEach { (key, value) ->
-            when (value) {
-                is String -> legacy.set(key, value)
-                is Int -> legacy.set(key, value)
-                is Long -> legacy.set(key, value)
-                is Boolean -> legacy.set(key, value)
-                is Double -> legacy.set(key, value)
-                else -> legacy.set(key, value.toString())
-            }
-        }
-
-        return legacy
-    }
 
     companion object {
         private const val PACKET_TYPE_PRESENTER = "cconnect.presenter"

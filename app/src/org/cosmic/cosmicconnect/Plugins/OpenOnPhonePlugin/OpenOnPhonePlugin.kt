@@ -20,9 +20,9 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.qualifiers.ApplicationContext
+import org.cosmic.cosmicconnect.Core.*
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Helpers.NotificationHelper
-import org.cosmic.cosmicconnect.NetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.R
@@ -180,7 +180,8 @@ class OpenOnPhonePlugin @AssistedInject constructor(
     // Packet Reception
     // ========================================================================
 
-    override fun onPacketReceived(np: NetworkPacket): Boolean {
+    override fun onPacketReceived(tp: TransferPacket): Boolean {
+        val np = tp.packet
         when (np.type) {
             PACKET_TYPE_OPEN_REQUEST -> handleOpenRequest(np)
             PACKET_TYPE_OPEN_CAPABILITY -> {
@@ -197,9 +198,9 @@ class OpenOnPhonePlugin @AssistedInject constructor(
      *
      * Validates the URL and shows confirmation notification
      */
-    private fun handleOpenRequest(np: NetworkPacket) {
-        val requestId = np.getString("requestId")
-        val url = np.getString("url")
+    private fun handleOpenRequest(np: org.cosmic.cosmicconnect.Core.NetworkPacket) {
+        val requestId = np.getStringOrNull("requestId")
+        val url = np.getStringOrNull("url")
         val title = np.getString("title", "")
 
         if (requestId == null || url == null) {
@@ -444,14 +445,15 @@ class OpenOnPhonePlugin @AssistedInject constructor(
      * @param error Optional error message
      */
     fun sendOpenResponse(requestId: String, success: Boolean, error: String?) {
-        val np = NetworkPacket(PACKET_TYPE_OPEN_RESPONSE).apply {
-            set("requestId", requestId)
-            set("success", success)
-            if (error != null) {
-                set("error", error)
-            }
+        val body = mutableMapOf<String, Any>(
+            "requestId" to requestId,
+            "success" to success
+        )
+        if (error != null) {
+            body["error"] = error
         }
-        device.sendPacket(np)
+        val packet = NetworkPacket.create(PACKET_TYPE_OPEN_RESPONSE, body)
+        device.sendPacket(TransferPacket(packet))
     }
 
     // ========================================================================

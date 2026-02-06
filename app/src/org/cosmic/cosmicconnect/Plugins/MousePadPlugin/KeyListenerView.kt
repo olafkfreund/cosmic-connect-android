@@ -14,7 +14,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputConnection
 import dagger.hilt.EntryPoints
-import org.cosmic.cosmicconnect.NetworkPacket
+import org.cosmic.cosmicconnect.Core.NetworkPacketBuilder
 import org.cosmic.cosmicconnect.di.HiltBridges
 
 class KeyListenerView(context: Context, set: AttributeSet?) : View(context, set) {
@@ -43,9 +43,9 @@ class KeyListenerView(context: Context, set: AttributeSet?) : View(context, set)
         plugin?.sendText(chars.toString())
     }
 
-    private fun sendKeyPressPacket(np: NetworkPacket) {
+    private fun sendKeyPressPacket(body: Map<String, Any>) {
         val plugin = deviceRegistry.getDevicePlugin(deviceId, MousePadPlugin::class.java)
-        plugin?.sendPacket(np)
+        plugin?.sendKeyPacket(body)
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
@@ -64,40 +64,40 @@ class KeyListenerView(context: Context, set: AttributeSet?) : View(context, set)
             return false
         }
 
-        val np = NetworkPacket(MousePadPlugin.PACKET_TYPE_MOUSEPAD_REQUEST)
+        val body = mutableMapOf<String, Any>()
 
         var modifier = false
         if (event.isAltPressed) {
-            np.set("alt", true)
+            body["alt"] = true
             modifier = true
         }
 
         if (event.isCtrlPressed) {
-            np.set("ctrl", true)
+            body["ctrl"] = true
             modifier = true
         }
 
         if (event.isShiftPressed) {
-            np.set("shift", true)
+            body["shift"] = true
         }
 
         if (event.isMetaPressed) {
-            np.set("super", true)
+            body["super"] = true
             modifier = true
         }
 
         val specialKey = SpecialKeysMap.get(keyCode, -1)
 
         if (specialKey != -1) {
-            np.set("specialKey", specialKey)
+            body["specialKey"] = specialKey
         } else if (event.displayLabel.code != 0 && modifier) {
             val keyCharacter = event.displayLabel
-            np.set("key", keyCharacter.toString().lowercase())
+            body["key"] = keyCharacter.toString().lowercase()
         } else {
-            np.set("key", event.unicodeChar.toChar().toString())
+            body["key"] = event.unicodeChar.toChar().toString()
         }
 
-        sendKeyPressPacket(np)
+        sendKeyPressPacket(body)
         return true
     }
 

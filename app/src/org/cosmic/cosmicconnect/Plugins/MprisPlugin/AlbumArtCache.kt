@@ -21,7 +21,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
-import org.cosmic.cosmicconnect.NetworkPacket.Payload
+import org.cosmic.cosmicconnect.Core.Payload
 import org.cosmic.cosmicconnect.BuildConfig
 import java.io.File
 import java.io.IOException

@@ -14,10 +14,10 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import org.cosmic.cosmicconnect.Core.BatteryState
 import org.cosmic.cosmicconnect.Core.CosmicConnectCore
 import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Core.PluginManager
 import org.cosmic.cosmicconnect.Core.PluginManagerProvider
 import org.cosmic.cosmicconnect.Device
-import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.R
@@ -229,17 +229,16 @@ class BatteryPluginFFI @AssistedInject constructor(
         }
     }
 
-    override fun onPacketReceived(np: LegacyNetworkPacket): Boolean {
+    override fun onPacketReceived(tp: TransferPacket): Boolean {
+        val np = tp.packet
+
         if (PACKET_TYPE_BATTERY != np.type) {
             return false
         }
 
         try {
-            // Convert legacy NetworkPacket to FFI NetworkPacket
-            val ffiPacket = convertLegacyPacket(np)
-
             // Route to FFI plugin manager
-            pluginManager?.routePacket(ffiPacket)
+            pluginManager?.routePacket(np)
 
             // Update cached remote battery info
             updateRemoteBatteryInfo()
@@ -286,21 +285,6 @@ class BatteryPluginFFI @AssistedInject constructor(
         } catch (e: Exception) {
             Log.e(TAG, "Failed to get remote battery info", e)
         }
-    }
-
-    /**
-     * Convert legacy NetworkPacket to FFI NetworkPacket
-     */
-    private fun convertLegacyPacket(legacy: LegacyNetworkPacket): NetworkPacket {
-        // Extract battery data from legacy packet
-        val body = mapOf(
-            "currentCharge" to legacy.getInt("currentCharge", 0),
-            "isCharging" to legacy.getBoolean("isCharging", false),
-            "thresholdEvent" to legacy.getInt("thresholdEvent", 0)
-        )
-
-        // Create FFI NetworkPacket
-        return NetworkPacket.create(PACKET_TYPE_BATTERY, body)
     }
 
 }

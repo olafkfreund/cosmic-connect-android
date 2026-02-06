@@ -15,14 +15,12 @@ import androidx.preference.PreferenceManager
 import org.cosmic.cosmicconnect.Helpers.DeviceHelper
 import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.Core.TransferPacket
-import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PresenterPlugin.PresenterActivity
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment
 import org.cosmic.cosmicconnect.R
 import org.json.JSONObject
-
 import org.cosmic.cosmicconnect.di.HiltBridges
 import dagger.hilt.EntryPoints
 
@@ -50,7 +48,7 @@ class DigitizerPlugin(context: Context, device: Device) : Plugin(context, device
             parentActivity.startActivity(intent)
         })
 
-    override fun onPacketReceived(np: LegacyNetworkPacket): Boolean {
+    override fun onPacketReceived(tp: TransferPacket): Boolean {
         Log.e(TAG, "The drawing tablet plugin should not be able to receive any packets!")
         return false
     }

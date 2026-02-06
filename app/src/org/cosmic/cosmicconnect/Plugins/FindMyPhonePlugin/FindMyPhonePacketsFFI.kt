@@ -35,8 +35,8 @@ import uniffi.cosmic_connect_core.createFindmyphoneRequest
  *
  * **Receiving (Android side - typical):**
  * ```kotlin
- * override fun onPacketReceived(legacyNp: org.cosmic.cosmicconnect.NetworkPacket): Boolean {
- *     val np = NetworkPacket.fromLegacy(legacyNp)
+ * override fun onPacketReceived(tp: TransferPacket): Boolean {
+ *     val np = tp.packet
  *
  *     if (np.isFindMyPhoneRequest) {
  *         // Make phone ring

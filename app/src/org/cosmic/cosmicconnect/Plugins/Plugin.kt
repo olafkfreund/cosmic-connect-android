@@ -15,8 +15,8 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Device
-import org.cosmic.cosmicconnect.NetworkPacket
 import org.cosmic.cosmicconnect.UserInterface.AlertDialogFragment
 import org.cosmic.cosmicconnect.UserInterface.MainActivity
 import org.cosmic.cosmicconnect.UserInterface.PermissionsAlertDialogFragment
@@ -66,7 +66,7 @@ abstract class Plugin(
      * To receive the network packet from the unpaired device, override
      * listensToUnpairedDevices to return true and this method.
      */
-    open fun onUnpairedDevicePacketReceived(np: NetworkPacket): Boolean {
+    open fun onUnpairedDevicePacketReceived(tp: TransferPacket): Boolean {
         return false
     }
 
@@ -161,7 +161,7 @@ abstract class Plugin(
      * By convention, we return true when we have done something in response to the packet or false otherwise,
      * even though that value is unused as of now.
      */
-    open fun onPacketReceived(np: NetworkPacket): Boolean {
+    open fun onPacketReceived(tp: TransferPacket): Boolean {
         return false
     }
 

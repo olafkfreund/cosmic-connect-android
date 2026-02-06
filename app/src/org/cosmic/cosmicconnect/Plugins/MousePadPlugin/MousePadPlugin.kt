@@ -18,7 +18,7 @@ import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.DeviceType
 import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.Core.TransferPacket
-import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
+import org.cosmic.cosmicconnect.Core.getBoolean
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment
@@ -39,7 +39,8 @@ class MousePadPlugin @AssistedInject constructor(
     var isKeyboardEnabled: Boolean = true
         private set
 
-    override fun onPacketReceived(np: LegacyNetworkPacket): Boolean {
+    override fun onPacketReceived(tp: TransferPacket): Boolean {
+        val np = tp.packet
         this.isKeyboardEnabled = np.getBoolean("state", true)
         return true
     }
@@ -152,12 +153,10 @@ class MousePadPlugin @AssistedInject constructor(
     }
 
     /**
-     * Send a pre-constructed legacy NetworkPacket
-     *
-     * Used by KeyListenerView for special key handling
+     * Send a key packet from KeyListenerView with pre-built body fields
      */
-    fun sendPacket(legacyPacket: LegacyNetworkPacket) {
-        device.sendPacket(legacyPacket)
+    fun sendKeyPacket(body: Map<String, Any>) {
+        sendMousePacket(body)
     }
 
     private fun sendSpecialKey(keyCode: Int) {

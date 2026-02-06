@@ -15,7 +15,6 @@ import org.json.JSONException
 import org.json.JSONObject
 import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Device
-import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.ConnectivityReportPlugin.ConnectivityListener.Companion.getInstance
 import org.cosmic.cosmicconnect.Plugins.ConnectivityReportPlugin.ConnectivityListener.SubscriptionState
 import org.cosmic.cosmicconnect.Plugins.Plugin
@@ -73,7 +72,7 @@ class ConnectivityReportPlugin @AssistedInject constructor(
         getInstance(context).cancelActiveListener(listener)
     }
 
-    override fun onPacketReceived(np: LegacyNetworkPacket): Boolean {
+    override fun onPacketReceived(tp: TransferPacket): Boolean {
         return false
     }
 

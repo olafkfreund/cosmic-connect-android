@@ -14,8 +14,12 @@ import dagger.assisted.AssistedInject
 import dagger.hilt.android.qualifiers.ApplicationContext
 import org.json.JSONException
 import org.cosmic.cosmicconnect.Core.TransferPacket
+import org.cosmic.cosmicconnect.Core.has
+import org.cosmic.cosmicconnect.Core.getString
+import org.cosmic.cosmicconnect.Core.getInt
+import org.cosmic.cosmicconnect.Core.getBoolean
+import org.cosmic.cosmicconnect.Core.getJSONArray
 import org.cosmic.cosmicconnect.Device
-import org.cosmic.cosmicconnect.NetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory
 import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
@@ -47,7 +51,8 @@ class SystemVolumePlugin @AssistedInject constructor(
     override val description: String
         get() = context.resources.getString(R.string.pref_plugin_systemvolume_desc)
 
-    override fun onPacketReceived(np: org.cosmic.cosmicconnect.NetworkPacket): Boolean {
+    override fun onPacketReceived(tp: TransferPacket): Boolean {
+        val np = tp.packet
         if (np.has("sinkList")) {
             sinks.clear()
 

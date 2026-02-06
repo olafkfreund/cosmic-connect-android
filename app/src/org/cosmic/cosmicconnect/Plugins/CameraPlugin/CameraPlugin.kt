@@ -325,14 +325,13 @@ class CameraPlugin @AssistedInject constructor(
     // Packet Reception
     // ========================================================================
 
-    override fun onPacketReceived(np: org.cosmic.cosmicconnect.NetworkPacket): Boolean {
-        // Convert to immutable packet for type-safe handling
-        val packet = NetworkPacket.fromLegacy(np)
+    override fun onPacketReceived(tp: TransferPacket): Boolean {
+        val np = tp.packet
 
         return when {
-            packet.isCameraStart -> handleStartRequest(packet)
-            packet.isCameraStop -> handleStopRequest()
-            packet.isCameraSettings -> handleSettingsRequest(packet)
+            np.isCameraStart -> handleStartRequest(np)
+            np.isCameraStop -> handleStopRequest()
+            np.isCameraSettings -> handleSettingsRequest(np)
             else -> false
         }
     }

@@ -172,7 +172,8 @@ object RunCommandPacketsFFI {
  * ## Usage Example
  *
  * ```kotlin
- * override fun onPacketReceived(np: NetworkPacket): Boolean {
+ * override fun onPacketReceived(tp: TransferPacket): Boolean {
+ *     val np = tp.packet
  *     return when {
  *         np.isRunCommandList -> {
  *             val commandListJson = np.commandListJson

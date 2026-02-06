@@ -15,7 +15,9 @@ import android.util.Log
 import android.webkit.MimeTypeMap
 import androidx.annotation.WorkerThread
 import org.apache.commons.io.FilenameUtils
-import org.cosmic.cosmicconnect.NetworkPacket
+import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.Core.Payload as CorePayload
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import java.io.File
 import kotlin.math.min
 
@@ -71,12 +73,10 @@ object FilesHelper {
      */
     @JvmStatic
     @WorkerThread
-    fun uriToNetworkPacket(context: Context, uri: Uri, type: String?): NetworkPacket? {
+    fun uriToNetworkPacket(context: Context, uri: Uri, type: String?): TransferPacket? {
         try {
             val contentResolver = context.contentResolver
             val inputStream = contentResolver.openInputStream(uri)
-
-            val packet = NetworkPacket(type!!)
 
             val sizeDefault = -1L
 
@@ -125,8 +125,10 @@ object FilesHelper {
                 else -> contentResolverExtract()
             }
 
+            val body = mutableMapOf<String, Any>()
+
             if (filename != null) {
-                packet["filename"] = filename
+                body["filename"] = filename
             }
             else {
                 // It would be very surprising if this happens
@@ -134,16 +136,15 @@ object FilesHelper {
             }
 
             if (lastModified != null) {
-                packet["lastModified"] = lastModified
+                body["lastModified"] = lastModified
             }
             else {
                 // This would not be too surprising, and probably means we need to improve FilesHelper.getLastModifiedTime
                 Log.w(LOG_TAG, "Unable to read file last modified time")
             }
 
-            packet.payload = NetworkPacket.Payload(inputStream, size)
-
-            return packet
+            val packet = NetworkPacket.create(type!!, body)
+            return TransferPacket(packet, payload = CorePayload(inputStream, size))
         }
         catch (e: Exception) {
             Log.e(LOG_TAG, "Exception creating network packet", e)

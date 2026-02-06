@@ -26,7 +26,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Helpers.ContactsHelper
 import org.cosmic.cosmicconnect.Core.NetworkPacket
-import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment
@@ -44,8 +44,10 @@ class TelephonyPlugin @AssistedInject constructor(
     interface Factory : PluginCreator {
         override fun create(device: Device): TelephonyPlugin
     }
+    private data class LastCallState(val event: String, val phoneNumber: String?, val contactName: String?)
+
     private var lastState = TelephonyManager.CALL_STATE_IDLE
-    private var lastPacket: LegacyNetworkPacket? = null
+    private var lastCallState: LastCallState? = null
     private var isMuted = false
 
     private val receiver: BroadcastReceiver = object : BroadcastReceiver() {
@@ -98,34 +100,35 @@ class TelephonyPlugin @AssistedInject constructor(
             TelephonyManager.CALL_STATE_RINGING -> {
                 unmuteRinger()
 
-                // Create telephony event packet using FFI
                 val packet = TelephonyPacketsFFI.createTelephonyEvent(
                     event = "ringing",
                     phoneNumber = phoneNumber,
                     contactName = contactName
                 )
-                val legacyPacket = convertToLegacyPacket(packet)
-
-                device.sendPacket(legacyPacket)
-                lastPacket = legacyPacket
+                device.sendPacket(TransferPacket(packet))
+                lastCallState = LastCallState("ringing", phoneNumber, contactName)
             }
             TelephonyManager.CALL_STATE_OFFHOOK -> {
-                // Create telephony event packet using FFI
                 val packet = TelephonyPacketsFFI.createTelephonyEvent(
                     event = "talking",
                     phoneNumber = phoneNumber,
                     contactName = contactName
                 )
-                val legacyPacket = convertToLegacyPacket(packet)
-
-                device.sendPacket(legacyPacket)
-                lastPacket = legacyPacket
+                device.sendPacket(TransferPacket(packet))
+                lastCallState = LastCallState("talking", phoneNumber, contactName)
             }
             TelephonyManager.CALL_STATE_IDLE -> {
-                val lastPacket = lastPacket ?: return
+                val last = lastCallState ?: return
+
                 // Resend a cancel of the last event (can either be "ringing" or "talking")
-                lastPacket["isCancel"] = "true"
-                device.sendPacket(lastPacket)
+                val cancelBody = mutableMapOf<String, Any>(
+                    "event" to last.event,
+                    "isCancel" to "true"
+                )
+                last.phoneNumber?.let { cancelBody["phoneNumber"] = it }
+                last.contactName?.let { cancelBody["contactName"] = it }
+                val cancelPacket = NetworkPacket.create(PACKET_TYPE_TELEPHONY, cancelBody)
+                device.sendPacket(TransferPacket(cancelPacket))
 
                 if (isMuted) {
                     val timer = Timer()
@@ -137,20 +140,16 @@ class TelephonyPlugin @AssistedInject constructor(
                 }
 
                 // Emit a missed call notification if needed
-                if ("ringing" == lastPacket.getString("event")) {
-                    val lastPhoneNumber = lastPacket.getStringOrNull("phoneNumber")
-                    val lastContactName = lastPacket.getStringOrNull("contactName")
-
-                    // Create missed call packet using FFI
+                if ("ringing" == last.event) {
                     val packet = TelephonyPacketsFFI.createTelephonyEvent(
                         event = "missedCall",
-                        phoneNumber = lastPhoneNumber,
-                        contactName = lastContactName
+                        phoneNumber = last.phoneNumber,
+                        contactName = last.contactName
                     )
-                    device.sendPacket(convertToLegacyPacket(packet))
+                    device.sendPacket(TransferPacket(packet))
                 }
 
-                // Don't update lastPacket in IDLE state
+                // Don't update lastCallState in IDLE state
             }
         }
     }
@@ -186,12 +185,11 @@ class TelephonyPlugin @AssistedInject constructor(
         context.unregisterReceiver(receiver)
     }
 
-    override fun onPacketReceived(np: LegacyNetworkPacket): Boolean {
-        // Convert to immutable NetworkPacket for type-safe inspection
-        val packet = NetworkPacket.fromLegacyPacket(np)
+    override fun onPacketReceived(tp: TransferPacket): Boolean {
+        val np = tp.packet
 
         when {
-            packet.isMuteRequest -> muteRinger()
+            np.isMuteRequest -> muteRinger()
         }
         return true
     }
@@ -215,26 +213,6 @@ class TelephonyPlugin @AssistedInject constructor(
 
     override fun getSettingsFragment(activity: Activity): PluginSettingsFragment = newInstance(pluginKey, R.xml.telephonyplugin_preferences)
 
-    /**
-     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
-     */
-    private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
-        val legacy = LegacyNetworkPacket(ffi.type)
-
-        // Copy all body fields
-        ffi.body.forEach { (key, value) ->
-            when (value) {
-                is String -> legacy.set(key, value)
-                is Int -> legacy.set(key, value)
-                is Long -> legacy.set(key, value)
-                is Boolean -> legacy.set(key, value)
-                is Double -> legacy.set(key, value)
-                else -> legacy.set(key, value.toString())
-            }
-        }
-
-        return legacy
-    }
 
     companion object {
         /**

@@ -23,7 +23,6 @@ import org.apache.commons.collections4.iterators.IteratorIterable
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.Core.TransferPacket
-import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory
 import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
@@ -221,24 +220,25 @@ class RunCommandPlugin @AssistedInject constructor(
     // Packet Handling
     // ========================================================================
 
-    override fun onPacketReceived(np: LegacyNetworkPacket): Boolean {
-        // Convert legacy packet to immutable for type-safe inspection
-        val networkPacket = NetworkPacket.fromLegacy(np)
+    override fun onPacketReceived(tp: TransferPacket): Boolean {
+        val np = tp.packet
 
-        if (networkPacket.isRunCommandList) {
-            handleCommandListPacket(np)
+        if (np.isRunCommandList) {
+            handleCommandListPacket(tp)
             return true
         }
 
         return false
     }
 
-    private fun handleCommandListPacket(np: LegacyNetworkPacket) {
+    private fun handleCommandListPacket(tp: TransferPacket) {
+        val np = tp.packet
+
         _commandList.clear()
         _commandItems.clear()
 
         try {
-            val commandListJson = np.getString("commandList")
+            val commandListJson = np.body["commandList"] as? String ?: return
             val obj = JSONObject(commandListJson)
 
             for (key in IteratorIterable(obj.keys())) {
@@ -284,7 +284,7 @@ class RunCommandPlugin @AssistedInject constructor(
         device.onPluginsChanged()
 
         // Check if desktop supports adding commands
-        canAddCommand = np.getBoolean("canAddCommand", false)
+        canAddCommand = (np.body["canAddCommand"] as? Boolean) ?: false
     }
 
     /**

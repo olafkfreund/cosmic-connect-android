@@ -24,10 +24,10 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import org.json.JSONException
 import org.json.JSONObject
 import org.cosmic.cosmicconnect.Core.TransferPacket
+import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.Core.getBoolean
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Helpers.NetworkHelper.localIpAddress
-import org.cosmic.cosmicconnect.Core.NetworkPacket
-import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.UserInterface.AlertDialogFragment
@@ -93,7 +93,8 @@ class SftpPlugin @AssistedInject constructor(
 
     override fun loadPluginWhenRequiredPermissionsMissing() = true
 
-    override fun onPacketReceived(np: LegacyNetworkPacket): Boolean {
+    override fun onPacketReceived(tp: TransferPacket): Boolean {
+        val np = tp.packet
         if (!np.getBoolean("startBrowsing")) return false
 
         if (!checkRequiredPermissions()) {
@@ -251,7 +252,7 @@ class SftpPlugin @AssistedInject constructor(
         val packet = NetworkPacket.create(PACKET_TYPE_SFTP_REQUEST, mapOf(
             "startBrowsing" to true
         ))
-        onPacketReceived(packet.toLegacyPacket())
+        onPacketReceived(TransferPacket(packet))
     }
 
     data class StorageInfo(@JvmField var displayName: String, @JvmField val uri: Uri) {

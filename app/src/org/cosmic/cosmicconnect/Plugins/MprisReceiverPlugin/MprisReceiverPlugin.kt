@@ -16,10 +16,9 @@ import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import org.apache.commons.lang3.StringUtils
-import org.cosmic.cosmicconnect.Core.TransferPacket
+import org.cosmic.cosmicconnect.Core.*
 import org.cosmic.cosmicconnect.Helpers.AppsHelper
 import org.cosmic.cosmicconnect.Helpers.ThreadHelper
-import org.cosmic.cosmicconnect.NetworkPacket
 import org.cosmic.cosmicconnect.Plugins.NotificationsPlugin.NotificationReceiver
 import org.json.JSONObject
 import android.content.Context
@@ -90,7 +89,8 @@ class MprisReceiverPlugin(context: Context, device: Device) : Plugin(context, de
     override val description: String
         get() = context.resources.getString(R.string.pref_plugin_mprisreceiver_desc)
 
-    override fun onPacketReceived(np: org.cosmic.cosmicconnect.NetworkPacket): Boolean {
+    override fun onPacketReceived(tp: TransferPacket): Boolean {
+        val np = tp.packet
         if (np.getBoolean("requestPlayerList")) {
             sendPlayerList()
             return true

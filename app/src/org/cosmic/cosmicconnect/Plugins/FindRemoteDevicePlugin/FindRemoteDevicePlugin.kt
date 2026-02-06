@@ -11,8 +11,8 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.qualifiers.ApplicationContext
 import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Device
-import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.FindMyPhonePlugin
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
@@ -34,7 +34,7 @@ class FindRemoteDevicePlugin @AssistedInject constructor(
     override val description: String
         get() = context.resources.getString(R.string.pref_plugin_findremotedevice_desc)
 
-    override fun onPacketReceived(np: LegacyNetworkPacket): Boolean = true
+    override fun onPacketReceived(tp: TransferPacket): Boolean = true
 
     override fun getUiMenuEntries(): List<PluginUiMenuEntry> = listOf(
         PluginUiMenuEntry(context.getString(R.string.ring)) { parentActivity ->
@@ -42,9 +42,7 @@ class FindRemoteDevicePlugin @AssistedInject constructor(
                 FindMyPhonePlugin.PACKET_TYPE_FINDMYPHONE_REQUEST,
                 emptyMap()
             )
-
-            val legacyPacket = LegacyNetworkPacket(packet.type)
-            device.sendPacket(legacyPacket)
+            device.sendPacket(TransferPacket(packet))
         }
     )
 

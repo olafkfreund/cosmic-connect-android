@@ -12,7 +12,7 @@ import android.content.IntentFilter
 import android.os.BatteryManager
 import androidx.annotation.VisibleForTesting
 import org.cosmic.cosmicconnect.Core.NetworkPacket
-import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.R
@@ -83,8 +83,7 @@ class BatteryPlugin(context: Context, device: Device) : Plugin(context, device) 
                     currentCharge = currentCharge,
                     thresholdEvent = thresholdEvent
                 )
-                val legacyPacket = convertToLegacyPacket(packet)
-                device.sendPacket(legacyPacket)
+                device.sendPacket(TransferPacket(packet))
 
                 // Update last known state
                 lastCharge = currentCharge
@@ -110,22 +109,21 @@ class BatteryPlugin(context: Context, device: Device) : Plugin(context, device) 
         context.unregisterReceiver(receiver)
     }
 
-    override fun onPacketReceived(np: LegacyNetworkPacket): Boolean {
-        // Convert to immutable NetworkPacket for type-safe inspection
-        val packet = NetworkPacket.fromLegacyPacket(np)
+    override fun onPacketReceived(tp: TransferPacket): Boolean {
+        val np = tp.packet
 
         when {
-            packet.isBatteryPacket -> {
+            np.isBatteryPacket -> {
                 // Received battery status from remote device
                 remoteBatteryInfo = DeviceBatteryInfo(
-                    currentCharge = packet.batteryCurrentCharge ?: 0,
-                    isCharging = packet.batteryIsCharging ?: false,
-                    thresholdEvent = packet.batteryThresholdEvent ?: THRESHOLD_EVENT_NONE
+                    currentCharge = np.batteryCurrentCharge ?: 0,
+                    isCharging = np.batteryIsCharging ?: false,
+                    thresholdEvent = np.batteryThresholdEvent ?: THRESHOLD_EVENT_NONE
                 )
                 device.onPluginsChanged()
                 return true
             }
-            packet.isBatteryRequest -> {
+            np.isBatteryRequest -> {
                 // Remote device requested our battery status - send current state
                 sendBatteryUpdate()
                 return true
@@ -152,30 +150,9 @@ class BatteryPlugin(context: Context, device: Device) : Plugin(context, device) 
             currentCharge = lastCharge,
             thresholdEvent = lastThresholdEvent
         )
-        val legacyPacket = convertToLegacyPacket(packet)
-        device.sendPacket(legacyPacket)
+        device.sendPacket(TransferPacket(packet))
     }
 
-    /**
-     * Convert immutable NetworkPacket to legacy NetworkPacket for sending
-     */
-    private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
-        val legacy = LegacyNetworkPacket(ffi.type)
-
-        // Copy all body fields
-        ffi.body.forEach { (key, value) ->
-            when (value) {
-                is String -> legacy.set(key, value)
-                is Int -> legacy.set(key, value)
-                is Long -> legacy.set(key, value)
-                is Boolean -> legacy.set(key, value)
-                is Double -> legacy.set(key, value)
-                else -> legacy.set(key, value.toString())
-            }
-        }
-
-        return legacy
-    }
 
     companion object {
         const val PACKET_TYPE_BATTERY = "cconnect.battery"

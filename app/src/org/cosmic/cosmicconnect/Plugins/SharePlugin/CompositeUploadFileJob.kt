@@ -9,8 +9,10 @@ package org.cosmic.cosmicconnect.Plugins.SharePlugin
 import android.os.Handler
 import android.os.Looper
 import androidx.annotation.GuardedBy
+import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.Core.TransferPacket
+import org.cosmic.cosmicconnect.Core.getString
 import org.cosmic.cosmicconnect.Device
-import org.cosmic.cosmicconnect.NetworkPacket
 import org.cosmic.cosmicconnect.R
 import org.cosmic.cosmicconnect.async.BackgroundJob
 
@@ -43,8 +45,8 @@ class CompositeUploadFileJob(device: Device, callback: Callback<java.lang.Void?>
     private val lock = Any() // Use to protect concurrent access to the variables below
 
     @GuardedBy("lock")
-    private val networkPacketList: MutableList<NetworkPacket> = ArrayList()
-    private var currentNetworkPacket: NetworkPacket? = null
+    private val networkPacketList: MutableList<TransferPacket> = ArrayList()
+    private var currentNetworkPacket: TransferPacket? = null
     private val sendPacketStatusCallback: SendPacketStatusCallback
     @GuardedBy("lock")
     private var totalNumFiles = 0
@@ -81,17 +83,17 @@ class CompositeUploadFileJob(device: Device, callback: Callback<java.lang.Void?>
                     currentNetworkPacket = networkPacketList.removeAt(0)
                 }
 
-                currentNetworkPacket?.let { packet ->
-                    currentFileName = packet.getString("filename")
+                currentNetworkPacket?.let { tp ->
+                    currentFileName = tp.getString("filename")
                     currentFileNum++
 
                     setProgress(prevProgressPercentage)
 
-                    addTotalsToNetworkPacket(packet)
+                    val enrichedTp = addTotalsToTransferPacket(tp)
 
                     // We set sendPayloadFromSameThread to true so this call blocks until the payload
                     // has been received by the other end, so payloads are sent one by one.
-                    if (!getDevice().sendPacketBlocking(packet, sendPacketStatusCallback, true)) {
+                    if (!getDevice().sendPacketBlocking(enrichedTp, sendPacketStatusCallback, true)) {
                         throw RuntimeException("Sending packet failed")
                     }
                 }
@@ -134,17 +136,22 @@ class CompositeUploadFileJob(device: Device, callback: Callback<java.lang.Void?>
         } finally {
             isRunningInternal = false
 
-            for (networkPacket in networkPacketList) {
-                networkPacket.payload?.close()
+            for (tp in networkPacketList) {
+                tp.payload?.close()
             }
             networkPacketList.clear()
         }
     }
 
-    private fun addTotalsToNetworkPacket(networkPacket: NetworkPacket) {
+    private fun addTotalsToTransferPacket(tp: TransferPacket): TransferPacket {
         synchronized(lock) {
-            networkPacket.set(SharePlugin.KEY_NUMBER_OF_FILES, totalNumFiles)
-            networkPacket.set(SharePlugin.KEY_TOTAL_PAYLOAD_SIZE, totalPayloadSize)
+            val enrichedPacket = tp.packet.copy(
+                body = tp.packet.body + mapOf(
+                    SharePlugin.KEY_NUMBER_OF_FILES to totalNumFiles,
+                    SharePlugin.KEY_TOTAL_PAYLOAD_SIZE to totalPayloadSize
+                )
+            )
+            return TransferPacket(enrichedPacket, payload = tp.payload)
         }
     }
 
@@ -164,14 +171,14 @@ class CompositeUploadFileJob(device: Device, callback: Callback<java.lang.Void?>
         uploadNotification.show()
     }
 
-    fun addNetworkPacket(networkPacket: NetworkPacket) {
+    fun addNetworkPacket(tp: TransferPacket) {
         synchronized(lock) {
-            networkPacketList.add(networkPacket)
+            networkPacketList.add(tp)
 
             totalNumFiles++
 
-            if (networkPacket.payloadSize >= 0) {
-                totalPayloadSize += networkPacket.payloadSize
+            if (tp.payloadSize >= 0) {
+                totalPayloadSize += tp.payloadSize
             }
 
             uploadNotification.setTitle(
@@ -198,17 +205,17 @@ class CompositeUploadFileJob(device: Device, callback: Callback<java.lang.Void?>
      * Use this to send metadata ahead of all the other [.networkPacketList] packets.
      */
     private fun sendUpdatePacket() {
-        // Create legacy packet directly
-        val packet = NetworkPacket(SharePlugin.PACKET_TYPE_SHARE_REQUEST_UPDATE)
-
+        val body: Map<String, Any>
         synchronized(lock) {
-            packet.set("numberOfFiles", totalNumFiles)
-            packet.set("totalPayloadSize", totalPayloadSize)
+            body = mapOf(
+                "numberOfFiles" to totalNumFiles,
+                "totalPayloadSize" to totalPayloadSize
+            )
             updatePacketPending = false
         }
 
-        // Send packet
-        getDevice().sendPacket(packet)
+        val packet = NetworkPacket.create(SharePlugin.PACKET_TYPE_SHARE_REQUEST_UPDATE, body)
+        getDevice().sendPacket(TransferPacket(packet))
     }
 
     override fun cancel() {
@@ -216,10 +223,11 @@ class CompositeUploadFileJob(device: Device, callback: Callback<java.lang.Void?>
         currentNetworkPacket?.cancel()
     }
 
+
     private inner class SendPacketStatusCallback : Device.SendPacketStatusCallback() {
         override fun onPayloadProgressChanged(percent: Int) {
-            currentNetworkPacket?.let { packet ->
-                val send = totalSend + (packet.payloadSize * (percent.toFloat() / 100))
+            currentNetworkPacket?.let { tp ->
+                val send = totalSend + (tp.payloadSize * (percent.toFloat() / 100))
                 val progress = if (totalPayloadSize > 0) ((send * 100) / totalPayloadSize).toInt() else 0
 
                 if (progress != prevProgressPercentage) {
@@ -230,8 +238,8 @@ class CompositeUploadFileJob(device: Device, callback: Callback<java.lang.Void?>
         }
 
         override fun onSuccess() {
-            currentNetworkPacket?.let { packet ->
-                if (packet.payloadSize == 0L) {
+            currentNetworkPacket?.let { tp ->
+                if (tp.payloadSize == 0L) {
                     synchronized(lock) {
                         if (networkPacketList.isEmpty()) {
                             setProgress(100)
@@ -239,7 +247,7 @@ class CompositeUploadFileJob(device: Device, callback: Callback<java.lang.Void?>
                     }
                 }
 
-                totalSend += packet.payloadSize
+                totalSend += tp.payloadSize
             }
         }
 

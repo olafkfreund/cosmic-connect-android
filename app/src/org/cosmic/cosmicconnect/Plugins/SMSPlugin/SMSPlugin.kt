@@ -50,7 +50,6 @@ import org.cosmic.cosmicconnect.Helpers.SMSHelper.jsonArrayToAttachmentsList
 import org.cosmic.cosmicconnect.Helpers.ThreadHelper.execute
 import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.Core.*
-import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.Plugins.SMSPlugin.SmsMmsUtils.partIdToMessageAttachmentPacket
@@ -239,8 +238,7 @@ class SMSPlugin @AssistedInject constructor(
         // Create immutable packet
         val packet = NetworkPacket.create(TelephonyPlugin.PACKET_TYPE_TELEPHONY, body.toMap())
 
-        // Convert and send
-        device.sendPacket(convertToLegacyPacket(packet))
+        device.sendPacket(TransferPacket(packet))
     }
 
     override val permissionExplanation: Int = R.string.telepathy_permission_explanation
@@ -278,49 +276,52 @@ class SMSPlugin @AssistedInject constructor(
     override val description: String
         get() = context.resources.getString(R.string.pref_plugin_telepathy_desc)
 
-    override fun onPacketReceived(np: LegacyNetworkPacket): Boolean = when (np.type) {
-        PACKET_TYPE_SMS_REQUEST_CONVERSATIONS -> {
-            execute {
-                this.handleRequestAllConversations(NetworkPacket.fromLegacyPacket(np))
+    override fun onPacketReceived(tp: TransferPacket): Boolean {
+        val np = tp.packet
+        return when (np.type) {
+            PACKET_TYPE_SMS_REQUEST_CONVERSATIONS -> {
+                execute {
+                    this.handleRequestAllConversations(np)
+                }
+                true
             }
-            true
-        }
-        PACKET_TYPE_SMS_REQUEST_CONVERSATION -> {
-            execute {
-                this.handleRequestSingleConversation(NetworkPacket.fromLegacyPacket(np))
+            PACKET_TYPE_SMS_REQUEST_CONVERSATION -> {
+                execute {
+                    this.handleRequestSingleConversation(np)
+                }
+                true
             }
-            true
-        }
-        PACKET_TYPE_SMS_REQUEST -> {
-            val textMessage: String = np.getString("messageBody")
-            val subId = np.getLong("subId", -1)
+            PACKET_TYPE_SMS_REQUEST -> {
+                val textMessage: String = np.getString("messageBody")
+                val subId = np.getLong("subId", -1)
 
-            val jsonAddressList = np.getJSONArray("addresses")
-            val addressList = if (jsonAddressList == null) {
-                // If jsonAddressList is null, then the SMS_REQUEST packet is most probably from the older version of the desktop app.
-                listOf(SMSHelper.Address(context, np.getString("phoneNumber")))
-            } else {
-                jsonArrayToAddressList(context, jsonAddressList)
+                val jsonAddressList = np.getJSONArray("addresses")
+                val addressList = if (jsonAddressList == null) {
+                    // If jsonAddressList is null, then the SMS_REQUEST packet is most probably from the older version of the desktop app.
+                    listOf(SMSHelper.Address(context, np.getString("phoneNumber")))
+                } else {
+                    jsonArrayToAddressList(context, jsonAddressList)
+                }
+                val attachedFiles: List<SMSHelper.Attachment> = jsonArrayToAttachmentsList(np.getJSONArray("attachments"))
+
+                sendMessage(context, textMessage, attachedFiles, addressList.toMutableList(), subId.toInt())
+
+                true
             }
-            val attachedFiles: List<SMSHelper.Attachment> = jsonArrayToAttachmentsList(np.getJSONArray("attachments"))
+            PACKET_TYPE_SMS_REQUEST_ATTACHMENT -> {
+                val partId: Long = np.getLong("partId")
+                val uniqueIdentifier: String = np.getString("uniqueIdentifier")
 
-            sendMessage(context, textMessage, attachedFiles, addressList.toMutableList(), subId.toInt())
+                val tp = partIdToMessageAttachmentPacket(context, partId, uniqueIdentifier, PACKET_TYPE_SMS_ATTACHMENT_FILE)
 
-            true
-        }
-        PACKET_TYPE_SMS_REQUEST_ATTACHMENT -> {
-            val partId: Long = np.getLong("partId")
-            val uniqueIdentifier: String = np.getString("uniqueIdentifier")
+                if (tp != null) {
+                    device.sendPacket(tp)
+                }
 
-            val networkPacket: LegacyNetworkPacket? = partIdToMessageAttachmentPacket(context, partId, uniqueIdentifier, PACKET_TYPE_SMS_ATTACHMENT_FILE)
-
-            if (networkPacket != null) {
-                device.sendPacket(networkPacket)
+                true
             }
-
-            true
+            else -> true
         }
-        else -> true
     }
 
     /**
@@ -335,7 +336,7 @@ class SMSPlugin @AssistedInject constructor(
 
         while (conversations.hasNext()) {
             val message: SMSHelper.Message = conversations.next()
-            val partialReply: LegacyNetworkPacket = constructBulkMessagePacket(setOf(message))
+            val partialReply = constructBulkMessagePacket(setOf(message))
             device.sendPacket(partialReply)
         }
 
@@ -360,7 +361,7 @@ class SMSPlugin @AssistedInject constructor(
             getMessagesInRange(this.context, threadId, rangeStartTimestamp, numberToGet, true)
         }
 
-        val reply: LegacyNetworkPacket = constructBulkMessagePacket(conversation)
+        val reply = constructBulkMessagePacket(conversation)
 
         device.sendPacket(reply)
 
@@ -529,7 +530,7 @@ class SMSPlugin @AssistedInject constructor(
          * @param messages Messages to include in the packet
          * @return NetworkPacket of type [PACKET_TYPE_SMS_MESSAGE]
          */
-        private fun constructBulkMessagePacket(messages: Iterable<SMSHelper.Message>): LegacyNetworkPacket {
+        private fun constructBulkMessagePacket(messages: Iterable<SMSHelper.Message>): TransferPacket {
             val messagesArray = JSONArray()
 
             for (message: SMSHelper.Message in messages) {
@@ -542,37 +543,12 @@ class SMSPlugin @AssistedInject constructor(
                 }
             }
 
-            // Create immutable packet
             val packet = NetworkPacket.create(PACKET_TYPE_SMS_MESSAGE, mapOf(
-                "messages" to messagesArray,
+                "messages" to messagesArray.toString(),
                 "version" to SMS_MESSAGE_PACKET_VERSION
             ))
 
-            // Convert and return
-            return convertToLegacyPacket(packet)
-        }
-
-        /**
-         * Convert immutable NetworkPacket to legacy NetworkPacket for sending
-         */
-        private fun convertToLegacyPacket(ffi: NetworkPacket): LegacyNetworkPacket {
-            val legacy = LegacyNetworkPacket(ffi.type)
-
-            // Copy all body fields
-            ffi.body.forEach { (key, value) ->
-                when (value) {
-                    is String -> legacy.set(key, value)
-                    is Int -> legacy.set(key, value)
-                    is Long -> legacy.set(key, value)
-                    is Boolean -> legacy.set(key, value)
-                    is Double -> legacy.set(key, value)
-                    is JSONArray -> legacy.set(key, value)
-                    is JSONObject -> legacy.set(key, value)
-                    else -> legacy.set(key, value.toString())
-                }
-            }
-
-            return legacy
+            return TransferPacket(packet)
         }
     }
 }

@@ -34,9 +34,14 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.qualifiers.ApplicationContext
+import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.Core.TransferPacket
+import org.cosmic.cosmicconnect.Core.getString
+import org.cosmic.cosmicconnect.Core.has
+import org.cosmic.cosmicconnect.Core.getBoolean
+import org.cosmic.cosmicconnect.Core.getInt
+import org.cosmic.cosmicconnect.Core.getLong
 import org.cosmic.cosmicconnect.Device
-import org.cosmic.cosmicconnect.NetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.R
@@ -175,7 +180,8 @@ class SharePlugin @AssistedInject constructor(
 
     override fun hasSettings(): Boolean = true
 
-    override fun onPacketReceived(np: NetworkPacket): Boolean {
+    override fun onPacketReceived(tp: TransferPacket): Boolean {
+        val np = tp.packet
         try {
             if (np.type == PACKET_TYPE_SHARE_REQUEST_UPDATE) {
                 val job = receiveFileJob
@@ -189,7 +195,7 @@ class SharePlugin @AssistedInject constructor(
 
             // Check packet type using legacy NetworkPacket methods
             when {
-                np.has("filename") -> receiveFile(np)
+                np.has("filename") -> receiveFile(tp)
                 np.has("text") -> {
                     Log.i("SharePlugin", "hasText")
                     receiveText(np)
@@ -231,7 +237,8 @@ class SharePlugin @AssistedInject constructor(
         handler.post { Toast.makeText(context, R.string.shareplugin_text_saved, Toast.LENGTH_LONG).show() }
     }
 
-    private fun receiveFile(np: NetworkPacket) {
+    private fun receiveFile(tp: TransferPacket) {
+        val np = tp.packet
         val hasNumberOfFiles = np.has(KEY_NUMBER_OF_FILES)
         val isOpen = np.getBoolean("open", false)
 
@@ -242,11 +249,17 @@ class SharePlugin @AssistedInject constructor(
         }
 
         if (!hasNumberOfFiles) {
-            np.set(KEY_NUMBER_OF_FILES, 1)
-            np.set(KEY_TOTAL_PAYLOAD_SIZE, np.payloadSize)
+            // Create updated packet with numberOfFiles and totalPayloadSize
+            val updatedBody = np.body + mapOf(
+                KEY_NUMBER_OF_FILES to 1,
+                KEY_TOTAL_PAYLOAD_SIZE to tp.payloadSize
+            )
+            val updatedPacket = np.copy(body = updatedBody)
+            val updatedTp = TransferPacket(updatedPacket, payload = tp.payload)
+            job.addNetworkPacket(updatedTp)
+        } else {
+            job.addNetworkPacket(tp)
         }
-
-        job.addNetworkPacket(np)
 
         if (job != receiveFileJob) {
             if (hasNumberOfFiles && !isOpen) {

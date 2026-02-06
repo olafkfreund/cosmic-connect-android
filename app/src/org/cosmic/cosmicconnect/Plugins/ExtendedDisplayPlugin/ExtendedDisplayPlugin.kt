@@ -15,7 +15,8 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.qualifiers.ApplicationContext
 import org.cosmic.cosmicconnect.Device
-import org.cosmic.cosmicconnect.NetworkPacket
+import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Plugins.ExtendedDisplayPlugin.network.WebRTCClient
 import org.cosmic.cosmicconnect.Plugins.ExtendedDisplayPlugin.network.WebRTCEventListener
 import org.cosmic.cosmicconnect.Plugins.ExtendedDisplayPlugin.ui.ConnectionSetupActivity
@@ -88,12 +89,13 @@ class ExtendedDisplayPlugin @AssistedInject constructor(
         cleanup()
     }
 
-    override fun onPacketReceived(np: NetworkPacket): Boolean {
+    override fun onPacketReceived(tp: TransferPacket): Boolean {
+        val np = tp.packet
         Log.d(TAG, "Received packet: ${np.type}")
 
         when (np.type) {
             PACKET_TYPE_EXTENDED_DISPLAY -> {
-                handleControlPacket(np)
+                handleControlPacket(tp)
                 return true
             }
         }
@@ -101,22 +103,23 @@ class ExtendedDisplayPlugin @AssistedInject constructor(
         return false
     }
 
-    private fun handleControlPacket(np: NetworkPacket) {
-        val action = np.getString("action", "")
+    private fun handleControlPacket(tp: TransferPacket) {
+        val np = tp.packet
+        val action = np.body["action"] as? String ?: ""
 
         when (action) {
             "offer" -> {
                 // Desktop is offering to start streaming
-                val sdp = np.getString("sdp", "")
+                val sdp = np.body["sdp"] as? String ?: ""
                 if (sdp.isNotEmpty()) {
                     handleSdpOffer(sdp)
                 }
             }
             "candidate" -> {
                 // ICE candidate from desktop
-                val candidate = np.getString("candidate", "")
-                val sdpMid = np.getString("sdpMid", "")
-                val sdpMLineIndex = np.getInt("sdpMLineIndex", 0)
+                val candidate = np.body["candidate"] as? String ?: ""
+                val sdpMid = np.body["sdpMid"] as? String ?: ""
+                val sdpMLineIndex = (np.body["sdpMLineIndex"] as? Number)?.toInt() ?: 0
                 handleIceCandidate(candidate, sdpMid, sdpMLineIndex)
             }
             "stop" -> {
@@ -142,10 +145,11 @@ class ExtendedDisplayPlugin @AssistedInject constructor(
     fun requestStreaming() {
         Log.i(TAG, "Requesting streaming from desktop")
 
-        val np = NetworkPacket(PACKET_TYPE_EXTENDED_DISPLAY_REQUEST)
-        np.set("action", "request")
-        np.set("capabilities", "h264,touch")
-        device.sendPacket(np)
+        val packet = NetworkPacket.create(PACKET_TYPE_EXTENDED_DISPLAY_REQUEST, mapOf(
+            "action" to "request",
+            "capabilities" to "h264,touch"
+        ))
+        device.sendPacket(TransferPacket(packet))
     }
 
     /**
@@ -154,9 +158,10 @@ class ExtendedDisplayPlugin @AssistedInject constructor(
     fun stopStreaming() {
         Log.i(TAG, "Stopping streaming")
 
-        val np = NetworkPacket(PACKET_TYPE_EXTENDED_DISPLAY_REQUEST)
-        np.set("action", "stop")
-        device.sendPacket(np)
+        val packet = NetworkPacket.create(PACKET_TYPE_EXTENDED_DISPLAY_REQUEST, mapOf(
+            "action" to "stop"
+        ))
+        device.sendPacket(TransferPacket(packet))
 
         cleanup()
     }
@@ -165,13 +170,14 @@ class ExtendedDisplayPlugin @AssistedInject constructor(
      * Send touch event to desktop
      */
     fun sendTouchEvent(x: Float, y: Float, action: String, pointerId: Int) {
-        val np = NetworkPacket(PACKET_TYPE_EXTENDED_DISPLAY_REQUEST)
-        np.set("action", "touch")
-        np.set("x", x.toDouble())
-        np.set("y", y.toDouble())
-        np.set("touchAction", action)
-        np.set("pointerId", pointerId)
-        device.sendPacket(np)
+        val packet = NetworkPacket.create(PACKET_TYPE_EXTENDED_DISPLAY_REQUEST, mapOf(
+            "action" to "touch",
+            "x" to x.toDouble(),
+            "y" to y.toDouble(),
+            "touchAction" to action,
+            "pointerId" to pointerId
+        ))
+        device.sendPacket(TransferPacket(packet))
     }
 
     private fun cleanup() {

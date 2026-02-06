@@ -6,6 +6,7 @@
 package org.cosmic.cosmicconnect.Plugins.PingPlugin
 
 import android.Manifest
+import android.app.Notification
 import android.app.NotificationManager
 import io.mockk.every
 import io.mockk.mockk
@@ -44,6 +45,7 @@ class PingPluginTest {
         plugin = PingPlugin(context, mockDevice)
 
         notificationManager = context.getSystemService(NotificationManager::class.java)
+        notificationManager.cancelAll()
     }
 
     // ========================================================================
@@ -76,7 +78,7 @@ class PingPluginTest {
         assertTrue(shadow.size() > 0)
         val notification = shadow.allNotifications.first()
         val extras = notification.extras
-        assertEquals("Hello from desktop!", extras.getCharSequence("android.text")?.toString())
+        assertEquals("Hello from desktop!", extras.getCharSequence(Notification.EXTRA_TEXT)?.toString())
     }
 
     @Test
@@ -93,7 +95,7 @@ class PingPluginTest {
         assertTrue(shadow.size() > 0)
         val notification = shadow.allNotifications.first()
         val extras = notification.extras
-        assertEquals("Ping!", extras.getCharSequence("android.text")?.toString())
+        assertEquals("Ping!", extras.getCharSequence(Notification.EXTRA_TEXT)?.toString())
     }
 
     @Test

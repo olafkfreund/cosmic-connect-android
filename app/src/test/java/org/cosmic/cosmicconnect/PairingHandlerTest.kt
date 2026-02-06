@@ -17,15 +17,31 @@ import org.cosmic.cosmicconnect.PairingHandler.PairingCallback
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
+import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import java.security.KeyPairGenerator
+import java.security.PublicKey
 import java.security.cert.Certificate
 
 @RunWith(RobolectricTestRunner::class)
 class PairingHandlerTest {
+
+    companion object {
+        private lateinit var publicKeyA: PublicKey
+        private lateinit var publicKeyB: PublicKey
+
+        @JvmStatic
+        @BeforeClass
+        fun setUpKeys() {
+            val keyGen = KeyPairGenerator.getInstance("RSA")
+            keyGen.initialize(1024)
+            publicKeyA = keyGen.generateKeyPair().public
+            publicKeyB = keyGen.generateKeyPair().public
+        }
+    }
 
     private lateinit var device: Device
     private lateinit var callback: PairingCallback
@@ -45,15 +61,10 @@ class PairingHandlerTest {
         callback = mockk(relaxed = true)
         sslHelper = mockk(relaxed = true)
 
-        // Generate real key pairs for deterministic verification key tests
-        val keyGen = KeyPairGenerator.getInstance("RSA")
-        keyGen.initialize(1024)
         mockCertificateA = mockk(relaxed = true)
         mockCertificateB = mockk(relaxed = true)
-        val keyPairA = keyGen.generateKeyPair()
-        val keyPairB = keyGen.generateKeyPair()
-        every { mockCertificateA.publicKey } returns keyPairA.public
-        every { mockCertificateB.publicKey } returns keyPairB.public
+        every { mockCertificateA.publicKey } returns publicKeyA
+        every { mockCertificateB.publicKey } returns publicKeyB
 
         every { sslHelper.certificate } returns mockCertificateA
         every { device.certificate } returns mockCertificateB

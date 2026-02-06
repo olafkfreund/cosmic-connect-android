@@ -17,6 +17,7 @@ import org.cosmic.cosmicconnect.Plugins.ContactsPlugin.ContactsPlugin
 import org.cosmic.cosmicconnect.Plugins.ExtendedDisplayPlugin.ExtendedDisplayPlugin
 import org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.FindMyPhonePlugin
 import org.cosmic.cosmicconnect.Plugins.NetworkInfoPlugin.NetworkInfoPlugin
+import org.cosmic.cosmicconnect.Plugins.PowerPlugin.PowerPlugin
 import org.cosmic.cosmicconnect.Plugins.FindRemoteDevicePlugin.FindRemoteDevicePlugin
 import org.cosmic.cosmicconnect.Plugins.MousePadPlugin.MousePadPlugin
 import org.cosmic.cosmicconnect.Plugins.MprisPlugin.MprisPlugin
@@ -176,4 +177,9 @@ object PluginModule {
     @dagger.multibindings.IntoMap
     @PluginKey("NetworkInfoPlugin")
     fun provideNetworkInfoPluginCreator(factory: NetworkInfoPlugin.Factory): PluginCreator = factory
+
+    @Provides
+    @dagger.multibindings.IntoMap
+    @PluginKey("PowerPlugin")
+    fun providePowerPluginCreator(factory: PowerPlugin.Factory): PluginCreator = factory
 }

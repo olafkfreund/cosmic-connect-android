@@ -307,6 +307,13 @@ class PluginFactory @Inject constructor(
                 displayNameRes = R.string.pref_plugin_networkinfo,
                 descriptionRes = R.string.pref_plugin_networkinfo_desc,
             ),
+            org.cosmic.cosmicconnect.Plugins.PowerPlugin.PowerPlugin::class.java to StaticPluginMetadata(
+                pluginKey = "PowerPlugin",
+                supportedPacketTypes = arrayOf("cconnect.power"),
+                outgoingPacketTypes = arrayOf("cconnect.power.request"),
+                displayNameRes = R.string.pref_plugin_power,
+                descriptionRes = R.string.pref_plugin_power_desc,
+            ),
         )
     }
 }

@@ -18,7 +18,7 @@ import uniffi.cosmic_connect_core.createNotificationRequestPacket
  * **Requesting notifications:**
  * ```kotlin
  * val packet = ReceiveNotificationsPacketsFFI.createNotificationRequestPacket()
- * device.sendPacket(packet.toLegacyPacket())
+ * device.sendPacket(TransferPacket(packet))
  * ```
  *
  * This is typically called when the plugin initializes to fetch the current

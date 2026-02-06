@@ -27,6 +27,7 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.qualifiers.ApplicationContext
 import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Helpers.NotificationHelper
 import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
@@ -88,7 +89,7 @@ class PingPlugin @AssistedInject constructor(
     fun sendPing(message: String? = null) {
         try {
             val packet = PingPacketsFFI.createPing(message)
-            device.sendPacket(packet.toLegacyPacket())
+            device.sendPacket(TransferPacket(packet))
 
             if (message != null) {
                 Log.d(TAG, "Ping sent with message: $message")

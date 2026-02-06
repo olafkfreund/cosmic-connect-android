@@ -23,6 +23,7 @@ import dagger.hilt.EntryPoints
 import dagger.hilt.android.qualifiers.ApplicationContext
 import org.json.JSONException
 import org.json.JSONObject
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Helpers.NetworkHelper.localIpAddress
 import org.cosmic.cosmicconnect.Core.NetworkPacket
@@ -100,7 +101,7 @@ class SftpPlugin @AssistedInject constructor(
                 "errorMessage" to context.getString(R.string.sftp_missing_permission_error)
             )).toString()
             val packet = SftpPacketsFFI.createSftpPacket(json)
-            device.sendPacket(packet.toLegacyPacket())
+            device.sendPacket(TransferPacket(packet))
             return true
         }
 
@@ -128,7 +129,7 @@ class SftpPlugin @AssistedInject constructor(
                     "errorMessage" to context.getString(R.string.sftp_no_storage_locations_configured)
                 )).toString()
                 val packet = SftpPacketsFFI.createSftpPacket(json)
-                device.sendPacket(packet.toLegacyPacket())
+                device.sendPacket(TransferPacket(packet))
                 return true
             }
             getPathsAndNamesForStorageInfoList(paths, pathNames, storageInfoList)
@@ -161,7 +162,7 @@ class SftpPlugin @AssistedInject constructor(
 
         val json = JSONObject(body).toString()
         val packet = SftpPacketsFFI.createSftpPacket(json)
-        device.sendPacket(packet.toLegacyPacket())
+        device.sendPacket(TransferPacket(packet))
 
         return true
     }

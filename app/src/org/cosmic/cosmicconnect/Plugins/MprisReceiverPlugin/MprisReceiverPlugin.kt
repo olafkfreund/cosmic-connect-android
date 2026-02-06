@@ -16,6 +16,7 @@ import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import org.apache.commons.lang3.StringUtils
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Helpers.AppsHelper
 import org.cosmic.cosmicconnect.Helpers.ThreadHelper
 import org.cosmic.cosmicconnect.NetworkPacket
@@ -191,7 +192,7 @@ class MprisReceiverPlugin(context: Context, device: Device) : Plugin(context, de
         val packet = MprisReceiverPacketsFFI.createMprisPacket(json)
 
         // Send packet
-        device.sendPacket(packet.toLegacyPacket())
+        device.sendPacket(TransferPacket(packet))
     }
 
     fun sendAlbumArt(playerName: String, cb: MprisReceiverCallback, requestedUrl: String?) {
@@ -221,14 +222,11 @@ class MprisReceiverPlugin(context: Context, device: Device) : Plugin(context, de
         val json = JSONObject(body).toString()
         val packet = MprisReceiverPacketsFFI.createMprisPacket(json)
 
-        // Convert to legacy and set payload
-        val legacyPacket = packet.toLegacyPacket()
-        p?.let { 
-            legacyPacket.payload = org.cosmic.cosmicconnect.NetworkPacket.Payload(it)
-        }
+        // Wrap in TransferPacket with optional payload
+        val tp = TransferPacket(packet, payload = p?.let { org.cosmic.cosmicconnect.Core.Payload(it) })
 
         // Send packet
-        device.sendPacket(legacyPacket)
+        device.sendPacket(tp)
     }
 
     fun sendMetadata(player: MprisReceiverPlayer) {
@@ -264,7 +262,7 @@ class MprisReceiverPlugin(context: Context, device: Device) : Plugin(context, de
         val packet = MprisReceiverPacketsFFI.createMprisPacket(json)
 
         // Send packet
-        device.sendPacket(packet.toLegacyPacket())
+        device.sendPacket(TransferPacket(packet))
     }
 
     override fun onNotificationRemoved(statusBarNotification: android.service.notification.StatusBarNotification?) {

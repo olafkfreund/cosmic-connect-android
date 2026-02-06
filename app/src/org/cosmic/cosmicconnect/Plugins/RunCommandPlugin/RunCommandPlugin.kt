@@ -22,6 +22,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import org.apache.commons.collections4.iterators.IteratorIterable
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory
@@ -185,7 +186,7 @@ class RunCommandPlugin @AssistedInject constructor(
      */
     fun runCommand(cmdKey: String) {
         val packet = RunCommandPacketsFFI.createExecuteCommand(cmdKey)
-        device.sendPacket(packet.toLegacyPacket())
+        device.sendPacket(TransferPacket(packet))
     }
 
     /**
@@ -203,7 +204,7 @@ class RunCommandPlugin @AssistedInject constructor(
      */
     fun sendSetupPacket() {
         val packet = RunCommandPacketsFFI.createSetupRequest()
-        device.sendPacket(packet.toLegacyPacket())
+        device.sendPacket(TransferPacket(packet))
     }
 
     // ========================================================================
@@ -295,7 +296,7 @@ class RunCommandPlugin @AssistedInject constructor(
      */
     private fun requestCommandList() {
         val packet = RunCommandPacketsFFI.createRequestCommandList()
-        device.sendPacket(packet.toLegacyPacket())
+        device.sendPacket(TransferPacket(packet))
     }
 
     // ========================================================================

@@ -29,14 +29,14 @@ import uniffi.cosmic_connect_core.createMousepadRequest
  *     "dy" to -5.0
  * ))
  * val packet = MousePadPacketsFFI.createMousePadRequest(moveBody.toString())
- * device.sendPacket(packet.toLegacyPacket())
+ * device.sendPacket(TransferPacket(packet))
  * ```
  *
  * **Sending mouse click:**
  * ```kotlin
  * val clickBody = JSONObject(mapOf("singleclick" to true))
  * val packet = MousePadPacketsFFI.createMousePadRequest(clickBody.toString())
- * device.sendPacket(packet.toLegacyPacket())
+ * device.sendPacket(TransferPacket(packet))
  * ```
  *
  * **Sending scroll:**
@@ -47,7 +47,7 @@ import uniffi.cosmic_connect_core.createMousepadRequest
  *     "dy" to -1.0
  * ))
  * val packet = MousePadPacketsFFI.createMousePadRequest(scrollBody.toString())
- * device.sendPacket(packet.toLegacyPacket())
+ * device.sendPacket(TransferPacket(packet))
  * ```
  *
  * **Sending keyboard input:**
@@ -57,7 +57,7 @@ import uniffi.cosmic_connect_core.createMousepadRequest
  *     "specialKey" to 0
  * ))
  * val packet = MousePadPacketsFFI.createMousePadRequest(keyBody.toString())
- * device.sendPacket(packet.toLegacyPacket())
+ * device.sendPacket(TransferPacket(packet))
  * ```
  *
  * @see MousePadPlugin

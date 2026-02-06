@@ -27,7 +27,7 @@ import uniffi.cosmic_connect_core.createContactsResponseVcards
  * val json = JSONObject(body).toString()
  * // Result: {"uids": {"1": 1234567890, "3": 1234567891, "15": 1234567892}}
  * val packet = ContactsPacketsFFI.createUidsTimestampsResponse(json)
- * device.sendPacket(packet.toLegacyPacket())
+ * device.sendPacket(TransferPacket(packet))
  * ```
  *
  * **Sending vCards:**
@@ -43,7 +43,7 @@ import uniffi.cosmic_connect_core.createContactsResponseVcards
  * val json = JSONObject(body).toString()
  * // Result: {"vcards": {"1": "BEGIN:VCARD...", "3": "BEGIN:VCARD..."}}
  * val packet = ContactsPacketsFFI.createVCardsResponse(json)
- * device.sendPacket(packet.toLegacyPacket())
+ * device.sendPacket(TransferPacket(packet))
  * ```
  *
  * @see ContactsPlugin

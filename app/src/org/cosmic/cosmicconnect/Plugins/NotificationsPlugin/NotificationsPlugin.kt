@@ -38,6 +38,8 @@ import org.apache.commons.collections4.MultiValuedMap
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap
 import org.apache.commons.lang3.ArrayUtils
 import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.Core.Payload as CorePayload
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -236,7 +238,7 @@ class NotificationsPlugin @AssistedInject constructor(
 
         // Create cancel packet using FFI wrapper
         val packet = NotificationsPacketsFFI.createCancelNotificationPacket(id)
-        device.sendPacket(packet.toLegacyPacket())
+        device.sendPacket(TransferPacket(packet))
         currentNotifications.remove(id)
     }
 
@@ -347,9 +349,8 @@ class NotificationsPlugin @AssistedInject constructor(
         if (!isUpdate) {
             currentNotifications.add(key)
 
-            // Attach BigPicture image or app icon and get legacy packet ready for sending
-            // Both attachImagePayload() and attachIcon() return legacy packets with payloads attached
-            val legacyPacketToSend: LegacyNetworkPacket = if (bigPicture != null) {
+            // Attach BigPicture image or app icon as TransferPacket with payload
+            val tp: TransferPacket = if (bigPicture != null) {
                 // Rich notification with BigPicture image
                 RichNotificationPackets.attachImagePayload(packet, bigPicture)
             } else {
@@ -358,15 +359,14 @@ class NotificationsPlugin @AssistedInject constructor(
                 if (appIcon != null && !blockImages) {
                     attachIcon(packet, appIcon)
                 } else {
-                    // No image/icon to attach - just convert to legacy
-                    packet.toLegacyPacket()
+                    // No image/icon to attach
+                    TransferPacket(packet)
                 }
             }
 
-            // Send the legacy packet directly (do NOT call toLegacyPacket() again!)
-            device.sendPacket(legacyPacketToSend)
+            device.sendPacket(tp)
         } else {
-            device.sendPacket(packet.toLegacyPacket())
+            device.sendPacket(TransferPacket(packet))
         }
     }
 
@@ -788,39 +788,41 @@ class NotificationsPlugin @AssistedInject constructor(
     /**
      * Attach icon as payload to packet.
      *
-     * IMPORTANT: Returns the legacy packet directly to avoid the bug where
-     * toLegacyPacket() creates a new instance each time, losing the payload.
+     * Creates a TransferPacket wrapping the Core packet with the icon as a Core.Payload.
+     * Adds payloadHash to the packet body for integrity verification.
      *
-     * @param packet Core NetworkPacket to convert and attach icon to
+     * @param packet Core NetworkPacket to wrap with icon payload
      * @param appIcon Bitmap icon to attach
-     * @return Legacy NetworkPacket with payload attached, ready for sending
+     * @return TransferPacket with payload attached, ready for sending
      */
-    private fun attachIcon(packet: NetworkPacket, appIcon: Bitmap): LegacyNetworkPacket {
+    private fun attachIcon(packet: NetworkPacket, appIcon: Bitmap): TransferPacket {
         val outStream = ByteArrayOutputStream()
         appIcon.compress(Bitmap.CompressFormat.PNG, 90, outStream)
         val bitmapData = outStream.toByteArray()
 
-        // Convert to legacy packet ONCE
-        val legacyPacket = packet.toLegacyPacket()
-
-        try {
-            // Create payload and set directly (no reflection needed)
-            val payload = LegacyNetworkPacket.Payload(bitmapData)
-            legacyPacket.payload = payload
-
-            // Set payload hash
+        return try {
             val hash = getChecksum(bitmapData)
+
+            // Build updated body with payloadHash
+            val updatedBody = packet.body.toMutableMap()
             if (hash != null) {
-                legacyPacket["payloadHash"] = hash
+                updatedBody["payloadHash"] = hash
             }
 
+            val updatedPacket = NetworkPacket(
+                id = packet.id,
+                type = packet.type,
+                body = updatedBody,
+                payloadSize = bitmapData.size.toLong()
+            )
+
             Log.d(TAG, "Attached ${bitmapData.size} byte icon payload")
+            TransferPacket(updatedPacket, payload = CorePayload(bitmapData))
         } catch (e: Exception) {
             Log.e(TAG, "Error attaching icon payload", e)
+            // Fall back to packet without payload
+            TransferPacket(packet)
         }
-
-        // Return the SAME legacy packet with payload attached
-        return legacyPacket
     }
 
     /**

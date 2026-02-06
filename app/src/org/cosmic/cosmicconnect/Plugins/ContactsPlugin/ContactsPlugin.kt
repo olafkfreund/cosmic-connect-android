@@ -23,6 +23,7 @@ import org.cosmic.cosmicconnect.Helpers.ContactsHelper.ContactNotFoundException
 import org.cosmic.cosmicconnect.Helpers.ContactsHelper.VCardBuilder
 import org.cosmic.cosmicconnect.Helpers.ContactsHelper.UID
 import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
@@ -138,7 +139,7 @@ class ContactsPlugin @AssistedInject constructor(
         val packet = ContactsPacketsFFI.createUidsTimestampsResponse(json)
 
         // Convert and send
-        device.sendPacket(packet.toLegacyPacket())
+        device.sendPacket(TransferPacket(packet))
 
         return true
     }
@@ -177,7 +178,7 @@ class ContactsPlugin @AssistedInject constructor(
         val packet = ContactsPacketsFFI.createVCardsResponse(json)
 
         // Convert and send
-        device.sendPacket(packet.toLegacyPacket())
+        device.sendPacket(TransferPacket(packet))
 
         return true
     }

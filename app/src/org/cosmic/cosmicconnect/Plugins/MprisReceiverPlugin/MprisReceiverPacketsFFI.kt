@@ -26,7 +26,7 @@ import uniffi.cosmic_connect_core.createMprisRequest
  *     "supportAlbumArtPayload" to true
  * ))
  * val packet = MprisReceiverPacketsFFI.createMprisPacket(playerList.toString())
- * device.sendPacket(packet.toLegacyPacket())
+ * device.sendPacket(TransferPacket(packet))
  * ```
  *
  * **Sending metadata:**
@@ -48,7 +48,7 @@ import uniffi.cosmic_connect_core.createMprisRequest
  *     "albumArtUrl" to "https://example.com/art.jpg"
  * ))
  * val packet = MprisReceiverPacketsFFI.createMprisPacket(metadata.toString())
- * device.sendPacket(packet.toLegacyPacket())
+ * device.sendPacket(TransferPacket(packet))
  * ```
  *
  * **Sending album art transfer:**
@@ -59,9 +59,8 @@ import uniffi.cosmic_connect_core.createMprisRequest
  *     "albumArtUrl" to "https://example.com/art.jpg"
  * ))
  * val packet = MprisReceiverPacketsFFI.createMprisPacket(artTransfer.toString())
- * val legacyPacket = packet.toLegacyPacket()
- * legacyPacket.setPayload(NetworkPacket.Payload(albumArtBytes))
- * device.sendPacket(legacyPacket)
+ * val transferPacket = TransferPacket(packet, Payload(albumArtBytes))
+ * device.sendPacket(transferPacket)
  * ```
  *
  * @see MprisReceiverPlugin

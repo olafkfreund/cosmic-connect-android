@@ -13,6 +13,7 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.qualifiers.ApplicationContext
 import org.json.JSONException
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.NetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
@@ -85,22 +86,22 @@ class SystemVolumePlugin @AssistedInject constructor(
 
     fun sendVolume(name: String, volume: Int) {
         val ffiPacket = SystemVolumePacketsFFI.createVolumeRequest(name, volume)
-        device.sendPacket(ffiPacket.toLegacyPacket())
+        device.sendPacket(TransferPacket(ffiPacket))
     }
 
     fun sendMute(name: String, mute: Boolean) {
         val ffiPacket = SystemVolumePacketsFFI.createMuteRequest(name, mute)
-        device.sendPacket(ffiPacket.toLegacyPacket())
+        device.sendPacket(TransferPacket(ffiPacket))
     }
 
     fun sendEnable(name: String) {
         val ffiPacket = SystemVolumePacketsFFI.createEnableRequest(name)
-        device.sendPacket(ffiPacket.toLegacyPacket())
+        device.sendPacket(TransferPacket(ffiPacket))
     }
 
     fun requestSinkList() {
         val ffiPacket = SystemVolumePacketsFFI.createSinkListRequest()
-        device.sendPacket(ffiPacket.toLegacyPacket())
+        device.sendPacket(TransferPacket(ffiPacket))
     }
 
     override val supportedPacketTypes: Array<String>

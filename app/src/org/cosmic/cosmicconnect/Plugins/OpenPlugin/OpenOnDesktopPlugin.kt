@@ -16,6 +16,7 @@ import dagger.assisted.AssistedInject
 import dagger.hilt.android.qualifiers.ApplicationContext
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory
 import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
@@ -86,7 +87,7 @@ class OpenOnDesktopPlugin @AssistedInject constructor(
 
         Log.i(TAG, "Sending URL to desktop: $url")
         val packet = OpenPacketsFFI.createUrlOpenRequest(url, "browser")
-        device.sendPacket(packet.toLegacyPacket())
+        device.sendPacket(TransferPacket(packet))
         showToast(R.string.open_plugin_sent_url)
         return true
     }
@@ -97,7 +98,7 @@ class OpenOnDesktopPlugin @AssistedInject constructor(
     fun sendFileToDesktop(uri: Uri, mimeType: String): Boolean {
         Log.i(TAG, "Sending file to desktop: $uri (type: $mimeType)")
         val packet = OpenPacketsFFI.createFileOpenRequest(uri.toString(), mimeType, "default")
-        device.sendPacket(packet.toLegacyPacket())
+        device.sendPacket(TransferPacket(packet))
         showToast(R.string.open_plugin_sent_file)
         return true
     }
@@ -113,7 +114,7 @@ class OpenOnDesktopPlugin @AssistedInject constructor(
 
         Log.i(TAG, "Sending text to desktop (${text.length} chars)")
         val packet = OpenPacketsFFI.createTextOpenRequest(text, "editor")
-        device.sendPacket(packet.toLegacyPacket())
+        device.sendPacket(TransferPacket(packet))
         showToast(R.string.open_plugin_sent_text)
         return true
     }
@@ -179,7 +180,7 @@ class OpenOnDesktopPlugin @AssistedInject constructor(
             canOpenText = true
         )
 
-        device.sendPacket(packet.toLegacyPacket())
+        device.sendPacket(TransferPacket(packet))
         Log.d(TAG, "Sent capability announcement to desktop")
     }
 

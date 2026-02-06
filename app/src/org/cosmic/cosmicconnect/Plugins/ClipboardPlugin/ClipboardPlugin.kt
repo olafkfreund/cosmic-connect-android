@@ -21,6 +21,7 @@ import dagger.assisted.AssistedInject
 import dagger.hilt.android.qualifiers.ApplicationContext
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.PluginFactory
 import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
@@ -174,8 +175,8 @@ class ClipboardPlugin @AssistedInject constructor(
         // Create packet using FFI wrapper
         val packet = ClipboardPacketsFFI.createClipboardUpdate(content)
 
-        // Send to remote device (convert to legacy packet)
-        device.sendPacket(packet.toLegacyPacket())
+        // Send to remote device
+        device.sendPacket(TransferPacket(packet))
     }
 
     /**
@@ -195,8 +196,8 @@ class ClipboardPlugin @AssistedInject constructor(
         val timestamp = ClipboardListener.instance(context).updateTimestamp
         val packet = ClipboardPacketsFFI.createClipboardConnect(content, timestamp)
 
-        // Send to remote device (convert to legacy packet)
-        device.sendPacket(packet.toLegacyPacket())
+        // Send to remote device
+        device.sendPacket(TransferPacket(packet))
     }
 
     // ========================================================================

@@ -28,7 +28,7 @@ import uniffi.cosmic_connect_core.createMprisRequest
  *     "action" to "PlayPause"
  * ))
  * val packet = MprisPacketsFFI.createMprisRequest(playPauseBody.toString())
- * device.sendPacket(packet.toLegacyPacket())
+ * device.sendPacket(TransferPacket(packet))
  * ```
  *
  * **Controlling volume:**
@@ -38,7 +38,7 @@ import uniffi.cosmic_connect_core.createMprisRequest
  *     "setVolume" to 75
  * ))
  * val packet = MprisPacketsFFI.createMprisRequest(volumeBody.toString())
- * device.sendPacket(packet.toLegacyPacket())
+ * device.sendPacket(TransferPacket(packet))
  * ```
  *
  * **Seeking to position:**
@@ -48,7 +48,7 @@ import uniffi.cosmic_connect_core.createMprisRequest
  *     "SetPosition" to 123000  // milliseconds
  * ))
  * val packet = MprisPacketsFFI.createMprisRequest(seekBody.toString())
- * device.sendPacket(packet.toLegacyPacket())
+ * device.sendPacket(TransferPacket(packet))
  * ```
  *
  * @see MprisPlugin

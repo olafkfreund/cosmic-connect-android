@@ -29,14 +29,14 @@ import uniffi.cosmic_connect_core.createMousepadKeyboardstate
  *     "isAck" to true
  * ))
  * val packet = RemoteKeyboardPacketsFFI.createEchoPacket(echoBody.toString())
- * device.sendPacket(packet.toLegacyPacket())
+ * device.sendPacket(TransferPacket(packet))
  * ```
  *
  * **Sending keyboard state:**
  * ```kotlin
  * // Notify desktop that keyboard is visible
  * val packet = RemoteKeyboardPacketsFFI.createKeyboardStatePacket(true)
- * device.sendPacket(packet.toLegacyPacket())
+ * device.sendPacket(TransferPacket(packet))
  * ```
  *
  * @see RemoteKeyboardPlugin

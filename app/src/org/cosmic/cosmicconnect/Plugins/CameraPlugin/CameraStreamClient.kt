@@ -9,8 +9,9 @@ package org.cosmic.cosmicconnect.Plugins.CameraPlugin
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import org.cosmic.cosmicconnect.Core.Payload as CorePayload
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Device
-import org.cosmic.cosmicconnect.NetworkPacket
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.atomic.AtomicLong
 
@@ -383,15 +384,14 @@ class CameraStreamClient(
             payloadSize = data.size.toLong()
         )
 
-        // Convert to legacy packet and attach payload
-        val legacyPacket = packet.toLegacyPacket()
-        legacyPacket.payload = NetworkPacket.Payload(data)
+        // Wrap in TransferPacket with payload
+        val tp = TransferPacket(packet, payload = CorePayload(data))
 
         // Track pending
         pendingFrames.incrementAndGet()
 
         // Send via device link
-        device.sendPacket(legacyPacket, object : Device.SendPacketStatusCallback() {
+        device.sendPacket(tp, object : Device.SendPacketStatusCallback() {
             override fun onSuccess() {
                 val sendTimeMs = System.currentTimeMillis() - sendStartTime
                 pendingFrames.decrementAndGet()

@@ -29,7 +29,7 @@ import uniffi.cosmic_connect_core.createConnectivityReport
  * val packet = ConnectivityPacketsFFI.createConnectivityReport(
  *     signalStrengths.toString()
  * )
- * device.sendPacket(packet.toLegacyPacket())
+ * device.sendPacket(TransferPacket(packet))
  * ```
  *
  * @see ConnectivityReportPlugin

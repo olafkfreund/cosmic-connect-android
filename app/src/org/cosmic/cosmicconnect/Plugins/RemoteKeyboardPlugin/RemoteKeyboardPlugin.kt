@@ -26,6 +26,7 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.qualifiers.ApplicationContext
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.NetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
@@ -305,7 +306,7 @@ class RemoteKeyboardPlugin @AssistedInject constructor(
             val packet = RemoteKeyboardPacketsFFI.createEchoPacket(JSONObject(body).toString())
 
             // Send packet
-            device.sendPacket(packet.toLegacyPacket())
+            device.sendPacket(TransferPacket(packet))
         }
 
         return true
@@ -318,7 +319,7 @@ class RemoteKeyboardPlugin @AssistedInject constructor(
         val packet = RemoteKeyboardPacketsFFI.createKeyboardStatePacket(state)
 
         // Send packet
-        device.sendPacket(packet.toLegacyPacket())
+        device.sendPacket(TransferPacket(packet))
     }
 
     val deviceIdValue: String

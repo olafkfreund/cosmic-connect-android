@@ -31,6 +31,7 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.qualifiers.ApplicationContext
 import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Helpers.NotificationHelper
 import org.cosmic.cosmicconnect.Plugins.Plugin
@@ -797,7 +798,7 @@ class CameraPlugin @AssistedInject constructor(
             maxFps = maxFps
         )
 
-        device.sendPacket(packet.toLegacyPacket())
+        device.sendPacket(TransferPacket(packet))
         Log.d(TAG, "Sent camera capabilities: ${availableCameras.size} cameras")
     }
 
@@ -820,7 +821,7 @@ class CameraPlugin @AssistedInject constructor(
             error = error
         )
 
-        device.sendPacket(packet.toLegacyPacket())
+        device.sendPacket(TransferPacket(packet))
         Log.d(TAG, "Sent camera status: $status")
     }
 

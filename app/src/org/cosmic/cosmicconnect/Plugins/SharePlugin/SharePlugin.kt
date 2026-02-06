@@ -34,6 +34,7 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.qualifiers.ApplicationContext
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.NetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
@@ -312,7 +313,7 @@ class SharePlugin @AssistedInject constructor(
                 }
 
                 // Convert and send
-                device.sendPacket(ffiPacket.toLegacyPacket())
+                device.sendPacket(TransferPacket(ffiPacket))
                 return
             }
         }

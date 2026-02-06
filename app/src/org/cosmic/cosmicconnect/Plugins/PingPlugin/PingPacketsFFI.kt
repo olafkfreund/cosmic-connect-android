@@ -28,11 +28,11 @@ import org.cosmic.cosmicconnect.Core.PluginManagerProvider
  * ```kotlin
  * // Create simple ping
  * val pingPacket = PingPacketsFFI.createPing()
- * device.sendPacket(pingPacket.toLegacyPacket())
+ * device.sendPacket(TransferPacket(pingPacket))
  *
  * // Create ping with message
  * val messagePacket = PingPacketsFFI.createPing("Hello from Android!")
- * device.sendPacket(messagePacket.toLegacyPacket())
+ * device.sendPacket(TransferPacket(messagePacket))
  *
  * // Get statistics
  * val stats = PingPacketsFFI.getPingStats()

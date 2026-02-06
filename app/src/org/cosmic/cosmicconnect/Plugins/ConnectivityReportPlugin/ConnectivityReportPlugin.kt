@@ -13,6 +13,7 @@ import dagger.assisted.AssistedInject
 import dagger.hilt.android.qualifiers.ApplicationContext
 import org.json.JSONException
 import org.json.JSONObject
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.ConnectivityReportPlugin.ConnectivityListener.Companion.getInstance
@@ -59,7 +60,7 @@ class ConnectivityReportPlugin @AssistedInject constructor(
                 signalStrengths.toString()
             )
 
-            device.sendPacket(packet.toLegacyPacket())
+            device.sendPacket(TransferPacket(packet))
         }
     }
 

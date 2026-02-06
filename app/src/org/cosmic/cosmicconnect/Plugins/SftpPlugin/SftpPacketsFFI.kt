@@ -30,7 +30,7 @@ import uniffi.cosmic_connect_core.createSftpPacket
  *     "pathNames" to listOf("Internal Storage", "SD Card")
  * ))
  * val packet = SftpPacketsFFI.createSftpPacket(serverInfo.toString())
- * device.sendPacket(packet.toLegacyPacket())
+ * device.sendPacket(TransferPacket(packet))
  * ```
  *
  * **Sending error message:**
@@ -39,7 +39,7 @@ import uniffi.cosmic_connect_core.createSftpPacket
  *     "errorMessage" to "Permission denied"
  * ))
  * val packet = SftpPacketsFFI.createSftpPacket(errorPacket.toString())
- * device.sendPacket(packet.toLegacyPacket())
+ * device.sendPacket(TransferPacket(packet))
  * ```
  *
  * @see SftpPlugin

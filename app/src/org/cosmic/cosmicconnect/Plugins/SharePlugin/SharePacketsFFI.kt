@@ -30,7 +30,7 @@ import uniffi.cosmic_connect_core.*
  * )
  *
  * // Send packet to device
- * device.sendPacket(packet.toLegacyPacket())
+ * device.sendPacket(TransferPacket(packet))
  *
  * // Then initiate payload transfer (see PayloadTransferFFI)
  * ```
@@ -38,13 +38,13 @@ import uniffi.cosmic_connect_core.*
  * ### Text Sharing
  * ```kotlin
  * val packet = SharePacketsFFI.createTextShare("Hello from Android!")
- * device.sendPacket(packet.toLegacyPacket())
+ * device.sendPacket(TransferPacket(packet))
  * ```
  *
  * ### URL Sharing
  * ```kotlin
  * val packet = SharePacketsFFI.createUrlShare("https://example.com")
- * device.sendPacket(packet.toLegacyPacket())
+ * device.sendPacket(TransferPacket(packet))
  * ```
  *
  * ### Multi-File Transfer
@@ -54,7 +54,7 @@ import uniffi.cosmic_connect_core.*
  *     numberOfFiles = 5,
  *     totalPayloadSize = 10485760L // 10 MB total
  * )
- * device.sendPacket(updatePacket.toLegacyPacket())
+ * device.sendPacket(TransferPacket(updatePacket))
  *
  * // Then send individual file packets...
  * ```

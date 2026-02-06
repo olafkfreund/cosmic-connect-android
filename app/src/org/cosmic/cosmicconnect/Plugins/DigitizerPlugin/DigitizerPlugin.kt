@@ -14,6 +14,7 @@ import android.util.Log
 import androidx.preference.PreferenceManager
 import org.cosmic.cosmicconnect.Helpers.DeviceHelper
 import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Plugins.Plugin
@@ -64,13 +65,13 @@ class DigitizerPlugin(context: Context, device: Device) : Plugin(context, device
         )
         val json = JSONObject(body).toString()
         val packet = DigitizerPacketsFFI.createSessionPacket(json)
-        device.sendPacket(packet.toLegacyPacket())
+        device.sendPacket(TransferPacket(packet))
     }
 
     fun endSession() {
         val json = JSONObject(mapOf("action" to "end")).toString()
         val packet = DigitizerPacketsFFI.createSessionPacket(json)
-        device.sendPacket(packet.toLegacyPacket())
+        device.sendPacket(TransferPacket(packet))
     }
 
     fun reportEvent(event: ToolEvent) {
@@ -87,7 +88,7 @@ class DigitizerPlugin(context: Context, device: Device) : Plugin(context, device
 
         val json = JSONObject(body).toString()
         val packet = DigitizerPacketsFFI.createEventPacket(json)
-        device.sendPacket(packet.toLegacyPacket())
+        device.sendPacket(TransferPacket(packet))
     }
 
     override fun hasSettings(): Boolean = true

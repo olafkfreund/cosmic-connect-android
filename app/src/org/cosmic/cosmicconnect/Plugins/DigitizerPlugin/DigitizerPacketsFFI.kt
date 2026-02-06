@@ -29,14 +29,14 @@ import uniffi.cosmic_connect_core.createDigitizerEvent
  *     "resolutionY" to 96
  * ))
  * val packet = DigitizerPacketsFFI.createSessionPacket(sessionBody.toString())
- * device.sendPacket(packet.toLegacyPacket())
+ * device.sendPacket(TransferPacket(packet))
  * ```
  *
  * **Ending a drawing session:**
  * ```kotlin
  * val endBody = JSONObject(mapOf("action" to "end"))
  * val packet = DigitizerPacketsFFI.createSessionPacket(endBody.toString())
- * device.sendPacket(packet.toLegacyPacket())
+ * device.sendPacket(TransferPacket(packet))
  * ```
  *
  * **Sending pen/stylus events:**
@@ -50,7 +50,7 @@ import uniffi.cosmic_connect_core.createDigitizerEvent
  *     "pressure" to 0.75
  * ))
  * val packet = DigitizerPacketsFFI.createEventPacket(eventBody.toString())
- * device.sendPacket(packet.toLegacyPacket())
+ * device.sendPacket(TransferPacket(packet))
  * ```
  *
  * @see DigitizerPlugin

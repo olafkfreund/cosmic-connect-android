@@ -25,6 +25,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Helpers.NotificationHelper
 import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.NetworkPacket as LegacyNetworkPacket
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
@@ -51,7 +52,7 @@ class ReceiveNotificationsPlugin @AssistedInject constructor(
     override fun onCreate(): Boolean {
         // request all existing notifications
         val packet = ReceiveNotificationsPacketsFFI.createNotificationRequestPacket()
-        device.sendPacket(packet.toLegacyPacket())
+        device.sendPacket(TransferPacket(packet))
         return true
     }
 

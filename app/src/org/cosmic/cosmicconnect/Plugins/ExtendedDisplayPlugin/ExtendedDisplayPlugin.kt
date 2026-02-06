@@ -7,13 +7,20 @@
 package org.cosmic.cosmicconnect.Plugins.ExtendedDisplayPlugin
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.util.Log
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import dagger.hilt.android.qualifiers.ApplicationContext
+import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.NetworkPacket
 import org.cosmic.cosmicconnect.Plugins.ExtendedDisplayPlugin.network.WebRTCClient
 import org.cosmic.cosmicconnect.Plugins.ExtendedDisplayPlugin.network.WebRTCEventListener
 import org.cosmic.cosmicconnect.Plugins.ExtendedDisplayPlugin.ui.ConnectionSetupActivity
 import org.cosmic.cosmicconnect.Plugins.Plugin
+import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.R
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment
 import org.webrtc.DataChannel
@@ -36,7 +43,15 @@ import org.webrtc.VideoTrack
  * - "cconnect.extendeddisplay" - Control packets
  * - "cconnect.extendeddisplay.request" - Client requests
  */
-class ExtendedDisplayPlugin : Plugin(), WebRTCEventListener {
+class ExtendedDisplayPlugin @AssistedInject constructor(
+    @ApplicationContext context: Context,
+    @Assisted device: Device,
+) : Plugin(context, device), WebRTCEventListener {
+
+    @AssistedFactory
+    interface Factory : PluginCreator {
+        override fun create(device: Device): ExtendedDisplayPlugin
+    }
 
     companion object {
         private const val TAG = "ExtendedDisplayPlugin"

@@ -26,10 +26,15 @@ import android.util.Size
 import android.view.Surface
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import dagger.hilt.android.qualifiers.ApplicationContext
 import org.cosmic.cosmicconnect.Core.NetworkPacket
+import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Helpers.NotificationHelper
 import org.cosmic.cosmicconnect.Plugins.Plugin
-import org.cosmic.cosmicconnect.Plugins.PluginFactory
+import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.R
 import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment
 
@@ -76,8 +81,15 @@ import org.cosmic.cosmicconnect.UserInterface.PluginSettingsFragment
  * @see CameraPacketsFFI
  * @see CameraStreamingService (TODO: Issue #103)
  */
-@PluginFactory.LoadablePlugin
-class CameraPlugin : Plugin() {
+class CameraPlugin @AssistedInject constructor(
+    @ApplicationContext context: Context,
+    @Assisted device: Device,
+) : Plugin(context, device) {
+
+    @AssistedFactory
+    interface Factory : PluginCreator {
+        override fun create(device: Device): CameraPlugin
+    }
 
     companion object {
         private const val TAG = "CameraPlugin"

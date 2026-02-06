@@ -107,24 +107,27 @@ class PluginFactoryDiTest {
         assertTrue("MprisPlugin should be available", available.contains("MprisPlugin"))
         assertTrue("NotificationsPlugin should be available", available.contains("NotificationsPlugin"))
         assertTrue("ReceiveNotificationsPlugin should be available", available.contains("ReceiveNotificationsPlugin"))
-    }
-
-    @Test
-    fun `initPluginInfo loads legacy plugins via reflection`() {
-        val factory = PluginFactory(context, emptyMap())
-        factory.initPluginInfo()
-
-        val available = factory.availablePlugins
+        // Wave 5
         assertTrue("OpenOnPhonePlugin should be available", available.contains("OpenOnPhonePlugin"))
         assertTrue("CameraPlugin should be available", available.contains("CameraPlugin"))
+        assertTrue("ExtendedDisplayPlugin should be available", available.contains("ExtendedDisplayPlugin"))
     }
 
     @Test
-    fun `total plugin count includes both migrated and legacy`() {
+    fun `all plugins are migrated and no legacy plugins remain`() {
         val factory = PluginFactory(context, emptyMap())
         factory.initPluginInfo()
 
-        // 20 migrated + 3 legacy = 23 total
+        // All 23 plugins are now migrated — no legacy reflection path needed
+        assertEquals("Should have 23 total plugins", 23, factory.availablePlugins.size)
+    }
+
+    @Test
+    fun `total plugin count is all migrated`() {
+        val factory = PluginFactory(context, emptyMap())
+        factory.initPluginInfo()
+
+        // 23 migrated + 0 legacy = 23 total
         assertEquals("Should have 23 total plugins", 23, factory.availablePlugins.size)
     }
 

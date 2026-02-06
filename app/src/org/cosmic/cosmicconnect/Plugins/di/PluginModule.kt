@@ -10,14 +10,17 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import org.cosmic.cosmicconnect.Plugins.BatteryPlugin.BatteryPluginFFI
+import org.cosmic.cosmicconnect.Plugins.CameraPlugin.CameraPlugin
 import org.cosmic.cosmicconnect.Plugins.ClipboardPlugin.ClipboardPlugin
 import org.cosmic.cosmicconnect.Plugins.ConnectivityReportPlugin.ConnectivityReportPlugin
 import org.cosmic.cosmicconnect.Plugins.ContactsPlugin.ContactsPlugin
+import org.cosmic.cosmicconnect.Plugins.ExtendedDisplayPlugin.ExtendedDisplayPlugin
 import org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.FindMyPhonePlugin
 import org.cosmic.cosmicconnect.Plugins.FindRemoteDevicePlugin.FindRemoteDevicePlugin
 import org.cosmic.cosmicconnect.Plugins.MousePadPlugin.MousePadPlugin
 import org.cosmic.cosmicconnect.Plugins.MprisPlugin.MprisPlugin
 import org.cosmic.cosmicconnect.Plugins.NotificationsPlugin.NotificationsPlugin
+import org.cosmic.cosmicconnect.Plugins.OpenOnPhonePlugin.OpenOnPhonePlugin
 import org.cosmic.cosmicconnect.Plugins.OpenPlugin.OpenOnDesktopPlugin
 import org.cosmic.cosmicconnect.Plugins.PingPlugin.PingPlugin
 import org.cosmic.cosmicconnect.Plugins.PresenterPlugin.PresenterPlugin
@@ -148,4 +151,21 @@ object PluginModule {
     @dagger.multibindings.IntoMap
     @PluginKey("ReceiveNotificationsPlugin")
     fun provideReceiveNotificationsPluginCreator(factory: ReceiveNotificationsPlugin.Factory): PluginCreator = factory
+
+    // ---- Wave 5 plugins ----
+
+    @Provides
+    @dagger.multibindings.IntoMap
+    @PluginKey("OpenOnPhonePlugin")
+    fun provideOpenOnPhonePluginCreator(factory: OpenOnPhonePlugin.Factory): PluginCreator = factory
+
+    @Provides
+    @dagger.multibindings.IntoMap
+    @PluginKey("CameraPlugin")
+    fun provideCameraPluginCreator(factory: CameraPlugin.Factory): PluginCreator = factory
+
+    @Provides
+    @dagger.multibindings.IntoMap
+    @PluginKey("ExtendedDisplayPlugin")
+    fun provideExtendedDisplayPluginCreator(factory: ExtendedDisplayPlugin.Factory): PluginCreator = factory
 }

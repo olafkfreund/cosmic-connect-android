@@ -307,19 +307,37 @@ class PluginFactory @Inject constructor(
                 descriptionRes = R.string.pref_plugin_receive_notifications_desc,
                 isEnabledByDefault = false,
             ),
+            // --- Wave 5 ---
+            org.cosmic.cosmicconnect.Plugins.OpenOnPhonePlugin.OpenOnPhonePlugin::class.java to StaticPluginMetadata(
+                pluginKey = "OpenOnPhonePlugin",
+                supportedPacketTypes = arrayOf("cconnect.open.request", "cconnect.open.capability"),
+                outgoingPacketTypes = arrayOf("cconnect.open.response", "cconnect.open.capability"),
+                displayNameRes = R.string.pref_plugin_open,
+                descriptionRes = R.string.pref_plugin_open_desc,
+            ),
+            org.cosmic.cosmicconnect.Plugins.CameraPlugin.CameraPlugin::class.java to StaticPluginMetadata(
+                pluginKey = "CameraPlugin",
+                supportedPacketTypes = arrayOf("cconnect.camera.start", "cconnect.camera.request", "cconnect.camera.stop", "cconnect.camera.settings"),
+                outgoingPacketTypes = arrayOf("cconnect.camera.capability", "cconnect.camera.status", "cconnect.camera.frame"),
+                displayNameRes = R.string.camera_plugin_title,
+                descriptionRes = R.string.camera_plugin_description,
+                hasSettings = true,
+            ),
+            org.cosmic.cosmicconnect.Plugins.ExtendedDisplayPlugin.ExtendedDisplayPlugin::class.java to StaticPluginMetadata(
+                pluginKey = "ExtendedDisplayPlugin",
+                supportedPacketTypes = arrayOf("cconnect.extendeddisplay"),
+                outgoingPacketTypes = arrayOf("cconnect.extendeddisplay.request"),
+                displayNameRes = R.string.pref_plugin_extended_display,
+                descriptionRes = R.string.pref_plugin_extended_display_desc,
+                isEnabledByDefault = false,
+                hasSettings = true,
+            ),
         )
 
         /**
-         * Plugins still using reflection-based instantiation.
-         * As plugins are migrated, move them from here to [migratedPlugins].
+         * All plugins have been migrated to @AssistedInject.
+         * This list is kept empty for backward compatibility.
          */
-        private val legacyPlugins = listOf(
-            // App Continuity plugins (Issues #112-123)
-            org.cosmic.cosmicconnect.Plugins.OpenOnPhonePlugin.OpenOnPhonePlugin::class,
-            // Camera Webcam plugin (Issues #102-111)
-            org.cosmic.cosmicconnect.Plugins.CameraPlugin.CameraPlugin::class,
-            // Extended Display plugin (Issue #138)
-            org.cosmic.cosmicconnect.Plugins.ExtendedDisplayPlugin.ExtendedDisplayPlugin::class,
-        )
+        private val legacyPlugins = listOf<kotlin.reflect.KClass<out Plugin>>()
     }
 }

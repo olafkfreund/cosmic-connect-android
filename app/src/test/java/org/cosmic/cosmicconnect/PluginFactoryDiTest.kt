@@ -99,6 +99,11 @@ class PluginFactoryDiTest {
         assertTrue("NetworkInfoPlugin should be available", available.contains("NetworkInfoPlugin"))
         assertTrue("PowerPlugin should be available", available.contains("PowerPlugin"))
         assertTrue("LockPlugin should be available", available.contains("LockPlugin"))
+        // Wave 7
+        assertTrue("ScreenSharePlugin should be available", available.contains("ScreenSharePlugin"))
+        assertTrue("FileSyncPlugin should be available", available.contains("FileSyncPlugin"))
+        assertTrue("VirtualMonitorPlugin should be available", available.contains("VirtualMonitorPlugin"))
+        assertTrue("AudioStreamPlugin should be available", available.contains("AudioStreamPlugin"))
     }
 
     @Test
@@ -106,8 +111,8 @@ class PluginFactoryDiTest {
         val factory = PluginFactory(context, emptyMap())
         factory.initPluginInfo()
 
-        // All 26 plugins are now migrated — no legacy reflection path needed
-        assertEquals("Should have 26 total plugins", 26, factory.availablePlugins.size)
+        // All 30 plugins are now migrated — no legacy reflection path needed
+        assertEquals("Should have 30 total plugins", 30, factory.availablePlugins.size)
     }
 
     @Test
@@ -115,8 +120,8 @@ class PluginFactoryDiTest {
         val factory = PluginFactory(context, emptyMap())
         factory.initPluginInfo()
 
-        // 26 migrated + 0 legacy = 26 total
-        assertEquals("Should have 26 total plugins", 26, factory.availablePlugins.size)
+        // 30 migrated + 0 legacy = 30 total
+        assertEquals("Should have 30 total plugins", 30, factory.availablePlugins.size)
     }
 
     @Test

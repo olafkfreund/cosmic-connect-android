@@ -16,9 +16,13 @@ import org.cosmic.cosmicconnect.Plugins.ConnectivityReportPlugin.ConnectivityRep
 import org.cosmic.cosmicconnect.Plugins.ContactsPlugin.ContactsPlugin
 import org.cosmic.cosmicconnect.Plugins.ExtendedDisplayPlugin.ExtendedDisplayPlugin
 import org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.FindMyPhonePlugin
+import org.cosmic.cosmicconnect.Plugins.FileSyncPlugin.FileSyncPlugin
 import org.cosmic.cosmicconnect.Plugins.LockPlugin.LockPlugin
+import org.cosmic.cosmicconnect.Plugins.ScreenSharePlugin.ScreenSharePlugin
 import org.cosmic.cosmicconnect.Plugins.NetworkInfoPlugin.NetworkInfoPlugin
+import org.cosmic.cosmicconnect.Plugins.VirtualMonitorPlugin.VirtualMonitorPlugin
 import org.cosmic.cosmicconnect.Plugins.PowerPlugin.PowerPlugin
+import org.cosmic.cosmicconnect.Plugins.AudioStreamPlugin.AudioStreamPlugin
 import org.cosmic.cosmicconnect.Plugins.FindRemoteDevicePlugin.FindRemoteDevicePlugin
 import org.cosmic.cosmicconnect.Plugins.MousePadPlugin.MousePadPlugin
 import org.cosmic.cosmicconnect.Plugins.MprisPlugin.MprisPlugin
@@ -188,4 +192,26 @@ object PluginModule {
     @dagger.multibindings.IntoMap
     @PluginKey("LockPlugin")
     fun provideLockPluginCreator(factory: LockPlugin.Factory): PluginCreator = factory
+
+    // ---- Wave 7 plugins (desktop plugin parity #145 continued) ----
+
+    @Provides
+    @dagger.multibindings.IntoMap
+    @PluginKey("ScreenSharePlugin")
+    fun provideScreenSharePluginCreator(factory: ScreenSharePlugin.Factory): PluginCreator = factory
+
+    @Provides
+    @dagger.multibindings.IntoMap
+    @PluginKey("FileSyncPlugin")
+    fun provideFileSyncPluginCreator(factory: FileSyncPlugin.Factory): PluginCreator = factory
+
+    @Provides
+    @dagger.multibindings.IntoMap
+    @PluginKey("VirtualMonitorPlugin")
+    fun provideVirtualMonitorPluginCreator(factory: VirtualMonitorPlugin.Factory): PluginCreator = factory
+
+    @Provides
+    @dagger.multibindings.IntoMap
+    @PluginKey("AudioStreamPlugin")
+    fun provideAudioStreamPluginCreator(factory: AudioStreamPlugin.Factory): PluginCreator = factory
 }

@@ -321,6 +321,39 @@ class PluginFactory @Inject constructor(
                 displayNameRes = R.string.pref_plugin_lock,
                 descriptionRes = R.string.pref_plugin_lock_desc,
             ),
+            // --- Wave 7 ---
+            org.cosmic.cosmicconnect.Plugins.ScreenSharePlugin.ScreenSharePlugin::class.java to StaticPluginMetadata(
+                pluginKey = "ScreenSharePlugin",
+                supportedPacketTypes = arrayOf("cconnect.screenshare"),
+                outgoingPacketTypes = arrayOf("cconnect.screenshare.request"),
+                displayNameRes = R.string.pref_plugin_screenshare,
+                descriptionRes = R.string.pref_plugin_screenshare_desc,
+                isEnabledByDefault = false,
+            ),
+            org.cosmic.cosmicconnect.Plugins.FileSyncPlugin.FileSyncPlugin::class.java to StaticPluginMetadata(
+                pluginKey = "FileSyncPlugin",
+                supportedPacketTypes = arrayOf("cconnect.filesync", "cconnect.filesync.conflict"),
+                outgoingPacketTypes = arrayOf("cconnect.filesync.request"),
+                displayNameRes = R.string.pref_plugin_filesync,
+                descriptionRes = R.string.pref_plugin_filesync_desc,
+                isEnabledByDefault = false,
+            ),
+            org.cosmic.cosmicconnect.Plugins.VirtualMonitorPlugin.VirtualMonitorPlugin::class.java to StaticPluginMetadata(
+                pluginKey = "VirtualMonitorPlugin",
+                supportedPacketTypes = arrayOf("cconnect.virtualmonitor"),
+                outgoingPacketTypes = arrayOf("cconnect.virtualmonitor.request"),
+                displayNameRes = R.string.pref_plugin_virtualmonitor,
+                descriptionRes = R.string.pref_plugin_virtualmonitor_desc,
+                isEnabledByDefault = false,
+            ),
+            org.cosmic.cosmicconnect.Plugins.AudioStreamPlugin.AudioStreamPlugin::class.java to StaticPluginMetadata(
+                pluginKey = "AudioStreamPlugin",
+                supportedPacketTypes = arrayOf("cconnect.audiostream", "cconnect.audiostream.capability"),
+                outgoingPacketTypes = arrayOf("cconnect.audiostream.request"),
+                displayNameRes = R.string.pref_plugin_audiostream,
+                descriptionRes = R.string.pref_plugin_audiostream_desc,
+                isEnabledByDefault = false,
+            ),
         )
     }
 }

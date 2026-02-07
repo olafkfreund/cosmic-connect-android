@@ -34,6 +34,10 @@ COSMIC Connect enables Android devices to communicate with COSMIC Desktop comput
 - **Network Info** - Report device network status (WiFi SSID, signal, type)
 - **Power Management** - Remote shutdown/reboot/suspend/hibernate
 - **Screen Lock** - Lock or unlock the remote device's screen
+- **Audio Streaming** - Stream audio between phone and desktop
+- **File Sync** - Synchronize files with conflict resolution
+- **Screen Share** - Share screen with configurable quality
+- **Virtual Monitor** - Use phone as an extra display for desktop
 
 All features work wirelessly over Wi-Fi or Bluetooth using **secure TLS encryption**.
 
@@ -86,7 +90,7 @@ The project uses a **Rust core + Kotlin UI** architecture for optimal performanc
 
 ## Project Status
 
-**26 plugins** | **711 unit tests** | **0 failures** | **All major architecture issues resolved**
+**30 plugins** | **787 unit tests** | **0 failures** | **All major architecture issues resolved**
 
 ### Recent Architecture Overhaul (2026-02-06)
 
@@ -94,9 +98,9 @@ The project uses a **Rust core + Kotlin UI** architecture for optimal performanc
 |-------|-------------|--------|
 | **#142** Unified NetworkPacket | Eliminated dual packet system. Legacy `NetworkPacket.kt` deleted, all code uses `Core.NetworkPacket` data class + `TransferPacket` for payloads. | Zero double-serialization overhead |
 | **#143** Device.kt decomposition | God class (702 lines) split into `ConnectionManager`, `PluginManager`, `PairingManager` via facade pattern (325 lines). | Testable, focused components |
-| **#144** Hilt DI for plugins | All 26 plugins migrated from reflection to `@AssistedInject` + `@AssistedFactory`. | Type-safe, compile-time verified DI |
-| **#145** Desktop plugin parity | Added NetworkInfo, Power, Lock plugins. Webcam core FFI ready. | 26 plugins (was 23) |
-| **#146** Test coverage | 130 tests expanded to 711 across 35 test files. | All testable plugins covered |
+| **#144** Hilt DI for plugins | All 30 plugins migrated from reflection to `@AssistedInject` + `@AssistedFactory`. | Type-safe, compile-time verified DI |
+| **#145** Desktop plugin parity | Added 7 new plugins across 3 tiers: NetworkInfo, Power, Lock, AudioStream, FileSync, ScreenShare, VirtualMonitor. | 30 plugins (was 23) |
+| **#146** Test coverage | 130 tests expanded to 787 across 39 test files. | All testable plugins covered |
 
 ### Security & Build Hardening
 - BouncyCastle upgraded (`bcpkix-jdk15on:1.70` -> `bcpkix-jdk18on:1.80`) for CVE fix
@@ -105,7 +109,7 @@ The project uses a **Rust core + Kotlin UI** architecture for optimal performanc
 - Exported receivers locked down (`exported=false`)
 - Private keys migrated to Android Keystore
 
-### Plugin Registry (26 plugins)
+### Plugin Registry (30 plugins)
 
 | Wave | Plugins | Status |
 |------|---------|--------|
@@ -115,31 +119,27 @@ The project uses a **Rust core + Kotlin UI** architecture for optimal performanc
 | **Wave 4** | Share, SFTP, MPRIS, Notifications, ReceiveNotifications | Shipped |
 | **Wave 5** | OpenOnPhone, Camera, ExtendedDisplay | Shipped |
 | **Wave 6** | NetworkInfo, Power, Lock | Shipped |
+| **Wave 7** | ScreenShare, FileSync, VirtualMonitor, AudioStream | Shipped (experimental) |
 
-### Test Suite: 711 Tests
+### Test Suite: 787 Tests
 
 | Category | Count | Files |
 |----------|-------|-------|
-| Plugin tests | ~530 | 25 test files covering all testable plugins |
+| Plugin tests | ~610 | 29 test files covering all testable plugins |
 | Core/architecture | ~110 | ConnectionManager, PluginManager, PairingManager, DeviceInfo, DeviceHelper, PairingHandler |
 | Transport layer | ~40 | LanLinkProvider, BaseLink, BaseLinkProvider |
 | Utility | ~31 | UrlValidator, MessagingNotificationHandler |
 
-### Open Issues (Tier 3 — deferred)
+### Open Issues
 
-| Issue | Plugin | Blocker |
-|-------|--------|---------|
-| #153 | AudioStream | PipeWire audio routing on COSMIC desktop |
-| #154 | FileSync | Sync protocol design (delta, conflicts) |
-| #155 | ScreenShare | PipeWire screen capture on COSMIC desktop |
-| #156 | VirtualMonitor | COSMIC compositor virtual output support |
+No open issues — all 51 issues closed.
 
 ### Build Status
 
 ```
 Build: PASSING (0 compilation errors)
-Unit Tests: 711/711 passing
-Plugins: 26/26 migrated to Hilt DI
+Unit Tests: 787/787 passing
+Plugins: 30/30 migrated to Hilt DI
 Architecture: NetworkPacket unified, Device.kt decomposed
 SDK: compileSdk 35, minSdk 23
 ```
@@ -256,19 +256,23 @@ cosmic-connect-android/
 │   │   ├── TransferPacket.kt               # Payload-aware wrapper
 │   │   ├── NetworkPacketCompat.kt          # Compat extensions (getString, getInt, etc.)
 │   │   └── PacketType.kt                   # Packet type constants
-│   ├── Plugins/                            # 26 plugins (all @AssistedInject)
+│   ├── Plugins/                            # 30 plugins (all @AssistedInject)
 │   │   ├── di/                             # Hilt DI module + PluginCreator interface
 │   │   ├── BatteryPlugin/                  # Battery status monitoring
 │   │   ├── LockPlugin/                     # Remote screen lock/unlock (Tier 2)
 │   │   ├── NetworkInfoPlugin/              # Network status reporting
 │   │   ├── PowerPlugin/                    # Remote power management
+│   │   ├── AudioStreamPlugin/              # Audio streaming (Tier 3, experimental)
+│   │   ├── FileSyncPlugin/                # File synchronization (Tier 3, experimental)
+│   │   ├── ScreenSharePlugin/             # Screen sharing (Tier 3, experimental)
+│   │   ├── VirtualMonitorPlugin/          # Virtual monitor (Tier 3, experimental)
 │   │   └── ...                             # 22 more plugins
 │   ├── Device.kt                           # Facade (325 lines, was 702)
 │   ├── ConnectionManager.kt               # Link management, packet routing
 │   ├── PluginManager.kt                    # Plugin lifecycle, permissions
 │   ├── PairingManager.kt                   # Pairing state machine
 │   └── BackgroundService.kt               # Main Android service
-├── app/src/test/                           # 35 test files, 711 tests
+├── app/src/test/                           # 39 test files, 787 tests
 ├── app/src/uniffi/cosmic_connect_core/     # Generated FFI bindings
 ├── docs/                                   # Documentation
 ├── flake.nix                               # NixOS development environment
@@ -282,6 +286,8 @@ cosmic-connect-core/                        # Rust core library (separate repo)
 │   ├── plugins/                            # Plugin packet creation
 │   │   ├── battery.rs, ping.rs, share.rs   # Core plugins
 │   │   ├── lock.rs, webcam.rs              # Tier 2 plugins
+│   │   ├── audiostream.rs, filesync.rs     # Tier 3 plugins
+│   │   ├── screenshare.rs, virtualmonitor.rs
 │   │   └── ...
 │   ├── ffi/                                # FFI wrappers (uniffi)
 │   └── cosmic_connect_core.udl            # UniFFI interface definition
@@ -296,7 +302,7 @@ cosmic-connect-core/                        # Rust core library (separate repo)
 - Compat extensions for type-safe field access
 
 **Plugin Layer** (`app/src/org/cosmic/cosmicconnect/Plugins/`):
-- 26 plugins, all using Hilt `@AssistedInject` DI
+- 30 plugins, all using Hilt `@AssistedInject` DI
 - Each plugin has a `Factory` implementing `PluginCreator`
 - Registered in `PluginFactory` (metadata) + `PluginModule` (Hilt bindings)
 
@@ -469,7 +475,7 @@ The following table shows which features can be tested on each platform:
 
 ### Test Suite Overview
 
-**Total: 711 Unit Tests** | **All Passing** | **35 Test Files**
+**Total: 787 Unit Tests** | **All Passing** | **39 Test Files**
 
 | Category | Tests | Examples |
 |----------|-------|---------|
@@ -717,8 +723,8 @@ See [LICENSE](LICENSE) for full license text.
 <div align="center">
 
 **Build**: ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
-![Tests](https://img.shields.io/badge/tests-711_passing-brightgreen)
-![Plugins](https://img.shields.io/badge/plugins-26-blue)
+![Tests](https://img.shields.io/badge/tests-787_passing-brightgreen)
+![Plugins](https://img.shields.io/badge/plugins-30-blue)
 ![Compilation](https://img.shields.io/badge/errors-0-brightgreen)
 
 **Last Updated**: 2026-02-06

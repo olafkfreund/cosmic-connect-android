@@ -16,6 +16,7 @@ import org.cosmic.cosmicconnect.Plugins.ConnectivityReportPlugin.ConnectivityRep
 import org.cosmic.cosmicconnect.Plugins.ContactsPlugin.ContactsPlugin
 import org.cosmic.cosmicconnect.Plugins.ExtendedDisplayPlugin.ExtendedDisplayPlugin
 import org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.FindMyPhonePlugin
+import org.cosmic.cosmicconnect.Plugins.LockPlugin.LockPlugin
 import org.cosmic.cosmicconnect.Plugins.NetworkInfoPlugin.NetworkInfoPlugin
 import org.cosmic.cosmicconnect.Plugins.PowerPlugin.PowerPlugin
 import org.cosmic.cosmicconnect.Plugins.FindRemoteDevicePlugin.FindRemoteDevicePlugin
@@ -182,4 +183,9 @@ object PluginModule {
     @dagger.multibindings.IntoMap
     @PluginKey("PowerPlugin")
     fun providePowerPluginCreator(factory: PowerPlugin.Factory): PluginCreator = factory
+
+    @Provides
+    @dagger.multibindings.IntoMap
+    @PluginKey("LockPlugin")
+    fun provideLockPluginCreator(factory: LockPlugin.Factory): PluginCreator = factory
 }

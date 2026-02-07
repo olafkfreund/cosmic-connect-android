@@ -42,6 +42,10 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-COSMIC-Accep
     <string name="power_confirm_reboot">Reboot %s?</string>
     <string name="power_confirm_suspend">Suspend %s?</string>
     <string name="power_confirm_hibernate">Hibernate %s?</string>
+    <string name="pref_plugin_lock">Screen lock</string>
+    <string name="pref_plugin_lock_desc">Lock or unlock the remote device\'s screen</string>
+    <string name="lock_lock">Lock screen</string>
+    <string name="lock_unlock">Unlock screen</string>
     <string name="pref_plugin_digitizer">Drawing tablet</string>
     <string name="pref_plugin_digitizer_desc">Use your device as a pressure sensitive drawing tablet</string>
     <string name="pref_plugin_sftp">Filesystem access</string>

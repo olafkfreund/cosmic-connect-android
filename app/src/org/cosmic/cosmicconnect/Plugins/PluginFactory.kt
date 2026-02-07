@@ -314,6 +314,13 @@ class PluginFactory @Inject constructor(
                 displayNameRes = R.string.pref_plugin_power,
                 descriptionRes = R.string.pref_plugin_power_desc,
             ),
+            org.cosmic.cosmicconnect.Plugins.LockPlugin.LockPlugin::class.java to StaticPluginMetadata(
+                pluginKey = "LockPlugin",
+                supportedPacketTypes = arrayOf("cconnect.lock"),
+                outgoingPacketTypes = arrayOf("cconnect.lock.request"),
+                displayNameRes = R.string.pref_plugin_lock,
+                descriptionRes = R.string.pref_plugin_lock_desc,
+            ),
         )
     }
 }

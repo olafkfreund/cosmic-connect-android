@@ -30,7 +30,10 @@ COSMIC Connect enables Android devices to communicate with COSMIC Desktop comput
 - **Run Commands** - Execute predefined commands remotely
 - **Telephony Integration** - SMS and call notifications on desktop
 - **Camera Webcam** - Use phone camera as wireless webcam for video calls
-- **App Continuity** - Open URLs and files seamlessly across devices (NEW!)
+- **App Continuity** - Open URLs and files seamlessly across devices
+- **Network Info** - Report device network status (WiFi SSID, signal, type)
+- **Power Management** - Remote shutdown/reboot/suspend/hibernate
+- **Screen Lock** - Lock or unlock the remote device's screen
 
 All features work wirelessly over Wi-Fi or Bluetooth using **secure TLS encryption**.
 
@@ -83,218 +86,63 @@ The project uses a **Rust core + Kotlin UI** architecture for optimal performanc
 
 ## Project Status
 
-**Current Phase**: Phase 4 UI Modernization & Testing - **100% COMPLETE**
+**26 plugins** | **711 unit tests** | **0 failures** | **All major architecture issues resolved**
 
-The project has completed all plugin FFI migrations, UI modernization with Jetpack Compose and Material Design 3, and comprehensive testing infrastructure. Ready for final polish and release preparation.
+### Recent Architecture Overhaul (2026-02-06)
 
-### Completed Milestones
+| Issue | What Changed | Impact |
+|-------|-------------|--------|
+| **#142** Unified NetworkPacket | Eliminated dual packet system. Legacy `NetworkPacket.kt` deleted, all code uses `Core.NetworkPacket` data class + `TransferPacket` for payloads. | Zero double-serialization overhead |
+| **#143** Device.kt decomposition | God class (702 lines) split into `ConnectionManager`, `PluginManager`, `PairingManager` via facade pattern (325 lines). | Testable, focused components |
+| **#144** Hilt DI for plugins | All 26 plugins migrated from reflection to `@AssistedInject` + `@AssistedFactory`. | Type-safe, compile-time verified DI |
+| **#145** Desktop plugin parity | Added NetworkInfo, Power, Lock plugins. Webcam core FFI ready. | 26 plugins (was 23) |
+| **#146** Test coverage | 130 tests expanded to 711 across 35 test files. | All testable plugins covered |
 
-#### Phase 0: Foundation (100% Complete)
-- **Issue #44**: Project restructuring and build system
-- **Issue #45**: NetworkPacket FFI implementation
-- **Issue #46**: Discovery service FFI
-- **Issue #47**: TLS/Certificate management FFI
-- **Issue #48**: Core FFI validation
-- **Issue #51**: cargo-ndk build integration (9.3 MB native libs)
+### Security & Build Hardening
+- BouncyCastle upgraded (`bcpkix-jdk15on:1.70` -> `bcpkix-jdk18on:1.80`) for CVE fix
+- `compileSdk`/`targetSdk` 34 -> 35, `core-ktx` 1.15.0
+- RunCommand URL execution now requires user confirmation dialog
+- Exported receivers locked down (`exported=false`)
+- Private keys migrated to Android Keystore
 
-#### Phase 1: Core Protocol Plugins (100% Complete)
-- **Issue #50**: FFI validation test framework (10 comprehensive tests)
-- **Issue #54**: Battery Plugin FFI migration
-- **Issue #55**: Telephony Plugin FFI migration
-- **Issue #56**: Share Plugin FFI migration
-- **Issue #57**: Notifications Plugin FFI migration
-- **Issue #58**: Clipboard Plugin FFI migration
-- **Issue #59**: FindMyPhone Plugin FFI migration
-- **Issue #60**: RunCommand Plugin FFI migration
-- **Issue #61**: Ping Plugin FFI migration
+### Plugin Registry (26 plugins)
 
-#### Phase 2: Major Feature Plugins (100% Complete)
-- **Issue #62**: NotificationsPlugin FFI migration
-- **Issue #63**: SMS Plugin FFI migration
-- **Issue #64**: Contacts Plugin FFI migration
-- **Issue #65**: SystemVolume Plugin FFI migration
-- **Issue #66**: MPRIS Plugin FFI migration
-- **Issue #68**: Presenter Plugin FFI migration
-- **Issue #69**: Connectivity Plugin FFI migration
+| Wave | Plugins | Status |
+|------|---------|--------|
+| **Wave 1** | Ping, FindRemoteDevice, ConnectivityReport, Presenter, MousePad | Shipped |
+| **Wave 2** | Clipboard, SystemVolume, RemoteKeyboard, RunCommand, OpenOnDesktop | Shipped |
+| **Wave 3** | Battery, FindMyPhone, Contacts, Telephony, SMS | Shipped |
+| **Wave 4** | Share, SFTP, MPRIS, Notifications, ReceiveNotifications | Shipped |
+| **Wave 5** | OpenOnPhone, Camera, ExtendedDisplay | Shipped |
+| **Wave 6** | NetworkInfo, Power, Lock | Shipped |
 
-#### Phase 3: Remaining Plugins (100% Complete)
-- **Issue #67**: MousePad Plugin FFI migration
-- **Issue #68**: RemoteKeyboard Plugin FFI migration (Java-Kotlin interop)
-- **Issue #69**: Digitizer Plugin FFI migration
-- **Issue #70**: SFTP Plugin FFI migration
-- **Issue #71**: MprisReceiver Plugin FFI migration (reused existing FFI)
-- **Issue #72**: MouseReceiver Plugin analysis (no migration needed - pure receiver)
-- **Issue #73**: ReceiveNotifications Plugin FFI migration (reused existing FFI)
+### Test Suite: 711 Tests
 
-#### Phase 4.1-4.3: UI Modernization (100% Complete)
-- **Issue #74**: Material Design 3 Foundation Components
-- **Issue #75**: Button Components - Complete Material3 button system
-- **Issue #76**: Input Components - Text fields, search bars, chips
-- **Issue #77**: Card Components - Material3 card variants
-- **Issue #78**: List Item Components - Device lists with rich content
-- **Issue #79**: Dialog Components - Reusable dialog system
-- **Issue #80**: Navigation Components - Complete navigation system
-- **Issue #81**: Status Indicators - Visual feedback system
+| Category | Count | Files |
+|----------|-------|-------|
+| Plugin tests | ~530 | 25 test files covering all testable plugins |
+| Core/architecture | ~110 | ConnectionManager, PluginManager, PairingManager, DeviceInfo, DeviceHelper, PairingHandler |
+| Transport layer | ~40 | LanLinkProvider, BaseLink, BaseLinkProvider |
+| Utility | ~31 | UrlValidator, MessagingNotificationHandler |
 
-#### Phase 4.4: Testing Infrastructure (100% Complete)
-- **Issue #28**: Integration Test Framework Setup
-- **Issue #30**: Integration Tests - Discovery & Pairing (24 tests)
-- **Issue #31**: Integration Tests - File Transfer (19 tests)
-- **Issue #32**: Integration Tests - All Plugins (35 tests)
-- **Issue #33**: E2E Test: Android → COSMIC (15 tests)
-- **Issue #34**: E2E Test: COSMIC → Android (16 tests)
-- **Issue #35**: Performance Testing (14 benchmarks)
+### Open Issues (Tier 3 — deferred)
 
-#### Build System Fixes (100% Complete)
-- **277 compilation errors** resolved (168 + 109)
-  - Fixed Java plugin compatibility with FFI packets
-  - Removed 520+ lines of duplicate helper functions
-  - Fixed UniFFI binding signature clashes
-  - Converted Plugin API to Kotlin properties
-  - Fixed all NetworkPacket import issues
-  - All FFI placeholder methods implemented
-  - All plugin FFI methods fully functional
-
-- **Issue #82**: Jetpack Compose Migration Compilation Fixes (109 errors)
-  - Fixed icon references and Material Design 3 components
-  - Fixed spacing system and preview functions
-  - Fixed DeviceDetailViewModel API mismatches
-  - Removed Material 1.x incompatibilities
-  - Fixed FlowRow experimental API usage
-  - Build successfully completes (debug & release)
-
-### Achievements
-
-**Plugin FFI Migration**: 100% Complete
-- 21 plugins analyzed
-- 20 plugins migrated to FFI (1 pure receiver plugin required no migration)
-- 79+ lines of boilerplate code eliminated
-- 2 cases of FFI function reuse between plugins (MPRIS family, Notifications family)
-- 3 Java plugins successfully using Kotlin FFI wrappers
-
-**Code Sharing**:
-- 70%+ code sharing with COSMIC Desktop
-- Single source of truth for all packet creation
-- Unified protocol implementation in Rust core
-
-**Quality**:
-- Zero compilation errors
-- Zero runtime regressions
-- All builds passing
-- Comprehensive FFI validation test suite
-
-**UI Modernization**: 100% Complete
-- 8 complete Material Design 3 component sets implemented
-- Jetpack Compose migration for all UI screens
-- Modern Android design patterns throughout
-- Accessibility support built-in
-
-**Test Coverage**: ~204 Tests
-- Unit tests: ~50 tests (FFI validation, core functionality)
-- Integration tests: 109 tests (discovery, pairing, file transfer, plugins)
-- E2E tests: 31 tests (bidirectional Android ↔ COSMIC communication)
-- Performance benchmarks: 14 tests (FFI, network, memory, stress testing)
-
-**Performance Metrics**: All Targets Met ✅
-- FFI call overhead: 0.45ms (target: < 1ms)
-- File transfer: 21.4 MB/s for large files (target: ≥ 20 MB/s)
-- Discovery latency: 2.34s (target: < 5s)
-- Memory growth: < 50 MB per operation (all tests passed)
-- Stress testing: 0% packet loss, 2% error rate (target: < 10%)
-
-### Next Steps
-
-**Phase 5: Release Preparation (In Progress - 80% Complete)**
-- ✅ Issue #82: Compilation error fixes (109 errors → 0)
-- ✅ Build system validation (debug & release APKs)
-- ✅ Lint checks passing
-- ✅ Issue #36: Update user documentation (USER_GUIDE, FAQ)
-- ✅ Issue #37: Update developer documentation (PLUGIN_API)
-- ✅ Issue #38: Create migration guide (MIGRATION_GUIDE)
-- ⏳ Beta testing preparation
-- ⏳ Release notes and changelogs
-- ⏳ App store submission preparation
-
-**Phase 6: COSMIC Desktop Integration (Planned)**
-- Desktop applet development
-- Wayland protocol integration
-- libcosmic UI components
-- Cross-platform testing and validation
+| Issue | Plugin | Blocker |
+|-------|--------|---------|
+| #153 | AudioStream | PipeWire audio routing on COSMIC desktop |
+| #154 | FileSync | Sync protocol design (delta, conflicts) |
+| #155 | ScreenShare | PipeWire screen capture on COSMIC desktop |
+| #156 | VirtualMonitor | COSMIC compositor virtual output support |
 
 ### Build Status
 
 ```
-Kotlin Compilation: 0 errors ✅ (Issue #82)
-Java Compilation: 0 errors ✅
-APK Build: SUCCESSFUL (24 MB debug, 15 MB release) ✅
-Native Libraries: Built (9.3 MB across 4 ABIs) ✅
-Lint Checks: PASSING ✅
-
-FFI Implementation: 100% complete (20/20 plugins migrated) ✅
-UI Modernization: 100% complete (8 component sets) ✅
-Test Suite: 204 tests passing ✅
-  - Unit Tests: 50/50 passing
-  - Integration Tests: 109/109 passing
-  - E2E Tests: 31/31 passing
-  - Performance Tests: 14/14 passing
-
-Phase 4 Status: 100% COMPLETE ✅
-  - Phase 4.1-4.3: UI Modernization ✓
-  - Phase 4.4: Testing Infrastructure ✓
-
-Phase 5 Status: In Progress (80% complete) 🚧
-  - Compilation fixes ✓ (Issue #82)
-  - Build validation ✓
-  - Documentation updates ✓ (Issues #36, #37, #38)
-  - Beta testing (pending)
-  - Release prep (pending)
+Build: PASSING (0 compilation errors)
+Unit Tests: 711/711 passing
+Plugins: 26/26 migrated to Hilt DI
+Architecture: NetworkPacket unified, Device.kt decomposed
+SDK: compileSdk 35, minSdk 23
 ```
-
-### Plugin Migration Progress
-
-All packet-producing plugins have been successfully migrated to use Rust FFI core.
-
-#### Phase 1: Core Protocol Plugins (100% Complete)
-
-| Plugin | FFI Wrapper | Status | Issue |
-|--------|-------------|--------|-------|
-| Battery | BatteryPacketsFFI | Complete | #54 |
-| Telephony | TelephonyPacketsFFI | Complete | #55 |
-| Share | SharePacketsFFI | Complete | #56 |
-| Notifications | NotificationsPacketsFFI | Complete | #57 |
-| Clipboard | ClipboardPacketsFFI | Complete | #58 |
-| FindMyPhone | FindMyPhonePacketsFFI | Complete | #59 |
-| RunCommand | RunCommandPacketsFFI | Complete | #60 |
-| Ping | PingPacketsFFI | Complete | #61 |
-
-#### Phase 2: Major Feature Plugins (100% Complete)
-
-| Plugin | FFI Wrapper | Status | Issue |
-|--------|-------------|--------|-------|
-| NotificationsPlugin | NotificationsPacketsFFI | Complete | #62 |
-| SMS | SmsPacketsFFI | Complete | #63 |
-| Contacts | ContactsPacketsFFI | Complete | #64 |
-| SystemVolume | SystemVolumePacketsFFI | Complete | #65 |
-| MPRIS | MprisPacketsFFI | Complete | #66 |
-| Presenter | PresenterPacketsFFI | Complete | #68 |
-| Connectivity | ConnectivityPacketsFFI | Complete | #69 |
-
-#### Phase 3: Remaining Plugins (100% Complete)
-
-| Plugin | FFI Wrapper | Status | Issue |
-|--------|-------------|--------|-------|
-| MousePad | MousePadPacketsFFI | Complete | #67 |
-| RemoteKeyboard | RemoteKeyboardPacketsFFI | Complete | #68 |
-| Digitizer | DigitizerPacketsFFI | Complete | #69 |
-| SFTP | SftpPacketsFFI | Complete | #70 |
-| MprisReceiver | MprisReceiverPacketsFFI | Complete (reused) | #71 |
-| MouseReceiver | N/A | No migration needed | #72 |
-| ReceiveNotifications | ReceiveNotificationsPacketsFFI | Complete (reused) | #73 |
-
-**Total Progress**: 20/20 plugins migrated (100% complete)
-- New FFI functions created: 18
-- FFI functions reused: 2 (MPRIS family, Notifications family)
-- Pure receiver plugins: 1 (no outgoing packets)
 
 ## Installation
 
@@ -402,59 +250,63 @@ All documentation is organized in the `docs/` directory:
 
 ```
 cosmic-connect-android/
-├── src/                                    # Android source code
-│   ├── org/cosmic/cosmicconnect/           # Legacy Java/Kotlin code
-│   │   ├── Plugins/                        # Plugin implementations
-│   │   │   ├── BatteryPlugin/              # Migrated to FFI
-│   │   │   ├── RunCommandPlugin/           # Migrated to FFI + Kotlin
-│   │   │   ├── FindMyPhonePlugin/          # Migrated to FFI + Kotlin
-│   │   │   └── ...                         # Others in progress
-│   │   ├── Device.kt                       # Device management
-│   │   └── BackgroundService.kt            # Main service
-│   ├── org/cosmic/cosmicconnect/Core/      # New FFI wrapper layer
-│   │   ├── NetworkPacket.kt                # Immutable packet wrapper
-│   │   ├── DeviceInfo.kt                   # Device info types
-│   │   └── CosmicConnectCore.kt            # Core initialization
-│   └── uniffi/cosmic_connect_core/         # Generated FFI bindings
-├── tests/                                  # Test suite
-│   └── org/cosmic/cosmicconnect/
-│       └── FFIValidationTest.kt            # 9 comprehensive tests
-├── build/rustJniLibs/                      # Built native libraries (9.3 MB)
-│   ├── arm64-v8a/                          # 2.4 MB
-│   ├── armeabi-v7a/                        # 2.3 MB
-│   ├── x86/                                # 2.3 MB
-│   └── x86_64/                             # 2.3 MB
+├── app/src/org/cosmic/cosmicconnect/       # Main source (non-standard layout)
+│   ├── Core/                               # Unified packet system
+│   │   ├── NetworkPacket.kt                # Immutable data class (the ONE packet type)
+│   │   ├── TransferPacket.kt               # Payload-aware wrapper
+│   │   ├── NetworkPacketCompat.kt          # Compat extensions (getString, getInt, etc.)
+│   │   └── PacketType.kt                   # Packet type constants
+│   ├── Plugins/                            # 26 plugins (all @AssistedInject)
+│   │   ├── di/                             # Hilt DI module + PluginCreator interface
+│   │   ├── BatteryPlugin/                  # Battery status monitoring
+│   │   ├── LockPlugin/                     # Remote screen lock/unlock (Tier 2)
+│   │   ├── NetworkInfoPlugin/              # Network status reporting
+│   │   ├── PowerPlugin/                    # Remote power management
+│   │   └── ...                             # 22 more plugins
+│   ├── Device.kt                           # Facade (325 lines, was 702)
+│   ├── ConnectionManager.kt               # Link management, packet routing
+│   ├── PluginManager.kt                    # Plugin lifecycle, permissions
+│   ├── PairingManager.kt                   # Pairing state machine
+│   └── BackgroundService.kt               # Main Android service
+├── app/src/test/                           # 35 test files, 711 tests
+├── app/src/uniffi/cosmic_connect_core/     # Generated FFI bindings
 ├── docs/                                   # Documentation
 ├── flake.nix                               # NixOS development environment
-├── CLAUDE.md                               # Claude Code AI assistant config
 └── README.md                               # This file
 
 cosmic-connect-core/                        # Rust core library (separate repo)
 ├── src/
-│   ├── protocol/                           # NetworkPacket, protocol types
+│   ├── protocol/                           # Packet, protocol types
 │   ├── network/                            # Discovery, connections
 │   ├── crypto/                             # TLS, certificates
-│   ├── plugins/                            # Plugin implementations
-│   │   ├── battery.rs                      # FFI enabled
-│   │   ├── runcommand.rs                   # FFI enabled
+│   ├── plugins/                            # Plugin packet creation
+│   │   ├── battery.rs, ping.rs, share.rs   # Core plugins
+│   │   ├── lock.rs, webcam.rs              # Tier 2 plugins
 │   │   └── ...
-│   └── ffi/                                # FFI interface (uniffi)
+│   ├── ffi/                                # FFI wrappers (uniffi)
+│   └── cosmic_connect_core.udl            # UniFFI interface definition
 └── bindings/                               # Generated language bindings
 ```
 
 ### Code Organization
 
-**Legacy Code** (Being Gradually Replaced):
-- `src/org/cosmic/cosmicconnect/` (excluding `Core/`)
-- Original Java/Kotlin KDE Connect Android implementation
-- Still used for UI and Android-specific functionality
-- Being migrated plugin by plugin
+**Core Layer** (`app/src/org/cosmic/cosmicconnect/Core/`):
+- Unified `NetworkPacket` data class — single packet type for the entire app
+- `TransferPacket` for payload-aware transfers
+- Compat extensions for type-safe field access
 
-**New Code** (Active Development):
-- `cosmic-connect-core/` - Rust protocol implementation
-- `src/org/cosmic/cosmicconnect/Core/` - Kotlin FFI wrapper
-- `src/uniffi/cosmic_connect_core/` - Generated bindings (auto-generated)
-- `build/rustJniLibs/` - Compiled native libraries
+**Plugin Layer** (`app/src/org/cosmic/cosmicconnect/Plugins/`):
+- 26 plugins, all using Hilt `@AssistedInject` DI
+- Each plugin has a `Factory` implementing `PluginCreator`
+- Registered in `PluginFactory` (metadata) + `PluginModule` (Hilt bindings)
+
+**Device Layer** (`app/src/org/cosmic/cosmicconnect/`):
+- `Device.kt` facade delegates to focused managers
+- `ConnectionManager`, `PluginManager`, `PairingManager`
+
+**Rust Core** ([cosmic-connect-core](https://github.com/olafkfreund/cosmic-connect-core)):
+- Protocol implementation, packet creation, TLS, discovery
+- UniFFI bindings generate Kotlin interfaces automatically
 
 ### Development Workflow
 
@@ -617,14 +469,14 @@ The following table shows which features can be tested on each platform:
 
 ### Test Suite Overview
 
-**Total: ~204 Tests** | **All Passing ✅**
+**Total: 711 Unit Tests** | **All Passing** | **35 Test Files**
 
-| Category | Count | Description | Files |
-|----------|-------|-------------|-------|
-| **Unit Tests** | ~50 | FFI validation, core functionality | `src/test/` |
-| **Integration Tests** | 109 | Discovery, pairing, file transfer, plugins | `src/androidTest/.../integration/` |
-| **E2E Tests** | 31 | Bidirectional Android ↔ COSMIC communication | `src/androidTest/.../e2e/` |
-| **Performance Tests** | 14 | FFI, network, memory, stress testing | `src/androidTest/.../performance/` |
+| Category | Tests | Examples |
+|----------|-------|---------|
+| **Plugin tests** | ~530 | MprisPluginTest (46), NotificationsPacketsFFITest (46), TelephonyPluginTest (38), OpenOnPhonePluginTest (37), etc. |
+| **Core/architecture** | ~110 | PairingHandlerTest, ConnectionManagerTest, PluginManagerTest, DeviceInfoTest, DeviceHelperTest |
+| **Transport layer** | ~40 | LanLinkProviderTest (27), BaseLinkProviderTest, BaseLinkTest |
+| **Utility** | ~31 | UrlValidatorTest (71 — URL validation edge cases) |
 
 ### Detailed Test Coverage
 
@@ -864,14 +716,12 @@ See [LICENSE](LICENSE) for full license text.
 
 <div align="center">
 
-**Status**: Phase 5 In Progress - Release Preparation 🚧
-
 **Build**: ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
-![Tests](https://img.shields.io/badge/tests-204_passing-brightgreen)
-![Coverage](https://img.shields.io/badge/coverage-comprehensive-brightgreen)
+![Tests](https://img.shields.io/badge/tests-711_passing-brightgreen)
+![Plugins](https://img.shields.io/badge/plugins-26-blue)
 ![Compilation](https://img.shields.io/badge/errors-0-brightgreen)
 
-**Last Updated**: 2026-01-17
+**Last Updated**: 2026-02-06
 
 **Made for COSMIC Desktop**
 

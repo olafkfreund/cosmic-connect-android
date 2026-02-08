@@ -19,8 +19,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Checkout cosmic-connect-core
+        uses: actions/checkout@v4
         with:
-          submodules: recursive
+          repository: olafkfreund/cosmic-connect-core
+          path: ../cosmic-connect-core
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -57,8 +61,8 @@ jobs:
           path: |
             ~/.cargo/registry
             ~/.cargo/git
-            cosmic-connect-core/target
-          key: rust-${{ runner.os }}-${{ hashFiles('cosmic-connect-core/Cargo.lock') }}
+            ../cosmic-connect-core/target
+          key: rust-${{ runner.os }}-${{ hashFiles('../cosmic-connect-core/Cargo.lock') }}
           restore-keys: rust-${{ runner.os }}-
 
       - name: Run lint
@@ -76,8 +80,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Checkout cosmic-connect-core
+        uses: actions/checkout@v4
         with:
-          submodules: recursive
+          repository: olafkfreund/cosmic-connect-core
+          path: ../cosmic-connect-core
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -114,8 +122,8 @@ jobs:
           path: |
             ~/.cargo/registry
             ~/.cargo/git
-            cosmic-connect-core/target
-          key: rust-${{ runner.os }}-${{ hashFiles('cosmic-connect-core/Cargo.lock') }}
+            ../cosmic-connect-core/target
+          key: rust-${{ runner.os }}-${{ hashFiles('../cosmic-connect-core/Cargo.lock') }}
           restore-keys: rust-${{ runner.os }}-
 
       - name: Run unit tests
@@ -134,8 +142,12 @@ jobs:
     needs: [test]
     steps:
       - uses: actions/checkout@v4
+
+      - name: Checkout cosmic-connect-core
+        uses: actions/checkout@v4
         with:
-          submodules: recursive
+          repository: olafkfreund/cosmic-connect-core
+          path: ../cosmic-connect-core
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -172,8 +184,8 @@ jobs:
           path: |
             ~/.cargo/registry
             ~/.cargo/git
-            cosmic-connect-core/target
-          key: rust-${{ runner.os }}-${{ hashFiles('cosmic-connect-core/Cargo.lock') }}
+            ../cosmic-connect-core/target
+          key: rust-${{ runner.os }}-${{ hashFiles('../cosmic-connect-core/Cargo.lock') }}
           restore-keys: rust-${{ runner.os }}-
 
       - name: Build debug APK

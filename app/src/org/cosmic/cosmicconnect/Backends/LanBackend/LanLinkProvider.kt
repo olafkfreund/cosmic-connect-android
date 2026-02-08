@@ -490,6 +490,8 @@ class LanLinkProvider @Inject constructor(
                             Log.e("LanLinkProvider", "Exception receiving incoming UDP connection", e)
                         } catch (e: IOException) {
                             Log.e("LanLinkProvider", "Exception receiving incoming UDP connection", e)
+                        } catch (e: Exception) {
+                            Log.e("LanLinkProvider", "Unexpected exception handling UDP packet", e)
                         }
                     }
                 } catch (e: IOException) {
@@ -518,6 +520,8 @@ class LanLinkProvider @Inject constructor(
                             tcpPacketReceived(socket)
                         } catch (e: IOException) {
                             Log.e("LanLinkProvider", "Exception receiving incoming TCP connection", e)
+                        } catch (e: Exception) {
+                            Log.e("LanLinkProvider", "Unexpected exception handling TCP connection", e)
                         }
                     }
                 } catch (e: Exception) {

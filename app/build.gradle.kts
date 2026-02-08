@@ -74,8 +74,8 @@ android {
         applicationId = "org.cosmic.cosmicconnect"
         minSdk = 23
         targetSdk = 35
-        versionCode = 13500
-        versionName = "1.1.0-beta"
+        versionCode = 13501
+        versionName = "1.2.0-beta"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
     }

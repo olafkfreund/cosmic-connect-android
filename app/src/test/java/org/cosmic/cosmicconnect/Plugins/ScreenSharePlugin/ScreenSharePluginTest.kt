@@ -39,11 +39,11 @@ class ScreenSharePluginTest {
             ScreenSharePlugin.PACKET_TYPE_SCREENSHARE_REQUEST
         )
         assertArrayEquals(
-            arrayOf("cconnect.screenshare"),
+            arrayOf("cconnect.screenshare", "cconnect.screenshare.start", "cconnect.screenshare.stop"),
             plugin.supportedPacketTypes
         )
         assertArrayEquals(
-            arrayOf("cconnect.screenshare.request"),
+            arrayOf("cconnect.screenshare.request", "cconnect.screenshare.ready"),
             plugin.outgoingPacketTypes
         )
         assertFalse("Plugin should be disabled by default", plugin.isEnabledByDefault)

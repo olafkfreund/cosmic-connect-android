@@ -328,8 +328,8 @@ class PluginFactory @Inject constructor(
             // --- Wave 7 ---
             org.cosmic.cosmicconnect.Plugins.ScreenSharePlugin.ScreenSharePlugin::class.java to StaticPluginMetadata(
                 pluginKey = "ScreenSharePlugin",
-                supportedPacketTypes = arrayOf("cconnect.screenshare"),
-                outgoingPacketTypes = arrayOf("cconnect.screenshare.request"),
+                supportedPacketTypes = arrayOf("cconnect.screenshare", "cconnect.screenshare.start", "cconnect.screenshare.stop"),
+                outgoingPacketTypes = arrayOf("cconnect.screenshare.request", "cconnect.screenshare.ready"),
                 displayNameRes = R.string.pref_plugin_screenshare,
                 descriptionRes = R.string.pref_plugin_screenshare_desc,
                 isEnabledByDefault = false,

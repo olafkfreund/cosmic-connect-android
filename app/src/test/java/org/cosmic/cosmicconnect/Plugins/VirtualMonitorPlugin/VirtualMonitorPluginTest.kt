@@ -7,11 +7,13 @@ package org.cosmic.cosmicconnect.Plugins.VirtualMonitorPlugin
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
+import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Device
+import org.cosmic.cosmicconnect.Plugins.ScreenSharePlugin.ScreenSharePlugin
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -34,6 +36,8 @@ class VirtualMonitorPluginTest {
     fun setUp() {
         context = ApplicationProvider.getApplicationContext()
         device = mockk(relaxed = true)
+        // Explicitly return null to avoid ClassCastException from relaxed mock's generic Plugin return
+        every { device.getPlugin(ScreenSharePlugin::class.java) } returns null
         plugin = VirtualMonitorPlugin(context, device)
     }
 

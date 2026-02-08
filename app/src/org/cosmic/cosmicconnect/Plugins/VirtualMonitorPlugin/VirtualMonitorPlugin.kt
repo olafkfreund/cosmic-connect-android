@@ -6,6 +6,7 @@
 package org.cosmic.cosmicconnect.Plugins.VirtualMonitorPlugin
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -15,6 +16,8 @@ import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Plugins.Plugin
+import org.cosmic.cosmicconnect.Plugins.ScreenSharePlugin.ScreenSharePlugin
+import org.cosmic.cosmicconnect.Plugins.ScreenSharePlugin.ui.ScreenShareViewerActivity
 import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.R
 
@@ -96,11 +99,47 @@ class VirtualMonitorPlugin @AssistedInject constructor(
         position = np.body["position"] as? String
         refreshRate = (np.body["refreshRate"] as? Number)?.toInt()
 
+        // Delegate streaming to ScreenSharePlugin
+        val screenSharePlugin = device.getPlugin(ScreenSharePlugin::class.java)
+        if (screenSharePlugin != null) {
+            if (isActive == true && width != null && height != null) {
+                screenSharePlugin.createStreamSession(
+                    width!!, height!!, refreshRate ?: 60, "h264"
+                )
+                Log.i(TAG, "Delegated stream session to ScreenSharePlugin: ${width}x${height}@${refreshRate}Hz")
+            } else if (isActive == false) {
+                screenSharePlugin.stopStreamSession()
+                Log.i(TAG, "Stopped delegated stream session")
+            }
+        }
+
         device.onPluginsChanged()
         listener?.onVirtualMonitorStateChanged(isActive, width, height, dpi, position, refreshRate)
 
         Log.d(TAG, "Virtual monitor status updated: active=$isActive, ${width}x${height}@${dpi}dpi, position=$position, ${refreshRate}Hz")
         return true
+    }
+
+    override fun onDestroy() {
+        // Stop any delegated stream session
+        device.getPlugin(ScreenSharePlugin::class.java)?.stopStreamSession()
+    }
+
+    override fun getUiButtons(): List<PluginUiButton> {
+        val screenSharePlugin = device.getPlugin(ScreenSharePlugin::class.java)
+        if (screenSharePlugin?.activeSession == null) return emptyList()
+        return listOf(
+            PluginUiButton(
+                context.getString(R.string.screenshare_viewer_virtualmonitor_title),
+                R.drawable.ic_notification,
+            ) { activity ->
+                val intent = Intent(activity, ScreenShareViewerActivity::class.java).apply {
+                    putExtra(ScreenShareViewerActivity.EXTRA_DEVICE_ID, device.deviceId)
+                    putExtra(ScreenShareViewerActivity.EXTRA_MODE, ScreenShareViewerActivity.MODE_VIRTUALMONITOR)
+                }
+                activity.startActivity(intent)
+            }
+        )
     }
 
     /** Set a listener to receive virtual monitor state change notifications. */

@@ -808,4 +808,14 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-COSMIC-Accep
     <string name="extended_display_disconnected">Disconnected from extended display</string>
     <string name="extended_display_error">Connection error. Please try again.</string>
 
+    <!-- Screen Share Viewer -->
+    <string name="screenshare_viewer_connecting">Waiting for desktop connection…</string>
+    <string name="screenshare_viewer_receiving">Receiving screen share</string>
+    <string name="screenshare_viewer_stopped">Screen share ended</string>
+    <string name="screenshare_viewer_error">Screen share error</string>
+    <string name="screenshare_viewer_title">Screen Share</string>
+    <string name="screenshare_viewer_virtualmonitor_title">Virtual Monitor</string>
+    <string name="screenshare_viewer_confirm_stop">Stop screen share?</string>
+    <string name="screenshare_viewer_no_session">No active screen share session</string>
+
 </resources>

@@ -18,6 +18,77 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.0-beta] - 2026-02-08
+
+### Architecture Overhaul
+
+#### NetworkPacket Unification (#142)
+- Unified dual NetworkPacket system into single `Core.NetworkPacket` data class
+- Migrated all plugins and transport layer to new packet system
+- Deleted legacy `NetworkPacket.kt` and all bridge methods (`toLegacy()`, `fromLegacy()`, etc.)
+- Added `payloadTransferInfo` field to match desktop Rust `Packet` struct
+
+#### Device.kt Decomposition (#143)
+- Decomposed 702-line god class into focused managers via facade pattern
+- `ConnectionManager` (179 lines): link management, send channel, packet routing
+- `PluginManager` (209 lines): plugin lifecycle, permissions, dispatch
+- `PairingManager` (148 lines): pairing state machine, callbacks, notifications
+- `PacketSender` interface to break circular dependencies
+
+#### Hilt DI Integration (#144)
+- Migrated all 30 plugins from reflection-based loading to Hilt `@AssistedInject`
+- `StaticPluginMetadata` pattern to work around Dagger KSP annotation bug
+- Zero legacy reflection-based plugin instantiation remaining
+
+### New Plugins (#145)
+
+#### Tier 1 — Android-Only
+- **NetworkInfoPlugin** (#148): WiFi SSID, signal strength, network type, metered/VPN status
+- **PowerPlugin** (#149): Remote shutdown/reboot/suspend/hibernate with confirmation dialogs
+
+#### Tier 2 — With Core FFI
+- **LockPlugin** (#150): Lock/unlock remote screen with status tracking
+
+#### Tier 3 — Experimental
+- **AudioStreamPlugin** (#153): Audio streaming control between devices
+- **FileSyncPlugin** (#154): File synchronization with conflict resolution
+- **ScreenSharePlugin** (#155): Screen sharing with configurable quality
+- **VirtualMonitorPlugin** (#156): Use phone as extra display
+
+Total plugins: 23 → 30
+
+### Test Coverage (#146)
+- **787 tests** across 39 test files (was 130 — **+505% increase**)
+- Comprehensive unit tests for all major plugins, transport layer, and core components
+- Robolectric-based tests with proper Android resource handling
+
+### Security & Build Hardening
+- BouncyCastle upgraded `bcpkix-jdk15on:1.70` → `bcpkix-jdk18on:1.80` (CVE fix)
+- compileSdk/targetSdk 34 → 35 with core-ktx 1.15.0
+- `RunCommandUrlActivity` now requires user confirmation before executing commands
+- `FindMyPhoneReceiver`, `ShareBroadcastReceiver`, `TransactionService` set `exported=false`
+- `PairingHandler` test backdoor guarded behind `BuildConfig.DEBUG`
+- `BackgroundService.initialized` flag made `@Volatile`
+- Removed deprecated `onAudioInfoChanged` override (API 35 compatibility)
+
+### Build & Dependency Cleanup
+- Removed duplicate WebRTC/OkHttp/Moshi declarations
+- Replaced deprecated `lifecycle-extensions` with `lifecycle-process`
+- Resolved OSGI-INF packaging conflict via `pickFirsts`
+- Thread pool bounded: `newCachedThreadPool()` → `newFixedThreadPool(8)`
+- UDP packet size corrected: 512KB → 8KB
+- File transfer buffer optimized: 4KB → 64KB
+
+### Release Infrastructure
+- GitHub Actions CI pipeline (lint, test, build)
+- GitHub Actions Release pipeline (signed APK + checksums on tag push)
+- Release signing config via environment variables
+- `scripts/build-release.sh` — local release build with validation
+- `scripts/bump-version.sh` — version bump with CHANGELOG + git tag
+- Release checklist documentation
+
+---
+
 ## [1.0.0-beta] - 2026-01-17
 
 ### First Beta Release! 🎉
@@ -285,8 +356,8 @@ If you're switching from KDE Connect:
 ### Code Metrics
 - **Lines of Code:** ~50,000 (Kotlin + Rust)
 - **Test Coverage:** ~80%
-- **Total Tests:** 204
-- **Plugins Migrated:** 20/20 (100%)
+- **Total Tests:** 787
+- **Plugins:** 30 (20 migrated + 7 new + 3 existing)
 - **Code Sharing:** 70%+ with COSMIC Desktop
 - **Compilation Errors Fixed:** 168
 
@@ -298,7 +369,7 @@ If you're switching from KDE Connect:
 - **Architecture:** Hybrid Rust + Kotlin
 
 ### Features
-- **Plugins:** 20 working plugins
+- **Plugins:** 30 working plugins
 - **UI Components:** 8 complete component sets
 - **Test Suites:** 4 (Unit, Integration, E2E, Performance)
 - **Supported Android Versions:** 6.0 - 15
@@ -402,7 +473,7 @@ For more information, see:
 
 ---
 
-**Version:** 1.0.0-beta
-**Release Date:** 2026-01-17
+**Version:** 1.2.0-beta
+**Release Date:** 2026-02-08
 **Status:** Beta Testing
-**Next Release:** 1.0.0 (stable)
+**Next Release:** 1.2.0 (stable)

@@ -132,6 +132,18 @@ android {
             keyAlias = "androiddebugkey"
             keyPassword = "android"
         }
+        create("release") {
+            val ksFile = System.getenv("KEYSTORE_FILE")
+            val ksPassword = System.getenv("KEYSTORE_PASSWORD")
+            val ksKeyAlias = System.getenv("KEY_ALIAS")
+            val ksKeyPassword = System.getenv("KEY_PASSWORD")
+            if (ksFile != null && File(ksFile).exists()) {
+                storeFile = File(ksFile)
+                storePassword = ksPassword
+                keyAlias = ksKeyAlias
+                keyPassword = ksKeyPassword
+            }
+        }
     }
     buildTypes {
         getByName("debug") {
@@ -144,6 +156,10 @@ android {
         getByName("release") {
             isMinifyEnabled = true
             isShrinkResources = true
+            val releaseSigning = signingConfigs.findByName("release")
+            if (releaseSigning?.storeFile != null) {
+                signingConfig = releaseSigning
+            }
         }
     }
     testOptions {
@@ -162,7 +178,7 @@ android {
 
     lint {
         abortOnError = false
-        checkReleaseBuilds = false
+        checkReleaseBuilds = true
     }
 
     // Temporarily disable AAR metadata checks for Issue #50 FFI testing

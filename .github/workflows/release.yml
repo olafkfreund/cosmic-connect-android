@@ -21,10 +21,7 @@ jobs:
           fetch-depth: 0
 
       - name: Checkout cosmic-connect-core
-        uses: actions/checkout@v4
-        with:
-          repository: olafkfreund/cosmic-connect-core
-          path: ../cosmic-connect-core
+        run: git clone --depth 1 https://github.com/olafkfreund/cosmic-connect-core.git ../cosmic-connect-core
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4

@@ -164,41 +164,50 @@ class SslContextFactory(
     }
 
     /**
-     * Parse PEM-encoded private key to Java PrivateKey
+     * Parse private key bytes to Java PrivateKey
      *
-     * Supports both RSA and EC keys (auto-detects from PEM)
+     * Supports both DER-encoded (from Rust FFI) and PEM-encoded keys.
+     * Auto-detects format and tries RSA/EC key factories.
      */
-    private fun parsePrivateKey(keyPem: ByteArray): java.security.PrivateKey {
+    private fun parsePrivateKey(keyData: ByteArray): java.security.PrivateKey {
         try {
-            // Remove PEM headers and decode base64
-            val pemString = keyPem.toString(Charsets.UTF_8)
-            val base64Data = pemString
-                .replace("-----BEGIN PRIVATE KEY-----", "")
-                .replace("-----END PRIVATE KEY-----", "")
-                .replace("-----BEGIN EC PRIVATE KEY-----", "")
-                .replace("-----END EC PRIVATE KEY-----", "")
-                .replace("-----BEGIN RSA PRIVATE KEY-----", "")
-                .replace("-----END RSA PRIVATE KEY-----", "")
-                .replace("\\s".toRegex(), "")
+            // Detect if this is PEM or DER format
+            val keyBytes = if (isPemEncoded(keyData)) {
+                // PEM: strip headers and base64-decode
+                val pemString = keyData.toString(Charsets.UTF_8)
+                val base64Data = pemString
+                    .replace("-----BEGIN PRIVATE KEY-----", "")
+                    .replace("-----END PRIVATE KEY-----", "")
+                    .replace("-----BEGIN EC PRIVATE KEY-----", "")
+                    .replace("-----END EC PRIVATE KEY-----", "")
+                    .replace("-----BEGIN RSA PRIVATE KEY-----", "")
+                    .replace("-----END RSA PRIVATE KEY-----", "")
+                    .replace("\\s".toRegex(), "")
+                android.util.Base64.decode(base64Data, android.util.Base64.DEFAULT)
+            } else {
+                // DER: use raw bytes directly (Rust FFI returns PKCS#8 DER)
+                keyData
+            }
 
-            val keyBytes = android.util.Base64.decode(base64Data, android.util.Base64.DEFAULT)
-
-            // Try PKCS8 format first (most common)
+            // Try PKCS8 format (RSA first since FFI generates RSA 2048)
+            val keySpec = java.security.spec.PKCS8EncodedKeySpec(keyBytes)
             return try {
-                val keySpec = java.security.spec.PKCS8EncodedKeySpec(keyBytes)
-                // Try EC first, then RSA
-                try {
-                    java.security.KeyFactory.getInstance("EC").generatePrivate(keySpec)
-                } catch (e: Exception) {
-                    java.security.KeyFactory.getInstance("RSA").generatePrivate(keySpec)
-                }
+                java.security.KeyFactory.getInstance("RSA").generatePrivate(keySpec)
             } catch (e: Exception) {
-                // If PKCS8 fails, might be older format - let FFI handle it
-                throw CosmicConnectException("Unsupported private key format: ${e.message}", e)
+                java.security.KeyFactory.getInstance("EC").generatePrivate(keySpec)
             }
         } catch (e: Exception) {
             throw CosmicConnectException("Failed to parse private key: ${e.message}", e)
         }
+    }
+
+    /**
+     * Check if byte array is PEM-encoded (starts with "-----BEGIN")
+     */
+    private fun isPemEncoded(data: ByteArray): Boolean {
+        if (data.size < 11) return false
+        val header = data.copyOfRange(0, 11).toString(Charsets.UTF_8)
+        return header.startsWith("-----BEGIN")
     }
 
     /**

@@ -53,7 +53,7 @@ class SslHelper @Inject constructor(
 ) {
     private lateinit var _certificate: Certificate
     val certificate: Certificate
-        get() = if (SslHelperFFI.isInitialized) SslHelperFFI.certificate else _certificate
+        get() = _certificate
     private val factory: CertificateFactory = CertificateFactory.getInstance("X.509")
 
     @SuppressLint("CustomX509TrustManager", "TrustAllX509TrustManager")
@@ -194,10 +194,11 @@ class SslHelper @Inject constructor(
     }
 
     fun convertToSslSocket(socket: Socket, deviceId: String, isDeviceTrusted: Boolean, clientMode: Boolean): SSLSocket {
-        // Delegate to Keystore-backed SslHelperFFI when available
-        if (SslHelperFFI.isInitialized) {
-            return SslHelperFFI.convertToSslSocket(context, socket, deviceId, isDeviceTrusted, clientMode)
-        }
+        // Use BouncyCastle path for TLS — the FFI path (SslHelperFFI/SslContextFactory)
+        // generates its own RSA key pair in Rust, which is different from the Android
+        // Keystore key used here. The FFI certificates also cause TLS handshake timeouts
+        // with KDE Connect peers (likely due to rcgen certificate format differences).
+        // TODO(#157): Unify certificate generation to use a single key pair
         val sslSocketFactory = getSslContextForDevice(deviceId, isDeviceTrusted).socketFactory
         val sslSocket = sslSocketFactory.createSocket(socket, socket.inetAddress.hostAddress, socket.port, true) as SSLSocket
         configureSslSocket(sslSocket, isDeviceTrusted, clientMode)

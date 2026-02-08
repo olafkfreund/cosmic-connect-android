@@ -21,6 +21,10 @@ class PluginFactory @Inject constructor(
 ) {
     private var pluginInfo: Map<String, PluginInfo> = mapOf()
 
+    init {
+        initPluginInfo()
+    }
+
     fun initPluginInfo() {
         val result = mutableMapOf<String, PluginInfo>()
 

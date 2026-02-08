@@ -62,8 +62,6 @@ class CosmicConnect : Application() {
             Log.e("CosmicConnect/Application", "Failed to initialize Keystore storage, using legacy", e)
         }
 
-        pluginFactory.initPluginInfo()
-        
         NotificationHelper.initializeChannels(this)
         LifecycleHelper.initializeObserver()
 

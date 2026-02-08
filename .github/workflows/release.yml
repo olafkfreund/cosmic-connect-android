@@ -58,8 +58,7 @@ jobs:
           path: |
             ~/.cargo/registry
             ~/.cargo/git
-            ../cosmic-connect-core/target
-          key: rust-${{ runner.os }}-${{ hashFiles('../cosmic-connect-core/Cargo.lock') }}
+          key: rust-${{ runner.os }}-cargo-registry
           restore-keys: rust-${{ runner.os }}-
 
       - name: Build Rust native libraries

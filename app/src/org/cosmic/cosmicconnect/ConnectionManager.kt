@@ -127,7 +127,12 @@ class ConnectionManager(
         }
 
         if (!isPaired()) {
+            // Tell the remote device we're not paired (once), then drop the packet.
+            // Don't call onUnpair() repeatedly — it triggers the full unpair chain
+            // (remove from trusted devices, reload plugins) on every data packet,
+            // causing an infinite cycle when the remote device keeps sending packets.
             onUnpair()
+            return
         }
 
         onDataPacket(tp)

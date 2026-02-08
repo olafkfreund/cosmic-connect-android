@@ -232,15 +232,18 @@ class PairingHandler(
     }
 
     fun unpair() {
+        val wasPaired = state != PairState.NotPaired
         state = PairState.NotPaired
-        if (device.isReachable) {
+        if (device.isReachable && wasPaired) {
             val packet = org.cosmic.cosmicconnect.Core.NetworkPacket.create(
                 PacketType.PAIR,
                 mapOf("pair" to false)
             )
             device.sendPacket(TransferPacket(packet))
         }
-        callback.unpaired(device)
+        if (wasPaired) {
+            callback.unpaired(device)
+        }
     }
 
     private fun cancelTimer() {

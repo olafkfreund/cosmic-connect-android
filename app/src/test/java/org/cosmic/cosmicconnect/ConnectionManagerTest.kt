@@ -128,7 +128,7 @@ class ConnectionManagerTest {
     }
 
     @Test
-    fun `onPacketReceived routes data packets and calls unpair when not paired`() {
+    fun `onPacketReceived calls unpair and drops data packets when not paired`() {
         val dataPacket = TransferPacket(
             org.cosmic.cosmicconnect.Core.NetworkPacket(
                 id = 2L, type = "cconnect.ping", body = emptyMap()
@@ -137,7 +137,7 @@ class ConnectionManagerTest {
         paired = false
         connectionManager.onPacketReceived(dataPacket)
         assertTrue(unpairCalled)
-        assertEquals(1, receivedDataPackets.size)
+        assertTrue(receivedDataPackets.isEmpty())
     }
 
     @Test

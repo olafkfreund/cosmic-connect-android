@@ -39,6 +39,7 @@ import org.cosmic.cosmicconnect.Plugins.SftpPlugin.SftpPlugin
 import org.cosmic.cosmicconnect.Plugins.SharePlugin.SharePlugin
 import org.cosmic.cosmicconnect.Plugins.SystemVolumePlugin.SystemVolumePlugin
 import org.cosmic.cosmicconnect.Plugins.TelephonyPlugin.TelephonyPlugin
+import org.cosmic.cosmicconnect.Plugins.WebcamPlugin.WebcamPlugin
 
 /**
  * Hilt module that binds migrated plugin factories into a
@@ -214,4 +215,11 @@ object PluginModule {
     @dagger.multibindings.IntoMap
     @PluginKey("AudioStreamPlugin")
     fun provideAudioStreamPluginCreator(factory: AudioStreamPlugin.Factory): PluginCreator = factory
+
+    // ---- Wave 8 plugins (webcam #158) ----
+
+    @Provides
+    @dagger.multibindings.IntoMap
+    @PluginKey("WebcamPlugin")
+    fun provideWebcamPluginCreator(factory: WebcamPlugin.Factory): PluginCreator = factory
 }

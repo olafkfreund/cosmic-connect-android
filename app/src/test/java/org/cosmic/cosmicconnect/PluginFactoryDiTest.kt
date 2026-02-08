@@ -111,8 +111,8 @@ class PluginFactoryDiTest {
         val factory = PluginFactory(context, emptyMap())
         factory.initPluginInfo()
 
-        // All 30 plugins are now migrated — no legacy reflection path needed
-        assertEquals("Should have 30 total plugins", 30, factory.availablePlugins.size)
+        // All 31 plugins are now migrated — no legacy reflection path needed
+        assertEquals("Should have 31 total plugins", 31, factory.availablePlugins.size)
     }
 
     @Test
@@ -120,8 +120,8 @@ class PluginFactoryDiTest {
         val factory = PluginFactory(context, emptyMap())
         factory.initPluginInfo()
 
-        // 30 migrated + 0 legacy = 30 total
-        assertEquals("Should have 30 total plugins", 30, factory.availablePlugins.size)
+        // 31 migrated + 0 legacy = 31 total
+        assertEquals("Should have 31 total plugins", 31, factory.availablePlugins.size)
     }
 
     @Test

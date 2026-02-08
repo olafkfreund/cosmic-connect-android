@@ -52,6 +52,8 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-COSMIC-Accep
     <string name="pref_plugin_filesync_desc">Synchronize files between devices</string>
     <string name="pref_plugin_audiostream">Audio streaming</string>
     <string name="pref_plugin_audiostream_desc">Stream audio between phone and desktop</string>
+    <string name="pref_plugin_webcam">Webcam</string>
+    <string name="pref_plugin_webcam_desc">Use device camera as a webcam for the desktop</string>
     <string name="lock_lock">Lock screen</string>
     <string name="lock_unlock">Unlock screen</string>
     <string name="pref_plugin_digitizer">Drawing tablet</string>

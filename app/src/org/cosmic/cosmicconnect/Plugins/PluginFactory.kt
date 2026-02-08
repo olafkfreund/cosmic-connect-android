@@ -358,6 +358,15 @@ class PluginFactory @Inject constructor(
                 descriptionRes = R.string.pref_plugin_audiostream_desc,
                 isEnabledByDefault = false,
             ),
+            // --- Wave 8 (webcam #158) ---
+            org.cosmic.cosmicconnect.Plugins.WebcamPlugin.WebcamPlugin::class.java to StaticPluginMetadata(
+                pluginKey = "WebcamPlugin",
+                supportedPacketTypes = arrayOf("cconnect.webcam.request", "cconnect.webcam.capability"),
+                outgoingPacketTypes = arrayOf("cconnect.webcam", "cconnect.webcam.capability"),
+                displayNameRes = R.string.pref_plugin_webcam,
+                descriptionRes = R.string.pref_plugin_webcam_desc,
+                isEnabledByDefault = false,
+            ),
         )
     }
 }

@@ -71,7 +71,7 @@ sed -i "s/## \[Unreleased\]/## [Unreleased]\n\n---\n\n## [$NEW_VERSION] - $TODAY
 ok "Added [$NEW_VERSION] - $TODAY section"
 
 # --- Update version footer ---
-sed -i "s/^**Version:** .*/**Version:** $NEW_VERSION/" "$CHANGELOG"
+sed -i "s/^\*\*Version:\*\* .*/\*\*Version:\*\* $NEW_VERSION/" "$CHANGELOG"
 
 echo
 

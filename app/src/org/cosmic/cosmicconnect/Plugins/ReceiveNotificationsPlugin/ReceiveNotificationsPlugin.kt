@@ -14,6 +14,8 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
+import android.text.Html
+import android.util.Base64
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
@@ -30,6 +32,7 @@ import org.cosmic.cosmicconnect.Core.getString
 import org.cosmic.cosmicconnect.Core.getInt
 import org.cosmic.cosmicconnect.Core.getBoolean
 import org.cosmic.cosmicconnect.Core.getStringOrNull
+import org.cosmic.cosmicconnect.Core.getJSONArray
 import org.cosmic.cosmicconnect.Core.contains
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
@@ -54,7 +57,6 @@ class ReceiveNotificationsPlugin @AssistedInject constructor(
     override val isEnabledByDefault: Boolean = false
 
     override fun onCreate(): Boolean {
-        // request all existing notifications
         val packet = ReceiveNotificationsPacketsFFI.createNotificationRequestPacket()
         device.sendPacket(TransferPacket(packet))
         return true
@@ -62,36 +64,81 @@ class ReceiveNotificationsPlugin @AssistedInject constructor(
 
     override fun onPacketReceived(tp: TransferPacket): Boolean {
         val np = tp.packet
-        if ("ticker" !in np || "appName" !in np || "id" !in np) {
-            Log.e("NotificationsPlugin", "Received notification packet lacks properties")
+        if ("appName" !in np || "id" !in np) {
+            Log.e(TAG, "Received notification packet lacks required properties")
             return true
         }
 
-        if (np.getBoolean("silent", false)) {
+        val notificationIdStr = np.body["id"]?.toString() ?: ""
+        val notifId = notificationIdStr.hashCode()
+
+        // Handle cancellation packets from desktop
+        if (np.getBoolean("isCancel", false)) {
+            val notificationManager = ContextCompat.getSystemService(context, NotificationManager::class.java)
+            notificationManager?.cancel(NOTIFICATION_TAG, notifId)
             return true
         }
 
-        val resultPendingIntent = PendingIntent.getActivity(context, 0, Intent(context, MainActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+        // Need at least ticker or text for content
+        if ("ticker" !in np && "text" !in np) {
+            Log.e(TAG, "Received notification packet lacks content (ticker/text)")
+            return true
+        }
 
+        // Handle both boolean true and string "true" for silent
+        val silentValue = np.body["silent"]
+        val isSilent = when (silentValue) {
+            is Boolean -> silentValue
+            is String -> silentValue.equals("true", ignoreCase = true)
+            else -> false
+        }
+        if (isSilent) return true
+
+        val notificationManager = ContextCompat.getSystemService(context, NotificationManager::class.java) ?: return true
+
+        // Title: prefer "title", fall back to "appName"
+        val title = np.getStringOrNull("title") ?: np.getString("appName")
+
+        // Content text: prefer "text", fall back to "ticker"
+        val contentText = np.getStringOrNull("text") ?: np.getString("ticker")
+
+        // App name as subtext
+        val appName = np.getString("appName")
+
+        // --- Image: try base64 imageData from body, then payload stream ---
         var largeIcon: Bitmap? = null
-        val payload = tp.payload
-        if (payload != null && payload.payloadSize != 0L) {
-            val width = context.resources.getDimensionPixelSize(android.R.dimen.notification_large_icon_width)
-            val height = context.resources.getDimensionPixelSize(android.R.dimen.notification_large_icon_height)
-            val input = payload.inputStream
-            largeIcon = BitmapFactory.decodeStream(input)
-            payload.close()
+        val imageDataBase64 = np.getStringOrNull("imageData")
+        if (!imageDataBase64.isNullOrEmpty()) {
+            try {
+                val bytes = Base64.decode(imageDataBase64, Base64.DEFAULT)
+                largeIcon = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+            } catch (e: Exception) {
+                Log.w(TAG, "Failed to decode imageData from body", e)
+            }
+        }
 
-            if (largeIcon != null) {
-                // Log.i("NotificationsPlugin", "hasPayload: size=${largeIcon.width}/${largeIcon.height} opti=$width/$height")
-                if (largeIcon.width > width || largeIcon.height > height) {
-                    // older API levels don't scale notification icons automatically, therefore:
-                    largeIcon = largeIcon.scale(width, height, false)
+        // Fall back to payload stream
+        if (largeIcon == null) {
+            val payload = tp.payload
+            if (payload != null && payload.payloadSize != 0L) {
+                try {
+                    largeIcon = BitmapFactory.decodeStream(payload.inputStream)
+                } catch (e: Exception) {
+                    Log.w(TAG, "Failed to decode image from payload stream", e)
+                } finally {
+                    payload.close()
                 }
             }
         }
 
-        val notificationManager = ContextCompat.getSystemService(context, NotificationManager::class.java) ?: return true
+        // Scale large icon if needed
+        if (largeIcon != null) {
+            val width = context.resources.getDimensionPixelSize(android.R.dimen.notification_large_icon_width)
+            val height = context.resources.getDimensionPixelSize(android.R.dimen.notification_large_icon_height)
+            if (largeIcon.width > width || largeIcon.height > height) {
+                largeIcon = largeIcon.scale(width, height, false)
+            }
+        }
 
         // Map desktop urgency (0=low, 1=normal, 2=critical) to Android priority
         val priority = when (np.getInt("urgency", 1)) {
@@ -106,36 +153,95 @@ class ReceiveNotificationsPlugin @AssistedInject constructor(
             "email" -> NotificationCompat.CATEGORY_EMAIL
             "call" -> NotificationCompat.CATEGORY_CALL
             "msg", "message" -> NotificationCompat.CATEGORY_MESSAGE
+            "im", "im.received" -> NotificationCompat.CATEGORY_MESSAGE
             "alarm" -> NotificationCompat.CATEGORY_ALARM
             "reminder" -> NotificationCompat.CATEGORY_REMINDER
+            "device" -> NotificationCompat.CATEGORY_SYSTEM
+            "network" -> NotificationCompat.CATEGORY_STATUS
             else -> null
         }
 
-        val noti =
-            NotificationCompat.Builder(context, NotificationHelper.Channels.RECEIVENOTIFICATION)
-                .setContentTitle(np.getString("appName"))
-                .setContentText(np.getString("ticker"))
-                .setContentIntent(resultPendingIntent)
-                .setTicker(np.getString("ticker"))
-                .setSmallIcon(R.drawable.ic_notification)
-                .setLargeIcon(largeIcon)
-                .setAutoCancel(true)
-                .setLocalOnly(true) // to avoid bouncing the notification back to other cosmicconnect nodes
-                .setDefaults(Notification.DEFAULT_ALL)
-                .setPriority(priority)
-                .apply { androidCategory?.let { setCategory(it) } }
-                .setStyle(NotificationCompat.BigTextStyle().bigText(np.getString("ticker")))
-                .build()
+        // Rich body (HTML rendering)
+        val richBody = np.getStringOrNull("richBody")
+        val styledText: CharSequence = if (!richBody.isNullOrEmpty()) {
+            Html.fromHtml(richBody, Html.FROM_HTML_MODE_COMPACT)
+        } else {
+            contentText
+        }
 
-        val id = np.getInt("id", 0)
-        notificationManager.notify("cosmicconnectId:${id}", id, noti)
+        // Content intent: open app
+        val contentIntent = PendingIntent.getActivity(
+            context, 0, Intent(context, MainActivity::class.java),
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        // Delete intent: sync dismissal to desktop
+        val dismissIntent = Intent(NotificationActionReceiver.ACTION_NOTIFICATION_DISMISSED).apply {
+            setPackage(context.packageName)
+            putExtra(NotificationActionReceiver.EXTRA_DEVICE_ID, device.deviceId)
+            putExtra(NotificationActionReceiver.EXTRA_NOTIFICATION_ID, notificationIdStr)
+        }
+        val deletePendingIntent = PendingIntent.getBroadcast(
+            context, notifId,
+            dismissIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val builder = NotificationCompat.Builder(context, NotificationHelper.Channels.RECEIVENOTIFICATION)
+            .setContentTitle(title)
+            .setContentText(contentText)
+            .setContentIntent(contentIntent)
+            .setDeleteIntent(deletePendingIntent)
+            .setTicker(np.getStringOrNull("ticker") ?: contentText)
+            .setSmallIcon(R.drawable.ic_notification)
+            .setLargeIcon(largeIcon)
+            .setAutoCancel(true)
+            .setLocalOnly(true)
+            .setDefaults(Notification.DEFAULT_ALL)
+            .setPriority(priority)
+            .setSubText(appName)
+            .apply { androidCategory?.let { setCategory(it) } }
+            .setStyle(NotificationCompat.BigTextStyle().bigText(styledText))
+
+        // Action buttons from desktop
+        val actionButtons = np.getJSONArray("actionButtons")
+        if (actionButtons != null) {
+            for (i in 0 until minOf(actionButtons.length(), MAX_ACTIONS)) {
+                try {
+                    val actionObj = actionButtons.getJSONObject(i)
+                    val actionId = actionObj.getString("id")
+                    val actionLabel = actionObj.getString("label")
+
+                    val actionIntent = Intent(NotificationActionReceiver.ACTION_NOTIFICATION_ACTION).apply {
+                        setPackage(context.packageName)
+                        putExtra(NotificationActionReceiver.EXTRA_DEVICE_ID, device.deviceId)
+                        putExtra(NotificationActionReceiver.EXTRA_NOTIFICATION_ID, notificationIdStr)
+                        putExtra(NotificationActionReceiver.EXTRA_ACTION_ID, actionId)
+                    }
+                    val actionPendingIntent = PendingIntent.getBroadcast(
+                        context, (notificationIdStr + actionId).hashCode(),
+                        actionIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                    )
+                    builder.addAction(0, actionLabel, actionPendingIntent)
+                } catch (e: Exception) {
+                    Log.w(TAG, "Failed to parse action button at index $i", e)
+                }
+            }
+        }
+
+        notificationManager.notify(NOTIFICATION_TAG, notifId, builder.build())
 
         return true
     }
 
     override val supportedPacketTypes: Array<String> = arrayOf(PACKET_TYPE_NOTIFICATION)
 
-    override val outgoingPacketTypes: Array<String> = arrayOf(PACKET_TYPE_NOTIFICATION_REQUEST)
+    override val outgoingPacketTypes: Array<String> = arrayOf(
+        PACKET_TYPE_NOTIFICATION_REQUEST,
+        PACKET_TYPE_NOTIFICATION,
+        PACKET_TYPE_NOTIFICATION_ACTION
+    )
 
     override val requiredPermissions: Array<String> = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         arrayOf(Manifest.permission.POST_NOTIFICATIONS)
@@ -146,7 +252,11 @@ class ReceiveNotificationsPlugin @AssistedInject constructor(
     override val permissionExplanation: Int = R.string.receive_notifications_permission_explanation
 
     companion object {
+        private const val TAG = "ReceiveNotificationsPlugin"
+        private const val NOTIFICATION_TAG = "cosmicconnect"
+        private const val MAX_ACTIONS = 3
         private const val PACKET_TYPE_NOTIFICATION = "cconnect.notification"
         private const val PACKET_TYPE_NOTIFICATION_REQUEST = "cconnect.notification.request"
+        private const val PACKET_TYPE_NOTIFICATION_ACTION = "cconnect.notification.action"
     }
 }

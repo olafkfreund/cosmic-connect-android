@@ -13,9 +13,12 @@ import io.mockk.mockk
 import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Device
+import org.json.JSONArray
+import org.json.JSONObject
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -51,10 +54,16 @@ class ReceiveNotificationsPluginTest {
     private fun validNotificationPacket(
         ticker: String = "Hello world",
         appName: String = "TestApp",
-        id: Int = 42,
-        silent: Boolean? = null,
+        id: String = "notification:42",
+        silent: Any? = null,
         urgency: Int? = null,
-        category: String? = null
+        category: String? = null,
+        title: String? = null,
+        text: String? = null,
+        richBody: String? = null,
+        imageData: String? = null,
+        actionButtons: String? = null,
+        isCancel: Boolean? = null
     ): NetworkPacket {
         val body = mutableMapOf<String, Any>(
             "ticker" to ticker,
@@ -64,6 +73,12 @@ class ReceiveNotificationsPluginTest {
         if (silent != null) body["silent"] = silent
         if (urgency != null) body["urgency"] = urgency
         if (category != null) body["category"] = category
+        if (title != null) body["title"] = title
+        if (text != null) body["text"] = text
+        if (richBody != null) body["richBody"] = richBody
+        if (imageData != null) body["imageData"] = imageData
+        if (actionButtons != null) body["actionButtons"] = actionButtons
+        if (isCancel != null) body["isCancel"] = isCancel
         return NetworkPacket(id = 1L, type = "cconnect.notification", body = body)
     }
 
@@ -72,22 +87,11 @@ class ReceiveNotificationsPluginTest {
     // ========================================================================
 
     @Test
-    fun `onPacketReceived returns true for packet missing ticker`() {
-        val packet = NetworkPacket(
-            id = 1L,
-            type = "cconnect.notification",
-            body = mapOf("appName" to "App", "id" to 1)
-        )
-        assertTrue(plugin.onPacketReceived(TransferPacket(packet)))
-        assertEquals(0, shadowOf(notificationManager).size())
-    }
-
-    @Test
     fun `onPacketReceived returns true for packet missing appName`() {
         val packet = NetworkPacket(
             id = 1L,
             type = "cconnect.notification",
-            body = mapOf("ticker" to "Hello", "id" to 1)
+            body = mapOf("ticker" to "Hello", "id" to "1")
         )
         assertTrue(plugin.onPacketReceived(TransferPacket(packet)))
         assertEquals(0, shadowOf(notificationManager).size())
@@ -115,6 +119,28 @@ class ReceiveNotificationsPluginTest {
         assertEquals(0, shadowOf(notificationManager).size())
     }
 
+    @Test
+    fun `onPacketReceived returns true for packet missing both ticker and text`() {
+        val packet = NetworkPacket(
+            id = 1L,
+            type = "cconnect.notification",
+            body = mapOf("appName" to "App", "id" to "1")
+        )
+        assertTrue(plugin.onPacketReceived(TransferPacket(packet)))
+        assertEquals(0, shadowOf(notificationManager).size())
+    }
+
+    @Test
+    fun `onPacketReceived posts notification when text present but no ticker`() {
+        val packet = NetworkPacket(
+            id = 1L,
+            type = "cconnect.notification",
+            body = mapOf("appName" to "App", "id" to "1", "text" to "Content")
+        )
+        assertTrue(plugin.onPacketReceived(TransferPacket(packet)))
+        assertTrue(shadowOf(notificationManager).size() > 0)
+    }
+
     // ========================================================================
     // Silent filtering
     // ========================================================================
@@ -127,6 +153,20 @@ class ReceiveNotificationsPluginTest {
     }
 
     @Test
+    fun `onPacketReceived skips silent notification with string true`() {
+        val packet = validNotificationPacket(silent = "true")
+        assertTrue(plugin.onPacketReceived(TransferPacket(packet)))
+        assertEquals(0, shadowOf(notificationManager).size())
+    }
+
+    @Test
+    fun `onPacketReceived does not skip when silent string is false`() {
+        val packet = validNotificationPacket(silent = "false")
+        assertTrue(plugin.onPacketReceived(TransferPacket(packet)))
+        assertTrue(shadowOf(notificationManager).size() > 0)
+    }
+
+    @Test
     fun `onPacketReceived does not skip non-silent notification`() {
         val packet = validNotificationPacket(silent = false)
         assertTrue(plugin.onPacketReceived(TransferPacket(packet)))
@@ -134,7 +174,7 @@ class ReceiveNotificationsPluginTest {
     }
 
     // ========================================================================
-    // Notification posting — content
+    // Notification content — title and text
     // ========================================================================
 
     @Test
@@ -145,7 +185,7 @@ class ReceiveNotificationsPluginTest {
     }
 
     @Test
-    fun `onPacketReceived notification has correct title`() {
+    fun `onPacketReceived uses appName as title when no title field`() {
         val packet = validNotificationPacket(appName = "Firefox", ticker = "Test message")
         plugin.onPacketReceived(TransferPacket(packet))
         val notification = shadowOf(notificationManager).allNotifications[0]
@@ -153,11 +193,78 @@ class ReceiveNotificationsPluginTest {
     }
 
     @Test
-    fun `onPacketReceived notification has correct text`() {
+    fun `onPacketReceived uses title field when present`() {
+        val packet = validNotificationPacket(appName = "Firefox", title = "New Email", ticker = "You have a new email")
+        plugin.onPacketReceived(TransferPacket(packet))
+        val notification = shadowOf(notificationManager).allNotifications[0]
+        assertEquals("New Email", notification.extras.getCharSequence(Notification.EXTRA_TITLE)?.toString())
+    }
+
+    @Test
+    fun `onPacketReceived uses ticker as text when no text field`() {
         val packet = validNotificationPacket(appName = "App", ticker = "Important message")
         plugin.onPacketReceived(TransferPacket(packet))
         val notification = shadowOf(notificationManager).allNotifications[0]
         assertEquals("Important message", notification.extras.getCharSequence(Notification.EXTRA_TEXT)?.toString())
+    }
+
+    @Test
+    fun `onPacketReceived uses text field when present`() {
+        val packet = validNotificationPacket(appName = "App", ticker = "Ticker text", text = "Full body text")
+        plugin.onPacketReceived(TransferPacket(packet))
+        val notification = shadowOf(notificationManager).allNotifications[0]
+        assertEquals("Full body text", notification.extras.getCharSequence(Notification.EXTRA_TEXT)?.toString())
+    }
+
+    @Test
+    fun `onPacketReceived sets appName as subtext`() {
+        val packet = validNotificationPacket(appName = "Thunderbird", title = "New Mail", ticker = "subject")
+        plugin.onPacketReceived(TransferPacket(packet))
+        val notification = shadowOf(notificationManager).allNotifications[0]
+        assertEquals("Thunderbird", notification.extras.getCharSequence(Notification.EXTRA_SUB_TEXT)?.toString())
+    }
+
+    // ========================================================================
+    // Notification ID — uses string hashCode
+    // ========================================================================
+
+    @Test
+    fun `different notification IDs produce different Android notification IDs`() {
+        val packet1 = validNotificationPacket(id = "notification:1", ticker = "First")
+        plugin.onPacketReceived(TransferPacket(packet1))
+
+        val packet2 = validNotificationPacket(id = "notification:2", ticker = "Second")
+        plugin.onPacketReceived(TransferPacket(packet2))
+
+        assertEquals(2, shadowOf(notificationManager).size())
+    }
+
+    @Test
+    fun `same notification ID replaces existing notification`() {
+        val packet1 = validNotificationPacket(id = "notification:42", ticker = "First")
+        plugin.onPacketReceived(TransferPacket(packet1))
+
+        val packet2 = validNotificationPacket(id = "notification:42", ticker = "Updated")
+        plugin.onPacketReceived(TransferPacket(packet2))
+
+        assertEquals(1, shadowOf(notificationManager).size())
+    }
+
+    // ========================================================================
+    // Cancellation packets
+    // ========================================================================
+
+    @Test
+    fun `onPacketReceived handles cancel packet`() {
+        // First post a notification
+        val packet = validNotificationPacket(id = "notification:99", ticker = "To be cancelled")
+        plugin.onPacketReceived(TransferPacket(packet))
+        assertEquals(1, shadowOf(notificationManager).size())
+
+        // Then cancel it
+        val cancelPacket = validNotificationPacket(id = "notification:99", isCancel = true)
+        plugin.onPacketReceived(TransferPacket(cancelPacket))
+        assertEquals(0, shadowOf(notificationManager).size())
     }
 
     // ========================================================================
@@ -233,6 +340,22 @@ class ReceiveNotificationsPluginTest {
     }
 
     @Test
+    fun `onPacketReceived maps im category to message`() {
+        val packet = validNotificationPacket(category = "im")
+        plugin.onPacketReceived(TransferPacket(packet))
+        val notification = shadowOf(notificationManager).allNotifications[0]
+        assertEquals("msg", notification.category)
+    }
+
+    @Test
+    fun `onPacketReceived maps im_received category to message`() {
+        val packet = validNotificationPacket(category = "im.received")
+        plugin.onPacketReceived(TransferPacket(packet))
+        val notification = shadowOf(notificationManager).allNotifications[0]
+        assertEquals("msg", notification.category)
+    }
+
+    @Test
     fun `onPacketReceived maps alarm category`() {
         val packet = validNotificationPacket(category = "alarm")
         plugin.onPacketReceived(TransferPacket(packet))
@@ -246,6 +369,22 @@ class ReceiveNotificationsPluginTest {
         plugin.onPacketReceived(TransferPacket(packet))
         val notification = shadowOf(notificationManager).allNotifications[0]
         assertEquals("reminder", notification.category)
+    }
+
+    @Test
+    fun `onPacketReceived maps device category to system`() {
+        val packet = validNotificationPacket(category = "device")
+        plugin.onPacketReceived(TransferPacket(packet))
+        val notification = shadowOf(notificationManager).allNotifications[0]
+        assertEquals("sys", notification.category)
+    }
+
+    @Test
+    fun `onPacketReceived maps network category to status`() {
+        val packet = validNotificationPacket(category = "network")
+        plugin.onPacketReceived(TransferPacket(packet))
+        val notification = shadowOf(notificationManager).allNotifications[0]
+        assertEquals("status", notification.category)
     }
 
     @Test
@@ -265,6 +404,78 @@ class ReceiveNotificationsPluginTest {
     }
 
     // ========================================================================
+    // Action buttons
+    // ========================================================================
+
+    @Test
+    fun `onPacketReceived adds action buttons from desktop`() {
+        val actions = JSONArray().apply {
+            put(JSONObject().put("id", "reply").put("label", "Reply"))
+            put(JSONObject().put("id", "dismiss").put("label", "Dismiss"))
+        }
+        val packet = validNotificationPacket(actionButtons = actions.toString())
+        plugin.onPacketReceived(TransferPacket(packet))
+
+        val notification = shadowOf(notificationManager).allNotifications[0]
+        assertEquals(2, notification.actions?.size ?: 0)
+        assertEquals("Reply", notification.actions[0].title.toString())
+        assertEquals("Dismiss", notification.actions[1].title.toString())
+    }
+
+    @Test
+    fun `onPacketReceived limits to 3 action buttons`() {
+        val actions = JSONArray().apply {
+            put(JSONObject().put("id", "a1").put("label", "Action 1"))
+            put(JSONObject().put("id", "a2").put("label", "Action 2"))
+            put(JSONObject().put("id", "a3").put("label", "Action 3"))
+            put(JSONObject().put("id", "a4").put("label", "Action 4"))
+        }
+        val packet = validNotificationPacket(actionButtons = actions.toString())
+        plugin.onPacketReceived(TransferPacket(packet))
+
+        val notification = shadowOf(notificationManager).allNotifications[0]
+        assertEquals(3, notification.actions?.size ?: 0)
+    }
+
+    @Test
+    fun `onPacketReceived handles no action buttons gracefully`() {
+        val packet = validNotificationPacket()
+        plugin.onPacketReceived(TransferPacket(packet))
+
+        val notification = shadowOf(notificationManager).allNotifications[0]
+        assertNull(notification.actions)
+    }
+
+    // ========================================================================
+    // Rich body HTML
+    // ========================================================================
+
+    @Test
+    fun `onPacketReceived renders richBody HTML in big text style`() {
+        val packet = validNotificationPacket(
+            richBody = "<b>Bold text</b> and <i>italic</i>",
+            ticker = "Bold text and italic"
+        )
+        plugin.onPacketReceived(TransferPacket(packet))
+
+        val notification = shadowOf(notificationManager).allNotifications[0]
+        val bigText = notification.extras.getCharSequence(Notification.EXTRA_BIG_TEXT)
+        assertNotNull(bigText)
+        // HTML-rendered text should contain the text content (without tags)
+        assertTrue(bigText!!.toString().contains("Bold text"))
+    }
+
+    @Test
+    fun `onPacketReceived uses contentText when no richBody`() {
+        val packet = validNotificationPacket(ticker = "Plain text")
+        plugin.onPacketReceived(TransferPacket(packet))
+
+        val notification = shadowOf(notificationManager).allNotifications[0]
+        val bigText = notification.extras.getCharSequence(Notification.EXTRA_BIG_TEXT)
+        assertEquals("Plain text", bigText?.toString())
+    }
+
+    // ========================================================================
     // Plugin metadata
     // ========================================================================
 
@@ -277,11 +488,13 @@ class ReceiveNotificationsPluginTest {
     }
 
     @Test
-    fun `outgoingPacketTypes contains notification request`() {
-        assertArrayEquals(
-            arrayOf("cconnect.notification.request"),
-            plugin.outgoingPacketTypes
+    fun `outgoingPacketTypes contains notification request and action types`() {
+        val expected = arrayOf(
+            "cconnect.notification.request",
+            "cconnect.notification",
+            "cconnect.notification.action"
         )
+        assertArrayEquals(expected, plugin.outgoingPacketTypes)
     }
 
     @Test

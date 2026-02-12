@@ -404,6 +404,14 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
             </intent-filter>
         </activity>
 
+        <receiver android:name="org.cosmic.cosmicconnect.Plugins.ReceiveNotificationsPlugin.NotificationActionReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="org.cosmic.cosmicconnect.Plugins.ReceiveNotificationsPlugin.DISMISSED" />
+                <action android:name="org.cosmic.cosmicconnect.Plugins.ReceiveNotificationsPlugin.ACTION" />
+            </intent-filter>
+        </receiver>
+
         <receiver android:name="org.cosmic.cosmicconnect.Plugins.SharePlugin.ShareBroadcastReceiver"
             android:exported="false">
             <intent-filter>

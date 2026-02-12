@@ -274,7 +274,7 @@ shellHook = ''
   echo "  • Start UI:         waydroid show-full-ui"
   echo "  • Install APK:      waydroid app install path/to/app.apk"
   echo "  • List apps:        waydroid app list"
-  echo "  • Launch app:       waydroid app launch org.cosmic.cosmicconnect"
+  echo "  • Launch app:       waydroid app launch org.cosmicext.connect"
   echo "  • ADB connect:      adb connect 192.168.240.112:5555"
   echo "  • Stop session:     waydroid session stop"
   echo ""
@@ -380,7 +380,7 @@ adb install -r build/outputs/apk/debug/cosmicconnect-android-debug-*.apk
 waydroid app install build/outputs/apk/debug/cosmicconnect-android-debug-*.apk
 
 # Launch app
-waydroid app launch org.cosmic.cosmicconnect
+waydroid app launch org.cosmicext.connect
 ```
 
 ### 6. Run Automated Tests
@@ -584,7 +584,7 @@ install_apk() {
   log "Installing COSMIC Connect to Waydroid..."
 
   # Uninstall previous version (ignore errors)
-  adb uninstall org.cosmic.cosmicconnect &> /dev/null || true
+  adb uninstall org.cosmicext.connect &> /dev/null || true
 
   # Install new version
   adb install -r "$APK_PATH" || error "Failed to install APK"
@@ -606,7 +606,7 @@ grant_permissions() {
   )
 
   for perm in "${PERMISSIONS[@]}"; do
-    adb shell pm grant org.cosmic.cosmicconnect "$perm" 2>/dev/null || true
+    adb shell pm grant org.cosmicext.connect "$perm" 2>/dev/null || true
   done
 
   success "Permissions granted"
@@ -824,9 +824,9 @@ jobs:
 
     - name: Grant permissions
       run: |
-        adb shell pm grant org.cosmic.cosmicconnect android.permission.ACCESS_FINE_LOCATION
-        adb shell pm grant org.cosmic.cosmicconnect android.permission.READ_EXTERNAL_STORAGE
-        adb shell pm grant org.cosmic.cosmicconnect android.permission.WRITE_EXTERNAL_STORAGE
+        adb shell pm grant org.cosmicext.connect android.permission.ACCESS_FINE_LOCATION
+        adb shell pm grant org.cosmicext.connect android.permission.READ_EXTERNAL_STORAGE
+        adb shell pm grant org.cosmicext.connect android.permission.WRITE_EXTERNAL_STORAGE
 
     - name: Run instrumented tests
       run: ./gradlew connectedAndroidTest
@@ -1038,7 +1038,7 @@ INSTALL_FAILED_INSUFFICIENT_STORAGE
    adb uninstall com.example.unusedapp
 
    # Clear cache
-   adb shell pm clear org.cosmic.cosmicconnect
+   adb shell pm clear org.cosmicext.connect
    ```
 
 3. **Increase Waydroid partition size:**
@@ -1220,7 +1220,7 @@ adb connect 192.168.240.112:5555
 adb install -r build/outputs/apk/debug/*.apk
 
 # Grant permissions
-adb shell pm grant org.cosmic.cosmicconnect android.permission.READ_EXTERNAL_STORAGE
+adb shell pm grant org.cosmicext.connect android.permission.READ_EXTERNAL_STORAGE
 
 # Run clipboard tests only
 ./gradlew connectedAndroidTest \
@@ -1271,7 +1271,7 @@ PERMISSIONS=(
 )
 
 for perm in "${PERMISSIONS[@]}"; do
-  adb shell pm grant org.cosmic.cosmicconnect "$perm"
+  adb shell pm grant org.cosmicext.connect "$perm"
 done
 
 # 8. Run all instrumented tests

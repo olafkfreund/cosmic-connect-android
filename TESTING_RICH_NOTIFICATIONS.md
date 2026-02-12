@@ -128,7 +128,7 @@ Located in: `app/src/androidTest/java/org/cosmic/cosmicconnect/`
 ./gradlew connectedDebugAndroidTest
 
 # Run specific test class
-./gradlew connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.RichNotificationsE2ETest
+./gradlew connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=org.cosmicext.connect.RichNotificationsE2ETest
 
 # Run on specific device
 ./gradlew connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.device=<device-id>

@@ -113,7 +113,7 @@ If you use Waydroid for testing:
 waydroid app install app/build/outputs/apk/debug/app-debug.apk
 
 # Launch the app
-waydroid app launch org.cosmic.cosmicconnect
+waydroid app launch org.cosmicext.connect
 ```
 
 ---

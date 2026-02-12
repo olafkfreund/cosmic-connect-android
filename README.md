@@ -8,7 +8,7 @@
   [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/olafkfreund/cosmic-connect-android)
   [![Protocol Version](https://img.shields.io/badge/protocol-v8-blue)](docs/protocol/)
   [![License](https://img.shields.io/badge/license-GPL--3.0-orange)](LICENSE)
-  [![Rust Core](https://img.shields.io/badge/rust-1.84+-red)](https://github.com/olafkfreund/cosmic-connect-core)
+  [![Rust Core](https://img.shields.io/badge/rust-1.84+-red)](https://github.com/olafkfreund/cosmic-ext-connect-core)
 
 </div>
 
@@ -69,7 +69,7 @@ All features work wirelessly over Wi-Fi or Bluetooth using **secure TLS encrypti
 
 The project uses a **Rust core + Kotlin UI** architecture for optimal performance and code sharing:
 
-#### Rust Core ([cosmic-connect-core](https://github.com/olafkfreund/cosmic-connect-core))
+#### Rust Core ([cosmic-ext-connect-core](https://github.com/olafkfreund/cosmic-ext-connect-core))
 - Protocol implementation (KDE Connect protocol v8)
 - Network communication and device discovery
 - TLS certificate management and encryption
@@ -209,7 +209,7 @@ nix develop
 # Build debug APK
 ./gradlew assembleDebug
 
-# Output: build/outputs/apk/debug/cosmicconnect-android-debug-*.apk
+# Output: build/outputs/apk/debug/cosmicextconnect-android-debug-*.apk
 ```
 
 #### Quick Start (Non-NixOS)
@@ -272,7 +272,7 @@ All documentation is organized in the `docs/` directory:
 
 ```
 cosmic-connect-android/
-├── app/src/org/cosmic/cosmicconnect/       # Main source (non-standard layout)
+├── app/src/org/cosmicext/connect/       # Main source (non-standard layout)
 │   ├── Core/                               # Unified packet system
 │   │   ├── NetworkPacket.kt                # Immutable data class (the ONE packet type)
 │   │   ├── TransferPacket.kt               # Payload-aware wrapper
@@ -295,12 +295,12 @@ cosmic-connect-android/
 │   ├── PairingManager.kt                   # Pairing state machine
 │   └── BackgroundService.kt               # Main Android service
 ├── app/src/test/                           # 59 test files, 1080 tests
-├── app/src/uniffi/cosmic_connect_core/     # Generated FFI bindings
+├── app/src/uniffi/cosmic_ext_connect_core/     # Generated FFI bindings
 ├── docs/                                   # Documentation
 ├── flake.nix                               # NixOS development environment
 └── README.md                               # This file
 
-cosmic-connect-core/                        # Rust core library (separate repo)
+cosmic-ext-connect-core/                        # Rust core library (separate repo)
 ├── src/
 │   ├── protocol/                           # Packet, protocol types
 │   ├── network/                            # Discovery, connections
@@ -312,27 +312,27 @@ cosmic-connect-core/                        # Rust core library (separate repo)
 │   │   ├── screenshare.rs, virtualmonitor.rs
 │   │   └── ...
 │   ├── ffi/                                # FFI wrappers (uniffi)
-│   └── cosmic_connect_core.udl            # UniFFI interface definition
+│   └── cosmic_ext_connect_core.udl            # UniFFI interface definition
 └── bindings/                               # Generated language bindings
 ```
 
 ### Code Organization
 
-**Core Layer** (`app/src/org/cosmic/cosmicconnect/Core/`):
+**Core Layer** (`app/src/org/cosmicext/connect/Core/`):
 - Unified `NetworkPacket` data class — single packet type for the entire app
 - `TransferPacket` for payload-aware transfers
 - Compat extensions for type-safe field access
 
-**Plugin Layer** (`app/src/org/cosmic/cosmicconnect/Plugins/`):
+**Plugin Layer** (`app/src/org/cosmicext/connect/Plugins/`):
 - 31 plugins, all using Hilt `@AssistedInject` DI
 - Each plugin has a `Factory` implementing `PluginCreator`
 - Registered in `PluginFactory` (metadata) + `PluginModule` (Hilt bindings)
 
-**Device Layer** (`app/src/org/cosmic/cosmicconnect/`):
+**Device Layer** (`app/src/org/cosmicext/connect/`):
 - `Device.kt` facade delegates to focused managers
 - `ConnectionManager`, `PluginManager`, `PairingManager`
 
-**Rust Core** ([cosmic-connect-core](https://github.com/olafkfreund/cosmic-connect-core)):
+**Rust Core** ([cosmic-ext-connect-core](https://github.com/olafkfreund/cosmic-ext-connect-core)):
 - Protocol implementation, packet creation, TLS, discovery
 - UniFFI bindings generate Kotlin interfaces automatically
 
@@ -446,13 +446,13 @@ See [docs/testing/SAMSUNG_TAB_TESTING_GUIDE.md](docs/testing/SAMSUNG_TAB_TESTING
 
 # Run specific test categories
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.package=org.cosmic.cosmicconnect.integration
+  -Pandroid.testInstrumentationRunnerArguments.package=org.cosmicext.connect.integration
 
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.package=org.cosmic.cosmicconnect.e2e
+  -Pandroid.testInstrumentationRunnerArguments.package=org.cosmicext.connect.e2e
 
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.performance.PerformanceBenchmarkTest
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmicext.connect.performance.PerformanceBenchmarkTest
 
 # Run on Waydroid manually
 waydroid session start
@@ -722,7 +722,7 @@ COSMIC Connect modernizes the Android app and adapts it for COSMIC Desktop while
 
 ## Related Projects
 
-- [cosmic-connect-core](https://github.com/olafkfreund/cosmic-connect-core) - Shared Rust core library
+- [cosmic-ext-connect-core](https://github.com/olafkfreund/cosmic-ext-connect-core) - Shared Rust core library
 - [cosmic-connect-desktop-app](https://github.com/olafkfreund/cosmic-connect-desktop-app) - COSMIC Desktop app
 - [COSMIC Desktop](https://github.com/pop-os/cosmic-epoch) - System76's COSMIC desktop environment
 - [KDE Connect](https://community.kde.org/KDEConnect) - Original KDE Connect project

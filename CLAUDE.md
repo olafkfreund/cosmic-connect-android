@@ -17,8 +17,8 @@ This repository is configured to work with [Claude Code](https://docs.claude.ai/
 
 - **cosmic-connect-android** (this repo): `/home/olafkfreund/Source/GitHub/Cosmic-kdeconnect-android`
 - **cosmic-applet-kdeconnect** (COSMIC Desktop): `/home/olafkfreund/Source/GitHub/cosmic-applet-kdeconnect`
-- **cosmic-connect-core** (Rust library): `/home/olafkfreund/Source/GitHub/cosmic-connect-core` ✅ Created!
-  - GitHub: https://github.com/olafkfreund/cosmic-connect-core
+- **cosmic-ext-connect-core** (Rust library): `/home/olafkfreund/Source/GitHub/cosmic-ext-connect-core` ✅ Created!
+  - GitHub: https://github.com/olafkfreund/cosmic-ext-connect-core
   - Status: NetworkPacket ✅ (Issue #45), Discovery ✅ (Issue #46)
 
 **When working on Phase 0 (Rust extraction)**: Reference the cosmic-applet-kdeconnect code directly at the path above - no need to clone.
@@ -35,7 +35,7 @@ This repository is configured to work with [Claude Code](https://docs.claude.ai/
 
 ```bash
 # Convert a Java file to Kotlin
-claude-code "Convert src/org/cosmic/cosmicconnect/Device.java to modern Kotlin"
+claude-code "Convert src/org/cosmicext/connect/Device.java to modern Kotlin"
 
 # Or use an agent for complex tasks
 claude-code --agent android-modernization "Refactor the entire device discovery module"

@@ -139,7 +139,7 @@ cd /home/olafkfreund/Source/GitHub/cosmic-connect-android
 **1. Install Debug Build:**
 ```bash
 ./gradlew installDebug
-adb shell am start -n org.cosmic.cosmicconnect/.MainActivity
+adb shell am start -n org.cosmicext.connect/.MainActivity
 ```
 
 **2. Enable Debug Logging:**
@@ -482,8 +482,8 @@ MediaPlayer: release() called
 **Verification Points:**
 ```
 // Check SharedPreferences
-adb shell run-as org.cosmic.cosmicconnect \
-  cat shared_prefs/org.cosmic.cosmicconnect_preferences.xml | \
+adb shell run-as org.cosmicext.connect \
+  cat shared_prefs/org.cosmicext.connect_preferences.xml | \
   grep findmyphone_ringtone
 
 Expected:
@@ -741,7 +741,7 @@ adb logcat | grep FindMyPhonePlugin
 adb shell dumpsys media.audio_flinger | grep -A 10 "ALARM"
 
 # Check permissions
-adb shell dumpsys package org.cosmic.cosmicconnect | grep -A 5 permissions
+adb shell dumpsys package org.cosmicext.connect | grep -A 5 permissions
 ```
 
 ### Issue: Volume Not Restored
@@ -790,7 +790,7 @@ override fun onDestroy() {
 **Debug:**
 ```bash
 # Check notification status
-adb shell dumpsys notification | grep org.cosmic.cosmicconnect
+adb shell dumpsys notification | grep org.cosmicext.connect
 
 # Check notification channels
 adb shell dumpsys notification | grep -A 20 "NotificationChannel"
@@ -817,13 +817,13 @@ adb shell dumpsys notification | grep -A 20 "NotificationChannel"
 adb shell dumpsys power | grep -i wake
 
 # Check battery stats
-adb shell dumpsys batterystats | grep -A 10 org.cosmic.cosmicconnect
+adb shell dumpsys batterystats | grep -A 10 org.cosmicext.connect
 ```
 
 **Fix:**
 Force stop app (releases all wake locks):
 ```bash
-adb shell am force-stop org.cosmic.cosmicconnect
+adb shell am force-stop org.cosmicext.connect
 ```
 
 ---

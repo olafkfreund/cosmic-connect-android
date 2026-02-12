@@ -459,7 +459,7 @@ These skills are provided to assist with the COSMIC Connect project, which is li
 ## 🙏 Acknowledgments
 
 Based on:
-- [COSMIC Connect Android](https://invent.kde.org/network/cosmicconnect-android)
+- [COSMIC Connect Android](https://invent.kde.org/network/cosmic-connect-android)
 - [cosmic-applet-cosmicconnect](https://github.com/olafkfreund/cosmic-applet-cosmicconnect)
 - COSMIC Connect Protocol Specification
 - COSMIC Desktop Development Guide

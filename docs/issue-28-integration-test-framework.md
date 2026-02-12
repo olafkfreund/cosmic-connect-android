@@ -456,7 +456,7 @@ Create `src/androidTest/AndroidManifest.xml`:
 
   <instrumentation
     android:name="androidx.test.runner.AndroidJUnitRunner"
-    android:targetPackage="org.cosmic.cosmicconnect" />
+    android:targetPackage="org.cosmicext.connect" />
 </manifest>
 ```
 

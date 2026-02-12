@@ -45,11 +45,11 @@ plugins {
 }
 
 android {
-    namespace = "org.cosmic.cosmicconnect"
+    namespace = "org.cosmicext.connect"
     compileSdk = 34
     
     defaultConfig {
-        applicationId = "org.cosmic.cosmicconnect"
+        applicationId = "org.cosmicext.connect"
         minSdk = 24
         targetSdk = 34
         versionCode = 15070
@@ -393,21 +393,21 @@ android.nonFinalResIds=true
 -keep interface okhttp3.** { *; }
 
 # COSMIC Connect specific
--keep class org.cosmic.cosmicconnect.** { *; }
--keep interface org.cosmic.cosmicconnect.** { *; }
--keepclassmembers class org.cosmic.cosmicconnect.** {
+-keep class org.cosmicext.connect.** { *; }
+-keep interface org.cosmicext.connect.** { *; }
+-keepclassmembers class org.cosmicext.connect.** {
     public <methods>;
     public <fields>;
 }
 
 # Keep plugin classes
--keep class * extends org.cosmic.cosmicconnect.Plugins.Plugin {
+-keep class * extends org.cosmicext.connect.Plugins.Plugin {
     public <init>(...);
 }
 
 # Keep packet classes
--keep class org.cosmic.cosmicconnect.NetworkPacket { *; }
--keep class org.cosmic.cosmicconnect.NetworkPacket$* { *; }
+-keep class org.cosmicext.connect.NetworkPacket { *; }
+-keep class org.cosmicext.connect.NetworkPacket$* { *; }
 
 # Hilt
 -dontwarn com.google.errorprone.annotations.*
@@ -486,7 +486,7 @@ tasks.register("generateBuildInfo") {
         
         val buildInfoFile = file("$outputDir/BuildInfo.kt")
         buildInfoFile.writeText("""
-            package org.cosmic.cosmicconnect
+            package org.cosmicext.connect
             
             object BuildInfo {
                 const val VERSION_CODE = ${android.defaultConfig.versionCode}

@@ -461,7 +461,7 @@ journalctl -f | grep "Notification received"
 **Tools:**
 ```bash
 # Android memory profiling
-adb shell dumpsys meminfo org.cosmic.cosmicconnect
+adb shell dumpsys meminfo org.cosmicext.connect
 
 # Before test
 # After 100 notifications
@@ -572,7 +572,7 @@ adb shell dumpsys batterystats | grep cosmic
 1. Notification permission enabled?
    ```bash
    adb shell settings get secure enabled_notification_listeners
-   # Should contain org.cosmic.cosmicconnect
+   # Should contain org.cosmicext.connect
    ```
 
 2. Device paired and connected?
@@ -650,11 +650,11 @@ adb install -r build/outputs/apk/debug/cosmic-connect-android-debug.apk
 
 # 5. Grant notification permission
 echo "Granting notification permission..."
-adb shell cmd notification allow_listener org.cosmic.cosmicconnect/org.cosmic.cconnect.Plugins.NotificationsPlugin.NotificationReceiver
+adb shell cmd notification allow_listener org.cosmicext.connect/org.cosmic.cconnect.Plugins.NotificationsPlugin.NotificationReceiver
 
 # 6. Launch app
 echo "Launching app..."
-adb shell am start -n org.cosmic.cosmicconnect/.UserInterface.MainActivity
+adb shell am start -n org.cosmicext.connect/.UserInterface.MainActivity
 
 echo "✅ Automated setup complete. Proceed with manual testing."
 ```

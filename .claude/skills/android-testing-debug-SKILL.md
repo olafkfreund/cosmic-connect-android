@@ -154,7 +154,7 @@ Unit tests run on the JVM and are fast. Use for business logic, FFI validation, 
 
 ```kotlin
 // src/test/org/cosmic/cosmicconnect/ExampleUnitTest.kt
-package org.cosmic.cosmicconnect
+package org.cosmicext.connect
 
 import org.junit.Test
 import org.junit.Assert.*
@@ -224,13 +224,13 @@ class NetworkPacketTest {
 
 ```kotlin
 // src/test/org/cosmic/cosmicconnect/FFIValidationTest.kt
-package org.cosmic.cosmicconnect
+package org.cosmicext.connect
 
 import org.junit.Test
 import org.junit.Assert.*
 import org.junit.BeforeClass
-import org.cosmic.cosmicconnect.Core.NetworkPacket
-import org.cosmic.cosmicconnect.Core.DeviceInfo
+import org.cosmicext.connect.Core.NetworkPacket
+import org.cosmicext.connect.Core.DeviceInfo
 
 class FFIValidationTest {
 
@@ -344,7 +344,7 @@ Instrumented tests run on Android devices/emulators. Use for Android framework A
 
 ```kotlin
 // src/androidTest/org/cosmic/cosmicconnect/ExampleInstrumentedTest.kt
-package org.cosmic.cosmicconnect
+package org.cosmicext.connect
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -361,7 +361,7 @@ class DeviceDiscoveryInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("org.cosmic.cosmicconnect", appContext.packageName)
+        assertEquals("org.cosmicext.connect", appContext.packageName)
     }
 
     @Test
@@ -871,17 +871,17 @@ adb connect 192.168.1.100:45678
 # App Installation & Management
 adb install path/to/app.apk         # Install APK
 adb install -r app.apk               # Reinstall keeping data
-adb uninstall org.cosmic.cosmicconnect  # Uninstall app
-adb shell pm clear org.cosmic.cosmicconnect  # Clear app data
+adb uninstall org.cosmicext.connect  # Uninstall app
+adb shell pm clear org.cosmicext.connect  # Clear app data
 
 # Starting Activities
-adb shell am start -n org.cosmic.cosmicconnect/.MainActivity
+adb shell am start -n org.cosmicext.connect/.MainActivity
 adb shell am start -a android.intent.action.VIEW -d "cosmic://pair"
 
 # Permissions
-adb shell pm grant org.cosmic.cosmicconnect android.permission.BLUETOOTH_SCAN
-adb shell pm grant org.cosmic.cosmicconnect android.permission.BLUETOOTH_CONNECT
-adb shell pm grant org.cosmic.cosmicconnect android.permission.ACCESS_FINE_LOCATION
+adb shell pm grant org.cosmicext.connect android.permission.BLUETOOTH_SCAN
+adb shell pm grant org.cosmicext.connect android.permission.BLUETOOTH_CONNECT
+adb shell pm grant org.cosmicext.connect android.permission.ACCESS_FINE_LOCATION
 
 # File Operations
 adb push local/file.txt /sdcard/
@@ -905,7 +905,7 @@ adb shell tcpdump -i any -w /sdcard/capture.pcap  # Packet capture
 adb shell getprop                         # All system properties
 adb shell getprop ro.product.model        # Device model
 adb shell dumpsys battery                 # Battery status
-adb shell dumpsys meminfo org.cosmic.cosmicconnect  # App memory usage
+adb shell dumpsys meminfo org.cosmicext.connect  # App memory usage
 ```
 
 ### Advanced ADB Techniques
@@ -931,12 +931,12 @@ adb shell svc data enable
 adb shell svc data disable
 
 # Run monkey test (stress testing)
-adb shell monkey -p org.cosmic.cosmicconnect -v 500
+adb shell monkey -p org.cosmicext.connect -v 500
 
 # Profile app performance
-adb shell am profile start org.cosmic.cosmicconnect /sdcard/profile.trace
+adb shell am profile start org.cosmicext.connect /sdcard/profile.trace
 # ... use app ...
-adb shell am profile stop org.cosmic.cosmicconnect
+adb shell am profile stop org.cosmicext.connect
 adb pull /sdcard/profile.trace
 
 # Debug native crashes
@@ -991,7 +991,7 @@ adb logcat -f /sdcard/logcat.txt
 
 ```bash
 # Filter by package name
-adb logcat --pid=$(adb shell pidof -s org.cosmic.cosmicconnect)
+adb logcat --pid=$(adb shell pidof -s org.cosmicext.connect)
 
 # Time-based filtering
 adb logcat -t '01-18 12:00:00.000'  # Since specific time
@@ -1115,7 +1115,7 @@ waydroid session start
 adb wait-for-device
 ./gradlew assembleDebug
 adb install -r build/outputs/apk/debug/*.apk
-adb shell pm grant org.cosmic.cosmicconnect android.permission.BLUETOOTH_SCAN
+adb shell pm grant org.cosmicext.connect android.permission.BLUETOOTH_SCAN
 ./gradlew connectedAndroidTest
 ```
 
@@ -1430,7 +1430,7 @@ adb shell ip addr show
 adb logcat | grep -i "udp\|discovery\|broadcast"
 
 # Check permissions
-adb shell dumpsys package org.cosmic.cosmicconnect | grep permission
+adb shell dumpsys package org.cosmicext.connect | grep permission
 
 # Test network manually
 adb shell ping 192.168.1.1
@@ -1450,8 +1450,8 @@ adb shell dumpsys bluetooth_manager
 adb logcat | grep -i bluetooth
 
 # Check Bluetooth permissions
-adb shell pm grant org.cosmic.cosmicconnect android.permission.BLUETOOTH_SCAN
-adb shell pm grant org.cosmic.cosmicconnect android.permission.BLUETOOTH_CONNECT
+adb shell pm grant org.cosmicext.connect android.permission.BLUETOOTH_SCAN
+adb shell pm grant org.cosmicext.connect android.permission.BLUETOOTH_CONNECT
 ```
 
 ### Scenario 4: File Transfer Hangs
@@ -1487,21 +1487,21 @@ withTimeout(60000) {  // 60 second timeout
 ```bash
 # Monitor memory over time
 while true; do
-    adb shell dumpsys meminfo org.cosmic.cosmicconnect | grep "TOTAL"
+    adb shell dumpsys meminfo org.cosmicext.connect | grep "TOTAL"
     sleep 5
 done
 
 # Dump heap
-adb shell am dumpheap org.cosmic.cosmicconnect /sdcard/heap.hprof
+adb shell am dumpheap org.cosmicext.connect /sdcard/heap.hprof
 adb pull /sdcard/heap.hprof
 
 # Analyze with Android Studio Memory Profiler or MAT (Memory Analyzer Tool)
 
 # Force GC and measure
-adb shell am force-stop org.cosmic.cosmicconnect
-adb shell am start -n org.cosmic.cosmicconnect/.MainActivity
+adb shell am force-stop org.cosmicext.connect
+adb shell am start -n org.cosmicext.connect/.MainActivity
 # ... use app ...
-adb shell am force-stop org.cosmic.cosmicconnect
+adb shell am force-stop org.cosmicext.connect
 ```
 
 ---

@@ -110,7 +110,7 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-COSMIC-Accep
     <string name="open_mpris_controls">Multimedia control</string>
     <string name="remotekeyboard_editing_only" translatable="false">remotekeyboard_editing_only</string>
     <string name="remotekeyboard_editing_only_title" translatable="true">Handle remote keys only when editing</string>
-    <string name="remotekeyboard_not_connected" translatable="true">There is no active remote keyboard connection, establish one in cosmicconnect</string>
+    <string name="remotekeyboard_not_connected" translatable="true">There is no active remote keyboard connection, establish one in COSMIC Ext Connect</string>
     <string name="remotekeyboard_connected" translatable="true">Remote keyboard connection is active</string>
     <string name="remotekeyboard_multiple_connections" translatable="true">There is more than one remote keyboard connection, select the device to configure</string>
     <string name="open_mousepad">Remote input</string>

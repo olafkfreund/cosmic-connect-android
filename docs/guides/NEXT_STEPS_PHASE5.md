@@ -265,7 +265,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Modern Build System**: Gradle Kotlin DSL with cargo-ndk integration
 - **Protocol Implementation**: Moved to shared Rust core (memory-safe)
 - **Minimum SDK**: Increased from API 21 to API 23 (Android 6.0+)
-- **Package Name**: Changed from org.kde.kdeconnect_tp to org.cosmic.cosmicconnect
+- **Package Name**: Changed from org.kde.kdeconnect_tp to org.cosmicext.connect
 
 ### Improved
 - **Performance**: 30% faster packet processing, 40% faster file transfers

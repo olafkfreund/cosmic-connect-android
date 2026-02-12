@@ -122,7 +122,7 @@ The following plugins use mutable NetworkPacket patterns and need refactoring:
 
 **Status**: ✅ Complete
 
-- Old `NetworkPacket` stays in `org.cosmic.cosmicconnect` (mutable)
+- Old `NetworkPacket` stays in `org.cosmicext.connect` (mutable)
 - New `Core.NetworkPacket` available for new code (immutable FFI)
 - Protocol constants updated to `cconnect.*`
 - Both implementations coexist

@@ -82,8 +82,8 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:networkSecurityConfig="@xml/network_security_config"
-        android:theme="@style/CosmicConnectTheme.NoActionBar"
-        android:name="org.cosmic.cosmicconnect.CosmicConnect"
+        android:theme="@style/CosmicExtConnectTheme.NoActionBar"
+        android:name="org.cosmicext.connect.CosmicExtConnect"
         android:enableOnBackInvokedCallback="true"
         android:requestLegacyExternalStorage="true"> <!-- requestLegacyExternalStorage is only used in Android 10: https://developer.android.com/training/data-storage/use-cases#opt-out-in-production-app -->
 
@@ -105,12 +105,12 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
             android:exported="false" />
 
         <service
-            android:name="org.cosmic.cosmicconnect.BackgroundService"
+            android:name="org.cosmicext.connect.BackgroundService"
             android:foregroundServiceType="connectedDevice"
             android:icon="@drawable/icon"
             android:enabled="true" />
         <service
-            android:name="org.cosmic.cosmicconnect.Plugins.RemoteKeyboardPlugin.RemoteKeyboardService"
+            android:name="org.cosmicext.connect.Plugins.RemoteKeyboardPlugin.RemoteKeyboardService"
             android:label="@string/remote_keyboard_service"
             android:exported="true"
             android:permission="android.permission.BIND_INPUT_METHOD">
@@ -124,7 +124,7 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
         </service>
 
         <activity
-            android:name="org.cosmic.cosmicconnect.UserInterface.MainActivity"
+            android:name="org.cosmicext.connect.UserInterface.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -142,34 +142,34 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
                 android:resource="@xml/shortcuts" />
         </activity>
         <activity
-            android:name="org.cosmic.cosmicconnect.UserInterface.PluginSettingsActivity"
+            android:name="org.cosmicext.connect.UserInterface.PluginSettingsActivity"
             android:label="@string/device_menu_plugins"
             android:exported="false"
-            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity">
+            android:parentActivityName="org.cosmicext.connect.UserInterface.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+                android:value="org.cosmicext.connect.UserInterface.MainActivity" />
         </activity>
         <activity
-            android:name="org.cosmic.cosmicconnect.UserInterface.CustomDevicesActivity"
+            android:name="org.cosmicext.connect.UserInterface.CustomDevicesActivity"
             android:label="@string/custom_devices_settings"
             android:exported="false"
-            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity">
+            android:parentActivityName="org.cosmicext.connect.UserInterface.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+                android:value="org.cosmicext.connect.UserInterface.MainActivity" />
         </activity>
         <activity
-            android:name="org.cosmic.cosmicconnect.Plugins.SharePlugin.SendFileActivity"
+            android:name="org.cosmicext.connect.Plugins.SharePlugin.SendFileActivity"
             android:label="COSMIC Connect"
             android:exported="true"
-            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity">
+            android:parentActivityName="org.cosmicext.connect.UserInterface.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+                android:value="org.cosmicext.connect.UserInterface.MainActivity" />
         </activity>
 
-        <receiver android:name="org.cosmic.cosmicconnect.CosmicConnectBroadcastReceiver"
+        <receiver android:name="org.cosmicext.connect.CosmicExtConnectBroadcastReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
@@ -186,45 +186,45 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
         </receiver>
 
         <activity
-            android:name="org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.FindMyPhoneActivity"
+            android:name="org.cosmicext.connect.Plugins.FindMyPhonePlugin.FindMyPhoneActivity"
             android:configChanges="orientation|screenSize"
             android:excludeFromRecents="true"
             android:label="@string/findmyphone_title"
             android:launchMode="singleInstance" />
 
-        <receiver android:name="org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.FindMyPhoneReceiver"
+        <receiver android:name="org.cosmicext.connect.Plugins.FindMyPhonePlugin.FindMyPhoneReceiver"
             android:exported="false">
             <intent-filter>
-                <action android:name="org.cosmic.cosmicconnect.Plugins.FindMyPhonePlugin.foundIt" />
+                <action android:name="org.cosmicext.connect.Plugins.FindMyPhonePlugin.foundIt" />
             </intent-filter>
         </receiver>
 
-        <receiver android:name="org.cosmic.cosmicconnect.Plugins.OpenOnPhonePlugin.OpenOnPhoneReceiver"
+        <receiver android:name="org.cosmicext.connect.Plugins.OpenOnPhonePlugin.OpenOnPhoneReceiver"
             android:exported="false">
             <intent-filter>
-                <action android:name="org.cosmic.cosmicconnect.Plugins.OpenOnPhonePlugin.APPROVE" />
-                <action android:name="org.cosmic.cosmicconnect.Plugins.OpenOnPhonePlugin.REJECT" />
+                <action android:name="org.cosmicext.connect.Plugins.OpenOnPhonePlugin.APPROVE" />
+                <action android:name="org.cosmicext.connect.Plugins.OpenOnPhonePlugin.REJECT" />
             </intent-filter>
         </receiver>
 
         <!-- Plugin-related activities and services -->
 
         <activity
-            android:name="org.cosmic.cosmicconnect.Plugins.ClipboardPlugin.ClipboardFloatingActivity"
+            android:name="org.cosmicext.connect.Plugins.ClipboardPlugin.ClipboardFloatingActivity"
             android:theme="@style/Theme.Transparent"
             android:excludeFromRecents="true"/>
 
         <activity
-            android:name="org.cosmic.cosmicconnect.Plugins.MprisPlugin.MprisActivity"
+            android:name="org.cosmicext.connect.Plugins.MprisPlugin.MprisActivity"
             android:label="@string/open_mpris_controls"
             android:launchMode="singleTop"
-            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity">
+            android:parentActivityName="org.cosmicext.connect.UserInterface.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+                android:value="org.cosmicext.connect.UserInterface.MainActivity" />
         </activity>
 
-        <receiver android:name="org.cosmic.cosmicconnect.Plugins.MprisPlugin.MprisMediaNotificationReceiver"
+        <receiver android:name="org.cosmicext.connect.Plugins.MprisPlugin.MprisMediaNotificationReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
@@ -232,16 +232,16 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
         </receiver>
 
         <activity
-            android:name="org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandActivity"
+            android:name="org.cosmicext.connect.Plugins.RunCommandPlugin.RunCommandActivity"
             android:label="@string/pref_plugin_runcommand"
             android:exported="false"
-            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity">
+            android:parentActivityName="org.cosmicext.connect.UserInterface.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+                android:value="org.cosmicext.connect.UserInterface.MainActivity" />
         </activity>
         <activity
-            android:name="org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandWidgetConfigActivity"
+            android:name="org.cosmicext.connect.Plugins.RunCommandPlugin.RunCommandWidgetConfigActivity"
             android:excludeFromRecents="true"
             android:label="@string/pref_plugin_runcommand"
             android:launchMode="singleTask"
@@ -249,12 +249,12 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
             android:screenOrientation="user"/>
 
         <service
-            android:name="org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.CommandsRemoteViewsService"
+            android:name="org.cosmicext.connect.Plugins.RunCommandPlugin.CommandsRemoteViewsService"
             android:exported="false"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <receiver
-            android:name="org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandWidgetProvider"
+            android:name="org.cosmicext.connect.Plugins.RunCommandPlugin.RunCommandWidgetProvider"
             android:label="@string/pref_plugin_runcommand"
             android:exported="true">
             <intent-filter>
@@ -269,7 +269,7 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
                 android:resource="@xml/remotecommandplugin_widget" />
         </receiver>
 
-        <activity android:name="org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandUrlActivity"
+        <activity android:name="org.cosmicext.connect.Plugins.RunCommandPlugin.RunCommandUrlActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -280,49 +280,49 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
 
                 <data
                     android:host="runcommand"
-                    android:scheme="cosmicconnect" />
+                    android:scheme="cosmicextconnect" />
             </intent-filter>
         </activity>
         <activity
-            android:name="org.cosmic.cosmicconnect.Plugins.MousePadPlugin.BigscreenActivity"
+            android:name="org.cosmicext.connect.Plugins.MousePadPlugin.BigscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/pref_plugin_bigscreen"
             android:exported="true"
-            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity"
+            android:parentActivityName="org.cosmicext.connect.UserInterface.MainActivity"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+                android:value="org.cosmicext.connect.UserInterface.MainActivity" />
         </activity>
         <activity
-            android:name="org.cosmic.cosmicconnect.Plugins.MousePadPlugin.MousePadActivity"
+            android:name="org.cosmicext.connect.Plugins.MousePadPlugin.MousePadActivity"
             android:label="@string/pref_plugin_mousepad"
             android:exported="false"
             android:launchMode="singleTop"
-            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity">
+            android:parentActivityName="org.cosmicext.connect.UserInterface.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+                android:value="org.cosmicext.connect.UserInterface.MainActivity" />
         </activity>
         <activity
-            android:name="org.cosmic.cosmicconnect.Plugins.MousePadPlugin.ComposeSendActivity"
+            android:name="org.cosmicext.connect.Plugins.MousePadPlugin.ComposeSendActivity"
             android:label="@string/compose_send_title"
             android:exported="false"
-            android:parentActivityName="org.cosmic.cosmicconnect.Plugins.MousePadPlugin.MousePadActivity"
+            android:parentActivityName="org.cosmicext.connect.Plugins.MousePadPlugin.MousePadActivity"
             android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.cosmic.cosmicconnect.Plugins.MousePadPlugin.MousePadActivity" />
+                android:value="org.cosmicext.connect.Plugins.MousePadPlugin.MousePadActivity" />
         </activity>
         <!-- TODO: Remove? This is only used by https://github.com/andOTP/andOTP, which is unmaintained since 2021. Do people use forks or can we remove this? -->
         <activity
-            android:name="org.cosmic.cosmicconnect.Plugins.MousePadPlugin.SendKeystrokesToHostActivity"
+            android:name="org.cosmicext.connect.Plugins.MousePadPlugin.SendKeystrokesToHostActivity"
             android:label="@string/pref_plugin_mousepad_send_keystrokes"
             android:exported="true"
-            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity">
+            android:parentActivityName="org.cosmicext.connect.UserInterface.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+                android:value="org.cosmicext.connect.UserInterface.MainActivity" />
             <!-- Accept data with "text/x-keystrokes" to send the text to the connected host and emulate keystrokes -->
             <intent-filter>
                 <action android:name="android.intent.action.SEND"/>
@@ -331,18 +331,18 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
             </intent-filter>
         </activity>
         <activity
-            android:name="org.cosmic.cosmicconnect.Plugins.PresenterPlugin.PresenterActivity"
+            android:name="org.cosmicext.connect.Plugins.PresenterPlugin.PresenterActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/pref_plugin_presenter"
             android:exported="false"
-            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity"
+            android:parentActivityName="org.cosmicext.connect.UserInterface.MainActivity"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+                android:value="org.cosmicext.connect.UserInterface.MainActivity" />
         </activity>
         <activity
-            android:name="org.cosmic.cosmicconnect.Plugins.SharePlugin.ShareActivity"
+            android:name="org.cosmicext.connect.Plugins.SharePlugin.ShareActivity"
             android:exported="true"
             android:label="@string/manifest_label_share">
             <intent-filter>
@@ -362,12 +362,12 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
 
             <meta-data
                 android:name="android.service.chooser.chooser_target_service"
-                android:value="org.cosmic.cosmicconnect.Plugins.SharePlugin.ShareChooserTargetService" />
+                android:value="org.cosmicext.connect.Plugins.SharePlugin.ShareChooserTargetService" />
         </activity>
 
         <!-- Open on Desktop - ShareSheet integration for App Continuity -->
         <activity
-            android:name="org.cosmic.cosmicconnect.UserInterface.OpenOnDesktopActivity"
+            android:name="org.cosmicext.connect.UserInterface.OpenOnDesktopActivity"
             android:exported="true"
             android:label="@string/open_on_desktop"
             android:theme="@style/Theme.Transparent"
@@ -404,18 +404,18 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
             </intent-filter>
         </activity>
 
-        <receiver android:name="org.cosmic.cosmicconnect.Plugins.ReceiveNotificationsPlugin.NotificationActionReceiver"
+        <receiver android:name="org.cosmicext.connect.Plugins.ReceiveNotificationsPlugin.NotificationActionReceiver"
             android:exported="false">
             <intent-filter>
-                <action android:name="org.cosmic.cosmicconnect.Plugins.ReceiveNotificationsPlugin.DISMISSED" />
-                <action android:name="org.cosmic.cosmicconnect.Plugins.ReceiveNotificationsPlugin.ACTION" />
+                <action android:name="org.cosmicext.connect.Plugins.ReceiveNotificationsPlugin.DISMISSED" />
+                <action android:name="org.cosmicext.connect.Plugins.ReceiveNotificationsPlugin.ACTION" />
             </intent-filter>
         </receiver>
 
-        <receiver android:name="org.cosmic.cosmicconnect.Plugins.SharePlugin.ShareBroadcastReceiver"
+        <receiver android:name="org.cosmicext.connect.Plugins.SharePlugin.ShareBroadcastReceiver"
             android:exported="false">
             <intent-filter>
-                <action android:name="org.cosmic.cosmicconnect.Plugins.SharePlugin.CancelShare" />
+                <action android:name="org.cosmicext.connect.Plugins.SharePlugin.CancelShare" />
             </intent-filter>
         </receiver>
 
@@ -430,7 +430,7 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
         </provider>
 
         <service
-            android:name="org.cosmic.cosmicconnect.Plugins.NotificationsPlugin.NotificationReceiver"
+            android:name="org.cosmicext.connect.Plugins.NotificationsPlugin.NotificationReceiver"
             android:exported="true"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
             <intent-filter>
@@ -438,7 +438,7 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
             </intent-filter>
         </service>
         <service
-            android:name="org.cosmic.cosmicconnect.Plugins.SharePlugin.ShareChooserTargetService"
+            android:name="org.cosmicext.connect.Plugins.SharePlugin.ShareChooserTargetService"
             android:exported="true"
             android:permission="android.permission.BIND_CHOOSER_TARGET_SERVICE">
             <intent-filter>
@@ -446,7 +446,7 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
             </intent-filter>
         </service>
         <service
-            android:name="org.cosmic.cosmicconnect.Plugins.MouseReceiverPlugin.MouseReceiverService"
+            android:name="org.cosmicext.connect.Plugins.MouseReceiverPlugin.MouseReceiverService"
             android:exported="true"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
@@ -458,64 +458,64 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
         </service>
 
         <activity
-            android:name="org.cosmic.cosmicconnect.Plugins.NotificationsPlugin.NotificationFilterActivity"
+            android:name="org.cosmicext.connect.Plugins.NotificationsPlugin.NotificationFilterActivity"
             android:label="@string/title_activity_notification_filter"
-            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.PluginSettingsActivity">
+            android:parentActivityName="org.cosmicext.connect.UserInterface.PluginSettingsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.cosmic.cosmicconnect.UserInterface.PluginSettingsActivity" />
+                android:value="org.cosmicext.connect.UserInterface.PluginSettingsActivity" />
         </activity>
 
         <activity
-            android:name="org.cosmic.cosmicconnect.Plugins.DigitizerPlugin.DigitizerActivity"
+            android:name="org.cosmicext.connect.Plugins.DigitizerPlugin.DigitizerActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/pref_plugin_digitizer"
             android:exported="false"
             android:launchMode="singleTop"
-            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity">
+            android:parentActivityName="org.cosmicext.connect.UserInterface.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+                android:value="org.cosmicext.connect.UserInterface.MainActivity" />
         </activity>
 
         <activity
-            android:name="org.cosmic.cosmicconnect.UserInterface.TrustedNetworksActivity"
+            android:name="org.cosmicext.connect.UserInterface.TrustedNetworksActivity"
             android:label="@string/trusted_networks"
-            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity">
+            android:parentActivityName="org.cosmicext.connect.UserInterface.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+                android:value="org.cosmicext.connect.UserInterface.MainActivity" />
         </activity>
 
         <activity
-            android:name="org.cosmic.cosmicconnect.UserInterface.About.EasterEggActivity"
+            android:name="org.cosmicext.connect.UserInterface.About.EasterEggActivity"
             android:label="@string/easter_egg"
-            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity">
+            android:parentActivityName="org.cosmicext.connect.UserInterface.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+                android:value="org.cosmicext.connect.UserInterface.MainActivity" />
         </activity>
 
         <activity
-            android:name="org.cosmic.cosmicconnect.UserInterface.About.AboutKDEActivity"
+            android:name="org.cosmicext.connect.UserInterface.About.AboutKDEActivity"
             android:label="@string/about_kde"
-            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity">
+            android:parentActivityName="org.cosmicext.connect.UserInterface.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+                android:value="org.cosmicext.connect.UserInterface.MainActivity" />
         </activity>
 
         <activity
-            android:name="org.cosmic.cosmicconnect.UserInterface.About.LicensesActivity"
+            android:name="org.cosmicext.connect.UserInterface.About.LicensesActivity"
             android:label="@string/licenses"
-            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity">
+            android:parentActivityName="org.cosmicext.connect.UserInterface.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+                android:value="org.cosmicext.connect.UserInterface.MainActivity" />
         </activity>
 
         <service
-            android:name="org.cosmic.cosmicconnect.Plugins.ClipboardPlugin.ClipboardTileService"
+            android:name="org.cosmicext.connect.Plugins.ClipboardPlugin.ClipboardTileService"
             android:icon="@drawable/ic_baseline_content_paste_24"
             android:exported="true"
             android:label="@string/send_clipboard"
@@ -525,7 +525,7 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
             </intent-filter>
         </service>
 
-        <service android:name="org.cosmic.cosmicconnect.Plugins.RunCommandPlugin.RunCommandControlsProviderService"
+        <service android:name="org.cosmicext.connect.Plugins.RunCommandPlugin.RunCommandControlsProviderService"
             android:label="@string/kde_connect"
             android:exported="true"
             android:permission="android.permission.BIND_CONTROLS">
@@ -536,7 +536,7 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
 
         <!-- Camera Webcam Streaming Service -->
         <service
-            android:name="org.cosmic.cosmicconnect.Plugins.CameraPlugin.CameraCaptureService"
+            android:name="org.cosmicext.connect.Plugins.CameraPlugin.CameraCaptureService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="camera" />
@@ -544,20 +544,20 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
         <!-- Extended Display Plugin Activities -->
         <!-- Phase 1: ConnectionSetupActivity - Commented out until Phase 1 is implemented
         <activity
-            android:name="org.cosmic.cosmicconnect.Plugins.ExtendedDisplayPlugin.ui.ConnectionSetupActivity"
+            android:name="org.cosmicext.connect.Plugins.ExtendedDisplayPlugin.ui.ConnectionSetupActivity"
             android:exported="false"
             android:label="@string/extended_display_connection_setup_title"
-            android:parentActivityName="org.cosmic.cosmicconnect.UserInterface.MainActivity"
-            android:theme="@style/CosmicConnectTheme.NoActionBar">
+            android:parentActivityName="org.cosmicext.connect.UserInterface.MainActivity"
+            android:theme="@style/CosmicExtConnectTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.cosmic.cosmicconnect.UserInterface.MainActivity" />
+                android:value="org.cosmicext.connect.UserInterface.MainActivity" />
         </activity>
         -->
 
         <!-- Phase 3: ExtendedDisplayActivity - Full-screen display renderer -->
         <activity
-            android:name="org.cosmic.cosmicconnect.Plugins.ExtendedDisplayPlugin.ui.ExtendedDisplayActivity"
+            android:name="org.cosmicext.connect.Plugins.ExtendedDisplayPlugin.ui.ExtendedDisplayActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:exported="false"
             android:label="@string/pref_plugin_extended_display"
@@ -567,7 +567,7 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
 
         <!-- ScreenShareViewerActivity - Full-screen screen share viewer -->
         <activity
-            android:name="org.cosmic.cosmicconnect.Plugins.ScreenSharePlugin.ui.ScreenShareViewerActivity"
+            android:name="org.cosmicext.connect.Plugins.ScreenSharePlugin.ui.ScreenShareViewerActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:exported="false"
             android:label="@string/screenshare_viewer_title"

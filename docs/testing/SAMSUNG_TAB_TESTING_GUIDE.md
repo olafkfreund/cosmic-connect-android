@@ -379,23 +379,23 @@ adb install -r build/outputs/apk/debug/cosmicconnect-android-debug-*.apk
 
 ```bash
 # Grant all required permissions
-adb shell pm grant org.cosmic.cosmicconnect android.permission.ACCESS_FINE_LOCATION
-adb shell pm grant org.cosmic.cosmicconnect android.permission.ACCESS_COARSE_LOCATION
-adb shell pm grant org.cosmic.cosmicconnect android.permission.READ_EXTERNAL_STORAGE
-adb shell pm grant org.cosmic.cosmicconnect android.permission.WRITE_EXTERNAL_STORAGE
-adb shell pm grant org.cosmic.cosmicconnect android.permission.POST_NOTIFICATIONS
-adb shell pm grant org.cosmic.cosmicconnect android.permission.BLUETOOTH_SCAN
-adb shell pm grant org.cosmic.cosmicconnect android.permission.BLUETOOTH_CONNECT
+adb shell pm grant org.cosmicext.connect android.permission.ACCESS_FINE_LOCATION
+adb shell pm grant org.cosmicext.connect android.permission.ACCESS_COARSE_LOCATION
+adb shell pm grant org.cosmicext.connect android.permission.READ_EXTERNAL_STORAGE
+adb shell pm grant org.cosmicext.connect android.permission.WRITE_EXTERNAL_STORAGE
+adb shell pm grant org.cosmicext.connect android.permission.POST_NOTIFICATIONS
+adb shell pm grant org.cosmicext.connect android.permission.BLUETOOTH_SCAN
+adb shell pm grant org.cosmicext.connect android.permission.BLUETOOTH_CONNECT
 ```
 
 ### 4. Launch App
 
 ```bash
 # Launch COSMIC Connect
-adb shell am start -n org.cosmic.cosmicconnect/.MainActivity
+adb shell am start -n org.cosmicext.connect/.MainActivity
 
 # Or use monkey to test
-adb shell monkey -p org.cosmic.cosmicconnect -c android.intent.category.LAUNCHER 1
+adb shell monkey -p org.cosmicext.connect -c android.intent.category.LAUNCHER 1
 ```
 
 ### 5. Run Tests
@@ -564,14 +564,14 @@ echo "✅ Bluetooth is ON"
 
 # Check Bluetooth permissions
 echo "Checking Bluetooth permissions..."
-adb shell pm grant org.cosmic.cosmicconnect android.permission.BLUETOOTH_SCAN 2>/dev/null || true
-adb shell pm grant org.cosmic.cosmicconnect android.permission.BLUETOOTH_CONNECT 2>/dev/null || true
-adb shell pm grant org.cosmic.cosmicconnect android.permission.BLUETOOTH_ADVERTISE 2>/dev/null || true
+adb shell pm grant org.cosmicext.connect android.permission.BLUETOOTH_SCAN 2>/dev/null || true
+adb shell pm grant org.cosmicext.connect android.permission.BLUETOOTH_CONNECT 2>/dev/null || true
+adb shell pm grant org.cosmicext.connect android.permission.BLUETOOTH_ADVERTISE 2>/dev/null || true
 echo "✅ Bluetooth permissions granted"
 
 # Launch app
 echo "Launching COSMIC Connect..."
-adb shell am start -n org.cosmic.cosmicconnect/.MainActivity
+adb shell am start -n org.cosmicext.connect/.MainActivity
 sleep 3
 
 # Clear logcat
@@ -724,7 +724,7 @@ build_apk() {
 install_apk() {
   log "Installing COSMIC Connect to Samsung tablet..."
 
-  adb uninstall org.cosmic.cosmicconnect &> /dev/null || true
+  adb uninstall org.cosmicext.connect &> /dev/null || true
   adb install -r "$APK_PATH" || error "Failed to install APK"
 
   success "APK installed successfully"
@@ -746,7 +746,7 @@ grant_permissions() {
   )
 
   for perm in "${PERMISSIONS[@]}"; do
-    adb shell pm grant org.cosmic.cosmicconnect "$perm" 2>/dev/null || true
+    adb shell pm grant org.cosmicext.connect "$perm" 2>/dev/null || true
   done
 
   success "Permissions granted"
@@ -993,14 +993,14 @@ Profile app performance on real hardware:
 
 ```bash
 # Enable CPU profiling
-adb shell am start -n org.cosmic.cosmicconnect/.MainActivity \
+adb shell am start -n org.cosmicext.connect/.MainActivity \
   --start-profiler cpu.trace
 
 # Run app interactions
 sleep 60  # Or perform specific tests
 
 # Stop profiling and pull results
-adb shell am profile stop org.cosmic.cosmicconnect
+adb shell am profile stop org.cosmicext.connect
 adb pull /data/local/tmp/cpu.trace ./
 ```
 
@@ -1087,7 +1087,7 @@ adb install app.apk
 
 1. **Uninstall first**:
    ```bash
-   adb uninstall org.cosmic.cosmicconnect
+   adb uninstall org.cosmicext.connect
    adb install app.apk
    ```
 
@@ -1162,9 +1162,9 @@ Test failed to run to completion. Reason: 'Instrumentation run failed due to 'Pr
 
 3. **Check permissions**:
    ```bash
-   adb shell pm grant org.cosmic.cosmicconnect android.permission.BLUETOOTH_SCAN
-   adb shell pm grant org.cosmic.cosmicconnect android.permission.BLUETOOTH_CONNECT
-   adb shell pm grant org.cosmic.cosmicconnect android.permission.BLUETOOTH_ADVERTISE
+   adb shell pm grant org.cosmicext.connect android.permission.BLUETOOTH_SCAN
+   adb shell pm grant org.cosmicext.connect android.permission.BLUETOOTH_CONNECT
+   adb shell pm grant org.cosmicext.connect android.permission.BLUETOOTH_ADVERTISE
    ```
 
 4. **Reset Bluetooth**:

@@ -3,7 +3,7 @@
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
-package org.cosmic.cosmicconnect.Plugins.ScreenSharePlugin
+package org.cosmicext.connect.Plugins.ScreenSharePlugin
 
 import android.app.Application
 import android.content.Context
@@ -11,12 +11,12 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.slot
 import io.mockk.verify
-import org.cosmic.cosmicconnect.Core.NetworkPacket
-import org.cosmic.cosmicconnect.Core.TransferPacket
-import org.cosmic.cosmicconnect.Device
-import org.cosmic.cosmicconnect.DeviceInfo
-import org.cosmic.cosmicconnect.DeviceType
-import org.cosmic.cosmicconnect.PluginManager
+import org.cosmicext.connect.Core.NetworkPacket
+import org.cosmicext.connect.Core.TransferPacket
+import org.cosmicext.connect.Device
+import org.cosmicext.connect.DeviceInfo
+import org.cosmicext.connect.DeviceType
+import org.cosmicext.connect.PluginManager
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
@@ -313,7 +313,7 @@ class ScreenShareHandshakeTest {
 
         val buttons = plugin.getUiButtons()
         assertEquals(1, buttons.size)
-        assertEquals(context.getString(org.cosmic.cosmicconnect.R.string.screenshare_viewer_title), buttons[0].name)
+        assertEquals(context.getString(org.cosmicext.connect.R.string.screenshare_viewer_title), buttons[0].name)
 
         plugin.stopStreamSession()
     }

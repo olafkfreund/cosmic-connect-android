@@ -37,11 +37,11 @@ kotlin {
 
 // Configure Rust library building
 cargo {
-    module = "../../cosmic-connect-core"
-    libname = "cosmic_connect_core"
+    module = "../../cosmic-ext-connect-core"
+    libname = "cosmic_ext_connect_core"
     targets = listOf("arm64", "arm", "x86_64", "x86")
     profile = "release"
-    targetDirectory = "../../cosmic-connect-core/target"
+    targetDirectory = "../../cosmic-ext-connect-core/target"
 }
 
 // Function to patch the linker wrapper
@@ -67,11 +67,11 @@ tasks.matching { it.name.startsWith("cargoBuild") }.configureEach {
 }
 
 android {
-    namespace = "org.cosmic.cosmicconnect"
+    namespace = "org.cosmicext.connect"
     compileSdk = 35
     ndkVersion = "27.0.12077973"
     defaultConfig {
-        applicationId = "org.cosmic.cosmicconnect"
+        applicationId = "org.cosmicext.connect"
         minSdk = 23
         targetSdk = 35
         versionCode = 13501
@@ -122,7 +122,7 @@ android {
         }
         jniLibs {
             // Handle duplicate native libraries from Rust builds
-            pickFirsts += listOf("**/libcosmic_connect_core.so")
+            pickFirsts += listOf("**/libcosmic_ext_connect_core.so")
         }
     }
     signingConfigs {
@@ -296,7 +296,7 @@ abstract class FixCollectionsClassVisitorFactory :
                         descriptor: String?,
                         isInterface: Boolean
                     ) {
-                        val backportClass = "org/cosmic/cosmicconnect/Helpers/CollectionsBackport"
+                        val backportClass = "org/cosmicext/connect/Helpers/CollectionsBackport"
 
                         if (opcode == INVOKESTATIC && type == "java/util/Collections") {
                             val replaceRules = mapOf(
@@ -327,7 +327,7 @@ abstract class FixCollectionsClassVisitorFactory :
 }
 
 ksp {
-    arg("com.albertvaka.classindexksp.annotations", "org.cosmic.cosmicconnect.Plugins.PluginFactory.LoadablePlugin")
+    arg("com.albertvaka.classindexksp.annotations", "org.cosmicext.connect.Plugins.PluginFactory.LoadablePlugin")
 }
 
 androidComponents {

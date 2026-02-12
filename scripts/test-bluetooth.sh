@@ -78,14 +78,14 @@ fi
 
 # Check Bluetooth permissions
 log "Checking Bluetooth permissions..."
-adb shell pm grant org.cosmic.cosmicconnect android.permission.BLUETOOTH_SCAN 2>/dev/null || true
-adb shell pm grant org.cosmic.cosmicconnect android.permission.BLUETOOTH_CONNECT 2>/dev/null || true
-adb shell pm grant org.cosmic.cosmicconnect android.permission.BLUETOOTH_ADVERTISE 2>/dev/null || true
+adb shell pm grant org.cosmicext.connect android.permission.BLUETOOTH_SCAN 2>/dev/null || true
+adb shell pm grant org.cosmicext.connect android.permission.BLUETOOTH_CONNECT 2>/dev/null || true
+adb shell pm grant org.cosmicext.connect android.permission.BLUETOOTH_ADVERTISE 2>/dev/null || true
 success "Bluetooth permissions granted"
 
 # Launch app
 log "Launching COSMIC Connect..."
-adb shell am start -n org.cosmic.cosmicconnect/.MainActivity
+adb shell am start -n org.cosmicext.connect/.MainActivity
 sleep 3
 success "App launched"
 

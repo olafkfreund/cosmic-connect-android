@@ -3,7 +3,7 @@
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
-package org.cosmic.cosmicconnect.Plugins.ScreenSharePlugin.streaming
+package org.cosmicext.connect.Plugins.ScreenSharePlugin.streaming
 
 import org.junit.Test
 import java.io.ByteArrayInputStream

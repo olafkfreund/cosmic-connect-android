@@ -541,7 +541,7 @@ networking.firewall = {
 adb logcat | grep -i cosmicconnect
 
 # More specific
-adb logcat --pid=$(adb shell pidof -s org.cosmic.cosmicconnect)
+adb logcat --pid=$(adb shell pidof -s org.cosmicext.connect)
 
 # Filter for connection issues
 adb logcat | grep -E "(LanLinkProvider|Handshake|identity|pair)"

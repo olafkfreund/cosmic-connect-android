@@ -48,7 +48,7 @@ Not all notifications are forwarded. The following are excluded:
 
 Additionally, these packages are blocked:
 
-- `org.cosmic.cosmicconnect` (own notifications)
+- `org.cosmicext.connect` (own notifications)
 - `com.android.systemui` with tag `low_battery` (spams repeatedly)
 - Samsung OneUI's `MediaOngoingActivity` channel (handled by MPRIS)
 

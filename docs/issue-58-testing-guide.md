@@ -104,7 +104,7 @@ Tests both FFI functions with various inputs:
 
 **Enable READ_LOGS Permission (Android 10+):**
 1. Connect device via ADB
-2. Run: `adb shell pm grant org.cosmic.cosmicconnect android.permission.READ_LOGS`
+2. Run: `adb shell pm grant org.cosmicext.connect android.permission.READ_LOGS`
 3. Verify: Button should appear in plugin UI
 
 **Pair Devices:**
@@ -457,7 +457,7 @@ journalctl -f | grep "Clipboard received"
 **Tools:**
 ```bash
 # Android memory profiling
-adb shell dumpsys meminfo org.cosmic.cosmicconnect | grep "Clipboard"
+adb shell dumpsys meminfo org.cosmicext.connect | grep "Clipboard"
 
 # Before test
 # After 100 clipboard operations
@@ -630,7 +630,7 @@ adb shell input text "Hello世界🎉"
 1. Android version >= 10?
 2. READ_LOGS permission denied?
    ```bash
-   adb shell dumpsys package org.cosmic.cosmicconnect | grep READ_LOGS
+   adb shell dumpsys package org.cosmicext.connect | grep READ_LOGS
    ```
 
 3. If permission granted, button won't show (menu entry instead)
@@ -667,11 +667,11 @@ adb install -r build/outputs/apk/debug/cosmic-connect-android-debug.apk
 
 # 5. Grant permissions
 echo "Granting READ_LOGS permission..."
-adb shell pm grant org.cosmic.cosmicconnect android.permission.READ_LOGS || echo "Permission already granted or not required"
+adb shell pm grant org.cosmicext.connect android.permission.READ_LOGS || echo "Permission already granted or not required"
 
 # 6. Launch app
 echo "Launching app..."
-adb shell am start -n org.cosmic.cosmicconnect/.UserInterface.MainActivity
+adb shell am start -n org.cosmicext.connect/.UserInterface.MainActivity
 
 echo "✅ Automated setup complete. Proceed with manual testing."
 ```

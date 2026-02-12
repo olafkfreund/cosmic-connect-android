@@ -416,7 +416,7 @@ cd cosmic-connect-android
 ### For Users
 
 - **No impact** - same app functionality
-- Package name already changed to `org.cosmic.cosmicconnect`
+- Package name already changed to `org.cosmicext.connect`
 - Protocol compatibility maintained
 
 ---

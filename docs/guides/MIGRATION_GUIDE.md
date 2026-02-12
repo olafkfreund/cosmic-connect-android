@@ -184,7 +184,7 @@ adb backup org.kde.kdeconnect_tp
 6. Verify certificate fingerprints match
 
 **Why re-pair?**
-- Different app package name (`org.cosmic.cosmicconnect` vs `org.kde.kdeconnect_tp`)
+- Different app package name (`org.cosmicext.connect` vs `org.kde.kdeconnect_tp`)
 - Different certificate storage location
 - Fresh start ensures security
 
@@ -623,7 +623,7 @@ org.kde.kdeconnect_tp
 
 **After:**
 ```
-org.cosmic.cosmicconnect
+org.cosmicext.connect
 ```
 
 **Impact:**
@@ -646,7 +646,7 @@ org.cosmic.cosmicconnect
 
 **After:**
 ```
-/data/data/org.cosmic.cosmicconnect/files/
+/data/data/org.cosmicext.connect/files/
 ```
 
 **Impact:**
@@ -1642,7 +1642,7 @@ All plugins work the same way across implementations.
 #### Q: Can I use both apps simultaneously?
 
 **A:** Yes! You can install both KDE Connect and COSMIC Connect side-by-side:
-- Different package names (`org.kde.kdeconnect_tp` vs `org.cosmic.cosmicconnect`)
+- Different package names (`org.kde.kdeconnect_tp` vs `org.cosmicext.connect`)
 - Won't conflict
 - Use different device names to distinguish
 - Useful for testing before full migration

@@ -47,7 +47,7 @@ adb logcat -s CosmicConnect:D
 adb logcat -s CosmicConnect:D NetworkPacket:D TLS:V
 
 # Filter by process ID
-adb logcat --pid=$(adb shell pidof -s org.cosmic.cosmicconnect)
+adb logcat --pid=$(adb shell pidof -s org.cosmicext.connect)
 
 # Filter with grep
 adb logcat | grep "CosmicConnect"
@@ -153,7 +153,7 @@ class MemoryMonitor {
 #### Heap Dump Analysis
 ```bash
 # Capture heap dump
-adb shell am dumpheap org.cosmic.cosmicconnect /data/local/tmp/heap.hprof
+adb shell am dumpheap org.cosmicext.connect /data/local/tmp/heap.hprof
 adb pull /data/local/tmp/heap.hprof
 
 # Convert to standard format
@@ -238,7 +238,7 @@ Debug.startMethodTracing("cosmicconnect")
 Debug.stopMethodTracing()
 
 // Pull trace file
-adb pull /sdcard/Android/data/org.cosmic.cosmicconnect/files/cosmicconnect.trace
+adb pull /sdcard/Android/data/org.cosmicext.connect/files/cosmicextconnect.trace
 
 // Analyze in Android Studio
 // File > Open... > Select trace file

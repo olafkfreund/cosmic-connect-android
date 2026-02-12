@@ -33,7 +33,7 @@ println("Library Path: $libPath")
 println()
 
 // Check if native library exists
-val libFile = File("$libPath/libcosmic_connect_core.so")
+val libFile = File("$libPath/libcosmic_ext_connect_core.so")
 if (!libFile.exists()) {
     println("❌ ERROR: Native library not found at ${libFile.absolutePath}")
     println()
@@ -56,7 +56,7 @@ println("=".repeat(70))
 
 try {
     // Try to load the library
-    val lib = Native.load("cosmic_connect_core", Library::class.java)
+    val lib = Native.load("cosmic_ext_connect_core", Library::class.java)
     println("✅ PASS: Native library loaded successfully")
     println()
 } catch (e: Exception) {
@@ -72,7 +72,7 @@ println("=".repeat(70))
 
 try {
     // Check if UniFFI generated bindings exist
-    val bindingsFile = File("src/uniffi/cosmic_connect_core/cosmic_connect_core.kt")
+    val bindingsFile = File("src/uniffi/cosmic_ext_connect_core/cosmic_ext_connect_core.kt")
     if (bindingsFile.exists()) {
         println("✅ PASS: UniFFI bindings file exists")
         println("   Location: ${bindingsFile.absolutePath}")
@@ -93,7 +93,7 @@ println("=".repeat(70))
 
 try {
     // Check if FFI wrapper exists
-    val wrapperFile = File("src/org/cosmic/cosmicconnect/Core/CosmicConnectCore.kt")
+    val wrapperFile = File("src/org/cosmicext/connect/Core/CosmicExtConnectCore.kt")
     if (wrapperFile.exists()) {
         println("✅ PASS: FFI wrapper file exists")
         println("   Location: ${wrapperFile.absolutePath}")

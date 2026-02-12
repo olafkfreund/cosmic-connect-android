@@ -621,13 +621,13 @@ class DeviceConnectionTest {
 ### Testing Against COSMIC Applet
 ```bash
 # Test device discovery
-adb shell am broadcast -a org.cosmic.cosmicconnect.ACTION_DISCOVERY
+adb shell am broadcast -a org.cosmicext.connect.ACTION_DISCOVERY
 
 # Test file transfer
 adb shell am start -a android.intent.action.SEND \
     -t "text/plain" \
     --es android.intent.extra.TEXT "Test message" \
-    org.cosmic.cosmicconnect/.MainActivity
+    org.cosmicext.connect/.MainActivity
 
 # Monitor logs
 adb logcat -s CosmicConnect:D

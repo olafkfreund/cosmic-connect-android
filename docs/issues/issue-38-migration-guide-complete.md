@@ -22,7 +22,7 @@ Successfully created complete migration guide for transitioning from KDE Connect
 **Breaking Changes Documented:**
 
 **For Users:**
-1. **Different App Package Name** (`org.cosmic.cosmicconnect` vs `org.kde.kdeconnect_tp`)
+1. **Different App Package Name** (`org.cosmicext.connect` vs `org.kde.kdeconnect_tp`)
    - Impact: Fresh installation required, cannot upgrade
    - Mitigation: Install side-by-side for testing
 

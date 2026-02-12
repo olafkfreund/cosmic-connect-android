@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
-    <share-target android:targetClass="org.cosmic.cosmicconnect.Plugins.SharePlugin.ShareActivity">
+    <share-target android:targetClass="org.cosmicext.connect.Plugins.SharePlugin.ShareActivity">
         <data android:mimeType="*/*" />
-        <category android:name="org.cosmic.cosmicconnect.category.SHARE_TARGET" />
+        <category android:name="org.cosmicext.connect.category.SHARE_TARGET" />
     </share-target>
 </shortcuts>

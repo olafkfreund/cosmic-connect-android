@@ -118,7 +118,7 @@ adb shell pm list packages | grep cosmicconnect
 
 Expected output:
 ```
-package:org.cosmic.cosmicconnect
+package:org.cosmicext.connect
 ```
 
 ## Step 8: Launch the App
@@ -130,7 +130,7 @@ In Waydroid UI:
 
 OR via command line:
 ```bash
-adb shell monkey -p org.cosmic.cosmicconnect -c android.intent.category.LAUNCHER 1
+adb shell monkey -p org.cosmicext.connect -c android.intent.category.LAUNCHER 1
 ```
 
 ## Step 9: Clone COSMIC Applet
@@ -223,10 +223,10 @@ rm -rf ~/.gradle/caches
 adb logcat | grep -i "androidruntime\|exception"
 
 # Clear app data
-adb shell pm clear org.cosmic.cosmicconnect
+adb shell pm clear org.cosmicext.connect
 
 # Reinstall
-adb uninstall org.cosmic.cosmicconnect
+adb uninstall org.cosmicext.connect
 adb install -r app/build/outputs/apk/debug/app-debug.apk
 ```
 
@@ -279,7 +279,7 @@ adb logcat | grep -i cosmicconnect
 ```bash
 adb devices                        # List connected devices
 adb install -r app.apk             # Install/reinstall APK
-adb uninstall org.cosmic.cosmicconnect # Uninstall app
+adb uninstall org.cosmicext.connect # Uninstall app
 adb logcat                         # View logs
 adb shell                          # Open shell in Android
 adb shell pm list packages         # List installed packages

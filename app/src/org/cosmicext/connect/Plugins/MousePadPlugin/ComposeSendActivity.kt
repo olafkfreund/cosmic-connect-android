@@ -1,0 +1,122 @@
+/*
+ * SPDX-FileCopyrightText: 2023 Dmitry Yudin <dgyudin@gmail.com>
+ *
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+ */
+
+package org.cosmicext.connect.Plugins.MousePadPlugin
+
+import android.os.Bundle
+import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Send
+import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import androidx.preference.PreferenceManager
+import dagger.hilt.android.AndroidEntryPoint
+import org.cosmicext.connect.Core.DeviceRegistry
+import org.cosmicext.connect.UserInterface.compose.KdeTextButton
+import org.cosmicext.connect.UserInterface.compose.CosmicTextField
+import org.cosmicext.connect.UserInterface.compose.CosmicTheme
+import org.cosmicext.connect.UserInterface.compose.CosmicTopAppBar
+import org.cosmicext.connect.extensions.safeDrawPadding
+import org.cosmicext.connect.R
+import androidx.core.content.edit
+import javax.inject.Inject
+
+private const val INPUT_CACHE_KEY = "compose_send_input_cache"
+
+@AndroidEntryPoint
+class ComposeSendActivity : AppCompatActivity() {
+
+    @Inject lateinit var deviceRegistry: DeviceRegistry
+
+    private var deviceId: String? = null
+    private val userInput = mutableStateOf(String())
+    private val prefs by lazy { PreferenceManager.getDefaultSharedPreferences(this) }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+
+        super.onCreate(savedInstanceState)
+
+        prefs.getString(INPUT_CACHE_KEY, null)?.let { userInput.value = it }
+
+        setContent { ComposeSendScreen() }
+
+        deviceId = intent.getStringExtra("org.cosmicext.connect.Plugins.MousePadPlugin.deviceId")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        prefs.edit {
+            if (userInput.value.isNotBlank()) putString(INPUT_CACHE_KEY,userInput.value)
+            else remove(INPUT_CACHE_KEY)
+        }
+    }
+
+    private fun sendComposed() {
+        val plugin = deviceRegistry.getDevicePlugin(deviceId, MousePadPlugin::class.java)
+        if (plugin == null) {
+            finish()
+            return
+        }
+        plugin.sendText(userInput.value)
+        clearComposeInput()
+    }
+
+    private fun clearComposeInput() {
+        userInput.value = String()
+    }
+
+    @Composable
+    private fun ComposeSendScreen() {
+        CosmicTheme(this) {
+            Scaffold(
+                modifier = Modifier.safeDrawPadding(),
+                topBar = {
+                    CosmicTopAppBar(
+                        title = stringResource(R.string.compose_send_title),
+                        navIconOnClick = { onBackPressedDispatcher.onBackPressed() },
+                        navIconDescription = getString(androidx.appcompat.R.string.abc_action_bar_up_description),
+                        actions = {
+                            KdeTextButton(
+                                modifier = Modifier.padding(horizontal = 8.dp),
+                                onClick = { clearComposeInput() },
+                                text = stringResource(R.string.clear_compose),
+                            )
+                        }
+                    )
+                },
+            ) { scaffoldPadding ->
+                Box(modifier = Modifier.padding(scaffoldPadding).fillMaxSize()) {
+                    CosmicTextField(
+                        modifier = Modifier
+                            .padding(horizontal = 16.dp)
+                            .padding(bottom = 80.dp)
+                            .align(Alignment.BottomStart)
+                            .fillMaxWidth(),
+                        input = userInput,
+                        label = stringResource(R.string.click_here_to_type),
+                    )
+                    KdeTextButton(
+                        onClick = { sendComposed() },
+                        modifier = Modifier.padding(all = 16.dp).align(Alignment.BottomEnd),
+                        enabled = userInput.value.isNotEmpty(),
+                        text = stringResource(R.string.send_compose),
+                        iconLeft = Icons.AutoMirrored.Filled.Send,
+                    )
+                }
+            }
+        }
+    }
+}

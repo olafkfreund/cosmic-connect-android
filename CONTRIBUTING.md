@@ -576,7 +576,7 @@ class DeviceManagerTest {
 
 # Specific instrumentation test
 ./gradlew connectedAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmic.cosmicconnect.integration.DiscoveryIntegrationTest
+  -Pandroid.testInstrumentationRunnerArguments.class=org.cosmicext.connect.integration.DiscoveryIntegrationTest
 
 # Test with coverage
 ./gradlew testDebugUnitTestCoverage

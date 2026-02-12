@@ -7,13 +7,13 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
 -->
 
 <resources>
-    <style name="CosmicConnectThemeBase.V27" parent="CosmicConnectThemeBase">
+    <style name="CosmicExtConnectThemeBase.V27" parent="CosmicExtConnectThemeBase">
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowLightNavigationBar">?attr/isLightTheme</item>
     </style>
 
-    <style name="CosmicConnectTheme" parent="CosmicConnectThemeBase.V27" />
+    <style name="CosmicExtConnectTheme" parent="CosmicExtConnectThemeBase.V27" />
 
     <style name="PreferenceThemeOverlay" parent="BasePreferenceThemeOverlay">
         <item name="preferenceCategoryTitleTextColor">?android:attr/colorAccent</item>

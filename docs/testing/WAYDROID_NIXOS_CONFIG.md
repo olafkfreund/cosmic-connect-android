@@ -203,13 +203,13 @@ adb install -r app.apk
 adb shell pm list packages | grep cosmic
 
 # Uninstall app
-adb uninstall org.cosmic.cosmicconnect
+adb uninstall org.cosmicext.connect
 
 # Clear app data
-adb shell pm clear org.cosmic.cosmicconnect
+adb shell pm clear org.cosmicext.connect
 
 # Launch app
-adb shell am start -n org.cosmic.cosmicconnect/.MainActivity
+adb shell am start -n org.cosmicext.connect/.MainActivity
 ```
 
 ### Testing

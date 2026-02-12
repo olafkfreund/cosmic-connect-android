@@ -182,7 +182,7 @@ install_apk() {
   log "Installing COSMIC Connect to Waydroid..."
 
   # Uninstall previous version (ignore errors)
-  adb uninstall org.cosmic.cosmicconnect &> /dev/null || true
+  adb uninstall org.cosmicext.connect &> /dev/null || true
 
   # Install new version
   adb install -r "$APK_PATH" || error "Failed to install APK"
@@ -204,7 +204,7 @@ grant_permissions() {
   )
 
   for perm in "${PERMISSIONS[@]}"; do
-    adb shell pm grant org.cosmic.cosmicconnect "$perm" 2>/dev/null || true
+    adb shell pm grant org.cosmicext.connect "$perm" 2>/dev/null || true
   done
 
   success "Permissions granted"

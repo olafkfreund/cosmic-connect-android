@@ -18,7 +18,7 @@
 
 -dontobfuscate
 -keepattributes SourceFile,LineNumberTable,Signature,*Annotation*
--keep class org.cosmic.cosmicconnect.** {*;}
+-keep class org.cosmicext.connect.** {*;}
 -keep class uniffi.** {*;}
 -keep class com.sun.jna.** {*;}
 -dontwarn java.awt.**

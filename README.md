@@ -41,6 +41,28 @@ COSMIC Connect enables Android devices to communicate with COSMIC Desktop comput
 
 All features work wirelessly over Wi-Fi or Bluetooth using **secure TLS encryption**.
 
+## Screenshots
+
+*Captured on Samsung Galaxy Tab S8 Ultra running Android 14*
+
+### Device List & Connection
+| Device List | Plugin List (Top) | Plugin List (Bottom) |
+|:-:|:-:|:-:|
+| ![Device List](docs/screenshots/01_device_list.png) | ![Plugins Top](docs/screenshots/02_device_detail_plugins_top.png) | ![Plugins Bottom](docs/screenshots/04_device_detail_plugins_bottom.png) |
+| Connected desktops with status | 31 plugins with per-device toggles | Screen Share, Virtual Monitor, Webcam |
+
+### Tier 3 Plugin Screens (Experimental)
+| Audio Stream | File Sync | Virtual Monitor |
+|:-:|:-:|:-:|
+| ![Audio Stream](docs/screenshots/05_audio_stream.png) | ![File Sync](docs/screenshots/06_file_sync.png) | ![Virtual Monitor](docs/screenshots/07_virtual_monitor.png) |
+| Stream status, codec info, start/stop | Sync folders with FAB, conflict resolution | Resolution/DPI/refresh rate config |
+
+### Settings
+| Settings |
+|:-:|
+| ![Settings](docs/screenshots/08_settings.png) |
+| General, Connection, Advanced, About |
+
 ## Architecture
 
 ### Hybrid Approach
@@ -90,7 +112,7 @@ The project uses a **Rust core + Kotlin UI** architecture for optimal performanc
 
 ## Project Status
 
-**30 plugins** | **787 unit tests** | **0 failures** | **All major architecture issues resolved**
+**31 plugins** | **1080 unit tests** | **0 failures** | **All major architecture issues resolved**
 
 ### Recent Architecture Overhaul (2026-02-06)
 
@@ -98,9 +120,9 @@ The project uses a **Rust core + Kotlin UI** architecture for optimal performanc
 |-------|-------------|--------|
 | **#142** Unified NetworkPacket | Eliminated dual packet system. Legacy `NetworkPacket.kt` deleted, all code uses `Core.NetworkPacket` data class + `TransferPacket` for payloads. | Zero double-serialization overhead |
 | **#143** Device.kt decomposition | God class (702 lines) split into `ConnectionManager`, `PluginManager`, `PairingManager` via facade pattern (325 lines). | Testable, focused components |
-| **#144** Hilt DI for plugins | All 30 plugins migrated from reflection to `@AssistedInject` + `@AssistedFactory`. | Type-safe, compile-time verified DI |
-| **#145** Desktop plugin parity | Added 7 new plugins across 3 tiers: NetworkInfo, Power, Lock, AudioStream, FileSync, ScreenShare, VirtualMonitor. | 30 plugins (was 23) |
-| **#146** Test coverage | 130 tests expanded to 787 across 39 test files. | All testable plugins covered |
+| **#144** Hilt DI for plugins | All 31 plugins migrated from reflection to `@AssistedInject` + `@AssistedFactory`. | Type-safe, compile-time verified DI |
+| **#145** Desktop plugin parity | Added 8 new plugins across 3 tiers: NetworkInfo, Power, Lock, Webcam, AudioStream, FileSync, ScreenShare, VirtualMonitor. | 31 plugins (was 23) |
+| **#146** Test coverage | 130 tests expanded to 1080 across 59 test files. | All plugins covered |
 
 ### Security & Build Hardening
 - BouncyCastle upgraded (`bcpkix-jdk15on:1.70` -> `bcpkix-jdk18on:1.80`) for CVE fix
@@ -109,7 +131,7 @@ The project uses a **Rust core + Kotlin UI** architecture for optimal performanc
 - Exported receivers locked down (`exported=false`)
 - Private keys migrated to Android Keystore
 
-### Plugin Registry (30 plugins)
+### Plugin Registry (31 plugins)
 
 | Wave | Plugins | Status |
 |------|---------|--------|
@@ -118,28 +140,28 @@ The project uses a **Rust core + Kotlin UI** architecture for optimal performanc
 | **Wave 3** | Battery, FindMyPhone, Contacts, Telephony, SMS | Shipped |
 | **Wave 4** | Share, SFTP, MPRIS, Notifications, ReceiveNotifications | Shipped |
 | **Wave 5** | OpenOnPhone, Camera, ExtendedDisplay | Shipped |
-| **Wave 6** | NetworkInfo, Power, Lock | Shipped |
-| **Wave 7** | ScreenShare, FileSync, VirtualMonitor, AudioStream | Shipped (experimental) |
+| **Wave 6** | NetworkInfo, Power, Lock, Webcam | Shipped |
+| **Wave 7** | ScreenShare, FileSync, VirtualMonitor, AudioStream | Shipped (experimental, with Compose UI) |
 
-### Test Suite: 787 Tests
+### Test Suite: 1080 Tests
 
 | Category | Count | Files |
 |----------|-------|-------|
-| Plugin tests | ~610 | 29 test files covering all testable plugins |
+| Plugin tests | ~900 | 45 test files covering all 31 plugins |
 | Core/architecture | ~110 | ConnectionManager, PluginManager, PairingManager, DeviceInfo, DeviceHelper, PairingHandler |
 | Transport layer | ~40 | LanLinkProvider, BaseLink, BaseLinkProvider |
 | Utility | ~31 | UrlValidator, MessagingNotificationHandler |
 
 ### Open Issues
 
-No open issues — all 51 issues closed.
+No open issues — all 65 issues closed.
 
 ### Build Status
 
 ```
 Build: PASSING (0 compilation errors)
-Unit Tests: 787/787 passing
-Plugins: 30/30 migrated to Hilt DI
+Unit Tests: 1080/1080 passing
+Plugins: 31/31 migrated to Hilt DI
 Architecture: NetworkPacket unified, Device.kt decomposed
 SDK: compileSdk 35, minSdk 23
 ```
@@ -256,7 +278,7 @@ cosmic-connect-android/
 │   │   ├── TransferPacket.kt               # Payload-aware wrapper
 │   │   ├── NetworkPacketCompat.kt          # Compat extensions (getString, getInt, etc.)
 │   │   └── PacketType.kt                   # Packet type constants
-│   ├── Plugins/                            # 30 plugins (all @AssistedInject)
+│   ├── Plugins/                            # 31 plugins (all @AssistedInject)
 │   │   ├── di/                             # Hilt DI module + PluginCreator interface
 │   │   ├── BatteryPlugin/                  # Battery status monitoring
 │   │   ├── LockPlugin/                     # Remote screen lock/unlock (Tier 2)
@@ -272,7 +294,7 @@ cosmic-connect-android/
 │   ├── PluginManager.kt                    # Plugin lifecycle, permissions
 │   ├── PairingManager.kt                   # Pairing state machine
 │   └── BackgroundService.kt               # Main Android service
-├── app/src/test/                           # 39 test files, 787 tests
+├── app/src/test/                           # 59 test files, 1080 tests
 ├── app/src/uniffi/cosmic_connect_core/     # Generated FFI bindings
 ├── docs/                                   # Documentation
 ├── flake.nix                               # NixOS development environment
@@ -302,7 +324,7 @@ cosmic-connect-core/                        # Rust core library (separate repo)
 - Compat extensions for type-safe field access
 
 **Plugin Layer** (`app/src/org/cosmic/cosmicconnect/Plugins/`):
-- 30 plugins, all using Hilt `@AssistedInject` DI
+- 31 plugins, all using Hilt `@AssistedInject` DI
 - Each plugin has a `Factory` implementing `PluginCreator`
 - Registered in `PluginFactory` (metadata) + `PluginModule` (Hilt bindings)
 
@@ -475,7 +497,7 @@ The following table shows which features can be tested on each platform:
 
 ### Test Suite Overview
 
-**Total: 787 Unit Tests** | **All Passing** | **39 Test Files**
+**Total: 1080 Unit Tests** | **All Passing** | **59 Test Files**
 
 | Category | Tests | Examples |
 |----------|-------|---------|
@@ -723,11 +745,11 @@ See [LICENSE](LICENSE) for full license text.
 <div align="center">
 
 **Build**: ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
-![Tests](https://img.shields.io/badge/tests-787_passing-brightgreen)
-![Plugins](https://img.shields.io/badge/plugins-30-blue)
+![Tests](https://img.shields.io/badge/tests-1080_passing-brightgreen)
+![Plugins](https://img.shields.io/badge/plugins-31-blue)
 ![Compilation](https://img.shields.io/badge/errors-0-brightgreen)
 
-**Last Updated**: 2026-02-06
+**Last Updated**: 2026-02-12
 
 **Made for COSMIC Desktop**
 

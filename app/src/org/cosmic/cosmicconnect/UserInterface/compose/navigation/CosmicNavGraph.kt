@@ -42,6 +42,9 @@ object Screen {
     const val Digitizer = "plugin/digitizer/{deviceId}"
     const val Share = "plugin/share/{deviceId}"
     const val NotificationFilter = "plugin/notifications/filter/{prefKey}"
+    const val AudioStream = "plugin/audiostream/{deviceId}"
+    const val FileSync = "plugin/filesync/{deviceId}"
+    const val VirtualMonitor = "plugin/virtualmonitor/{deviceId}"
 
     fun deviceDetail(deviceId: String) = "device/$deviceId"
     fun findMyPhone(deviceId: String) = "plugin/findmyphone/$deviceId"
@@ -52,6 +55,9 @@ object Screen {
     fun digitizer(deviceId: String) = "plugin/digitizer/$deviceId"
     fun share(deviceId: String) = "plugin/share/$deviceId"
     fun notificationFilter(prefKey: String) = "plugin/notifications/filter/$prefKey"
+    fun audioStream(deviceId: String) = "plugin/audiostream/$deviceId"
+    fun fileSync(deviceId: String) = "plugin/filesync/$deviceId"
+    fun virtualMonitor(deviceId: String) = "plugin/virtualmonitor/$deviceId"
 }
 
 @Composable
@@ -113,6 +119,9 @@ fun CosmicNavGraph(
                             // TODO: Pass correct prefKey
                             navController.navigate(Screen.notificationFilter("todo"))
                         }
+                        "audiostreamplugin" -> navController.navigate(Screen.audioStream(deviceId!!))
+                        "filesyncplugin" -> navController.navigate(Screen.fileSync(deviceId!!))
+                        "virtualmonitorplugin" -> navController.navigate(Screen.virtualMonitor(deviceId!!))
                     }
                 }
             )
@@ -269,6 +278,39 @@ fun CosmicNavGraph(
             ShareScreen(
                 viewModel = hiltViewModel(),
                 shareIntent = null, // No intent when navigating from device detail
+                onNavigateBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(
+            route = Screen.AudioStream,
+            arguments = listOf(navArgument("deviceId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            AudioStreamScreen(
+                viewModel = hiltViewModel(),
+                deviceId = backStackEntry.arguments?.getString("deviceId"),
+                onNavigateBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(
+            route = Screen.FileSync,
+            arguments = listOf(navArgument("deviceId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            FileSyncScreen(
+                viewModel = hiltViewModel(),
+                deviceId = backStackEntry.arguments?.getString("deviceId"),
+                onNavigateBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(
+            route = Screen.VirtualMonitor,
+            arguments = listOf(navArgument("deviceId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            VirtualMonitorScreen(
+                viewModel = hiltViewModel(),
+                deviceId = backStackEntry.arguments?.getString("deviceId"),
                 onNavigateBack = { navController.popBackStack() }
             )
         }

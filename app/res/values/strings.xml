@@ -820,4 +820,54 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-COSMIC-Accep
     <string name="screenshare_viewer_confirm_stop">Stop screen share?</string>
     <string name="screenshare_viewer_no_session">No active screen share session</string>
 
+    <!-- Audio Stream Plugin UI -->
+    <string name="audiostream_title">Audio Stream</string>
+    <string name="audiostream_status">Stream Status</string>
+    <string name="audiostream_start">Start Streaming</string>
+    <string name="audiostream_stop">Stop Streaming</string>
+    <string name="audiostream_capabilities">Supported Capabilities</string>
+    <string name="audiostream_codec">Codec</string>
+    <string name="audiostream_sample_rate">Sample Rate</string>
+    <string name="audiostream_channels">Channels</string>
+    <string name="audiostream_direction">Direction</string>
+    <string name="audiostream_idle">Idle</string>
+    <string name="audiostream_streaming">Streaming</string>
+    <string name="audiostream_no_capabilities">No capabilities reported by desktop</string>
+    <string name="audiostream_codecs">Codecs</string>
+    <string name="audiostream_sample_rates">Sample Rates</string>
+
+    <!-- File Sync Plugin UI -->
+    <string name="filesync_title">File Sync</string>
+    <string name="filesync_add_folder">Add Sync Folder</string>
+    <string name="filesync_remove_folder">Remove Folder</string>
+    <string name="filesync_sync_now">Sync Now</string>
+    <string name="filesync_conflicts">Conflicts</string>
+    <string name="filesync_no_folders">No sync folders configured</string>
+    <string name="filesync_folder_path">Folder path</string>
+    <string name="filesync_folder_path_hint">/home/user/Documents</string>
+    <string name="filesync_add_folder_description">Enter the absolute path of the folder to sync on the remote device.</string>
+    <string name="filesync_remove_confirm">Remove sync folder?</string>
+    <string name="filesync_remove_confirm_message">This will stop syncing the selected folder. Files already synced will not be deleted.</string>
+    <string name="filesync_use_local">Use Local</string>
+    <string name="filesync_use_remote">Use Remote</string>
+
+    <!-- Virtual Monitor Plugin UI -->
+    <string name="virtualmonitor_title">Virtual Monitor</string>
+    <string name="virtualmonitor_enable">Enable Virtual Monitor</string>
+    <string name="virtualmonitor_disable">Disable Virtual Monitor</string>
+    <string name="virtualmonitor_open_viewer">Open Viewer</string>
+    <string name="virtualmonitor_config">Display Configuration</string>
+    <string name="virtualmonitor_status">Monitor Status</string>
+    <string name="virtualmonitor_active">Active</string>
+    <string name="virtualmonitor_inactive">Inactive</string>
+    <string name="virtualmonitor_width">Width (px)</string>
+    <string name="virtualmonitor_height">Height (px)</string>
+    <string name="virtualmonitor_dpi">DPI</string>
+    <string name="virtualmonitor_position">Position</string>
+    <string name="virtualmonitor_refresh_rate">Refresh Rate (Hz)</string>
+    <string name="virtualmonitor_position_left">Left</string>
+    <string name="virtualmonitor_position_right">Right</string>
+    <string name="virtualmonitor_position_above">Above</string>
+    <string name="virtualmonitor_position_below">Below</string>
+
 </resources>

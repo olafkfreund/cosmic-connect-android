@@ -71,6 +71,12 @@ class FileSyncPlugin @AssistedInject constructor(
     /** Monotonically increasing packet ID counter. */
     private var nextPacketId = 1L
 
+    /** Per-file sync state tracker with persistence. */
+    private var stateManager: SyncStateManager? = null
+
+    /** Core file-watching and sync orchestrator. */
+    private var engine: FileSyncEngine? = null
+
     interface Listener {
         fun onSyncStatusChanged(folderId: String, status: SyncStatus)
         fun onConflictDetected(conflict: FileConflict)
@@ -92,13 +98,33 @@ class FileSyncPlugin @AssistedInject constructor(
 
     override val isEnabledByDefault: Boolean = false
 
+    override fun getUiButtons(): List<PluginUiButton> = listOf(
+        PluginUiButton(
+            context.getString(R.string.pref_plugin_filesync),
+            R.drawable.ic_notification,
+        ) { /* Navigation handled by Compose NavGraph */ }
+    )
+
     override fun onCreate(): Boolean {
         loadSyncFolders()
+
+        // Initialize sync state tracker and engine
+        stateManager = SyncStateManager(preferences).also { it.load() }
+        engine = FileSyncEngine(context, device, stateManager!!, listener)
+
+        val folders = getSyncFolders()
+        if (folders.isNotEmpty()) {
+            engine?.start(folders)
+        }
+
         requestSyncFolderList()
         return true
     }
 
     override fun onDestroy() {
+        engine?.destroy()
+        engine = null
+        stateManager = null
         listener = null
         synchronized(syncFolders) { syncFolders.clear() }
         synchronized(_conflicts) { _conflicts.clear() }
@@ -226,6 +252,17 @@ class FileSyncPlugin @AssistedInject constructor(
                 }
             }
             saveSyncFolders()
+
+            // Register new folders with the engine
+            val currentFolders = getSyncFolders()
+            currentFolders.forEach { folder ->
+                engine?.watchFolder(folder)
+                engine?.scanFolder(folder)
+            }
+            if (currentFolders.isNotEmpty() && engine?.isRunning == false) {
+                engine?.start(currentFolders)
+            }
+
             Log.i(TAG, "Received ${arr.length()} sync folders from desktop")
         } catch (e: Exception) {
             Log.e(TAG, "Failed to parse folder list response", e)
@@ -281,6 +318,7 @@ class FileSyncPlugin @AssistedInject constructor(
         } catch (e: Exception) {
             Log.e(TAG, "Failed to send remove sync folder packet", e)
         }
+        engine?.unwatchFolder(folderId)
         synchronized(syncFolders) {
             syncFolders.removeAll { it.id == folderId }
         }
@@ -305,6 +343,33 @@ class FileSyncPlugin @AssistedInject constructor(
 
     /** Get current list of sync folders. */
     fun getSyncFolders(): List<SyncFolder> = synchronized(syncFolders) { syncFolders.toList() }
+
+    /**
+     * Resolve a file conflict by choosing either the local or remote version.
+     *
+     * @param conflictPath Path of the conflicted file
+     * @param useLocal True to keep local version, false to use remote version
+     */
+    fun resolveConflict(conflictPath: String, useLocal: Boolean) {
+        val packet = NetworkPacket(
+            id = nextPacketId++,
+            type = PACKET_TYPE_FILESYNC_REQUEST,
+            body = mapOf(
+                "resolveConflict" to true,
+                "path" to conflictPath,
+                "resolution" to if (useLocal) "local" else "remote",
+            ),
+        )
+        try {
+            device.sendPacket(TransferPacket(packet))
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to send conflict resolution packet", e)
+        }
+        synchronized(_conflicts) {
+            _conflicts.removeAll { it.path == conflictPath }
+        }
+        Log.i(TAG, "Resolved conflict for $conflictPath: ${if (useLocal) "local" else "remote"}")
+    }
 
     /** Validate a sync path is safe for use. */
     private fun isValidSyncPath(path: String): Boolean {
@@ -364,6 +429,12 @@ class FileSyncPlugin @AssistedInject constructor(
         }
         prefs.edit().putString("sync_folders_json", arr.toString()).apply()
     }
+
+    /** Get all tracked file states (delegates to [SyncStateManager]). */
+    fun getFileStates(): Map<String, SyncFileInfo> = stateManager?.getAllStates() ?: emptyMap()
+
+    /** Compute SHA-256 checksum for a file (delegates to [FileSyncEngine]). */
+    fun computeFileChecksum(path: String): String? = engine?.computeChecksum(path)
 
     companion object {
         private const val TAG = "FileSyncPlugin"

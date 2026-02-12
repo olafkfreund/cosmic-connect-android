@@ -175,10 +175,10 @@ class VirtualMonitorStreamDelegationTest {
     }
 
     @Test
-    fun `getUiButtons empty when no activeStreamSession`() {
-        // activeStreamSession is null by default
+    fun `getUiButtons always returns button for Compose navigation`() {
+        // activeStreamSession is null by default, but button is always present
         val buttons = plugin.getUiButtons()
-        assertTrue(buttons.isEmpty())
+        assertEquals(1, buttons.size)
     }
 
     @Test
@@ -207,11 +207,11 @@ class VirtualMonitorStreamDelegationTest {
     }
 
     @Test
-    fun `getUiButtons empty when no ScreenSharePlugin`() {
+    fun `getUiButtons present even when no ScreenSharePlugin`() {
         every { device.getPlugin(ScreenSharePlugin::class.java) } returns null
 
         val buttons = plugin.getUiButtons()
-        assertTrue(buttons.isEmpty())
+        assertEquals(1, buttons.size)
     }
 
     @Test

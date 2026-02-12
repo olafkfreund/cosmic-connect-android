@@ -142,21 +142,22 @@ class VirtualMonitorPlugin @AssistedInject constructor(
         device.getPlugin(ScreenSharePlugin::class.java)?.stopStreamSession()
     }
 
-    override fun getUiButtons(): List<PluginUiButton> {
-        if (activeStreamSession == null) return emptyList()
-        return listOf(
-            PluginUiButton(
-                context.getString(R.string.screenshare_viewer_virtualmonitor_title),
-                R.drawable.ic_notification,
-            ) { activity ->
+    override fun getUiButtons(): List<PluginUiButton> = listOf(
+        PluginUiButton(
+            context.getString(R.string.pref_plugin_virtualmonitor),
+            R.drawable.ic_notification,
+        ) { activity ->
+            // When launched from legacy Activity, open the viewer if session is active
+            if (activeStreamSession != null) {
                 val intent = Intent(activity, ScreenShareViewerActivity::class.java).apply {
                     putExtra(ScreenShareViewerActivity.EXTRA_DEVICE_ID, device.deviceId)
                     putExtra(ScreenShareViewerActivity.EXTRA_MODE, ScreenShareViewerActivity.MODE_VIRTUALMONITOR)
                 }
                 activity.startActivity(intent)
             }
-        )
-    }
+            // From Compose NavGraph, navigation is handled separately
+        }
+    )
 
     /** Add a listener to receive virtual monitor state change notifications. */
     fun addVirtualMonitorStateListener(listener: VirtualMonitorStateListener) {

@@ -97,6 +97,13 @@ class AudioStreamPlugin @AssistedInject constructor(
     )
     override val outgoingPacketTypes: Array<String> = arrayOf(PACKET_TYPE_AUDIOSTREAM_REQUEST)
 
+    override fun getUiButtons(): List<PluginUiButton> = listOf(
+        PluginUiButton(
+            context.getString(R.string.pref_plugin_audiostream),
+            R.drawable.ic_notification,
+        ) { /* Navigation handled by Compose NavGraph */ }
+    )
+
     override fun onCreate(): Boolean {
         val packet = NetworkPacket(
             id = System.nanoTime(),

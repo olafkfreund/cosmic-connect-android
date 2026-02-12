@@ -17,6 +17,7 @@ import org.cosmic.cosmicconnect.Plugins.ExtendedDisplayPlugin.decoder.DecoderCal
 import org.cosmic.cosmicconnect.Plugins.ExtendedDisplayPlugin.decoder.VideoDecoder
 import java.net.ServerSocket
 import java.net.Socket
+import java.net.SocketTimeoutException
 import java.util.concurrent.atomic.AtomicBoolean
 
 /**
@@ -42,6 +43,7 @@ class StreamSession(
     private var serverSocket: ServerSocket? = null
     private var clientSocket: Socket? = null
     private var decoder: VideoDecoder? = null
+    private var receiver: CsmrStreamReceiver? = null
     private val stopped = AtomicBoolean(false)
 
     /** The TCP port the desktop should connect to. Valid after prepare(). */
@@ -56,6 +58,7 @@ class StreamSession(
         check(serverSocket == null) { "Session already prepared" }
         serverSocket = ServerSocket(0).also { ss ->
             ss.reuseAddress = true
+            ss.soTimeout = 30_000 // 30s timeout for accept()
             Log.i(TAG, "TCP server listening on port ${ss.localPort}")
             _state.value = StreamState.WaitingForConnection(ss.localPort)
         }
@@ -71,8 +74,16 @@ class StreamSession(
 
         try {
             Log.i(TAG, "Waiting for desktop connection on port ${ss.localPort}...")
-            val socket = ss.accept()
+            val socket: Socket
+            try {
+                socket = ss.accept()
+            } catch (e: SocketTimeoutException) {
+                Log.e(TAG, "Timed out waiting for desktop connection", e)
+                _state.value = StreamState.Error(e)
+                return@withContext
+            }
             clientSocket = socket
+            socket.soTimeout = 10_000 // 10s read timeout
             Log.i(TAG, "Desktop connected from ${socket.remoteSocketAddress}")
 
             val videoDecoder = VideoDecoder(surface, width, height, object : DecoderCallback {
@@ -96,15 +107,41 @@ class StreamSession(
 
             _state.value = StreamState.Receiving(width, height, fps, 0)
 
-            val receiver = CsmrStreamReceiver(socket.getInputStream())
+            val streamReceiver = CsmrStreamReceiver(socket.getInputStream())
+            receiver = streamReceiver
+
+            var consecutiveTimeouts = 0
+            val maxConsecutiveTimeouts = 3
 
             while (isActive && !stopped.get()) {
-                val frame = receiver.readFrame() ?: break // EOF
+                val frame = streamReceiver.readFrame()
+                if (frame == null) {
+                    // null can mean EOF or socket timeout
+                    consecutiveTimeouts++
+                    if (consecutiveTimeouts >= maxConsecutiveTimeouts) {
+                        Log.w(TAG, "Too many consecutive read timeouts ($maxConsecutiveTimeouts), stopping")
+                        break
+                    }
+                    Log.w(TAG, "Read timeout ($consecutiveTimeouts/$maxConsecutiveTimeouts), continuing")
+                    continue
+                }
+                consecutiveTimeouts = 0
 
                 when (frame.type) {
                     CsmrFrame.TYPE_VIDEO -> {
+                        // Skip empty payload frames
+                        if (frame.payload.isEmpty()) {
+                            Log.w(TAG, "Skipping video frame with empty payload")
+                            continue
+                        }
                         // timestamp from wire is in nanoseconds, MediaCodec expects microseconds
-                        videoDecoder.decodeFrame(frame.payload, frame.timestampNs / 1000)
+                        try {
+                            videoDecoder.decodeFrame(frame.payload, frame.timestampNs / 1000)
+                        } catch (e: Exception) {
+                            Log.e(TAG, "Error decoding frame", e)
+                            _state.value = StreamState.Error(e)
+                            break
+                        }
                     }
                     CsmrFrame.TYPE_END_OF_STREAM -> {
                         Log.i(TAG, "End of stream received")
@@ -143,9 +180,11 @@ class StreamSession(
 
     private fun cleanup() {
         try { decoder?.stop() } catch (e: Exception) { Log.w(TAG, "Error stopping decoder", e) }
+        try { receiver?.close() } catch (e: Exception) { Log.w(TAG, "Error closing receiver", e) }
         try { clientSocket?.close() } catch (e: Exception) { Log.w(TAG, "Error closing client socket", e) }
         try { serverSocket?.close() } catch (e: Exception) { Log.w(TAG, "Error closing server socket", e) }
         decoder = null
+        receiver = null
         clientSocket = null
         serverSocket = null
     }

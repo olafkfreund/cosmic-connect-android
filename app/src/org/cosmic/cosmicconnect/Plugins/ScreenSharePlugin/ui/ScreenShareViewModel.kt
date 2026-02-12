@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.Surface
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -30,6 +31,7 @@ class ScreenShareViewModel : ViewModel() {
     val streamState: StateFlow<StreamState> = _streamState.asStateFlow()
 
     private var session: StreamSession? = null
+    private var stateCollectorJob: Job? = null
 
     /**
      * Attaches a StreamSession to this ViewModel.
@@ -37,8 +39,10 @@ class ScreenShareViewModel : ViewModel() {
      */
     fun attachSession(streamSession: StreamSession) {
         session = streamSession
+        // Cancel any previous state collector to avoid coroutine leak
+        stateCollectorJob?.cancel()
         // Mirror session state to our exposed flow
-        viewModelScope.launch {
+        stateCollectorJob = viewModelScope.launch {
             streamSession.state.collect { state ->
                 _streamState.value = state
             }

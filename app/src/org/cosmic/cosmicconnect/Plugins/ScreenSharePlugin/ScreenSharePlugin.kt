@@ -84,7 +84,7 @@ class ScreenSharePlugin @AssistedInject constructor(
     var activeSession: StreamSession? = null
         private set
 
-    private val listeners = mutableSetOf<Listener>()
+    private val listeners = java.util.Collections.synchronizedSet(mutableSetOf<Listener>())
 
     override val displayName: String
         get() = context.resources.getString(R.string.pref_plugin_screenshare)
@@ -192,7 +192,9 @@ class ScreenSharePlugin @AssistedInject constructor(
         direction = DIRECTION_DESKTOP_TO_PHONE
 
         // Notify listeners
-        listeners.forEach { it.onStreamStartRequested(startWidth, startHeight, startCodec, startFps) }
+        synchronized(listeners) {
+            listeners.forEach { it.onStreamStartRequested(startWidth, startHeight, startCodec, startFps) }
+        }
 
         // Fire notification to open viewer
         fireViewerNotification()
@@ -208,7 +210,9 @@ class ScreenSharePlugin @AssistedInject constructor(
         isSharing = false
         direction = DIRECTION_PHONE_TO_DESKTOP
 
-        listeners.forEach { it.onStreamStopped() }
+        synchronized(listeners) {
+            listeners.forEach { it.onStreamStopped() }
+        }
         dismissViewerNotification()
 
         device.onPluginsChanged()
@@ -302,6 +306,7 @@ class ScreenSharePlugin @AssistedInject constructor(
      * Creates and prepares a StreamSession for receiving screen share from desktop.
      * Returns the TCP port the desktop should connect to.
      */
+    @Synchronized
     fun createStreamSession(width: Int, height: Int, fps: Int, codec: String): Int {
         // Clean up any existing session
         activeSession?.stop()
@@ -317,6 +322,7 @@ class ScreenSharePlugin @AssistedInject constructor(
     /**
      * Stops and clears the active streaming session.
      */
+    @Synchronized
     fun stopStreamSession() {
         activeSession?.stop()
         activeSession = null
@@ -324,15 +330,17 @@ class ScreenSharePlugin @AssistedInject constructor(
     }
 
     private fun notifyListeners() {
-        listeners.forEach { listener ->
-            listener.onSharingStateChanged(
-                isSharing ?: false,
-                width,
-                height,
-                codec,
-                fps,
-                direction
-            )
+        synchronized(listeners) {
+            listeners.forEach { listener ->
+                listener.onSharingStateChanged(
+                    isSharing ?: false,
+                    width,
+                    height,
+                    codec,
+                    fps,
+                    direction
+                )
+            }
         }
     }
 

@@ -22,7 +22,7 @@ class CsmrFrameTest {
         assertEquals(0x03.toByte(), CsmrFrame.TYPE_ANNOTATION)
         assertEquals(0xFF.toByte(), CsmrFrame.TYPE_END_OF_STREAM)
         assertEquals(-1, CsmrFrame.TYPE_END_OF_STREAM) // Verify it's -1 as signed byte
-        assertEquals(10 * 1024 * 1024, CsmrFrame.MAX_PAYLOAD_SIZE)
+        assertEquals(2 * 1024 * 1024, CsmrFrame.MAX_PAYLOAD_SIZE)
     }
 
     @Test

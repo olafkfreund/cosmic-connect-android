@@ -5,10 +5,12 @@
  */
 package org.cosmic.cosmicconnect.Plugins.ScreenSharePlugin.streaming
 
+import java.io.Closeable
 import java.io.DataInputStream
 import java.io.EOFException
 import java.io.IOException
 import java.io.InputStream
+import java.net.SocketTimeoutException
 import java.nio.charset.StandardCharsets
 
 /**
@@ -26,14 +28,14 @@ import java.nio.charset.StandardCharsets
  * }
  * ```
  */
-class CsmrStreamReceiver(inputStream: InputStream) {
+class CsmrStreamReceiver(inputStream: InputStream) : Closeable {
 
     private val dis = DataInputStream(inputStream)
 
     /**
      * Reads the next CSMR frame from the stream.
      *
-     * @return The parsed frame, or null on clean EOF (stream closed).
+     * @return The parsed frame, or null on clean EOF (stream closed) or socket timeout.
      * @throws IOException on read error
      * @throws CsmrProtocolException on invalid magic or oversized payload
      */
@@ -44,6 +46,8 @@ class CsmrStreamReceiver(inputStream: InputStream) {
             dis.readFully(magicBytes)
         } catch (e: EOFException) {
             return null // Clean EOF
+        } catch (e: SocketTimeoutException) {
+            return null // Timeout — let caller decide what to do
         }
 
         val magic = String(magicBytes, StandardCharsets.US_ASCII)
@@ -72,5 +76,13 @@ class CsmrStreamReceiver(inputStream: InputStream) {
         }
 
         return CsmrFrame(type, timestampNs, payload)
+    }
+
+    override fun close() {
+        try {
+            dis.close()
+        } catch (e: Exception) {
+            // Ignore close errors
+        }
     }
 }

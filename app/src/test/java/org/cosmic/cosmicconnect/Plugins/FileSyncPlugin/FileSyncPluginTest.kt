@@ -11,7 +11,8 @@ import io.mockk.verify
 import org.cosmic.cosmicconnect.Core.NetworkPacket
 import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Device
-import org.cosmic.cosmicconnect.R
+import org.json.JSONArray
+import org.json.JSONObject
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,7 +20,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
-import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 
 @RunWith(RobolectricTestRunner::class)
@@ -126,9 +127,6 @@ class FileSyncPluginTest {
             ),
         )
 
-        // Add folder to track sync status
-        plugin.addSyncFolder("/test/path")
-
         val result = plugin.onPacketReceived(TransferPacket(np))
         assertTrue(result)
         verify { mockListener.onSyncStatusChanged("folder-start", FileSyncPlugin.SyncStatus.SYNCING) }
@@ -168,9 +166,11 @@ class FileSyncPluginTest {
 
         val result = plugin.onPacketReceived(TransferPacket(np))
         assertTrue(result)
-        assertEquals(1, plugin.conflicts.size)
 
-        val conflict = plugin.conflicts[0]
+        val conflictList = plugin.conflicts
+        assertEquals(1, conflictList.size)
+
+        val conflict = conflictList[0]
         assertEquals("docs/report.docx", conflict.path)
         assertEquals("local-hash-123", conflict.localChecksum)
         assertEquals("remote-hash-456", conflict.remoteChecksum)
@@ -179,6 +179,46 @@ class FileSyncPluginTest {
         assertEquals("folder-conflict", conflict.syncFolderId)
 
         verify { mockListener.onConflictDetected(conflict) }
+    }
+
+    @Test
+    fun `test conflict deduplication by path`() {
+        // Send first conflict for a path
+        val np1 = NetworkPacket(
+            id = 1L,
+            type = "cconnect.filesync.conflict",
+            body = mapOf(
+                "path" to "docs/report.docx",
+                "localChecksum" to "old-local",
+                "remoteChecksum" to "old-remote",
+                "localTimestamp" to 1000L,
+                "remoteTimestamp" to 2000L,
+                "syncFolderId" to "folder-1",
+            ),
+        )
+        plugin.onPacketReceived(TransferPacket(np1))
+        assertEquals(1, plugin.conflicts.size)
+
+        // Send second conflict for the same path (should replace, not add)
+        val np2 = NetworkPacket(
+            id = 2L,
+            type = "cconnect.filesync.conflict",
+            body = mapOf(
+                "path" to "docs/report.docx",
+                "localChecksum" to "new-local",
+                "remoteChecksum" to "new-remote",
+                "localTimestamp" to 3000L,
+                "remoteTimestamp" to 4000L,
+                "syncFolderId" to "folder-1",
+            ),
+        )
+        plugin.onPacketReceived(TransferPacket(np2))
+
+        // Should still be 1 conflict, with the updated values
+        val conflictList = plugin.conflicts
+        assertEquals(1, conflictList.size)
+        assertEquals("new-local", conflictList[0].localChecksum)
+        assertEquals(3000L, conflictList[0].localTimestamp)
     }
 
     @Test
@@ -248,6 +288,61 @@ class FileSyncPluginTest {
             mockDevice.sendPacket(match {
                 it.packet.type == "cconnect.filesync.request" &&
                 it.packet.body["addSyncFolder"] == "/home/user/Documents"
+            })
+        }
+    }
+
+    @Test
+    fun `test addSyncFolder rejects path traversal`() {
+        plugin.addSyncFolder("/home/user/../../../etc/passwd")
+
+        // Should NOT send any packet for invalid path
+        verify(exactly = 0) {
+            mockDevice.sendPacket(match {
+                it.packet.body.containsKey("addSyncFolder")
+            })
+        }
+    }
+
+    @Test
+    fun `test addSyncFolder rejects blank path`() {
+        plugin.addSyncFolder("")
+
+        verify(exactly = 0) {
+            mockDevice.sendPacket(match {
+                it.packet.body.containsKey("addSyncFolder")
+            })
+        }
+    }
+
+    @Test
+    fun `test addSyncFolder rejects relative path`() {
+        plugin.addSyncFolder("relative/path")
+
+        verify(exactly = 0) {
+            mockDevice.sendPacket(match {
+                it.packet.body.containsKey("addSyncFolder")
+            })
+        }
+    }
+
+    @Test
+    fun `test addSyncFolder rejects system paths`() {
+        val blockedPaths = listOf(
+            "/data/data/com.example/files",
+            "/system/bin/sh",
+            "/proc/self/maps",
+            "/sys/class/net",
+            "/dev/urandom",
+        )
+
+        for (path in blockedPaths) {
+            plugin.addSyncFolder(path)
+        }
+
+        verify(exactly = 0) {
+            mockDevice.sendPacket(match {
+                it.packet.body.containsKey("addSyncFolder")
             })
         }
     }
@@ -326,5 +421,142 @@ class FileSyncPluginTest {
     fun `test getSyncFolders returns empty list initially`() {
         val folders = plugin.getSyncFolders()
         assertTrue(folders.isEmpty())
+    }
+
+    @Test
+    fun `test onDestroy clears state`() {
+        // Add a conflict first
+        val np = NetworkPacket(
+            id = 1L,
+            type = "cconnect.filesync.conflict",
+            body = mapOf(
+                "path" to "test.txt",
+                "localChecksum" to "abc",
+                "remoteChecksum" to "def",
+                "localTimestamp" to 1000L,
+                "remoteTimestamp" to 2000L,
+                "syncFolderId" to "folder-1",
+            ),
+        )
+        plugin.onPacketReceived(TransferPacket(np))
+        assertEquals(1, plugin.conflicts.size)
+
+        plugin.onDestroy()
+
+        // Conflicts should be cleared
+        assertEquals(0, plugin.conflicts.size)
+        // Listener should be null
+        assertNull(plugin.listener)
+        // Sync folders should be cleared
+        assertTrue(plugin.getSyncFolders().isEmpty())
+    }
+
+    @Test
+    fun `test folder list response populates sync folders`() {
+        val foldersArr = JSONArray().apply {
+            put(JSONObject().apply {
+                put("id", "folder-1")
+                put("path", "/home/user/Documents")
+            })
+            put(JSONObject().apply {
+                put("id", "folder-2")
+                put("path", "/home/user/Photos")
+            })
+        }
+        val np = NetworkPacket(
+            id = 100L,
+            type = "cconnect.filesync",
+            body = mapOf("folders" to foldersArr.toString()),
+        )
+
+        val result = plugin.onPacketReceived(TransferPacket(np))
+        assertTrue(result)
+
+        val folders = plugin.getSyncFolders()
+        assertEquals(2, folders.size)
+        assertEquals("folder-1", folders[0].id)
+        assertEquals("/home/user/Documents", folders[0].path)
+        assertEquals(FileSyncPlugin.SyncStatus.IDLE, folders[0].syncStatus)
+        assertEquals("folder-2", folders[1].id)
+        assertEquals("/home/user/Photos", folders[1].path)
+    }
+
+    @Test
+    fun `test folder list response rejects invalid paths`() {
+        val foldersArr = JSONArray().apply {
+            put(JSONObject().apply {
+                put("id", "folder-good")
+                put("path", "/home/user/Documents")
+            })
+            put(JSONObject().apply {
+                put("id", "folder-bad")
+                put("path", "/proc/self/maps")
+            })
+        }
+        val np = NetworkPacket(
+            id = 101L,
+            type = "cconnect.filesync",
+            body = mapOf("folders" to foldersArr.toString()),
+        )
+
+        plugin.onPacketReceived(TransferPacket(np))
+
+        val folders = plugin.getSyncFolders()
+        // Only the valid folder should be added
+        assertEquals(1, folders.size)
+        assertEquals("folder-good", folders[0].id)
+    }
+
+    @Test
+    fun `test onPacketReceived returns false for unknown packet type`() {
+        val np = NetworkPacket(
+            id = 200L,
+            type = "cconnect.unknown",
+            body = emptyMap(),
+        )
+
+        assertFalse(plugin.onPacketReceived(TransferPacket(np)))
+    }
+
+    @Test
+    fun `test conflicts returns immutable snapshot`() {
+        // Add two distinct conflicts
+        val np1 = NetworkPacket(
+            id = 1L,
+            type = "cconnect.filesync.conflict",
+            body = mapOf(
+                "path" to "file1.txt",
+                "localChecksum" to "a",
+                "remoteChecksum" to "b",
+                "localTimestamp" to 1000L,
+                "remoteTimestamp" to 2000L,
+                "syncFolderId" to "f1",
+            ),
+        )
+        val np2 = NetworkPacket(
+            id = 2L,
+            type = "cconnect.filesync.conflict",
+            body = mapOf(
+                "path" to "file2.txt",
+                "localChecksum" to "c",
+                "remoteChecksum" to "d",
+                "localTimestamp" to 3000L,
+                "remoteTimestamp" to 4000L,
+                "syncFolderId" to "f2",
+            ),
+        )
+        plugin.onPacketReceived(TransferPacket(np1))
+
+        // Take a snapshot
+        val snapshot = plugin.conflicts
+        assertEquals(1, snapshot.size)
+
+        // Add another conflict
+        plugin.onPacketReceived(TransferPacket(np2))
+
+        // Snapshot should not have changed (it's a copy)
+        assertEquals(1, snapshot.size)
+        // But the live list should have 2
+        assertEquals(2, plugin.conflicts.size)
     }
 }

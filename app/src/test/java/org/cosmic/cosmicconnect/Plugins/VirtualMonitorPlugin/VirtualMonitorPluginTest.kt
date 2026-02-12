@@ -23,7 +23,8 @@ import org.robolectric.RobolectricTestRunner
 /**
  * Unit tests for VirtualMonitorPlugin.
  *
- * Tests virtual monitor status reception, enable/disable requests, and state management.
+ * Tests virtual monitor status reception, enable/disable requests, state management,
+ * bounds validation, set-based listeners, and activeStreamSession tracking.
  */
 @RunWith(RobolectricTestRunner::class)
 class VirtualMonitorPluginTest {
@@ -219,7 +220,7 @@ class VirtualMonitorPluginTest {
     @Test
     fun `listener notified on status change`() {
         val listener = mockk<VirtualMonitorPlugin.VirtualMonitorStateListener>(relaxed = true)
-        plugin.setVirtualMonitorStateListener(listener)
+        plugin.addVirtualMonitorStateListener(listener)
 
         val np = NetworkPacket(
             id = 10L,
@@ -244,7 +245,7 @@ class VirtualMonitorPluginTest {
     @Test
     fun `listener notified with nulls for missing fields`() {
         val listener = mockk<VirtualMonitorPlugin.VirtualMonitorStateListener>(relaxed = true)
-        plugin.setVirtualMonitorStateListener(listener)
+        plugin.addVirtualMonitorStateListener(listener)
 
         val np = NetworkPacket(
             id = 11L,
@@ -260,9 +261,7 @@ class VirtualMonitorPluginTest {
     }
 
     @Test
-    fun `set listener to null - no crash on packet`() {
-        plugin.setVirtualMonitorStateListener(null)
-
+    fun `no listeners registered - no crash on packet`() {
         val np = NetworkPacket(
             id = 12L,
             type = "cconnect.virtualmonitor",
@@ -271,6 +270,201 @@ class VirtualMonitorPluginTest {
 
         // Should not throw exception
         plugin.onPacketReceived(TransferPacket(np))
+    }
+
+    @Test
+    fun `multiple listeners all notified`() {
+        val listener1 = mockk<VirtualMonitorPlugin.VirtualMonitorStateListener>(relaxed = true)
+        val listener2 = mockk<VirtualMonitorPlugin.VirtualMonitorStateListener>(relaxed = true)
+        plugin.addVirtualMonitorStateListener(listener1)
+        plugin.addVirtualMonitorStateListener(listener2)
+
+        val np = NetworkPacket(
+            id = 20L,
+            type = "cconnect.virtualmonitor",
+            body = mapOf("isActive" to true, "width" to 1920, "height" to 1080),
+        )
+
+        plugin.onPacketReceived(TransferPacket(np))
+
+        verify { listener1.onVirtualMonitorStateChanged(true, 1920, 1080, null, null, null) }
+        verify { listener2.onVirtualMonitorStateChanged(true, 1920, 1080, null, null, null) }
+    }
+
+    @Test
+    fun `remove listener stops notifications`() {
+        val listener = mockk<VirtualMonitorPlugin.VirtualMonitorStateListener>(relaxed = true)
+        plugin.addVirtualMonitorStateListener(listener)
+        plugin.removeVirtualMonitorStateListener(listener)
+
+        val np = NetworkPacket(
+            id = 21L,
+            type = "cconnect.virtualmonitor",
+            body = mapOf("isActive" to true),
+        )
+
+        plugin.onPacketReceived(TransferPacket(np))
+
+        verify(exactly = 0) { listener.onVirtualMonitorStateChanged(any(), any(), any(), any(), any(), any()) }
+    }
+
+    @Test
+    fun `onDestroy clears all listeners`() {
+        val listener = mockk<VirtualMonitorPlugin.VirtualMonitorStateListener>(relaxed = true)
+        plugin.addVirtualMonitorStateListener(listener)
+
+        plugin.onDestroy()
+
+        // Send a packet after destroy - listener should NOT be notified
+        val np = NetworkPacket(
+            id = 22L,
+            type = "cconnect.virtualmonitor",
+            body = mapOf("isActive" to true),
+        )
+        plugin.onPacketReceived(TransferPacket(np))
+
+        verify(exactly = 0) { listener.onVirtualMonitorStateChanged(any(), any(), any(), any(), any(), any()) }
+    }
+
+    // ========== Bounds Validation Tests ==========
+
+    @Test
+    fun `negative width is rejected as null`() {
+        val np = NetworkPacket(
+            id = 30L,
+            type = "cconnect.virtualmonitor",
+            body = mapOf("isActive" to true, "width" to -1, "height" to 1080),
+        )
+
+        plugin.onPacketReceived(TransferPacket(np))
+
+        assertNull(plugin.width)
+        assertEquals(1080, plugin.height)
+    }
+
+    @Test
+    fun `zero width is rejected as null`() {
+        val np = NetworkPacket(
+            id = 31L,
+            type = "cconnect.virtualmonitor",
+            body = mapOf("isActive" to true, "width" to 0, "height" to 1080),
+        )
+
+        plugin.onPacketReceived(TransferPacket(np))
+
+        assertNull(plugin.width)
+    }
+
+    @Test
+    fun `negative height is rejected as null`() {
+        val np = NetworkPacket(
+            id = 32L,
+            type = "cconnect.virtualmonitor",
+            body = mapOf("isActive" to true, "width" to 1920, "height" to -100),
+        )
+
+        plugin.onPacketReceived(TransferPacket(np))
+
+        assertEquals(1920, plugin.width)
+        assertNull(plugin.height)
+    }
+
+    @Test
+    fun `width exceeding 7680 is rejected as null`() {
+        val np = NetworkPacket(
+            id = 33L,
+            type = "cconnect.virtualmonitor",
+            body = mapOf("isActive" to true, "width" to 10000, "height" to 1080),
+        )
+
+        plugin.onPacketReceived(TransferPacket(np))
+
+        assertNull(plugin.width)
+        assertEquals(1080, plugin.height)
+    }
+
+    @Test
+    fun `height exceeding 4320 is rejected as null`() {
+        val np = NetworkPacket(
+            id = 34L,
+            type = "cconnect.virtualmonitor",
+            body = mapOf("isActive" to true, "width" to 1920, "height" to 5000),
+        )
+
+        plugin.onPacketReceived(TransferPacket(np))
+
+        assertEquals(1920, plugin.width)
+        assertNull(plugin.height)
+    }
+
+    @Test
+    fun `dpi exceeding 600 is rejected as null`() {
+        val np = NetworkPacket(
+            id = 35L,
+            type = "cconnect.virtualmonitor",
+            body = mapOf("isActive" to true, "dpi" to 999),
+        )
+
+        plugin.onPacketReceived(TransferPacket(np))
+
+        assertNull(plugin.dpi)
+    }
+
+    @Test
+    fun `refreshRate exceeding 240 is rejected as null`() {
+        val np = NetworkPacket(
+            id = 36L,
+            type = "cconnect.virtualmonitor",
+            body = mapOf("isActive" to true, "refreshRate" to 500),
+        )
+
+        plugin.onPacketReceived(TransferPacket(np))
+
+        assertNull(plugin.refreshRate)
+    }
+
+    @Test
+    fun `boundary values are accepted`() {
+        val np = NetworkPacket(
+            id = 37L,
+            type = "cconnect.virtualmonitor",
+            body = mapOf(
+                "isActive" to true,
+                "width" to 7680,
+                "height" to 4320,
+                "dpi" to 600,
+                "refreshRate" to 240,
+            ),
+        )
+
+        plugin.onPacketReceived(TransferPacket(np))
+
+        assertEquals(7680, plugin.width)
+        assertEquals(4320, plugin.height)
+        assertEquals(600, plugin.dpi)
+        assertEquals(240, plugin.refreshRate)
+    }
+
+    @Test
+    fun `minimum boundary values are accepted`() {
+        val np = NetworkPacket(
+            id = 38L,
+            type = "cconnect.virtualmonitor",
+            body = mapOf(
+                "isActive" to true,
+                "width" to 1,
+                "height" to 1,
+                "dpi" to 1,
+                "refreshRate" to 1,
+            ),
+        )
+
+        plugin.onPacketReceived(TransferPacket(np))
+
+        assertEquals(1, plugin.width)
+        assertEquals(1, plugin.height)
+        assertEquals(1, plugin.dpi)
+        assertEquals(1, plugin.refreshRate)
     }
 
     // ========== Plugin Metadata Tests ==========
@@ -335,5 +529,33 @@ class VirtualMonitorPluginTest {
         packets.forEach { np ->
             assertTrue(plugin.onPacketReceived(TransferPacket(np)))
         }
+    }
+
+    // ========== activeStreamSession Tests ==========
+
+    @Test
+    fun `activeStreamSession is null by default`() {
+        assertNull(plugin.activeStreamSession)
+    }
+
+    @Test
+    fun `activeStreamSession is null when no ScreenSharePlugin`() {
+        val np = NetworkPacket(
+            id = 40L,
+            type = "cconnect.virtualmonitor",
+            body = mapOf("isActive" to true, "width" to 1920, "height" to 1080),
+        )
+
+        plugin.onPacketReceived(TransferPacket(np))
+
+        assertNull(plugin.activeStreamSession)
+    }
+
+    @Test
+    fun `onDestroy clears activeStreamSession`() {
+        // Verify it starts null and stays null after destroy
+        plugin.onDestroy()
+
+        assertNull(plugin.activeStreamSession)
     }
 }

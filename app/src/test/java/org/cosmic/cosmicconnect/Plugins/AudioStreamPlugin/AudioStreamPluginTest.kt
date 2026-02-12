@@ -61,7 +61,7 @@ class AudioStreamPluginTest {
     }
 
     @Test
-    fun `status packet with isStreaming false updates state`() {
+    fun `status packet with isStreaming false clears state`() {
         // Set up initial streaming state
         val startPacket = NetworkPacket(
             id = 1L,
@@ -89,6 +89,10 @@ class AudioStreamPluginTest {
 
         assertTrue(result)
         assertFalse(plugin.isStreaming)
+        assertNull(plugin.activeCodec)
+        assertNull(plugin.sampleRate)
+        assertNull(plugin.channels)
+        assertNull(plugin.direction)
     }
 
     @Test
@@ -124,6 +128,22 @@ class AudioStreamPluginTest {
     }
 
     @Test
+    fun `capability packet parses codecs from JSON string`() {
+        val packet = NetworkPacket(
+            id = 1L,
+            type = "cconnect.audiostream.capability",
+            body = mapOf(
+                "codecs" to """["opus","aac"]"""
+            )
+        )
+
+        val result = plugin.onPacketReceived(TransferPacket(packet))
+
+        assertTrue(result)
+        assertEquals(listOf("opus", "aac"), plugin.supportedCodecs)
+    }
+
+    @Test
     fun `capability packet sets sample rates list`() {
         val packet = NetworkPacket(
             id = 1L,
@@ -137,6 +157,22 @@ class AudioStreamPluginTest {
 
         assertTrue(result)
         assertEquals(listOf(44100, 48000, 96000), plugin.supportedSampleRates)
+    }
+
+    @Test
+    fun `capability packet parses sample rates from JSON string`() {
+        val packet = NetworkPacket(
+            id = 1L,
+            type = "cconnect.audiostream.capability",
+            body = mapOf(
+                "sampleRates" to """[44100,48000]"""
+            )
+        )
+
+        val result = plugin.onPacketReceived(TransferPacket(packet))
+
+        assertTrue(result)
+        assertEquals(listOf(44100, 48000), plugin.supportedSampleRates)
     }
 
     @Test
@@ -377,5 +413,224 @@ class AudioStreamPluginTest {
         assertEquals(8, plugin.maxChannels)
         assertEquals(listOf("opus", "aac", "pcm", "flac"), plugin.supportedCodecs)
         assertEquals(listOf(44100, 48000, 96000, 192000), plugin.supportedSampleRates)
+    }
+
+    // --- New tests for issue #161 fixes ---
+
+    @Test
+    fun `onDestroy clears listeners and resets state`() {
+        // Set up state
+        var notified = false
+        plugin.addStreamStateListener { notified = true }
+
+        val startPacket = NetworkPacket(
+            id = 1L,
+            type = "cconnect.audiostream",
+            body = mapOf(
+                "isStreaming" to true,
+                "codec" to "opus",
+                "sampleRate" to 48000,
+                "channels" to 2,
+                "direction" to "send"
+            )
+        )
+        plugin.onPacketReceived(TransferPacket(startPacket))
+        assertTrue(plugin.isStreaming)
+
+        // Destroy
+        plugin.onDestroy()
+
+        assertFalse(plugin.isStreaming)
+        assertNull(plugin.activeCodec)
+        assertNull(plugin.sampleRate)
+        assertNull(plugin.channels)
+        assertNull(plugin.direction)
+        assertEquals(emptyList<String>(), plugin.supportedCodecs)
+        assertEquals(emptyList<Int>(), plugin.supportedSampleRates)
+
+        // Listener should not be notified after destroy
+        notified = false
+        val packet = NetworkPacket(
+            id = 2L,
+            type = "cconnect.audiostream",
+            body = mapOf("isStreaming" to true)
+        )
+        plugin.onPacketReceived(TransferPacket(packet))
+        assertFalse(notified)
+    }
+
+    @Test
+    fun `negative sampleRate is rejected`() {
+        val packet = NetworkPacket(
+            id = 1L,
+            type = "cconnect.audiostream",
+            body = mapOf(
+                "isStreaming" to true,
+                "sampleRate" to -1,
+                "channels" to 2
+            )
+        )
+
+        plugin.onPacketReceived(TransferPacket(packet))
+
+        assertTrue(plugin.isStreaming)
+        assertNull(plugin.sampleRate)
+        assertEquals(2, plugin.channels)
+    }
+
+    @Test
+    fun `sampleRate exceeding 192000 is rejected`() {
+        val packet = NetworkPacket(
+            id = 1L,
+            type = "cconnect.audiostream",
+            body = mapOf(
+                "isStreaming" to true,
+                "sampleRate" to 999999,
+                "channels" to 2
+            )
+        )
+
+        plugin.onPacketReceived(TransferPacket(packet))
+
+        assertTrue(plugin.isStreaming)
+        assertNull(plugin.sampleRate)
+        assertEquals(2, plugin.channels)
+    }
+
+    @Test
+    fun `zero sampleRate is rejected`() {
+        val packet = NetworkPacket(
+            id = 1L,
+            type = "cconnect.audiostream",
+            body = mapOf(
+                "isStreaming" to true,
+                "sampleRate" to 0
+            )
+        )
+
+        plugin.onPacketReceived(TransferPacket(packet))
+
+        assertTrue(plugin.isStreaming)
+        assertNull(plugin.sampleRate)
+    }
+
+    @Test
+    fun `channels exceeding 8 is rejected`() {
+        val packet = NetworkPacket(
+            id = 1L,
+            type = "cconnect.audiostream",
+            body = mapOf(
+                "isStreaming" to true,
+                "channels" to 16
+            )
+        )
+
+        plugin.onPacketReceived(TransferPacket(packet))
+
+        assertTrue(plugin.isStreaming)
+        assertNull(plugin.channels)
+    }
+
+    @Test
+    fun `zero channels is rejected`() {
+        val packet = NetworkPacket(
+            id = 1L,
+            type = "cconnect.audiostream",
+            body = mapOf(
+                "isStreaming" to true,
+                "channels" to 0
+            )
+        )
+
+        plugin.onPacketReceived(TransferPacket(packet))
+
+        assertTrue(plugin.isStreaming)
+        assertNull(plugin.channels)
+    }
+
+    @Test
+    fun `sampleRate as Long number is accepted`() {
+        val packet = NetworkPacket(
+            id = 1L,
+            type = "cconnect.audiostream",
+            body = mapOf(
+                "isStreaming" to true,
+                "sampleRate" to 48000L,
+                "channels" to 2L
+            )
+        )
+
+        plugin.onPacketReceived(TransferPacket(packet))
+
+        assertTrue(plugin.isStreaming)
+        assertEquals(48000, plugin.sampleRate)
+        assertEquals(2, plugin.channels)
+    }
+
+    @Test
+    fun `sampleRate as Double number is accepted`() {
+        val packet = NetworkPacket(
+            id = 1L,
+            type = "cconnect.audiostream",
+            body = mapOf(
+                "isStreaming" to true,
+                "sampleRate" to 48000.0,
+                "channels" to 2.0
+            )
+        )
+
+        plugin.onPacketReceived(TransferPacket(packet))
+
+        assertTrue(plugin.isStreaming)
+        assertEquals(48000, plugin.sampleRate)
+        assertEquals(2, plugin.channels)
+    }
+
+    @Test
+    fun `capability sample rates with out-of-range values are filtered`() {
+        val packet = NetworkPacket(
+            id = 1L,
+            type = "cconnect.audiostream.capability",
+            body = mapOf(
+                "sampleRates" to listOf(44100, -1, 48000, 0, 999999)
+            )
+        )
+
+        plugin.onPacketReceived(TransferPacket(packet))
+
+        assertEquals(listOf(44100, 48000), plugin.supportedSampleRates)
+    }
+
+    @Test
+    fun `capability maxChannels with out-of-range value is rejected`() {
+        val packet = NetworkPacket(
+            id = 1L,
+            type = "cconnect.audiostream.capability",
+            body = mapOf(
+                "maxChannels" to 99
+            )
+        )
+
+        plugin.onPacketReceived(TransferPacket(packet))
+
+        assertNull(plugin.maxChannels)
+    }
+
+    @Test
+    fun `onCreate sends capability query`() {
+        // plugin is constructed in setup; onCreate not called yet by default.
+        // We create a fresh plugin to test onCreate explicitly.
+        val freshDevice: Device = mockk(relaxed = true)
+        val freshPlugin = AudioStreamPlugin(context, freshDevice)
+
+        freshPlugin.onCreate()
+
+        verify {
+            freshDevice.sendPacket(match { tp ->
+                val np = tp.packet
+                np.type == "cconnect.audiostream.request" &&
+                    np.body["queryCapabilities"] == true
+            })
+        }
     }
 }

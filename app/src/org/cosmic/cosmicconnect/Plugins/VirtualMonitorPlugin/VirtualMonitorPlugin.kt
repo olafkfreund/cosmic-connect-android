@@ -17,6 +17,7 @@ import org.cosmic.cosmicconnect.Core.TransferPacket
 import org.cosmic.cosmicconnect.Device
 import org.cosmic.cosmicconnect.Plugins.Plugin
 import org.cosmic.cosmicconnect.Plugins.ScreenSharePlugin.ScreenSharePlugin
+import org.cosmic.cosmicconnect.Plugins.ScreenSharePlugin.streaming.StreamSession
 import org.cosmic.cosmicconnect.Plugins.ScreenSharePlugin.ui.ScreenShareViewerActivity
 import org.cosmic.cosmicconnect.Plugins.di.PluginCreator
 import org.cosmic.cosmicconnect.R
@@ -39,15 +40,15 @@ class VirtualMonitorPlugin @AssistedInject constructor(
     var isActive: Boolean? = null
         private set
 
-    /** Current display width in pixels. Null if not configured. */
+    /** Current display width in pixels. Null if not configured or out of bounds. */
     var width: Int? = null
         private set
 
-    /** Current display height in pixels. Null if not configured. */
+    /** Current display height in pixels. Null if not configured or out of bounds. */
     var height: Int? = null
         private set
 
-    /** Current display DPI. Null if not configured. */
+    /** Current display DPI. Null if not configured or out of bounds. */
     var dpi: Int? = null
         private set
 
@@ -55,8 +56,12 @@ class VirtualMonitorPlugin @AssistedInject constructor(
     var position: String? = null
         private set
 
-    /** Current refresh rate in Hz. Null if not configured. */
+    /** Current refresh rate in Hz. Null if not configured or out of bounds. */
     var refreshRate: Int? = null
+        private set
+
+    /** The currently active delegated stream session, if any. */
+    var activeStreamSession: StreamSession? = null
         private set
 
     override val displayName: String
@@ -82,7 +87,7 @@ class VirtualMonitorPlugin @AssistedInject constructor(
         )
     }
 
-    private var listener: VirtualMonitorStateListener? = null
+    private val listeners = mutableSetOf<VirtualMonitorStateListener>()
 
     override fun onCreate(): Boolean {
         return true
@@ -93,41 +98,52 @@ class VirtualMonitorPlugin @AssistedInject constructor(
         if (np.type != PACKET_TYPE_VIRTUALMONITOR) return false
 
         isActive = (np.body["isActive"] as? Boolean)
-        width = (np.body["width"] as? Number)?.toInt()
-        height = (np.body["height"] as? Number)?.toInt()
-        dpi = (np.body["dpi"] as? Number)?.toInt()
+        width = safeInt(np.body["width"], min = 1, max = 7680)
+        height = safeInt(np.body["height"], min = 1, max = 4320)
+        dpi = safeInt(np.body["dpi"], min = 1, max = 600)
         position = np.body["position"] as? String
-        refreshRate = (np.body["refreshRate"] as? Number)?.toInt()
+        refreshRate = safeInt(np.body["refreshRate"], min = 1, max = 240)
 
         // Delegate streaming to ScreenSharePlugin
         val screenSharePlugin = device.getPlugin(ScreenSharePlugin::class.java)
-        if (screenSharePlugin != null) {
-            if (isActive == true && width != null && height != null) {
-                screenSharePlugin.createStreamSession(
-                    width!!, height!!, refreshRate ?: 60, "h264"
-                )
-                Log.i(TAG, "Delegated stream session to ScreenSharePlugin: ${width}x${height}@${refreshRate}Hz")
-            } else if (isActive == false) {
+        when {
+            screenSharePlugin != null && isActive == true && width != null && height != null -> {
+                try {
+                    screenSharePlugin.createStreamSession(
+                        width!!, height!!, refreshRate ?: 60, "h264"
+                    )
+                    activeStreamSession = screenSharePlugin.activeSession
+                    Log.i(TAG, "Delegated stream session to ScreenSharePlugin (${width}x${height}@${refreshRate ?: 60}Hz)")
+                } catch (e: Exception) {
+                    Log.e(TAG, "Failed to delegate to ScreenSharePlugin", e)
+                }
+            }
+            screenSharePlugin != null && isActive == false -> {
+                activeStreamSession = null
                 screenSharePlugin.stopStreamSession()
                 Log.i(TAG, "Stopped delegated stream session")
+            }
+            screenSharePlugin == null && isActive == true && width != null && height != null -> {
+                Log.w(TAG, "Cannot activate virtual monitor: ScreenSharePlugin not loaded or disabled")
             }
         }
 
         device.onPluginsChanged()
-        listener?.onVirtualMonitorStateChanged(isActive, width, height, dpi, position, refreshRate)
+        listeners.forEach { it.onVirtualMonitorStateChanged(isActive, width, height, dpi, position, refreshRate) }
 
         Log.d(TAG, "Virtual monitor status updated: active=$isActive, ${width}x${height}@${dpi}dpi, position=$position, ${refreshRate}Hz")
         return true
     }
 
     override fun onDestroy() {
+        listeners.clear()
+        activeStreamSession = null
         // Stop any delegated stream session
         device.getPlugin(ScreenSharePlugin::class.java)?.stopStreamSession()
     }
 
     override fun getUiButtons(): List<PluginUiButton> {
-        val screenSharePlugin = device.getPlugin(ScreenSharePlugin::class.java)
-        if (screenSharePlugin?.activeSession == null) return emptyList()
+        if (activeStreamSession == null) return emptyList()
         return listOf(
             PluginUiButton(
                 context.getString(R.string.screenshare_viewer_virtualmonitor_title),
@@ -142,9 +158,24 @@ class VirtualMonitorPlugin @AssistedInject constructor(
         )
     }
 
-    /** Set a listener to receive virtual monitor state change notifications. */
-    fun setVirtualMonitorStateListener(listener: VirtualMonitorStateListener?) {
-        this.listener = listener
+    /** Add a listener to receive virtual monitor state change notifications. */
+    fun addVirtualMonitorStateListener(listener: VirtualMonitorStateListener) {
+        listeners.add(listener)
+    }
+
+    /** Remove a previously registered listener. */
+    fun removeVirtualMonitorStateListener(listener: VirtualMonitorStateListener) {
+        listeners.remove(listener)
+    }
+
+    /**
+     * Validate and clamp a numeric value within bounds.
+     * Returns null if the value is not a number or outside the given range.
+     */
+    private fun safeInt(value: Any?, min: Int = 0, max: Int = Int.MAX_VALUE): Int? {
+        val num = value as? Number ?: return null
+        val i = num.toInt()
+        return if (i in min..max) i else null
     }
 
     /**

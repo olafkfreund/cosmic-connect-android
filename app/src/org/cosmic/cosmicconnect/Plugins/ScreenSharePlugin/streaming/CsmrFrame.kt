@@ -36,6 +36,6 @@ data class CsmrFrame(
         const val TYPE_CURSOR: Byte = 0x02
         const val TYPE_ANNOTATION: Byte = 0x03
         val TYPE_END_OF_STREAM: Byte = 0xFF.toByte()
-        const val MAX_PAYLOAD_SIZE = 10 * 1024 * 1024 // 10MB sanity limit
+        const val MAX_PAYLOAD_SIZE = 2 * 1024 * 1024 // 2MB sanity limit
     }
 }

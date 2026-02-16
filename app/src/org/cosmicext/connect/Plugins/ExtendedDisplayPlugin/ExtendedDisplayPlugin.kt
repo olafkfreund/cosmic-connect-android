@@ -108,6 +108,16 @@ class ExtendedDisplayPlugin @AssistedInject constructor(
         val action = np.body["action"] as? String ?: ""
 
         when (action) {
+            "ready" -> {
+                // Desktop signaling server is ready, connect via WebRTC
+                val address = np.body["address"] as? String ?: ""
+                val port = (np.body["port"] as? Number)?.toInt() ?: 0
+                if (address.isNotEmpty() && port > 0) {
+                    handleDesktopReady(address, port)
+                } else {
+                    Log.w(TAG, "Invalid ready packet: address=$address port=$port")
+                }
+            }
             "offer" -> {
                 // Desktop is offering to start streaming
                 val sdp = np.body["sdp"] as? String ?: ""
@@ -126,6 +136,18 @@ class ExtendedDisplayPlugin @AssistedInject constructor(
                 // Desktop requests to stop streaming
                 stopStreaming()
             }
+        }
+    }
+
+    private fun handleDesktopReady(address: String, port: Int) {
+        Log.i(TAG, "Desktop signaling server ready at $address:$port")
+
+        // Clean up any existing connection
+        cleanup()
+
+        // Create WebRTC client and connect to the desktop's signaling server
+        webRtcClient = WebRTCClient(context, this, ConnectionMode.WIFI).also { client ->
+            client.connect(address, port)
         }
     }
 

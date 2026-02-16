@@ -123,9 +123,69 @@ class WebRTCClient(
 
         signalingClient = SignalingClient(signalingUrl, mode).apply {
             setListener { message -> handleSignalingMessage(message) }
+            setConnectionListener { onSignalingConnected() }
         }
 
         signalingClient?.connect()
+    }
+
+    /**
+     * Called when WebSocket signaling connection is established.
+     * Creates a PeerConnection and sends an SDP offer to the desktop.
+     */
+    private fun onSignalingConnected() {
+        Log.i(TAG, "Signaling connected, creating offer")
+
+        if (peerConnection == null) {
+            createPeerConnection()
+        }
+
+        createOffer()
+    }
+
+    /**
+     * Create an SDP offer and send it to the desktop via signaling
+     */
+    private fun createOffer() {
+        Log.i(TAG, "Creating SDP offer")
+
+        val constraints = MediaConstraints().apply {
+            mandatory.add(MediaConstraints.KeyValuePair("OfferToReceiveAudio", "false"))
+            mandatory.add(MediaConstraints.KeyValuePair("OfferToReceiveVideo", "true"))
+        }
+
+        peerConnection?.createOffer(object : SdpObserver {
+            override fun onCreateSuccess(sessionDescription: SessionDescription?) {
+                if (sessionDescription == null) {
+                    Log.e(TAG, "Created null session description for offer")
+                    return
+                }
+
+                Log.i(TAG, "Offer created successfully")
+
+                peerConnection?.setLocalDescription(object : SdpObserver {
+                    override fun onCreateSuccess(sd: SessionDescription?) {}
+                    override fun onSetSuccess() {
+                        Log.i(TAG, "Local description (offer) set successfully")
+                        signalingClient?.sendOffer(sessionDescription.description)
+                    }
+                    override fun onCreateFailure(error: String?) {}
+                    override fun onSetFailure(error: String?) {
+                        Log.e(TAG, "Failed to set local description (offer): $error")
+                        listener.onError("Failed to set local description: $error")
+                    }
+                }, sessionDescription)
+            }
+
+            override fun onSetSuccess() {}
+
+            override fun onCreateFailure(error: String?) {
+                Log.e(TAG, "Failed to create offer: $error")
+                listener.onError("Failed to create offer: $error")
+            }
+
+            override fun onSetFailure(error: String?) {}
+        }, constraints)
     }
 
     /**

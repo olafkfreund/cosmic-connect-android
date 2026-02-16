@@ -77,6 +77,7 @@ class SignalingClient(
 
     private var webSocket: WebSocket? = null
     private var messageListener: ((SignalingMessage) -> Unit)? = null
+    private var connectionListener: (() -> Unit)? = null
     private var reconnectAttempts = 0
 
     private val _connectionState = MutableStateFlow(ConnectionState.DISCONNECTED)
@@ -87,6 +88,13 @@ class SignalingClient(
      */
     fun setListener(listener: (SignalingMessage) -> Unit) {
         messageListener = listener
+    }
+
+    /**
+     * Set listener called when WebSocket connection is established
+     */
+    fun setConnectionListener(listener: () -> Unit) {
+        connectionListener = listener
     }
 
     /**
@@ -117,6 +125,13 @@ class SignalingClient(
         webSocket = null
         reconnectAttempts = 0
         _connectionState.value = ConnectionState.DISCONNECTED
+    }
+
+    /**
+     * Send SDP offer to server
+     */
+    fun sendOffer(sdp: String) {
+        sendMessage(SignalingMessage.Offer(sdp))
     }
 
     /**
@@ -180,6 +195,14 @@ class SignalingClient(
                 SignalingMessage.TYPE_CANDIDATE -> {
                     moshi.adapter(SignalingMessage.IceCandidate::class.java).fromJson(json)
                 }
+                "ready" -> {
+                    Log.i(TAG, "Server ready: ${map?.get("server_id")}")
+                    null // Informational only, connection listener handles this
+                }
+                "connected", "disconnected", "error" -> {
+                    Log.d(TAG, "Server message: $type")
+                    null
+                }
                 else -> {
                     Log.w(TAG, "Unknown message type: $type")
                     null
@@ -214,6 +237,7 @@ class SignalingClient(
             Log.i(TAG, "WebSocket connected")
             _connectionState.value = ConnectionState.CONNECTED
             reconnectAttempts = 0
+            connectionListener?.invoke()
         }
 
         override fun onMessage(webSocket: WebSocket, text: String) {

@@ -7,11 +7,18 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
 -->
 
 <network-security-config>
-    <!--Set application-wide security config using base-config tag.-->
-    <base-config cleartextTrafficPermitted="false"/>
-    <!--Allow cleartext only for local device discovery (UDP broadcasts)-->
-    <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">localhost</domain>
-        <domain includeSubdomains="true">127.0.0.1</domain>
-    </domain-config>
+    <!--
+        Allow cleartext traffic for LAN device communication.
+
+        COSMIC Connect communicates exclusively with devices on the local network:
+        - UDP discovery broadcasts (port 1816)
+        - WebSocket signaling for WebRTC Extended Display (ws://)
+        - The main CConnect protocol connection is TLS-encrypted separately
+        - WebRTC media streams are encrypted via DTLS
+
+        Android's domain-config does not support IP ranges, so we permit
+        cleartext globally. This is safe because the app only connects to
+        paired devices on the local network.
+    -->
+    <base-config cleartextTrafficPermitted="true"/>
 </network-security-config>
